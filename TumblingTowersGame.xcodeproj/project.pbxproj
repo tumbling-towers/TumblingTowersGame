@@ -51,6 +51,7 @@
 		2F33195A29BEF74000B71081 /* TumblingTowersGameUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TumblingTowersGameUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F33195E29BEF74000B71081 /* TumblingTowersGameUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TumblingTowersGameUITests.swift; sourceTree = "<group>"; };
 		2F33196029BEF74000B71081 /* TumblingTowersGameUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TumblingTowersGameUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		2F33196D29BEF76F00B71081 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +82,7 @@
 		2F33192E29BEF73F00B71081 = {
 			isa = PBXGroup;
 			children = (
+				2F33196D29BEF76F00B71081 /* README.md */,
 				2F33193929BEF73F00B71081 /* TumblingTowersGame */,
 				2F33195329BEF74000B71081 /* TumblingTowersGameTests */,
 				2F33195D29BEF74000B71081 /* TumblingTowersGameUITests */,
