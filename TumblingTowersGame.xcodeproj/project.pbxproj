@@ -1,0 +1,618 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2F33193B29BEF73F00B71081 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F33193A29BEF73F00B71081 /* AppDelegate.swift */; };
+		2F33193D29BEF73F00B71081 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F33193C29BEF73F00B71081 /* SceneDelegate.swift */; };
+		2F33193F29BEF73F00B71081 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F33193E29BEF73F00B71081 /* ViewController.swift */; };
+		2F33194229BEF73F00B71081 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F33194029BEF73F00B71081 /* Main.storyboard */; };
+		2F33194529BEF73F00B71081 /* TumblingTowersGame.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2F33194329BEF73F00B71081 /* TumblingTowersGame.xcdatamodeld */; };
+		2F33194729BEF74000B71081 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F33194629BEF74000B71081 /* Assets.xcassets */; };
+		2F33194A29BEF74000B71081 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F33194829BEF74000B71081 /* LaunchScreen.storyboard */; };
+		2F33195529BEF74000B71081 /* TumblingTowersGameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F33195429BEF74000B71081 /* TumblingTowersGameTests.swift */; };
+		2F33195F29BEF74000B71081 /* TumblingTowersGameUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F33195E29BEF74000B71081 /* TumblingTowersGameUITests.swift */; };
+		2F33196129BEF74000B71081 /* TumblingTowersGameUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F33196029BEF74000B71081 /* TumblingTowersGameUITestsLaunchTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		2F33195129BEF74000B71081 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2F33192F29BEF73F00B71081 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2F33193629BEF73F00B71081;
+			remoteInfo = TumblingTowersGame;
+		};
+		2F33195B29BEF74000B71081 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2F33192F29BEF73F00B71081 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2F33193629BEF73F00B71081;
+			remoteInfo = TumblingTowersGame;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		2F33193729BEF73F00B71081 /* TumblingTowersGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TumblingTowersGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2F33193A29BEF73F00B71081 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		2F33193C29BEF73F00B71081 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		2F33193E29BEF73F00B71081 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		2F33194129BEF73F00B71081 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		2F33194429BEF73F00B71081 /* TumblingTowersGame.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TumblingTowersGame.xcdatamodel; sourceTree = "<group>"; };
+		2F33194629BEF74000B71081 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2F33194929BEF74000B71081 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		2F33194B29BEF74000B71081 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2F33195029BEF74000B71081 /* TumblingTowersGameTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TumblingTowersGameTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2F33195429BEF74000B71081 /* TumblingTowersGameTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TumblingTowersGameTests.swift; sourceTree = "<group>"; };
+		2F33195A29BEF74000B71081 /* TumblingTowersGameUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TumblingTowersGameUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2F33195E29BEF74000B71081 /* TumblingTowersGameUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TumblingTowersGameUITests.swift; sourceTree = "<group>"; };
+		2F33196029BEF74000B71081 /* TumblingTowersGameUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TumblingTowersGameUITestsLaunchTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2F33193429BEF73F00B71081 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2F33194D29BEF74000B71081 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2F33195729BEF74000B71081 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2F33192E29BEF73F00B71081 = {
+			isa = PBXGroup;
+			children = (
+				2F33193929BEF73F00B71081 /* TumblingTowersGame */,
+				2F33195329BEF74000B71081 /* TumblingTowersGameTests */,
+				2F33195D29BEF74000B71081 /* TumblingTowersGameUITests */,
+				2F33193829BEF73F00B71081 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		2F33193829BEF73F00B71081 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2F33193729BEF73F00B71081 /* TumblingTowersGame.app */,
+				2F33195029BEF74000B71081 /* TumblingTowersGameTests.xctest */,
+				2F33195A29BEF74000B71081 /* TumblingTowersGameUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2F33193929BEF73F00B71081 /* TumblingTowersGame */ = {
+			isa = PBXGroup;
+			children = (
+				2F33193A29BEF73F00B71081 /* AppDelegate.swift */,
+				2F33193C29BEF73F00B71081 /* SceneDelegate.swift */,
+				2F33193E29BEF73F00B71081 /* ViewController.swift */,
+				2F33194029BEF73F00B71081 /* Main.storyboard */,
+				2F33194629BEF74000B71081 /* Assets.xcassets */,
+				2F33194829BEF74000B71081 /* LaunchScreen.storyboard */,
+				2F33194B29BEF74000B71081 /* Info.plist */,
+				2F33194329BEF73F00B71081 /* TumblingTowersGame.xcdatamodeld */,
+			);
+			path = TumblingTowersGame;
+			sourceTree = "<group>";
+		};
+		2F33195329BEF74000B71081 /* TumblingTowersGameTests */ = {
+			isa = PBXGroup;
+			children = (
+				2F33195429BEF74000B71081 /* TumblingTowersGameTests.swift */,
+			);
+			path = TumblingTowersGameTests;
+			sourceTree = "<group>";
+		};
+		2F33195D29BEF74000B71081 /* TumblingTowersGameUITests */ = {
+			isa = PBXGroup;
+			children = (
+				2F33195E29BEF74000B71081 /* TumblingTowersGameUITests.swift */,
+				2F33196029BEF74000B71081 /* TumblingTowersGameUITestsLaunchTests.swift */,
+			);
+			path = TumblingTowersGameUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2F33193629BEF73F00B71081 /* TumblingTowersGame */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2F33196429BEF74000B71081 /* Build configuration list for PBXNativeTarget "TumblingTowersGame" */;
+			buildPhases = (
+				2F33193329BEF73F00B71081 /* Sources */,
+				2F33193429BEF73F00B71081 /* Frameworks */,
+				2F33193529BEF73F00B71081 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TumblingTowersGame;
+			productName = TumblingTowersGame;
+			productReference = 2F33193729BEF73F00B71081 /* TumblingTowersGame.app */;
+			productType = "com.apple.product-type.application";
+		};
+		2F33194F29BEF74000B71081 /* TumblingTowersGameTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2F33196729BEF74000B71081 /* Build configuration list for PBXNativeTarget "TumblingTowersGameTests" */;
+			buildPhases = (
+				2F33194C29BEF74000B71081 /* Sources */,
+				2F33194D29BEF74000B71081 /* Frameworks */,
+				2F33194E29BEF74000B71081 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2F33195229BEF74000B71081 /* PBXTargetDependency */,
+			);
+			name = TumblingTowersGameTests;
+			productName = TumblingTowersGameTests;
+			productReference = 2F33195029BEF74000B71081 /* TumblingTowersGameTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		2F33195929BEF74000B71081 /* TumblingTowersGameUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2F33196A29BEF74000B71081 /* Build configuration list for PBXNativeTarget "TumblingTowersGameUITests" */;
+			buildPhases = (
+				2F33195629BEF74000B71081 /* Sources */,
+				2F33195729BEF74000B71081 /* Frameworks */,
+				2F33195829BEF74000B71081 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2F33195C29BEF74000B71081 /* PBXTargetDependency */,
+			);
+			name = TumblingTowersGameUITests;
+			productName = TumblingTowersGameUITests;
+			productReference = 2F33195A29BEF74000B71081 /* TumblingTowersGameUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		2F33192F29BEF73F00B71081 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1420;
+				LastUpgradeCheck = 1420;
+				TargetAttributes = {
+					2F33193629BEF73F00B71081 = {
+						CreatedOnToolsVersion = 14.2;
+					};
+					2F33194F29BEF74000B71081 = {
+						CreatedOnToolsVersion = 14.2;
+						TestTargetID = 2F33193629BEF73F00B71081;
+					};
+					2F33195929BEF74000B71081 = {
+						CreatedOnToolsVersion = 14.2;
+						TestTargetID = 2F33193629BEF73F00B71081;
+					};
+				};
+			};
+			buildConfigurationList = 2F33193229BEF73F00B71081 /* Build configuration list for PBXProject "TumblingTowersGame" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 2F33192E29BEF73F00B71081;
+			productRefGroup = 2F33193829BEF73F00B71081 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2F33193629BEF73F00B71081 /* TumblingTowersGame */,
+				2F33194F29BEF74000B71081 /* TumblingTowersGameTests */,
+				2F33195929BEF74000B71081 /* TumblingTowersGameUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2F33193529BEF73F00B71081 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2F33194A29BEF74000B71081 /* LaunchScreen.storyboard in Resources */,
+				2F33194729BEF74000B71081 /* Assets.xcassets in Resources */,
+				2F33194229BEF73F00B71081 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2F33194E29BEF74000B71081 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2F33195829BEF74000B71081 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2F33193329BEF73F00B71081 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2F33193F29BEF73F00B71081 /* ViewController.swift in Sources */,
+				2F33193B29BEF73F00B71081 /* AppDelegate.swift in Sources */,
+				2F33193D29BEF73F00B71081 /* SceneDelegate.swift in Sources */,
+				2F33194529BEF73F00B71081 /* TumblingTowersGame.xcdatamodeld in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2F33194C29BEF74000B71081 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2F33195529BEF74000B71081 /* TumblingTowersGameTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2F33195629BEF74000B71081 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2F33196129BEF74000B71081 /* TumblingTowersGameUITestsLaunchTests.swift in Sources */,
+				2F33195F29BEF74000B71081 /* TumblingTowersGameUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		2F33195229BEF74000B71081 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2F33193629BEF73F00B71081 /* TumblingTowersGame */;
+			targetProxy = 2F33195129BEF74000B71081 /* PBXContainerItemProxy */;
+		};
+		2F33195C29BEF74000B71081 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2F33193629BEF73F00B71081 /* TumblingTowersGame */;
+			targetProxy = 2F33195B29BEF74000B71081 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		2F33194029BEF73F00B71081 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2F33194129BEF73F00B71081 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		2F33194829BEF74000B71081 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2F33194929BEF74000B71081 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		2F33196229BEF74000B71081 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		2F33196329BEF74000B71081 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		2F33196529BEF74000B71081 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TumblingTowersGame/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = CS3217.TumblingTowers.TumblingTowersGame;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		2F33196629BEF74000B71081 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TumblingTowersGame/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = CS3217.TumblingTowers.TumblingTowersGame;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		2F33196829BEF74000B71081 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = CS3217.TumblingTowers.TumblingTowersGameTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TumblingTowersGame.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/TumblingTowersGame";
+			};
+			name = Debug;
+		};
+		2F33196929BEF74000B71081 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = CS3217.TumblingTowers.TumblingTowersGameTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TumblingTowersGame.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/TumblingTowersGame";
+			};
+			name = Release;
+		};
+		2F33196B29BEF74000B71081 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = CS3217.TumblingTowers.TumblingTowersGameUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = TumblingTowersGame;
+			};
+			name = Debug;
+		};
+		2F33196C29BEF74000B71081 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = CS3217.TumblingTowers.TumblingTowersGameUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = TumblingTowersGame;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2F33193229BEF73F00B71081 /* Build configuration list for PBXProject "TumblingTowersGame" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2F33196229BEF74000B71081 /* Debug */,
+				2F33196329BEF74000B71081 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2F33196429BEF74000B71081 /* Build configuration list for PBXNativeTarget "TumblingTowersGame" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2F33196529BEF74000B71081 /* Debug */,
+				2F33196629BEF74000B71081 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2F33196729BEF74000B71081 /* Build configuration list for PBXNativeTarget "TumblingTowersGameTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2F33196829BEF74000B71081 /* Debug */,
+				2F33196929BEF74000B71081 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2F33196A29BEF74000B71081 /* Build configuration list for PBXNativeTarget "TumblingTowersGameUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2F33196B29BEF74000B71081 /* Debug */,
+				2F33196C29BEF74000B71081 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		2F33194329BEF73F00B71081 /* TumblingTowersGame.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				2F33194429BEF73F00B71081 /* TumblingTowersGame.xcdatamodel */,
+			);
+			currentVersion = 2F33194429BEF73F00B71081 /* TumblingTowersGame.xcdatamodel */;
+			path = TumblingTowersGame.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 2F33192F29BEF73F00B71081 /* Project object */;
+}
