@@ -5,7 +5,6 @@
 //  Created by Taufiq Abdul Rahman on 9/3/23.
 //
 
-import BiDictionary
 import Foundation
 import SpriteKit
 
@@ -13,7 +12,7 @@ class FiziksEngine: SKScene {
     // TODO: having so many mappings is error prone.
     // consider creating a subclass of SKNode with a reference to a FiziksBody such that
     // whenever one's position gets updated, the other's position automatically follows.
-    var fiziksBodyIdToSKNode: BiDictionary<ObjectIdentifier, SKNode> = BiDictionary()
+    var fiziksBodyIdToSKNode: BiMap<ObjectIdentifier, SKNode> = BiMap()
     var fiziksBodyIdToFiziksBody: [ObjectIdentifier: FiziksBody] = [:]
 
     override func didFinishUpdate() {

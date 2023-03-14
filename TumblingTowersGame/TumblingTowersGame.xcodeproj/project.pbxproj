@@ -37,6 +37,7 @@
 		146E2E1629C0E33900BFC757 /* CGPath+Create.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146E2E1429C0E33900BFC757 /* CGPath+Create.swift */; };
 		146E2E1729C0E33900BFC757 /* CGPoint+Hashable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146E2E1529C0E33900BFC757 /* CGPoint+Hashable.swift */; };
 		146E2E1929C0E5B400BFC757 /* GameplayLevelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146E2E1829C0E5B400BFC757 /* GameplayLevelView.swift */; };
+		2F7E13A629C0F054000E6FA9 /* BiMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F7E13A529C0F054000E6FA9 /* BiMap.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,6 +91,7 @@
 		146E2E1429C0E33900BFC757 /* CGPath+Create.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGPath+Create.swift"; sourceTree = "<group>"; };
 		146E2E1529C0E33900BFC757 /* CGPoint+Hashable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGPoint+Hashable.swift"; sourceTree = "<group>"; };
 		146E2E1829C0E5B400BFC757 /* GameplayLevelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameplayLevelView.swift; sourceTree = "<group>"; };
+		2F7E13A529C0F054000E6FA9 /* BiMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiMap.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +142,7 @@
 		146E2DB229C0D07200BFC757 /* TumblingTowersGame */ = {
 			isa = PBXGroup;
 			children = (
+				2F7E13A429C0F044000E6FA9 /* DataStructures */,
 				146E2E1329C0E32500BFC757 /* Extensions */,
 				146E2DE029C0D0CC00BFC757 /* Input */,
 				146E2DDD29C0D0AF00BFC757 /* Models */,
@@ -180,14 +183,9 @@
 		146E2DDD29C0D0AF00BFC757 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				146E2E0D29C0E30700BFC757 /* Block.swift */,
-				146E2E0B29C0E30700BFC757 /* GameObject.swift */,
-				146E2E0C29C0E30700BFC757 /* Platform.swift */,
-				146E2E1129C0E30F00BFC757 /* GameObjectCategory.swift */,
-				146E2E0429C0E2D800BFC757 /* FizikaEngine */,
+				2F7E13A829C0F5E5000E6FA9 /* GameEngine */,
+				146E2E0429C0E2D800BFC757 /* FiziksEngine */,
 				146E2DFF29C0E2B300BFC757 /* FiziksShape */,
-				146E2DFD29C0E05A00BFC757 /* TetrisShape.swift */,
-				146E2DEF29C0D62F00BFC757 /* GameEngine.swift */,
 				146E2DEE29C0D62F00BFC757 /* Point.swift */,
 				146E2DED29C0D62F00BFC757 /* Vector.swift */,
 			);
@@ -233,14 +231,14 @@
 			path = FiziksShape;
 			sourceTree = "<group>";
 		};
-		146E2E0429C0E2D800BFC757 /* FizikaEngine */ = {
+		146E2E0429C0E2D800BFC757 /* FiziksEngine */ = {
 			isa = PBXGroup;
 			children = (
 				146E2E0529C0E2FE00BFC757 /* FiziksBody.swift */,
 				146E2E0629C0E2FE00BFC757 /* FiziksEngine.swift */,
 				146E2E0729C0E2FE00BFC757 /* Scene.swift */,
 			);
-			path = FizikaEngine;
+			path = FiziksEngine;
 			sourceTree = "<group>";
 		};
 		146E2E1329C0E32500BFC757 /* Extensions */ = {
@@ -250,6 +248,35 @@
 				146E2E1529C0E33900BFC757 /* CGPoint+Hashable.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		2F7E13A429C0F044000E6FA9 /* DataStructures */ = {
+			isa = PBXGroup;
+			children = (
+				2F7E13A529C0F054000E6FA9 /* BiMap.swift */,
+			);
+			path = DataStructures;
+			sourceTree = "<group>";
+		};
+		2F7E13A729C0F56F000E6FA9 /* GameObject */ = {
+			isa = PBXGroup;
+			children = (
+				146E2E0B29C0E30700BFC757 /* GameObject.swift */,
+				146E2E0D29C0E30700BFC757 /* Block.swift */,
+				146E2E0C29C0E30700BFC757 /* Platform.swift */,
+				146E2DFD29C0E05A00BFC757 /* TetrisShape.swift */,
+			);
+			path = GameObject;
+			sourceTree = "<group>";
+		};
+		2F7E13A829C0F5E5000E6FA9 /* GameEngine */ = {
+			isa = PBXGroup;
+			children = (
+				2F7E13A729C0F56F000E6FA9 /* GameObject */,
+				146E2DEF29C0D62F00BFC757 /* GameEngine.swift */,
+				146E2E1129C0E30F00BFC757 /* GameObjectCategory.swift */,
+			);
+			path = GameEngine;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -397,6 +424,7 @@
 				146E2E0F29C0E30700BFC757 /* Platform.swift in Sources */,
 				146E2DFE29C0E05A00BFC757 /* TetrisShape.swift in Sources */,
 				146E2E0829C0E2FE00BFC757 /* FiziksBody.swift in Sources */,
+				2F7E13A629C0F054000E6FA9 /* BiMap.swift in Sources */,
 				146E2E0229C0E2D100BFC757 /* PathFiziksShape.swift in Sources */,
 				146E2DF229C0D62F00BFC757 /* GameEngine.swift in Sources */,
 				146E2E1729C0E33900BFC757 /* CGPoint+Hashable.swift in Sources */,

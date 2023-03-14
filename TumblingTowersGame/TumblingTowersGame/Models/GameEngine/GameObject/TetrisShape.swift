@@ -8,6 +8,7 @@
 import CoreGraphics
 import Foundation
 
+// TODO: consider creating a subclass for each shape?
 enum TetrisShape: PathFiziksShape {
     case I, J, L, O, S, T, Z
 
