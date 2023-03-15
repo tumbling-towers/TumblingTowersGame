@@ -71,7 +71,10 @@ class GameEngine {
 //            updateGameObjs()
 //            updateBallEvents()
 //            updateGameEvents()
-            step()
+            if (frameCount.isMultiple(of: 60)) {
+                // Step every 1s instead (Temporary so that it doesnt keep printing)
+                step()
+            }
 
             framesPassed -= 1
             frameCount += 1

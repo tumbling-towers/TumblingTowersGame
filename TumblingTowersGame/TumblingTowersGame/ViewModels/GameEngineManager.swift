@@ -48,6 +48,12 @@ class GameEngineManager: ObservableObject {
     func getPhysicsEngine() -> FiziksEngine {
         gameEngine.fiziksEngine
     }
+
+    // Temp function for testing
+    func addBlock(at: CGPoint) {
+        gameEngine.addBlock(at: at)
+        print("Adding")
+    }
 }
 
 extension GameEngineManager: GameRendererDelegate {

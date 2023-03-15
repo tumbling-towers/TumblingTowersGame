@@ -13,7 +13,7 @@ struct ScreenInputView: View {
     var body: some View {
         ZStack {
             GeometryReader { _ in
-                Image("background")
+                Image("trans-bkg-test")
                     .resizable()
                     .scaledToFill()
             }
@@ -21,6 +21,7 @@ struct ScreenInputView: View {
                 .onEnded { tap in
                     let tapLocation = Point(tap.location.x, tap.location.y)
                     gameEngineMgr.tapEvent(at: tapLocation)
+                    gameEngineMgr.addBlock(at: tap.location)
                 }
             )
 

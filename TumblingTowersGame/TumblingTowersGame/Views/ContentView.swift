@@ -14,11 +14,14 @@ struct ContentView: View {
 
     var body: some View {
         ZStack {
+
+            GameplayLevelView()
+                .environmentObject(gameEngineMgr)
+            
             ScreenInputView()
                 .environmentObject(gameEngineMgr)
 
-//            GameplayLevelView()
-//                .environmentObject(gameEngineMgr)
+
         }
         .ignoresSafeArea(.all)
     }

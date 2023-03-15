@@ -5,7 +5,7 @@
 //  Created by Elvis on 15/3/23.
 //
 
-//import SpriteKit
+import SpriteKit
 import SwiftUI
 
 struct GameplayLevelView: View {
@@ -18,19 +18,19 @@ struct GameplayLevelView: View {
 //        skView.presentScene(gameEngine?.fiziksEngine)
 //        skView.showsPhysics = true
 
-//        SpriteView(scene: getUselessSKSceneToPresent())
-        TestView()
+        SpriteView(scene: getUselessSKSceneToPresent())
+//        TestView()
     }
 
-//    private func getUselessSKSceneToPresent() -> SKScene {
-//        // Equivalent to gameEngine?.fiziksEngine
-//        var skScene = gameEngineMgr.getPhysicsEngine()
-//
-//        // Not sure if this works
-//        skScene.view?.showsPhysics = true
-//
-//        return skScene
-//    }
+    private func getUselessSKSceneToPresent() -> SKScene {
+        // Equivalent to gameEngine?.fiziksEngine
+        var skScene = gameEngineMgr.getPhysicsEngine()
+
+        // Not sure if this works
+        skScene.view?.showsPhysics = true
+
+        return skScene
+    }
 }
 
 struct GameplayLevelView_Previews: PreviewProvider {
