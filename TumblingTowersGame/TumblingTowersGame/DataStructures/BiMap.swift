@@ -24,24 +24,17 @@ public struct BiMap<Key: Hashable, Value: Hashable> {
         self.valueKeyDict = [:]
     }
     
-    /*
-    internal init(keyValueDict keys: [Key: Value],
-                  valueKeyDict values: [Value: Key]) {
-        self.keyValueDict = keys
-        self.valueKeyDict = values
-    }
-     */
-
     public subscript(key key: Key) -> Value? {
         get {
-            return keyValueDict[key]
+            keyValueDict[key]
         }
         set(insertedValue) {
-            guard let newValue = insertedValue,
-                  let oldValue = keyValueDict[key] else {
+            guard let newValue = insertedValue else {
                 return
             }
-            valueKeyDict[oldValue] = nil
+            if let oldValue = keyValueDict[key] {
+                valueKeyDict[oldValue] = nil
+            }
             keyValueDict[key] = newValue
             valueKeyDict[newValue] = key
         }
@@ -49,14 +42,15 @@ public struct BiMap<Key: Hashable, Value: Hashable> {
     
     public subscript(value value: Value) -> Key? {
         get {
-            return valueKeyDict[value]
+            valueKeyDict[value]
         }
         set(insertedKey) {
-            guard let newKey = insertedKey,
-                  let oldKey = valueKeyDict[value] else {
+            guard let newKey = insertedKey else {
                 return
             }
-            keyValueDict[oldKey] = nil
+            if let oldKey = valueKeyDict[value] {
+                keyValueDict[oldKey] = nil
+            }
             valueKeyDict[value] = newKey
             keyValueDict[newKey] = value
         }
