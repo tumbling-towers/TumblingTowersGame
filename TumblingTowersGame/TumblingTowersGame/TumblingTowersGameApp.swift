@@ -11,7 +11,7 @@ import SwiftUI
 struct TumblingTowersGameApp: App {
     @StateObject var mainGameMgr = MainGameManager()
 
-    var body: some Scene {
+    var body: some TumblingTowersScene {
         WindowGroup {
             GeometryReader { geo in
                 ContentView(gameEngineMgr: mainGameMgr

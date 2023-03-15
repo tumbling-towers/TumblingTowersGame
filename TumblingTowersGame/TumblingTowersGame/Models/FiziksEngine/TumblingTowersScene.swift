@@ -1,5 +1,5 @@
 //
-//  Scene.swift
+//  TumblingTowersScene.swift
 //  Facade
 //
 //  Created by Taufiq Abdul Rahman on 9/3/23.
@@ -8,7 +8,7 @@
 import Foundation
 import SpriteKit
 
-protocol Scene: SKScene {
+protocol TumblingTowersScene: SKScene {
     var size: CGSize { get }
 
     // FiziksBody related functions
@@ -23,6 +23,6 @@ protocol Scene: SKScene {
     func setDynamicValue(_ fiziksBody: FiziksBody, to newValue: Bool)
     func isDynamic(_ fiziksBody: FiziksBody) -> Bool
 
-    // Scene related functions
+    // TumblingTowersScene related functions
     func setUpScene()
 }

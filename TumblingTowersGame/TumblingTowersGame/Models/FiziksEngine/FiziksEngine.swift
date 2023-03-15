@@ -32,7 +32,7 @@ class FiziksEngine: SKScene {
     }
 }
 
-extension FiziksEngine: Scene {
+extension FiziksEngine: TumblingTowersScene {
     override func sceneDidLoad() {
         super.sceneDidLoad()
         setUpScene()
