@@ -17,8 +17,8 @@ struct ContentView: View {
             ScreenInputView()
                 .environmentObject(gameEngineMgr)
 
-            GameplayLevelView()
-                .environmentObject(gameEngineMgr)
+//            GameplayLevelView()
+//                .environmentObject(gameEngineMgr)
         }
         .ignoresSafeArea(.all)
     }

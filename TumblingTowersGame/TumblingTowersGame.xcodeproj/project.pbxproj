@@ -37,6 +37,7 @@
 		146E2E1629C0E33900BFC757 /* CGPath+Create.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146E2E1429C0E33900BFC757 /* CGPath+Create.swift */; };
 		146E2E1729C0E33900BFC757 /* CGPoint+Hashable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146E2E1529C0E33900BFC757 /* CGPoint+Hashable.swift */; };
 		146E2E1929C0E5B400BFC757 /* GameplayLevelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146E2E1829C0E5B400BFC757 /* GameplayLevelView.swift */; };
+		148FB94629C22F80007C3AE4 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148FB94529C22F80007C3AE4 /* TestView.swift */; };
 		2F7E13A629C0F054000E6FA9 /* BiMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F7E13A529C0F054000E6FA9 /* BiMap.swift */; };
 /* End PBXBuildFile section */
 
@@ -91,6 +92,7 @@
 		146E2E1429C0E33900BFC757 /* CGPath+Create.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGPath+Create.swift"; sourceTree = "<group>"; };
 		146E2E1529C0E33900BFC757 /* CGPoint+Hashable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGPoint+Hashable.swift"; sourceTree = "<group>"; };
 		146E2E1829C0E5B400BFC757 /* GameplayLevelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameplayLevelView.swift; sourceTree = "<group>"; };
+		148FB94529C22F80007C3AE4 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		2F7E13A529C0F054000E6FA9 /* BiMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiMap.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -208,6 +210,7 @@
 				146E2DF329C0D72F00BFC757 /* ScreenInputView.swift */,
 				146E2DB529C0D07200BFC757 /* ContentView.swift */,
 				146E2E1829C0E5B400BFC757 /* GameplayLevelView.swift */,
+				148FB94529C22F80007C3AE4 /* TestView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -433,6 +436,7 @@
 				146E2DE629C0D61A00BFC757 /* MainGameManager.swift in Sources */,
 				146E2E1629C0E33900BFC757 /* CGPath+Create.swift in Sources */,
 				146E2DF029C0D62F00BFC757 /* Vector.swift in Sources */,
+				148FB94629C22F80007C3AE4 /* TestView.swift in Sources */,
 				146E2DE429C0D61A00BFC757 /* GameEngineManager.swift in Sources */,
 				146E2E0929C0E2FE00BFC757 /* FiziksEngine.swift in Sources */,
 			);
