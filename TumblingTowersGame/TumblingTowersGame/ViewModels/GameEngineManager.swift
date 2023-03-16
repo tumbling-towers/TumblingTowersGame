@@ -51,7 +51,7 @@ class GameEngineManager: ObservableObject {
 
     // Temp function for testing
     func addBlock(at: CGPoint) {
-        gameEngine.addBlock(at: at)
+        gameEngine.insertNewBlock(at: at)
         print("Adding")
     }
 }

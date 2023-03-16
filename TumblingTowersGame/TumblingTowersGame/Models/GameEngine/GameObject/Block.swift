@@ -8,22 +8,16 @@
 import Foundation
 
 class Block: GameObject {
-    let fiziksShape: FiziksShape
-    var position: CGPoint
-    var zRotation: CGFloat
-    let category: GameObjectCategory
-    var isDynamic: Bool
+    let fiziksBody: FiziksBody
 
-    init(fiziksShape: FiziksShape,
-         position: CGPoint,
-         zRotation: CGFloat = 0,
-         category: GameObjectCategory = .block,
-         isDynamic: Bool = true) {
-        self.fiziksShape = fiziksShape
-        self.position = position
-        self.zRotation = zRotation
-        self.category = category
-        self.isDynamic = isDynamic
+    static var collisionBitmask: BitMask = ContactTestMask.block
+
+    static var contactTestBitmask: BitMask = ContactTestMask.block
+
+    static let categoryBitmask: BitMask = CategoryMask.block
+
+    init(fiziksBody: FiziksBody) {
+        self.fiziksBody = fiziksBody
     }
 }
 
