@@ -8,8 +8,7 @@
 import CoreGraphics
 import Foundation
 
-// TODO: consider creating a subclass for each shape?
-enum TetrisShape: PathFiziksShape {
+enum TetrisShape {
     case I, J, L, O, S, T, Z
 
     typealias P = CGPoint
@@ -23,20 +22,20 @@ enum TetrisShape: PathFiziksShape {
                                                         P(x: 10, y: 0),
                                                         P(x: 10, y: 40),
                                                         P(x: 0, y: 40)],
-                                                    J: [P(x: 10, y: 0),
-                                                        P(x: 20, y: 0),
-                                                        P(x: 20, y: 30),
-                                                        P(x: 0, y: 30),
-                                                        P(x: 0, y: 20),
-                                                        P(x: 10, y: 20)],
+                                                    J: [P(x: 0, y: 0),
+                                                        P(x: 30, y: 0),
+                                                        P(x: 30, y: 10),
+                                                        P(x: 10, y: 10),
+                                                        P(x: 10, y: 20),
+                                                        P(x: 0, y: 20)],
                                                     O: [P(x: 0, y: 0),
                                                         P(x: 20, y: 0),
                                                         P(x: 20, y: 20),
                                                         P(x: 0, y: 20)],
-                                                    S: [P(x: 10, y: 0),
+                                                    Z: [P(x: 10, y: 0),
                                                         P(x: 30, y: 0),
                                                         P(x: 30, y: 10),
-                                                        P(x: 20, y: 20),
+                                                        P(x: 20, y: 10),
                                                         P(x: 20, y: 20),
                                                         P(x: 0, y: 20),
                                                         P(x: 0, y: 10),
@@ -49,7 +48,7 @@ enum TetrisShape: PathFiziksShape {
                                                         P(x: 10, y: 20),
                                                         P(x: 10, y: 10),
                                                         P(x: 0, y: 10)],
-                                                    Z: [P(x: 0, y: 0),
+                                                    S: [P(x: 0, y: 0),
                                                         P(x: 20, y: 0),
                                                         P(x: 20, y: 10),
                                                         P(x: 30, y: 10),

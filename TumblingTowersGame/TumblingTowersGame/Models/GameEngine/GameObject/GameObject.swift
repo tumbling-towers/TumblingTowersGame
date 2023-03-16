@@ -7,20 +7,12 @@
 
 import Foundation
 
-protocol GameObject: FiziksBody {
-    var category: GameObjectCategory { get }
-}
+protocol GameObject {
+    var fiziksBody: FiziksBody { get }
 
-extension GameObject {
-    var categoryBitMask: BitMask {
-        category.categoryBitMask
-    }
+    static var categoryBitmask: BitMask { get }
 
-    var collisionBitMask: BitMask {
-        category.collisionBitMask
-    }
+    static var collisionBitmask: BitMask { get }
 
-    var contactTestBitMask: BitMask {
-        category.contactTestBitMask
-    }
+    static var contactTestBitmask: BitMask { get }
 }
