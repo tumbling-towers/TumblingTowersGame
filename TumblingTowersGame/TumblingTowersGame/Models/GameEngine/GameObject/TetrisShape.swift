@@ -8,7 +8,7 @@
 import CoreGraphics
 import Foundation
 
-enum TetrisShape {
+enum TetrisShape: CaseIterable {
     case I, J, L, O, S, T, Z
 
     typealias P = CGPoint

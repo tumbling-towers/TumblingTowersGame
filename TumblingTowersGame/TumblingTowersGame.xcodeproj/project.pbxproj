@@ -35,6 +35,9 @@
 		146E2E1929C0E5B400BFC757 /* GameplayLevelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146E2E1829C0E5B400BFC757 /* GameplayLevelView.swift */; };
 		148FB94629C22F80007C3AE4 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148FB94529C22F80007C3AE4 /* TestView.swift */; };
 		2F7E13A629C0F054000E6FA9 /* BiMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F7E13A529C0F054000E6FA9 /* BiMap.swift */; };
+		2FC7FACC29C50B4500B56850 /* ShapeRandomizerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC7FACB29C50B4500B56850 /* ShapeRandomizerTests.swift */; };
+		2FC7FAD229C50C2C00B56850 /* RandomNumberGeneratorWithSeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC7FAD129C50C2C00B56850 /* RandomNumberGeneratorWithSeed.swift */; };
+		2FC7FAD429C50C3C00B56850 /* ShapeRandomizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC7FAD329C50C3C00B56850 /* ShapeRandomizer.swift */; };
 		61CD55E129C35C4A00DB6000 /* FiziksContact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61CD55E029C35C4A00DB6000 /* FiziksContact.swift */; };
 		61CD55E329C35C5E00DB6000 /* FiziksContactDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61CD55E229C35C5E00DB6000 /* FiziksContactDelegate.swift */; };
 		61CD55E629C35CDB00DB6000 /* FiziksEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61CD55E529C35CDB00DB6000 /* FiziksEngine.swift */; };
@@ -94,6 +97,9 @@
 		146E2E1829C0E5B400BFC757 /* GameplayLevelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameplayLevelView.swift; sourceTree = "<group>"; };
 		148FB94529C22F80007C3AE4 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		2F7E13A529C0F054000E6FA9 /* BiMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiMap.swift; sourceTree = "<group>"; };
+		2FC7FACB29C50B4500B56850 /* ShapeRandomizerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeRandomizerTests.swift; sourceTree = "<group>"; };
+		2FC7FAD129C50C2C00B56850 /* RandomNumberGeneratorWithSeed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandomNumberGeneratorWithSeed.swift; sourceTree = "<group>"; };
+		2FC7FAD329C50C3C00B56850 /* ShapeRandomizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeRandomizer.swift; sourceTree = "<group>"; };
 		61CD55E029C35C4A00DB6000 /* FiziksContact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiziksContact.swift; sourceTree = "<group>"; };
 		61CD55E229C35C5E00DB6000 /* FiziksContactDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiziksContactDelegate.swift; sourceTree = "<group>"; };
 		61CD55E529C35CDB00DB6000 /* FiziksEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiziksEngine.swift; sourceTree = "<group>"; };
@@ -177,6 +183,7 @@
 			isa = PBXGroup;
 			children = (
 				146E2DC429C0D07300BFC757 /* TumblingTowersGameTests.swift */,
+				2FC7FACB29C50B4500B56850 /* ShapeRandomizerTests.swift */,
 			);
 			path = TumblingTowersGameTests;
 			sourceTree = "<group>";
@@ -279,6 +286,8 @@
 				61CD55EC29C35D7A00DB6000 /* Collision */,
 				2F7E13A729C0F56F000E6FA9 /* GameObject */,
 				146E2DEF29C0D62F00BFC757 /* GameEngine.swift */,
+				2FC7FAD129C50C2C00B56850 /* RandomNumberGeneratorWithSeed.swift */,
+				2FC7FAD329C50C3C00B56850 /* ShapeRandomizer.swift */,
 			);
 			path = GameEngine;
 			sourceTree = "<group>";
@@ -440,10 +449,12 @@
 				146E2E0E29C0E30700BFC757 /* GameObject.swift in Sources */,
 				61CD55F029C35D9600DB6000 /* CollisionMask.swift in Sources */,
 				146E2DF429C0D73000BFC757 /* ScreenInputView.swift in Sources */,
+				2FC7FAD429C50C3C00B56850 /* ShapeRandomizer.swift in Sources */,
 				61CD55EA29C35D2C00DB6000 /* FiziksConstants.swift in Sources */,
 				146E2DEC29C0D62800BFC757 /* GyroInput.swift in Sources */,
 				146E2DEB29C0D62800BFC757 /* TapInput.swift in Sources */,
 				146E2DB429C0D07200BFC757 /* TumblingTowersGameApp.swift in Sources */,
+				2FC7FAD229C50C2C00B56850 /* RandomNumberGeneratorWithSeed.swift in Sources */,
 				61CD55E129C35C4A00DB6000 /* FiziksContact.swift in Sources */,
 				61CD55E329C35C5E00DB6000 /* FiziksContactDelegate.swift in Sources */,
 				61CD55E629C35CDB00DB6000 /* FiziksEngine.swift in Sources */,
@@ -470,6 +481,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2FC7FACC29C50B4500B56850 /* ShapeRandomizerTests.swift in Sources */,
 				146E2DC529C0D07300BFC757 /* TumblingTowersGameTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
