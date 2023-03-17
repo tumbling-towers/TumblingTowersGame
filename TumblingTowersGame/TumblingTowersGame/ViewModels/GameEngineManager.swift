@@ -51,7 +51,7 @@ class GameEngineManager: ObservableObject {
 
     // Temp function for testing
     func addBlock(at: CGPoint) {
-        gameEngine.insertNewBlock(at: at)
+        gameEngine.addBlock(ofShape: TetrisShape.L, at: at)
         print("Adding")
     }
 }

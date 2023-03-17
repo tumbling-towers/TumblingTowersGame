@@ -8,8 +8,11 @@
 import Foundation
 import SpriteKit
 
-protocol FiziksEngine: SKScene {
+protocol FiziksEngine: AnyObject {
     var fiziksContactDelegate: FiziksContactDelegate? { get set }
+    
+    // Breaks abstration but this is the only way to start the SKScene
+    func presentOnUselessView(skView: SKView)
 
     // FiziksBody related functions
     func contains(_ fiziksBody: FiziksBody) -> Bool
@@ -25,7 +28,5 @@ protocol FiziksEngine: SKScene {
     func setAffectedByGravity(_ fiziksBody: FiziksBody, to newValue: Bool)
     func setWorldGravity(to newValue: CGVector)
     func setVelocity(_ fiziksBody: FiziksBody, to newVelocity: CGVector)
-
-    // Scene related functions
-    func setUpScene()
+    func updateAllFiziksBodies()
 }

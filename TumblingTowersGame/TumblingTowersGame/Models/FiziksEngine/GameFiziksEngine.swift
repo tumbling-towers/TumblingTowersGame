@@ -8,27 +8,34 @@
 import Foundation
 import SpriteKit
 
-class GameFiziksEngine: SKScene {
+class GameFiziksEngine: NSObject {
+    let fiziksScene: FiziksScene
+    
     // TODO: Potentially refactor double lookup to double delegates to synchronise position updates between FiziksBody & SKNode.
-    var fiziksBodyIdToSKNode: BiMap<ObjectIdentifier, SKNode> = BiMap()
-    var fiziksBodyIdToFiziksBody: [ObjectIdentifier: FiziksBody] = [:]
+    var fiziksBodyIdToSKNode: BiMap<ObjectIdentifier, SKNode>
+    var fiziksBodyIdToFiziksBody: [ObjectIdentifier: FiziksBody]
 
     weak var fiziksContactDelegate: FiziksContactDelegate?
-
-    override func didFinishUpdate() {
-        // SK has updated all the SKNodes, now update all the FiziksBodies
-        updateAllFiziksBodies()
+    
+    init(levelDimensions: CGRect, boundingRect: CGRect) {
+        let size = CGSize(width: levelDimensions.width, height: levelDimensions.height)
+        self.fiziksScene = FiziksScene(size: size,
+                                       boundingRect: boundingRect)
+        self.fiziksBodyIdToSKNode = BiMap()
+        self.fiziksBodyIdToFiziksBody = [:]
+        self.fiziksContactDelegate = nil
+        super.init()
+        setUpFiziksScene()
     }
 
-    private func updateAllFiziksBodies() {
-        for skNode in fiziksBodyIdToSKNode.values {
-            guard let fiziksBodyId = fiziksBodyIdToSKNode[value: skNode],
-                  let fiziksBody = fiziksBodyIdToFiziksBody[fiziksBodyId] else {
-                continue
-            }
-            fiziksBody.position = skNode.position
-            fiziksBody.zRotation = skNode.zRotation
-        }
+    private func setUpFiziksScene() {
+        fiziksScene.physicsWorld.contactDelegate = self
+        fiziksScene.fiziksSceneUpdateDelegate = self
+        fiziksScene.gravity = GameFiziksEngine.defaultFiziksEngineGravity
+    }
+
+    private func hasExittedArea(skNode: SKNode) -> Bool {
+        !fiziksScene.intersects(skNode)
     }
 }
 
@@ -36,20 +43,11 @@ extension GameFiziksEngine: FiziksEngine {
 
     static let defaultFiziksEngineGravity = CGVector(dx: 0, dy: -1.0)
 
-    var gravity: CGVector {
-        get {
-            physicsWorld.gravity
-        }
-        set {
-            physicsWorld.gravity = newValue
-        }
+    func presentOnUselessView(skView: SKView) {
+        skView.presentScene(fiziksScene)
+        skView.showsPhysics = true
     }
-
-    override func sceneDidLoad() {
-        super.sceneDidLoad()
-        setUpScene()
-    }
-
+    
     func contains(_ fiziksBody: FiziksBody) -> Bool {
         let bodyId = ObjectIdentifier(fiziksBody)
         return fiziksBodyIdToSKNode[key: bodyId] != nil
@@ -70,7 +68,7 @@ extension GameFiziksEngine: FiziksEngine {
         let bodyId = ObjectIdentifier(fiziksBody)
         fiziksBodyIdToSKNode[key: bodyId] = node
         fiziksBodyIdToFiziksBody[bodyId] = fiziksBody
-        addChild(node)
+        fiziksScene.addChild(node)
     }
 
     func delete(_ fiziksBody: FiziksBody) {
@@ -106,7 +104,7 @@ extension GameFiziksEngine: FiziksEngine {
         let combinedNode = SKNode()
         combinedNode.physicsBody = SKPhysicsBody(bodies: skPhysicsBodies)
 
-        addChild(combinedNode)
+        fiziksScene.addChild(combinedNode)
     }
 
     // TODO: rotation works but looks a bit weird. run to see.
@@ -153,20 +151,20 @@ extension GameFiziksEngine: FiziksEngine {
     }
 
     func setWorldGravity(to newValue: CGVector) {
-        gravity = newValue
+        fiziksScene.gravity = newValue
     }
 
-    func setUpScene() {
-        gravity = GameFiziksEngine.defaultFiziksEngineGravity
-        self.physicsWorld.contactDelegate = self
-        // FIXME: figure out why this line is buggy. Somehow the 500, 500 works but the
-        // commented line does not
-        // scene?.size = CGSize(width: size.width, height: size.height)
-        scene?.size = CGSize(width: 500, height: 500)
-        // Set up the edge loop to define boundaries of physics world (so that objects are contained within the screen)
-        self.physicsBody = SKPhysicsBody(edgeLoopFrom: self.frame)
+    func updateAllFiziksBodies() {
+        for skNode in fiziksBodyIdToSKNode.values {
+            guard let fiziksBodyId = fiziksBodyIdToSKNode[value: skNode],
+                  let fiziksBody = fiziksBodyIdToFiziksBody[fiziksBodyId] else {
+                continue
+            }
+            fiziksBody.position = skNode.position
+            fiziksBody.zRotation = skNode.zRotation
+        }
     }
-
+    
     private func createSKPhysicsBody(for fiziksBody: FiziksBody) -> SKPhysicsBody {
         let physicsBody = fiziksBody.createSKPhysicsBody()
         physicsBody.isDynamic = fiziksBody.isDynamic
@@ -215,5 +213,11 @@ extension GameFiziksEngine: SKPhysicsContactDelegate {
                              contactPoint: skPhysicsContact.contactPoint,
                              collisionImpulse: skPhysicsContact.collisionImpulse,
                              contactNormal: skPhysicsContact.contactNormal)
+    }
+}
+
+extension GameFiziksEngine: FiziksSceneUpdateDelegate {
+    func didUpdateFiziksScene() {
+        updateAllFiziksBodies()
     }
 }

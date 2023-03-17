@@ -24,10 +24,11 @@ struct GameplayLevelView: View {
 
     private func getUselessSKSceneToPresent() -> SKScene {
         // Equivalent to gameEngine?.fiziksEngine
-        let skScene = gameEngineMgr.getPhysicsEngine()
+        // let skScene = gameEngineMgr.getPhysicsEngine()
+        let skScene = SKScene()
 
         // Not sure if this works
-        skScene.view?.showsPhysics = true
+        // skScene.view?.showsPhysics = true
 
         return skScene
     }
