@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Platform: GameObject {
+class Platform: GameEngineObject {
     let fiziksBody: FiziksBody
 
     static var categoryBitmask: BitMask = CategoryMask.platform

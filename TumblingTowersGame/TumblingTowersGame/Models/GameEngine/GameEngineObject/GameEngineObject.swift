@@ -1,5 +1,5 @@
 //
-//  GameObject.swift
+//  GameEngineObject.swift
 //  Facade
 //
 //  Created by Taufiq Abdul Rahman on 8/3/23.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol GameObject {
+protocol GameEngineObject {
     var fiziksBody: FiziksBody { get }
 
     static var categoryBitmask: BitMask { get }

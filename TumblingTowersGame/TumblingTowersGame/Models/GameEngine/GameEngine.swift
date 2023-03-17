@@ -21,7 +21,7 @@ class GameEngine {
     static let defaultBlockVelocity = CGVector(dx: 0, dy: -1)
     static let defaultInsertionPoint = CGPoint(x: 200, y: 300)
     
-    var gameObjects: [any GameObject]
+    var gameObjects: [any GameEngineObject]
     let fiziksEngine: FiziksEngine
     // var shapeRandomizer: ShapeRandomizer
     

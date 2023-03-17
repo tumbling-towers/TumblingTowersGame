@@ -10,6 +10,10 @@ import SwiftUI
 import SpriteKit
 
 class GameEngineManager: ObservableObject {
+    @Published var goalLinePosition: CGPoint = CGPoint()
+    @Published var powerUpLinePosition: CGPoint = CGPoint()
+    @Published var platformPosition: CGPoint = CGPoint()
+
 
     private var gameEngine: GameEngine
     private var lastTapLocation = Point(0, 0)
@@ -61,3 +65,23 @@ extension GameEngineManager: GameRendererDelegate {
         objectWillChange.send()
     }
 }
+
+
+//extension GameEngineManager: ObservableObject {
+    
+//    func getPlatformPosition() -> CGPoint {
+//        return CGPoint()
+//    }
+//    func getGoalLinePosition() -> CGPoint {
+//        return CGPoint()
+//    }
+//    func getPowerUpLinePosition() -> CGPoint {
+//        return CGPoint()
+//    }
+//    func getPlatformPosition() -> CGPoint {
+//        return CGPoint()
+//    }
+//    func getPlatformPosition() -> CGPoint {
+//        return CGPoint()
+//    }
+//}
