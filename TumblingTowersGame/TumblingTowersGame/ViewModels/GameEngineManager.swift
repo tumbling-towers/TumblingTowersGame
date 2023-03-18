@@ -70,7 +70,7 @@ class GameEngineManager: ObservableObject {
     private var frameCount = 0
     private weak var gameRenderer: GameRendererDelegate?
     
-    func start(mainGameMgr: MainGameManager) {
+    func setUpLevelAndStartEngine(mainGameMgr: MainGameManager) {
         // Initialize level here and start it
         gameRenderer = self
         
@@ -80,6 +80,8 @@ class GameEngineManager: ObservableObject {
         self.mainGameMgr = mainGameMgr
         
         createCADisplayLink()
+        
+        platformPosition = CGPoint(x: mainGameMgr.deviceWidth/2, y: mainGameMgr.deviceHeight-100)
     }
     
     func createCADisplayLink() {
