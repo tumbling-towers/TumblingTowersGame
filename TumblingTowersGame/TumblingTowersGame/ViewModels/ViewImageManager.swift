@@ -8,7 +8,7 @@
 import Foundation
 
 struct ViewImageManager {
-    static let backgroundImage = "trans-bkg-test"
+    static let backgroundImage = "backgroundImage"
     static let platformImage = "platformImage"
     
     static let LBlockImage = "LBlockImage"

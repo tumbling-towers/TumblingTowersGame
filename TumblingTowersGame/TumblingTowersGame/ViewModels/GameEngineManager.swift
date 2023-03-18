@@ -129,15 +129,6 @@ class GameEngineManager: ObservableObject {
         render()
 
     }
-    
-//    func step() {
-//        print("----------")
-//
-//        for object in gameEngine.gameObjects {
-//            print(object.fiziksBody.position)
-//        }
-//
-//    }
 
     func step() {
         print("----------")
@@ -154,8 +145,6 @@ class GameEngineManager: ObservableObject {
         level = newLevel
         levelBlocks = newLevel.blocks
         levelPlatform = newLevel.platform
-        print("new level \(level.blocks)")
-
     }
 
     func render() {
