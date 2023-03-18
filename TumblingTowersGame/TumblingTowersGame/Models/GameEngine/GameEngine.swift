@@ -71,6 +71,26 @@ class GameEngine {
         
         insertInitialPlatform()
     }
+
+    func setRenderer(gameRenderer: GameRendererDelegate) {
+        self.gameRenderer = gameRenderer
+    }
+
+    // This update method is called by the GameUpdater every frame.
+    func update() {
+        // MARK: Platform is always sampleplatform for now
+        var newLevel = Level(blocks: [], platform: .samplePlatform)
+
+        for object in gameObjects {
+            if object.fiziksBody.categoryBitMask == CategoryMask.block {
+                let blockPosition = object.fiziksBody.position
+                // TODO: hardcoded .I shape for now, need to get the shape from engine
+                newLevel.add(block: GameObjectBlock(position: blockPosition, blockShape: .I))
+            }
+        }
+
+        gameRenderer?.renderLevel(level: newLevel, gameObjectBlocks: newLevel.blocks, gameObjectPlatform: newLevel.platform)
+    }
     
     func insertNewBlock() {
         let shape = shapeRandomizer.getShape()
