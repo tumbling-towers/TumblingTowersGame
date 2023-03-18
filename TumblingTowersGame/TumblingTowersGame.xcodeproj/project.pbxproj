@@ -16,6 +16,9 @@
 		124B02CF29C41FD000094CF5 /* GameObjectBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124B02CE29C41FD000094CF5 /* GameObjectBlock.swift */; };
 		124B02D129C4201F00094CF5 /* BlockShapeEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124B02D029C4201F00094CF5 /* BlockShapeEnum.swift */; };
 		124B02D329C4204300094CF5 /* GameObjectPlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124B02D229C4204300094CF5 /* GameObjectPlatform.swift */; };
+		124B02D529C55F8C00094CF5 /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124B02D429C55F8C00094CF5 /* Level.swift */; };
+		124B02D729C567F600094CF5 /* LevelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124B02D629C567F600094CF5 /* LevelView.swift */; };
+		124B02D929C568FE00094CF5 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124B02D829C568FE00094CF5 /* BackgroundView.swift */; };
 		146E2DB429C0D07200BFC757 /* TumblingTowersGameApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146E2DB329C0D07200BFC757 /* TumblingTowersGameApp.swift */; };
 		146E2DB629C0D07200BFC757 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146E2DB529C0D07200BFC757 /* ContentView.swift */; };
 		146E2DB829C0D07300BFC757 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 146E2DB729C0D07300BFC757 /* Assets.xcassets */; };
@@ -81,6 +84,9 @@
 		124B02CE29C41FD000094CF5 /* GameObjectBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameObjectBlock.swift; sourceTree = "<group>"; };
 		124B02D029C4201F00094CF5 /* BlockShapeEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockShapeEnum.swift; sourceTree = "<group>"; };
 		124B02D229C4204300094CF5 /* GameObjectPlatform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameObjectPlatform.swift; sourceTree = "<group>"; };
+		124B02D429C55F8C00094CF5 /* Level.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
+		124B02D629C567F600094CF5 /* LevelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelView.swift; sourceTree = "<group>"; };
+		124B02D829C568FE00094CF5 /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
 		146E2DB029C0D07200BFC757 /* TumblingTowersGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TumblingTowersGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		146E2DB329C0D07200BFC757 /* TumblingTowersGameApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TumblingTowersGameApp.swift; sourceTree = "<group>"; };
 		146E2DB529C0D07200BFC757 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -154,6 +160,7 @@
 				124B02CE29C41FD000094CF5 /* GameObjectBlock.swift */,
 				124B02D029C4201F00094CF5 /* BlockShapeEnum.swift */,
 				124B02D229C4204300094CF5 /* GameObjectPlatform.swift */,
+				124B02D429C55F8C00094CF5 /* Level.swift */,
 			);
 			path = GameObject;
 			sourceTree = "<group>";
@@ -246,9 +253,11 @@
 			isa = PBXGroup;
 			children = (
 				124B02C029C415CC00094CF5 /* BlockView.swift */,
+				124B02D829C568FE00094CF5 /* BackgroundView.swift */,
 				146E2DB529C0D07200BFC757 /* ContentView.swift */,
 				146E2E1829C0E5B400BFC757 /* GameplayLevelView.swift */,
 				124B02C629C4160100094CF5 /* GoalView.swift */,
+				124B02D629C567F600094CF5 /* LevelView.swift */,
 				124B02C229C415DC00094CF5 /* PlatformView.swift */,
 				124B02C429C415E700094CF5 /* PowerUpLineView.swift */,
 				146E2DF329C0D72F00BFC757 /* ScreenInputView.swift */,
@@ -495,7 +504,9 @@
 				146E2DE529C0D61A00BFC757 /* GameRendererDelegate.swift in Sources */,
 				146E2E0E29C0E30700BFC757 /* GameEngineObject.swift in Sources */,
 				61CD55F029C35D9600DB6000 /* CollisionMask.swift in Sources */,
+				124B02D729C567F600094CF5 /* LevelView.swift in Sources */,
 				146E2DF429C0D73000BFC757 /* ScreenInputView.swift in Sources */,
+				124B02D529C55F8C00094CF5 /* Level.swift in Sources */,
 				61CD55EA29C35D2C00DB6000 /* FiziksConstants.swift in Sources */,
 				124B02C329C415DC00094CF5 /* PlatformView.swift in Sources */,
 				146E2DEC29C0D62800BFC757 /* GyroInput.swift in Sources */,
@@ -519,6 +530,7 @@
 				146E2DF229C0D62F00BFC757 /* GameEngine.swift in Sources */,
 				146E2E1729C0E33900BFC757 /* CGPoint+Hashable.swift in Sources */,
 				146E2E1029C0E30700BFC757 /* Block.swift in Sources */,
+				124B02D929C568FE00094CF5 /* BackgroundView.swift in Sources */,
 				61CD55F229C35DA700DB6000 /* ContactTestMask.swift in Sources */,
 				124B02C529C415E700094CF5 /* PowerUpLineView.swift in Sources */,
 				124B02CD29C41F7100094CF5 /* GameObject.swift in Sources */,

@@ -11,10 +11,20 @@ import SpriteKit
 
 class GameEngineManager: ObservableObject {
     @Published var goalLinePosition: CGPoint = CGPoint()
-    @Published var powerUpLinePosition: CGPoint = CGPoint()
-    @Published var platformPosition: CGPoint = CGPoint()
-
-
+    @Published var powerUpLinePosition: CGPoint = CGPoint(x: 500, y: 500)
+    @Published var platformPosition: CGPoint = GameObjectPlatform.samplePlatform.position
+    
+    var level: Level = Level.sampleLevel
+    @Published var levelBlocks: [GameObjectBlock] = [.sampleBlock]
+    @Published var levelPlatform: GameObjectPlatform = .samplePlatform
+    
+    
+    
+    
+    
+    
+    
+    
     private var gameEngine: GameEngine
     private var lastTapLocation = Point(0, 0)
     private weak var mainGameMgr: MainGameManager?
@@ -66,22 +76,3 @@ extension GameEngineManager: GameRendererDelegate {
     }
 }
 
-
-//extension GameEngineManager: ObservableObject {
-    
-//    func getPlatformPosition() -> CGPoint {
-//        return CGPoint()
-//    }
-//    func getGoalLinePosition() -> CGPoint {
-//        return CGPoint()
-//    }
-//    func getPowerUpLinePosition() -> CGPoint {
-//        return CGPoint()
-//    }
-//    func getPlatformPosition() -> CGPoint {
-//        return CGPoint()
-//    }
-//    func getPlatformPosition() -> CGPoint {
-//        return CGPoint()
-//    }
-//}

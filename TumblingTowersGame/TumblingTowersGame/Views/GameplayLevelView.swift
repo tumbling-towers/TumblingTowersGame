@@ -19,6 +19,7 @@ struct GameplayLevelView: View {
 
         SpriteView(scene: getUselessSKSceneToPresent())
 //        TestView()
+        LevelView()
     }
 
     private func getUselessSKSceneToPresent() -> SKScene {

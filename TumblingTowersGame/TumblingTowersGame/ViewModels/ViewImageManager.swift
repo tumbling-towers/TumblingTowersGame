@@ -8,19 +8,36 @@
 import Foundation
 
 struct ViewImageManager {
-    static let backgroundImage = ""
-    static let platformImage = ""
+    static let backgroundImage = "trans-bkg-test"
+    static let platformImage = "platformImage"
     
-    static let LBlockImage = ""
-    static let IBlockImage = ""
-    static let JBlockImage = ""
-    static let OBlockImage = ""
-    static let ZBlockImage = ""
-    static let TBlockImage = ""
-    static let SBlockImage = ""
+    static let LBlockImage = "LBlockImage"
+    static let IBlockImage = "IBlockImage"
+    static let JBlockImage = "JBlockImage"
+    static let OBlockImage = "OBlockImage"
+    static let ZBlockImage = "ZBlockImage"
+    static let TBlockImage = "TBlockImage"
+    static let SBlockImage = "SBlockImage"
     
     static let powerUpLineImage = ""
     static let goalLineImage = ""
     
+    static let blockShapeToImage: [BlockShapeEnum: String] = [
+        .L : LBlockImage,
+        .I : IBlockImage,
+        .J : JBlockImage,
+        .O : OBlockImage,
+        .Z : ZBlockImage,
+        .T : TBlockImage,
+        .S : SBlockImage
+    ]
+    
+    // TODO: should throw
+    static func getBlockImage(_ block: GameObjectBlock) -> String? {
+        guard let image = blockShapeToImage[block.blockShape] else {
+            return ""
+        }
+        return image
+    }
     // TODO: vines blocks
 }

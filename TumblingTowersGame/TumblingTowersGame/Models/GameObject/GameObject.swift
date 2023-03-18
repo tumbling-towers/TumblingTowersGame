@@ -7,12 +7,12 @@
 
 import Foundation
 
-protocol GameObject {
-    static var categoryBitmask: BitMask { get }
-
-    static var collisionBitmask: BitMask { get }
-
-    static var contactTestBitmask: BitMask { get }
+protocol GameObject: Identifiable {
+//    static var categoryBitmask: BitMask { get }
+//
+//    static var collisionBitmask: BitMask { get }
+//
+//    static var contactTestBitmask: BitMask { get }
     
     var position: CGPoint { get set }
 }

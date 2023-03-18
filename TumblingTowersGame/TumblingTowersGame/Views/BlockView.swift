@@ -1,25 +1,26 @@
-////
-////  BlockView.swift
-////  TumblingTowersGame
-////
-////  Created by Lee Yong Ler on 17/3/23.
-////
 //
-//import SwiftUI
+//  BlockView.swift
+//  TumblingTowersGame
 //
-//struct BlockView: View {
-////    @EnvironmentObject var gameEngineMgr: GameEngineManager
-////    @Binding var block: Block
-//    
-//    var body: some View {
-////        Image(ViewImageManager.goalLineImage)
-////            .position(block.centre)
-//    }
-//}
+//  Created by Lee Yong Ler on 17/3/23.
 //
-//struct BlockView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        BlockView()
-//            .environmentObject(GameEngineManager(levelDimensions: .infinite))
-//    }
-//}
+
+import SwiftUI
+
+struct BlockView: View {
+    @EnvironmentObject var gameEngineMgr: GameEngineManager
+    @Binding var block: GameObjectBlock
+
+    var body: some View {
+        // TODO: should not coalesce
+        Image(ViewImageManager.getBlockImage(block) ?? "")
+            .position(block.position)
+    }
+}
+
+struct BlockView_Previews: PreviewProvider {
+    static var previews: some View {
+        BlockView(block: .constant(GameObjectBlock.sampleBlock))
+            .environmentObject(GameEngineManager(levelDimensions: .infinite))
+    }
+}

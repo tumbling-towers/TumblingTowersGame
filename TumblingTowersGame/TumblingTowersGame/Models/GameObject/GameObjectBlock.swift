@@ -7,13 +7,14 @@
 
 import Foundation
 
-class GameObjectBlock: GameObject {
-    static var collisionBitmask: BitMask = ContactTestMask.block
-
-    static var contactTestBitmask: BitMask = ContactTestMask.block
-
-    static let categoryBitmask: BitMask = CategoryMask.block
+struct GameObjectBlock: GameObject {
+//    static var collisionBitmask: BitMask = ContactTestMask.block
+//
+//    static var contactTestBitmask: BitMask = ContactTestMask.block
+//
+//    static let categoryBitmask: BitMask = CategoryMask.block
     
+    var id = UUID()
     var position: CGPoint
     var blockShape: BlockShapeEnum
     
@@ -22,3 +23,14 @@ class GameObjectBlock: GameObject {
         self.blockShape = blockShape
     }
 }
+
+extension GameObjectBlock: Equatable {
+    static func == (lhs: GameObjectBlock, rhs: GameObjectBlock) -> Bool {
+        lhs.position == rhs.position && lhs.blockShape == rhs.blockShape
+    }
+}
+
+extension GameObjectBlock {
+    static let sampleBlock = GameObjectBlock(position: CGPoint(x: 500, y: 500), blockShape: .I)
+}
+
