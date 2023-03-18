@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Block: GameObject {
+class Block: GameEngineObject {
     let fiziksBody: FiziksBody
 
     static var collisionBitmask: BitMask = ContactTestMask.block

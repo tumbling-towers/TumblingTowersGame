@@ -11,7 +11,6 @@ import SwiftUI
 struct GameplayLevelView: View {
     @EnvironmentObject var gameEngineMgr: GameEngineManager
     
-
     var body: some View {
 
         // Need to run physics engine (from testing we need to run these 2 lines so that the physics engine will start running)
@@ -20,6 +19,7 @@ struct GameplayLevelView: View {
 
         SpriteView(scene: getUselessSKSceneToPresent())
 //        TestView()
+        LevelView()
     }
 
     private func getUselessSKSceneToPresent() -> SKScene {

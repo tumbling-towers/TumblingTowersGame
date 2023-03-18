@@ -7,6 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		124B02C129C415CC00094CF5 /* BlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124B02C029C415CC00094CF5 /* BlockView.swift */; };
+		124B02C329C415DC00094CF5 /* PlatformView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124B02C229C415DC00094CF5 /* PlatformView.swift */; };
+		124B02C529C415E700094CF5 /* PowerUpLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124B02C429C415E700094CF5 /* PowerUpLineView.swift */; };
+		124B02C729C4160100094CF5 /* GoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124B02C629C4160100094CF5 /* GoalView.swift */; };
+		124B02C929C4171400094CF5 /* ViewImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124B02C829C4171400094CF5 /* ViewImageManager.swift */; };
+		124B02CD29C41F7100094CF5 /* GameObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124B02CC29C41F7100094CF5 /* GameObject.swift */; };
+		124B02CF29C41FD000094CF5 /* GameObjectBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124B02CE29C41FD000094CF5 /* GameObjectBlock.swift */; };
+		124B02D129C4201F00094CF5 /* BlockShapeEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124B02D029C4201F00094CF5 /* BlockShapeEnum.swift */; };
+		124B02D329C4204300094CF5 /* GameObjectPlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124B02D229C4204300094CF5 /* GameObjectPlatform.swift */; };
+		124B02D529C55F8C00094CF5 /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124B02D429C55F8C00094CF5 /* Level.swift */; };
+		124B02D729C567F600094CF5 /* LevelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124B02D629C567F600094CF5 /* LevelView.swift */; };
+		124B02D929C568FE00094CF5 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124B02D829C568FE00094CF5 /* BackgroundView.swift */; };
 		146E2DB429C0D07200BFC757 /* TumblingTowersGameApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146E2DB329C0D07200BFC757 /* TumblingTowersGameApp.swift */; };
 		146E2DB629C0D07200BFC757 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146E2DB529C0D07200BFC757 /* ContentView.swift */; };
 		146E2DB829C0D07300BFC757 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 146E2DB729C0D07300BFC757 /* Assets.xcassets */; };
@@ -27,7 +39,7 @@
 		146E2DFE29C0E05A00BFC757 /* TetrisShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146E2DFD29C0E05A00BFC757 /* TetrisShape.swift */; };
 		146E2E0829C0E2FE00BFC757 /* FiziksBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146E2E0529C0E2FE00BFC757 /* FiziksBody.swift */; };
 		146E2E0A29C0E2FE00BFC757 /* GameFiziksEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146E2E0729C0E2FE00BFC757 /* GameFiziksEngine.swift */; };
-		146E2E0E29C0E30700BFC757 /* GameObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146E2E0B29C0E30700BFC757 /* GameObject.swift */; };
+		146E2E0E29C0E30700BFC757 /* GameEngineObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146E2E0B29C0E30700BFC757 /* GameEngineObject.swift */; };
 		146E2E0F29C0E30700BFC757 /* Platform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146E2E0C29C0E30700BFC757 /* Platform.swift */; };
 		146E2E1029C0E30700BFC757 /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146E2E0D29C0E30700BFC757 /* Block.swift */; };
 		146E2E1629C0E33900BFC757 /* CGPath+Create.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146E2E1429C0E33900BFC757 /* CGPath+Create.swift */; };
@@ -63,6 +75,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		124B02C029C415CC00094CF5 /* BlockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockView.swift; sourceTree = "<group>"; };
+		124B02C229C415DC00094CF5 /* PlatformView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformView.swift; sourceTree = "<group>"; };
+		124B02C429C415E700094CF5 /* PowerUpLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerUpLineView.swift; sourceTree = "<group>"; };
+		124B02C629C4160100094CF5 /* GoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalView.swift; sourceTree = "<group>"; };
+		124B02C829C4171400094CF5 /* ViewImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewImageManager.swift; sourceTree = "<group>"; };
+		124B02CC29C41F7100094CF5 /* GameObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameObject.swift; sourceTree = "<group>"; };
+		124B02CE29C41FD000094CF5 /* GameObjectBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameObjectBlock.swift; sourceTree = "<group>"; };
+		124B02D029C4201F00094CF5 /* BlockShapeEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockShapeEnum.swift; sourceTree = "<group>"; };
+		124B02D229C4204300094CF5 /* GameObjectPlatform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameObjectPlatform.swift; sourceTree = "<group>"; };
+		124B02D429C55F8C00094CF5 /* Level.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
+		124B02D629C567F600094CF5 /* LevelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelView.swift; sourceTree = "<group>"; };
+		124B02D829C568FE00094CF5 /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
 		146E2DB029C0D07200BFC757 /* TumblingTowersGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TumblingTowersGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		146E2DB329C0D07200BFC757 /* TumblingTowersGameApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TumblingTowersGameApp.swift; sourceTree = "<group>"; };
 		146E2DB529C0D07200BFC757 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -86,7 +110,7 @@
 		146E2DFD29C0E05A00BFC757 /* TetrisShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TetrisShape.swift; sourceTree = "<group>"; };
 		146E2E0529C0E2FE00BFC757 /* FiziksBody.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiziksBody.swift; sourceTree = "<group>"; };
 		146E2E0729C0E2FE00BFC757 /* GameFiziksEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameFiziksEngine.swift; sourceTree = "<group>"; };
-		146E2E0B29C0E30700BFC757 /* GameObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameObject.swift; sourceTree = "<group>"; };
+		146E2E0B29C0E30700BFC757 /* GameEngineObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameEngineObject.swift; sourceTree = "<group>"; };
 		146E2E0C29C0E30700BFC757 /* Platform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Platform.swift; sourceTree = "<group>"; };
 		146E2E0D29C0E30700BFC757 /* Block.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
 		146E2E1429C0E33900BFC757 /* CGPath+Create.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGPath+Create.swift"; sourceTree = "<group>"; };
@@ -129,6 +153,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		124B02CB29C41F6400094CF5 /* GameObject */ = {
+			isa = PBXGroup;
+			children = (
+				124B02D029C4201F00094CF5 /* BlockShapeEnum.swift */,
+				124B02CC29C41F7100094CF5 /* GameObject.swift */,
+				124B02CE29C41FD000094CF5 /* GameObjectBlock.swift */,
+				124B02D229C4204300094CF5 /* GameObjectPlatform.swift */,
+				124B02D429C55F8C00094CF5 /* Level.swift */,
+			);
+			path = GameObject;
+			sourceTree = "<group>";
+		};
 		146E2DA729C0D07200BFC757 = {
 			isa = PBXGroup;
 			children = (
@@ -193,6 +229,7 @@
 		146E2DDD29C0D0AF00BFC757 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				124B02CB29C41F6400094CF5 /* GameObject */,
 				2F7E13A829C0F5E5000E6FA9 /* GameEngine */,
 				146E2E0429C0E2D800BFC757 /* FiziksEngine */,
 				146E2DEE29C0D62F00BFC757 /* Point.swift */,
@@ -207,6 +244,7 @@
 				146E2DE129C0D61A00BFC757 /* GameEngineManager.swift */,
 				146E2DE229C0D61A00BFC757 /* GameRendererDelegate.swift */,
 				146E2DE329C0D61A00BFC757 /* MainGameManager.swift */,
+				124B02C829C4171400094CF5 /* ViewImageManager.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -214,9 +252,15 @@
 		146E2DDF29C0D0BB00BFC757 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				146E2DF329C0D72F00BFC757 /* ScreenInputView.swift */,
+				124B02C029C415CC00094CF5 /* BlockView.swift */,
+				124B02D829C568FE00094CF5 /* BackgroundView.swift */,
 				146E2DB529C0D07200BFC757 /* ContentView.swift */,
 				146E2E1829C0E5B400BFC757 /* GameplayLevelView.swift */,
+				124B02C629C4160100094CF5 /* GoalView.swift */,
+				124B02D629C567F600094CF5 /* LevelView.swift */,
+				124B02C229C415DC00094CF5 /* PlatformView.swift */,
+				124B02C429C415E700094CF5 /* PowerUpLineView.swift */,
+				146E2DF329C0D72F00BFC757 /* ScreenInputView.swift */,
 				148FB94529C22F80007C3AE4 /* TestView.swift */,
 			);
 			path = Views;
@@ -236,11 +280,11 @@
 			isa = PBXGroup;
 			children = (
 				61CD55EB29C35D3900DB6000 /* FiziksBody */,
-				146E2E0729C0E2FE00BFC757 /* GameFiziksEngine.swift */,
+				61CD55E929C35D2C00DB6000 /* FiziksConstants.swift */,
 				61CD55E029C35C4A00DB6000 /* FiziksContact.swift */,
 				61CD55E229C35C5E00DB6000 /* FiziksContactDelegate.swift */,
 				61CD55E529C35CDB00DB6000 /* FiziksEngine.swift */,
-				61CD55E929C35D2C00DB6000 /* FiziksConstants.swift */,
+				146E2E0729C0E2FE00BFC757 /* GameFiziksEngine.swift */,
 			);
 			path = FiziksEngine;
 			sourceTree = "<group>";
@@ -262,22 +306,22 @@
 			path = DataStructures;
 			sourceTree = "<group>";
 		};
-		2F7E13A729C0F56F000E6FA9 /* GameObject */ = {
+		2F7E13A729C0F56F000E6FA9 /* GameEngineObject */ = {
 			isa = PBXGroup;
 			children = (
-				146E2E0B29C0E30700BFC757 /* GameObject.swift */,
 				146E2E0D29C0E30700BFC757 /* Block.swift */,
+				146E2E0B29C0E30700BFC757 /* GameEngineObject.swift */,
 				146E2E0C29C0E30700BFC757 /* Platform.swift */,
 				146E2DFD29C0E05A00BFC757 /* TetrisShape.swift */,
 			);
-			path = GameObject;
+			path = GameEngineObject;
 			sourceTree = "<group>";
 		};
 		2F7E13A829C0F5E5000E6FA9 /* GameEngine */ = {
 			isa = PBXGroup;
 			children = (
 				61CD55EC29C35D7A00DB6000 /* Collision */,
-				2F7E13A729C0F56F000E6FA9 /* GameObject */,
+				2F7E13A729C0F56F000E6FA9 /* GameEngineObject */,
 				146E2DEF29C0D62F00BFC757 /* GameEngine.swift */,
 			);
 			path = GameEngine;
@@ -286,8 +330,8 @@
 		61CD55EB29C35D3900DB6000 /* FiziksBody */ = {
 			isa = PBXGroup;
 			children = (
-				61CD55E729C35D1E00DB6000 /* PathFiziksBody.swift */,
 				146E2E0529C0E2FE00BFC757 /* FiziksBody.swift */,
+				61CD55E729C35D1E00DB6000 /* PathFiziksBody.swift */,
 			);
 			path = FiziksBody;
 			sourceTree = "<group>";
@@ -312,6 +356,7 @@
 				146E2DAC29C0D07200BFC757 /* Sources */,
 				146E2DAD29C0D07200BFC757 /* Frameworks */,
 				146E2DAE29C0D07200BFC757 /* Resources */,
+				124B02CA29C4184D00094CF5 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -427,6 +472,26 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		124B02CA29C4184D00094CF5 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\nexit 0 \n\nif test -d \"/opt/homebrew/bin/\"; then\n  PATH=\"/opt/homebrew/bin/:${PATH}\"\nfi\n\nexport PATH\n\nif which swiftlint >/dev/null; then\n  swiftlint --fix && swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		146E2DAC29C0D07200BFC757 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -437,18 +502,27 @@
 				61CD55E829C35D1E00DB6000 /* PathFiziksBody.swift in Sources */,
 				146E2E1929C0E5B400BFC757 /* GameplayLevelView.swift in Sources */,
 				146E2DE529C0D61A00BFC757 /* GameRendererDelegate.swift in Sources */,
-				146E2E0E29C0E30700BFC757 /* GameObject.swift in Sources */,
+				146E2E0E29C0E30700BFC757 /* GameEngineObject.swift in Sources */,
 				61CD55F029C35D9600DB6000 /* CollisionMask.swift in Sources */,
+				124B02D729C567F600094CF5 /* LevelView.swift in Sources */,
 				146E2DF429C0D73000BFC757 /* ScreenInputView.swift in Sources */,
+				124B02D529C55F8C00094CF5 /* Level.swift in Sources */,
 				61CD55EA29C35D2C00DB6000 /* FiziksConstants.swift in Sources */,
+				124B02C329C415DC00094CF5 /* PlatformView.swift in Sources */,
 				146E2DEC29C0D62800BFC757 /* GyroInput.swift in Sources */,
 				146E2DEB29C0D62800BFC757 /* TapInput.swift in Sources */,
+				124B02C729C4160100094CF5 /* GoalView.swift in Sources */,
 				146E2DB429C0D07200BFC757 /* TumblingTowersGameApp.swift in Sources */,
 				61CD55E129C35C4A00DB6000 /* FiziksContact.swift in Sources */,
 				61CD55E329C35C5E00DB6000 /* FiziksContactDelegate.swift in Sources */,
 				61CD55E629C35CDB00DB6000 /* FiziksEngine.swift in Sources */,
+				124B02D329C4204300094CF5 /* GameObjectPlatform.swift in Sources */,
+				124B02D129C4201F00094CF5 /* BlockShapeEnum.swift in Sources */,
 				146E2E0A29C0E2FE00BFC757 /* GameFiziksEngine.swift in Sources */,
+				124B02C929C4171400094CF5 /* ViewImageManager.swift in Sources */,
+				124B02C129C415CC00094CF5 /* BlockView.swift in Sources */,
 				146E2E0F29C0E30700BFC757 /* Platform.swift in Sources */,
+				124B02CF29C41FD000094CF5 /* GameObjectBlock.swift in Sources */,
 				146E2DFE29C0E05A00BFC757 /* TetrisShape.swift in Sources */,
 				146E2E0829C0E2FE00BFC757 /* FiziksBody.swift in Sources */,
 				61CD55EE29C35D8A00DB6000 /* CategoryMask.swift in Sources */,
@@ -456,7 +530,10 @@
 				146E2DF229C0D62F00BFC757 /* GameEngine.swift in Sources */,
 				146E2E1729C0E33900BFC757 /* CGPoint+Hashable.swift in Sources */,
 				146E2E1029C0E30700BFC757 /* Block.swift in Sources */,
+				124B02D929C568FE00094CF5 /* BackgroundView.swift in Sources */,
 				61CD55F229C35DA700DB6000 /* ContactTestMask.swift in Sources */,
+				124B02C529C415E700094CF5 /* PowerUpLineView.swift in Sources */,
+				124B02CD29C41F7100094CF5 /* GameObject.swift in Sources */,
 				146E2DF129C0D62F00BFC757 /* Point.swift in Sources */,
 				146E2DE629C0D61A00BFC757 /* MainGameManager.swift in Sources */,
 				146E2E1629C0E33900BFC757 /* CGPath+Create.swift in Sources */,

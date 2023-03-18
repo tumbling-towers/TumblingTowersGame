@@ -20,7 +20,7 @@ class MainGameManager: ObservableObject {
 
         gameEngineMgr = GameEngineManager(levelDimensions: CGRect(x: 0, y: 0, width: deviceWidth, height: deviceHeight))
 
-        gameEngineMgr.start(mainGameMgr: self)
+        gameEngineMgr.setUpLevelAndStartEngine(mainGameMgr: self)
 
         return gameEngineMgr
     }
