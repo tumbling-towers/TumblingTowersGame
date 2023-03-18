@@ -10,13 +10,6 @@ import SwiftUI
 
 class GameEngine {
 
-    // TODO: can this be removed?
-    private var time: Date
-    private var leftoverTime: Double = 0.0
-    private let durationOfFrameFor60FPS = TimeInterval(1.0 / 60.0)
-    private var displayLink: CADisplayLink?
-    private var frameCount = 0
-
     private weak var gameRenderer: GameRendererDelegate?
     
     static let defaultBlockVelocity = CGVector(dx: 0, dy: -5)
@@ -66,7 +59,6 @@ class GameEngine {
 
         // TODO: pass in seed
         self.shapeRandomizer = ShapeRandomizer(possibleShapes: TetrisShape.allCases, seed: 1)
-        self.time = Date.now
 
         fiziksEngine.fiziksContactDelegate = self
         
