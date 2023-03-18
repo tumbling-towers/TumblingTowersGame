@@ -22,7 +22,7 @@ class TapInput: InputSystem {
         inputVal
     }
 
-    func tapEvent(at: Point) {
+    func tapEvent(at: CGPoint) {
         if at.x > levelWidth / 2 {
             inputVal = .RIGHT
         } else {
