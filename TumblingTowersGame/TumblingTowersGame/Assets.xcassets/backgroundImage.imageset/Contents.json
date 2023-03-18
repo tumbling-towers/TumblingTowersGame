@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "backgroundImage.jpeg",
+      "filename" : "backgroundImageCropped.jpeg",
       "idiom" : "universal",
       "scale" : "1x"
     },

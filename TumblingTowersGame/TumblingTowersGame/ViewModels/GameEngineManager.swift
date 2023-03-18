@@ -138,7 +138,7 @@ class GameEngineManager: ObservableObject {
             print("\(object) \(object.fiziksBody.position)")
             if object.fiziksBody.categoryBitMask == CategoryMask.block {
                 let blockPosition = object.fiziksBody.position
-                // TODO: hardcoded .I shape for now
+                // TODO: hardcoded .I shape for now, need to get the shape from engine
                 newLevel.add(block: GameObjectBlock(position: blockPosition, blockShape: .I))
             }
         }
