@@ -16,6 +16,10 @@ struct Level {
             blocks[i].move(to: to)
         }
     }
+    
+    mutating func add(block: GameObjectBlock) {
+        blocks.append(block)
+    }
 }
 
 

@@ -45,3 +45,9 @@ class PathFiziksBody: FiziksBody {
         SKPhysicsBody(polygonFrom: path)
     }
 }
+
+extension PathFiziksBody: CustomDebugStringConvertible {
+    var debugDescription: String {
+        "\(position)"
+    }
+}

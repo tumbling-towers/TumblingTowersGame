@@ -156,9 +156,9 @@
 		124B02CB29C41F6400094CF5 /* GameObject */ = {
 			isa = PBXGroup;
 			children = (
+				124B02D029C4201F00094CF5 /* BlockShapeEnum.swift */,
 				124B02CC29C41F7100094CF5 /* GameObject.swift */,
 				124B02CE29C41FD000094CF5 /* GameObjectBlock.swift */,
-				124B02D029C4201F00094CF5 /* BlockShapeEnum.swift */,
 				124B02D229C4204300094CF5 /* GameObjectPlatform.swift */,
 				124B02D429C55F8C00094CF5 /* Level.swift */,
 			);
