@@ -33,10 +33,6 @@ class GameFiziksEngine: NSObject {
         fiziksScene.fiziksSceneUpdateDelegate = self
         fiziksScene.gravity = GameFiziksEngine.defaultFiziksEngineGravity
     }
-
-    private func hasExittedArea(skNode: SKNode) -> Bool {
-        !fiziksScene.intersects(skNode)
-    }
 }
 
 extension GameFiziksEngine: FiziksEngine {
