@@ -16,3 +16,13 @@ protocol GameEngineObject {
 
     static var contactTestBitmask: BitMask { get }
 }
+
+extension GameEngineObject {
+    var position: CGPoint {
+        fiziksBody.position
+    }
+    
+    var zRotation: CGFloat {
+        fiziksBody.zRotation
+    }
+}

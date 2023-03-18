@@ -9,7 +9,6 @@ import Foundation
 import SpriteKit
 
 protocol FiziksEngine: AnyObject {
-    var fiziksScene: FiziksScene { get }
     var fiziksContactDelegate: FiziksContactDelegate? { get set }
     
     // Breaks abstration but this is the only way to start the SKScene
