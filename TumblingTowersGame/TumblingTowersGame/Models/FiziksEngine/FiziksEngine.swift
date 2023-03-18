@@ -11,8 +11,6 @@ import SpriteKit
 protocol FiziksEngine: AnyObject {
     var fiziksContactDelegate: FiziksContactDelegate? { get set }
     
-    // Breaks abstration but this is the only way to start the SKScene
-    func presentOnUselessView(skView: SKView)
     func activatePhysics()
 
     // FiziksBody related functions

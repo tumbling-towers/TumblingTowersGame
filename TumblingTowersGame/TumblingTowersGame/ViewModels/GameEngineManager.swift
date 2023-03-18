@@ -24,12 +24,14 @@ class GameEngineManager: ObservableObject {
 
     var inputSystem: InputSystem
     private var gameUpdater: GameUpdater?
+    
+    var levelDimensions: CGRect
 
     init(levelDimensions: CGRect) {
+        self.levelDimensions = levelDimensions
         self.gameEngine = GameEngine(levelDimensions: levelDimensions)
 
         inputSystem = TapInput()
-
     }
     
     func tapEvent(at: Point) {
@@ -54,8 +56,6 @@ class GameEngineManager: ObservableObject {
         print("Adding")
     }
 
-    
-
     func setUpLevelAndStartEngine(mainGameMgr: MainGameManager) {
         // Initialize level here and start it
         // gameRenderer = self
@@ -73,6 +73,12 @@ class GameEngineManager: ObservableObject {
         platformPosition = CGPoint(x: mainGameMgr.deviceWidth/2, y: mainGameMgr.deviceHeight-100)
     }
     
+    /// GameEngine outputs coordinates with the origin at the bottom-left.
+    /// This method converts it such that the origin is at the top-left.
+    private func adjustCoordinates(for point: CGPoint) -> CGPoint {
+        let newPoint = CGPoint(x: point.x, y: levelDimensions.height - point.y)
+        return newPoint
+    }
 }
 
 extension GameEngineManager: GameRendererDelegate {
