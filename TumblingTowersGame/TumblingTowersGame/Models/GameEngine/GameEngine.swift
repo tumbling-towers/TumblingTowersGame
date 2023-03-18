@@ -167,7 +167,7 @@ class GameEngine {
                                            collisionBitMask: Block.collisionBitmask,
                                            contactTestBitMask: Block.contactTestBitmask,
                                            isDynamic: true)
-        let newBlock = Block(fiziksBody: newFiziksBody)
+        let newBlock = Block(fiziksBody: newFiziksBody, path: shape.path)
         return newBlock
     }
 
@@ -179,7 +179,7 @@ class GameEngine {
                                            collisionBitMask: Platform.collisionBitmask,
                                            contactTestBitMask: Platform.contactTestBitmask,
                                            isDynamic: false)
-        let newPlatform = Platform(fiziksBody: newFiziksBody)
+        let newPlatform = Platform(fiziksBody: newFiziksBody, path: path)
         return newPlatform
     }
 }

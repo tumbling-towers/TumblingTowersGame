@@ -5,10 +5,12 @@
 //  Created by Taufiq Abdul Rahman on 8/3/23.
 //
 
+import CoreGraphics
 import Foundation
 
 protocol GameEngineObject {
     var fiziksBody: FiziksBody { get }
+    var path: CGPath { get }
 
     static var categoryBitmask: BitMask { get }
 
