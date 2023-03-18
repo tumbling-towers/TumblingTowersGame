@@ -39,11 +39,6 @@ extension GameFiziksEngine: FiziksEngine {
 
     static let defaultFiziksEngineGravity = CGVector(dx: 0, dy: -1.0)
 
-    func presentOnUselessView(skView: SKView) {
-        skView.presentScene(fiziksScene)
-        skView.showsPhysics = true
-    }
-    
     func activatePhysics() {
         fiziksScene.view?.showsPhysics = true
     }

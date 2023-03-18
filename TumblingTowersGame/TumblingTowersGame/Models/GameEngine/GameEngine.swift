@@ -10,12 +10,6 @@ import SwiftUI
 
 class GameEngine {
 
-    private var time: Date
-    private var leftoverTime: Double = 0.0
-    private let durationOfFrameFor60FPS = TimeInterval(1.0 / 60.0)
-    private var displayLink: CADisplayLink?
-    private var frameCount = 0
-
     private weak var gameRenderer: GameRendererDelegate?
     
     static let defaultBlockVelocity = CGVector(dx: 0, dy: -5)
@@ -65,7 +59,6 @@ class GameEngine {
 
         // TODO: pass in seed
         self.shapeRandomizer = ShapeRandomizer(possibleShapes: TetrisShape.allCases, seed: 1)
-        self.time = Date.now
 
         fiziksEngine.fiziksContactDelegate = self
         
@@ -83,7 +76,7 @@ class GameEngine {
 
         for object in gameObjects {
             if object.fiziksBody.categoryBitMask == CategoryMask.block {
-                let blockPosition = object.fiziksBody.position
+                let blockPosition = object.position
                 // TODO: hardcoded .I shape for now, need to get the shape from engine
                 newLevel.add(block: GameObjectBlock(position: blockPosition, blockShape: .I))
             }
@@ -96,18 +89,6 @@ class GameEngine {
         let shape = shapeRandomizer.getShape()
         let insertedBlock = addBlock(ofShape: shape, at: blockInsertionPoint)
         currentlyMovingBlock = insertedBlock
-    }
-
-    private func createPlatform(path: CGPath, at position: CGPoint) -> Platform {
-        let newFiziksBody = PathFiziksBody(path: path,
-                                           position: position,
-                                           zRotation: 0,
-                                           categoryBitMask: Platform.categoryBitmask,
-                                           collisionBitMask: Platform.collisionBitmask,
-                                           contactTestBitMask: Platform.contactTestBitmask,
-                                           isDynamic: false)
-        let newPlatform = Platform(fiziksBody: newFiziksBody)
-        return newPlatform
     }
 
     func insertInitialPlatform() {
@@ -160,7 +141,7 @@ class GameEngine {
     // TODO: this should eventually become private as we do not want the player
     // adding blocks
     @discardableResult
-    func addBlock(ofShape shape: TetrisShape, at position: CGPoint) -> Block {
+    private func addBlock(ofShape shape: TetrisShape, at position: CGPoint) -> Block {
         let newBlock = createBlock(ofShape: shape, at: position)
         gameObjects.append(newBlock)
         fiziksEngine.add(newBlock.fiziksBody)
@@ -169,6 +150,7 @@ class GameEngine {
         return newBlock
     }
 
+    // MARK: private methods
     private func createBlock(ofShape shape: TetrisShape, at position: CGPoint) -> Block {
         let newFiziksBody = PathFiziksBody(path: shape.path,
                                            position: position,
@@ -177,8 +159,20 @@ class GameEngine {
                                            collisionBitMask: Block.collisionBitmask,
                                            contactTestBitMask: Block.contactTestBitmask,
                                            isDynamic: true)
-        let newBlock = Block(fiziksBody: newFiziksBody)
+        let newBlock = Block(fiziksBody: newFiziksBody, path: shape.path)
         return newBlock
+    }
+
+    private func createPlatform(path: CGPath, at position: CGPoint) -> Platform {
+        let newFiziksBody = PathFiziksBody(path: path,
+                                           position: position,
+                                           zRotation: 0,
+                                           categoryBitMask: Platform.categoryBitmask,
+                                           collisionBitMask: Platform.collisionBitmask,
+                                           contactTestBitMask: Platform.contactTestBitmask,
+                                           isDynamic: false)
+        let newPlatform = Platform(fiziksBody: newFiziksBody, path: path)
+        return newPlatform
     }
 }
 

@@ -49,7 +49,7 @@ class GyroInput: InputSystem {
         }
     }
 
-    func tapEvent(at: Point) {
+    func tapEvent(at: CGPoint) {
         
     }
 }

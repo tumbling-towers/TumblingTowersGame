@@ -20,8 +20,7 @@ struct ContentView: View {
                 .environmentObject(gameEngineMgr)
                 .gesture(DragGesture(minimumDistance: 0)
                     .onEnded { tap in
-                        let tapLocation = Point(tap.location.x, tap.location.y)
-                        gameEngineMgr.tapEvent(at: tapLocation)
+                        gameEngineMgr.tapEvent(at: tap.location)
                         gameEngineMgr.addBlock(at: tap.location)
                     }
                 )
