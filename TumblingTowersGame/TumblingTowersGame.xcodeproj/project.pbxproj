@@ -47,8 +47,6 @@
 		146E2E1929C0E5B400BFC757 /* GameplayLevelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146E2E1829C0E5B400BFC757 /* GameplayLevelView.swift */; };
 		148FB94629C22F80007C3AE4 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148FB94529C22F80007C3AE4 /* TestView.swift */; };
 		14C53B2629C5E9D10035EC17 /* GameUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C53B2529C5E9D10035EC17 /* GameUpdater.swift */; };
-		2F04AB0429C64CA00062D5A3 /* Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F04AB0329C64CA00062D5A3 /* Shape.swift */; };
-		2F04AB0729C64CC10062D5A3 /* PathShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F04AB0629C64CC10062D5A3 /* PathShape.swift */; };
 		2F7E13A629C0F054000E6FA9 /* BiMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F7E13A529C0F054000E6FA9 /* BiMap.swift */; };
 		2FC7FACC29C50B4500B56850 /* ShapeRandomizerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC7FACB29C50B4500B56850 /* ShapeRandomizerTests.swift */; };
 		2FC7FAD229C50C2C00B56850 /* RandomNumberGeneratorWithSeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC7FAD129C50C2C00B56850 /* RandomNumberGeneratorWithSeed.swift */; };
@@ -127,8 +125,6 @@
 		146E2E1829C0E5B400BFC757 /* GameplayLevelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameplayLevelView.swift; sourceTree = "<group>"; };
 		148FB94529C22F80007C3AE4 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		14C53B2529C5E9D10035EC17 /* GameUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GameUpdater.swift; path = TumblingTowersGame/GameUpdater/GameUpdater.swift; sourceTree = SOURCE_ROOT; };
-		2F04AB0329C64CA00062D5A3 /* Shape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shape.swift; sourceTree = "<group>"; };
-		2F04AB0629C64CC10062D5A3 /* PathShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathShape.swift; sourceTree = "<group>"; };
 		2F7E13A529C0F054000E6FA9 /* BiMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiMap.swift; sourceTree = "<group>"; };
 		2FC7FACB29C50B4500B56850 /* ShapeRandomizerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeRandomizerTests.swift; sourceTree = "<group>"; };
 		2FC7FAD129C50C2C00B56850 /* RandomNumberGeneratorWithSeed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandomNumberGeneratorWithSeed.swift; sourceTree = "<group>"; };
@@ -328,15 +324,6 @@
 			path = GameUpdater;
 			sourceTree = "<group>";
 		};
-		2F04AB0529C64CA50062D5A3 /* Shape */ = {
-			isa = PBXGroup;
-			children = (
-				2F04AB0329C64CA00062D5A3 /* Shape.swift */,
-				2F04AB0629C64CC10062D5A3 /* PathShape.swift */,
-			);
-			path = Shape;
-			sourceTree = "<group>";
-		};
 		2F7E13A429C0F044000E6FA9 /* DataStructures */ = {
 			isa = PBXGroup;
 			children = (
@@ -359,7 +346,6 @@
 		2F7E13A829C0F5E5000E6FA9 /* GameEngine */ = {
 			isa = PBXGroup;
 			children = (
-				2F04AB0529C64CA50062D5A3 /* Shape */,
 				61CD55EC29C35D7A00DB6000 /* Collision */,
 				2F7E13A729C0F56F000E6FA9 /* GameEngineObject */,
 				146E2DEF29C0D62F00BFC757 /* GameEngine.swift */,
@@ -560,7 +546,6 @@
 				2FC7FAD429C50C3C00B56850 /* ShapeRandomizer.swift in Sources */,
 				124B02D529C55F8C00094CF5 /* Level.swift in Sources */,
 				61CD55EA29C35D2C00DB6000 /* FiziksConstants.swift in Sources */,
-				2F04AB0729C64CC10062D5A3 /* PathShape.swift in Sources */,
 				124B02C329C415DC00094CF5 /* PlatformView.swift in Sources */,
 				146E2DEC29C0D62800BFC757 /* GyroInput.swift in Sources */,
 				146E2DEB29C0D62800BFC757 /* TapInput.swift in Sources */,
@@ -584,7 +569,6 @@
 				2F7E13A629C0F054000E6FA9 /* BiMap.swift in Sources */,
 				146E2DF229C0D62F00BFC757 /* GameEngine.swift in Sources */,
 				146E2E1729C0E33900BFC757 /* CGPoint+Hashable.swift in Sources */,
-				2F04AB0429C64CA00062D5A3 /* Shape.swift in Sources */,
 				146E2E1029C0E30700BFC757 /* Block.swift in Sources */,
 				124B02D929C568FE00094CF5 /* BackgroundView.swift in Sources */,
 				61CD55F229C35DA700DB6000 /* ContactTestMask.swift in Sources */,
