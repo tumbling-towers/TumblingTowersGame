@@ -52,7 +52,9 @@ class GameEngineManager: ObservableObject {
 
     // Temp function for testing
     func addBlock(at: CGPoint) {
-        gameEngine.addBlock(ofShape: TetrisShape.L, at: adjustCoordinates(for: at))
+        // this inserts a new block from the top, like tetris, then auto inserts after
+        // the block lands
+        gameEngine.insertNewBlock()
         print("Adding")
     }
 

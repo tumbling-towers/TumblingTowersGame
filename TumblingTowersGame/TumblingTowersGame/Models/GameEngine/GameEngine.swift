@@ -149,7 +149,7 @@ class GameEngine {
     // TODO: this should eventually become private as we do not want the player
     // adding blocks
     @discardableResult
-    func addBlock(ofShape shape: TetrisShape, at position: CGPoint) -> Block {
+    private func addBlock(ofShape shape: TetrisShape, at position: CGPoint) -> Block {
         let newBlock = createBlock(ofShape: shape, at: position)
         gameObjects.append(newBlock)
         fiziksEngine.add(newBlock.fiziksBody)
