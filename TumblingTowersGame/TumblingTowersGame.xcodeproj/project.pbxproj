@@ -46,6 +46,7 @@
 		146E2E1729C0E33900BFC757 /* CGPoint+Hashable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146E2E1529C0E33900BFC757 /* CGPoint+Hashable.swift */; };
 		146E2E1929C0E5B400BFC757 /* GameplayLevelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146E2E1829C0E5B400BFC757 /* GameplayLevelView.swift */; };
 		148FB94629C22F80007C3AE4 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148FB94529C22F80007C3AE4 /* TestView.swift */; };
+		14C53B2629C5E9D10035EC17 /* GameUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C53B2529C5E9D10035EC17 /* GameUpdater.swift */; };
 		2F7E13A629C0F054000E6FA9 /* BiMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F7E13A529C0F054000E6FA9 /* BiMap.swift */; };
 		2FC7FACC29C50B4500B56850 /* ShapeRandomizerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC7FACB29C50B4500B56850 /* ShapeRandomizerTests.swift */; };
 		2FC7FAD229C50C2C00B56850 /* RandomNumberGeneratorWithSeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC7FAD129C50C2C00B56850 /* RandomNumberGeneratorWithSeed.swift */; };
@@ -123,6 +124,7 @@
 		146E2E1529C0E33900BFC757 /* CGPoint+Hashable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGPoint+Hashable.swift"; sourceTree = "<group>"; };
 		146E2E1829C0E5B400BFC757 /* GameplayLevelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameplayLevelView.swift; sourceTree = "<group>"; };
 		148FB94529C22F80007C3AE4 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
+		14C53B2529C5E9D10035EC17 /* GameUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GameUpdater.swift; path = TumblingTowersGame/GameUpdater/GameUpdater.swift; sourceTree = SOURCE_ROOT; };
 		2F7E13A529C0F054000E6FA9 /* BiMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiMap.swift; sourceTree = "<group>"; };
 		2FC7FACB29C50B4500B56850 /* ShapeRandomizerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeRandomizerTests.swift; sourceTree = "<group>"; };
 		2FC7FAD129C50C2C00B56850 /* RandomNumberGeneratorWithSeed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandomNumberGeneratorWithSeed.swift; sourceTree = "<group>"; };
@@ -202,6 +204,7 @@
 			children = (
 				2F7E13A429C0F044000E6FA9 /* DataStructures */,
 				146E2E1329C0E32500BFC757 /* Extensions */,
+				14C53B2729C5EB5F0035EC17 /* GameUpdater */,
 				146E2DE029C0D0CC00BFC757 /* Input */,
 				146E2DDD29C0D0AF00BFC757 /* Models */,
 				146E2DDE29C0D0B500BFC757 /* ViewModels */,
@@ -311,6 +314,14 @@
 				2FC7FADD29C510F200B56850 /* CGPoint+arithmeticMean.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		14C53B2729C5EB5F0035EC17 /* GameUpdater */ = {
+			isa = PBXGroup;
+			children = (
+				14C53B2529C5E9D10035EC17 /* GameUpdater.swift */,
+			);
+			path = GameUpdater;
 			sourceTree = "<group>";
 		};
 		2F7E13A429C0F044000E6FA9 /* DataStructures */ = {
@@ -567,6 +578,7 @@
 				146E2DE629C0D61A00BFC757 /* MainGameManager.swift in Sources */,
 				146E2E1629C0E33900BFC757 /* CGPath+Create.swift in Sources */,
 				146E2DF029C0D62F00BFC757 /* Vector.swift in Sources */,
+				14C53B2629C5E9D10035EC17 /* GameUpdater.swift in Sources */,
 				148FB94629C22F80007C3AE4 /* TestView.swift in Sources */,
 				2FC7FADA29C510A900B56850 /* FiziksScene.swift in Sources */,
 				146E2DE429C0D61A00BFC757 /* GameEngineManager.swift in Sources */,

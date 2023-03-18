@@ -11,4 +11,6 @@ protocol GameRendererDelegate: AnyObject {
 
     func rerender()
 
+    func renderLevel(level: Level, gameObjectBlocks: [GameObjectBlock], gameObjectPlatform: GameObjectPlatform)
+
 }

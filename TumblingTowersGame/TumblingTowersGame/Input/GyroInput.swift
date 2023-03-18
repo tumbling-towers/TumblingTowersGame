@@ -17,8 +17,18 @@ class GyroInput: InputSystem {
 
     init() {
         motionManager = CMMotionManager()
-        motionManager.startDeviceMotionUpdates()
-        motionManager.startGyroUpdates()
+
+        if motionManager.isDeviceMotionAvailable {
+            motionManager.startDeviceMotionUpdates()
+        }
+
+        if motionManager.isGyroAvailable {
+            motionManager.startGyroUpdates()
+        }
+
+        if motionManager.isAccelerometerAvailable {
+            motionManager.startAccelerometerUpdates()
+        }
     }
 
     func start(levelWidth: CGFloat, levelHeight: CGFloat) {
@@ -27,7 +37,7 @@ class GyroInput: InputSystem {
 
     func getInput() -> InputType {
 
-        if let rate = motionManager.gyroData?.rotationRate.y {
+        if let rate = motionManager.accelerometerData?.acceleration.x {
             print("Rate: " + String(rate))
             if rate > 0 {
                 return .RIGHT
