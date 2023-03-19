@@ -18,9 +18,9 @@ class GameEngine {
     
     var gameObjects: [any GameEngineObject]
     let fiziksEngine: FiziksEngine
-    var shapeRandomizer: ShapeRandomizer
+    private var shapeRandomizer: ShapeRandomizer
     
-    var currentlyMovingBlock: Block? {
+    private var currentlyMovingBlock: Block? {
         didSet {
             if currentlyMovingBlock == nil {
                 insertNewBlock()
@@ -28,12 +28,12 @@ class GameEngine {
         }
     }
     
-    var blockInsertionPoint: CGPoint {
+    private var blockInsertionPoint: CGPoint {
         CGPoint(x: levelDimensions.width / 2,
                 y: levelDimensions.height + 30)
     }
 
-    var platformPoints: [CGPoint] {
+    private var platformPoints: [CGPoint] {
         let bottom: CGFloat = 20
         let top: CGFloat = bottom + 30
         let left: CGFloat = levelDimensions.width / 2 - 100
@@ -85,22 +85,12 @@ class GameEngine {
         gameRenderer?.renderLevel(level: newLevel, gameObjectBlocks: newLevel.blocks, gameObjectPlatform: newLevel.platform)
     }
     
-    func insertNewBlock() {
+    @discardableResult
+    func insertNewBlock() -> Block {
         let shape = shapeRandomizer.getShape()
         let insertedBlock = addBlock(ofShape: shape, at: blockInsertionPoint)
         currentlyMovingBlock = insertedBlock
-    }
-
-    func insertInitialPlatform() {
-        let path = CGPath.create(from: platformPoints)
-        let center = CGPoint.arithmeticMean(points: platformPoints)
-        let platformPosition = CGPoint(x: center.x - 400, y: center.y)
-
-        let insertedPlatform = createPlatform(path: path, at: platformPosition)
-
-        gameObjects.append(insertedPlatform)
-        fiziksEngine.add(insertedPlatform.fiziksBody)
-        fiziksEngine.setAffectedByGravity(insertedPlatform.fiziksBody, to: false)
+        return insertedBlock
     }
     
     /// Slides the currently-moving block only on the x-axis.
@@ -173,6 +163,18 @@ class GameEngine {
                                            isDynamic: false)
         let newPlatform = Platform(fiziksBody: newFiziksBody, shape: PlatformShape(path: path))
         return newPlatform
+    }
+    
+    private func insertInitialPlatform() {
+        let path = CGPath.create(from: platformPoints)
+        let center = CGPoint.arithmeticMean(points: platformPoints)
+        let platformPosition = CGPoint(x: center.x - 400, y: center.y)
+
+        let insertedPlatform = createPlatform(path: path, at: platformPosition)
+
+        gameObjects.append(insertedPlatform)
+        fiziksEngine.add(insertedPlatform.fiziksBody)
+        fiziksEngine.setAffectedByGravity(insertedPlatform.fiziksBody, to: false)
     }
 }
 
