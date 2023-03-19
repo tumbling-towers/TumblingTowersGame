@@ -48,6 +48,7 @@
 		148FB94629C22F80007C3AE4 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148FB94529C22F80007C3AE4 /* TestView.swift */; };
 		14C53B2629C5E9D10035EC17 /* GameUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C53B2529C5E9D10035EC17 /* GameUpdater.swift */; };
 		2F7E13A629C0F054000E6FA9 /* BiMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F7E13A529C0F054000E6FA9 /* BiMap.swift */; };
+		2FBBD79E29C6C1C100C30582 /* BiMapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FBBD79D29C6C1C100C30582 /* BiMapTests.swift */; };
 		2FC7FACC29C50B4500B56850 /* ShapeRandomizerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC7FACB29C50B4500B56850 /* ShapeRandomizerTests.swift */; };
 		2FC7FAD229C50C2C00B56850 /* RandomNumberGeneratorWithSeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC7FAD129C50C2C00B56850 /* RandomNumberGeneratorWithSeed.swift */; };
 		2FC7FAD429C50C3C00B56850 /* ShapeRandomizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC7FAD329C50C3C00B56850 /* ShapeRandomizer.swift */; };
@@ -126,6 +127,7 @@
 		148FB94529C22F80007C3AE4 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		14C53B2529C5E9D10035EC17 /* GameUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GameUpdater.swift; path = TumblingTowersGame/GameUpdater/GameUpdater.swift; sourceTree = SOURCE_ROOT; };
 		2F7E13A529C0F054000E6FA9 /* BiMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiMap.swift; sourceTree = "<group>"; };
+		2FBBD79D29C6C1C100C30582 /* BiMapTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiMapTests.swift; sourceTree = "<group>"; };
 		2FC7FACB29C50B4500B56850 /* ShapeRandomizerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeRandomizerTests.swift; sourceTree = "<group>"; };
 		2FC7FAD129C50C2C00B56850 /* RandomNumberGeneratorWithSeed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandomNumberGeneratorWithSeed.swift; sourceTree = "<group>"; };
 		2FC7FAD329C50C3C00B56850 /* ShapeRandomizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeRandomizer.swift; sourceTree = "<group>"; };
@@ -229,6 +231,7 @@
 			children = (
 				146E2DC429C0D07300BFC757 /* TumblingTowersGameTests.swift */,
 				2FC7FACB29C50B4500B56850 /* ShapeRandomizerTests.swift */,
+				2FBBD79D29C6C1C100C30582 /* BiMapTests.swift */,
 			);
 			path = TumblingTowersGameTests;
 			sourceTree = "<group>";
@@ -591,6 +594,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2FC7FACC29C50B4500B56850 /* ShapeRandomizerTests.swift in Sources */,
+				2FBBD79E29C6C1C100C30582 /* BiMapTests.swift in Sources */,
 				146E2DC529C0D07300BFC757 /* TumblingTowersGameTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
