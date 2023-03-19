@@ -32,6 +32,8 @@ class GameEngineManager: ObservableObject {
         self.gameEngine = GameEngine(levelDimensions: levelDimensions)
 
         inputSystem = TapInput()
+
+        gameEngine.insertNewBlock()
     }
     
     func tapEvent(at: CGPoint) {
@@ -54,8 +56,8 @@ class GameEngineManager: ObservableObject {
     func addBlock(at: CGPoint) {
         // this inserts a new block from the top, like tetris, then auto inserts after
         // the block lands
-        gameEngine.insertNewBlock()
-        print("Adding")
+//        gameEngine.insertNewBlock()
+//        print("Adding")
     }
 
     func setUpLevelAndStartEngine(mainGameMgr: MainGameManager) {
@@ -101,6 +103,10 @@ extension GameEngineManager: GameRendererDelegate {
 
         self.levelBlocks = invertedGameObjBlocks
         self.levelPlatform = gameObjectPlatform
+    }
+
+    func getCurrInput() -> InputType {
+        inputSystem.getInput()
     }
 }
 
