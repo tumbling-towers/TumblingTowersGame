@@ -55,6 +55,25 @@
 		2FC7FADA29C510A900B56850 /* FiziksScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC7FAD929C510A900B56850 /* FiziksScene.swift */; };
 		2FC7FADC29C510CD00B56850 /* FiziksSceneUpdateDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC7FADB29C510CD00B56850 /* FiziksSceneUpdateDelegate.swift */; };
 		2FC7FADE29C510F200B56850 /* CGPoint+arithmeticMean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC7FADD29C510F200B56850 /* CGPoint+arithmeticMean.swift */; };
+		619D44A029C62FFC00EE00CE /* FiziksContactTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619D449F29C62FFC00EE00CE /* FiziksContactTests.swift */; };
+		619D44A229C630FA00EE00CE /* FiziksScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC7FAD929C510A900B56850 /* FiziksScene.swift */; };
+		619D44A329C630FA00EE00CE /* FiziksSceneUpdateDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC7FADB29C510CD00B56850 /* FiziksSceneUpdateDelegate.swift */; };
+		619D44A429C630FD00EE00CE /* FiziksBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146E2E0529C0E2FE00BFC757 /* FiziksBody.swift */; };
+		619D44A529C630FD00EE00CE /* PathFiziksBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61CD55E729C35D1E00DB6000 /* PathFiziksBody.swift */; };
+		619D44AA29C6310100EE00CE /* FiziksContactDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61CD55E229C35C5E00DB6000 /* FiziksContactDelegate.swift */; };
+		619D44AB29C6310100EE00CE /* FiziksEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61CD55E529C35CDB00DB6000 /* FiziksEngine.swift */; };
+		619D44AC29C6310100EE00CE /* FiziksContact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61CD55E029C35C4A00DB6000 /* FiziksContact.swift */; };
+		619D44AD29C6310100EE00CE /* GameFiziksEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146E2E0729C0E2FE00BFC757 /* GameFiziksEngine.swift */; };
+		619D44AE29C6310100EE00CE /* FiziksConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61CD55E929C35D2C00DB6000 /* FiziksConstants.swift */; };
+		619D44B029C6312100EE00CE /* MockFiziksBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619D44AF29C6312100EE00CE /* MockFiziksBody.swift */; };
+		619D44B329C6966200EE00CE /* MockFIziksSceneUpdateDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619D44B229C6966200EE00CE /* MockFIziksSceneUpdateDelegate.swift */; };
+		619D44B529C6972000EE00CE /* FiziksSceneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619D44B429C6972000EE00CE /* FiziksSceneTests.swift */; };
+		619D44B729C6986000EE00CE /* PathFiziksBodyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619D44B629C6986000EE00CE /* PathFiziksBodyTests.swift */; };
+		619D44B829C699AB00EE00CE /* CGPath+Create.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146E2E1429C0E33900BFC757 /* CGPath+Create.swift */; };
+		619D44B929C699EA00EE00CE /* CategoryMask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61CD55ED29C35D8A00DB6000 /* CategoryMask.swift */; };
+		619D44BB29C69BAA00EE00CE /* GameFiziksEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619D44BA29C69BAA00EE00CE /* GameFiziksEngineTests.swift */; };
+		619D44BD29C69CE500EE00CE /* MockFiziksContactDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619D44BC29C69CE500EE00CE /* MockFiziksContactDelegate.swift */; };
+		619D44BE29C6A77500EE00CE /* BiMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F7E13A529C0F054000E6FA9 /* BiMap.swift */; };
 		61CD55E129C35C4A00DB6000 /* FiziksContact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61CD55E029C35C4A00DB6000 /* FiziksContact.swift */; };
 		61CD55E329C35C5E00DB6000 /* FiziksContactDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61CD55E229C35C5E00DB6000 /* FiziksContactDelegate.swift */; };
 		61CD55E629C35CDB00DB6000 /* FiziksEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61CD55E529C35CDB00DB6000 /* FiziksEngine.swift */; };
@@ -134,6 +153,13 @@
 		2FC7FAD929C510A900B56850 /* FiziksScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiziksScene.swift; sourceTree = "<group>"; };
 		2FC7FADB29C510CD00B56850 /* FiziksSceneUpdateDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiziksSceneUpdateDelegate.swift; sourceTree = "<group>"; };
 		2FC7FADD29C510F200B56850 /* CGPoint+arithmeticMean.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGPoint+arithmeticMean.swift"; sourceTree = "<group>"; };
+		619D449F29C62FFC00EE00CE /* FiziksContactTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiziksContactTests.swift; sourceTree = "<group>"; };
+		619D44AF29C6312100EE00CE /* MockFiziksBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockFiziksBody.swift; sourceTree = "<group>"; };
+		619D44B229C6966200EE00CE /* MockFIziksSceneUpdateDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockFIziksSceneUpdateDelegate.swift; sourceTree = "<group>"; };
+		619D44B429C6972000EE00CE /* FiziksSceneTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiziksSceneTests.swift; sourceTree = "<group>"; };
+		619D44B629C6986000EE00CE /* PathFiziksBodyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathFiziksBodyTests.swift; sourceTree = "<group>"; };
+		619D44BA29C69BAA00EE00CE /* GameFiziksEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameFiziksEngineTests.swift; sourceTree = "<group>"; };
+		619D44BC29C69CE500EE00CE /* MockFiziksContactDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockFiziksContactDelegate.swift; sourceTree = "<group>"; };
 		61CD55E029C35C4A00DB6000 /* FiziksContact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiziksContact.swift; sourceTree = "<group>"; };
 		61CD55E229C35C5E00DB6000 /* FiziksContactDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiziksContactDelegate.swift; sourceTree = "<group>"; };
 		61CD55E529C35CDB00DB6000 /* FiziksEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiziksEngine.swift; sourceTree = "<group>"; };
@@ -229,6 +255,7 @@
 		146E2DC329C0D07300BFC757 /* TumblingTowersGameTests */ = {
 			isa = PBXGroup;
 			children = (
+				619D449E29C62FCF00EE00CE /* FiziksEngine */,
 				146E2DC429C0D07300BFC757 /* TumblingTowersGameTests.swift */,
 				2FC7FACB29C50B4500B56850 /* ShapeRandomizerTests.swift */,
 				2FBBD79D29C6C1C100C30582 /* BiMapTests.swift */,
@@ -365,6 +392,28 @@
 				2FC7FADB29C510CD00B56850 /* FiziksSceneUpdateDelegate.swift */,
 			);
 			path = FiziksScene;
+			sourceTree = "<group>";
+		};
+		619D449E29C62FCF00EE00CE /* FiziksEngine */ = {
+			isa = PBXGroup;
+			children = (
+				619D44B129C6314900EE00CE /* Mocks */,
+				619D449F29C62FFC00EE00CE /* FiziksContactTests.swift */,
+				619D44B429C6972000EE00CE /* FiziksSceneTests.swift */,
+				619D44B629C6986000EE00CE /* PathFiziksBodyTests.swift */,
+				619D44BA29C69BAA00EE00CE /* GameFiziksEngineTests.swift */,
+			);
+			path = FiziksEngine;
+			sourceTree = "<group>";
+		};
+		619D44B129C6314900EE00CE /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				619D44AF29C6312100EE00CE /* MockFiziksBody.swift */,
+				619D44B229C6966200EE00CE /* MockFIziksSceneUpdateDelegate.swift */,
+				619D44BC29C69CE500EE00CE /* MockFiziksContactDelegate.swift */,
+			);
+			path = Mocks;
 			sourceTree = "<group>";
 		};
 		61CD55EB29C35D3900DB6000 /* FiziksBody */ = {
@@ -593,9 +642,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				619D44BE29C6A77500EE00CE /* BiMap.swift in Sources */,
+				619D44A429C630FD00EE00CE /* FiziksBody.swift in Sources */,
+				619D44AE29C6310100EE00CE /* FiziksConstants.swift in Sources */,
+				619D44B729C6986000EE00CE /* PathFiziksBodyTests.swift in Sources */,
 				2FC7FACC29C50B4500B56850 /* ShapeRandomizerTests.swift in Sources */,
 				2FBBD79E29C6C1C100C30582 /* BiMapTests.swift in Sources */,
+				619D44A529C630FD00EE00CE /* PathFiziksBody.swift in Sources */,
+				619D44B929C699EA00EE00CE /* CategoryMask.swift in Sources */,
+				619D44A029C62FFC00EE00CE /* FiziksContactTests.swift in Sources */,
+				619D44BD29C69CE500EE00CE /* MockFiziksContactDelegate.swift in Sources */,
+				619D44AC29C6310100EE00CE /* FiziksContact.swift in Sources */,
+				619D44A329C630FA00EE00CE /* FiziksSceneUpdateDelegate.swift in Sources */,
+				619D44AA29C6310100EE00CE /* FiziksContactDelegate.swift in Sources */,
+				619D44B829C699AB00EE00CE /* CGPath+Create.swift in Sources */,
+				619D44BB29C69BAA00EE00CE /* GameFiziksEngineTests.swift in Sources */,
+				619D44B529C6972000EE00CE /* FiziksSceneTests.swift in Sources */,
+				619D44B029C6312100EE00CE /* MockFiziksBody.swift in Sources */,
+				619D44AB29C6310100EE00CE /* FiziksEngine.swift in Sources */,
+				619D44AD29C6310100EE00CE /* GameFiziksEngine.swift in Sources */,
 				146E2DC529C0D07300BFC757 /* TumblingTowersGameTests.swift in Sources */,
+				619D44A229C630FA00EE00CE /* FiziksScene.swift in Sources */,
+				619D44B329C6966200EE00CE /* MockFIziksSceneUpdateDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -746,6 +814,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TumblingTowersGame/Preview Content\"";
+				DEVELOPMENT_TEAM = T95PZMKKDH;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -753,12 +822,13 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.tlc.TumblingTowersGame;
+				PRODUCT_BUNDLE_IDENTIFIER = com.taubar.TumblingTowersGame;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -774,6 +844,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TumblingTowersGame/Preview Content\"";
+				DEVELOPMENT_TEAM = T95PZMKKDH;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -781,12 +852,13 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.tlc.TumblingTowersGame;
+				PRODUCT_BUNDLE_IDENTIFIER = com.taubar.TumblingTowersGame;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -799,12 +871,14 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = T95PZMKKDH;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.tlc.TumblingTowersGameTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.taubar.TumblingTowersGameTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -818,12 +892,14 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = T95PZMKKDH;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.tlc.TumblingTowersGameTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.taubar.TumblingTowersGameTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -838,9 +914,10 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = T95PZMKKDH;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.tlc.TumblingTowersGameUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.taubar.TumblingTowersGameUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -855,9 +932,10 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = T95PZMKKDH;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.tlc.TumblingTowersGameUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.taubar.TumblingTowersGameUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
