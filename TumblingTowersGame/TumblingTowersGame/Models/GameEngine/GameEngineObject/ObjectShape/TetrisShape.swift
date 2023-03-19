@@ -8,31 +8,36 @@
 import CoreGraphics
 import Foundation
 
-enum TetrisShape: CaseIterable {
+enum TetrisType: CaseIterable {
     case I, J, L, O, S, T, Z
+}
 
+struct TetrisShape: PathObjectShape {
     typealias P = CGPoint
-    static let shapeToPoints: [TetrisShape: [P]] = [L: [P(x: 0, y: 0),
+    
+    let type: TetrisType
+    
+    static let shapeToPoints: [TetrisType: [P]] = [.L: [P(x: 0, y: 0),
                                                         P(x: 10, y: 0),
                                                         P(x: 10, y: 10),
                                                         P(x: 30, y: 10),
                                                         P(x: 30, y: 20),
                                                         P(x: 0, y: 20)],
-                                                    I: [P(x: 0, y: 0),
+                                                   .I: [P(x: 0, y: 0),
                                                         P(x: 10, y: 0),
                                                         P(x: 10, y: 40),
                                                         P(x: 0, y: 40)],
-                                                    J: [P(x: 0, y: 0),
+                                                   .J: [P(x: 0, y: 0),
                                                         P(x: 30, y: 0),
                                                         P(x: 30, y: 10),
                                                         P(x: 10, y: 10),
                                                         P(x: 10, y: 20),
                                                         P(x: 0, y: 20)],
-                                                    O: [P(x: 0, y: 0),
+                                                   .O: [P(x: 0, y: 0),
                                                         P(x: 20, y: 0),
                                                         P(x: 20, y: 20),
                                                         P(x: 0, y: 20)],
-                                                    Z: [P(x: 10, y: 0),
+                                                   .Z: [P(x: 10, y: 0),
                                                         P(x: 30, y: 0),
                                                         P(x: 30, y: 10),
                                                         P(x: 20, y: 10),
@@ -40,7 +45,7 @@ enum TetrisShape: CaseIterable {
                                                         P(x: 0, y: 20),
                                                         P(x: 0, y: 10),
                                                         P(x: 10, y: 10)],
-                                                    T: [P(x: 0, y: 0),
+                                                   .T: [P(x: 0, y: 0),
                                                         P(x: 30, y: 0),
                                                         P(x: 30, y: 10),
                                                         P(x: 20, y: 10),
@@ -48,7 +53,7 @@ enum TetrisShape: CaseIterable {
                                                         P(x: 10, y: 20),
                                                         P(x: 10, y: 10),
                                                         P(x: 0, y: 10)],
-                                                    S: [P(x: 0, y: 0),
+                                                   .S: [P(x: 0, y: 0),
                                                         P(x: 20, y: 0),
                                                         P(x: 20, y: 10),
                                                         P(x: 30, y: 10),
@@ -56,10 +61,14 @@ enum TetrisShape: CaseIterable {
                                                         P(x: 10, y: 20),
                                                         P(x: 10, y: 10),
                                                         P(x: 0, y: 10)]]
+    
+    init(type: TetrisType) {
+        self.type = type
+    }
 
     var points: [P] {
         // TODO: this coalace should not happen. Should throw error if cannot find.
-        TetrisShape.shapeToPoints[self] ?? [CGPoint()]
+        TetrisShape.shapeToPoints[type] ?? [CGPoint()]
     }
 
     var path: CGPath {

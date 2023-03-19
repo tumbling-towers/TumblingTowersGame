@@ -9,8 +9,8 @@ import Foundation
 
 class ShapeRandomizer {
     var rng: RandomNumberGeneratorWithSeed
-    let possibleShapes: [TetrisShape]
-    var bagOfShapes: Set<TetrisShape> {
+    let possibleShapes: [TetrisType]
+    var bagOfShapes: Set<TetrisType> {
         didSet {
             if bagOfShapes.isEmpty {
                 bagOfShapes = Set(possibleShapes)
@@ -18,7 +18,7 @@ class ShapeRandomizer {
         }
     }
 
-    init(possibleShapes: [TetrisShape], seed: Int = 1) {
+    init(possibleShapes: [TetrisType], seed: Int = 1) {
         self.rng = RandomNumberGeneratorWithSeed(seed: seed)
         self.possibleShapes = possibleShapes
         bagOfShapes = Set(possibleShapes)
@@ -27,9 +27,9 @@ class ShapeRandomizer {
     func getShape() -> TetrisShape {
         guard let randomShape = bagOfShapes.randomElement(using: &rng) else {
             // TODO: throw error as this should never happen.
-            return TetrisShape.L
+            return TetrisShape(type: .L)
         }
         bagOfShapes.remove(randomShape)
-        return randomShape
+        return TetrisShape(type: randomShape)
     }
 }
