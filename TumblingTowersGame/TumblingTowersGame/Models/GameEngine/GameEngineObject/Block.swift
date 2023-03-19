@@ -5,10 +5,12 @@
 //  Created by Quan Teng Foong on 11/3/23.
 //
 
+import CoreGraphics
 import Foundation
 
 class Block: GameEngineObject {
     let fiziksBody: FiziksBody
+    let path: CGPath
 
     static var collisionBitmask: BitMask = ContactTestMask.block
 
@@ -16,8 +18,9 @@ class Block: GameEngineObject {
 
     static let categoryBitmask: BitMask = CategoryMask.block
 
-    init(fiziksBody: FiziksBody) {
+    init(fiziksBody: FiziksBody, path: CGPath) {
         self.fiziksBody = fiziksBody
+        self.path = path
     }
 }
 

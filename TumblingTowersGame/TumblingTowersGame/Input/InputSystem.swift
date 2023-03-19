@@ -13,7 +13,7 @@ protocol InputSystem {
 
     func getInput() -> InputType
 
-    func tapEvent(at: Point)
+    func tapEvent(at: CGPoint)
 
 }
 

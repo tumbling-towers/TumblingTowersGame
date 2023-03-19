@@ -19,25 +19,27 @@ class GameEngineManager: ObservableObject {
     @Published var levelPlatform: GameObjectPlatform = .samplePlatform
     
     private var gameEngine: GameEngine
-    private var lastTapLocation = Point(0, 0)
+    private var lastTapLocation = CGPoint(x: 0, y: 0)
     private weak var mainGameMgr: MainGameManager?
 
     var inputSystem: InputSystem
     private var gameUpdater: GameUpdater?
+    
+    var levelDimensions: CGRect
 
     init(levelDimensions: CGRect) {
+        self.levelDimensions = levelDimensions
         self.gameEngine = GameEngine(levelDimensions: levelDimensions)
 
         inputSystem = TapInput()
-
     }
     
-    func tapEvent(at: Point) {
+    func tapEvent(at: CGPoint) {
         lastTapLocation = at
         // MARK: Debug print
-        print("Tapped at " + String(at.x) + ", " + String(at.y))
+        print("Tapped at \(at.x) ,  \(at.y)")
 
-        inputSystem.tapEvent(at: at)
+        inputSystem.tapEvent(at: adjustCoordinates(for: at))
     }
 
     func getInput() -> InputType {
@@ -50,11 +52,11 @@ class GameEngineManager: ObservableObject {
 
     // Temp function for testing
     func addBlock(at: CGPoint) {
-        gameEngine.addBlock(ofShape: TetrisShape.L, at: at)
+        // this inserts a new block from the top, like tetris, then auto inserts after
+        // the block lands
+        gameEngine.insertNewBlock()
         print("Adding")
     }
-
-    
 
     func setUpLevelAndStartEngine(mainGameMgr: MainGameManager) {
         // Initialize level here and start it
@@ -73,6 +75,12 @@ class GameEngineManager: ObservableObject {
         platformPosition = CGPoint(x: mainGameMgr.deviceWidth/2, y: mainGameMgr.deviceHeight-100)
     }
     
+    /// GameEngine outputs coordinates with the origin at the bottom-left.
+    /// This method converts it such that the origin is at the top-left.
+    private func adjustCoordinates(for point: CGPoint) -> CGPoint {
+        let newPoint = CGPoint(x: point.x, y: levelDimensions.height - point.y)
+        return newPoint
+    }
 }
 
 extension GameEngineManager: GameRendererDelegate {
@@ -82,7 +90,16 @@ extension GameEngineManager: GameRendererDelegate {
 
     func renderLevel(level: Level, gameObjectBlocks: [GameObjectBlock], gameObjectPlatform: GameObjectPlatform) {
         self.level = level
-        self.levelBlocks = gameObjectBlocks
+
+        var invertedGameObjBlocks: [GameObjectBlock] = []
+
+        for gameObjectBlock in gameObjectBlocks {
+            var currBlock = gameObjectBlock
+            currBlock.position = adjustCoordinates(for: currBlock.position)
+            invertedGameObjBlocks.append(currBlock)
+        }
+
+        self.levelBlocks = invertedGameObjBlocks
         self.levelPlatform = gameObjectPlatform
     }
 }
