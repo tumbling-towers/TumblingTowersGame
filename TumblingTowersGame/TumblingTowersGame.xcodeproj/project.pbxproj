@@ -19,6 +19,7 @@
 		124B02D529C55F8C00094CF5 /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124B02D429C55F8C00094CF5 /* Level.swift */; };
 		124B02D729C567F600094CF5 /* LevelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124B02D629C567F600094CF5 /* LevelView.swift */; };
 		124B02D929C568FE00094CF5 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124B02D829C568FE00094CF5 /* BackgroundView.swift */; };
+		1445F84A29C71DC900F94751 /* TapInputTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1445F84929C71DC900F94751 /* TapInputTests.swift */; };
 		146E2DB429C0D07200BFC757 /* TumblingTowersGameApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146E2DB329C0D07200BFC757 /* TumblingTowersGameApp.swift */; };
 		146E2DB629C0D07200BFC757 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146E2DB529C0D07200BFC757 /* ContentView.swift */; };
 		146E2DB829C0D07300BFC757 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 146E2DB729C0D07300BFC757 /* Assets.xcassets */; };
@@ -114,6 +115,7 @@
 		124B02D429C55F8C00094CF5 /* Level.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
 		124B02D629C567F600094CF5 /* LevelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelView.swift; sourceTree = "<group>"; };
 		124B02D829C568FE00094CF5 /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
+		1445F84929C71DC900F94751 /* TapInputTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapInputTests.swift; sourceTree = "<group>"; };
 		146E2DB029C0D07200BFC757 /* TumblingTowersGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TumblingTowersGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		146E2DB329C0D07200BFC757 /* TumblingTowersGameApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TumblingTowersGameApp.swift; sourceTree = "<group>"; };
 		146E2DB529C0D07200BFC757 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -207,6 +209,14 @@
 			path = GameObject;
 			sourceTree = "<group>";
 		};
+		1445F84829C71DB500F94751 /* Input */ = {
+			isa = PBXGroup;
+			children = (
+				1445F84929C71DC900F94751 /* TapInputTests.swift */,
+			);
+			path = Input;
+			sourceTree = "<group>";
+		};
 		146E2DA729C0D07200BFC757 = {
 			isa = PBXGroup;
 			children = (
@@ -255,6 +265,7 @@
 		146E2DC329C0D07300BFC757 /* TumblingTowersGameTests */ = {
 			isa = PBXGroup;
 			children = (
+				1445F84829C71DB500F94751 /* Input */,
 				619D449E29C62FCF00EE00CE /* FiziksEngine */,
 				146E2DC429C0D07300BFC757 /* TumblingTowersGameTests.swift */,
 				2FC7FACB29C50B4500B56850 /* ShapeRandomizerTests.swift */,
@@ -661,6 +672,7 @@
 				619D44B029C6312100EE00CE /* MockFiziksBody.swift in Sources */,
 				619D44AB29C6310100EE00CE /* FiziksEngine.swift in Sources */,
 				619D44AD29C6310100EE00CE /* GameFiziksEngine.swift in Sources */,
+				1445F84A29C71DC900F94751 /* TapInputTests.swift in Sources */,
 				146E2DC529C0D07300BFC757 /* TumblingTowersGameTests.swift in Sources */,
 				619D44A229C630FA00EE00CE /* FiziksScene.swift in Sources */,
 				619D44B329C6966200EE00CE /* MockFIziksSceneUpdateDelegate.swift in Sources */,
