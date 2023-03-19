@@ -10,7 +10,8 @@ import Foundation
 
 protocol GameEngineObject {
     var fiziksBody: FiziksBody { get }
-    var path: CGPath { get }
+    
+    var shape: ObjectShape { get }
 
     static var categoryBitmask: BitMask { get }
 

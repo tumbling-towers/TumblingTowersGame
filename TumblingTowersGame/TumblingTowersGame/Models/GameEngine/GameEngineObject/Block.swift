@@ -10,7 +10,8 @@ import Foundation
 
 class Block: GameEngineObject {
     let fiziksBody: FiziksBody
-    let path: CGPath
+    
+    let shape: ObjectShape
 
     static var collisionBitmask: BitMask = ContactTestMask.block
 
@@ -18,9 +19,9 @@ class Block: GameEngineObject {
 
     static let categoryBitmask: BitMask = CategoryMask.block
 
-    init(fiziksBody: FiziksBody, path: CGPath) {
+    init(fiziksBody: FiziksBody, shape: ObjectShape) {
         self.fiziksBody = fiziksBody
-        self.path = path
+        self.shape = shape
     }
 }
 

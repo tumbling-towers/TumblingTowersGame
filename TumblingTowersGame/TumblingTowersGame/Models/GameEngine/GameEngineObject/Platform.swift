@@ -9,8 +9,10 @@ import CoreGraphics
 import Foundation
 
 class Platform: GameEngineObject {
+    
     let fiziksBody: FiziksBody
-    let path: CGPath
+    
+    var shape: ObjectShape
 
     static var categoryBitmask: BitMask = CategoryMask.platform
 
@@ -18,9 +20,9 @@ class Platform: GameEngineObject {
 
     static var contactTestBitmask: BitMask = ContactTestMask.platform
 
-    init(fiziksBody: FiziksBody, path: CGPath) {
+    init(fiziksBody: FiziksBody, shape: ObjectShape) {
         self.fiziksBody = fiziksBody
-        self.path = path
+        self.shape = shape
     }
 }
 

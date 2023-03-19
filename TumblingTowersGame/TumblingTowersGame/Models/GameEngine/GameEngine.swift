@@ -58,7 +58,7 @@ class GameEngine {
         self.fiziksEngine = GameFiziksEngine(levelDimensions: levelDimensions, boundingRect: fiziksEngineBoundingRect)
 
         // TODO: pass in seed
-        self.shapeRandomizer = ShapeRandomizer(possibleShapes: TetrisShape.allCases, seed: 1)
+        self.shapeRandomizer = ShapeRandomizer(possibleShapes: TetrisType.allCases, seed: 1)
 
         fiziksEngine.fiziksContactDelegate = self
         
@@ -159,7 +159,7 @@ class GameEngine {
                                            collisionBitMask: Block.collisionBitmask,
                                            contactTestBitMask: Block.contactTestBitmask,
                                            isDynamic: true)
-        let newBlock = Block(fiziksBody: newFiziksBody, path: shape.path)
+        let newBlock = Block(fiziksBody: newFiziksBody, shape: shape)
         return newBlock
     }
 
@@ -171,7 +171,7 @@ class GameEngine {
                                            collisionBitMask: Platform.collisionBitmask,
                                            contactTestBitMask: Platform.contactTestBitmask,
                                            isDynamic: false)
-        let newPlatform = Platform(fiziksBody: newFiziksBody, path: path)
+        let newPlatform = Platform(fiziksBody: newFiziksBody, shape: PlatformShape(path: path))
         return newPlatform
     }
 }
