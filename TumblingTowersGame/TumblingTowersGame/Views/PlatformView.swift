@@ -12,7 +12,13 @@ struct PlatformView: View {
     
     var body: some View {
         Image(ViewImageManager.platformImage)
-            .position(gameEngineMgr.platformPosition)
+            .resizable()
+            .position(CGPoint(
+                x: gameEngineMgr.levelDimensions.width / 2,
+                y:  gameEngineMgr.levelDimensions.height - 100))
+            .frame(
+                width: gameEngineMgr.levelDimensions.width,
+                height: (gameEngineMgr.levelDimensions.height + 200) / 2, alignment: .center)
     }
 }
 
