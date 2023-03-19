@@ -35,6 +35,15 @@ class GameEngine {
 
     private var platformPoints: [CGPoint] {
         let bottom: CGFloat = 20
+        let top: CGFloat = bottom + 100
+        let left: CGFloat = 0
+        let right: CGFloat = levelDimensions.width
+        return [CGPoint(x: left, y: top),
+                CGPoint(x: right, y: top),
+                CGPoint(x: right, y: bottom),
+                CGPoint(x: left, y: bottom)]
+        /*
+        let bottom: CGFloat = 20
         let top: CGFloat = bottom + 30
         let left: CGFloat = levelDimensions.width / 2 - 100
         let right: CGFloat = levelDimensions.width / 2 + 100
@@ -42,6 +51,7 @@ class GameEngine {
                 CGPoint(x: right, y: top),
                 CGPoint(x: right, y: bottom),
                 CGPoint(x: left, y: bottom)]
+         */
     }
     
     init(levelDimensions: CGRect) {
