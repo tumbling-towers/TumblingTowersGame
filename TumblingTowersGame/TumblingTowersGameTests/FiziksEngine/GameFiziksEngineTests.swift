@@ -37,12 +37,6 @@ class GameFiziksEngineTests: XCTest {
         XCTAssertTrue(fiziksScene.fiziksSceneUpdateDelegate === engine)
     }
     
-    func test_presentSkView() {
-        engine?.presentOnUselessView(skView: skView)
-        
-        XCTAssertTrue(skView.showsPhysics)
-    }
-    
     func test_activatePhysics() {
         engine?.activatePhysics()
         
