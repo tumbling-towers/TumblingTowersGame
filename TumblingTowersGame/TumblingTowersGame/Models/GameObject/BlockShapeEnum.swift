@@ -10,3 +10,7 @@ import Foundation
 enum BlockShapeEnum {
     case I, J, L, O, S, T, Z
 }
+
+//extension BlockShapeEnum: CaseIterable {
+//    
+//}

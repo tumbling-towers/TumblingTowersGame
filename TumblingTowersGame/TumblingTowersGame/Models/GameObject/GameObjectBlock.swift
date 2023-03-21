@@ -8,12 +8,6 @@
 import Foundation
 
 struct GameObjectBlock: GameObject {
-//    static var collisionBitmask: BitMask = ContactTestMask.block
-//
-//    static var contactTestBitmask: BitMask = ContactTestMask.block
-//
-//    static let categoryBitmask: BitMask = CategoryMask.block
-    
     var id = UUID()
     var position: CGPoint
     var blockShape: BlockShapeEnum
