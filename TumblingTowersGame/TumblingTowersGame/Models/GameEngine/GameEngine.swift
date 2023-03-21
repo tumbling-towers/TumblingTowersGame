@@ -30,7 +30,7 @@ class GameEngine {
     
     private var blockInsertionPoint: CGPoint {
         CGPoint(x: levelDimensions.width / 2,
-                y: levelDimensions.height + 30)
+                y: levelDimensions.height - 100)
     }
 
     private var platformPoints: [CGPoint] {

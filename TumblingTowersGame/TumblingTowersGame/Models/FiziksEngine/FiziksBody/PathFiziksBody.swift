@@ -7,12 +7,23 @@ import Foundation
 import SpriteKit
 
 class PathFiziksBody: FiziksBody {
-
     /// Shape representation for a `PathFiziksBody`
     var path: CGPath
-
-    var position: CGPoint
-    var zRotation: CGFloat
+    weak var delegate: FiziksBodyDelegate?
+    var position: CGPoint {
+        didSet {
+            if oldValue != position {
+                delegate?.didUpdatePosition(to: position)
+            }
+        }
+    }
+    var zRotation: CGFloat {
+        didSet {
+            if oldValue != zRotation {
+                delegate?.didUpdateRotation(to: zRotation)
+            }
+        }
+    }
     let categoryBitMask: BitMask
     let collisionBitMask: BitMask
     let contactTestBitMask: BitMask
@@ -36,9 +47,9 @@ class PathFiziksBody: FiziksBody {
         self.isDynamic = isDynamic
         self.friction = friction
     }
-
-    func createSKShapeNode() -> SKShapeNode {
-        SKShapeNode(path: path)
+    
+    func createFiziksShapeNode() -> FiziksShapeNode {
+        FiziksShapeNode(path: path)
     }
 
     func createSKPhysicsBody() -> SKPhysicsBody {

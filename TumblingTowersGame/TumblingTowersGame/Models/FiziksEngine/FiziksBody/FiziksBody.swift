@@ -6,6 +6,7 @@ import Foundation
 import SpriteKit
 
 protocol FiziksBody: AnyObject {
+    var delegate: FiziksBodyDelegate? { get set }
     var position: CGPoint { get set }
     var zRotation: CGFloat { get set }
     var categoryBitMask: BitMask { get }
@@ -14,6 +15,6 @@ protocol FiziksBody: AnyObject {
     var isDynamic: Bool { get set }
     var friction: Double { get set }
 
-    func createSKShapeNode() -> SKShapeNode
+    func createFiziksShapeNode() -> FiziksShapeNode
     func createSKPhysicsBody() -> SKPhysicsBody
 }

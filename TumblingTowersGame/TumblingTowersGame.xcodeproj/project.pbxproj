@@ -87,6 +87,8 @@
 		61CD55EE29C35D8A00DB6000 /* CategoryMask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61CD55ED29C35D8A00DB6000 /* CategoryMask.swift */; };
 		61CD55F029C35D9600DB6000 /* CollisionMask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61CD55EF29C35D9600DB6000 /* CollisionMask.swift */; };
 		61CD55F229C35DA700DB6000 /* ContactTestMask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61CD55F129C35DA700DB6000 /* ContactTestMask.swift */; };
+		61FEAD9B29C9FBDC00323A5A /* FiziksBodyDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FEAD9A29C9FBDC00323A5A /* FiziksBodyDelegate.swift */; };
+		61FEADA229CA099900323A5A /* FiziksShapeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FEADA129CA099900323A5A /* FiziksShapeNode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -178,6 +180,8 @@
 		61CD55ED29C35D8A00DB6000 /* CategoryMask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryMask.swift; sourceTree = "<group>"; };
 		61CD55EF29C35D9600DB6000 /* CollisionMask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollisionMask.swift; sourceTree = "<group>"; };
 		61CD55F129C35DA700DB6000 /* ContactTestMask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactTestMask.swift; sourceTree = "<group>"; };
+		61FEAD9A29C9FBDC00323A5A /* FiziksBodyDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiziksBodyDelegate.swift; sourceTree = "<group>"; };
+		61FEADA129CA099900323A5A /* FiziksShapeNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiziksShapeNode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -353,6 +357,7 @@
 		146E2E0429C0E2D800BFC757 /* FiziksEngine */ = {
 			isa = PBXGroup;
 			children = (
+				61FEADA029CA098A00323A5A /* FiziksShapeNode */,
 				2FC7FAD829C5109A00B56850 /* FiziksScene */,
 				61CD55EB29C35D3900DB6000 /* FiziksBody */,
 				61CD55E929C35D2C00DB6000 /* FiziksConstants.swift */,
@@ -468,6 +473,7 @@
 			children = (
 				146E2E0529C0E2FE00BFC757 /* FiziksBody.swift */,
 				61CD55E729C35D1E00DB6000 /* PathFiziksBody.swift */,
+				61FEAD9A29C9FBDC00323A5A /* FiziksBodyDelegate.swift */,
 			);
 			path = FiziksBody;
 			sourceTree = "<group>";
@@ -480,6 +486,14 @@
 				61CD55F129C35DA700DB6000 /* ContactTestMask.swift */,
 			);
 			path = Collision;
+			sourceTree = "<group>";
+		};
+		61FEADA029CA098A00323A5A /* FiziksShapeNode */ = {
+			isa = PBXGroup;
+			children = (
+				61FEADA129CA099900323A5A /* FiziksShapeNode.swift */,
+			);
+			path = FiziksShapeNode;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -638,6 +652,7 @@
 				61CD55E829C35D1E00DB6000 /* PathFiziksBody.swift in Sources */,
 				146E2E1929C0E5B400BFC757 /* GameplayLevelView.swift in Sources */,
 				146E2DE529C0D61A00BFC757 /* GameRendererDelegate.swift in Sources */,
+				61FEAD9B29C9FBDC00323A5A /* FiziksBodyDelegate.swift in Sources */,
 				146E2E0E29C0E30700BFC757 /* GameEngineObject.swift in Sources */,
 				61CD55F029C35D9600DB6000 /* CollisionMask.swift in Sources */,
 				124B02D729C567F600094CF5 /* LevelView.swift in Sources */,
@@ -660,6 +675,7 @@
 				146E2E0A29C0E2FE00BFC757 /* GameFiziksEngine.swift in Sources */,
 				124B02C929C4171400094CF5 /* ViewImageManager.swift in Sources */,
 				124B02C129C415CC00094CF5 /* BlockView.swift in Sources */,
+				61FEADA229CA099900323A5A /* FiziksShapeNode.swift in Sources */,
 				146E2E0F29C0E30700BFC757 /* Platform.swift in Sources */,
 				619D44C329C6F3AE00EE00CE /* PathObjectShape.swift in Sources */,
 				124B02CF29C41FD000094CF5 /* GameObjectBlock.swift in Sources */,
