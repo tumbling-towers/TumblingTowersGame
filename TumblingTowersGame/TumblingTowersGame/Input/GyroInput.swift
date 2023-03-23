@@ -38,18 +38,23 @@ class GyroInput: InputSystem {
     func getInput() -> InputType {
 
         if let rate = motionManager.accelerometerData?.acceleration.x {
-            print("Rate: " + String(rate))
-            if rate > 0 {
+            // TODO: Add sensitivity setting?
+            if rate > 0.1 {
                 return .RIGHT
-            } else {
+            } else if rate < -0.1 {
                 return .LEFT
+            } else {
+                return .NONE
             }
-        } else {
-            return .NONE
         }
+        return .NONE
     }
 
     func tapEvent(at: CGPoint) {
+        
+    }
+    
+    func resetInput() {
         
     }
 }

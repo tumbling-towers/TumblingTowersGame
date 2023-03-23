@@ -31,7 +31,7 @@ class GameEngineManager: ObservableObject {
         self.levelDimensions = levelDimensions
         self.gameEngine = GameEngine(levelDimensions: levelDimensions)
 
-        inputSystem = TapInput()
+        inputSystem = GyroInput()
 
         gameEngine.insertNewBlock()
     }
@@ -42,6 +42,10 @@ class GameEngineManager: ObservableObject {
         print("Tapped at \(location.x) ,  \(location.y)")
 
         inputSystem.tapEvent(at: adjustCoordinates(for: location))
+    }
+    
+    func resetInput() {
+        inputSystem.resetInput()
     }
 
     func getInput() -> InputType {

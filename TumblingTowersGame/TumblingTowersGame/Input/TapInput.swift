@@ -21,6 +21,10 @@ class TapInput: InputSystem {
     func getInput() -> InputType {
         inputVal
     }
+    
+    func resetInput() {
+        inputVal = .NONE
+    }
 
     func tapEvent(at: CGPoint) {
         if at.x > levelWidth / 2 {

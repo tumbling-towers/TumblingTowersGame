@@ -14,6 +14,8 @@ protocol InputSystem {
     func getInput() -> InputType
 
     func tapEvent(at: CGPoint)
+    
+    func resetInput()
 
 }
 

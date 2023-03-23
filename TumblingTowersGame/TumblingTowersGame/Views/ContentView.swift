@@ -17,8 +17,11 @@ struct ContentView: View {
             GameplayLevelView()
                 .environmentObject(gameEngineMgr)
                 .gesture(DragGesture(minimumDistance: 0)
-                    .onEnded { tap in
+                    .onChanged({ tap in
                         gameEngineMgr.tapEvent(at: tap.location)
+                    })
+                    .onEnded { tap in
+                        gameEngineMgr.resetInput()
                     }
                 )
 
