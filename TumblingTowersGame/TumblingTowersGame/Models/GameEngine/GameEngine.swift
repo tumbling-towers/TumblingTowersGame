@@ -87,8 +87,10 @@ class GameEngine {
         for object in gameObjects {
             if object.fiziksBody.categoryBitMask == CategoryMask.block {
                 let blockPosition = object.position
-                // TODO: hardcoded .I shape for now, need to get the shape from engine
-                newLevel.add(block: GameObjectBlock(position: blockPosition, blockShape: .I))
+                // TODO: more elegant way besides downcasting?
+                guard let block = object as? Block, let shape = block.shape as? TetrisShape else { continue }
+                newLevel.add(block: GameObjectBlock(position: blockPosition, path: shape.path, rotation: block.rotation)
+                )
             }
         }
 
@@ -102,13 +104,13 @@ class GameEngine {
         } else if currInput == .RIGHT {
             moveSideways(by: CGVector(dx: 2, dy: 0))
         }
-
-
     }
     
     @discardableResult
     func insertNewBlock() -> Block {
         let shape = shapeRandomizer.getShape()
+        // TODO: Here for testing individual shapes rendering - remove once not needed
+        // let shape = TetrisShape(type: .L)
         let insertedBlock = addBlock(ofShape: shape, at: blockInsertionPoint)
         currentlyMovingBlock = insertedBlock
         return insertedBlock

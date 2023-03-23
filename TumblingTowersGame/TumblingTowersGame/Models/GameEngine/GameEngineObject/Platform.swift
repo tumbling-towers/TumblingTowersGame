@@ -13,6 +13,10 @@ class Platform: GameEngineObject {
     let fiziksBody: FiziksBody
     
     var shape: ObjectShape
+    
+    var rotation: Double {
+        fiziksBody.zRotation
+    }
 
     static var categoryBitmask: BitMask = CategoryMask.platform
 

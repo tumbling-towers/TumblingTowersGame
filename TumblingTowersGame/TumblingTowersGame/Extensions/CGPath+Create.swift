@@ -17,7 +17,7 @@ extension CGPath {
             path.addLine(to: points[i])
         }
 
-        path.move(to: points[0])
+        path.addLine(to: points[0])
         return path
     }
 }

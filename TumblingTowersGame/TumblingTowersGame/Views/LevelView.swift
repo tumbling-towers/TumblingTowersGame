@@ -11,7 +11,7 @@ struct LevelView: View {
     @EnvironmentObject var gameEngineMgr: GameEngineManager
     
     var body: some View {
-        ZStack {
+        return ZStack {
             BackgroundView()
             
             ForEach($gameEngineMgr.levelBlocks) { block in
@@ -19,6 +19,13 @@ struct LevelView: View {
             }
             
             PlatformView()
+            
+            Button("ROTATE") {
+                gameEngineMgr.rotateCurrentBlock()
+            }
+            .foregroundColor(.white)
+            .background(Color.green)
+            .position(x: 100, y: gameEngineMgr.levelDimensions.height - 100)
         }
     }
 }

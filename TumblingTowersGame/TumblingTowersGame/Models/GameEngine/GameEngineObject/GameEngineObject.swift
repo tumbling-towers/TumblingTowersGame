@@ -12,6 +12,8 @@ protocol GameEngineObject {
     var fiziksBody: FiziksBody { get }
     
     var shape: ObjectShape { get }
+    
+    var rotation: Double { get }
 
     static var categoryBitmask: BitMask { get }
 

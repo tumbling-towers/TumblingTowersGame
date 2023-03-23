@@ -13,26 +13,18 @@ struct ContentView: View {
     @StateObject var gameEngineMgr: GameEngineManager
 
     var body: some View {
-        ZStack {
-
+        return ZStack {
             GameplayLevelView()
-//            LevelView()
                 .environmentObject(gameEngineMgr)
                 .gesture(DragGesture(minimumDistance: 0)
                     .onEnded { tap in
                         gameEngineMgr.tapEvent(at: tap.location)
-                        gameEngineMgr.addBlock(at: tap.location)
                     }
                 )
 
                 // MARK: Comment this out later. This is for testing only
                 // We need to keep this view to receive tap input
                 Text("Move: " + gameEngineMgr.getInput().rawValue)
-            
-//            ScreenInputView()
-//                .environmentObject(gameEngineMgr)
-
-
         }
         .ignoresSafeArea(.all)
     }

@@ -22,7 +22,7 @@ struct ViewImageManager {
     static let powerUpLineImage = ""
     static let goalLineImage = ""
     
-    static let blockShapeToImage: [BlockShapeEnum: String] = [
+    static let blockShapeToImage: [TetrisType: String] = [
         .L : LBlockImage,
         .I : IBlockImage,
         .J : JBlockImage,
@@ -32,12 +32,12 @@ struct ViewImageManager {
         .S : SBlockImage
     ]
     
-    // TODO: should throw
-    static func getBlockImage(_ block: GameObjectBlock) -> String? {
-        guard let image = blockShapeToImage[block.blockShape] else {
-            return ""
-        }
-        return image
-    }
+    // TODO: should throw / remove
+//    static func getBlockImage(_ block: GameObjectBlock) -> String? {
+//        guard let image = blockShapeToImage[block.blockShape] else {
+//            return ""
+//        }
+//        return image
+//    }
     // TODO: vines blocks
 }
