@@ -7,22 +7,21 @@
 
 import Foundation
 
-struct TumblingTowersEventIdentifier: EventIdentifier {
-    let id: Int
-    var notificationName: NotificationName
-
+class TumblingTowersEventIdentifier: EventIdentifier {
     init<T: TumblingTowersEvent>(_ eventType: T.Type) {
-        self.id = ObjectIdentifier(eventType).hashValue
-        self.notificationName = NotificationName(String(self.id))
+        let id = ObjectIdentifier(eventType).hashValue
+        let notificationName = NotificationName(String(id))
+        
+        super.init(id: id, notificationName: notificationName)
     }
 }
 
-extension TumblingTowersEventIdentifier: Hashable {
-    static func == (lhs: TumblingTowersEventIdentifier, rhs: TumblingTowersEventIdentifier) -> Bool {
-        return lhs.id == rhs.id
-    }
-    
-    public func hash(into hasher: inout Hasher) {
-        return hasher.combine(id)
-    }
-}
+//extension TumblingTowersEventIdentifier: Hashable {
+//    static func == (lhs: TumblingTowersEventIdentifier, rhs: TumblingTowersEventIdentifier) -> Bool {
+//        return lhs.id == rhs.id
+//    }
+//
+//    public func hash(into hasher: inout Hasher) {
+//        return hasher.combine(id)
+//    }
+//}

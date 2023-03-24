@@ -8,10 +8,10 @@
 import Foundation
 
 protocol Event {
-    static var identifier: any EventIdentifier { get }
-    var identifier: any EventIdentifier { get }
+    static var identifier: EventIdentifier { get }
+    var identifier: EventIdentifier { get }
+    func toNotification() -> TumblingTowersNotification
 }
 
-extension Event {
-    func toNotification() -> TumblingTowersNotification?
-}
+//extension Event {
+//}

@@ -11,20 +11,21 @@
 import NotificationCenter
 
 class TumblingTowersEventManager: EventManager {
-    var observerClosures: [TumblingTowersEventIdentifier: [EventClosure]]
-
-    private init() {
+    var observerClosures: [EventIdentifier: [EventClosure]]
+    var NCfacade: NotificationCenterFacade = NotificationCenterFacade.shared
+    
+    init() {
         observerClosures = [:]
     }
 
     func postEvent(_ event: Event) {
-        NotificationCenter.default.post(event.toNotification())
+        NCfacade.postNotification(event.toNotification())
     }
 
     func reinit() {
         for eventIdentifier in observerClosures.keys {
             observerClosures[eventIdentifier] = nil
-            NotificationCenter.default.removeObserver(self, name: eventIdentifier.notificationName, object: nil)
+            NCfacade.removeObserver(observer: self, notificationName: eventIdentifier.notificationName, object: nil)
         }
         observerClosures = [:]
     }
@@ -38,10 +39,7 @@ class TumblingTowersEventManager: EventManager {
 
     private func createObserver<T: Event>(for event: T.Type, observer: AnyObject, selector: Selector) {
         let notificationName = T.identifier.notificationName
-        NotificationCenter.default.addObserver(observer,
-                                               selector: selector,
-                                               name: notificationName,
-                                               object: nil)
+        NCfacade.createObserver(observer: observer, selector: selector, notificationName: notificationName, object: nil)
     }
 
     @objc
@@ -57,4 +55,8 @@ class TumblingTowersEventManager: EventManager {
             closure(event)
         }
     }
+    
+//    func degisterClosure<T: Event>(for event: T.Type, closure: @escaping EventClosure) {
+//        observerClosures[T.identifier]?.removeAll(where: {$0 == closure})
+//    }
 }
