@@ -15,13 +15,3 @@ class TumblingTowersEventIdentifier: EventIdentifier {
         super.init(id: id, notificationName: notificationName)
     }
 }
-
-//extension TumblingTowersEventIdentifier: Hashable {
-//    static func == (lhs: TumblingTowersEventIdentifier, rhs: TumblingTowersEventIdentifier) -> Bool {
-//        return lhs.id == rhs.id
-//    }
-//
-//    public func hash(into hasher: inout Hasher) {
-//        return hasher.combine(id)
-//    }
-//}

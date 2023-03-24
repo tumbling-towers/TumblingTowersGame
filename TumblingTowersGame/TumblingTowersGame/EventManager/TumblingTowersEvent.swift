@@ -7,14 +7,17 @@
 
 import Foundation
 
-protocol TumblingTowersEvent: Event {
-}
 
-extension TumblingTowersEvent {
-    static var identifier: TumblingTowersEventIdentifier { TumblingTowersEventIdentifier(Self.self) }
-    var identifier: TumblingTowersEventIdentifier { Self.identifier }
+class TumblingTowersEvent: Event {
+    static var identifier: EventIdentifier {
+        TumblingTowersEventIdentifier(Self.self)
+    }
     
-    func toNotification() -> Notification {
-        Notification(name: self.identifier.notificationName.name, object: nil, userInfo: ["event": self])
+    var identifier: EventIdentifier {
+        Self.identifier
+    }
+    
+    func toNotification() -> TumblingTowersNotification {
+        TumblingTowersNotification(name: self.identifier.notificationName, object: nil, userInfo: ["event": self])
     }
 }
