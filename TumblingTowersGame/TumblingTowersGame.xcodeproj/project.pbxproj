@@ -47,6 +47,7 @@
 		146E2E1729C0E33900BFC757 /* CGPoint+Hashable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146E2E1529C0E33900BFC757 /* CGPoint+Hashable.swift */; };
 		146E2E1929C0E5B400BFC757 /* GameplayLevelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146E2E1829C0E5B400BFC757 /* GameplayLevelView.swift */; };
 		14C53B2629C5E9D10035EC17 /* GameUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C53B2529C5E9D10035EC17 /* GameUpdater.swift */; };
+		14DAFDF729CE3146003BE140 /* SoundSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DAFDF629CE3146003BE140 /* SoundSystem.swift */; };
 		2F7E13A629C0F054000E6FA9 /* BiMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F7E13A529C0F054000E6FA9 /* BiMap.swift */; };
 		2FA2AC0329C74528001C5B7C /* GameEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA2AC0229C74528001C5B7C /* GameEngineTests.swift */; };
 		2FA2AC0529C74541001C5B7C /* GameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA2AC0429C74541001C5B7C /* GameEngine.swift */; };
@@ -150,6 +151,7 @@
 		146E2E1529C0E33900BFC757 /* CGPoint+Hashable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGPoint+Hashable.swift"; sourceTree = "<group>"; };
 		146E2E1829C0E5B400BFC757 /* GameplayLevelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameplayLevelView.swift; sourceTree = "<group>"; };
 		14C53B2529C5E9D10035EC17 /* GameUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GameUpdater.swift; path = TumblingTowersGame/GameUpdater/GameUpdater.swift; sourceTree = SOURCE_ROOT; };
+		14DAFDF629CE3146003BE140 /* SoundSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundSystem.swift; sourceTree = "<group>"; };
 		2F7E13A529C0F054000E6FA9 /* BiMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiMap.swift; sourceTree = "<group>"; };
 		2FA2AC0229C74528001C5B7C /* GameEngineTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameEngineTests.swift; sourceTree = "<group>"; };
 		2FA2AC0429C74541001C5B7C /* GameEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameEngine.swift; sourceTree = "<group>"; };
@@ -258,6 +260,7 @@
 		146E2DB229C0D07200BFC757 /* TumblingTowersGame */ = {
 			isa = PBXGroup;
 			children = (
+				14DAFDF529CE312D003BE140 /* Sound */,
 				2F7E13A429C0F044000E6FA9 /* DataStructures */,
 				146E2E1329C0E32500BFC757 /* Extensions */,
 				14C53B2729C5EB5F0035EC17 /* GameUpdater */,
@@ -380,6 +383,14 @@
 				14C53B2529C5E9D10035EC17 /* GameUpdater.swift */,
 			);
 			path = GameUpdater;
+			sourceTree = "<group>";
+		};
+		14DAFDF529CE312D003BE140 /* Sound */ = {
+			isa = PBXGroup;
+			children = (
+				14DAFDF629CE3146003BE140 /* SoundSystem.swift */,
+			);
+			path = Sound;
 			sourceTree = "<group>";
 		};
 		2F7E13A429C0F044000E6FA9 /* DataStructures */ = {
@@ -665,6 +676,7 @@
 				124B02CF29C41FD000094CF5 /* GameObjectBlock.swift in Sources */,
 				146E2DFE29C0E05A00BFC757 /* TetrisShape.swift in Sources */,
 				146E2E0829C0E2FE00BFC757 /* FiziksBody.swift in Sources */,
+				14DAFDF729CE3146003BE140 /* SoundSystem.swift in Sources */,
 				61CD55EE29C35D8A00DB6000 /* CategoryMask.swift in Sources */,
 				2F7E13A629C0F054000E6FA9 /* BiMap.swift in Sources */,
 				146E2E1729C0E33900BFC757 /* CGPoint+Hashable.swift in Sources */,
