@@ -26,6 +26,13 @@ struct LevelView: View {
             .foregroundColor(.white)
             .background(Color.green)
             .position(x: 100, y: gameEngineMgr.levelDimensions.height - 100)
+            
+            if let box = gameEngineMgr.referenceBox {
+                Rectangle()
+                    .path(in: box)
+                    .fill(.blue.opacity(0.1), strokeBorder: .blue)
+            }
+            
         }
     }
 }

@@ -78,6 +78,16 @@ class GameEngine {
     func setRenderer(gameRenderer: GameRendererDelegate) {
         self.gameRenderer = gameRenderer
     }
+    
+    func getReferencePoints() -> (left: CGPoint, right: CGPoint)? {
+        guard let block = currentlyMovingBlock, let shape = currentlyMovingBlock?.shape as? TetrisShape else { return nil }
+        let movingGameObjectBlock = GameObjectBlock(position: block.position, path: shape.path, rotation: block.rotation)
+        let xPosLeft: Double = movingGameObjectBlock.position.x - movingGameObjectBlock.width / 2
+        let xPosRight: Double = movingGameObjectBlock.position.x + movingGameObjectBlock.width / 2
+        let yPos: Double = 0
+        return (left: CGPoint(x: xPosLeft, y: yPos), right: CGPoint(x: xPosRight, y: yPos))
+    }
+    
 
     // This update method is called by the GameUpdater every frame.
     func update() {
@@ -110,7 +120,7 @@ class GameEngine {
     func insertNewBlock() -> Block {
         let shape = shapeRandomizer.getShape()
         // TODO: Here for testing individual shapes rendering - remove once not needed
-        // let shape = TetrisShape(type: .L)
+//         let shape = TetrisShape(type: .I)
         let insertedBlock = addBlock(ofShape: shape, at: blockInsertionPoint)
         currentlyMovingBlock = insertedBlock
         return insertedBlock

@@ -13,6 +13,12 @@ class GameEngineManager: ObservableObject {
     @Published var goalLinePosition: CGPoint = CGPoint()
     @Published var powerUpLinePosition: CGPoint = CGPoint(x: 500, y: 500)
     @Published var platformPosition: CGPoint = GameObjectPlatform.samplePlatform.position
+    var referenceBox: CGRect? {
+        guard let refPoints = gameEngine.getReferencePoints() else { return nil }
+        
+        let width = refPoints.right.x - refPoints.left.x
+        return CGRect(x: refPoints.left.x, y: 0, width: width, height: 5000)
+    }
     
     var level: Level = Level.sampleLevel
     @Published var levelBlocks: [GameObjectBlock] = [.sampleBlock]
@@ -31,7 +37,7 @@ class GameEngineManager: ObservableObject {
         self.levelDimensions = levelDimensions
         self.gameEngine = GameEngine(levelDimensions: levelDimensions)
 
-        inputSystem = GyroInput()
+        inputSystem = TapInput()
 
         gameEngine.insertNewBlock()
     }
