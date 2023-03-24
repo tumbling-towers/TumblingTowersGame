@@ -37,7 +37,7 @@ class GameEngineManager: ObservableObject {
         self.levelDimensions = levelDimensions
         self.gameEngine = GameEngine(levelDimensions: levelDimensions)
 
-        inputSystem = TapInput()
+        inputSystem = GyroInput()
 
         gameEngine.insertNewBlock()
     }
@@ -54,7 +54,7 @@ class GameEngineManager: ObservableObject {
         inputSystem.resetInput()
     }
 
-    func getInput() -> InputType {
+    func getInput() -> InputData {
         inputSystem.getInput()
     }
 
@@ -121,7 +121,7 @@ extension GameEngineManager: GameRendererDelegate {
         self.levelPlatform = gameObjectPlatform
     }
 
-    func getCurrInput() -> InputType {
+    func getCurrInput() -> InputData {
         inputSystem.getInput()
     }
 }

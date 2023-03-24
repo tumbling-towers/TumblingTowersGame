@@ -27,7 +27,7 @@ struct ContentView: View {
 
                 // MARK: Comment this out later. This is for testing only
                 // We need to keep this view to receive tap input
-                Text("Move: " + gameEngineMgr.getInput().rawValue)
+            Text("Move: " + gameEngineMgr.getInput().inputType.rawValue)
         }
         .ignoresSafeArea(.all)
     }

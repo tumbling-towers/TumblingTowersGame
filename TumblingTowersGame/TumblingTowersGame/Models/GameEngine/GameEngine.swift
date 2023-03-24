@@ -107,12 +107,8 @@ class GameEngine {
         gameRenderer?.renderLevel(level: newLevel, gameObjectBlocks: newLevel.blocks, gameObjectPlatform: newLevel.platform)
 
         // Get curr input and move block
-        let currInput = gameRenderer?.getCurrInput()
-
-        if currInput == .LEFT {
-            moveSideways(by: CGVector(dx: -2, dy: 0))
-        } else if currInput == .RIGHT {
-            moveSideways(by: CGVector(dx: 2, dy: 0))
+        if let currInput = gameRenderer?.getCurrInput() {
+            moveSideways(by: currInput.vector)
         }
     }
     
