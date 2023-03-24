@@ -20,12 +20,24 @@ struct LevelView: View {
             
             PlatformView()
             
-            Button("ROTATE") {
+            Button {
                 gameEngineMgr.rotateCurrentBlock()
+            } label: {
+                Image("rotate")
+                    .resizable()
+                    .frame(width: 50, height: 50)
+                    .padding(20)
             }
+            .padding()
             .foregroundColor(.white)
-            .background(Color.green)
-            .position(x: 100, y: gameEngineMgr.levelDimensions.height - 100)
+            .background(Color.blue)
+            .frame(width: 70, height: 70)
+            .clipShape(Circle())
+            // TODO: Potentially could make this adjustable to be on left/right of screen (in settings)
+            .position(x: gameEngineMgr.levelDimensions.width - 100, y: gameEngineMgr.levelDimensions.height - 100)
+            .shadow(color: .black, radius: 5, x: 1, y: 1)
+            
+            
             
             if let box = gameEngineMgr.referenceBox {
                 Rectangle()
