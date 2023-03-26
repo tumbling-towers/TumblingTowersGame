@@ -84,7 +84,8 @@ class GameEngine {
 
         for object in gameObjects {
             if isOutOfBounds(object) {
-                print("out of bounds")
+                // TODO: Emit event that a block has gone out of bounds.
+                removeObject(object: object)
             }
             
             if object.fiziksBody.categoryBitMask == CategoryMask.block {
@@ -182,6 +183,11 @@ class GameEngine {
         fiziksEngine.setVelocity(newBlock.fiziksBody, to: GameEngine.defaultBlockVelocity)
         return newBlock
     }
+    
+    private func removeObject(object: GameEngineObject) {
+        gameObjects.removeAll(where: { $0 === object })
+        fiziksEngine.delete(object.fiziksBody)
+    }
 
     // MARK: private methods
     private func createBlock(ofShape shape: TetrisShape, at position: CGPoint) -> Block {
@@ -213,9 +219,8 @@ class GameEngine {
         let height = obj.shape.height
         let buffer = max(width, height)
         let pos = obj.position
-        
         // doesn't include being above the level dimensions (so that objects can spawn from above)
-        return pos.x - buffer > levelDimensions.maxX || pos.x + buffer < levelDimensions.minX
+        return pos.x - buffer > levelDimensions.maxX || pos.x + buffer < levelDimensions.minX || pos.y + buffer < 0
     }
 }
 

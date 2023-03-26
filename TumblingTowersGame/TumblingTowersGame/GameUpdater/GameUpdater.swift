@@ -54,10 +54,6 @@ class GameUpdater {
 
         var framesPassed = timePassed.magnitude / durationOfFrameFor60FPS
         while framesPassed > 1 {
-//            physicsEngine.update(timePassed: durationOfFrameFor60FPS)
-//            updateGameObjs()
-//            updateBallEvents()
-//            updateGameEvents()
             gameEngine.update()
 
             if (frameCount.isMultiple(of: 60)) {
@@ -70,9 +66,6 @@ class GameUpdater {
             frameCount += 1
         }
         leftoverTime = framesPassed * durationOfFrameFor60FPS
-
-//        gameRenderer?.rerender()
-
     }
 
     @objc func step() {
