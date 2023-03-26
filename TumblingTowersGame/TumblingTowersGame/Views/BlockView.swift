@@ -12,8 +12,9 @@ struct BlockView: View {
     @Binding var block: GameObjectBlock
 
     var body: some View {
-        // TODO: should not coalesce
-        Image(ViewImageManager.getBlockImage(block) ?? "")
+        return PathViewShape(cgPath: block.path)
+            .fill(.red, strokeBorder: .white)
+            .frame(width: block.width, height: block.height)
             .position(block.position)
     }
 }

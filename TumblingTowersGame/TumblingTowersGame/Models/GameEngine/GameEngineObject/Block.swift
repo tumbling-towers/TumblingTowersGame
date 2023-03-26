@@ -12,6 +12,10 @@ class Block: GameEngineObject {
     let fiziksBody: FiziksBody
     
     let shape: ObjectShape
+    
+    var rotation: Double {
+        fiziksBody.zRotation
+    }
 
     static var collisionBitmask: BitMask = ContactTestMask.block
 

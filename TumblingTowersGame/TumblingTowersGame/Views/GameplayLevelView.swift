@@ -12,13 +12,10 @@ struct GameplayLevelView: View {
     @EnvironmentObject var gameEngineMgr: GameEngineManager
     
     var body: some View {
-
-        // Need to run physics engine (from testing we need to run these 2 lines so that the physics engine will start running)
-//        skView.presentScene(gameEngine?.fiziksEngine)
-//        skView.showsPhysics = true
-
+        // sprite view required for sprite kit to run, hidden
         SpriteView(scene: getUselessSKSceneToPresent())
-//        TestView()
+        
+        // present actual level rendered by swift ui above sprite view
         LevelView()
     }
 
