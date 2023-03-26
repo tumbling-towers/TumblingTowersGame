@@ -8,9 +8,9 @@
 import Foundation
 import AVKit
 
-class AudioManager {
+class SoundSystem {
 
-    static let shared = AudioManager()
+    static let shared = SoundSystem()
     private var backgroundMusicPlayer: AVAudioPlayer?
 
     private var soundPlayers: [GameSound: AVAudioPlayer] = [:]
