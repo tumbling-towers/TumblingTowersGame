@@ -8,8 +8,23 @@
 import Foundation
 
 struct GameObjectPlatform: GameObject {
+    static let defaultWidth: Double = 500
+    static let defaultHeight: Double = 100
+    
     var id = UUID()
     var position: CGPoint
+    var width: Double
+    var height: Double
+    
+    init(id: UUID = UUID(),
+         position: CGPoint,
+         width: Double = GameObjectPlatform.defaultWidth,
+         height: Double = GameObjectPlatform.defaultHeight) {
+        self.id = id
+        self.position = position
+        self.width = width
+        self.height = height
+    }
 }
 
 extension GameObjectPlatform {

@@ -8,5 +8,7 @@
 import Foundation
 
 protocol ObjectShape {
+    var height: Double { get }
     
+    var width: Double { get }
 }

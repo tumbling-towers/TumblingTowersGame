@@ -76,11 +76,7 @@ class GameUpdater {
     }
 
     @objc func step() {
-//        print("----------")
-//
-//        for object in gameEngine.gameObjects {
-//            print("\(object) \(object.fiziksBody.position)")
-//        }
+
     }
 
 }

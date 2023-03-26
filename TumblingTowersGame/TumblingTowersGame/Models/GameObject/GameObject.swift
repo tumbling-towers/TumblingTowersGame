@@ -9,6 +9,10 @@ import Foundation
 
 protocol GameObject: Identifiable {
     var position: CGPoint { get set }
+    
+    var height: Double { get }
+    
+    var width: Double { get }
 }
 
 extension GameObject {

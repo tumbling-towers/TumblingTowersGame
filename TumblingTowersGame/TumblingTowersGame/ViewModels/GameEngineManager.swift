@@ -12,17 +12,44 @@ import SpriteKit
 class GameEngineManager: ObservableObject {
     @Published var goalLinePosition: CGPoint = CGPoint()
     @Published var powerUpLinePosition: CGPoint = CGPoint(x: 500, y: 500)
-    @Published var platformPosition: CGPoint = GameObjectPlatform.samplePlatform.position
+    @Published var levelBlocks: [GameObjectBlock] = [.sampleBlock]
+    @Published var levelPlatform: GameObjectPlatform = .samplePlatform
+    
+    var platformPosition: CGPoint? {
+        get {
+            gameEngine.platform?.position
+        }
+        set {
+            if let newPosition = newValue {
+                gameEngine.setPlatform(position: newPosition)
+            }
+        }
+    }
+    
+    var platformRenderPosition: CGPoint? {
+        guard let position = platformPosition,
+              let width = platformPath?.width,
+              let height = platformPath?.height else { return nil }
+        
+        // TODO: FIX THIS!
+        let adjusted = adjustCoordinates(for: position)
+        return adjusted.add(by: CGPoint(x: width / 2, y: -height / 2))
+    }
+    
+    var platformPath: CGPath? {
+        guard let platformShape = gameEngine.platform?.shape as? PlatformShape else { return nil }
+        
+        return platformShape.path
+    }
+    
     var referenceBox: CGRect? {
         guard let refPoints = gameEngine.getReferencePoints() else { return nil }
         
         let width = refPoints.right.x - refPoints.left.x
-        return CGRect(x: refPoints.left.x, y: 0, width: width, height: 5000)
+        return CGRect(x: refPoints.left.x, y: 0, width: width, height: 3000)
     }
     
     var level: Level = Level.sampleLevel
-    @Published var levelBlocks: [GameObjectBlock] = [.sampleBlock]
-    @Published var levelPlatform: GameObjectPlatform = .samplePlatform
     
     private var gameEngine: GameEngine
     private var lastTapLocation = CGPoint(x: 0, y: 0)
@@ -63,20 +90,20 @@ class GameEngineManager: ObservableObject {
     }
 
     func setUpLevelAndStartEngine(mainGameMgr: MainGameManager) {
-        // Initialize level here and start it
-        // gameRenderer = self
-
+        // set up game loop
         gameUpdater = GameUpdater(gameEngine: gameEngine, gameRenderer: self)
+        gameUpdater?.createCADisplayLink()
+        
+        // set up renderer
         gameEngine.setRenderer(gameRenderer: self)
 
-//        gameEngine.start(gameRendererDelegate: self)
+        // set up input system
         inputSystem.start(levelWidth: mainGameMgr.deviceWidth, levelHeight: mainGameMgr.deviceHeight)
 
         self.mainGameMgr = mainGameMgr
         
-        gameUpdater?.createCADisplayLink()
-        
-        platformPosition = CGPoint(x: mainGameMgr.deviceWidth/2, y: mainGameMgr.deviceHeight-100)
+        // set up initial platform
+        platformPosition = CGPoint(x: mainGameMgr.deviceWidth/2, y: 100)
     }
     
     func rotateCurrentBlock() {

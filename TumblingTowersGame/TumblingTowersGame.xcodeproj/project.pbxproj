@@ -12,7 +12,6 @@
 		124B02C929C4171400094CF5 /* ViewImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124B02C829C4171400094CF5 /* ViewImageManager.swift */; };
 		124B02CD29C41F7100094CF5 /* GameObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124B02CC29C41F7100094CF5 /* GameObject.swift */; };
 		124B02CF29C41FD000094CF5 /* GameObjectBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124B02CE29C41FD000094CF5 /* GameObjectBlock.swift */; };
-		124B02D129C4201F00094CF5 /* BlockShapeEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124B02D029C4201F00094CF5 /* BlockShapeEnum.swift */; };
 		124B02D329C4204300094CF5 /* GameObjectPlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124B02D229C4204300094CF5 /* GameObjectPlatform.swift */; };
 		124B02D529C55F8C00094CF5 /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124B02D429C55F8C00094CF5 /* Level.swift */; };
 		124B02D729C567F600094CF5 /* LevelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124B02D629C567F600094CF5 /* LevelView.swift */; };
@@ -126,7 +125,6 @@
 		124B02C829C4171400094CF5 /* ViewImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewImageManager.swift; sourceTree = "<group>"; };
 		124B02CC29C41F7100094CF5 /* GameObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameObject.swift; sourceTree = "<group>"; };
 		124B02CE29C41FD000094CF5 /* GameObjectBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameObjectBlock.swift; sourceTree = "<group>"; };
-		124B02D029C4201F00094CF5 /* BlockShapeEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockShapeEnum.swift; sourceTree = "<group>"; };
 		124B02D229C4204300094CF5 /* GameObjectPlatform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameObjectPlatform.swift; sourceTree = "<group>"; };
 		124B02D429C55F8C00094CF5 /* Level.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
 		124B02D629C567F600094CF5 /* LevelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelView.swift; sourceTree = "<group>"; };
@@ -236,7 +234,6 @@
 		124B02CB29C41F6400094CF5 /* GameObject */ = {
 			isa = PBXGroup;
 			children = (
-				124B02D029C4201F00094CF5 /* BlockShapeEnum.swift */,
 				124B02CC29C41F7100094CF5 /* GameObject.swift */,
 				124B02CE29C41FD000094CF5 /* GameObjectBlock.swift */,
 				124B02D229C4204300094CF5 /* GameObjectPlatform.swift */,
@@ -722,7 +719,6 @@
 				61FC031129CC483400CE2CE5 /* CGPath+Rotate.swift in Sources */,
 				61FC031529CCBFB100CE2CE5 /* CGPoint+Arithmetic.swift in Sources */,
 				61FC031329CCBDE300CE2CE5 /* PathViewShape.swift in Sources */,
-				124B02D129C4201F00094CF5 /* BlockShapeEnum.swift in Sources */,
 				124B02EB29C9DB8300094CF5 /* Event.swift in Sources */,
 				619D44C529C70EFA00EE00CE /* PlatformShape.swift in Sources */,
 				146E2E0A29C0E2FE00BFC757 /* GameFiziksEngine.swift in Sources */,

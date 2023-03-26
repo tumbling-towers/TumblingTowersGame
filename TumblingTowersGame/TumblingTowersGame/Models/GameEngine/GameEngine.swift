@@ -9,15 +9,24 @@ import Foundation
 import SwiftUI
 
 class GameEngine {
-
-    private weak var gameRenderer: GameRendererDelegate?
+    
+    static let defaultSeed: Int = 1
     
     static let defaultBlockVelocity = CGVector(dx: 0, dy: -5)
     
     let levelDimensions: CGRect
     
     var gameObjects: [any GameEngineObject]
+    
     let fiziksEngine: FiziksEngine
+    
+    var platform: Platform?
+    
+    // TODO: Add random generation of platform in the future
+    private var rng: RandomNumberGeneratorWithSeed
+    
+    private weak var gameRenderer: GameRendererDelegate?
+    
     private var shapeRandomizer: ShapeRandomizer
     
     private var currentlyMovingBlock: Block? {
@@ -32,29 +41,8 @@ class GameEngine {
         CGPoint(x: levelDimensions.width / 2,
                 y: levelDimensions.height + 30)
     }
-
-    private var platformPoints: [CGPoint] {
-        let bottom: CGFloat = 20
-        let top: CGFloat = bottom + 100
-        let left: CGFloat = 0
-        let right: CGFloat = levelDimensions.width
-        return [CGPoint(x: left, y: top),
-                CGPoint(x: right, y: top),
-                CGPoint(x: right, y: bottom),
-                CGPoint(x: left, y: bottom)]
-        /*
-        let bottom: CGFloat = 20
-        let top: CGFloat = bottom + 30
-        let left: CGFloat = levelDimensions.width / 2 - 100
-        let right: CGFloat = levelDimensions.width / 2 + 100
-        return [CGPoint(x: left, y: top),
-                CGPoint(x: right, y: top),
-                CGPoint(x: right, y: bottom),
-                CGPoint(x: left, y: bottom)]
-         */
-    }
     
-    init(levelDimensions: CGRect) {
+    init(levelDimensions: CGRect, seed: Int = GameEngine.defaultSeed) {
         self.levelDimensions = levelDimensions
         // Use leveldimensions to set size of level if needed, otherwise remove
         self.gameObjects = []
@@ -69,10 +57,10 @@ class GameEngine {
 
         // TODO: pass in seed
         self.shapeRandomizer = ShapeRandomizer(possibleShapes: TetrisType.allCases, seed: 1)
+        
+        self.rng = RandomNumberGeneratorWithSeed(seed: seed)
 
         fiziksEngine.fiziksContactDelegate = self
-        
-        insertInitialPlatform()
     }
 
     func setRenderer(gameRenderer: GameRendererDelegate) {
@@ -95,12 +83,15 @@ class GameEngine {
         var newLevel = Level(blocks: [], platform: .samplePlatform)
 
         for object in gameObjects {
+            if isOutOfBounds(object) {
+                print("out of bounds")
+            }
+            
             if object.fiziksBody.categoryBitMask == CategoryMask.block {
                 let blockPosition = object.position
                 // TODO: more elegant way besides downcasting?
                 guard let block = object as? Block, let shape = block.shape as? TetrisShape else { continue }
-                newLevel.add(block: GameObjectBlock(position: blockPosition, path: shape.path, rotation: block.rotation)
-                )
+                newLevel.add(block: GameObjectBlock(position: blockPosition, path: shape.path, rotation: block.rotation))
             }
         }
 
@@ -157,6 +148,29 @@ class GameEngine {
         fiziksEngine.rotate(fiziksBodyToMove, by: Double.pi / 2)
     }
     
+    func setPlatform(position: CGPoint) {
+        // TODO: Add random generation of platform sizes here
+        let width = 200
+        let height = 100
+        
+        let points = [CGPoint(x: 0, y: height),
+                      CGPoint(x: width, y: height),
+                      CGPoint(x: width, y: 0),
+                      CGPoint(x: 0, y: 0)]
+        
+        
+        let path = CGPath.create(from: points)
+
+        // TODO: FIX THIS!
+        let insertedPlatform = createPlatform(path: path, at: position.subtract(by: CGPoint(x: path.width / 2, y: 0)))
+        
+        platform = insertedPlatform
+
+        gameObjects.append(insertedPlatform)
+        fiziksEngine.add(insertedPlatform.fiziksBody)
+        fiziksEngine.setAffectedByGravity(insertedPlatform.fiziksBody, to: false)
+    }
+    
     // TODO: this should eventually become private as we do not want the player
     // adding blocks
     @discardableResult
@@ -194,16 +208,14 @@ class GameEngine {
         return newPlatform
     }
     
-    private func insertInitialPlatform() {
-        let path = CGPath.create(from: platformPoints)
-        let center = CGPoint.arithmeticMean(points: platformPoints)
-        let platformPosition = CGPoint(x: center.x - 400, y: center.y)
-
-        let insertedPlatform = createPlatform(path: path, at: platformPosition)
-
-        gameObjects.append(insertedPlatform)
-        fiziksEngine.add(insertedPlatform.fiziksBody)
-        fiziksEngine.setAffectedByGravity(insertedPlatform.fiziksBody, to: false)
+    private func isOutOfBounds(_ obj: any GameEngineObject) -> Bool {
+        let width = obj.shape.width
+        let height = obj.shape.height
+        let buffer = max(width, height)
+        let pos = obj.position
+        
+        // doesn't include being above the level dimensions (so that objects can spawn from above)
+        return pos.x - buffer > levelDimensions.maxX || pos.x + buffer < levelDimensions.minX
     }
 }
 
