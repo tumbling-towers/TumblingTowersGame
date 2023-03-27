@@ -22,6 +22,8 @@ class GameEngine {
     
     let fiziksEngine: FiziksEngine
     
+    var eventManager: EventManager?
+    
     var platform: Platform? {
         didSet {
             if let platform = platform {
@@ -279,17 +281,15 @@ extension GameEngine: FiziksContactDelegate {
         // Once Block collides with another block/platform, Block should be affected by gravity
         // TODO: set the falling block friction to 0, test for collision normal to have a vertical component
         // update: tried checking for vertical component, i think there is always a tiny vertical component, so not a good check.
-        guard let currentlyMovingFiziksBody = currentlyMovingBlock?.fiziksBody else {
-            return
-        }
-        let currentlyMovingFiziksBodyId = ObjectIdentifier(currentlyMovingFiziksBody)
-        
-        if contact.contains(body: leftBoundary) || contact.contains(body: rightBoundary) {
-          // do nothing
-        } else if contact.contains(body: currentlyMovingFiziksBody) {
-            fiziksEngine.setAffectedByGravity(currentlyMovingFiziksBody, to: true)
-            fiziksEngine.setIsRotationAllowed(currentlyMovingFiziksBody, to: true)
-            currentlyMovingBlock = nil
+        if let currentBlock = currentlyMovingBlock {
+            if contact.contains(body: currentBlock.fiziksBody)
+                && !contact.contains(body: leftBoundary)
+                && !contact.contains(body: rightBoundary) {
+                fiziksEngine.setAffectedByGravity(currentBlock.fiziksBody, to: true)
+                fiziksEngine.setIsRotationAllowed(currentBlock.fiziksBody, to: true)
+                eventManager?.postEvent(BlockPlacedEvent())
+                self.currentlyMovingBlock = nil
+            }
         }
     }
 

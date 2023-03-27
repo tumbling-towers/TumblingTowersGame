@@ -15,6 +15,10 @@ class GameEngineManager: ObservableObject {
     @Published var levelBlocks: [GameObjectBlock] = [.sampleBlock]
     @Published var levelPlatform: GameObjectPlatform = .samplePlatform
     
+    private weak var mainGameMgr: MainGameManager?
+    var eventManager: EventManager?
+    
+    // MARK: Game logic related attributes
     var platformPosition: CGPoint? {
         get {
             gameEngine.platform?.position
@@ -25,6 +29,17 @@ class GameEngineManager: ObservableObject {
             }
         }
     }
+    
+    var level: Level = Level.sampleLevel
+    
+    var levelDimensions: CGRect
+    
+    private var gameEngine: GameEngine
+
+    // MARK: UI/UX related attributes
+    var inputSystem: InputSystem
+    
+    private var gameUpdater: GameUpdater?
     
     var platformRenderPosition: CGPoint? {
         guard let position = platformPosition,
@@ -48,21 +63,12 @@ class GameEngineManager: ObservableObject {
         let width = refPoints.right.x - refPoints.left.x
         return CGRect(x: refPoints.left.x, y: 0, width: width, height: 3000)
     }
-    
-    var level: Level = Level.sampleLevel
-    
-    private var gameEngine: GameEngine
-    private var lastTapLocation = CGPoint(x: 0, y: 0)
-    private weak var mainGameMgr: MainGameManager?
-
-    var inputSystem: InputSystem
-    private var gameUpdater: GameUpdater?
-    
-    var levelDimensions: CGRect
 
     init(levelDimensions: CGRect) {
         self.levelDimensions = levelDimensions
         self.gameEngine = GameEngine(levelDimensions: levelDimensions)
+        
+        gameEngine.eventManager = eventManager
 
         inputSystem = GyroInput()
 
@@ -70,7 +76,6 @@ class GameEngineManager: ObservableObject {
     }
     
     func tapEvent(at location: CGPoint) {
-        lastTapLocation = location
         // MARK: Debug print
         print("Tapped at \(location.x) ,  \(location.y)")
 
