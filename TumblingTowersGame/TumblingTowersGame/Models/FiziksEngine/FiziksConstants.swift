@@ -9,4 +9,6 @@ import Foundation
 
 struct FiziksConstants {
     static let defaultFriction: Double = 1.0
+    static let defaultRotation: Double = 0.0
+    static let defaultIsDynamic: Bool = true
 }

@@ -27,5 +27,6 @@ protocol FiziksEngine: AnyObject {
     func setAffectedByGravity(_ fiziksBody: FiziksBody, to newValue: Bool)
     func setWorldGravity(to newValue: CGVector)
     func setVelocity(_ fiziksBody: FiziksBody, to newVelocity: CGVector)
+    func setIsRotationAllowed(_ fiziksBody: FiziksBody, to isAllowed: Bool)
     func updateAllFiziksBodies()
 }

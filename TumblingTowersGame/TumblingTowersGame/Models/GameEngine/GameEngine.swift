@@ -12,7 +12,9 @@ class GameEngine {
     
     static let defaultSeed: Int = 1
     
-    static let defaultBlockVelocity = CGVector(dx: 0, dy: -5)
+    static let defaultBlockVelocity = CGVector(dx: 0, dy: -8)
+    
+    static let defaultPlatformBoundaryBuffer: Double = 200
     
     let levelDimensions: CGRect
     
@@ -20,7 +22,40 @@ class GameEngine {
     
     let fiziksEngine: FiziksEngine
     
-    var platform: Platform?
+    var platform: Platform? {
+        didSet {
+            if let platform = platform {
+                // boundaries set to have a buffer to allow blocks to fall off or creative gameplay
+                
+                // TODO: FIX THE POSITIONS OF THESE, NOT SURE WHY WEIRD POSITIONING
+                let leftPosition = CGPoint(x: platform.position.x - GameEngine.defaultPlatformBoundaryBuffer, y: 0)
+                let rightPosition = CGPoint(x: platform.position.x, y: 0)
+                rightBoundary = createLevelBoundary(at: rightPosition)
+                leftBoundary = createLevelBoundary(at: leftPosition)
+                
+                
+            }
+            
+        }
+    }
+    
+    var leftBoundary: FiziksBody? {
+        didSet {
+            // remove the old boundary
+            if let oldValue = oldValue {
+                fiziksEngine.delete(oldValue)
+            }
+        }
+    }
+    
+    var rightBoundary: FiziksBody? {
+        didSet {
+            // remove the old boundary
+            if let oldValue = oldValue {
+                fiziksEngine.delete(oldValue)
+            }
+        }
+    }
     
     // TODO: Add random generation of platform in the future
     private var rng: RandomNumberGeneratorWithSeed
@@ -86,6 +121,10 @@ class GameEngine {
             if isOutOfBounds(object) {
                 // TODO: Emit event that a block has gone out of bounds.
                 removeObject(object: object)
+                
+                if object === currentlyMovingBlock {
+                    currentlyMovingBlock = nil
+                }
             }
             
             if object.fiziksBody.categoryBitMask == CategoryMask.block {
@@ -110,6 +149,7 @@ class GameEngine {
         // TODO: Here for testing individual shapes rendering - remove once not needed
 //         let shape = TetrisShape(type: .I)
         let insertedBlock = addBlock(ofShape: shape, at: blockInsertionPoint)
+        fiziksEngine.setIsRotationAllowed(insertedBlock.fiziksBody, to: false)
         currentlyMovingBlock = insertedBlock
         return insertedBlock
     }
@@ -222,6 +262,16 @@ class GameEngine {
         // doesn't include being above the level dimensions (so that objects can spawn from above)
         return pos.x - buffer > levelDimensions.maxX || pos.x + buffer < levelDimensions.minX || pos.y + buffer < 0
     }
+    
+    /// Creates  a FiziksBody to represent the level boundary.
+    private func createLevelBoundary(at position: CGPoint) -> FiziksBody {
+        let path = CGPath(rect: CGRect(x: position.x, y: position.y, width: 5, height: levelDimensions.height), transform: nil)
+        let fiziksBody = PathFiziksBody(path: path, position: position)
+        fiziksEngine.add(fiziksBody)
+//        fiziksEngine.setAffectedByGravity(fiziksBody, to: false)
+        fiziksEngine.setDynamicValue(fiziksBody, to: false)
+        return fiziksBody
+    }
 }
 
 extension GameEngine: FiziksContactDelegate {
@@ -233,10 +283,12 @@ extension GameEngine: FiziksContactDelegate {
             return
         }
         let currentlyMovingFiziksBodyId = ObjectIdentifier(currentlyMovingFiziksBody)
-        if currentlyMovingFiziksBodyId == ObjectIdentifier(contact.bodyA)
-            || currentlyMovingFiziksBodyId == ObjectIdentifier(contact.bodyB) {
-            fiziksEngine.setAffectedByGravity(contact.bodyA, to: true)
-            fiziksEngine.setAffectedByGravity(contact.bodyB, to: true)
+        
+        if contact.contains(body: leftBoundary) || contact.contains(body: rightBoundary) {
+          // do nothing
+        } else if contact.contains(body: currentlyMovingFiziksBody) {
+            fiziksEngine.setAffectedByGravity(currentlyMovingFiziksBody, to: true)
+            fiziksEngine.setIsRotationAllowed(currentlyMovingFiziksBody, to: true)
             currentlyMovingBlock = nil
         }
     }

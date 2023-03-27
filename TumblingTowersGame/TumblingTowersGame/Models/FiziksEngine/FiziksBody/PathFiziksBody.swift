@@ -18,14 +18,14 @@ class PathFiziksBody: FiziksBody {
     let contactTestBitMask: BitMask
     var isDynamic: Bool
     var friction: Double
-
+    
     init(path: CGPath,
          position: CGPoint,
-         zRotation: CGFloat,
-         categoryBitMask: BitMask,
-         collisionBitMask: BitMask,
-         contactTestBitMask: BitMask,
-         isDynamic: Bool,
+         zRotation: CGFloat = FiziksConstants.defaultRotation,
+         categoryBitMask: BitMask = CategoryMask.max,
+         collisionBitMask: BitMask = CollisionMask.max,
+         contactTestBitMask: BitMask = ContactTestMask.max,
+         isDynamic: Bool = FiziksConstants.defaultIsDynamic,
          friction: Double = FiziksConstants.defaultFriction) {
         self.path = path
         self.position = position

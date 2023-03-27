@@ -52,10 +52,18 @@ extension GameFiziksEngine: FiziksEngine {
         let node = fiziksBody.createSKShapeNode()
 
         let skPhysicsBody = createSKPhysicsBody(for: fiziksBody)
+        
 
         // ----- to be removed -----
         node.fillColor = .red
         // -------------------------
+        
+        // remove air resistance
+        skPhysicsBody.linearDamping = 0
+        skPhysicsBody.density = 3.0
+        skPhysicsBody.contactTestBitMask = fiziksBody.contactTestBitMask
+        skPhysicsBody.collisionBitMask = fiziksBody.collisionBitMask
+        skPhysicsBody.categoryBitMask = fiziksBody.categoryBitMask
 
         node.physicsBody = skPhysicsBody
         node.position = fiziksBody.position
@@ -147,6 +155,12 @@ extension GameFiziksEngine: FiziksEngine {
 
     func setWorldGravity(to newValue: CGVector) {
         fiziksScene.gravity = newValue
+    }
+    
+    func setIsRotationAllowed(_ fiziksBody: FiziksBody, to isAllowed: Bool) {
+        let bodyId = ObjectIdentifier(fiziksBody)
+        let skNode = fiziksBodyIdToSKNode[key: bodyId]
+        skNode?.physicsBody?.allowsRotation = isAllowed
     }
 
     func updateAllFiziksBodies() {
