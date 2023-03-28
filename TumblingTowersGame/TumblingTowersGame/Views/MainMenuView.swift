@@ -30,25 +30,21 @@ struct MainMenuView: View {
                     currGameScreen = .gameModeSelection
                 } label: {
                     Text("START GAME")
-                        .foregroundColor(.black)
-                        .font(.system(size: 30, weight: .bold))
+                        .modifier(MenuButtonText(fontSize: 30))
                 }
 
                 Button {
                     currGameScreen = .achievements
                 } label: {
                     Text("ACHIEVEMENTS")
-                        .foregroundColor(.black)
-                        .font(.system(size: 30, weight: .bold))
+                        .modifier(MenuButtonText(fontSize: 30, padding: 50))
                 }
-                .padding(.all, 50)
 
                 Button {
                     currGameScreen = .settings
                 } label: {
                     Text("SETTINGS")
-                        .foregroundColor(.black)
-                        .font(.system(size: 30, weight: .bold))
+                        .modifier(MenuButtonText(fontSize: 30))
                 }
 
                 Spacer()

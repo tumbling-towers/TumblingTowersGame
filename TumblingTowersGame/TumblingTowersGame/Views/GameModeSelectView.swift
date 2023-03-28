@@ -54,10 +54,8 @@ struct GameModeSelectView: View {
                 currGameScreen = .gameplay
             } label: {
                 Text(name)
-                    .foregroundColor(.black)
-                    .font(.system(size: fontSize, weight: .bold))
+                    .modifier(MenuButtonText(fontSize: fontSize))
             }
-            .padding(.all, 10)
         )
     }
 
