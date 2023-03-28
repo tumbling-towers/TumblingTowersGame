@@ -16,6 +16,12 @@ class GameEngine {
     
     static let defaultPlatformBoundaryBuffer: Double = 200
     
+    static let defaultPowerupHeightStep: Double = 50
+    
+    static let defaultInitialPowerupHeight: Double = 200
+    
+    static let defaultPowerupLineDimensions: CGSize = CGSize(width: 20, height: 5)
+    
     let levelDimensions: CGRect
     
     var gameObjects: [any GameEngineObject]
@@ -23,6 +29,8 @@ class GameEngine {
     let fiziksEngine: FiziksEngine
     
     var eventManager: EventManager?
+    
+    var powerupLine: PowerupLine?
     
     var platform: Platform? {
         didSet {
@@ -32,10 +40,19 @@ class GameEngine {
                 // TODO: FIX THE POSITIONS OF THESE, NOT SURE WHY WEIRD POSITIONING
                 let leftPosition = CGPoint(x: platform.position.x - GameEngine.defaultPlatformBoundaryBuffer, y: 0)
                 let rightPosition = CGPoint(x: platform.position.x, y: 0)
+                
+                // set up boundaries relative to platform
                 rightBoundary = createLevelBoundary(at: rightPosition)
                 leftBoundary = createLevelBoundary(at: leftPosition)
                 
+                // set up initial powerup line relative to platform
+                // TODO: FIX UNCENTERED POSITIONING
+                print(levelDimensions)
+//                var centerPosition = CGPoint(x: platform.position.x, y: platform.position.y + GameEngine.defaultInitialPowerupHeight)
+                var centerPosition = CGPoint(x: 200, y: platform.position.y + GameEngine.defaultInitialPowerupHeight)
+//                centerPosition = centerPosition.add(by: CGPoint(x: platform.shape.width / 2 - GameEngine.defaultPowerupLineDimensions.width / 2, y: 0))
                 
+                powerupLine = createPowerupLine(at: centerPosition)
             }
             
         }
@@ -237,8 +254,8 @@ class GameEngine {
                                            position: position,
                                            zRotation: 0,
                                            categoryBitMask: Block.categoryBitmask,
-                                           collisionBitMask: Block.collisionBitmask,
-                                           contactTestBitMask: Block.contactTestBitmask,
+                                           collisionBitMask: Block.fallingCollisionBitmask,
+                                           contactTestBitMask: Block.fallingContactTestBitMask,
                                            isDynamic: true)
         let newBlock = Block(fiziksBody: newFiziksBody, shape: shape)
         return newBlock
@@ -268,19 +285,43 @@ class GameEngine {
     /// Creates  a FiziksBody to represent the level boundary.
     private func createLevelBoundary(at position: CGPoint) -> FiziksBody {
         let path = CGPath(rect: CGRect(x: position.x, y: position.y, width: 5, height: levelDimensions.height), transform: nil)
-        let fiziksBody = PathFiziksBody(path: path, position: position)
+        let fiziksBody = PathFiziksBody(path: path,
+                                        position: position,
+                                        categoryBitMask: CategoryMask.levelBoundary,
+                                        collisionBitMask: CollisionMask.levelBoundary)
         fiziksEngine.add(fiziksBody)
-//        fiziksEngine.setAffectedByGravity(fiziksBody, to: false)
         fiziksEngine.setDynamicValue(fiziksBody, to: false)
         return fiziksBody
+    }
+    
+    private func updatePowerupHeight() {
+        guard let powerupLine = powerupLine else { return }
+        fiziksEngine.move(powerupLine.fiziksBody, by: CGVector(dx: 0, dy: GameEngine.defaultPowerupHeightStep))
+    }
+    
+    private func createPowerupLine(at pos: CGPoint) -> PowerupLine {
+        let rect = CGRect(x: pos.x,
+                          y: pos.y,
+                          width: GameEngine.defaultPowerupLineDimensions.width,
+                          height: GameEngine.defaultPowerupLineDimensions.height)
+        let newPowerupLine = PowerupLine(fiziksBody: PathFiziksBody(path: CGPath(rect: rect, transform: nil),
+                                                                    position: pos,
+                                                                    categoryBitMask: PowerupLine.categoryBitmask,
+                                                                    collisionBitMask: PowerupLine.collisionBitmask,
+                                                                    contactTestBitMask: PowerupLine.contactTestBitmask
+                                                                    ), shape: PowerupLineShape(rect: rect))
+        fiziksEngine.add(newPowerupLine.fiziksBody)
+        fiziksEngine.setAffectedByGravity(newPowerupLine.fiziksBody, to: false)
+        
+        return newPowerupLine
     }
 }
 
 extension GameEngine: FiziksContactDelegate {
     func didBegin(_ contact: FiziksContact) {
         // Once Block collides with another block/platform, Block should be affected by gravity
-        // TODO: set the falling block friction to 0, test for collision normal to have a vertical component
-        // update: tried checking for vertical component, i think there is always a tiny vertical component, so not a good check.
+        
+        // TODO: Set block's contacttestbitmask and collisionbitmask after touching platform
         if let currentBlock = currentlyMovingBlock {
             if contact.contains(body: currentBlock.fiziksBody)
                 && !contact.contains(body: leftBoundary)

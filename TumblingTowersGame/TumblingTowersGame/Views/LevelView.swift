@@ -17,8 +17,10 @@ struct LevelView: View {
             ForEach($gameEngineMgr.levelBlocks) { block in
                 BlockView(block: block)
             }
-            
+                        
             PlatformView()
+            
+            PowerupLineView()
             
             Button {
                 gameEngineMgr.rotateCurrentBlock()

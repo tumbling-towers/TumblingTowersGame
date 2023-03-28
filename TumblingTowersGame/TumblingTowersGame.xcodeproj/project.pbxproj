@@ -88,6 +88,9 @@
 		619D44C329C6F3AE00EE00CE /* PathObjectShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619D44C229C6F3AE00EE00CE /* PathObjectShape.swift */; };
 		619D44C529C70EFA00EE00CE /* PlatformShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619D44C429C70EFA00EE00CE /* PlatformShape.swift */; };
 		61AE15B329D16DD500D04E95 /* BlockPlacedEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61AE15B229D16DD500D04E95 /* BlockPlacedEvent.swift */; };
+		61AE15B529D1786700D04E95 /* PowerupLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61AE15B429D1786700D04E95 /* PowerupLineView.swift */; };
+		61AE15B729D18B2D00D04E95 /* PowerupLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61AE15B629D18B2D00D04E95 /* PowerupLine.swift */; };
+		61AE15B929D18BB400D04E95 /* PowerupLineShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61AE15B829D18BB400D04E95 /* PowerupLineShape.swift */; };
 		61CD55E129C35C4A00DB6000 /* FiziksContact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61CD55E029C35C4A00DB6000 /* FiziksContact.swift */; };
 		61CD55E329C35C5E00DB6000 /* FiziksContactDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61CD55E229C35C5E00DB6000 /* FiziksContactDelegate.swift */; };
 		61CD55E629C35CDB00DB6000 /* FiziksEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61CD55E529C35CDB00DB6000 /* FiziksEngine.swift */; };
@@ -193,6 +196,9 @@
 		619D44C229C6F3AE00EE00CE /* PathObjectShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathObjectShape.swift; sourceTree = "<group>"; };
 		619D44C429C70EFA00EE00CE /* PlatformShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformShape.swift; sourceTree = "<group>"; };
 		61AE15B229D16DD500D04E95 /* BlockPlacedEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BlockPlacedEvent.swift; path = TumblingTowersGame/Extensions/BlockPlacedEvent.swift; sourceTree = SOURCE_ROOT; };
+		61AE15B429D1786700D04E95 /* PowerupLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerupLineView.swift; sourceTree = "<group>"; };
+		61AE15B629D18B2D00D04E95 /* PowerupLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerupLine.swift; sourceTree = "<group>"; };
+		61AE15B829D18BB400D04E95 /* PowerupLineShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerupLineShape.swift; sourceTree = "<group>"; };
 		61CD55E029C35C4A00DB6000 /* FiziksContact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiziksContact.swift; sourceTree = "<group>"; };
 		61CD55E229C35C5E00DB6000 /* FiziksContactDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiziksContactDelegate.swift; sourceTree = "<group>"; };
 		61CD55E529C35CDB00DB6000 /* FiziksEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiziksEngine.swift; sourceTree = "<group>"; };
@@ -390,6 +396,7 @@
 				124B02D629C567F600094CF5 /* LevelView.swift */,
 				124B02C229C415DC00094CF5 /* PlatformView.swift */,
 				61FC031229CCBDE300CE2CE5 /* PathViewShape.swift */,
+				61AE15B429D1786700D04E95 /* PowerupLineView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -455,6 +462,7 @@
 				146E2E0D29C0E30700BFC757 /* Block.swift */,
 				146E2E0B29C0E30700BFC757 /* GameEngineObject.swift */,
 				146E2E0C29C0E30700BFC757 /* Platform.swift */,
+				61AE15B629D18B2D00D04E95 /* PowerupLine.swift */,
 			);
 			path = GameEngineObject;
 			sourceTree = "<group>";
@@ -517,6 +525,7 @@
 				619D44BF29C6F35300EE00CE /* ObjectShape.swift */,
 				619D44C229C6F3AE00EE00CE /* PathObjectShape.swift */,
 				619D44C429C70EFA00EE00CE /* PlatformShape.swift */,
+				61AE15B829D18BB400D04E95 /* PowerupLineShape.swift */,
 			);
 			path = ObjectShape;
 			sourceTree = "<group>";
@@ -728,7 +737,9 @@
 				146E2E0A29C0E2FE00BFC757 /* GameFiziksEngine.swift in Sources */,
 				124B02C929C4171400094CF5 /* ViewImageManager.swift in Sources */,
 				124B02C129C415CC00094CF5 /* BlockView.swift in Sources */,
+				61AE15B929D18BB400D04E95 /* PowerupLineShape.swift in Sources */,
 				146E2E0F29C0E30700BFC757 /* Platform.swift in Sources */,
+				61AE15B729D18B2D00D04E95 /* PowerupLine.swift in Sources */,
 				619D44C329C6F3AE00EE00CE /* PathObjectShape.swift in Sources */,
 				124B02CF29C41FD000094CF5 /* GameObjectBlock.swift in Sources */,
 				146E2DFE29C0E05A00BFC757 /* TetrisShape.swift in Sources */,
@@ -753,6 +764,7 @@
 				124B02F129C9ED4100094CF5 /* TumblingTowersEvent.swift in Sources */,
 				2FC7FADC29C510CD00B56850 /* FiziksSceneUpdateDelegate.swift in Sources */,
 				124B02F329C9ED6A00094CF5 /* NotificationCenterFacade.swift in Sources */,
+				61AE15B529D1786700D04E95 /* PowerupLineView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -11,7 +11,8 @@ import SpriteKit
 
 class GameEngineManager: ObservableObject {
     @Published var goalLinePosition: CGPoint = CGPoint()
-    @Published var powerUpLinePosition: CGPoint = CGPoint(x: 500, y: 500)
+    @Published var powerUpLinePosition: CGPoint = CGPoint()
+    @Published var powerupLineDimensions: CGSize = CGSize()
     @Published var levelBlocks: [GameObjectBlock] = [.sampleBlock]
     @Published var levelPlatform: GameObjectPlatform = .samplePlatform
     
@@ -77,9 +78,9 @@ class GameEngineManager: ObservableObject {
     
     func tapEvent(at location: CGPoint) {
         // MARK: Debug print
-        print("Tapped at \(location.x) ,  \(location.y)")
-
         inputSystem.tapEvent(at: adjustCoordinates(for: location))
+        let adjusted = adjustCoordinates(for: location)
+        print("Tapped at \(adjusted.x) ,  \(adjusted.y)")
     }
     
     func resetInput() {
@@ -147,6 +148,11 @@ extension GameEngineManager: GameRendererDelegate {
         for gameObjectBlock in gameObjectBlocks {
             let transformedBlock = transformRenderable(for: gameObjectBlock)
             invertedGameObjBlocks.append(transformedBlock)
+        }
+        
+        if let powerupLine = gameEngine.powerupLine {
+            powerUpLinePosition = adjustCoordinates(for: powerupLine.position)
+            powerupLineDimensions = CGSize(width: powerupLine.shape.width, height: powerupLine.shape.height)
         }
 
         self.levelBlocks = invertedGameObjBlocks
