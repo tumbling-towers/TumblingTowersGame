@@ -80,11 +80,30 @@
 		619D44B929C699EA00EE00CE /* CategoryMask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61CD55ED29C35D8A00DB6000 /* CategoryMask.swift */; };
 		619D44BB29C69BAA00EE00CE /* GameFiziksEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619D44BA29C69BAA00EE00CE /* GameFiziksEngineTests.swift */; };
 		619D44BD29C69CE500EE00CE /* MockFiziksContactDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619D44BC29C69CE500EE00CE /* MockFiziksContactDelegate.swift */; };
-		619D44BE29C6A77500EE00CE /* BiMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F7E13A529C0F054000E6FA9 /* BiMap.swift */; };
 		619D44C029C6F35300EE00CE /* ObjectShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619D44BF29C6F35300EE00CE /* ObjectShape.swift */; };
 		619D44C329C6F3AE00EE00CE /* PathObjectShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619D44C229C6F3AE00EE00CE /* PathObjectShape.swift */; };
 		619D44C529C70EFA00EE00CE /* PlatformShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619D44C429C70EFA00EE00CE /* PlatformShape.swift */; };
 		61A10F1C29D2EB4B000EB4B4 /* BlockTouchedPowerupLineEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A10F1B29D2EB4B000EB4B4 /* BlockTouchedPowerupLineEvent.swift */; };
+		61A10F1F29D30BED000EB4B4 /* PowerupManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A10F1E29D30BED000EB4B4 /* PowerupManager.swift */; };
+		61A10F2129D30C02000EB4B4 /* Powerup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A10F2029D30C02000EB4B4 /* Powerup.swift */; };
+		61A10F2429D30C7F000EB4B4 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A10F2329D30C7F000EB4B4 /* Queue.swift */; };
+		61A10F2629D30CAB000EB4B4 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A10F2529D30CAB000EB4B4 /* LinkedList.swift */; };
+		61A10F2829D30CBB000EB4B4 /* LinkedListNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A10F2729D30CBB000EB4B4 /* LinkedListNode.swift */; };
+		61A10F2B29D30CF0000EB4B4 /* QueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A10F2A29D30CF0000EB4B4 /* QueueTests.swift */; };
+		61A10F2F29D30D03000EB4B4 /* BiMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F7E13A529C0F054000E6FA9 /* BiMap.swift */; };
+		61A10F3029D30D03000EB4B4 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A10F2529D30CAB000EB4B4 /* LinkedList.swift */; };
+		61A10F3129D30D03000EB4B4 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A10F2329D30C7F000EB4B4 /* Queue.swift */; };
+		61A10F3229D30D03000EB4B4 /* LinkedListNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A10F2729D30CBB000EB4B4 /* LinkedListNode.swift */; };
+		61A10F3429D30D0C000EB4B4 /* LinkedListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A10F3329D30D0C000EB4B4 /* LinkedListTests.swift */; };
+		61A10F3629D30D1C000EB4B4 /* LinkedListNodeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A10F3529D30D1C000EB4B4 /* LinkedListNodeTests.swift */; };
+		61A10F3829D30DCA000EB4B4 /* PowerupDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A10F3729D30DCA000EB4B4 /* PowerupDelegate.swift */; };
+		61A10F3B29D30E9E000EB4B4 /* VinePowerup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A10F3A29D30E9E000EB4B4 /* VinePowerup.swift */; };
+		61A10F3D29D30F93000EB4B4 /* PlatformPowerup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A10F3C29D30F93000EB4B4 /* PlatformPowerup.swift */; };
+		61A10F3F29D30FB0000EB4B4 /* GamePowerupManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A10F3E29D30FB0000EB4B4 /* GamePowerupManager.swift */; };
+		61A10F4129D31083000EB4B4 /* VinePowerupActivatedEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A10F4029D31083000EB4B4 /* VinePowerupActivatedEvent.swift */; };
+		61A10F4329D310CA000EB4B4 /* PlatformPowerupActivatedEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A10F4229D310CA000EB4B4 /* PlatformPowerupActivatedEvent.swift */; };
+		61A10F4529D31357000EB4B4 /* PowerupFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A10F4429D31357000EB4B4 /* PowerupFactory.swift */; };
+		61A10F4729D31384000EB4B4 /* PowerupType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A10F4629D31384000EB4B4 /* PowerupType.swift */; };
 		61AE15B329D16DD500D04E95 /* BlockPlacedEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61AE15B229D16DD500D04E95 /* BlockPlacedEvent.swift */; };
 		61AE15B529D1786700D04E95 /* PowerupLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61AE15B429D1786700D04E95 /* PowerupLineView.swift */; };
 		61AE15B729D18B2D00D04E95 /* PowerupLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61AE15B629D18B2D00D04E95 /* PowerupLine.swift */; };
@@ -194,6 +213,22 @@
 		619D44C229C6F3AE00EE00CE /* PathObjectShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathObjectShape.swift; sourceTree = "<group>"; };
 		619D44C429C70EFA00EE00CE /* PlatformShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformShape.swift; sourceTree = "<group>"; };
 		61A10F1B29D2EB4B000EB4B4 /* BlockTouchedPowerupLineEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BlockTouchedPowerupLineEvent.swift; path = TumblingTowersGame/Models/GameEngine/GameEngineObject/ObjectShape/BlockTouchedPowerupLineEvent.swift; sourceTree = SOURCE_ROOT; };
+		61A10F1E29D30BED000EB4B4 /* PowerupManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerupManager.swift; sourceTree = "<group>"; };
+		61A10F2029D30C02000EB4B4 /* Powerup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Powerup.swift; sourceTree = "<group>"; };
+		61A10F2329D30C7F000EB4B4 /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
+		61A10F2529D30CAB000EB4B4 /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
+		61A10F2729D30CBB000EB4B4 /* LinkedListNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedListNode.swift; sourceTree = "<group>"; };
+		61A10F2A29D30CF0000EB4B4 /* QueueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueTests.swift; sourceTree = "<group>"; };
+		61A10F3329D30D0C000EB4B4 /* LinkedListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedListTests.swift; sourceTree = "<group>"; };
+		61A10F3529D30D1C000EB4B4 /* LinkedListNodeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedListNodeTests.swift; sourceTree = "<group>"; };
+		61A10F3729D30DCA000EB4B4 /* PowerupDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerupDelegate.swift; sourceTree = "<group>"; };
+		61A10F3A29D30E9E000EB4B4 /* VinePowerup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VinePowerup.swift; sourceTree = "<group>"; };
+		61A10F3C29D30F93000EB4B4 /* PlatformPowerup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformPowerup.swift; sourceTree = "<group>"; };
+		61A10F3E29D30FB0000EB4B4 /* GamePowerupManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePowerupManager.swift; sourceTree = "<group>"; };
+		61A10F4029D31083000EB4B4 /* VinePowerupActivatedEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = VinePowerupActivatedEvent.swift; path = TumblingTowersGame/PowerupManager/Powerups/VinePowerupActivatedEvent.swift; sourceTree = SOURCE_ROOT; };
+		61A10F4229D310CA000EB4B4 /* PlatformPowerupActivatedEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PlatformPowerupActivatedEvent.swift; path = TumblingTowersGame/PowerupManager/Powerups/PlatformPowerupActivatedEvent.swift; sourceTree = SOURCE_ROOT; };
+		61A10F4429D31357000EB4B4 /* PowerupFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerupFactory.swift; sourceTree = "<group>"; };
+		61A10F4629D31384000EB4B4 /* PowerupType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerupType.swift; sourceTree = "<group>"; };
 		61AE15B229D16DD500D04E95 /* BlockPlacedEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BlockPlacedEvent.swift; path = TumblingTowersGame/Extensions/BlockPlacedEvent.swift; sourceTree = SOURCE_ROOT; };
 		61AE15B429D1786700D04E95 /* PowerupLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerupLineView.swift; sourceTree = "<group>"; };
 		61AE15B629D18B2D00D04E95 /* PowerupLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerupLine.swift; sourceTree = "<group>"; };
@@ -279,6 +314,8 @@
 			children = (
 				61AE15B229D16DD500D04E95 /* BlockPlacedEvent.swift */,
 				61A10F1B29D2EB4B000EB4B4 /* BlockTouchedPowerupLineEvent.swift */,
+				61A10F4029D31083000EB4B4 /* VinePowerupActivatedEvent.swift */,
+				61A10F4229D310CA000EB4B4 /* PlatformPowerupActivatedEvent.swift */,
 			);
 			path = Events;
 			sourceTree = "<group>";
@@ -314,6 +351,7 @@
 		146E2DB229C0D07200BFC757 /* TumblingTowersGame */ = {
 			isa = PBXGroup;
 			children = (
+				61A10F1D29D30BC8000EB4B4 /* PowerupManager */,
 				146E2DB729C0D07300BFC757 /* Assets.xcassets */,
 				2F7E13A429C0F044000E6FA9 /* DataStructures */,
 				124B02E429C9DA8E00094CF5 /* EventManager */,
@@ -340,13 +378,13 @@
 		146E2DC329C0D07300BFC757 /* TumblingTowersGameTests */ = {
 			isa = PBXGroup;
 			children = (
+				61A10F2929D30CDD000EB4B4 /* DataStructures */,
 				124B02DA29C74B9700094CF5 /* GameObject */,
 				1445F84829C71DB500F94751 /* Input */,
 				2FA2AC0129C74528001C5B7C /* GameEngine */,
 				619D449E29C62FCF00EE00CE /* FiziksEngine */,
 				146E2DC429C0D07300BFC757 /* TumblingTowersGameTests.swift */,
 				2FC7FACB29C50B4500B56850 /* ShapeRandomizerTests.swift */,
-				2FBBD79D29C6C1C100C30582 /* BiMapTests.swift */,
 				124B02DB29C74C1400094CF5 /* ViewImageManagerTests.swift */,
 			);
 			path = TumblingTowersGameTests;
@@ -457,7 +495,10 @@
 		2F7E13A429C0F044000E6FA9 /* DataStructures */ = {
 			isa = PBXGroup;
 			children = (
+				61A10F2229D30C74000EB4B4 /* Queue */,
 				2F7E13A529C0F054000E6FA9 /* BiMap.swift */,
+				61A10F2529D30CAB000EB4B4 /* LinkedList.swift */,
+				61A10F2729D30CBB000EB4B4 /* LinkedListNode.swift */,
 			);
 			path = DataStructures;
 			sourceTree = "<group>";
@@ -526,6 +567,48 @@
 				61AE15B829D18BB400D04E95 /* PowerupLineShape.swift */,
 			);
 			path = ObjectShape;
+			sourceTree = "<group>";
+		};
+		61A10F1D29D30BC8000EB4B4 /* PowerupManager */ = {
+			isa = PBXGroup;
+			children = (
+				61A10F3E29D30FB0000EB4B4 /* GamePowerupManager.swift */,
+				61A10F3929D30E92000EB4B4 /* Powerups */,
+				61A10F1E29D30BED000EB4B4 /* PowerupManager.swift */,
+				61A10F2029D30C02000EB4B4 /* Powerup.swift */,
+				61A10F3729D30DCA000EB4B4 /* PowerupDelegate.swift */,
+				61A10F4429D31357000EB4B4 /* PowerupFactory.swift */,
+				61A10F4629D31384000EB4B4 /* PowerupType.swift */,
+			);
+			path = PowerupManager;
+			sourceTree = "<group>";
+		};
+		61A10F2229D30C74000EB4B4 /* Queue */ = {
+			isa = PBXGroup;
+			children = (
+				61A10F2329D30C7F000EB4B4 /* Queue.swift */,
+			);
+			path = Queue;
+			sourceTree = "<group>";
+		};
+		61A10F2929D30CDD000EB4B4 /* DataStructures */ = {
+			isa = PBXGroup;
+			children = (
+				2FBBD79D29C6C1C100C30582 /* BiMapTests.swift */,
+				61A10F2A29D30CF0000EB4B4 /* QueueTests.swift */,
+				61A10F3329D30D0C000EB4B4 /* LinkedListTests.swift */,
+				61A10F3529D30D1C000EB4B4 /* LinkedListNodeTests.swift */,
+			);
+			path = DataStructures;
+			sourceTree = "<group>";
+		};
+		61A10F3929D30E92000EB4B4 /* Powerups */ = {
+			isa = PBXGroup;
+			children = (
+				61A10F3A29D30E9E000EB4B4 /* VinePowerup.swift */,
+				61A10F3C29D30F93000EB4B4 /* PlatformPowerup.swift */,
+			);
+			path = Powerups;
 			sourceTree = "<group>";
 		};
 		61CD55EB29C35D3900DB6000 /* FiziksBody */ = {
@@ -704,28 +787,35 @@
 				146E2DEA29C0D62800BFC757 /* InputSystem.swift in Sources */,
 				61CD55E829C35D1E00DB6000 /* PathFiziksBody.swift in Sources */,
 				146E2E1929C0E5B400BFC757 /* GameplayLevelView.swift in Sources */,
+				61A10F4129D31083000EB4B4 /* VinePowerupActivatedEvent.swift in Sources */,
 				124B02E629C9DAA200094CF5 /* EventManager.swift in Sources */,
 				146E2DE529C0D61A00BFC757 /* GameRendererDelegate.swift in Sources */,
 				146E2E0E29C0E30700BFC757 /* GameEngineObject.swift in Sources */,
 				61CD55F029C35D9600DB6000 /* CollisionMask.swift in Sources */,
 				124B02D729C567F600094CF5 /* LevelView.swift in Sources */,
+				61A10F1F29D30BED000EB4B4 /* PowerupManager.swift in Sources */,
 				2FA2AC0529C74541001C5B7C /* GameEngine.swift in Sources */,
 				2FC7FAD429C50C3C00B56850 /* ShapeRandomizer.swift in Sources */,
 				124B02D529C55F8C00094CF5 /* Level.swift in Sources */,
+				61A10F4729D31384000EB4B4 /* PowerupType.swift in Sources */,
 				124B02EF29C9ED1800094CF5 /* TumblingTowersEventIdentifier.swift in Sources */,
 				61CD55EA29C35D2C00DB6000 /* FiziksConstants.swift in Sources */,
 				124B02C329C415DC00094CF5 /* PlatformView.swift in Sources */,
 				146E2DEC29C0D62800BFC757 /* GyroInput.swift in Sources */,
 				146E2DEB29C0D62800BFC757 /* TapInput.swift in Sources */,
+				61A10F3B29D30E9E000EB4B4 /* VinePowerup.swift in Sources */,
 				146E2DB429C0D07200BFC757 /* TumblingTowersGameApp.swift in Sources */,
 				2FC7FAD229C50C2C00B56850 /* RandomNumberGeneratorWithSeed.swift in Sources */,
 				61FC030F29CC3AE100CE2CE5 /* CGPath+Dimensions.swift in Sources */,
+				61A10F2429D30C7F000EB4B4 /* Queue.swift in Sources */,
 				124B02ED29C9ED0000094CF5 /* EventIdentifier.swift in Sources */,
 				61CD55E629C35CDB00DB6000 /* FiziksEngine.swift in Sources */,
+				61A10F4529D31357000EB4B4 /* PowerupFactory.swift in Sources */,
 				2FC7FADE29C510F200B56850 /* CGPoint+arithmeticMean.swift in Sources */,
 				124B02D329C4204300094CF5 /* GameObjectPlatform.swift in Sources */,
 				61FC031729CD498400CE2CE5 /* Shape+Fill.swift in Sources */,
 				61FC031129CC483400CE2CE5 /* CGPath+Rotate.swift in Sources */,
+				61A10F2829D30CBB000EB4B4 /* LinkedListNode.swift in Sources */,
 				61AE15B329D16DD500D04E95 /* BlockPlacedEvent.swift in Sources */,
 				61FC031529CCBFB100CE2CE5 /* CGPoint+Arithmetic.swift in Sources */,
 				61FC031329CCBDE300CE2CE5 /* PathViewShape.swift in Sources */,
@@ -736,14 +826,18 @@
 				2F469D5829D2AB2700C4152E /* FiziksScene.swift in Sources */,
 				124B02C129C415CC00094CF5 /* BlockView.swift in Sources */,
 				61AE15B929D18BB400D04E95 /* PowerupLineShape.swift in Sources */,
+				61A10F2129D30C02000EB4B4 /* Powerup.swift in Sources */,
 				2F469D5629D2AB1500C4152E /* FiziksContactDelegate.swift in Sources */,
 				146E2E0F29C0E30700BFC757 /* Platform.swift in Sources */,
 				61AE15B729D18B2D00D04E95 /* PowerupLine.swift in Sources */,
+				61A10F3F29D30FB0000EB4B4 /* GamePowerupManager.swift in Sources */,
+				61A10F3D29D30F93000EB4B4 /* PlatformPowerup.swift in Sources */,
 				619D44C329C6F3AE00EE00CE /* PathObjectShape.swift in Sources */,
 				124B02CF29C41FD000094CF5 /* GameObjectBlock.swift in Sources */,
 				146E2DFE29C0E05A00BFC757 /* TetrisShape.swift in Sources */,
 				146E2E0829C0E2FE00BFC757 /* FiziksBody.swift in Sources */,
 				61A10F1C29D2EB4B000EB4B4 /* BlockTouchedPowerupLineEvent.swift in Sources */,
+				61A10F4329D310CA000EB4B4 /* PlatformPowerupActivatedEvent.swift in Sources */,
 				61CD55EE29C35D8A00DB6000 /* CategoryMask.swift in Sources */,
 				2F7E13A629C0F054000E6FA9 /* BiMap.swift in Sources */,
 				146E2E1729C0E33900BFC757 /* CGPoint+Hashable.swift in Sources */,
@@ -756,8 +850,10 @@
 				146E2DF129C0D62F00BFC757 /* Point.swift in Sources */,
 				146E2DE629C0D61A00BFC757 /* MainGameManager.swift in Sources */,
 				146E2DF029C0D62F00BFC757 /* Vector.swift in Sources */,
+				61A10F3829D30DCA000EB4B4 /* PowerupDelegate.swift in Sources */,
 				124B02F529C9F10300094CF5 /* TumblingTowersNotification.swift in Sources */,
 				619D44C029C6F35300EE00CE /* ObjectShape.swift in Sources */,
+				61A10F2629D30CAB000EB4B4 /* LinkedList.swift in Sources */,
 				14C53B2629C5E9D10035EC17 /* GameUpdater.swift in Sources */,
 				146E2DE429C0D61A00BFC757 /* GameEngineManager.swift in Sources */,
 				124B02F729C9F54B00094CF5 /* NotificationName.swift in Sources */,
@@ -772,9 +868,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				619D44BE29C6A77500EE00CE /* BiMap.swift in Sources */,
 				619D44A429C630FD00EE00CE /* FiziksBody.swift in Sources */,
 				619D44AE29C6310100EE00CE /* FiziksConstants.swift in Sources */,
+				61A10F3029D30D03000EB4B4 /* LinkedList.swift in Sources */,
 				619D44B729C6986000EE00CE /* PathFiziksBodyTests.swift in Sources */,
 				2FC7FACC29C50B4500B56850 /* ShapeRandomizerTests.swift in Sources */,
 				2FBBD79E29C6C1C100C30582 /* BiMapTests.swift in Sources */,
@@ -788,13 +884,19 @@
 				124B02DC29C74C1400094CF5 /* ViewImageManagerTests.swift in Sources */,
 				124B02E229C754F400094CF5 /* LevelTests.swift in Sources */,
 				619D44B529C6972000EE00CE /* FiziksSceneTests.swift in Sources */,
+				61A10F2F29D30D03000EB4B4 /* BiMap.swift in Sources */,
+				61A10F3129D30D03000EB4B4 /* Queue.swift in Sources */,
+				61A10F3429D30D0C000EB4B4 /* LinkedListTests.swift in Sources */,
+				61A10F3229D30D03000EB4B4 /* LinkedListNode.swift in Sources */,
 				619D44B029C6312100EE00CE /* MockFiziksBody.swift in Sources */,
 				619D44AB29C6310100EE00CE /* FiziksEngine.swift in Sources */,
 				619D44AD29C6310100EE00CE /* GameFiziksEngine.swift in Sources */,
+				61A10F2B29D30CF0000EB4B4 /* QueueTests.swift in Sources */,
 				1445F84A29C71DC900F94751 /* TapInputTests.swift in Sources */,
 				146E2DC529C0D07300BFC757 /* TumblingTowersGameTests.swift in Sources */,
 				2F469D5C29D2ABD900C4152E /* MockFIziksSceneUpdateDelegate.swift in Sources */,
 				124B02E029C74F3900094CF5 /* GameObjectPlatformTests.swift in Sources */,
+				61A10F3629D30D1C000EB4B4 /* LinkedListNodeTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
