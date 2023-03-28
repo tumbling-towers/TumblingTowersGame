@@ -90,6 +90,10 @@ extension GameFiziksEngine: FiziksEngine {
     func setWorldGravity(to newValue: CGVector) {
         fiziksScene.gravity = newValue
     }
+    
+    func setIsRotationAllowed(_ fiziksBody: FiziksBody, to isAllowed: Bool) {
+        fiziksBody.allowsRotation = isAllowed
+    }
 
     private func getSKPhysicsBody(of fiziksBody: FiziksBody) -> SKPhysicsBody? {
         return fiziksBody.fiziksShapeNode.physicsBody

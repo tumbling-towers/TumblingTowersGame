@@ -8,7 +8,7 @@
 import CoreGraphics
 import Foundation
 
-protocol GameEngineObject {
+protocol GameEngineObject: AnyObject {
     var fiziksBody: FiziksBody { get }
 
     var shape: ObjectShape { get }

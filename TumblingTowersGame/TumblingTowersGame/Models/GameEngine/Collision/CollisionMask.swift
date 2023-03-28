@@ -9,7 +9,8 @@ import Foundation
 
 struct CollisionMask {
     static let none: BitMask = 0
-    static let block: BitMask = CategoryMask.block | CategoryMask.platform
+    static let block: BitMask = CategoryMask.block | CategoryMask.platform | CategoryMask.levelBoundary
     static let platform: BitMask = CategoryMask.platform | CategoryMask.block
+    static let levelBoundary: BitMask = CategoryMask.levelBoundary | CategoryMask.block
     static let max: BitMask = 0xFFFFFFFF
 }

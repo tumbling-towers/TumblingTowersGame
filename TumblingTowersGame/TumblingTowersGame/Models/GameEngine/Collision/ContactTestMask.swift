@@ -11,6 +11,7 @@ import Foundation
 struct ContactTestMask {
     static let none: BitMask = 0
     static let block: BitMask = CategoryMask.block | CategoryMask.platform
+    static let powerupLine = CategoryMask.powerupLine
     static let platform: BitMask = CategoryMask.platform | CategoryMask.block
     static let max: BitMask = 0xFFFFFFFF
 }

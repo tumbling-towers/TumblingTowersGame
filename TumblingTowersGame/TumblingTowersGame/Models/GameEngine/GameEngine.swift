@@ -9,14 +9,74 @@ import Foundation
 import SwiftUI
 
 class GameEngine {
-
-    private weak var gameRenderer: GameRendererDelegate?
-
+    
+    static let defaultSeed: Int = 1
+    
     static let defaultBlockVelocity = CGVector(dx: 0, dy: -5)
-
+    
+    static let defaultPlatformBoundaryBuffer: Double = 200
+    
+    static let defaultPowerupHeightStep: Double = 50
+    
+    static let defaultInitialPowerupHeight: Double = 20
+    
+    static let defaultPowerupLineDimensions: CGSize = CGSize(width: 400, height: 5)
+    
     let levelDimensions: CGRect
-    var gameEngineObjects: [any GameEngineObject]
+    
+    var gameObjects: [any GameEngineObject]
+    
     let fiziksEngine: FiziksEngine
+    
+    var eventManager: EventManager?
+    
+    var powerupLine: PowerupLine?
+    
+    var platform: Platform? {
+        didSet {
+            if let platform = platform {
+                // boundaries set to have a buffer to allow blocks to fall off or creative gameplay
+                
+                let leftPosition = CGPoint(x: platform.position.x - GameEngine.defaultPlatformBoundaryBuffer, y: levelDimensions.midY)
+                let rightPosition = CGPoint(x: platform.position.x + GameEngine.defaultPlatformBoundaryBuffer, y: levelDimensions.midY)
+                
+                // set up boundaries with buffer relative to platform
+                rightBoundary = createLevelBoundary(at: rightPosition)
+                leftBoundary = createLevelBoundary(at: leftPosition)
+                
+                // set up initial powerup line relative to platform
+                let centerPosition = CGPoint(x: platform.position.x,
+                                             y: platform.position.y + platform.shape.height / 2 + GameEngine.defaultInitialPowerupHeight)
+                
+                powerupLine = createPowerupLine(at: centerPosition)
+            }
+            
+        }
+    }
+    
+    var leftBoundary: FiziksBody? {
+        didSet {
+            // remove the old boundary
+            if let oldValue = oldValue {
+                fiziksEngine.delete(oldValue)
+            }
+        }
+    }
+    
+    var rightBoundary: FiziksBody? {
+        didSet {
+            // remove the old boundary
+            if let oldValue = oldValue {
+                fiziksEngine.delete(oldValue)
+            }
+        }
+    }
+    
+    // TODO: Add random generation of platform in the future
+    private var rng: RandomNumberGeneratorWithSeed
+    
+    private weak var gameRenderer: GameRendererDelegate?
+    
     private var shapeRandomizer: ShapeRandomizer
 
     private var currentlyMovingBlock: Block? {
@@ -31,33 +91,11 @@ class GameEngine {
         CGPoint(x: levelDimensions.width / 2,
                 y: levelDimensions.height + 30)
     }
-
-    // TODO: expose API to allow adding of platforms instead of hard-coded platform
-    private var platformPoints: [CGPoint] {
-        let bottom: CGFloat = 20
-        let top: CGFloat = bottom + 100
-        let left: CGFloat = 0
-        let right: CGFloat = levelDimensions.width
-        return [CGPoint(x: left, y: top),
-                CGPoint(x: right, y: top),
-                CGPoint(x: right, y: bottom),
-                CGPoint(x: left, y: bottom)]
-        /*
-        let bottom: CGFloat = 20
-        let top: CGFloat = bottom + 30
-        let left: CGFloat = levelDimensions.width / 2 - 100
-        let right: CGFloat = levelDimensions.width / 2 + 100
-        return [CGPoint(x: left, y: top),
-                CGPoint(x: right, y: top),
-                CGPoint(x: right, y: bottom),
-                CGPoint(x: left, y: bottom)]
-         */
-    }
-
-    init(levelDimensions: CGRect) {
+    
+    init(levelDimensions: CGRect, seed: Int = GameEngine.defaultSeed) {
         self.levelDimensions = levelDimensions
         // Use leveldimensions to set size of level if needed, otherwise remove
-        self.gameEngineObjects = []
+        self.gameObjects = []
 
         // FiziksBodies will collide with walls at the sides,
         // but there is 100px above and below
@@ -70,10 +108,10 @@ class GameEngine {
 
         // TODO: pass in seed
         self.shapeRandomizer = ShapeRandomizer(possibleShapes: TetrisType.allCases, seed: 1)
+        
+        self.rng = RandomNumberGeneratorWithSeed(seed: seed)
 
         fiziksEngine.fiziksContactDelegate = self
-
-        insertInitialPlatform()
     }
 
     func setRenderer(gameRenderer: GameRendererDelegate) {
@@ -94,13 +132,21 @@ class GameEngine {
         // MARK: Platform is always sampleplatform for now
         var newLevel = Level(blocks: [], platform: .samplePlatform)
 
-        for object in gameEngineObjects {
+        for object in gameObjects {
+            if isOutOfBounds(object) {
+                // TODO: Emit event that a block has gone out of bounds.
+                removeObject(object: object)
+                
+                if object === currentlyMovingBlock {
+                    currentlyMovingBlock = nil
+                }
+            }
+            
             if object.fiziksBody.categoryBitMask == CategoryMask.block {
                 let blockPosition = object.position
                 // TODO: more elegant way besides downcasting?
                 guard let block = object as? Block, let shape = block.shape as? TetrisShape else { continue }
-                newLevel.add(block: GameObjectBlock(position: blockPosition, path: shape.path, rotation: block.rotation)
-                )
+                newLevel.add(block: GameObjectBlock(position: blockPosition, path: shape.path, rotation: block.rotation))
             }
         }
 
@@ -115,9 +161,11 @@ class GameEngine {
     @discardableResult
     func insertNewBlock() -> Block {
         let shape = shapeRandomizer.getShape()
-        // TODO: Here for testing individual shapes rendering - remove once not needed
-        // let shape = TetrisShape(type: .I)
         let insertedBlock = addBlock(ofShape: shape, at: blockInsertionPoint)
+        
+        // initially inserted blocks cannot rotate from collisions
+        insertedBlock.fiziksBody.allowsRotation = false
+        
         currentlyMovingBlock = insertedBlock
         return insertedBlock
     }
@@ -150,18 +198,44 @@ class GameEngine {
         }
         fiziksBodyToMove.zRotation += CGFloat.pi / 2
     }
+    
+    func setPlatform(position: CGPoint) {
+        // TODO: Add random generation of platform sizes here
+        let width = 200
+        let height = 100
+        
+        let points = [CGPoint(x: 0, y: height),
+                      CGPoint(x: width, y: height),
+                      CGPoint(x: width, y: 0),
+                      CGPoint(x: 0, y: 0)]
+        
+        
+        let path = CGPath.create(from: points)
 
-    // TODO: this should eventually become private as we do not want the player
-    // adding blocks
+        let insertedPlatform = createPlatform(path: path, at: position)
+        
+        platform = insertedPlatform
+
+        gameObjects.append(insertedPlatform)
+        fiziksEngine.add(insertedPlatform.fiziksBody)
+        
+        insertedPlatform.fiziksBody.affectedByGravity = false
+    }
+    
     @discardableResult
     private func addBlock(ofShape shape: TetrisShape, at position: CGPoint) -> Block {
         let newBlock = createBlock(ofShape: shape, at: position)
-        gameEngineObjects.append(newBlock)
+        gameObjects.append(newBlock)
         fiziksEngine.add(newBlock.fiziksBody)
         newBlock.fiziksBody.affectedByGravity = false
         newBlock.fiziksBody.velocity = .zero
         newBlock.fiziksBody.applyImpulse(GameEngine.defaultBlockVelocity)
         return newBlock
+    }
+    
+    private func removeObject(object: GameEngineObject) {
+        gameObjects.removeAll(where: { $0 === object })
+        fiziksEngine.delete(object.fiziksBody)
     }
 
     // MARK: private methods
@@ -190,17 +264,58 @@ class GameEngine {
         let newPlatform = Platform(fiziksBody: newFiziksBody, shape: PlatformShape(path: path))
         return newPlatform
     }
-
-    private func insertInitialPlatform() {
-        let path = CGPath.create(from: platformPoints)
-        let center = CGPoint.arithmeticMean(points: platformPoints)
-        let platformPosition = CGPoint(x: center.x - 400, y: center.y)
-
-        let insertedPlatform = createPlatform(path: path, at: platformPosition)
-
-        gameEngineObjects.append(insertedPlatform)
-        fiziksEngine.add(insertedPlatform.fiziksBody)
-        insertedPlatform.fiziksBody.affectedByGravity = false
+    
+    private func isOutOfBounds(_ obj: any GameEngineObject) -> Bool {
+        let width = obj.shape.width
+        let height = obj.shape.height
+        let buffer = max(width, height)
+        let pos = obj.position
+        // doesn't include being above the level dimensions (so that objects can spawn from above)
+        return pos.x - buffer > levelDimensions.maxX || pos.x + buffer < levelDimensions.minX || pos.y + buffer < 0
+    }
+    
+    /// Creates  a FiziksBody to represent the level boundary.
+    private func createLevelBoundary(at position: CGPoint) -> FiziksBody {
+        let levelBoundaryWidth: CGFloat = 5
+        let position = CGPoint(x: position.x - levelBoundaryWidth / 2, y: position.y - levelBoundaryWidth / 2)
+        let rect = CGRect(origin: position, size: CGSize(width: levelBoundaryWidth, height: levelDimensions.height))
+        
+        let path = CGPath.create(from: rect, centered: true)
+        
+        let fiziksBody = PathFiziksBody(path: path,
+                                        position: position,
+                                        categoryBitMask: CategoryMask.levelBoundary,
+                                        collisionBitMask: CollisionMask.levelBoundary)
+        fiziksEngine.add(fiziksBody)
+        fiziksBody.isDynamic = false
+        return fiziksBody
+    }
+    
+    private func updatePowerupHeight() {
+        guard let powerupLine = powerupLine else { return }
+        let position = powerupLine.position
+        
+        powerupLine.fiziksBody.position = position.add(by: CGVector(dx: 0, dy: GameEngine.defaultPowerupHeightStep))
+    }
+    
+    private func createPowerupLine(at pos: CGPoint) -> PowerupLine {
+        let rect = CGRect(x: pos.x,
+                          y: pos.y,
+                          width: GameEngine.defaultPowerupLineDimensions.width,
+                          height: GameEngine.defaultPowerupLineDimensions.height)
+        
+        let path = CGPath.create(from: rect, centered: true)
+        
+        let newPowerupLine = PowerupLine(fiziksBody: PathFiziksBody(path: path,
+                                                                    position: pos,
+                                                                    affectedByGravity: false,
+                                                                    categoryBitMask: PowerupLine.categoryBitMask,
+                                                                    collisionBitMask: PowerupLine.collisionBitMask,
+                                                                    contactTestBitMask: PowerupLine.contactTestBitMask
+                                                                   ), shape: PowerupLineShape(path: path))
+        fiziksEngine.add(newPowerupLine.fiziksBody)
+        
+        return newPowerupLine
     }
     
     private func moveCMB(by vector: CGVector) {
@@ -216,20 +331,49 @@ class GameEngine {
 
 extension GameEngine: FiziksContactDelegate {
     func didBegin(_ contact: FiziksContact) {
-        // Once Block collides with another block/platform, Block should be affected by gravity
-        guard let currentlyMovingFiziksBody = currentlyMovingBlock?.fiziksBody else {
-            return
-        }
-        let currentlyMovingFiziksBodyId = ObjectIdentifier(currentlyMovingFiziksBody)
-        if currentlyMovingFiziksBodyId == ObjectIdentifier(contact.bodyA)
-            || currentlyMovingFiziksBodyId == ObjectIdentifier(contact.bodyB) {
-            contact.bodyA.affectedByGravity = true
-            contact.bodyB.affectedByGravity = true
-            currentlyMovingBlock = nil
+        
+        // check whether it is contact between currently moving block & something else (not level boundaries)
+        if let currentBlock = currentlyMovingBlock {
+            if contact.contains(body: currentBlock.fiziksBody)
+                && !contact.contains(body: leftBoundary)
+                && !contact.contains(body: rightBoundary) {
+                handlePlaceCMB()
+                checkAndHandleContactPowerupLine(currentBlock)
+            }
         }
     }
 
     func didEnd(_ contact: FiziksContact) {
         // pass
+    }
+    
+    
+    private func checkAndHandleContactPowerupLine(_ currentBlock: Block) {
+        if let powerupLine = powerupLine {
+            let pos = currentBlock.position
+            let height = currentBlock.shape.height
+            
+            if pos.y + height / 2 > powerupLine.position.y
+                && pos.y - height / 2 < powerupLine.position.y {
+                print("touched powerup line")
+                eventManager?.postEvent(BlockTouchedPowerupLineEvent())
+                updatePowerupHeight()
+            }
+        }
+    }
+    
+    func handlePlaceCMB() {
+        // allow gravity and rotation by collisions
+        currentlyMovingBlock?.fiziksBody.affectedByGravity = true
+        currentlyMovingBlock?.fiziksBody.allowsRotation = true
+        
+        // update collsion and contact mask
+        currentlyMovingBlock?.fiziksBody.collisionBitMask = Block.collisionBitMask
+        currentlyMovingBlock?.fiziksBody.contactTestBitMask = Block.contactTestBitMask
+        
+        print("block placed")
+        eventManager?.postEvent(BlockPlacedEvent())
+        
+        self.currentlyMovingBlock = nil
     }
 }
