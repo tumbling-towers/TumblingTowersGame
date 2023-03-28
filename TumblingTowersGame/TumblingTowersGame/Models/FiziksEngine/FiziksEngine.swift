@@ -10,7 +10,7 @@ import SpriteKit
 
 protocol FiziksEngine: AnyObject {
     var fiziksContactDelegate: FiziksContactDelegate? { get set }
-    
+
     func activatePhysics()
 
     // FiziksBody related functions

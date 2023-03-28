@@ -15,22 +15,22 @@ class GameEngineManager: ObservableObject {
     @Published var platformPosition: CGPoint = GameObjectPlatform.samplePlatform.position
     var referenceBox: CGRect? {
         guard let refPoints = gameEngine.getReferencePoints() else { return nil }
-        
+
         let width = refPoints.right.x - refPoints.left.x
         return CGRect(x: refPoints.left.x, y: 0, width: width, height: 5000)
     }
-    
+
     var level: Level = Level.sampleLevel
     @Published var levelBlocks: [GameObjectBlock] = [.sampleBlock]
     @Published var levelPlatform: GameObjectPlatform = .samplePlatform
-    
+
     private var gameEngine: GameEngine
     private var lastTapLocation = CGPoint(x: 0, y: 0)
     private weak var mainGameMgr: MainGameManager?
 
     var inputSystem: InputSystem
     private var gameUpdater: GameUpdater?
-    
+
     var levelDimensions: CGRect
 
     init(levelDimensions: CGRect) {
@@ -41,7 +41,7 @@ class GameEngineManager: ObservableObject {
 
         gameEngine.insertNewBlock()
     }
-    
+
     func tapEvent(at location: CGPoint) {
         lastTapLocation = location
         // MARK: Debug print
@@ -49,7 +49,7 @@ class GameEngineManager: ObservableObject {
 
         inputSystem.tapEvent(at: adjustCoordinates(for: location))
     }
-    
+
     func resetInput() {
         inputSystem.resetInput()
     }
@@ -73,23 +73,23 @@ class GameEngineManager: ObservableObject {
         inputSystem.start(levelWidth: mainGameMgr.deviceWidth, levelHeight: mainGameMgr.deviceHeight)
 
         self.mainGameMgr = mainGameMgr
-        
+
         gameUpdater?.createCADisplayLink()
-        
+
         platformPosition = CGPoint(x: mainGameMgr.deviceWidth/2, y: mainGameMgr.deviceHeight-100)
     }
-    
+
     func rotateCurrentBlock() {
         gameEngine.rotateClockwise()
     }
-    
+
     /// GameEngine outputs coordinates with the origin at the bottom-left.
     /// This method converts it such that the origin is at the top-left.
     private func adjustCoordinates(for point: CGPoint) -> CGPoint {
         let newPoint = CGPoint(x: point.x, y: levelDimensions.height - point.y)
         return newPoint
     }
-    
+
     private func transformRenderable(for block: GameObjectBlock) -> GameObjectBlock {
         // Flips the block vertically (mirror image) due to difference in coordinate system
         let path = UIBezierPath(cgPath: block.path)
@@ -125,4 +125,3 @@ extension GameEngineManager: GameRendererDelegate {
         inputSystem.getInput()
     }
 }
-

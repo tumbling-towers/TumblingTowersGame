@@ -7,16 +7,15 @@
 
 import Foundation
 
-
 class TumblingTowersEvent: Event {
     static var identifier: EventIdentifier {
         TumblingTowersEventIdentifier(Self.self)
     }
-    
+
     var identifier: EventIdentifier {
         Self.identifier
     }
-    
+
     func toNotification() -> TumblingTowersNotification {
         TumblingTowersNotification(name: self.identifier.notificationName, object: nil, userInfo: ["event": self])
     }

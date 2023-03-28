@@ -10,13 +10,13 @@ import SpriteKit
 
 class GameFiziksEngine: NSObject {
     let fiziksScene: FiziksScene
-    
+
     // TODO: Potentially refactor double lookup to double delegates to synchronise position updates between FiziksBody & SKNode.
     var fiziksBodyIdToSKNode: BiMap<ObjectIdentifier, SKNode>
     var fiziksBodyIdToFiziksBody: [ObjectIdentifier: FiziksBody]
 
     weak var fiziksContactDelegate: FiziksContactDelegate?
-    
+
     init(levelDimensions: CGRect, boundingRect: CGRect) {
         let size = CGSize(width: levelDimensions.width, height: levelDimensions.height)
         self.fiziksScene = FiziksScene(size: size,
@@ -42,7 +42,7 @@ extension GameFiziksEngine: FiziksEngine {
     func activatePhysics() {
         fiziksScene.view?.showsPhysics = true
     }
-    
+
     func contains(_ fiziksBody: FiziksBody) -> Bool {
         let bodyId = ObjectIdentifier(fiziksBody)
         return fiziksBodyIdToSKNode[key: bodyId] != nil
@@ -159,7 +159,7 @@ extension GameFiziksEngine: FiziksEngine {
             fiziksBody.zRotation = skNode.zRotation
         }
     }
-    
+
     private func createSKPhysicsBody(for fiziksBody: FiziksBody) -> SKPhysicsBody {
         let physicsBody = fiziksBody.createSKPhysicsBody()
         physicsBody.isDynamic = fiziksBody.isDynamic

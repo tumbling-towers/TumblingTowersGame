@@ -10,9 +10,9 @@ import Foundation
 
 protocol GameEngineObject {
     var fiziksBody: FiziksBody { get }
-    
+
     var shape: ObjectShape { get }
-    
+
     var rotation: Double { get }
 
     static var categoryBitmask: BitMask { get }
@@ -26,7 +26,7 @@ extension GameEngineObject {
     var position: CGPoint {
         fiziksBody.position
     }
-    
+
     var zRotation: CGFloat {
         fiziksBody.zRotation
     }

@@ -10,9 +10,9 @@ import Foundation
 
 class Block: GameEngineObject {
     let fiziksBody: FiziksBody
-    
+
     let shape: ObjectShape
-    
+
     var rotation: Double {
         fiziksBody.zRotation
     }

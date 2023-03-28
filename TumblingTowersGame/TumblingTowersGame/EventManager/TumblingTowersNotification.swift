@@ -10,11 +10,11 @@ import NotificationCenter
 
 class TumblingTowersNotification {
     let notification: Notification
-    
+
     init(name: NotificationName, object: Any?, userInfo: [AnyHashable: Any]?) {
         self.notification = Notification(name: name.name, object: nil, userInfo: userInfo)
     }
-    
+
     func toNotification() -> Notification {
         return notification
     }

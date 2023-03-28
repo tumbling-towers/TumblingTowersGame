@@ -9,7 +9,7 @@ import Foundation
 
 class NotificationName {
     var name: Notification.Name
-    
+
     init(_ name: String) {
         self.name = Notification.Name(name)
     }

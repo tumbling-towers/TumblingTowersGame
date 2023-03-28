@@ -11,15 +11,15 @@ import SwiftUI
 class GameEngine {
 
     private weak var gameRenderer: GameRendererDelegate?
-    
+
     static let defaultBlockVelocity = CGVector(dx: 0, dy: -5)
-    
+
     let levelDimensions: CGRect
-    
+
     var gameObjects: [any GameEngineObject]
     let fiziksEngine: FiziksEngine
     private var shapeRandomizer: ShapeRandomizer
-    
+
     private var currentlyMovingBlock: Block? {
         didSet {
             if currentlyMovingBlock == nil {
@@ -27,7 +27,7 @@ class GameEngine {
             }
         }
     }
-    
+
     private var blockInsertionPoint: CGPoint {
         CGPoint(x: levelDimensions.width / 2,
                 y: levelDimensions.height + 30)
@@ -53,7 +53,7 @@ class GameEngine {
                 CGPoint(x: left, y: bottom)]
          */
     }
-    
+
     init(levelDimensions: CGRect) {
         self.levelDimensions = levelDimensions
         // Use leveldimensions to set size of level if needed, otherwise remove
@@ -71,14 +71,14 @@ class GameEngine {
         self.shapeRandomizer = ShapeRandomizer(possibleShapes: TetrisType.allCases, seed: 1)
 
         fiziksEngine.fiziksContactDelegate = self
-        
+
         insertInitialPlatform()
     }
 
     func setRenderer(gameRenderer: GameRendererDelegate) {
         self.gameRenderer = gameRenderer
     }
-    
+
     func getReferencePoints() -> (left: CGPoint, right: CGPoint)? {
         guard let block = currentlyMovingBlock, let shape = currentlyMovingBlock?.shape as? TetrisShape else { return nil }
         let movingGameObjectBlock = GameObjectBlock(position: block.position, path: shape.path, rotation: block.rotation)
@@ -87,7 +87,6 @@ class GameEngine {
         let yPos: Double = 0
         return (left: CGPoint(x: xPosLeft, y: yPos), right: CGPoint(x: xPosRight, y: yPos))
     }
-    
 
     // This update method is called by the GameUpdater every frame.
     func update() {
@@ -111,7 +110,7 @@ class GameEngine {
             moveSideways(by: currInput.vector)
         }
     }
-    
+
     @discardableResult
     func insertNewBlock() -> Block {
         let shape = shapeRandomizer.getShape()
@@ -121,7 +120,7 @@ class GameEngine {
         currentlyMovingBlock = insertedBlock
         return insertedBlock
     }
-    
+
     /// Slides the currently-moving block only on the x-axis.
     func moveSideways(by displacement: CGVector) {
         guard let fiziksBodyToMove = currentlyMovingBlock?.fiziksBody else {
@@ -156,7 +155,7 @@ class GameEngine {
         }
         fiziksEngine.rotate(fiziksBodyToMove, by: Double.pi / 2)
     }
-    
+
     // TODO: this should eventually become private as we do not want the player
     // adding blocks
     @discardableResult
@@ -193,7 +192,7 @@ class GameEngine {
         let newPlatform = Platform(fiziksBody: newFiziksBody, shape: PlatformShape(path: path))
         return newPlatform
     }
-    
+
     private func insertInitialPlatform() {
         let path = CGPath.create(from: platformPoints)
         let center = CGPoint.arithmeticMean(points: platformPoints)

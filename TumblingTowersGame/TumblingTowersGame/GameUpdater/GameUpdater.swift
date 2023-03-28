@@ -19,7 +19,6 @@ class GameUpdater {
     private var frameCount = 0
     private weak var gameRenderer: GameRendererDelegate?
 
-    
     init(gameEngine: GameEngine, gameRenderer: GameRendererDelegate) {
         self.gameEngine = gameEngine
         self.gameRenderer = gameRenderer
@@ -60,7 +59,7 @@ class GameUpdater {
 //            updateGameEvents()
             gameEngine.update()
 
-            if (frameCount.isMultiple(of: 60)) {
+            if frameCount.isMultiple(of: 60) {
                 // Things to do every 1s
                 // Step every 1s instead (Temporary so that it doesnt keep printing)
                 step()

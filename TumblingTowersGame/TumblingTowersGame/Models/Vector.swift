@@ -90,4 +90,3 @@ extension Vector: Equatable {
         lhs.x == rhs.x && lhs.y == rhs.y
     }
 }
-

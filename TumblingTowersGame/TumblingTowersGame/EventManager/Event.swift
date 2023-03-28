@@ -10,7 +10,6 @@ import Foundation
 protocol Event {
     static var identifier: EventIdentifier { get }
     var identifier: EventIdentifier { get }
-    
+
     func toNotification() -> TumblingTowersNotification
 }
-

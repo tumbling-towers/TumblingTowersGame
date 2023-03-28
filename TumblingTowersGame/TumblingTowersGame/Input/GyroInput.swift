@@ -14,7 +14,7 @@ class GyroInput: InputSystem {
     private var motionManager: CMMotionManager
 
     private var inputVal = InputType.NONE
-    
+
     // TODO: Allow for sensitivity adjustment?
     let sensitivity: Double = 5
 
@@ -58,10 +58,10 @@ class GyroInput: InputSystem {
     }
 
     func tapEvent(at: CGPoint) {
-        
+
     }
-    
+
     func resetInput() {
-        
+
     }
 }

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct PlatformView: View {
     @EnvironmentObject var gameEngineMgr: GameEngineManager
-    
+
     var body: some View {
         Image(ViewImageManager.platformImage)
             .resizable()

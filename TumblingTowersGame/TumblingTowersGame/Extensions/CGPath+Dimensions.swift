@@ -12,7 +12,7 @@ extension CGPath {
     var height: Double {
         Double(self.boundingBox.height)
     }
-    
+
     var width: Double {
         Double(self.boundingBox.width)
     }
