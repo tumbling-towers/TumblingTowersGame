@@ -61,15 +61,14 @@ class GameEngineManager: ObservableObject {
         return CGRect(x: refPoints.left.x, y: 0, width: width, height: 3000)
     }
 
-    init(levelDimensions: CGRect) {
+    init(levelDimensions: CGRect, eventManager: EventManager) {
         self.levelDimensions = levelDimensions
         self.gameEngine = GameEngine(levelDimensions: levelDimensions)
+        self.eventManager = eventManager
         
         gameEngine.eventManager = eventManager
 
-        inputSystem = GyroInput()
-
-        gameEngine.insertNewBlock()
+        inputSystem = TapInput()
     }
 
     func tapEvent(at location: CGPoint) {
@@ -103,9 +102,16 @@ class GameEngineManager: ObservableObject {
         inputSystem.start(levelWidth: mainGameMgr.deviceWidth, levelHeight: mainGameMgr.deviceHeight)
 
         self.mainGameMgr = mainGameMgr
-        
+    }
+
+    func startGame() {
+        // set up game in game engine
+        gameEngine.startGame()
+
         // set up initial platform
-        platformPosition = CGPoint(x: mainGameMgr.deviceWidth/2, y: 100)
+        if let mainGameMgr = mainGameMgr {
+            platformPosition = CGPoint(x: mainGameMgr.deviceWidth/2, y: 100)
+        }
     }
 
     func rotateCurrentBlock() {

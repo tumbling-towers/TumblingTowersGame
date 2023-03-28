@@ -54,6 +54,9 @@
 		146E2E1729C0E33900BFC757 /* CGPoint+Hashable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146E2E1529C0E33900BFC757 /* CGPoint+Hashable.swift */; };
 		146E2E1929C0E5B400BFC757 /* GameplayLevelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146E2E1829C0E5B400BFC757 /* GameplayLevelView.swift */; };
 		14C53B2629C5E9D10035EC17 /* GameUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C53B2529C5E9D10035EC17 /* GameUpdater.swift */; };
+		14C6732029D366D300D8DF78 /* MainMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C6731F29D366D300D8DF78 /* MainMenuView.swift */; };
+		14C6732229D368C900D8DF78 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C6732129D368C900D8DF78 /* Constants.swift */; };
+		14C6732429D36AB100D8DF78 /* GameModeSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C6732329D36AB100D8DF78 /* GameModeSelectView.swift */; };
 		14DAFDF729CE3146003BE140 /* SoundSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DAFDF629CE3146003BE140 /* SoundSystem.swift */; };
 		2F469D5129D2AA3200C4152E /* CGPath+Create.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F469D5029D2AA3200C4152E /* CGPath+Create.swift */; };
 		2F469D5529D2AB1500C4152E /* FiziksContact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F469D5329D2AB1500C4152E /* FiziksContact.swift */; };
@@ -190,6 +193,9 @@
 		146E2E1529C0E33900BFC757 /* CGPoint+Hashable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGPoint+Hashable.swift"; sourceTree = "<group>"; };
 		146E2E1829C0E5B400BFC757 /* GameplayLevelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameplayLevelView.swift; sourceTree = "<group>"; };
 		14C53B2529C5E9D10035EC17 /* GameUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GameUpdater.swift; path = TumblingTowersGame/GameUpdater/GameUpdater.swift; sourceTree = SOURCE_ROOT; };
+		14C6731F29D366D300D8DF78 /* MainMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuView.swift; sourceTree = "<group>"; };
+		14C6732129D368C900D8DF78 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		14C6732329D36AB100D8DF78 /* GameModeSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModeSelectView.swift; sourceTree = "<group>"; };
 		14DAFDF629CE3146003BE140 /* SoundSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundSystem.swift; sourceTree = "<group>"; };
 		2F469D5029D2AA3200C4152E /* CGPath+Create.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGPath+Create.swift"; sourceTree = "<group>"; };
 		2F469D5329D2AB1500C4152E /* FiziksContact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiziksContact.swift; sourceTree = "<group>"; };
@@ -410,6 +416,7 @@
 				146E2E0429C0E2D800BFC757 /* FiziksEngine */,
 				146E2DEE29C0D62F00BFC757 /* Point.swift */,
 				146E2DED29C0D62F00BFC757 /* Vector.swift */,
+				14C6732129D368C900D8DF78 /* Constants.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -436,6 +443,8 @@
 				124B02C229C415DC00094CF5 /* PlatformView.swift */,
 				61FC031229CCBDE300CE2CE5 /* PathViewShape.swift */,
 				61AE15B429D1786700D04E95 /* PowerupLineView.swift */,
+				14C6731F29D366D300D8DF78 /* MainMenuView.swift */,
+				14C6732329D36AB100D8DF78 /* GameModeSelectView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -795,6 +804,7 @@
 			files = (
 				124B02E829C9DABA00094CF5 /* TumblingTowersEventManager.swift in Sources */,
 				146E2DB629C0D07200BFC757 /* ContentView.swift in Sources */,
+				14C6732429D36AB100D8DF78 /* GameModeSelectView.swift in Sources */,
 				146E2DEA29C0D62800BFC757 /* InputSystem.swift in Sources */,
 				61CD55E829C35D1E00DB6000 /* PathFiziksBody.swift in Sources */,
 				146E2E1929C0E5B400BFC757 /* GameplayLevelView.swift in Sources */,
@@ -858,6 +868,7 @@
 				2F469D5529D2AB1500C4152E /* FiziksContact.swift in Sources */,
 				124B02D929C568FE00094CF5 /* BackgroundView.swift in Sources */,
 				61CD55F229C35DA700DB6000 /* ContactTestMask.swift in Sources */,
+				14C6732229D368C900D8DF78 /* Constants.swift in Sources */,
 				124B02CD29C41F7100094CF5 /* GameObject.swift in Sources */,
 				146E2DF129C0D62F00BFC757 /* Point.swift in Sources */,
 				146E2DE629C0D61A00BFC757 /* MainGameManager.swift in Sources */,
@@ -868,6 +879,7 @@
 				61A10F2629D30CAB000EB4B4 /* LinkedList.swift in Sources */,
 				14C53B2629C5E9D10035EC17 /* GameUpdater.swift in Sources */,
 				146E2DE429C0D61A00BFC757 /* GameEngineManager.swift in Sources */,
+				14C6732029D366D300D8DF78 /* MainMenuView.swift in Sources */,
 				124B02F729C9F54B00094CF5 /* NotificationName.swift in Sources */,
 				2F469D5A29D2AB3300C4152E /* FiziksShapeNode.swift in Sources */,
 				124B02F129C9ED4100094CF5 /* TumblingTowersEvent.swift in Sources */,

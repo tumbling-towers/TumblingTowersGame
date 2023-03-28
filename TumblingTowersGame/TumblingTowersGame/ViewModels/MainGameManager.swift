@@ -14,17 +14,17 @@ class MainGameManager: ObservableObject {
     
     private var eventManager: EventManager?
 
-    private var gameEngineMgr = GameEngineManager(levelDimensions: .infinite)
+    private var gameEngineMgr = GameEngineManager(levelDimensions: .infinite, eventManager: TumblingTowersEventManager())
 
     func setDeviceDimensionsAndGetGameEngineMgr(deviceHeight: CGFloat, deviceWidth: CGFloat) -> GameEngineManager {
         self.deviceHeight = deviceHeight
         self.deviceWidth = deviceWidth
         
-        self.eventManager = TumblingTowersEventManager()
+        let eventManager = TumblingTowersEventManager()
 
-        gameEngineMgr = GameEngineManager(levelDimensions: CGRect(x: 0, y: 0, width: deviceWidth, height: deviceHeight))
+        gameEngineMgr = GameEngineManager(levelDimensions: CGRect(x: 0, y: 0, width: deviceWidth, height: deviceHeight), eventManager: eventManager)
         
-        gameEngineMgr.eventManager = eventManager
+        self.eventManager = eventManager
         
         gameEngineMgr.setUpLevelAndStartEngine(mainGameMgr: self)
 

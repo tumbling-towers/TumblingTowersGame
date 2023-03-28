@@ -12,24 +12,41 @@ struct ContentView: View {
     @EnvironmentObject var mainGameMgr: MainGameManager
     @StateObject var gameEngineMgr: GameEngineManager
 
+    @State var currGameScreen = Constants.CurrGameScreens.mainMenu
+
     var body: some View {
-        return ZStack {
-            GameplayLevelView()
+
+        if currGameScreen == .mainMenu {
+            MainMenuView(currGameScreen: $currGameScreen)
+                .environmentObject(mainGameMgr)
                 .environmentObject(gameEngineMgr)
-                .gesture(DragGesture(minimumDistance: 0)
-                    .onChanged({ tap in
-                        gameEngineMgr.tapEvent(at: tap.location)
-                    })
-                    .onEnded { _ in
-                        gameEngineMgr.resetInput()
-                    }
-                )
+        } else if currGameScreen == .gameModeSelection {
+            GameModeSelectView(currGameScreen: $currGameScreen)
+                .environmentObject(mainGameMgr)
+                .environmentObject(gameEngineMgr)
+        } else if currGameScreen == .gameplay {
+            ZStack {
+                GameplayLevelView()
+                    .environmentObject(gameEngineMgr)
+                    .gesture(DragGesture(minimumDistance: 0)
+                        .onChanged({ tap in
+                            gameEngineMgr.tapEvent(at: tap.location)
+                        })
+                            .onEnded { _ in
+                                gameEngineMgr.resetInput()
+                            }
+                    )
 
                 // MARK: Comment this out later. This is for testing only
                 // We need to keep this view to receive tap input
-            Text("Move: " + gameEngineMgr.getInput().inputType.rawValue)
+                Text("Move: " + gameEngineMgr.getInput().inputType.rawValue)
+            }
+            .ignoresSafeArea(.all)
+        } else if currGameScreen == .settings {
+            EmptyView()
+        } else if currGameScreen == .achievements {
+            EmptyView()
         }
-        .ignoresSafeArea(.all)
     }
 }
 
@@ -37,7 +54,7 @@ struct ContentView_Previews: PreviewProvider {
     static var mainGameMgrPrev = MainGameManager()
 
     static var previews: some View {
-        ContentView(gameEngineMgr: GameEngineManager(levelDimensions: .infinite))
+        ContentView(gameEngineMgr: GameEngineManager(levelDimensions: .infinite, eventManager: TumblingTowersEventManager()))
             .environmentObject(mainGameMgrPrev)
     }
 }
