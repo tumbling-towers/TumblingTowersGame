@@ -22,7 +22,6 @@ struct ContentView: View {
                 .environmentObject(gameEngineMgr)
         } else if currGameScreen == .gameModeSelection {
             GameModeSelectView(currGameScreen: $currGameScreen)
-                .environmentObject(mainGameMgr)
                 .environmentObject(gameEngineMgr)
         } else if currGameScreen == .gameplay {
             ZStack {
@@ -43,7 +42,9 @@ struct ContentView: View {
             }
             .ignoresSafeArea(.all)
         } else if currGameScreen == .settings {
-            EmptyView()
+            SettingsView(currGameScreen: $currGameScreen)
+                .environmentObject(mainGameMgr)
+                .environmentObject(gameEngineMgr)
         } else if currGameScreen == .achievements {
             EmptyView()
         }

@@ -20,6 +20,9 @@ struct TumblingTowersGameApp: App {
                         deviceWidth: geo.size.width))
                 .environmentObject(mainGameMgr)
                 .statusBarHidden(true)
+                .onAppear {
+                    SoundSystem.shared.startBackgroundMusic()
+                }
             }
         }
     }

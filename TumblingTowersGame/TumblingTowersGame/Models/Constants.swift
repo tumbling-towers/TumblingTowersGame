@@ -8,6 +8,8 @@
 import Foundation
 
 class Constants {
+    static let backgroundMusicFileName = "bkgMusic.mp3"
+
     enum CurrGameScreens {
         case mainMenu
         case gameModeSelection

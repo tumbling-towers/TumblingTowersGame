@@ -32,8 +32,7 @@ struct GameModeSelectView: View {
                     currGameScreen = .mainMenu
                 } label: {
                     Text("BACK")
-                        .foregroundColor(.black)
-                        .font(.system(size: 20, weight: .bold))
+                        .modifier(MenuButtonText(fontSize: 20))
                 }
                 .padding(.top, 35.0)
 

@@ -15,6 +15,19 @@ class SoundSystem {
 
     private var soundPlayers: [GameSound: AVAudioPlayer] = [:]
 
+    var backgroundMusicVolume: Float {
+        if let currVol = backgroundMusicPlayer?.volume {
+            return currVol
+        } else {
+            return 0
+        }
+    }
+
+    var otherSoundVolume: Float {
+        // TODO: Update when storage implemented
+        0
+    }
+
     private init() {
         for sound in GameSound.allCases {
             loadSound(sound)
@@ -45,21 +58,29 @@ class SoundSystem {
         currPlayer.play()
     }
 
-//    func startMainMusic() {
-//        if let path = Bundle.main.path(forResource: FILE NAME, ofType: nil) {
-//            let urlToBkgMusic = URL(fileURLWithPath: path)
-//
-//            do {
-//                backgroundMusicPlayer = try AVAudioPlayer(contentsOf: urlToBkgMusic)
-//            } catch {
-//                return
-//            }
-//
-//            backgroundMusicPlayer?.numberOfLoops = -1
-//            backgroundMusicPlayer?.prepareToPlay()
-//            backgroundMusicPlayer?.play()
-//        }
-//    }
+    func startBackgroundMusic() {
+        if let path = Bundle.main.path(forResource: Constants.backgroundMusicFileName, ofType: nil) {
+            let urlToBkgMusic = URL(fileURLWithPath: path)
+
+            do {
+                backgroundMusicPlayer = try AVAudioPlayer(contentsOf: urlToBkgMusic)
+            } catch {
+                return
+            }
+
+            backgroundMusicPlayer?.numberOfLoops = -1
+            backgroundMusicPlayer?.prepareToPlay()
+            backgroundMusicPlayer?.play()
+        }
+    }
+
+    func changeBackgroundMusicVolume(_ newVolume: Float) {
+        backgroundMusicPlayer?.setVolume(exp(newVolume), fadeDuration: TimeInterval(0.2))
+    }
+
+    func changeSoundVolume(_ newVolume: Float) {
+        // TODO: Implement
+    }
 
     enum GameSound: String, CaseIterable {
         case COLLIDE = "collide.mp3"
