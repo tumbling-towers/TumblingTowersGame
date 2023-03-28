@@ -12,6 +12,5 @@ struct CollisionMask {
     static let block: BitMask = CategoryMask.block | CategoryMask.platform
     static let platform: BitMask = CategoryMask.platform | CategoryMask.block
     static let levelBoundary: BitMask = CategoryMask.levelBoundary | CategoryMask.block
-    static let fallingBlock: BitMask = CollisionMask.block | CategoryMask.levelBoundary
     static let max: BitMask = 0xFFFFFFFF
 }

@@ -19,12 +19,8 @@ class Block: GameEngineObject {
     }
 
     static var collisionBitMask: BitMask = CollisionMask.block
-    
-    static var fallingCollisionBitMask: BitMask = CollisionMask.fallingBlock
 
     static var contactTestBitMask: BitMask = ContactTestMask.block
-    
-    static var fallingContactTestBitMask: BitMask = ContactTestMask.fallingBlock
 
     static let categoryBitMask: BitMask = CategoryMask.block
 

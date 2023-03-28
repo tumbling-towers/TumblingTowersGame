@@ -18,7 +18,7 @@ class GameEngine {
     
     static let defaultPowerupHeightStep: Double = 50
     
-    static let defaultInitialPowerupHeight: Double = 200
+    static let defaultInitialPowerupHeight: Double = 20
     
     static let defaultPowerupLineDimensions: CGSize = CGSize(width: 400, height: 5)
     
@@ -45,7 +45,8 @@ class GameEngine {
                 leftBoundary = createLevelBoundary(at: leftPosition)
                 
                 // set up initial powerup line relative to platform
-                let centerPosition = CGPoint(x: platform.position.x, y: platform.position.y + GameEngine.defaultInitialPowerupHeight)
+                let centerPosition = CGPoint(x: platform.position.x,
+                                             y: platform.position.y + platform.shape.height / 2 + GameEngine.defaultInitialPowerupHeight)
                 
                 powerupLine = createPowerupLine(at: centerPosition)
             }
@@ -245,8 +246,8 @@ class GameEngine {
                                            restitution: .zero,
                                            linearDamping: .zero,
                                            categoryBitMask: Block.categoryBitMask,
-                                           collisionBitMask: Block.fallingCollisionBitMask,
-                                           contactTestBitMask: Block.fallingContactTestBitMask)
+                                           collisionBitMask: Block.collisionBitMask,
+                                           contactTestBitMask: Block.contactTestBitMask)
         let newBlock = Block(fiziksBody: newFiziksBody, shape: shape)
         return newBlock
     }
@@ -330,27 +331,49 @@ class GameEngine {
 
 extension GameEngine: FiziksContactDelegate {
     func didBegin(_ contact: FiziksContact) {
+        
+        // check whether it is contact between currently moving block & something else (not level boundaries)
         if let currentBlock = currentlyMovingBlock {
             if contact.contains(body: currentBlock.fiziksBody)
                 && !contact.contains(body: leftBoundary)
                 && !contact.contains(body: rightBoundary) {
-                
-                // allow gravity and rotation by collisions
-                currentlyMovingBlock?.fiziksBody.affectedByGravity = true
-                currentlyMovingBlock?.fiziksBody.allowsRotation = true
-                
-                // update collsion and contact mask
-                currentlyMovingBlock?.fiziksBody.collisionBitMask = Block.collisionBitMask
-                currentlyMovingBlock?.fiziksBody.contactTestBitMask = Block.contactTestBitMask
-                
-                eventManager?.postEvent(BlockPlacedEvent())
-                
-                self.currentlyMovingBlock = nil
+                handlePlaceCMB()
+                checkAndHandleContactPowerupLine(currentBlock)
             }
         }
     }
 
     func didEnd(_ contact: FiziksContact) {
         // pass
+    }
+    
+    
+    private func checkAndHandleContactPowerupLine(_ currentBlock: Block) {
+        if let powerupLine = powerupLine {
+            let pos = currentBlock.position
+            let height = currentBlock.shape.height
+            
+            if pos.y + height / 2 > powerupLine.position.y
+                && pos.y - height / 2 < powerupLine.position.y {
+                print("touched powerup line")
+                eventManager?.postEvent(BlockTouchedPowerupLineEvent())
+                updatePowerupHeight()
+            }
+        }
+    }
+    
+    func handlePlaceCMB() {
+        // allow gravity and rotation by collisions
+        currentlyMovingBlock?.fiziksBody.affectedByGravity = true
+        currentlyMovingBlock?.fiziksBody.allowsRotation = true
+        
+        // update collsion and contact mask
+        currentlyMovingBlock?.fiziksBody.collisionBitMask = Block.collisionBitMask
+        currentlyMovingBlock?.fiziksBody.contactTestBitMask = Block.contactTestBitMask
+        
+        print("block placed")
+        eventManager?.postEvent(BlockPlacedEvent())
+        
+        self.currentlyMovingBlock = nil
     }
 }

@@ -10,9 +10,8 @@ import Foundation
 // TODO: Update/add more
 struct ContactTestMask {
     static let none: BitMask = 0
-    static let fallingBlock: BitMask = CategoryMask.block | CategoryMask.platform
+    static let block: BitMask = CategoryMask.block | CategoryMask.platform
     static let powerupLine = CategoryMask.powerupLine
-    static let block: BitMask = ContactTestMask.fallingBlock | ContactTestMask.powerupLine
     static let platform: BitMask = CategoryMask.platform | CategoryMask.block
     static let max: BitMask = 0xFFFFFFFF
 }
