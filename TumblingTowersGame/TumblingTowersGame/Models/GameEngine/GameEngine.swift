@@ -166,27 +166,27 @@ class GameEngine {
 
     // MARK: private methods
     private func createBlock(ofShape shape: TetrisShape, at position: CGPoint) -> Block {
-        let newFiziksBody = PathFiziksBody(path: shape.path)
-        newFiziksBody.position = position
-        newFiziksBody.categoryBitMask = Block.categoryBitMask
-        newFiziksBody.collisionBitMask = Block.collisionBitMask
-        newFiziksBody.contactTestBitMask = Block.contactTestBitMask
-        newFiziksBody.isDynamic = true
-        newFiziksBody.linearDamping = 0
-        newFiziksBody.restitution = 0
+        let newFiziksBody = PathFiziksBody(path: shape.path,
+                                           position: position,
+                                           isDynamic: true,
+                                           restitution: .zero,
+                                           linearDamping: .zero,
+                                           categoryBitMask: Block.categoryBitMask,
+                                           collisionBitMask: Block.collisionBitMask,
+                                           contactTestBitMask: Block.contactTestBitMask)
         let newBlock = Block(fiziksBody: newFiziksBody, shape: shape)
         return newBlock
     }
 
     private func createPlatform(path: CGPath, at position: CGPoint) -> Platform {
-        let newFiziksBody = PathFiziksBody(path: path)
-        newFiziksBody.position = position
-        newFiziksBody.zRotation = 0
-        newFiziksBody.categoryBitMask = Platform.categoryBitMask
-        newFiziksBody.collisionBitMask = Platform.collisionBitMask
-        newFiziksBody.contactTestBitMask = Platform.contactTestBitMask
-        newFiziksBody.isDynamic = false
-        newFiziksBody.restitution = 0
+        let newFiziksBody = PathFiziksBody(path: path,
+                                           position: position,
+                                           zRotation: .zero,
+                                           isDynamic: false,
+                                           restitution: .zero,
+                                           categoryBitMask: Platform.categoryBitMask,
+                                           collisionBitMask: Platform.collisionBitMask,
+                                           contactTestBitMask: Platform.contactTestBitMask)
         let newPlatform = Platform(fiziksBody: newFiziksBody, shape: PlatformShape(path: path))
         return newPlatform
     }

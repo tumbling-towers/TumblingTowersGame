@@ -13,9 +13,7 @@ protocol FiziksEngine: AnyObject {
 
     func insertBounds(_ bounds: CGRect)
 
-    // Breaks abstration but this is the only way to start the SKScene
     func activatePhysics()
-    func presentOnUselessView(skView: SKView)
 
     // FiziksBody related functions
     func contains(_ fiziksBody: FiziksBody) -> Bool

@@ -45,11 +45,6 @@ extension GameFiziksEngine: FiziksEngine {
         fiziksScene.view?.showsPhysics = true
     }
 
-    func presentOnUselessView(skView: SKView) {
-        skView.presentScene(fiziksScene)
-        skView.showsPhysics = true
-    }
-
     func contains(_ fiziksBody: FiziksBody) -> Bool {
         let bodyId = ObjectIdentifier(fiziksBody)
         return idToFiziksBody.keys.contains(bodyId)
