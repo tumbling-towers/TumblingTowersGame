@@ -110,6 +110,8 @@ class GameEngine {
         if let currInput = gameRenderer?.getCurrInput() {
             moveCMBSideways(by: currInput.vector)
         }
+        
+        print(fiziksEngine.allBodiesContacted(with: gameEngineObjects[0].fiziksBody))
     }
 
     @discardableResult
