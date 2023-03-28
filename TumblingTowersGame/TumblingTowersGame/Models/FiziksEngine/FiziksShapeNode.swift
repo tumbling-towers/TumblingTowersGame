@@ -202,6 +202,7 @@ class FiziksShapeNode: SKShapeNode {
     // MARK: Update methods
     func didUpdatePosition(to newValue: CGPoint) {
         let tempPhysicsBody = physicsBody
+        // TODO: store angularVelocity also because that will also get reset.
         guard let tempPhysicsBodyVelocity = tempPhysicsBody?.velocity else {
             return
         }

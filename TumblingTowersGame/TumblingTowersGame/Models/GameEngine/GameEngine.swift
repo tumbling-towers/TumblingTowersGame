@@ -227,6 +227,7 @@ extension GameEngine: FiziksContactDelegate {
             contact.bodyB.affectedByGravity = true
             currentlyMovingBlock = nil
         }
+        print("colliding")
     }
 
     func didEnd(_ contact: FiziksContact) {
