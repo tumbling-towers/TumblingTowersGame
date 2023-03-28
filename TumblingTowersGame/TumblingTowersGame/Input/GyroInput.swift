@@ -15,6 +15,9 @@ class GyroInput: InputSystem {
 
     private var inputVal = InputType.NONE
 
+    // TODO: Allow for sensitivity adjustment?
+    let sensitivity: Double = 5
+
     init() {
         motionManager = CMMotionManager()
 
@@ -35,21 +38,30 @@ class GyroInput: InputSystem {
 
     }
 
-    func getInput() -> InputType {
+    func getInput() -> InputData {
 
         if let rate = motionManager.accelerometerData?.acceleration.x {
-            print("Rate: " + String(rate))
-            if rate > 0 {
-                return .RIGHT
+            // TODO: Add sensitivity setting?
+            if rate > 0.1 {
+                // If want constant rate
+//                return InputData(inputType: .RIGHT, vector: InputData.unitRight)
+                return InputData(inputType: .RIGHT, vector: CGVector(dx: rate * sensitivity, dy: 0))
+            } else if rate < -0.1 {
+                // If want constant rate
+//                return InputData(inputType: .LEFT, vector: InputData.unitLeft)
+                return InputData(inputType: .LEFT, vector: CGVector(dx: rate * sensitivity, dy: 0))
             } else {
-                return .LEFT
+                return InputData.none
             }
-        } else {
-            return .NONE
         }
+        return InputData.none
     }
 
     func tapEvent(at: CGPoint) {
-        
+
+    }
+
+    func resetInput() {
+
     }
 }

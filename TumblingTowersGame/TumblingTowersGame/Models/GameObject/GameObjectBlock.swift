@@ -6,25 +6,43 @@
 //
 
 import Foundation
+import CoreGraphics
 
 struct GameObjectBlock: GameObject {
     var id = UUID()
+
     var position: CGPoint
-    var blockShape: BlockShapeEnum
-    
-    init(position: CGPoint, blockShape: BlockShapeEnum) {
+
+    /// Path of the GameObjectBlock before applying rotation.
+    private var rawPath: CGPath
+
+    /// Path of GameObjectBlock after applying rotation
+    var path: CGPath {
+        rawPath.rotate(by: rotation)
+    }
+
+    var height: Double {
+        path.height
+    }
+    var width: Double {
+        path.width
+    }
+
+    var rotation: Double
+
+    init(position: CGPoint, path: CGPath, rotation: Double = 0) {
         self.position = position
-        self.blockShape = blockShape
+        self.rawPath = path
+        self.rotation = rotation
     }
 }
 
 extension GameObjectBlock: Equatable {
     static func == (lhs: GameObjectBlock, rhs: GameObjectBlock) -> Bool {
-        lhs.position == rhs.position && lhs.blockShape == rhs.blockShape
+        lhs.position == rhs.position && lhs.path == rhs.path
     }
 }
 
 extension GameObjectBlock {
-    static let sampleBlock = GameObjectBlock(position: CGPoint(x: 500, y: 500), blockShape: .I)
+    static let sampleBlock = GameObjectBlock(position: CGPoint(x: 500, y: 500), path: TetrisShape(type: .I).path)
 }
-

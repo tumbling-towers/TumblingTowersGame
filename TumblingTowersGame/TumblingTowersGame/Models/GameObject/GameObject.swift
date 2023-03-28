@@ -15,7 +15,7 @@ extension GameObject {
     mutating func move(to newPosition: CGPoint) {
         position = newPosition
     }
-    
+
     mutating func move(by displacement: CGVector) {
         let newPosition = CGPoint(x: position.x + displacement.dx, y: position.y + displacement.dy)
         move(to: newPosition)

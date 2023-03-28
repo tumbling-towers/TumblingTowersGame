@@ -10,27 +10,25 @@ import SpriteKit
 
 class GameFiziksEngine: NSObject {
     let fiziksScene: FiziksScene
-    
-    // TODO: Potentially refactor double lookup to double delegates to synchronise position updates between FiziksBody & SKNode.
-    var fiziksBodyIdToSKNode: BiMap<ObjectIdentifier, SKNode>
-    var fiziksBodyIdToFiziksBody: [ObjectIdentifier: FiziksBody]
+
+    // Basically a Set<FiziksBody>, except we can't hash
+    // a protocol, so this is the temp solution. May consider
+    // creating a new data structure for this purpose.
+    var idToFiziksBody: [ObjectIdentifier: FiziksBody]
 
     weak var fiziksContactDelegate: FiziksContactDelegate?
-    
-    init(levelDimensions: CGRect, boundingRect: CGRect) {
-        let size = CGSize(width: levelDimensions.width, height: levelDimensions.height)
-        self.fiziksScene = FiziksScene(size: size,
-                                       boundingRect: boundingRect)
-        self.fiziksBodyIdToSKNode = BiMap()
-        self.fiziksBodyIdToFiziksBody = [:]
+
+    init(size: CGRect) {
+        let size = CGSize(width: size.width, height: size.height)
+        self.fiziksScene = FiziksScene(size: size)
         self.fiziksContactDelegate = nil
+        self.idToFiziksBody = [:]
         super.init()
         setUpFiziksScene()
     }
 
     private func setUpFiziksScene() {
         fiziksScene.physicsWorld.contactDelegate = self
-        fiziksScene.fiziksSceneUpdateDelegate = self
         fiziksScene.gravity = GameFiziksEngine.defaultFiziksEngineGravity
     }
 }
@@ -39,141 +37,62 @@ extension GameFiziksEngine: FiziksEngine {
 
     static let defaultFiziksEngineGravity = CGVector(dx: 0, dy: -1.0)
 
+    func insertBounds(_ bounds: CGRect) {
+        fiziksScene.physicsBody = SKPhysicsBody(edgeLoopFrom: bounds)
+    }
+
     func activatePhysics() {
         fiziksScene.view?.showsPhysics = true
     }
-    
+
     func contains(_ fiziksBody: FiziksBody) -> Bool {
         let bodyId = ObjectIdentifier(fiziksBody)
-        return fiziksBodyIdToSKNode[key: bodyId] != nil
+        return idToFiziksBody.keys.contains(bodyId)
     }
 
     func add(_ fiziksBody: FiziksBody) {
-        let node = fiziksBody.createSKShapeNode()
-
-        let skPhysicsBody = createSKPhysicsBody(for: fiziksBody)
-
-        // ----- to be removed -----
-        node.fillColor = .red
-        // -------------------------
-
-        node.physicsBody = skPhysicsBody
-        node.position = fiziksBody.position
-
         let bodyId = ObjectIdentifier(fiziksBody)
-        fiziksBodyIdToSKNode[key: bodyId] = node
-        fiziksBodyIdToFiziksBody[bodyId] = fiziksBody
-        fiziksScene.addChild(node)
+        idToFiziksBody[bodyId] = fiziksBody
+        fiziksScene.addChild(fiziksBody)
     }
 
     func delete(_ fiziksBody: FiziksBody) {
         let idToDelete = ObjectIdentifier(fiziksBody)
-        let deletedNode = fiziksBodyIdToSKNode[key: idToDelete]
-        fiziksBodyIdToSKNode[key: idToDelete] = nil
-        fiziksBodyIdToFiziksBody[idToDelete] = nil
-        deletedNode?.removeFromParent()
+        idToFiziksBody[idToDelete] = nil
+        fiziksScene.remove(fiziksBody)
     }
 
-    func move(_ fiziksBody: FiziksBody, to newPosition: CGPoint) {
-        let idToMove = ObjectIdentifier(fiziksBody)
-        let movedNode = fiziksBodyIdToSKNode[key: idToMove]
-        movedNode?.position = newPosition
-        let fiziksBody = fiziksBodyIdToFiziksBody[idToMove]
-        fiziksBody?.position = newPosition
-    }
-
-    func move(_ fiziksBody: FiziksBody, by displacement: CGVector) {
-        let idToMove = ObjectIdentifier(fiziksBody)
-        guard let movedNode = fiziksBodyIdToSKNode[key: idToMove] else {
-            return
-        }
-        let oldPosition = movedNode.position
-        let newPosition = CGPoint(x: oldPosition.x + displacement.dx, y: oldPosition.y + displacement.dy)
-        move(fiziksBody, to: newPosition)
-    }
-
+    // TODO: Figure out logic on how to create new FiziksBody from combined node
+    // As it turns out, SKPhysicsBody(bodies:) doesn't really do what we need, cos
+    // it seems to just take the bodies and put them as children of the new body.
+    // The problem is that if in that frame there is some overlap, the overlap will
+    // stay in the new body. I think this is a good place to use double dispatch actually.
+    // Might consider coming up with ways to combine different shapes.
     func combine(_ fiziksBodies: [FiziksBody]) {
         let skPhysicsBodies = fiziksBodies.compactMap({ getSKPhysicsBody(of: $0) })
-        fiziksBodies.forEach({ delete($0) })
+        var newCollisionBitmask: BitMask = 0x0
+        var newCategoryBitmask: BitMask = 0x0
+        var newContactTestBitmask: BitMask = 0x0
 
-        let combinedNode = SKNode()
+        fiziksBodies.forEach({
+            newCollisionBitmask = newCollisionBitmask | ($0.collisionBitMask ?? 0)
+            newCategoryBitmask = newCategoryBitmask | ($0.categoryBitMask ?? 0)
+            newContactTestBitmask = newContactTestBitmask | ($0.contactTestBitMask ?? 0)
+            delete($0)
+        })
+
+        let combinedNode = SKShapeNode()
         combinedNode.physicsBody = SKPhysicsBody(bodies: skPhysicsBodies)
 
         fiziksScene.addChild(combinedNode)
-    }
-
-    // TODO: rotation works but looks a bit weird. run to see.
-    func rotate(_ fiziksBody: FiziksBody, by angle: Double) {
-        let idToRotate = ObjectIdentifier(fiziksBody)
-        let nodeToRotate = fiziksBodyIdToSKNode[key: idToRotate]
-        nodeToRotate?.zRotation += angle
-        let fiziksBodyToRotate = fiziksBodyIdToFiziksBody[idToRotate]
-        fiziksBodyToRotate?.zRotation += angle
-    }
-
-    // Might remove this since FiziksBodies automatically get updated
-    func getPosition(of fiziksBody: FiziksBody) -> CGPoint? {
-        let bodyId = ObjectIdentifier(fiziksBody)
-        let node = fiziksBodyIdToSKNode[key: bodyId]
-        return node?.position
-    }
-
-    func setDynamicValue(_ fiziksBody: FiziksBody, to newValue: Bool) {
-        fiziksBody.isDynamic = newValue
-
-        let bodyId = ObjectIdentifier(fiziksBody)
-        let node = fiziksBodyIdToSKNode[key: bodyId]
-        node?.physicsBody?.isDynamic = newValue
-    }
-
-    func isDynamic(_ fiziksBody: FiziksBody) -> Bool {
-        let bodyId = ObjectIdentifier(fiziksBody)
-        let node = fiziksBodyIdToSKNode[key: bodyId]
-        return node?.physicsBody?.isDynamic ?? false
-    }
-
-    func setAffectedByGravity(_ fiziksBody: FiziksBody, to newValue: Bool) {
-        let bodyId = ObjectIdentifier(fiziksBody)
-        let skNode = fiziksBodyIdToSKNode[key: bodyId]
-        skNode?.physicsBody?.affectedByGravity = newValue
-    }
-
-    func setVelocity(_ fiziksBody: FiziksBody, to newVelocity: CGVector) {
-        let bodyId = ObjectIdentifier(fiziksBody)
-        let skNode = fiziksBodyIdToSKNode[key: bodyId]
-        skNode?.physicsBody?.velocity = CGVector.zero
-        skNode?.physicsBody?.applyImpulse(newVelocity)
     }
 
     func setWorldGravity(to newValue: CGVector) {
         fiziksScene.gravity = newValue
     }
 
-    func updateAllFiziksBodies() {
-        for skNode in fiziksBodyIdToSKNode.values {
-            guard let fiziksBodyId = fiziksBodyIdToSKNode[value: skNode],
-                  let fiziksBody = fiziksBodyIdToFiziksBody[fiziksBodyId] else {
-                continue
-            }
-            fiziksBody.position = skNode.position
-            fiziksBody.zRotation = skNode.zRotation
-        }
-    }
-    
-    private func createSKPhysicsBody(for fiziksBody: FiziksBody) -> SKPhysicsBody {
-        let physicsBody = fiziksBody.createSKPhysicsBody()
-        physicsBody.isDynamic = fiziksBody.isDynamic
-        physicsBody.collisionBitMask = fiziksBody.collisionBitMask
-        physicsBody.contactTestBitMask = fiziksBody.contactTestBitMask
-        physicsBody.friction = fiziksBody.friction
-
-        return physicsBody
-    }
-
     private func getSKPhysicsBody(of fiziksBody: FiziksBody) -> SKPhysicsBody? {
-        let bodyId = ObjectIdentifier(fiziksBody)
-        let node = fiziksBodyIdToSKNode[key: bodyId]
-        return node?.physicsBody
+        return fiziksBody.fiziksShapeNode.physicsBody
     }
 }
 
@@ -197,10 +116,8 @@ extension GameFiziksEngine: SKPhysicsContactDelegate {
     private func createFiziksContact(skPhysicsContact: SKPhysicsContact) -> FiziksContact? {
         guard let nodeA = skPhysicsContact.bodyA.node,
               let nodeB = skPhysicsContact.bodyB.node,
-              let bodyAId = fiziksBodyIdToSKNode[value: nodeA],
-              let bodyBId = fiziksBodyIdToSKNode[value: nodeB],
-              let fiziksBodyA = fiziksBodyIdToFiziksBody[bodyAId],
-              let fiziksBodyB = fiziksBodyIdToFiziksBody[bodyBId] else {
+              let fiziksBodyA = (nodeA as? FiziksShapeNode)?.fiziksBody,
+              let fiziksBodyB = (nodeB as? FiziksShapeNode)?.fiziksBody else {
             return nil
         }
         return FiziksContact(bodyA: fiziksBodyA,
@@ -208,11 +125,5 @@ extension GameFiziksEngine: SKPhysicsContactDelegate {
                              contactPoint: skPhysicsContact.contactPoint,
                              collisionImpulse: skPhysicsContact.collisionImpulse,
                              contactNormal: skPhysicsContact.contactNormal)
-    }
-}
-
-extension GameFiziksEngine: FiziksSceneUpdateDelegate {
-    func didUpdateFiziksScene() {
-        updateAllFiziksBodies()
     }
 }

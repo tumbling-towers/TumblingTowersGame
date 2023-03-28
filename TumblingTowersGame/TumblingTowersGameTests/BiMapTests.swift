@@ -9,7 +9,7 @@ import XCTest
 @testable import TumblingTowersGame
 
 final class BiMapTests: XCTestCase {
-    
+
     var stringToInt: BiMap<String, Int>!
 
     override func setUp() {
@@ -18,7 +18,7 @@ final class BiMapTests: XCTestCase {
             stringToInt[key: str] = int
         }
     }
-    
+
     override func tearDown() {
         stringToInt = nil
     }
@@ -29,7 +29,7 @@ final class BiMapTests: XCTestCase {
             XCTAssertEqual(intFromBiMap, int)
         }
     }
-    
+
     func testSubscriptKey_set_addNew() {
         for (str, int) in [("8", 8), ("9", 9), ("0", 0)] {
             stringToInt[key: str] = int
@@ -39,7 +39,7 @@ final class BiMapTests: XCTestCase {
             XCTAssertEqual(intFromBiMap, int)
         }
     }
-    
+
     func testSubsciptKey_set_modify() {
         for (str, int) in [("1", -1), ("3", -3), ("4", -4)] {
             stringToInt[key: str] = int
@@ -55,7 +55,7 @@ final class BiMapTests: XCTestCase {
             XCTAssertEqual(stringFromBiMap, String(int))
         }
     }
-    
+
     func testSubscriptValue_set_addNew() {
         for (str, int) in [("8", 8), ("9", 9), ("0", 0)] {
             stringToInt[value: int] = str
@@ -65,7 +65,7 @@ final class BiMapTests: XCTestCase {
             XCTAssertEqual(stringFromBiMap, String(int))
         }
     }
-    
+
     func testSubsciptValue_set_modify() {
         for (str, int) in [("-1", 1), ("-3", 3), ("-4", 4)] {
             stringToInt[value: int] = str
@@ -75,18 +75,18 @@ final class BiMapTests: XCTestCase {
             XCTAssertEqual(stringFromBiMap, String(-int))
         }
     }
-    
+
     func testKeys() {
         let expectedKeys = Set(["1", "2", "3", "4", "5"])
         let keysFromBiMap = stringToInt.keys
-        
+
         XCTAssertEqual(keysFromBiMap, expectedKeys)
     }
-    
+
     func testValues() {
         let expectedValues = Set<Int>([1, 2, 3, 4, 5])
         let valuesFromBiMap = stringToInt.values
-        
+
         XCTAssertEqual(valuesFromBiMap, expectedValues)
     }
 }
