@@ -15,11 +15,11 @@ protocol GameEngineObject {
 
     var rotation: Double { get }
 
-    static var categoryBitmask: BitMask { get }
+    static var categoryBitMask: BitMask { get }
 
-    static var collisionBitmask: BitMask { get }
+    static var collisionBitMask: BitMask { get }
 
-    static var contactTestBitmask: BitMask { get }
+    static var contactTestBitMask: BitMask { get }
 }
 
 extension GameEngineObject {

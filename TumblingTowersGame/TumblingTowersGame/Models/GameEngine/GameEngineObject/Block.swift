@@ -17,11 +17,11 @@ class Block: GameEngineObject {
         fiziksBody.zRotation
     }
 
-    static var collisionBitmask: BitMask = ContactTestMask.block
+    static var collisionBitMask: BitMask = ContactTestMask.block
 
-    static var contactTestBitmask: BitMask = ContactTestMask.block
+    static var contactTestBitMask: BitMask = ContactTestMask.block
 
-    static let categoryBitmask: BitMask = CategoryMask.block
+    static let categoryBitMask: BitMask = CategoryMask.block
 
     init(fiziksBody: FiziksBody, shape: ObjectShape) {
         self.fiziksBody = fiziksBody
