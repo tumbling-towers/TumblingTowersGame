@@ -20,7 +20,7 @@ struct ContentView: View {
                     .onChanged({ tap in
                         gameEngineMgr.tapEvent(at: tap.location)
                     })
-                    .onEnded { tap in
+                    .onEnded { _ in
                         gameEngineMgr.resetInput()
                     }
                 )

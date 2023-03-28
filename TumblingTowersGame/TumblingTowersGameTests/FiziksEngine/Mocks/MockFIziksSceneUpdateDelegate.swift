@@ -8,8 +8,8 @@
 import Foundation
 
 class MockFiziksSceneUpdateDelegate: FiziksSceneUpdateDelegate {
-    var updatedFiziksScene: Bool = false;
+    var updatedFiziksScene: Bool = false
     func didUpdateFiziksScene() {
-        updatedFiziksScene = true;
+        updatedFiziksScene = true
     }
 }

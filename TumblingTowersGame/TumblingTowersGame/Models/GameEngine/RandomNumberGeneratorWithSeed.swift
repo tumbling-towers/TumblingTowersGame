@@ -12,7 +12,7 @@ struct RandomNumberGeneratorWithSeed: RandomNumberGenerator {
         // Set the random seed
         srand48(seed)
     }
-    
+
     func next() -> UInt64 {
         // drand48() returns a Double, transform to UInt64
         return withUnsafeBytes(of: drand48()) { bytes in

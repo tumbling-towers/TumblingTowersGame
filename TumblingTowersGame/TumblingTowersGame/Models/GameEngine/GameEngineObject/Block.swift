@@ -9,23 +9,24 @@ import CoreGraphics
 import Foundation
 
 class Block: GameEngineObject {
+    
     let fiziksBody: FiziksBody
-    
+
     let shape: ObjectShape
-    
+
     var rotation: Double {
         fiziksBody.zRotation
     }
 
-    static var collisionBitmask: BitMask = CollisionMask.block
+    static var collisionBitMask: BitMask = CollisionMask.block
     
-    static var fallingCollisionBitmask: BitMask = CollisionMask.fallingBlock
+    static var fallingCollisionBitMask: BitMask = CollisionMask.fallingBlock
 
-    static var contactTestBitmask: BitMask = ContactTestMask.block
+    static var contactTestBitMask: BitMask = ContactTestMask.block
     
     static var fallingContactTestBitMask: BitMask = ContactTestMask.fallingBlock
 
-    static let categoryBitmask: BitMask = CategoryMask.block
+    static let categoryBitMask: BitMask = CategoryMask.block
 
     init(fiziksBody: FiziksBody, shape: ObjectShape) {
         self.fiziksBody = fiziksBody

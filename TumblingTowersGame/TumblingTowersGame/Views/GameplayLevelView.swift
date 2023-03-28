@@ -10,11 +10,12 @@ import SwiftUI
 
 struct GameplayLevelView: View {
     @EnvironmentObject var gameEngineMgr: GameEngineManager
-    
+
     var body: some View {
+//        LevelView()
         // sprite view required for sprite kit to run, hidden
         SpriteView(scene: getUselessSKSceneToPresent())
-        
+
         // present actual level rendered by swift ui above sprite view
         LevelView()
     }

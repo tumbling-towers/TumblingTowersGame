@@ -11,7 +11,7 @@ class TapInput: InputSystem {
 
     private var levelWidth: CGFloat = 0
     private var levelHeight: CGFloat = 0
-    
+
     private var inputData: InputData = InputData.none
 
     func start(levelWidth: CGFloat, levelHeight: CGFloat) {
@@ -22,7 +22,7 @@ class TapInput: InputSystem {
     func getInput() -> InputData {
         inputData
     }
-    
+
     func resetInput() {
         inputData = InputData.none
     }

@@ -11,7 +11,7 @@ class TumblingTowersEventIdentifier: EventIdentifier {
     init<T: TumblingTowersEvent>(_ eventType: T.Type) {
         let id = ObjectIdentifier(eventType).hashValue
         let notificationName = NotificationName(String(id))
-        
+
         super.init(id: id, notificationName: notificationName)
     }
 }

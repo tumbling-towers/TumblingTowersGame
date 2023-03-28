@@ -30,7 +30,5 @@ class MainGameManager: ObservableObject {
 
         return gameEngineMgr
     }
-    
+
 }
-
-

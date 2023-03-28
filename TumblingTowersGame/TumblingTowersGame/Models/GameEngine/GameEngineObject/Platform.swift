@@ -9,20 +9,20 @@ import CoreGraphics
 import Foundation
 
 class Platform: GameEngineObject {
-    
+
     let fiziksBody: FiziksBody
-    
+
     var shape: ObjectShape
-    
+
     var rotation: Double {
         fiziksBody.zRotation
     }
 
-    static var categoryBitmask: BitMask = CategoryMask.platform
+    static var categoryBitMask: BitMask = CategoryMask.platform
 
-    static var collisionBitmask: BitMask = CollisionMask.platform
+    static var collisionBitMask: BitMask = CollisionMask.platform
 
-    static var contactTestBitmask: BitMask = ContactTestMask.platform
+    static var contactTestBitMask: BitMask = ContactTestMask.platform
 
     init(fiziksBody: FiziksBody, shape: ObjectShape) {
         self.fiziksBody = fiziksBody

@@ -18,7 +18,7 @@ struct PlatformShape: PathObjectShape {
     }
     
     var path: CGPath
-    
+
     init(path: CGPath) {
         self.path = path
     }

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct PlatformView: View {
     @EnvironmentObject var gameEngineMgr: GameEngineManager
-    
+
     var body: some View {
         if let position = gameEngineMgr.platformRenderPosition, let path = gameEngineMgr.platformPath {
             Image(ViewImageManager.platformImage)

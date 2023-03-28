@@ -9,7 +9,7 @@ import CoreGraphics
 import Foundation
 
 class PowerupLine: GameEngineObject {
-    
+
     let fiziksBody: FiziksBody
     
     var shape: ObjectShape
@@ -18,12 +18,12 @@ class PowerupLine: GameEngineObject {
         fiziksBody.zRotation
     }
 
-    static var categoryBitmask: BitMask = CategoryMask.powerupLine
-
-    static var collisionBitmask: BitMask = CollisionMask.none
-
-    static var contactTestBitmask: BitMask = ContactTestMask.none
-
+    static var categoryBitMask: BitMask = CategoryMask.powerupLine
+    
+    static var collisionBitMask: BitMask = CollisionMask.none
+    
+    static var contactTestBitMask: BitMask = ContactTestMask.none
+    
     init(fiziksBody: FiziksBody, shape: ObjectShape) {
         self.fiziksBody = fiziksBody
         self.shape = shape

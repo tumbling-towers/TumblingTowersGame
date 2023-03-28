@@ -43,13 +43,9 @@ class GameEngineManager: ObservableObject {
     private var gameUpdater: GameUpdater?
     
     var platformRenderPosition: CGPoint? {
-        guard let position = platformPosition,
-              let width = platformPath?.width,
-              let height = platformPath?.height else { return nil }
+        guard let position = platformPosition else { return nil }
         
-        // TODO: FIX THIS!
-        let adjusted = adjustCoordinates(for: position)
-        return adjusted.add(by: CGPoint(x: width / 2, y: -height / 2))
+        return adjustCoordinates(for: position)
     }
     
     var platformPath: CGPath? {
@@ -60,7 +56,7 @@ class GameEngineManager: ObservableObject {
     
     var referenceBox: CGRect? {
         guard let refPoints = gameEngine.getReferencePoints() else { return nil }
-        
+
         let width = refPoints.right.x - refPoints.left.x
         return CGRect(x: refPoints.left.x, y: 0, width: width, height: 3000)
     }
@@ -75,14 +71,14 @@ class GameEngineManager: ObservableObject {
 
         gameEngine.insertNewBlock()
     }
-    
+
     func tapEvent(at location: CGPoint) {
         // MARK: Debug print
         inputSystem.tapEvent(at: adjustCoordinates(for: location))
         let adjusted = adjustCoordinates(for: location)
         print("Tapped at \(adjusted.x) ,  \(adjusted.y)")
     }
-    
+
     func resetInput() {
         inputSystem.resetInput()
     }
@@ -111,27 +107,32 @@ class GameEngineManager: ObservableObject {
         // set up initial platform
         platformPosition = CGPoint(x: mainGameMgr.deviceWidth/2, y: 100)
     }
-    
+
     func rotateCurrentBlock() {
-        gameEngine.rotateClockwise()
+        gameEngine.rotateCMBClockwise()
     }
-    
+
     /// GameEngine outputs coordinates with the origin at the bottom-left.
     /// This method converts it such that the origin is at the top-left.
     private func adjustCoordinates(for point: CGPoint) -> CGPoint {
         let newPoint = CGPoint(x: point.x, y: levelDimensions.height - point.y)
         return newPoint
     }
-    
+
     private func transformRenderable(for block: GameObjectBlock) -> GameObjectBlock {
         // Flips the block vertically (mirror image) due to difference in coordinate system
-        let path = UIBezierPath(cgPath: block.path)
-        var flip = CGAffineTransformMakeScale(1, -1)
-        flip = CGAffineTransformTranslate(flip, block.width / 2, -block.height / 2)
-        path.apply(flip)
+        let path = transformPath(path: block.path, width: block.width, height: block.height)
         let newPosition = adjustCoordinates(for: block.position)
-        let transformedBlock = GameObjectBlock(position: newPosition, path: path.cgPath)
+        let transformedBlock = GameObjectBlock(position: newPosition, path: path)
         return transformedBlock
+    }
+    
+    private func transformPath(path: CGPath, width: Double, height: Double) -> CGPath {
+        let path = UIBezierPath(cgPath: path)
+        var flip = CGAffineTransformMakeScale(1, -1)
+        flip = CGAffineTransformTranslate(flip, width / 2, -height / 2)
+        path.apply(flip)
+        return path.cgPath
     }
 }
 
@@ -152,6 +153,8 @@ extension GameEngineManager: GameRendererDelegate {
         
         if let powerupLine = gameEngine.powerupLine {
             powerUpLinePosition = adjustCoordinates(for: powerupLine.position)
+                                  .add(by: CGVector(dx: -powerupLineDimensions.width / 2,
+                                                    dy: 0))
             powerupLineDimensions = CGSize(width: powerupLine.shape.width, height: powerupLine.shape.height)
         }
 
@@ -163,4 +166,3 @@ extension GameEngineManager: GameRendererDelegate {
         inputSystem.getInput()
     }
 }
-

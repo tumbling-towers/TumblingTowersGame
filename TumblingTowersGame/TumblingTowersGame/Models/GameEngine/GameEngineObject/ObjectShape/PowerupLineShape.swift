@@ -19,7 +19,7 @@ struct PowerupLineShape: PathObjectShape {
     
     var path: CGPath
     
-    init(rect: CGRect) {
-        self.path = CGPath(rect: rect, transform: nil)
+    init(path: CGPath) {
+        self.path = path
     }
 }

@@ -9,13 +9,13 @@ import Foundation
 
 class NotificationCenterFacade {
     static var shared = NotificationCenterFacade()
-    
+
     func postNotification(_ notification: TumblingTowersNotification) {
         NotificationCenter.default.post(notification.toNotification())
     }
 
     func createObserver(observer: AnyObject, selector: Selector, notificationName: NotificationName, object: Any?) {
-        
+
         let eventName = notificationName.name
         NotificationCenter.default.addObserver(observer,
                                                selector: selector,
