@@ -80,7 +80,7 @@ class GameEngineManager: ObservableObject {
     }
 
     func rotateCurrentBlock() {
-        gameEngine.rotateClockwise()
+        gameEngine.rotateCMBClockwise()
     }
 
     /// GameEngine outputs coordinates with the origin at the bottom-left.

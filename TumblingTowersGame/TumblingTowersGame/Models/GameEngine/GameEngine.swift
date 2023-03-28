@@ -15,8 +15,7 @@ class GameEngine {
     static let defaultBlockVelocity = CGVector(dx: 0, dy: -5)
 
     let levelDimensions: CGRect
-
-    var gameObjects: [any GameEngineObject]
+    var gameEngineObjects: [any GameEngineObject]
     let fiziksEngine: FiziksEngine
     private var shapeRandomizer: ShapeRandomizer
 
@@ -33,6 +32,7 @@ class GameEngine {
                 y: levelDimensions.height + 30)
     }
 
+    // TODO: expose API to allow adding of platforms instead of hard-coded platform
     private var platformPoints: [CGPoint] {
         let bottom: CGFloat = 20
         let top: CGFloat = bottom + 100
@@ -57,7 +57,7 @@ class GameEngine {
     init(levelDimensions: CGRect) {
         self.levelDimensions = levelDimensions
         // Use leveldimensions to set size of level if needed, otherwise remove
-        self.gameObjects = []
+        self.gameEngineObjects = []
 
         // FiziksBodies will collide with walls at the sides,
         // but there is 100px above and below
@@ -65,7 +65,8 @@ class GameEngine {
                                               y: levelDimensions.minY - 100,
                                               width: levelDimensions.width,
                                               height: levelDimensions.height + 200)
-        self.fiziksEngine = GameFiziksEngine(levelDimensions: levelDimensions, boundingRect: fiziksEngineBoundingRect)
+        self.fiziksEngine = GameFiziksEngine(size: levelDimensions)
+        self.fiziksEngine.insertBounds(fiziksEngineBoundingRect)
 
         // TODO: pass in seed
         self.shapeRandomizer = ShapeRandomizer(possibleShapes: TetrisType.allCases, seed: 1)
@@ -93,7 +94,7 @@ class GameEngine {
         // MARK: Platform is always sampleplatform for now
         var newLevel = Level(blocks: [], platform: .samplePlatform)
 
-        for object in gameObjects {
+        for object in gameEngineObjects {
             if object.fiziksBody.categoryBitMask == CategoryMask.block {
                 let blockPosition = object.position
                 // TODO: more elegant way besides downcasting?
@@ -107,7 +108,7 @@ class GameEngine {
 
         // Get curr input and move block
         if let currInput = gameRenderer?.getCurrInput() {
-            moveSideways(by: currInput.vector)
+            moveCMBSideways(by: currInput.vector)
         }
     }
 
@@ -115,45 +116,39 @@ class GameEngine {
     func insertNewBlock() -> Block {
         let shape = shapeRandomizer.getShape()
         // TODO: Here for testing individual shapes rendering - remove once not needed
-//         let shape = TetrisShape(type: .I)
+        // let shape = TetrisShape(type: .I)
         let insertedBlock = addBlock(ofShape: shape, at: blockInsertionPoint)
         currentlyMovingBlock = insertedBlock
         return insertedBlock
     }
 
     /// Slides the currently-moving block only on the x-axis.
-    func moveSideways(by displacement: CGVector) {
-        guard let fiziksBodyToMove = currentlyMovingBlock?.fiziksBody else {
-            return
-        }
+    func moveCMBSideways(by displacement: CGVector) {
         let correctedDisplacement = CGVector(dx: displacement.dx, dy: 0)
-        fiziksEngine.move(fiziksBodyToMove, by: correctedDisplacement)
+        moveCMB(by: correctedDisplacement)
     }
 
     /// Moves the currently-moving block downwards only.
-    func moveDown(by displacement: CGVector) {
-        guard let fiziksBodyToMove = currentlyMovingBlock?.fiziksBody else {
-            return
-        }
+    func moveCMBDown(by displacement: CGVector) {
         let correctedDy = min(displacement.dy, 0)
         let correctedDisplacement = CGVector(dx: 0, dy: correctedDy)
-        fiziksEngine.move(fiziksBodyToMove, by: correctedDisplacement)
+        moveCMB(by: correctedDisplacement)
     }
-
+    
     /// Rotates the currently moving block clockwise by 90 degrees.
-    func rotateClockwise() {
+    func rotateCMBClockwise() {
         guard let fiziksBodyToMove = currentlyMovingBlock?.fiziksBody else {
             return
         }
-        fiziksEngine.rotate(fiziksBodyToMove, by: -Double.pi / 2)
+        fiziksBodyToMove.zRotation -= CGFloat.pi / 2
     }
 
     /// Rotates the currently moving block counter-clockwise by 90 degrees.
-    func rotateCounterClockwise() {
+    func rotateCMBCounterClockwise() {
         guard let fiziksBodyToMove = currentlyMovingBlock?.fiziksBody else {
             return
         }
-        fiziksEngine.rotate(fiziksBodyToMove, by: Double.pi / 2)
+        fiziksBodyToMove.zRotation += CGFloat.pi / 2
     }
 
     // TODO: this should eventually become private as we do not want the player
@@ -161,34 +156,37 @@ class GameEngine {
     @discardableResult
     private func addBlock(ofShape shape: TetrisShape, at position: CGPoint) -> Block {
         let newBlock = createBlock(ofShape: shape, at: position)
-        gameObjects.append(newBlock)
+        gameEngineObjects.append(newBlock)
         fiziksEngine.add(newBlock.fiziksBody)
-        fiziksEngine.setAffectedByGravity(newBlock.fiziksBody, to: false)
-        fiziksEngine.setVelocity(newBlock.fiziksBody, to: GameEngine.defaultBlockVelocity)
+        newBlock.fiziksBody.affectedByGravity = false
+        newBlock.fiziksBody.velocity = .zero
+        newBlock.fiziksBody.applyImpulse(GameEngine.defaultBlockVelocity)
         return newBlock
     }
 
     // MARK: private methods
     private func createBlock(ofShape shape: TetrisShape, at position: CGPoint) -> Block {
-        let newFiziksBody = PathFiziksBody(path: shape.path,
-                                           position: position,
-                                           zRotation: 0,
-                                           categoryBitMask: Block.categoryBitmask,
-                                           collisionBitMask: Block.collisionBitmask,
-                                           contactTestBitMask: Block.contactTestBitmask,
-                                           isDynamic: true)
+        let newFiziksBody = PathFiziksBody(path: shape.path)
+        newFiziksBody.position = position
+        newFiziksBody.categoryBitMask = Block.categoryBitMask
+        newFiziksBody.collisionBitMask = Block.collisionBitMask
+        newFiziksBody.contactTestBitMask = Block.contactTestBitMask
+        newFiziksBody.isDynamic = true
+        newFiziksBody.linearDamping = 0
+        newFiziksBody.restitution = 0
         let newBlock = Block(fiziksBody: newFiziksBody, shape: shape)
         return newBlock
     }
 
     private func createPlatform(path: CGPath, at position: CGPoint) -> Platform {
-        let newFiziksBody = PathFiziksBody(path: path,
-                                           position: position,
-                                           zRotation: 0,
-                                           categoryBitMask: Platform.categoryBitmask,
-                                           collisionBitMask: Platform.collisionBitmask,
-                                           contactTestBitMask: Platform.contactTestBitmask,
-                                           isDynamic: false)
+        let newFiziksBody = PathFiziksBody(path: path)
+        newFiziksBody.position = position
+        newFiziksBody.zRotation = 0
+        newFiziksBody.categoryBitMask = Platform.categoryBitMask
+        newFiziksBody.collisionBitMask = Platform.collisionBitMask
+        newFiziksBody.contactTestBitMask = Platform.contactTestBitMask
+        newFiziksBody.isDynamic = false
+        newFiziksBody.restitution = 0
         let newPlatform = Platform(fiziksBody: newFiziksBody, shape: PlatformShape(path: path))
         return newPlatform
     }
@@ -200,25 +198,33 @@ class GameEngine {
 
         let insertedPlatform = createPlatform(path: path, at: platformPosition)
 
-        gameObjects.append(insertedPlatform)
+        gameEngineObjects.append(insertedPlatform)
         fiziksEngine.add(insertedPlatform.fiziksBody)
-        fiziksEngine.setAffectedByGravity(insertedPlatform.fiziksBody, to: false)
+        insertedPlatform.fiziksBody.affectedByGravity = false
+    }
+    
+    private func moveCMB(by vector: CGVector) {
+        guard let fiziksBodyToMove = currentlyMovingBlock?.fiziksBody else {
+            return
+        }
+        let oldPosition = fiziksBodyToMove.position
+        let newPosition = CGPoint(x: oldPosition.x + vector.dx,
+                                  y: oldPosition.y + vector.dy)
+        fiziksBodyToMove.position = newPosition
     }
 }
 
 extension GameEngine: FiziksContactDelegate {
     func didBegin(_ contact: FiziksContact) {
         // Once Block collides with another block/platform, Block should be affected by gravity
-        // TODO: set the falling block friction to 0, test for collision normal to have a vertical component
-        // update: tried checking for vertical component, i think there is always a tiny vertical component, so not a good check.
         guard let currentlyMovingFiziksBody = currentlyMovingBlock?.fiziksBody else {
             return
         }
         let currentlyMovingFiziksBodyId = ObjectIdentifier(currentlyMovingFiziksBody)
         if currentlyMovingFiziksBodyId == ObjectIdentifier(contact.bodyA)
             || currentlyMovingFiziksBodyId == ObjectIdentifier(contact.bodyB) {
-            fiziksEngine.setAffectedByGravity(contact.bodyA, to: true)
-            fiziksEngine.setAffectedByGravity(contact.bodyB, to: true)
+            contact.bodyA.affectedByGravity = true
+            contact.bodyB.affectedByGravity = true
             currentlyMovingBlock = nil
         }
     }
