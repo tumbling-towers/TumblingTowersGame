@@ -161,8 +161,7 @@ class GameEngine {
 
     @discardableResult
     func insertNewBlock() -> Block {
-//        let shape = shapeRandomizer.getShape()
-        let shape = TetrisShape(type: .O)
+        let shape = shapeRandomizer.getShape()
         let insertedBlock = addBlock(ofShape: shape, at: blockInsertionPoint)
         
         // initially inserted blocks cannot rotate from collisions
