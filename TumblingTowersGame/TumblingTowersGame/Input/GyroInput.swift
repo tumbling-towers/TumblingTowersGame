@@ -9,7 +9,6 @@ import Foundation
 import CoreMotion
 
 class GyroInput: InputSystem {
-
     private weak var mainGameMgr: MainGameManager?
     private var motionManager: CMMotionManager
 
@@ -56,9 +55,9 @@ class GyroInput: InputSystem {
         }
         return InputData.none
     }
-
-    func tapEvent(at: CGPoint) {
-
+    
+    func dragEvent(offset: CGSize) {
+        // do nothing
     }
 
     func resetInput() {

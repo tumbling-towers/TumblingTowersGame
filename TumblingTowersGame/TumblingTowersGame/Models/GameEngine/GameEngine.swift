@@ -12,7 +12,7 @@ class GameEngine {
     
     static let defaultSeed: Int = 1
     
-    static let defaultBlockVelocity = CGVector(dx: 0, dy: -5)
+    static let defaultBlockVelocity = CGVector(dx: 0, dy: -3)
     
     static let defaultPlatformBoundaryBuffer: Double = 200
     
@@ -146,6 +146,8 @@ class GameEngine {
                 // TODO: more elegant way besides downcasting?
                 guard let block = object as? Block, let shape = block.shape as? TetrisShape else { continue }
                 newLevel.add(block: GameObjectBlock(position: blockPosition, path: shape.path, rotation: block.rotation))
+                
+                checkAndHandleContactPowerupLine(currentBlock: block)
             }
         }
 
@@ -153,13 +155,14 @@ class GameEngine {
 
         // Get curr input and move block
         if let currInput = gameRenderer?.getCurrInput() {
-            moveCMBSideways(by: currInput.vector)
+            moveCMB(by: currInput.vector)
         }
     }
 
     @discardableResult
     func insertNewBlock() -> Block {
-        let shape = shapeRandomizer.getShape()
+//        let shape = shapeRandomizer.getShape()
+        let shape = TetrisShape(type: .O)
         let insertedBlock = addBlock(ofShape: shape, at: blockInsertionPoint)
         
         // initially inserted blocks cannot rotate from collisions
@@ -337,7 +340,6 @@ extension GameEngine: FiziksContactDelegate {
                 && !contact.contains(body: leftBoundary)
                 && !contact.contains(body: rightBoundary) {
                 handlePlaceCMB()
-                checkAndHandleContactPowerupLine(currentBlock: currentBlock)
             }
         }
     }
@@ -348,8 +350,8 @@ extension GameEngine: FiziksContactDelegate {
     
     
     private func checkAndHandleContactPowerupLine(currentBlock: Block) {
-        // something in contact with powerup line
-        if let powerupLine = powerupLine {
+        // landed block in contact with powerup line
+        if let powerupLine = powerupLine, currentBlock.fiziksBody.contactTestBitMask == ContactTestMask.block {
             let pos = currentBlock.position
             let height = currentBlock.height
 
