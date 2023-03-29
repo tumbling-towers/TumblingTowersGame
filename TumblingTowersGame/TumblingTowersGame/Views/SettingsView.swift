@@ -23,6 +23,16 @@ struct SettingsView: View {
                     .modifier(CategoryText())
 
                 HStack {
+                    Text("Overall")
+                        .modifier(BodyText())
+
+                    Slider(value: $settingsMgr.overallVolume, in: 0.0...3.0)
+                        .frame(width: 400)
+                        .padding(.all)
+                }
+
+
+                HStack {
                     Text("Background Music")
                         .modifier(BodyText())
 

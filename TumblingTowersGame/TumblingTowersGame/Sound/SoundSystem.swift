@@ -7,6 +7,7 @@
 
 import Foundation
 import AVKit
+import MediaPlayer
 
 class SoundSystem {
 
@@ -26,6 +27,17 @@ class SoundSystem {
     var otherSoundVolume: Float {
         // TODO: Update when storage implemented
         0
+    }
+
+    var overallVolume: Float {
+        let mpVolumeView = MPVolumeView()
+        let slider = mpVolumeView.subviews.first(where: { $0 is UISlider }) as? UISlider
+
+        if let currVol = slider?.value {
+            return currVol
+        } else {
+            return 0
+        }
     }
 
     private init() {
@@ -80,6 +92,13 @@ class SoundSystem {
 
     func changeSoundVolume(_ newVolume: Float) {
         // TODO: Implement
+    }
+
+    func changeOverallVolume(_ newVolume: Float) {
+        let mpVolumeView = MPVolumeView()
+        let slider = mpVolumeView.subviews.first(where: { $0 is UISlider }) as? UISlider
+
+        slider?.value = newVolume
     }
 
     enum GameSound: String, CaseIterable {

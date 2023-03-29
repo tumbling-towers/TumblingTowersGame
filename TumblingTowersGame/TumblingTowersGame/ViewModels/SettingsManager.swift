@@ -9,6 +9,7 @@ import Foundation
 
 class SettingsManager: ObservableObject {
     @Published var backgroundMusicVolume: Float {
+        // Cannot use get {} set {} because Property wrapper cannot be applied to a computed property
         didSet {
             SoundSystem.shared.changeBackgroundMusicVolume(backgroundMusicVolume)
         }
@@ -20,9 +21,16 @@ class SettingsManager: ObservableObject {
         }
     }
 
+    @Published var overallVolume: Float {
+        didSet {
+            SoundSystem.shared.changeOverallVolume(overallVolume)
+        }
+    }
+
     init() {
         backgroundMusicVolume = SoundSystem.shared.backgroundMusicVolume
         otherSoundVolume = SoundSystem.shared.otherSoundVolume
+        overallVolume = SoundSystem.shared.overallVolume
     }
 
 }
