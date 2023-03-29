@@ -60,7 +60,7 @@ class GameEngineManager: ObservableObject {
         guard let refPoints = gameEngine.getReferencePoints() else { return nil }
 
         let width = refPoints.right.x - refPoints.left.x
-        return CGRect(x: refPoints.left.x, y: 0, width: width, height: 3000)
+        return CGRect(x: refPoints.left.x - 1, y: 0, width: width + 2, height: 3000)
     }
 
     init(levelDimensions: CGRect, eventManager: EventManager) {
@@ -73,11 +73,8 @@ class GameEngineManager: ObservableObject {
         inputSystem = TapInput()
     }
 
-    func tapEvent(at location: CGPoint) {
-        // MARK: Debug print
-        inputSystem.tapEvent(at: adjustCoordinates(for: location))
-        let adjusted = adjustCoordinates(for: location)
-        print("Tapped at \(adjusted.x) ,  \(adjusted.y)")
+    func dragEvent(offset: CGSize) {
+        inputSystem.dragEvent(offset: offset)
     }
 
     func resetInput() {

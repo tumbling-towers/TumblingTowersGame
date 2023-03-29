@@ -11,9 +11,11 @@ struct ContentView: View {
 
     @EnvironmentObject var mainGameMgr: MainGameManager
     @StateObject var gameEngineMgr: GameEngineManager
-
     @State var currGameScreen = Constants.CurrGameScreens.mainMenu
 
+    // for tracking drag movement
+    @State private var offset = CGSize.zero
+    
     var body: some View {
 
         if currGameScreen == .mainMenu {
@@ -28,12 +30,14 @@ struct ContentView: View {
                 GameplayLevelView()
                     .environmentObject(gameEngineMgr)
                     .gesture(DragGesture(minimumDistance: 0)
-                        .onChanged({ tap in
-                            gameEngineMgr.tapEvent(at: tap.location)
-                        })
-                            .onEnded { _ in
-                                gameEngineMgr.resetInput()
-                            }
+                        .onChanged { gesture in
+                            offset = gesture.translation
+                            gameEngineMgr.dragEvent(offset: offset)
+                        }
+                        .onEnded { _ in
+                            offset = .zero
+                            gameEngineMgr.resetInput()
+                        }
                     )
 
                 // MARK: Comment this out later. This is for testing only

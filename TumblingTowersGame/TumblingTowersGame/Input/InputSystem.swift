@@ -13,7 +13,7 @@ protocol InputSystem {
 
     func getInput() -> InputData
 
-    func tapEvent(at: CGPoint)
+    func dragEvent(offset: CGSize)
 
     func resetInput()
 
@@ -26,10 +26,12 @@ struct InputData {
     static let none = InputData(inputType: .NONE, vector: .zero)
     static let unitLeft: CGVector = CGVector(dx: -1.0, dy: 0)
     static let unitRight: CGVector = CGVector(dx: 1.0, dy: 0)
+    static let unitDown: CGVector = CGVector(dx: 0, dy: -1.0)
 }
 
 enum InputType: String {
     case LEFT = "LEFT"
     case NONE = "NONE"
     case RIGHT = "RIGHT"
+    case DOWN = "DOWN"
 }

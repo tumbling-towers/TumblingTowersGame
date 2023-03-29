@@ -17,8 +17,12 @@ class Block: GameEngineObject {
     var rotation: Double {
         fiziksBody.zRotation
     }
+    
+    static var fallingCollisionBitMask: BitMask = CollisionMask.fallingBlock
 
     static var collisionBitMask: BitMask = CollisionMask.block
+    
+    static var fallingContactTestBitMask: BitMask = ContactTestMask.fallingBlock
 
     static var contactTestBitMask: BitMask = ContactTestMask.block
 

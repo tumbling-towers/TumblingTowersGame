@@ -22,7 +22,7 @@ class PowerupLine: GameEngineObject {
     
     static var collisionBitMask: BitMask = CollisionMask.none
     
-    static var contactTestBitMask: BitMask = ContactTestMask.none
+    static var contactTestBitMask: BitMask = ContactTestMask.powerupLine
     
     init(fiziksBody: FiziksBody, shape: ObjectShape) {
         self.fiziksBody = fiziksBody
