@@ -45,7 +45,10 @@ class GyroInput: InputSystem {
 
         if let rate = motionManager.accelerometerData?.acceleration.x {
             // TODO: Add sensitivity setting?
-            if rate > 0.1 {
+            // prioritise down input
+            if inputData.inputType != .NONE {
+                return inputData
+            } else if rate > 0.1 {
                 // If want constant rate
 //                return InputData(inputType: .RIGHT, vector: InputData.unitRight)
                 return InputData(inputType: .RIGHT, vector: CGVector(dx: rate * sensitivity, dy: 0))
@@ -53,8 +56,6 @@ class GyroInput: InputSystem {
                 // If want constant rate
 //                return InputData(inputType: .LEFT, vector: InputData.unitLeft)
                 return InputData(inputType: .LEFT, vector: CGVector(dx: rate * sensitivity, dy: 0))
-            } else {
-                return inputData
             }
         }
         return InputData.none
