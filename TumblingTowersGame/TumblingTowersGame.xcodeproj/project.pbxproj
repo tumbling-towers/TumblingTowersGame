@@ -69,6 +69,8 @@
 		2FC4652E29D2EA9A00A5B4F3 /* Achievement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC4652D29D2EA9A00A5B4F3 /* Achievement.swift */; };
 		2FC4653129D30FF700A5B4F3 /* CountPerGameAchievement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC4653029D30FF700A5B4F3 /* CountPerGameAchievement.swift */; };
 		2FC4653329D3101000A5B4F3 /* OverallAchievement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC4653229D3101000A5B4F3 /* OverallAchievement.swift */; };
+		2FC4653829D35E3700A5B4F3 /* BlockPlacedEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC4653729D35E3700A5B4F3 /* BlockPlacedEvent.swift */; };
+		2FC4654029D3D6DE00A5B4F3 /* BlockPlacerAchievement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC4653F29D3D6DE00A5B4F3 /* BlockPlacerAchievement.swift */; };
 		2FC7FACC29C50B4500B56850 /* ShapeRandomizerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC7FACB29C50B4500B56850 /* ShapeRandomizerTests.swift */; };
 		2FC7FAD229C50C2C00B56850 /* RandomNumberGeneratorWithSeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC7FAD129C50C2C00B56850 /* RandomNumberGeneratorWithSeed.swift */; };
 		2FC7FAD429C50C3C00B56850 /* ShapeRandomizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC7FAD329C50C3C00B56850 /* ShapeRandomizer.swift */; };
@@ -185,6 +187,8 @@
 		2FC4652D29D2EA9A00A5B4F3 /* Achievement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Achievement.swift; sourceTree = "<group>"; };
 		2FC4653029D30FF700A5B4F3 /* CountPerGameAchievement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountPerGameAchievement.swift; sourceTree = "<group>"; };
 		2FC4653229D3101000A5B4F3 /* OverallAchievement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverallAchievement.swift; sourceTree = "<group>"; };
+		2FC4653729D35E3700A5B4F3 /* BlockPlacedEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockPlacedEvent.swift; sourceTree = "<group>"; };
+		2FC4653F29D3D6DE00A5B4F3 /* BlockPlacerAchievement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockPlacerAchievement.swift; sourceTree = "<group>"; };
 		2FC7FACB29C50B4500B56850 /* ShapeRandomizerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeRandomizerTests.swift; sourceTree = "<group>"; };
 		2FC7FAD129C50C2C00B56850 /* RandomNumberGeneratorWithSeed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandomNumberGeneratorWithSeed.swift; sourceTree = "<group>"; };
 		2FC7FAD329C50C3C00B56850 /* ShapeRandomizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeRandomizer.swift; sourceTree = "<group>"; };
@@ -261,7 +265,7 @@
 		124B02E429C9DA8E00094CF5 /* EventManager */ = {
 			isa = PBXGroup;
 			children = (
-				124B02E929C9DB5C00094CF5 /* Events */,
+				2FC4653629D35E2900A5B4F3 /* Events */,
 				124B02F229C9ED6A00094CF5 /* NotificationCenterFacade.swift */,
 				124B02F629C9F54B00094CF5 /* NotificationName.swift */,
 				124B02F429C9F10300094CF5 /* TumblingTowersNotification.swift */,
@@ -273,13 +277,6 @@
 				124B02EE29C9ED1800094CF5 /* TumblingTowersEventIdentifier.swift */,
 			);
 			path = EventManager;
-			sourceTree = "<group>";
-		};
-		124B02E929C9DB5C00094CF5 /* Events */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Events;
 			sourceTree = "<group>";
 		};
 		1445F84829C71DB500F94751 /* Input */ = {
@@ -504,11 +501,28 @@
 		2FC4652F29D30FE900A5B4F3 /* Achievements */ = {
 			isa = PBXGroup;
 			children = (
+				2FC4654129D3ECCB00A5B4F3 /* AchievementSubtypes(experimental) */,
 				2FC4652D29D2EA9A00A5B4F3 /* Achievement.swift */,
+				2FC4653F29D3D6DE00A5B4F3 /* BlockPlacerAchievement.swift */,
+			);
+			path = Achievements;
+			sourceTree = "<group>";
+		};
+		2FC4653629D35E2900A5B4F3 /* Events */ = {
+			isa = PBXGroup;
+			children = (
+				2FC4653729D35E3700A5B4F3 /* BlockPlacedEvent.swift */,
+			);
+			path = Events;
+			sourceTree = "<group>";
+		};
+		2FC4654129D3ECCB00A5B4F3 /* AchievementSubtypes(experimental) */ = {
+			isa = PBXGroup;
+			children = (
 				2FC4653029D30FF700A5B4F3 /* CountPerGameAchievement.swift */,
 				2FC4653229D3101000A5B4F3 /* OverallAchievement.swift */,
 			);
-			path = Achievements;
+			path = "AchievementSubtypes(experimental)";
 			sourceTree = "<group>";
 		};
 		619D449E29C62FCF00EE00CE /* FiziksEngine */ = {
@@ -719,6 +733,7 @@
 				146E2DB629C0D07200BFC757 /* ContentView.swift in Sources */,
 				146E2DEA29C0D62800BFC757 /* InputSystem.swift in Sources */,
 				61CD55E829C35D1E00DB6000 /* PathFiziksBody.swift in Sources */,
+				2FC4653829D35E3700A5B4F3 /* BlockPlacedEvent.swift in Sources */,
 				146E2E1929C0E5B400BFC757 /* GameplayLevelView.swift in Sources */,
 				124B02E629C9DAA200094CF5 /* EventManager.swift in Sources */,
 				146E2DE529C0D61A00BFC757 /* GameRendererDelegate.swift in Sources */,
@@ -772,6 +787,7 @@
 				146E2DE629C0D61A00BFC757 /* MainGameManager.swift in Sources */,
 				146E2DF029C0D62F00BFC757 /* Vector.swift in Sources */,
 				124B02F529C9F10300094CF5 /* TumblingTowersNotification.swift in Sources */,
+				2FC4654029D3D6DE00A5B4F3 /* BlockPlacerAchievement.swift in Sources */,
 				619D44C029C6F35300EE00CE /* ObjectShape.swift in Sources */,
 				14C53B2629C5E9D10035EC17 /* GameUpdater.swift in Sources */,
 				146E2DE429C0D61A00BFC757 /* GameEngineManager.swift in Sources */,

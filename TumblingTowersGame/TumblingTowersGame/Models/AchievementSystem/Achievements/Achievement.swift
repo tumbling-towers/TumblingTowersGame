@@ -7,10 +7,8 @@
 
 import Foundation
 
-protocol Achievement: CustomStringConvertible {
+protocol Achievement {
     var name: String { get }
     var achievementDescription: String { get }
-    var triggeringEvent: Event { get set }
-    
-    func trigger()
+    var progressDescription: String { get }
 }

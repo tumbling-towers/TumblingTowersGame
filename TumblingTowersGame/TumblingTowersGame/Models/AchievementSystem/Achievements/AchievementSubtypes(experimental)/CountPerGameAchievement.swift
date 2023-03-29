@@ -7,7 +7,7 @@
 
 import Foundation
 
-class CountPerGameAchievement: Achievement {
+class CountPerGameAchievement {
     let name: String
     let achievementDescription: String
     var triggeringEvent: Event

@@ -7,7 +7,6 @@
 
 import Foundation
 
-/*
 class AchievementSystem {
     let eventManager: EventManager
     var achievements: [Achievement]
@@ -15,11 +14,15 @@ class AchievementSystem {
     init(eventManager: EventManager) {
         self.eventManager = eventManager
         self.achievements = []
+        setupAchievements()
     }
     
-    func add(_ achievement: Achievement) {
-        eventManager.registerClosure(for: <#T##Event.Protocol#>, closure: <#T##(Event) -> Void#>)
+    private func setupAchievements() {
+        // TODO: get from storage
+        add(BlockPlacerAchievement(eventManager: eventManager))
+    }
+    
+    private func add(_ achievement: Achievement) {
         achievements.append(achievement)
     }
 }
-*/

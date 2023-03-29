@@ -18,6 +18,9 @@ class GameEngine {
     var gameEngineObjects: [any GameEngineObject]
     let fiziksEngine: FiziksEngine
     private var shapeRandomizer: ShapeRandomizer
+    
+    let eventManager: EventManager
+    let achievementSystem: AchievementSystem
 
     private var currentlyMovingBlock: Block? {
         didSet {
@@ -70,6 +73,9 @@ class GameEngine {
 
         // TODO: pass in seed
         self.shapeRandomizer = ShapeRandomizer(possibleShapes: TetrisType.allCases, seed: 1)
+        
+        self.eventManager = TumblingTowersEventManager()
+        self.achievementSystem = AchievementSystem(eventManager: eventManager)
 
         fiziksEngine.fiziksContactDelegate = self
 
@@ -226,8 +232,8 @@ extension GameEngine: FiziksContactDelegate {
             contact.bodyA.affectedByGravity = true
             contact.bodyB.affectedByGravity = true
             currentlyMovingBlock = nil
+            eventManager.postEvent(BlockPlacedEvent())
         }
-        print("colliding")
     }
 
     func didEnd(_ contact: FiziksContact) {
