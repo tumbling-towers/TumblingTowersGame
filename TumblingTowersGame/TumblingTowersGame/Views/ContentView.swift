@@ -38,7 +38,10 @@ struct ContentView: View {
 
                 // MARK: Comment this out later. This is for testing only
                 // We need to keep this view to receive tap input
-                Text("Move: " + gameEngineMgr.getInput().inputType.rawValue)
+                VStack {
+                    Text("Move: " + gameEngineMgr.getInput().inputType.rawValue)
+                    Text("Selected GameMode: " + gameEngineMgr.gameMode.name)
+                }
             }
             .ignoresSafeArea(.all)
         } else if currGameScreen == .settings {

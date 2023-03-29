@@ -76,11 +76,11 @@ struct SettingsView: View {
 
     }
 
-    private func drawGameModeOption(gameMode: Constants.GameModes, name: String, fontSize: CGFloat) -> AnyView {
+    private func drawGameModeOption(gameMode: Constants.GameModeTypes, name: String, fontSize: CGFloat) -> AnyView {
         AnyView(
             Button {
 //                gameEngineMgr.setGameMode(gameMode: gameMode)
-                gameEngineMgr.startGame()
+                gameEngineMgr.startGame(gameMode: gameMode)
                 currGameScreen = .gameplay
             } label: {
                 Text(name)

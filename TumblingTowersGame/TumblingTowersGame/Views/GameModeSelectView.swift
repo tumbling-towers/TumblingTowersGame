@@ -23,9 +23,9 @@ struct GameModeSelectView: View {
                     .padding(.all, 30)
 
                 HStack {
-                    drawGameModeOption(gameMode: .survival, name: "SURVIVAL", fontSize: 30.0)
+                    drawGameModeOption(gameMode: .SURVIVAL, name: "SURVIVAL", fontSize: 30.0)
 
-                    drawGameModeOption(gameMode: .raceClock, name: "RACE AGAINST CLOCK", fontSize: 30.0)
+                    drawGameModeOption(gameMode: .RACECLOCK, name: "RACE AGAINST CLOCK", fontSize: 30.0)
                 }
 
                 Button {
@@ -45,11 +45,11 @@ struct GameModeSelectView: View {
 
     }
 
-    private func drawGameModeOption(gameMode: Constants.GameModes, name: String, fontSize: CGFloat) -> AnyView {
+    private func drawGameModeOption(gameMode: Constants.GameModeTypes, name: String, fontSize: CGFloat) -> AnyView {
         AnyView(
             Button {
 //                gameEngineMgr.setGameMode(gameMode: gameMode)
-                gameEngineMgr.startGame()
+                gameEngineMgr.startGame(gameMode: gameMode)
                 currGameScreen = .gameplay
             } label: {
                 Text(name)

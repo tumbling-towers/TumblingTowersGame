@@ -19,6 +19,12 @@ class GameUpdater {
     private var frameCount = 0
     private weak var gameRenderer: GameRendererDelegate?
 
+    var timePassed: Double {
+        get {
+            (Double(frameCount) + leftoverTime) * durationOfFrameFor60FPS
+        }
+    }
+
     init(gameEngine: GameEngine, gameRenderer: GameRendererDelegate) {
         self.gameEngine = gameEngine
         self.gameRenderer = gameRenderer
@@ -26,6 +32,9 @@ class GameUpdater {
 
     func createCADisplayLink() {
         time = Date()
+
+        frameCount = 0
+        leftoverTime = 0
 
         // TODO: We need to facade DisplayLink out into our own refresh class also later
         displayLink = CADisplayLink(target: self, selector: #selector(update))

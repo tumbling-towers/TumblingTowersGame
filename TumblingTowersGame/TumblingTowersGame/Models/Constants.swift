@@ -18,8 +18,16 @@ class Constants {
         case achievements
     }
 
-    enum GameModes {
-        case raceClock
-        case survival
+    enum GameModeTypes: String {
+        case SURVIVAL = "Survival"
+        case RACECLOCK = "Race Against the Clock"
     }
+
+    enum GameState {
+        case WIN
+        case LOSE
+        case RUNNING
+        case PAUSED
+    }
+
 }

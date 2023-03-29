@@ -41,6 +41,8 @@ class GameEngineManager: ObservableObject {
     var inputSystem: InputSystem
     
     private var gameUpdater: GameUpdater?
+
+    var gameMode: GameMode = SurvivalGameMode(eventMgr: TumblingTowersEventManager())
     
     var platformRenderPosition: CGPoint? {
         guard let position = platformPosition else { return nil }
@@ -91,10 +93,6 @@ class GameEngineManager: ObservableObject {
     }
 
     func setUpLevelAndStartEngine(mainGameMgr: MainGameManager) {
-        // set up game loop
-        gameUpdater = GameUpdater(gameEngine: gameEngine, gameRenderer: self)
-        gameUpdater?.createCADisplayLink()
-        
         // set up renderer
         gameEngine.setRenderer(gameRenderer: self)
 
@@ -104,7 +102,20 @@ class GameEngineManager: ObservableObject {
         self.mainGameMgr = mainGameMgr
     }
 
-    func startGame() {
+    func startGame(gameMode: Constants.GameModeTypes) {
+        // set up game loop
+        gameUpdater = GameUpdater(gameEngine: gameEngine, gameRenderer: self)
+        gameUpdater?.createCADisplayLink()
+
+        // set up game mode
+        if let eventManager = eventManager {
+            if gameMode == .SURVIVAL {
+                self.gameMode = SurvivalGameMode(eventMgr: eventManager)
+            } else if gameMode == .RACECLOCK {
+                self.gameMode = RaceTimeGameMode(eventMgr: eventManager)
+            }
+        }
+
         // set up game in game engine
         gameEngine.startGame()
 
