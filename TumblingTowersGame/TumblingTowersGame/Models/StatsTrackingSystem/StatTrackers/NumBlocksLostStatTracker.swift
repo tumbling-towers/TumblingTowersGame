@@ -8,11 +8,8 @@
 import Foundation
 
 class NumBlocksLostStatTracker: StatTracker {
-    var numBlocksLost: Int {
-        didSet {
-            print(numBlocksLost)
-        }
-    }
+    let name: String = "NumBlocksLost"
+    var numBlocksLost: Int
     
     init(eventManager: EventManager) {
         self.numBlocksLost = 0

@@ -73,6 +73,12 @@
 		2FC4654029D3D6DE00A5B4F3 /* NumBlocksPlacedStatTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC4653F29D3D6DE00A5B4F3 /* NumBlocksPlacedStatTracker.swift */; };
 		2FC4654329D4264E00A5B4F3 /* NumBlocksLostStatTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC4654229D4264E00A5B4F3 /* NumBlocksLostStatTracker.swift */; };
 		2FC4654529D4272C00A5B4F3 /* BlockLostEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC4654429D4272C00A5B4F3 /* BlockLostEvent.swift */; };
+		2FC4654929D42D9500A5B4F3 /* AchievementSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC4654829D42D9500A5B4F3 /* AchievementSystem.swift */; };
+		2FC4654B29D42E4000A5B4F3 /* Achievement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC4654A29D42E4000A5B4F3 /* Achievement.swift */; };
+		2FC4654D29D4375D00A5B4F3 /* BobTheBuilderAchievement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC4654C29D4375D00A5B4F3 /* BobTheBuilderAchievement.swift */; };
+		2FC4654F29D43C0900A5B4F3 /* BobTheBuilderAchievementDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC4654E29D43C0900A5B4F3 /* BobTheBuilderAchievementDataSource.swift */; };
+		2FC4655129D43CEF00A5B4F3 /* GameEndedEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC4655029D43CEF00A5B4F3 /* GameEndedEvent.swift */; };
+		2FC4655329D440D000A5B4F3 /* AchievementSystemDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC4655229D440D000A5B4F3 /* AchievementSystemDataSource.swift */; };
 		2FC7FACC29C50B4500B56850 /* ShapeRandomizerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC7FACB29C50B4500B56850 /* ShapeRandomizerTests.swift */; };
 		2FC7FAD229C50C2C00B56850 /* RandomNumberGeneratorWithSeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC7FAD129C50C2C00B56850 /* RandomNumberGeneratorWithSeed.swift */; };
 		2FC7FAD429C50C3C00B56850 /* ShapeRandomizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC7FAD329C50C3C00B56850 /* ShapeRandomizer.swift */; };
@@ -193,6 +199,12 @@
 		2FC4653F29D3D6DE00A5B4F3 /* NumBlocksPlacedStatTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumBlocksPlacedStatTracker.swift; sourceTree = "<group>"; };
 		2FC4654229D4264E00A5B4F3 /* NumBlocksLostStatTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumBlocksLostStatTracker.swift; sourceTree = "<group>"; };
 		2FC4654429D4272C00A5B4F3 /* BlockLostEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockLostEvent.swift; sourceTree = "<group>"; };
+		2FC4654829D42D9500A5B4F3 /* AchievementSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementSystem.swift; sourceTree = "<group>"; };
+		2FC4654A29D42E4000A5B4F3 /* Achievement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Achievement.swift; sourceTree = "<group>"; };
+		2FC4654C29D4375D00A5B4F3 /* BobTheBuilderAchievement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BobTheBuilderAchievement.swift; sourceTree = "<group>"; };
+		2FC4654E29D43C0900A5B4F3 /* BobTheBuilderAchievementDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BobTheBuilderAchievementDataSource.swift; sourceTree = "<group>"; };
+		2FC4655029D43CEF00A5B4F3 /* GameEndedEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEndedEvent.swift; sourceTree = "<group>"; };
+		2FC4655229D440D000A5B4F3 /* AchievementSystemDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementSystemDataSource.swift; sourceTree = "<group>"; };
 		2FC7FACB29C50B4500B56850 /* ShapeRandomizerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeRandomizerTests.swift; sourceTree = "<group>"; };
 		2FC7FAD129C50C2C00B56850 /* RandomNumberGeneratorWithSeed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandomNumberGeneratorWithSeed.swift; sourceTree = "<group>"; };
 		2FC7FAD329C50C3C00B56850 /* ShapeRandomizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeRandomizer.swift; sourceTree = "<group>"; };
@@ -364,6 +376,7 @@
 		146E2DDD29C0D0AF00BFC757 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				2FC4654629D42D7B00A5B4F3 /* AchievementSystem */,
 				2FC4652A29D2EA0700A5B4F3 /* StatsTrackingSystem */,
 				124B02CB29C41F6400094CF5 /* GameObject */,
 				2F7E13A829C0F5E5000E6FA9 /* GameEngine */,
@@ -518,6 +531,7 @@
 			children = (
 				2FC4653729D35E3700A5B4F3 /* BlockPlacedEvent.swift */,
 				2FC4654429D4272C00A5B4F3 /* BlockLostEvent.swift */,
+				2FC4655029D43CEF00A5B4F3 /* GameEndedEvent.swift */,
 			);
 			path = Events;
 			sourceTree = "<group>";
@@ -529,6 +543,34 @@
 				2FC4653229D3101000A5B4F3 /* OverallStat.swift */,
 			);
 			path = "StatsSubtypes(experimental)";
+			sourceTree = "<group>";
+		};
+		2FC4654629D42D7B00A5B4F3 /* AchievementSystem */ = {
+			isa = PBXGroup;
+			children = (
+				2FC4654729D42D8800A5B4F3 /* Achievements */,
+				2FC4654829D42D9500A5B4F3 /* AchievementSystem.swift */,
+				2FC4655229D440D000A5B4F3 /* AchievementSystemDataSource.swift */,
+			);
+			path = AchievementSystem;
+			sourceTree = "<group>";
+		};
+		2FC4654729D42D8800A5B4F3 /* Achievements */ = {
+			isa = PBXGroup;
+			children = (
+				2FC4655429D442C400A5B4F3 /* BobTheBuilderAchievement */,
+				2FC4654A29D42E4000A5B4F3 /* Achievement.swift */,
+			);
+			path = Achievements;
+			sourceTree = "<group>";
+		};
+		2FC4655429D442C400A5B4F3 /* BobTheBuilderAchievement */ = {
+			isa = PBXGroup;
+			children = (
+				2FC4654C29D4375D00A5B4F3 /* BobTheBuilderAchievement.swift */,
+				2FC4654E29D43C0900A5B4F3 /* BobTheBuilderAchievementDataSource.swift */,
+			);
+			path = BobTheBuilderAchievement;
 			sourceTree = "<group>";
 		};
 		619D449E29C62FCF00EE00CE /* FiziksEngine */ = {
@@ -741,8 +783,10 @@
 				61CD55E829C35D1E00DB6000 /* PathFiziksBody.swift in Sources */,
 				2FC4653829D35E3700A5B4F3 /* BlockPlacedEvent.swift in Sources */,
 				146E2E1929C0E5B400BFC757 /* GameplayLevelView.swift in Sources */,
+				2FC4655129D43CEF00A5B4F3 /* GameEndedEvent.swift in Sources */,
 				124B02E629C9DAA200094CF5 /* EventManager.swift in Sources */,
 				146E2DE529C0D61A00BFC757 /* GameRendererDelegate.swift in Sources */,
+				2FC4654929D42D9500A5B4F3 /* AchievementSystem.swift in Sources */,
 				146E2E0E29C0E30700BFC757 /* GameEngineObject.swift in Sources */,
 				61CD55F029C35D9600DB6000 /* CollisionMask.swift in Sources */,
 				124B02D729C567F600094CF5 /* LevelView.swift in Sources */,
@@ -759,8 +803,10 @@
 				2FC7FAD229C50C2C00B56850 /* RandomNumberGeneratorWithSeed.swift in Sources */,
 				61FC030F29CC3AE100CE2CE5 /* CGPath+Dimensions.swift in Sources */,
 				2FC4652E29D2EA9A00A5B4F3 /* StatTracker.swift in Sources */,
+				2FC4654D29D4375D00A5B4F3 /* BobTheBuilderAchievement.swift in Sources */,
 				124B02ED29C9ED0000094CF5 /* EventIdentifier.swift in Sources */,
 				61CD55E629C35CDB00DB6000 /* FiziksEngine.swift in Sources */,
+				2FC4654F29D43C0900A5B4F3 /* BobTheBuilderAchievementDataSource.swift in Sources */,
 				2FC7FADE29C510F200B56850 /* CGPoint+arithmeticMean.swift in Sources */,
 				124B02D329C4204300094CF5 /* GameObjectPlatform.swift in Sources */,
 				2FC4652C29D2EA1500A5B4F3 /* StatsTrackingSystem.swift in Sources */,
@@ -786,7 +832,9 @@
 				146E2E1729C0E33900BFC757 /* CGPoint+Hashable.swift in Sources */,
 				146E2E1029C0E30700BFC757 /* Block.swift in Sources */,
 				2F469D5129D2AA3200C4152E /* CGPath+Create.swift in Sources */,
+				2FC4655329D440D000A5B4F3 /* AchievementSystemDataSource.swift in Sources */,
 				2F469D5529D2AB1500C4152E /* FiziksContact.swift in Sources */,
+				2FC4654B29D42E4000A5B4F3 /* Achievement.swift in Sources */,
 				2FC4654529D4272C00A5B4F3 /* BlockLostEvent.swift in Sources */,
 				124B02D929C568FE00094CF5 /* BackgroundView.swift in Sources */,
 				61CD55F229C35DA700DB6000 /* ContactTestMask.swift in Sources */,

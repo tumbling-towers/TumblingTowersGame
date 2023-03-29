@@ -8,6 +8,7 @@
 import Foundation
 
 class NumBlocksPlacedStatTracker: StatTracker {
+    let name: String = "NumBlocksPlaced"
     var numBlocksPlaced: Int
     
     init(eventManager: EventManager) {
