@@ -65,12 +65,14 @@
 		2FA2AC0329C74528001C5B7C /* GameEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA2AC0229C74528001C5B7C /* GameEngineTests.swift */; };
 		2FA2AC0529C74541001C5B7C /* GameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA2AC0429C74541001C5B7C /* GameEngine.swift */; };
 		2FBBD79E29C6C1C100C30582 /* BiMapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FBBD79D29C6C1C100C30582 /* BiMapTests.swift */; };
-		2FC4652C29D2EA1500A5B4F3 /* AchievementSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC4652B29D2EA1500A5B4F3 /* AchievementSystem.swift */; };
-		2FC4652E29D2EA9A00A5B4F3 /* Achievement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC4652D29D2EA9A00A5B4F3 /* Achievement.swift */; };
-		2FC4653129D30FF700A5B4F3 /* CountPerGameAchievement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC4653029D30FF700A5B4F3 /* CountPerGameAchievement.swift */; };
-		2FC4653329D3101000A5B4F3 /* OverallAchievement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC4653229D3101000A5B4F3 /* OverallAchievement.swift */; };
+		2FC4652C29D2EA1500A5B4F3 /* StatsTrackingSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC4652B29D2EA1500A5B4F3 /* StatsTrackingSystem.swift */; };
+		2FC4652E29D2EA9A00A5B4F3 /* StatTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC4652D29D2EA9A00A5B4F3 /* StatTracker.swift */; };
+		2FC4653129D30FF700A5B4F3 /* PerGameStat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC4653029D30FF700A5B4F3 /* PerGameStat.swift */; };
+		2FC4653329D3101000A5B4F3 /* OverallStat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC4653229D3101000A5B4F3 /* OverallStat.swift */; };
 		2FC4653829D35E3700A5B4F3 /* BlockPlacedEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC4653729D35E3700A5B4F3 /* BlockPlacedEvent.swift */; };
-		2FC4654029D3D6DE00A5B4F3 /* BlockPlacerAchievement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC4653F29D3D6DE00A5B4F3 /* BlockPlacerAchievement.swift */; };
+		2FC4654029D3D6DE00A5B4F3 /* NumBlocksPlacedStatTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC4653F29D3D6DE00A5B4F3 /* NumBlocksPlacedStatTracker.swift */; };
+		2FC4654329D4264E00A5B4F3 /* NumBlocksLostStatTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC4654229D4264E00A5B4F3 /* NumBlocksLostStatTracker.swift */; };
+		2FC4654529D4272C00A5B4F3 /* BlockLostEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC4654429D4272C00A5B4F3 /* BlockLostEvent.swift */; };
 		2FC7FACC29C50B4500B56850 /* ShapeRandomizerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC7FACB29C50B4500B56850 /* ShapeRandomizerTests.swift */; };
 		2FC7FAD229C50C2C00B56850 /* RandomNumberGeneratorWithSeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC7FAD129C50C2C00B56850 /* RandomNumberGeneratorWithSeed.swift */; };
 		2FC7FAD429C50C3C00B56850 /* ShapeRandomizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC7FAD329C50C3C00B56850 /* ShapeRandomizer.swift */; };
@@ -183,12 +185,14 @@
 		2FA2AC0229C74528001C5B7C /* GameEngineTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameEngineTests.swift; sourceTree = "<group>"; };
 		2FA2AC0429C74541001C5B7C /* GameEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameEngine.swift; sourceTree = "<group>"; };
 		2FBBD79D29C6C1C100C30582 /* BiMapTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiMapTests.swift; sourceTree = "<group>"; };
-		2FC4652B29D2EA1500A5B4F3 /* AchievementSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementSystem.swift; sourceTree = "<group>"; };
-		2FC4652D29D2EA9A00A5B4F3 /* Achievement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Achievement.swift; sourceTree = "<group>"; };
-		2FC4653029D30FF700A5B4F3 /* CountPerGameAchievement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountPerGameAchievement.swift; sourceTree = "<group>"; };
-		2FC4653229D3101000A5B4F3 /* OverallAchievement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverallAchievement.swift; sourceTree = "<group>"; };
+		2FC4652B29D2EA1500A5B4F3 /* StatsTrackingSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsTrackingSystem.swift; sourceTree = "<group>"; };
+		2FC4652D29D2EA9A00A5B4F3 /* StatTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatTracker.swift; sourceTree = "<group>"; };
+		2FC4653029D30FF700A5B4F3 /* PerGameStat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerGameStat.swift; sourceTree = "<group>"; };
+		2FC4653229D3101000A5B4F3 /* OverallStat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverallStat.swift; sourceTree = "<group>"; };
 		2FC4653729D35E3700A5B4F3 /* BlockPlacedEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockPlacedEvent.swift; sourceTree = "<group>"; };
-		2FC4653F29D3D6DE00A5B4F3 /* BlockPlacerAchievement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockPlacerAchievement.swift; sourceTree = "<group>"; };
+		2FC4653F29D3D6DE00A5B4F3 /* NumBlocksPlacedStatTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumBlocksPlacedStatTracker.swift; sourceTree = "<group>"; };
+		2FC4654229D4264E00A5B4F3 /* NumBlocksLostStatTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumBlocksLostStatTracker.swift; sourceTree = "<group>"; };
+		2FC4654429D4272C00A5B4F3 /* BlockLostEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockLostEvent.swift; sourceTree = "<group>"; };
 		2FC7FACB29C50B4500B56850 /* ShapeRandomizerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeRandomizerTests.swift; sourceTree = "<group>"; };
 		2FC7FAD129C50C2C00B56850 /* RandomNumberGeneratorWithSeed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandomNumberGeneratorWithSeed.swift; sourceTree = "<group>"; };
 		2FC7FAD329C50C3C00B56850 /* ShapeRandomizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeRandomizer.swift; sourceTree = "<group>"; };
@@ -360,7 +364,7 @@
 		146E2DDD29C0D0AF00BFC757 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				2FC4652A29D2EA0700A5B4F3 /* AchievementSystem */,
+				2FC4652A29D2EA0700A5B4F3 /* StatsTrackingSystem */,
 				124B02CB29C41F6400094CF5 /* GameObject */,
 				2F7E13A829C0F5E5000E6FA9 /* GameEngine */,
 				146E2E0429C0E2D800BFC757 /* FiziksEngine */,
@@ -489,40 +493,42 @@
 			path = GameEngine;
 			sourceTree = "<group>";
 		};
-		2FC4652A29D2EA0700A5B4F3 /* AchievementSystem */ = {
+		2FC4652A29D2EA0700A5B4F3 /* StatsTrackingSystem */ = {
 			isa = PBXGroup;
 			children = (
-				2FC4652F29D30FE900A5B4F3 /* Achievements */,
-				2FC4652B29D2EA1500A5B4F3 /* AchievementSystem.swift */,
+				2FC4652F29D30FE900A5B4F3 /* StatTrackers */,
+				2FC4652B29D2EA1500A5B4F3 /* StatsTrackingSystem.swift */,
 			);
-			path = AchievementSystem;
+			path = StatsTrackingSystem;
 			sourceTree = "<group>";
 		};
-		2FC4652F29D30FE900A5B4F3 /* Achievements */ = {
+		2FC4652F29D30FE900A5B4F3 /* StatTrackers */ = {
 			isa = PBXGroup;
 			children = (
-				2FC4654129D3ECCB00A5B4F3 /* AchievementSubtypes(experimental) */,
-				2FC4652D29D2EA9A00A5B4F3 /* Achievement.swift */,
-				2FC4653F29D3D6DE00A5B4F3 /* BlockPlacerAchievement.swift */,
+				2FC4654129D3ECCB00A5B4F3 /* StatsSubtypes(experimental) */,
+				2FC4652D29D2EA9A00A5B4F3 /* StatTracker.swift */,
+				2FC4653F29D3D6DE00A5B4F3 /* NumBlocksPlacedStatTracker.swift */,
+				2FC4654229D4264E00A5B4F3 /* NumBlocksLostStatTracker.swift */,
 			);
-			path = Achievements;
+			path = StatTrackers;
 			sourceTree = "<group>";
 		};
 		2FC4653629D35E2900A5B4F3 /* Events */ = {
 			isa = PBXGroup;
 			children = (
 				2FC4653729D35E3700A5B4F3 /* BlockPlacedEvent.swift */,
+				2FC4654429D4272C00A5B4F3 /* BlockLostEvent.swift */,
 			);
 			path = Events;
 			sourceTree = "<group>";
 		};
-		2FC4654129D3ECCB00A5B4F3 /* AchievementSubtypes(experimental) */ = {
+		2FC4654129D3ECCB00A5B4F3 /* StatsSubtypes(experimental) */ = {
 			isa = PBXGroup;
 			children = (
-				2FC4653029D30FF700A5B4F3 /* CountPerGameAchievement.swift */,
-				2FC4653229D3101000A5B4F3 /* OverallAchievement.swift */,
+				2FC4653029D30FF700A5B4F3 /* PerGameStat.swift */,
+				2FC4653229D3101000A5B4F3 /* OverallStat.swift */,
 			);
-			path = "AchievementSubtypes(experimental)";
+			path = "StatsSubtypes(experimental)";
 			sourceTree = "<group>";
 		};
 		619D449E29C62FCF00EE00CE /* FiziksEngine */ = {
@@ -742,6 +748,7 @@
 				124B02D729C567F600094CF5 /* LevelView.swift in Sources */,
 				2FA2AC0529C74541001C5B7C /* GameEngine.swift in Sources */,
 				2FC7FAD429C50C3C00B56850 /* ShapeRandomizer.swift in Sources */,
+				2FC4654329D4264E00A5B4F3 /* NumBlocksLostStatTracker.swift in Sources */,
 				124B02D529C55F8C00094CF5 /* Level.swift in Sources */,
 				124B02EF29C9ED1800094CF5 /* TumblingTowersEventIdentifier.swift in Sources */,
 				61CD55EA29C35D2C00DB6000 /* FiziksConstants.swift in Sources */,
@@ -751,12 +758,12 @@
 				146E2DB429C0D07200BFC757 /* TumblingTowersGameApp.swift in Sources */,
 				2FC7FAD229C50C2C00B56850 /* RandomNumberGeneratorWithSeed.swift in Sources */,
 				61FC030F29CC3AE100CE2CE5 /* CGPath+Dimensions.swift in Sources */,
-				2FC4652E29D2EA9A00A5B4F3 /* Achievement.swift in Sources */,
+				2FC4652E29D2EA9A00A5B4F3 /* StatTracker.swift in Sources */,
 				124B02ED29C9ED0000094CF5 /* EventIdentifier.swift in Sources */,
 				61CD55E629C35CDB00DB6000 /* FiziksEngine.swift in Sources */,
 				2FC7FADE29C510F200B56850 /* CGPoint+arithmeticMean.swift in Sources */,
 				124B02D329C4204300094CF5 /* GameObjectPlatform.swift in Sources */,
-				2FC4652C29D2EA1500A5B4F3 /* AchievementSystem.swift in Sources */,
+				2FC4652C29D2EA1500A5B4F3 /* StatsTrackingSystem.swift in Sources */,
 				61FC031729CD498400CE2CE5 /* Shape+Fill.swift in Sources */,
 				61FC031129CC483400CE2CE5 /* CGPath+Rotate.swift in Sources */,
 				61FC031529CCBFB100CE2CE5 /* CGPoint+Arithmetic.swift in Sources */,
@@ -780,6 +787,7 @@
 				146E2E1029C0E30700BFC757 /* Block.swift in Sources */,
 				2F469D5129D2AA3200C4152E /* CGPath+Create.swift in Sources */,
 				2F469D5529D2AB1500C4152E /* FiziksContact.swift in Sources */,
+				2FC4654529D4272C00A5B4F3 /* BlockLostEvent.swift in Sources */,
 				124B02D929C568FE00094CF5 /* BackgroundView.swift in Sources */,
 				61CD55F229C35DA700DB6000 /* ContactTestMask.swift in Sources */,
 				124B02CD29C41F7100094CF5 /* GameObject.swift in Sources */,
@@ -787,12 +795,12 @@
 				146E2DE629C0D61A00BFC757 /* MainGameManager.swift in Sources */,
 				146E2DF029C0D62F00BFC757 /* Vector.swift in Sources */,
 				124B02F529C9F10300094CF5 /* TumblingTowersNotification.swift in Sources */,
-				2FC4654029D3D6DE00A5B4F3 /* BlockPlacerAchievement.swift in Sources */,
+				2FC4654029D3D6DE00A5B4F3 /* NumBlocksPlacedStatTracker.swift in Sources */,
 				619D44C029C6F35300EE00CE /* ObjectShape.swift in Sources */,
 				14C53B2629C5E9D10035EC17 /* GameUpdater.swift in Sources */,
 				146E2DE429C0D61A00BFC757 /* GameEngineManager.swift in Sources */,
-				2FC4653129D30FF700A5B4F3 /* CountPerGameAchievement.swift in Sources */,
-				2FC4653329D3101000A5B4F3 /* OverallAchievement.swift in Sources */,
+				2FC4653129D30FF700A5B4F3 /* PerGameStat.swift in Sources */,
+				2FC4653329D3101000A5B4F3 /* OverallStat.swift in Sources */,
 				124B02F729C9F54B00094CF5 /* NotificationName.swift in Sources */,
 				2F469D5A29D2AB3300C4152E /* FiziksShapeNode.swift in Sources */,
 				124B02F129C9ED4100094CF5 /* TumblingTowersEvent.swift in Sources */,

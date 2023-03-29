@@ -20,7 +20,7 @@ class GameEngine {
     private var shapeRandomizer: ShapeRandomizer
     
     let eventManager: EventManager
-    let achievementSystem: AchievementSystem
+    let achievementSystem: StatsTrackingSystem
 
     private var currentlyMovingBlock: Block? {
         didSet {
@@ -75,7 +75,7 @@ class GameEngine {
         self.shapeRandomizer = ShapeRandomizer(possibleShapes: TetrisType.allCases, seed: 1)
         
         self.eventManager = TumblingTowersEventManager()
-        self.achievementSystem = AchievementSystem(eventManager: eventManager)
+        self.achievementSystem = StatsTrackingSystem(eventManager: eventManager)
 
         fiziksEngine.fiziksContactDelegate = self
 
