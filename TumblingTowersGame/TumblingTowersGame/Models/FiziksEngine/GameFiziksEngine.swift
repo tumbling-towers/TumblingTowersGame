@@ -100,7 +100,7 @@ extension GameFiziksEngine: FiziksEngine {
             return []
         }
         let contactedSKPhysicsBodies = skPhysicsBody.allContactedBodies()
-        var contactedFiziksBodies = [fiziksBody]
+        var contactedFiziksBodies: [FiziksBody] = []
         for body in contactedSKPhysicsBodies {
             guard let node = body.node,
                   let contactedFiziksBody = skNodeToFiziksBody[node] else {
