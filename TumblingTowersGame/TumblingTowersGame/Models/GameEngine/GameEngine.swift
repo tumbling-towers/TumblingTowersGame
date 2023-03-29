@@ -131,7 +131,6 @@ class GameEngine {
     func update() {
         // MARK: Platform is always sampleplatform for now
         var newLevel = Level(blocks: [], platform: .samplePlatform)
-
         for object in gameObjects {
             if isOutOfBounds(object) {
                 // TODO: Emit event that a block has gone out of bounds.
@@ -246,8 +245,8 @@ class GameEngine {
                                            restitution: .zero,
                                            linearDamping: .zero,
                                            categoryBitMask: Block.categoryBitMask,
-                                           collisionBitMask: Block.collisionBitMask,
-                                           contactTestBitMask: Block.contactTestBitMask)
+                                           collisionBitMask: Block.fallingCollisionBitMask,
+                                           contactTestBitMask: Block.fallingContactTestBitMask)
         let newBlock = Block(fiziksBody: newFiziksBody, shape: shape)
         return newBlock
     }
@@ -338,7 +337,7 @@ extension GameEngine: FiziksContactDelegate {
                 && !contact.contains(body: leftBoundary)
                 && !contact.contains(body: rightBoundary) {
                 handlePlaceCMB()
-                checkAndHandleContactPowerupLine(currentBlock)
+                checkAndHandleContactPowerupLine(currentBlock: currentBlock)
             }
         }
     }
@@ -348,11 +347,12 @@ extension GameEngine: FiziksContactDelegate {
     }
     
     
-    private func checkAndHandleContactPowerupLine(_ currentBlock: Block) {
+    private func checkAndHandleContactPowerupLine(currentBlock: Block) {
+        // something in contact with powerup line
         if let powerupLine = powerupLine {
             let pos = currentBlock.position
-            let height = currentBlock.shape.height
-            
+            let height = currentBlock.height
+
             if pos.y + height / 2 > powerupLine.position.y
                 && pos.y - height / 2 < powerupLine.position.y {
                 print("touched powerup line")

@@ -30,4 +30,12 @@ extension GameEngineObject {
     var zRotation: CGFloat {
         fiziksBody.zRotation
     }
+    
+    var width: Double {
+        shape.width * abs(cos(rotation)) + shape.height * abs(sin(rotation))
+    }
+    
+    var height: Double {
+        shape.height * abs(cos(rotation)) + shape.width * abs(sin(rotation))
+    }
 }
