@@ -53,6 +53,7 @@ class GameEngine {
             
         }
     }
+    var temp: Bool = true
     
     var leftBoundary: FiziksBody? {
         didSet {
@@ -340,6 +341,12 @@ extension GameEngine: FiziksContactDelegate {
                 && !contact.contains(body: rightBoundary) {
                 handlePlaceCMB()
             }
+        }
+        
+        // TODO: Experiment with combine
+        if contact.bodyA.categoryBitMask == CategoryMask.block && contact.bodyB.categoryBitMask == CategoryMask.block {
+            fiziksEngine.combine([contact.bodyA, contact.bodyB])
+            temp = false
         }
     }
 

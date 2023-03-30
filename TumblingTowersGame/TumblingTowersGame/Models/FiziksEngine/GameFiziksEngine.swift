@@ -73,22 +73,24 @@ extension GameFiziksEngine: FiziksEngine {
     // stay in the new body. I think this is a good place to use double dispatch actually.
     // Might consider coming up with ways to combine different shapes.
     func combine(_ fiziksBodies: [FiziksBody]) {
+        print("check")
+        if fiziksBodies.count < 2 {
+            return
+        }
+        
         let skPhysicsBodies = fiziksBodies.compactMap({ getSKPhysicsBody(of: $0) })
-        var newCollisionBitmask: BitMask = 0x0
-        var newCategoryBitmask: BitMask = 0x0
-        var newContactTestBitmask: BitMask = 0x0
-
-        fiziksBodies.forEach({
-            newCollisionBitmask = newCollisionBitmask | ($0.collisionBitMask ?? 0)
-            newCategoryBitmask = newCategoryBitmask | ($0.categoryBitMask ?? 0)
-            newContactTestBitmask = newContactTestBitmask | ($0.contactTestBitMask ?? 0)
-            delete($0)
-        })
-
-        let combinedNode = SKShapeNode()
-        combinedNode.physicsBody = SKPhysicsBody(bodies: skPhysicsBodies)
-
-        fiziksScene.addChild(combinedNode)
+        let bodyA = fiziksBodies[1]
+        
+        let gravityField: SKFieldNode = SKFieldNode.electricField()
+        gravityField.position = bodyA.position
+        gravityField.physicsBody?.fieldBitMask = CategoryMask.block
+        gravityField.strength = 100
+        gravityField.falloff = 10
+        
+        print(bodyA.position)
+        print(gravityField.position)
+        
+        bodyA.fiziksShapeNode.addChild(gravityField)
     }
 
     func setWorldGravity(to newValue: CGVector) {
