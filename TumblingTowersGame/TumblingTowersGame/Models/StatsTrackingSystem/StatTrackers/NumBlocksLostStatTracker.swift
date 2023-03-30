@@ -8,7 +8,7 @@
 import Foundation
 
 class NumBlocksLostStatTracker: StatTracker {
-    let name: String = "NumBlocksLost"
+    static let name: String = "NumBlocksLost"
     var numBlocksLost: Int
     
     init(eventManager: EventManager) {

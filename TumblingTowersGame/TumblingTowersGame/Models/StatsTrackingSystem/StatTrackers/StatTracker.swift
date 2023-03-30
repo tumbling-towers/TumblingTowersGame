@@ -8,5 +8,5 @@
 import Foundation
 
 protocol StatTracker {
-    var name: String { get }
+    static var name: String { get }
 }

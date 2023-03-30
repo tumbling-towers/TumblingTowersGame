@@ -8,13 +8,15 @@
 import Foundation
 
 class NumBlocksPlacedStatTracker: StatTracker {
-    let name: String = "NumBlocksPlaced"
+    static let name: String = "NumBlocksPlaced"
     var numBlocksPlaced: Int
     
     init(eventManager: EventManager) {
         self.numBlocksPlaced = 0
+        /*
         eventManager.registerClosure(for: BlockPlacedEvent.self, closure: { [weak self] (event: Event) in
             self?.numBlocksPlaced += 1
         })
+         */
     }
 }

@@ -28,18 +28,18 @@ class StatsTrackingSystem {
     
     private func add(_ statTracker: StatTracker) {
         statTrackers.append(statTracker)
-        statTrackerMap[statTracker.name] = statTracker
+        statTrackerMap[type(of: statTracker).name] = statTracker
     }
 }
 
 extension StatsTrackingSystem: BobTheBuilderAchievementDataSource {
     var numBlocksPlaced: Int? {
-        let tracker = statTrackerMap["NumBlocksPlaced"] as? NumBlocksPlacedStatTracker
+        let tracker = statTrackerMap[NumBlocksPlacedStatTracker.name] as? NumBlocksPlacedStatTracker
         return tracker?.numBlocksPlaced
     }
     
     var numBlocksDropped: Int? {
-        let tracker = statTrackerMap["NumBlocksLost"] as? NumBlocksLostStatTracker
+        let tracker = statTrackerMap[NumBlocksLostStatTracker.name] as? NumBlocksLostStatTracker
         return tracker?.numBlocksLost
     }
 }

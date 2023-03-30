@@ -234,7 +234,6 @@ extension GameEngine: FiziksContactDelegate {
             contact.bodyA.affectedByGravity = true
             contact.bodyB.affectedByGravity = true
             currentlyMovingBlock = nil
-            eventManager.postEvent(BlockPlacedEvent())
         }
         
     }

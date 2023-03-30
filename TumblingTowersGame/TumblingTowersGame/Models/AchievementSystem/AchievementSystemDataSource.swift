@@ -7,6 +7,5 @@
 
 import Foundation
 
-// TODO: is it good to have multiple conformance???
 protocol AchievementSystemDataSource: BobTheBuilderAchievementDataSource {
 }

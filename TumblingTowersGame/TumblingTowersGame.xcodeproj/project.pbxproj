@@ -69,7 +69,6 @@
 		2FC4652E29D2EA9A00A5B4F3 /* StatTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC4652D29D2EA9A00A5B4F3 /* StatTracker.swift */; };
 		2FC4653129D30FF700A5B4F3 /* PerGameStat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC4653029D30FF700A5B4F3 /* PerGameStat.swift */; };
 		2FC4653329D3101000A5B4F3 /* OverallStat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC4653229D3101000A5B4F3 /* OverallStat.swift */; };
-		2FC4653829D35E3700A5B4F3 /* BlockPlacedEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC4653729D35E3700A5B4F3 /* BlockPlacedEvent.swift */; };
 		2FC4654029D3D6DE00A5B4F3 /* NumBlocksPlacedStatTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC4653F29D3D6DE00A5B4F3 /* NumBlocksPlacedStatTracker.swift */; };
 		2FC4654329D4264E00A5B4F3 /* NumBlocksLostStatTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC4654229D4264E00A5B4F3 /* NumBlocksLostStatTracker.swift */; };
 		2FC4654529D4272C00A5B4F3 /* BlockLostEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC4654429D4272C00A5B4F3 /* BlockLostEvent.swift */; };
@@ -195,7 +194,6 @@
 		2FC4652D29D2EA9A00A5B4F3 /* StatTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatTracker.swift; sourceTree = "<group>"; };
 		2FC4653029D30FF700A5B4F3 /* PerGameStat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerGameStat.swift; sourceTree = "<group>"; };
 		2FC4653229D3101000A5B4F3 /* OverallStat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverallStat.swift; sourceTree = "<group>"; };
-		2FC4653729D35E3700A5B4F3 /* BlockPlacedEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockPlacedEvent.swift; sourceTree = "<group>"; };
 		2FC4653F29D3D6DE00A5B4F3 /* NumBlocksPlacedStatTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumBlocksPlacedStatTracker.swift; sourceTree = "<group>"; };
 		2FC4654229D4264E00A5B4F3 /* NumBlocksLostStatTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumBlocksLostStatTracker.swift; sourceTree = "<group>"; };
 		2FC4654429D4272C00A5B4F3 /* BlockLostEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockLostEvent.swift; sourceTree = "<group>"; };
@@ -529,7 +527,6 @@
 		2FC4653629D35E2900A5B4F3 /* Events */ = {
 			isa = PBXGroup;
 			children = (
-				2FC4653729D35E3700A5B4F3 /* BlockPlacedEvent.swift */,
 				2FC4654429D4272C00A5B4F3 /* BlockLostEvent.swift */,
 				2FC4655029D43CEF00A5B4F3 /* GameEndedEvent.swift */,
 			);
@@ -781,7 +778,6 @@
 				146E2DB629C0D07200BFC757 /* ContentView.swift in Sources */,
 				146E2DEA29C0D62800BFC757 /* InputSystem.swift in Sources */,
 				61CD55E829C35D1E00DB6000 /* PathFiziksBody.swift in Sources */,
-				2FC4653829D35E3700A5B4F3 /* BlockPlacedEvent.swift in Sources */,
 				146E2E1929C0E5B400BFC757 /* GameplayLevelView.swift in Sources */,
 				2FC4655129D43CEF00A5B4F3 /* GameEndedEvent.swift in Sources */,
 				124B02E629C9DAA200094CF5 /* EventManager.swift in Sources */,
