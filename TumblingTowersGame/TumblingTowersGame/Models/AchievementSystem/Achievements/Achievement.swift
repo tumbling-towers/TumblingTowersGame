@@ -9,6 +9,7 @@ import Foundation
 
 protocol Achievement {
     var name: String { get }
+    var description: String { get }
     var achieved: Bool { get }
     func update()
 }

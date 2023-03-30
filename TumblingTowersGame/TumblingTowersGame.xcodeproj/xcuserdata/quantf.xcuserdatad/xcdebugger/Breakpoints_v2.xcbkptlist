@@ -3,4 +3,54 @@
    uuid = "95D96ABF-6DD1-41E0-A1CF-A1B0A4592166"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "34E02A23-9E91-4010-B5FE-05566A925A7B"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TumblingTowersGame/EventManager/TumblingTowersEventManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "51"
+            endingLineNumber = "51"
+            landmarkName = "executeObserverClosures(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "34E02A23-9E91-4010-B5FE-05566A925A7B - 2379ec78c9c6377f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TumblingTowersGame.TumblingTowersEventManager.executeObserverClosures(Foundation.Notification) -&gt; ()"
+                  moduleName = "TumblingTowersGame"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/quantf/Documents/3217/TumblingTowersGame/TumblingTowersGame/TumblingTowersGame/EventManager/TumblingTowersEventManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "52"
+                  endingLineNumber = "52"
+                  offsetFromSymbolStart = "880">
+               </Location>
+               <Location
+                  uuid = "34E02A23-9E91-4010-B5FE-05566A925A7B - 2379ec78c9c6377f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TumblingTowersGame.TumblingTowersEventManager.executeObserverClosures(Foundation.Notification) -&gt; ()"
+                  moduleName = "TumblingTowersGame"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/quantf/Documents/3217/TumblingTowersGame/TumblingTowersGame/TumblingTowersGame/EventManager/TumblingTowersEventManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "52"
+                  endingLineNumber = "52"
+                  offsetFromSymbolStart = "1156">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

@@ -6,3 +6,7 @@
 //
 
 import Foundation
+
+protocol SkyscraperAchievementDataSource {
+    var towerHeight: CGFloat? { get }
+}

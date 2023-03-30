@@ -8,18 +8,23 @@
 import Foundation
 
 class BobTheBuilderAchievement: Achievement {
-    var name: String {
-        "BobTheBuilder(\(goal))"
+    var name: String
+    var description: String {
+        "Place \(goal) blocks without them falling off the platform. Progress: \(progress)/\(goal)"
     }
-    var achieved: Bool
+    var achieved: Bool {
+        progress >= goal
+    }
     
     let dataSource: BobTheBuilderAchievementDataSource
+    var progress: Int
     let goal: Int
     
-    init(dataSource: BobTheBuilderAchievementDataSource, achieved: Bool = false, goal: Int = 10) {
-        self.dataSource = dataSource
-        self.achieved = achieved
+    init(name: String, goal: Int, dataSource: BobTheBuilderAchievementDataSource) {
+        self.name = name
         self.goal = goal
+        self.dataSource = dataSource
+        self.progress = 0
     }
     
     func update() {
@@ -27,6 +32,6 @@ class BobTheBuilderAchievement: Achievement {
               let numBlocksDropped = dataSource.numBlocksDropped else {
             return
         }
-        achieved = (numBlocksPlaced - numBlocksDropped) >= goal
+        progress = (numBlocksPlaced - numBlocksDropped)
     }
 }

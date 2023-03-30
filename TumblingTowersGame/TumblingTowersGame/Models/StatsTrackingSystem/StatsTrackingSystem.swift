@@ -22,12 +22,15 @@ class StatsTrackingSystem {
         // TODO: get from storage
         add(NumBlocksPlacedStatTracker(eventManager: eventManager))
         add(NumBlocksLostStatTracker(eventManager: eventManager))
+        add(TowerHeightStatTracker(eventManager: eventManager))
     }
     
     private func add(_ statTracker: StatTracker) {
         statTrackerMap[type(of: statTracker).name] = statTracker
     }
 }
+
+extension StatsTrackingSystem: AchievementSystemDataSource {}
 
 extension StatsTrackingSystem: BobTheBuilderAchievementDataSource {
     var numBlocksPlaced: Int? {
@@ -41,5 +44,9 @@ extension StatsTrackingSystem: BobTheBuilderAchievementDataSource {
     }
 }
 
-extension StatsTrackingSystem: AchievementSystemDataSource {
+extension StatsTrackingSystem: SkyscraperAchievementDataSource {
+    var towerHeight: CGFloat? {
+        let tracker = statTrackerMap[TowerHeightStatTracker.name] as? TowerHeightStatTracker
+        return tracker?.height
+    }
 }

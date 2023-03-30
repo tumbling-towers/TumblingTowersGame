@@ -13,8 +13,10 @@ class NumBlocksLostStatTracker: StatTracker {
     
     init(eventManager: EventManager) {
         self.numBlocksLost = 0
-        eventManager.registerClosure(for: BlockLostEvent.self, closure: { [weak self] (event: Event) in
-            self?.numBlocksLost += 1
-        })
+        eventManager.registerClosure(for: BlockLostEvent.self, closure: blockLostClosure)
+    }
+    
+    private lazy var blockLostClosure = { [weak self] (_ event: Event) -> Void in
+        self?.numBlocksLost += 1
     }
 }

@@ -67,6 +67,10 @@
 		2FB69D5D29D55D9A008D81AC /* VinePowerupActivatedEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB69D5C29D55D9A008D81AC /* VinePowerupActivatedEvent.swift */; };
 		2FB69D5F29D55ED1008D81AC /* BlockTouchedPowerupLineEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB69D5E29D55ED1008D81AC /* BlockTouchedPowerupLineEvent.swift */; };
 		2FB69D6129D55F06008D81AC /* PlatformPowerupActivatedEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB69D6029D55F06008D81AC /* PlatformPowerupActivatedEvent.swift */; };
+		2FB69D6629D5B9E6008D81AC /* SkyscraperAchievement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB69D6529D5B9E6008D81AC /* SkyscraperAchievement.swift */; };
+		2FB69D6829D5B9F6008D81AC /* SkyscraperAchievementDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB69D6729D5B9F6008D81AC /* SkyscraperAchievementDataSource.swift */; };
+		2FB69D6A29D5BC63008D81AC /* TowerHeightStatTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB69D6929D5BC63008D81AC /* TowerHeightStatTracker.swift */; };
+		2FB69D6C29D5BD0E008D81AC /* TowerHeightIncreasedEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB69D6B29D5BD0E008D81AC /* TowerHeightIncreasedEvent.swift */; };
 		2FBBD79E29C6C1C100C30582 /* BiMapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FBBD79D29C6C1C100C30582 /* BiMapTests.swift */; };
 		2FC4652C29D2EA1500A5B4F3 /* StatsTrackingSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC4652B29D2EA1500A5B4F3 /* StatsTrackingSystem.swift */; };
 		2FC4652E29D2EA9A00A5B4F3 /* StatTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC4652D29D2EA9A00A5B4F3 /* StatTracker.swift */; };
@@ -216,6 +220,10 @@
 		2FB69D5C29D55D9A008D81AC /* VinePowerupActivatedEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VinePowerupActivatedEvent.swift; sourceTree = "<group>"; };
 		2FB69D5E29D55ED1008D81AC /* BlockTouchedPowerupLineEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockTouchedPowerupLineEvent.swift; sourceTree = "<group>"; };
 		2FB69D6029D55F06008D81AC /* PlatformPowerupActivatedEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlatformPowerupActivatedEvent.swift; sourceTree = "<group>"; };
+		2FB69D6529D5B9E6008D81AC /* SkyscraperAchievement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkyscraperAchievement.swift; sourceTree = "<group>"; };
+		2FB69D6729D5B9F6008D81AC /* SkyscraperAchievementDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkyscraperAchievementDataSource.swift; sourceTree = "<group>"; };
+		2FB69D6929D5BC63008D81AC /* TowerHeightStatTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TowerHeightStatTracker.swift; sourceTree = "<group>"; };
+		2FB69D6B29D5BD0E008D81AC /* TowerHeightIncreasedEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TowerHeightIncreasedEvent.swift; sourceTree = "<group>"; };
 		2FBBD79D29C6C1C100C30582 /* BiMapTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiMapTests.swift; sourceTree = "<group>"; };
 		2FC4652B29D2EA1500A5B4F3 /* StatsTrackingSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsTrackingSystem.swift; sourceTree = "<group>"; };
 		2FC4652D29D2EA9A00A5B4F3 /* StatTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatTracker.swift; sourceTree = "<group>"; };
@@ -555,6 +563,15 @@
 			path = GameEngine;
 			sourceTree = "<group>";
 		};
+		2FB69D6429D5B9D2008D81AC /* SkyscraperAchievement */ = {
+			isa = PBXGroup;
+			children = (
+				2FB69D6529D5B9E6008D81AC /* SkyscraperAchievement.swift */,
+				2FB69D6729D5B9F6008D81AC /* SkyscraperAchievementDataSource.swift */,
+			);
+			path = SkyscraperAchievement;
+			sourceTree = "<group>";
+		};
 		2FC4652A29D2EA0700A5B4F3 /* StatsTrackingSystem */ = {
 			isa = PBXGroup;
 			children = (
@@ -571,6 +588,7 @@
 				2FC4652D29D2EA9A00A5B4F3 /* StatTracker.swift */,
 				2FC4653F29D3D6DE00A5B4F3 /* NumBlocksPlacedStatTracker.swift */,
 				2FC4654229D4264E00A5B4F3 /* NumBlocksLostStatTracker.swift */,
+				2FB69D6929D5BC63008D81AC /* TowerHeightStatTracker.swift */,
 			);
 			path = StatTrackers;
 			sourceTree = "<group>";
@@ -584,6 +602,7 @@
 				2FB69D5A29D55A6C008D81AC /* BlockPlacedEvent.swift */,
 				2FC4654429D4272C00A5B4F3 /* BlockLostEvent.swift */,
 				2FC4655029D43CEF00A5B4F3 /* GameEndedEvent.swift */,
+				2FB69D6B29D5BD0E008D81AC /* TowerHeightIncreasedEvent.swift */,
 			);
 			path = Events;
 			sourceTree = "<group>";
@@ -610,6 +629,7 @@
 		2FC4654729D42D8800A5B4F3 /* Achievements */ = {
 			isa = PBXGroup;
 			children = (
+				2FB69D6429D5B9D2008D81AC /* SkyscraperAchievement */,
 				2FC4655429D442C400A5B4F3 /* BobTheBuilderAchievement */,
 				2FC4654A29D42E4000A5B4F3 /* Achievement.swift */,
 			);
@@ -912,7 +932,9 @@
 				2FC4652C29D2EA1500A5B4F3 /* StatsTrackingSystem.swift in Sources */,
 				61FC031729CD498400CE2CE5 /* Shape+Fill.swift in Sources */,
 				61FC031129CC483400CE2CE5 /* CGPath+Rotate.swift in Sources */,
+				2FB69D6C29D5BD0E008D81AC /* TowerHeightIncreasedEvent.swift in Sources */,
 				2FB69D5F29D55ED1008D81AC /* BlockTouchedPowerupLineEvent.swift in Sources */,
+				2FB69D6A29D5BC63008D81AC /* TowerHeightStatTracker.swift in Sources */,
 				61A10F2829D30CBB000EB4B4 /* LinkedListNode.swift in Sources */,
 				61FC031529CCBFB100CE2CE5 /* CGPoint+Arithmetic.swift in Sources */,
 				61FC031329CCBDE300CE2CE5 /* PathViewShape.swift in Sources */,
@@ -958,6 +980,7 @@
 				146E2DE429C0D61A00BFC757 /* GameEngineManager.swift in Sources */,
 				614B458829D3EB9100BDD2F0 /* CGVector+Multiply.swift in Sources */,
 				2FC4653129D30FF700A5B4F3 /* PerGameStat.swift in Sources */,
+				2FB69D6629D5B9E6008D81AC /* SkyscraperAchievement.swift in Sources */,
 				2FC4653329D3101000A5B4F3 /* OverallStat.swift in Sources */,
 				124B02F729C9F54B00094CF5 /* NotificationName.swift in Sources */,
 				2FB69D5D29D55D9A008D81AC /* VinePowerupActivatedEvent.swift in Sources */,
@@ -965,6 +988,7 @@
 				124B02F129C9ED4100094CF5 /* TumblingTowersEvent.swift in Sources */,
 				124B02F329C9ED6A00094CF5 /* NotificationCenterFacade.swift in Sources */,
 				61AE15B529D1786700D04E95 /* PowerupLineView.swift in Sources */,
+				2FB69D6829D5B9F6008D81AC /* SkyscraperAchievementDataSource.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

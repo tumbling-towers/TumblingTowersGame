@@ -7,5 +7,5 @@
 
 import Foundation
 
-protocol AchievementSystemDataSource: BobTheBuilderAchievementDataSource {
+protocol AchievementSystemDataSource: BobTheBuilderAchievementDataSource, SkyscraperAchievementDataSource {
 }

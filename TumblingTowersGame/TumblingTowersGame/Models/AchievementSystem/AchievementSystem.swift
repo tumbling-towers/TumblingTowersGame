@@ -9,11 +9,11 @@ import Foundation
 
 class AchievementSystem {
     var achievements: [Achievement]
-    let achievementSystemDataSource: AchievementSystemDataSource
+    let dataSource: AchievementSystemDataSource
     
     init(eventManager: EventManager, dataSource: AchievementSystemDataSource) {
         self.achievements = []
-        self.achievementSystemDataSource = dataSource
+        self.dataSource = dataSource
         eventManager.registerClosure(for: GameEndedEvent.self, closure: { [weak self] (event: Event) in
             self?.updateAllAchievements()
         })
@@ -21,7 +21,12 @@ class AchievementSystem {
     }
     
     private func setupAchievements() {
-        add(BobTheBuilderAchievement(dataSource: achievementSystemDataSource))
+        add(BobTheBuilderAchievement(name: "BobTheBuilder I", goal: 10, dataSource: dataSource))
+        add(BobTheBuilderAchievement(name: "BobTheBuilder II", goal: 20, dataSource: dataSource))
+        add(BobTheBuilderAchievement(name: "BobTheBuilder III", goal: 50, dataSource: dataSource))
+        add(SkyscraperAchievement(name: "Skyscraper I", goal: 300, dataSource: dataSource))
+        add(SkyscraperAchievement(name: "Skyscraper II", goal: 8000, dataSource: dataSource))
+        add(SkyscraperAchievement(name: "Skyscraper III", goal: 1500, dataSource: dataSource))
     }
     
     private func add(_ achievement: Achievement) {

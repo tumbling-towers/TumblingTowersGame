@@ -76,6 +76,11 @@ class GameEngine {
         }
     }
     
+    var towerHeight: CGFloat {
+        let gameObjectHeights = gameObjects.map({ $0.position.y })
+        return gameObjectHeights.max() ?? 0
+    }
+    
     // TODO: Add random generation of platform in the future
     private var rng: RandomNumberGeneratorWithSeed
     
@@ -379,6 +384,7 @@ extension GameEngine: FiziksContactDelegate {
         
         print("block placed")
         eventManager?.postEvent(BlockPlacedEvent())
+        eventManager?.postEvent(TowerHeightIncreasedEvent(newHeight: towerHeight))
         
         self.currentlyMovingBlock = nil
     }
