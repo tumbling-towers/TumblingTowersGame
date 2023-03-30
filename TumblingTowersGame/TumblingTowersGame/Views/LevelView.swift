@@ -17,9 +17,11 @@ struct LevelView: View {
             ForEach($gameEngineMgr.levelBlocks) { block in
                 BlockView(block: block)
             }
-
+                        
             PlatformView()
-
+            
+            PowerupLineView()
+            
             Button {
                 gameEngineMgr.rotateCurrentBlock()
             } label: {
@@ -48,8 +50,9 @@ struct LevelView: View {
 }
 
 struct LevelView_Previews: PreviewProvider {
+    // FIXME: this intantiating a new event manager here is wrong
     static var previews: some View {
         LevelView()
-            .environmentObject(GameEngineManager(levelDimensions: .infinite))
+            .environmentObject(GameEngineManager(levelDimensions: .infinite, eventManager: TumblingTowersEventManager()))
     }
 }

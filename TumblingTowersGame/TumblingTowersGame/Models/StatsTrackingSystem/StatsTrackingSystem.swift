@@ -10,12 +10,10 @@ import Foundation
 class StatsTrackingSystem {
     let eventManager: EventManager
     // TODO: consider which one to keep. array or map?
-    var statTrackers: [StatTracker]
     var statTrackerMap: [String: StatTracker]
     
     init(eventManager: EventManager) {
         self.eventManager = eventManager
-        self.statTrackers = []
         self.statTrackerMap = [:]
         setupStatTrackers()
     }
@@ -27,7 +25,6 @@ class StatsTrackingSystem {
     }
     
     private func add(_ statTracker: StatTracker) {
-        statTrackers.append(statTracker)
         statTrackerMap[type(of: statTracker).name] = statTracker
     }
 }

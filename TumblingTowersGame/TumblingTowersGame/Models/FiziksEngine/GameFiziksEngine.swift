@@ -15,6 +15,7 @@ class GameFiziksEngine: NSObject {
     // a protocol, so this is the temp solution. May consider
     // creating a new data structure for this purpose.
     var idToFiziksBody: [ObjectIdentifier: FiziksBody]
+    var skNodeToFiziksBody: [SKNode: FiziksBody]
 
     weak var fiziksContactDelegate: FiziksContactDelegate?
 
@@ -23,6 +24,7 @@ class GameFiziksEngine: NSObject {
         self.fiziksScene = FiziksScene(size: size)
         self.fiziksContactDelegate = nil
         self.idToFiziksBody = [:]
+        self.skNodeToFiziksBody = [:]
         super.init()
         setUpFiziksScene()
     }
@@ -53,12 +55,14 @@ extension GameFiziksEngine: FiziksEngine {
     func add(_ fiziksBody: FiziksBody) {
         let bodyId = ObjectIdentifier(fiziksBody)
         idToFiziksBody[bodyId] = fiziksBody
+        skNodeToFiziksBody[fiziksBody.fiziksShapeNode] = fiziksBody
         fiziksScene.addChild(fiziksBody)
     }
 
     func delete(_ fiziksBody: FiziksBody) {
         let idToDelete = ObjectIdentifier(fiziksBody)
         idToFiziksBody[idToDelete] = nil
+        skNodeToFiziksBody[fiziksBody.fiziksShapeNode] = nil
         fiziksScene.remove(fiziksBody)
     }
 
@@ -89,6 +93,22 @@ extension GameFiziksEngine: FiziksEngine {
 
     func setWorldGravity(to newValue: CGVector) {
         fiziksScene.gravity = newValue
+    }
+    
+    func allBodiesContacted(with fiziksBody: FiziksBody) -> [FiziksBody] {
+        guard let skPhysicsBody = fiziksBody.fiziksShapeNode.physicsBody else {
+            return []
+        }
+        let contactedSKPhysicsBodies = skPhysicsBody.allContactedBodies()
+        var contactedFiziksBodies: [FiziksBody] = []
+        for body in contactedSKPhysicsBodies {
+            guard let node = body.node,
+                  let contactedFiziksBody = skNodeToFiziksBody[node] else {
+                continue
+            }
+            contactedFiziksBodies.append(contactedFiziksBody)
+        }
+        return contactedFiziksBodies
     }
 
     private func getSKPhysicsBody(of fiziksBody: FiziksBody) -> SKPhysicsBody? {

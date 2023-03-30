@@ -1,14 +1,14 @@
 //
-//  PlatformShape.swift
+//  PowerupLineShape.swift
 //  TumblingTowersGame
 //
-//  Created by Taufiq Abdul Rahman on 19/3/23.
+//  Created by Taufiq Abdul Rahman on 27/3/23.
 //
 
 import Foundation
 import CoreGraphics
 
-struct PlatformShape: PathObjectShape {
+struct PowerupLineShape: PathObjectShape {
     var height: Double {
         path.height
     }
@@ -18,7 +18,7 @@ struct PlatformShape: PathObjectShape {
     }
     
     var path: CGPath
-
+    
     init(path: CGPath) {
         self.path = path
     }

@@ -11,16 +11,21 @@ struct ContentView: View {
 
     @EnvironmentObject var mainGameMgr: MainGameManager
     @StateObject var gameEngineMgr: GameEngineManager
-
+    
+    // for tracking drag movement
+    @State private var offset = CGSize.zero
+    
     var body: some View {
         return ZStack {
             GameplayLevelView()
                 .environmentObject(gameEngineMgr)
                 .gesture(DragGesture(minimumDistance: 0)
-                    .onChanged({ tap in
-                        gameEngineMgr.tapEvent(at: tap.location)
-                    })
+                    .onChanged { gesture in
+                        offset = gesture.translation
+                        gameEngineMgr.dragEvent(offset: offset)
+                    }
                     .onEnded { _ in
+                        offset = .zero
                         gameEngineMgr.resetInput()
                     }
                 )
@@ -36,8 +41,9 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var mainGameMgrPrev = MainGameManager()
 
+    // FIXME: this intantiating a new event manager here is wrong
     static var previews: some View {
-        ContentView(gameEngineMgr: GameEngineManager(levelDimensions: .infinite))
+        ContentView(gameEngineMgr: GameEngineManager(levelDimensions: .infinite, eventManager: TumblingTowersEventManager()))
             .environmentObject(mainGameMgrPrev)
     }
 }

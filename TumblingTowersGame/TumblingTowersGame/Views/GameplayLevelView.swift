@@ -12,6 +12,7 @@ struct GameplayLevelView: View {
     @EnvironmentObject var gameEngineMgr: GameEngineManager
 
     var body: some View {
+//        LevelView()
         // sprite view required for sprite kit to run, hidden
         SpriteView(scene: getUselessSKSceneToPresent())
 
@@ -31,8 +32,9 @@ struct GameplayLevelView: View {
 }
 
 struct GameplayLevelView_Previews: PreviewProvider {
+    // FIXME: this intantiating a new event manager here is wrong
     static var previews: some View {
         GameplayLevelView()
-            .environmentObject(GameEngineManager(levelDimensions: .infinite))
+            .environmentObject(GameEngineManager(levelDimensions: .infinite, eventManager: TumblingTowersEventManager()))
     }
 }

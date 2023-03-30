@@ -9,11 +9,11 @@ import Foundation
 import CoreGraphics
 
 extension CGPoint {
-    func add(by otherPoint: CGPoint) -> CGPoint {
-        CGPoint(x: self.x + otherPoint.x, y: self.y + otherPoint.y)
+    func add(by vector: CGVector) -> CGPoint {
+        CGPoint(x: self.x + vector.dx, y: self.y + vector.dy)
     }
 
-    func subtract(by otherPoint: CGPoint) -> CGPoint {
-        CGPoint(x: self.x - otherPoint.x, y: self.y - otherPoint.y)
+    func subtract(by vector: CGVector) -> CGPoint {
+        CGPoint(x: self.x - vector.dx, y: self.y - vector.dy)
     }
 }

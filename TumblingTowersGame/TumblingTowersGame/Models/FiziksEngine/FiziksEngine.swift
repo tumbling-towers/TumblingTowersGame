@@ -21,4 +21,5 @@ protocol FiziksEngine: AnyObject {
     func delete(_ fiziksBody: FiziksBody)
     func combine(_ fiziksBodies: [FiziksBody])
     func setWorldGravity(to newValue: CGVector)
+    func allBodiesContacted(with fiziksBody: FiziksBody) -> [FiziksBody]
 }

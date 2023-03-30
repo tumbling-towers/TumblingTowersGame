@@ -11,43 +11,72 @@ import SpriteKit
 
 class GameEngineManager: ObservableObject {
     @Published var goalLinePosition: CGPoint = CGPoint()
-    @Published var powerUpLinePosition: CGPoint = CGPoint(x: 500, y: 500)
-    @Published var platformPosition: CGPoint = GameObjectPlatform.samplePlatform.position
+    @Published var powerUpLinePosition: CGPoint = CGPoint()
+    @Published var powerupLineDimensions: CGSize = CGSize()
+    @Published var levelBlocks: [GameObjectBlock] = [.sampleBlock]
+    @Published var levelPlatform: GameObjectPlatform = .samplePlatform
+    
+    private weak var mainGameMgr: MainGameManager?
+    
+    // MARK: Game logic related attributes
+    var platformPosition: CGPoint? {
+        get {
+            gameEngine.platform?.position
+        }
+        set {
+            if let newPosition = newValue {
+                gameEngine.setPlatform(position: newPosition)
+            }
+        }
+    }
+    
+    var level: Level = Level.sampleLevel
+    
+    var levelDimensions: CGRect
+    
+    private var gameEngine: GameEngine
+
+    // MARK: UI/UX related attributes
+    var inputSystem: InputSystem
+    
+    private var gameUpdater: GameUpdater?
+    
+    var platformRenderPosition: CGPoint? {
+        guard let position = platformPosition else { return nil }
+        
+        return adjustCoordinates(for: position)
+    }
+    
+    var platformPath: CGPath? {
+        guard let platformShape = gameEngine.platform?.shape as? PlatformShape else { return nil }
+        
+        return platformShape.path
+    }
+    
     var referenceBox: CGRect? {
         guard let refPoints = gameEngine.getReferencePoints() else { return nil }
 
         let width = refPoints.right.x - refPoints.left.x
-        return CGRect(x: refPoints.left.x, y: 0, width: width, height: 5000)
+        return CGRect(x: refPoints.left.x - 1, y: 0, width: width + 2, height: 3000)
     }
 
-    var level: Level = Level.sampleLevel
-    @Published var levelBlocks: [GameObjectBlock] = [.sampleBlock]
-    @Published var levelPlatform: GameObjectPlatform = .samplePlatform
-
-    private var gameEngine: GameEngine
-    private var lastTapLocation = CGPoint(x: 0, y: 0)
-    private weak var mainGameMgr: MainGameManager?
-
-    var inputSystem: InputSystem
-    private var gameUpdater: GameUpdater?
-
-    var levelDimensions: CGRect
-
-    init(levelDimensions: CGRect) {
+    init(levelDimensions: CGRect, eventManager: EventManager) {
         self.levelDimensions = levelDimensions
         self.gameEngine = GameEngine(levelDimensions: levelDimensions)
+        
+        gameEngine.eventManager = eventManager
 
         inputSystem = GyroInput()
 
         gameEngine.insertNewBlock()
+        
+        let statsTrackingSystem = StatsTrackingSystem(eventManager: eventManager)
+        gameEngine.statsTrackingSystem = statsTrackingSystem
+        gameEngine.achievementSystem = AchievementSystem(eventManager: eventManager, dataSource: statsTrackingSystem)
     }
 
-    func tapEvent(at location: CGPoint) {
-        lastTapLocation = location
-        // MARK: Debug print
-        print("Tapped at \(location.x) ,  \(location.y)")
-
-        inputSystem.tapEvent(at: adjustCoordinates(for: location))
+    func dragEvent(offset: CGSize) {
+        inputSystem.dragEvent(offset: offset)
     }
 
     func resetInput() {
@@ -63,20 +92,20 @@ class GameEngineManager: ObservableObject {
     }
 
     func setUpLevelAndStartEngine(mainGameMgr: MainGameManager) {
-        // Initialize level here and start it
-        // gameRenderer = self
-
+        // set up game loop
         gameUpdater = GameUpdater(gameEngine: gameEngine, gameRenderer: self)
+        gameUpdater?.createCADisplayLink()
+        
+        // set up renderer
         gameEngine.setRenderer(gameRenderer: self)
 
-//        gameEngine.start(gameRendererDelegate: self)
+        // set up input system
         inputSystem.start(levelWidth: mainGameMgr.deviceWidth, levelHeight: mainGameMgr.deviceHeight)
 
         self.mainGameMgr = mainGameMgr
-
-        gameUpdater?.createCADisplayLink()
-
-        platformPosition = CGPoint(x: mainGameMgr.deviceWidth/2, y: mainGameMgr.deviceHeight-100)
+        
+        // set up initial platform
+        platformPosition = CGPoint(x: mainGameMgr.deviceWidth/2, y: 100)
     }
 
     func rotateCurrentBlock() {
@@ -92,13 +121,18 @@ class GameEngineManager: ObservableObject {
 
     private func transformRenderable(for block: GameObjectBlock) -> GameObjectBlock {
         // Flips the block vertically (mirror image) due to difference in coordinate system
-        let path = UIBezierPath(cgPath: block.path)
-        var flip = CGAffineTransformMakeScale(1, -1)
-        flip = CGAffineTransformTranslate(flip, block.width / 2, -block.height / 2)
-        path.apply(flip)
+        let path = transformPath(path: block.path, width: block.width, height: block.height)
         let newPosition = adjustCoordinates(for: block.position)
-        let transformedBlock = GameObjectBlock(position: newPosition, path: path.cgPath)
+        let transformedBlock = GameObjectBlock(position: newPosition, path: path)
         return transformedBlock
+    }
+    
+    private func transformPath(path: CGPath, width: Double, height: Double) -> CGPath {
+        let path = UIBezierPath(cgPath: path)
+        var flip = CGAffineTransformMakeScale(1, -1)
+        flip = CGAffineTransformTranslate(flip, width / 2, -height / 2)
+        path.apply(flip)
+        return path.cgPath
     }
 }
 
@@ -115,6 +149,13 @@ extension GameEngineManager: GameRendererDelegate {
         for gameObjectBlock in gameObjectBlocks {
             let transformedBlock = transformRenderable(for: gameObjectBlock)
             invertedGameObjBlocks.append(transformedBlock)
+        }
+        
+        if let powerupLine = gameEngine.powerupLine {
+            powerUpLinePosition = adjustCoordinates(for: powerupLine.position)
+                                  .add(by: CGVector(dx: -powerupLineDimensions.width / 2,
+                                                    dy: 0))
+            powerupLineDimensions = CGSize(width: powerupLine.shape.width, height: powerupLine.shape.height)
         }
 
         self.levelBlocks = invertedGameObjBlocks

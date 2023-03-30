@@ -20,7 +20,7 @@ extension CGPath {
             path.addLine(to: points[i])
         }
 
-        path.move(to: points[0])
+        path.addLine(to: points[0])
 
         if centered {
             let center = CGPoint(x: path.boundingBox.width / 2 + path.boundingBox.minX,
@@ -33,6 +33,15 @@ extension CGPath {
             }
             return newCGPath
         }
+        return path
+    }
+    
+    static func create(from rect: CGRect, centered: Bool = true) -> CGPath {
+        let path = CGPath.create(from: [CGPoint(x: rect.minX, y: rect.minY),
+                             CGPoint(x: rect.maxX, y: rect.minY),
+                             CGPoint(x: rect.maxX, y: rect.maxY),
+                             CGPoint(x: rect.minX, y: rect.maxY)], centered: centered)
+        
         return path
     }
 }

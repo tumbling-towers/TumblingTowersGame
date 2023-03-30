@@ -9,14 +9,16 @@ import Foundation
 
 class NumBlocksPlacedStatTracker: StatTracker {
     static let name: String = "NumBlocksPlaced"
-    var numBlocksPlaced: Int
+    var numBlocksPlaced: Int {
+        didSet {
+            print(numBlocksPlaced)
+        }
+    }
     
     init(eventManager: EventManager) {
         self.numBlocksPlaced = 0
-        /*
         eventManager.registerClosure(for: BlockPlacedEvent.self, closure: { [weak self] (event: Event) in
             self?.numBlocksPlaced += 1
         })
-         */
     }
 }

@@ -11,18 +11,24 @@ struct PlatformView: View {
     @EnvironmentObject var gameEngineMgr: GameEngineManager
 
     var body: some View {
-        Image(ViewImageManager.platformImage)
-            .resizable()
-            .position(gameEngineMgr.platformPosition)
-            .frame(
-                width: gameEngineMgr.levelDimensions.width,
-                height: (gameEngineMgr.levelDimensions.height + 200) / 2, alignment: .center)
+        if let position = gameEngineMgr.platformRenderPosition, let path = gameEngineMgr.platformPath {
+            Image(ViewImageManager.platformImage)
+                .resizable()
+                .frame(
+                    width: path.width,
+                    height: path.height, alignment: .center)
+                .position(position)
+        } else {
+            EmptyView()
+        }
+        
     }
 }
 
 struct PlatformView_Previews: PreviewProvider {
+    // FIXME: this intantiating a new event manager here is wrong
     static var previews: some View {
         PlatformView()
-            .environmentObject(GameEngineManager(levelDimensions: .infinite))
+            .environmentObject(GameEngineManager(levelDimensions: .infinite, eventManager: TumblingTowersEventManager()))
     }
 }
