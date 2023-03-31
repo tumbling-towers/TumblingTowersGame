@@ -65,32 +65,24 @@ extension GameFiziksEngine: FiziksEngine {
         skNodeToFiziksBody[fiziksBody.fiziksShapeNode] = nil
         fiziksScene.remove(fiziksBody)
     }
-
-    // TODO: Figure out logic on how to create new FiziksBody from combined node
-    // As it turns out, SKPhysicsBody(bodies:) doesn't really do what we need, cos
-    // it seems to just take the bodies and put them as children of the new body.
-    // The problem is that if in that frame there is some overlap, the overlap will
-    // stay in the new body. I think this is a good place to use double dispatch actually.
-    // Might consider coming up with ways to combine different shapes.
-    func combine(_ fiziksBodies: [FiziksBody]) {
-        print("check")
-        if fiziksBodies.count < 2 {
-            return
+    
+    func combine(bodyA: FiziksBody, bodyB: FiziksBody, at anchorPoint: CGPoint? = nil) {
+        guard let bodyA = bodyA.fiziksShapeNode.physicsBody,
+              let bodyB = bodyB.fiziksShapeNode.physicsBody else { return }
+        
+        var pinJoint: SKPhysicsJointPin?
+        
+        if let point = anchorPoint {
+            pinJoint = SKPhysicsJointPin.joint(withBodyA: bodyA, bodyB: bodyB, anchor: point)
+        } else if let pos = bodyA.node?.position, let posB = bodyB.node?.position {
+            let meanPos = CGPoint(x: (pos.x + posB.x) / 2, y: (pos.y + posB.y) / 2)
+            pinJoint = SKPhysicsJointPin.joint(withBodyA: bodyA, bodyB: bodyB, anchor: meanPos)
         }
         
-        let skPhysicsBodies = fiziksBodies.compactMap({ getSKPhysicsBody(of: $0) })
-        let bodyA = fiziksBodies[1]
+        guard let pinJoint = pinJoint else { return }
         
-        let gravityField: SKFieldNode = SKFieldNode.electricField()
-        gravityField.position = bodyA.position
-        gravityField.physicsBody?.fieldBitMask = CategoryMask.block
-        gravityField.strength = 100
-        gravityField.falloff = 10
-        
-        print(bodyA.position)
-        print(gravityField.position)
-        
-        bodyA.fiziksShapeNode.addChild(gravityField)
+        pinJoint.shouldEnableLimits = true
+        fiziksScene.scene?.physicsWorld.add(pinJoint)
     }
 
     func setWorldGravity(to newValue: CGVector) {

@@ -340,13 +340,13 @@ extension GameEngine: FiziksContactDelegate {
                 && !contact.contains(body: leftBoundary)
                 && !contact.contains(body: rightBoundary) {
                 handlePlaceCMB()
+                currentBlock.fiziksBody.fiziksShapeNode.physicsBody?.charge = -1.0
             }
         }
         
         // TODO: Experiment with combine
         if contact.bodyA.categoryBitMask == CategoryMask.block && contact.bodyB.categoryBitMask == CategoryMask.block {
-            fiziksEngine.combine([contact.bodyA, contact.bodyB])
-            temp = false
+            fiziksEngine.combine(bodyA: contact.bodyA, bodyB: contact.bodyB, at: contact.contactPoint)
         }
     }
 

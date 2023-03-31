@@ -67,7 +67,7 @@ class GameEngineManager: ObservableObject {
         
         gameEngine.eventManager = eventManager
 
-        inputSystem = GyroInput()
+        inputSystem = TapInput()
 
         gameEngine.insertNewBlock()
     }
