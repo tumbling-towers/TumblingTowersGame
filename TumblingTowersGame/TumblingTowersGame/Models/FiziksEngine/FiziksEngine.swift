@@ -22,4 +22,5 @@ protocol FiziksEngine: AnyObject {
     func combine(bodyA: FiziksBody, bodyB: FiziksBody, at anchorPoint: CGPoint?)
     func setWorldGravity(to newValue: CGVector)
     func allBodiesContacted(with fiziksBody: FiziksBody) -> [FiziksBody]
+    func isIntersecting(body: FiziksBody, otherBodies: [FiziksBody]) -> Bool
 }

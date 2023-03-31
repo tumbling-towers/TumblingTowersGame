@@ -10,18 +10,6 @@ import SwiftUI
 
 class GameEngine {
     
-    static let defaultSeed: Int = 1
-    
-    static let defaultBlockVelocity = CGVector(dx: 0, dy: -3)
-    
-    static let defaultPlatformBoundaryBuffer: Double = 200
-    
-    static let defaultPowerupHeightStep: Double = 50
-    
-    static let defaultInitialPowerupHeight: Double = 20
-    
-    static let defaultPowerupLineDimensions: CGSize = CGSize(width: 400, height: 5)
-    
     let levelDimensions: CGRect
     
     var gameObjects: [any GameEngineObject]
@@ -44,8 +32,8 @@ class GameEngine {
             if let platform = platform {
                 // boundaries set to have a buffer to allow blocks to fall off or creative gameplay
                 
-                let leftPosition = CGPoint(x: platform.position.x - GameEngine.defaultPlatformBoundaryBuffer, y: levelDimensions.midY)
-                let rightPosition = CGPoint(x: platform.position.x + GameEngine.defaultPlatformBoundaryBuffer, y: levelDimensions.midY)
+                let leftPosition = CGPoint(x: platform.position.x - GameEngineConstants.defaultPlatformBoundaryBuffer, y: levelDimensions.midY)
+                let rightPosition = CGPoint(x: platform.position.x + GameEngineConstants.defaultPlatformBoundaryBuffer, y: levelDimensions.midY)
                 
                 // set up boundaries with buffer relative to platform
                 rightBoundary = createLevelBoundary(at: rightPosition)
@@ -53,14 +41,13 @@ class GameEngine {
                 
                 // set up initial powerup line relative to platform
                 let centerPosition = CGPoint(x: platform.position.x,
-                                             y: platform.position.y + platform.shape.height / 2 + GameEngine.defaultInitialPowerupHeight)
+                                             y: platform.position.y + platform.shape.height / 2 + GameEngineConstants.defaultInitialPowerupHeight)
                 
                 powerupLine = createPowerupLine(at: centerPosition)
             }
             
         }
     }
-    var temp: Bool = true
     
     var leftBoundary: FiziksBody? {
         didSet {
@@ -100,7 +87,7 @@ class GameEngine {
                 y: levelDimensions.height + 30)
     }
     
-    init(levelDimensions: CGRect, seed: Int = GameEngine.defaultSeed) {
+    init(levelDimensions: CGRect, seed: Int = GameEngineConstants.defaultSeed) {
         self.levelDimensions = levelDimensions
         // Use leveldimensions to set size of level if needed, otherwise remove
         self.gameObjects = []
@@ -252,7 +239,7 @@ class GameEngine {
         fiziksEngine.add(newBlock.fiziksBody)
         newBlock.fiziksBody.affectedByGravity = false
         newBlock.fiziksBody.velocity = .zero
-        newBlock.fiziksBody.applyImpulse(GameEngine.defaultBlockVelocity)
+        newBlock.fiziksBody.applyImpulse(GameEngineConstants.defaultBlockVelocity)
         return newBlock
     }
     
@@ -318,7 +305,7 @@ class GameEngine {
         guard let powerupLine = powerupLine else { return }
         let position = powerupLine.position
         
-        powerupLine.fiziksBody.position = position.add(by: CGVector(dx: 0, dy: GameEngine.defaultPowerupHeightStep))
+        powerupLine.fiziksBody.position = position.add(by: CGVector(dx: 0, dy: GameEngineConstants.defaultPowerupHeightStep))
         
         powerupManager.createNextPowerup()
     }
@@ -326,8 +313,8 @@ class GameEngine {
     private func createPowerupLine(at pos: CGPoint) -> PowerupLine {
         let rect = CGRect(x: pos.x,
                           y: pos.y,
-                          width: GameEngine.defaultPowerupLineDimensions.width,
-                          height: GameEngine.defaultPowerupLineDimensions.height)
+                          width: GameEngineConstants.defaultPowerupLineDimensions.width,
+                          height: GameEngineConstants.defaultPowerupLineDimensions.height)
         
         let path = CGPath.create(from: rect, centered: true)
         
@@ -382,9 +369,10 @@ extension GameEngine: FiziksContactDelegate {
             let pos = currentBlock.position
             let height = currentBlock.height
 
+            // if above powerup line & stable (velocity = 0), then give powerup
             if pos.y + height / 2 > powerupLine.position.y
-                && pos.y - height / 2 < powerupLine.position.y {
-                print("touched powerup line")
+                && pos.y - height / 2 < powerupLine.position.y
+                && currentBlock.fiziksBody.velocity == .zero {
                 eventManager?.postEvent(BlockTouchedPowerupLineEvent())
                 updatePowerupHeight()
             }
@@ -405,18 +393,63 @@ extension GameEngine: FiziksContactDelegate {
         
         self.currentlyMovingBlock = nil
     }
+    
+    /// Returns the y-coordinate of the highest point in the level
+    private func findHighestPoint() -> Double {
+        var maxY: Double = -.infinity
+        gameObjects.forEach({ obj in
+            if let block = obj as? Block, block !== currentlyMovingBlock {
+                maxY = max(block.position.y + block.height / 2, maxY)
+            }
+        })
+        
+        return maxY
+    }
 }
 
 // extension to support powerups
 extension GameEngine {
     func registerPowerupEvents() {
         eventManager?.registerClosure(for: GluePowerupActivatedEvent.self, closure: { event in
-            print("glue activated")
             self.currentlyMovingBlock?.isGlueBlock = true
         })
         eventManager?.registerClosure(for: PlatformPowerupActivatedEvent.self, closure: { event in
-            print("platform activated")
-            
+            guard let newPlatform = self.createPowerupPlatform() else { return }
+            self.gameObjects.append(newPlatform)
+            print(newPlatform.position)
+            self.fiziksEngine.add(newPlatform.fiziksBody)
         })
+    }
+    
+    // used when platform powerup is activated
+    private func createPowerupPlatform() -> Platform? {
+        guard let platform = platform else { return nil }
+        var count = 0
+        while count < GameEngineConstants.defaultTriesToFindPlatformPosition {
+            let rngX = Int(rng.next()) % Int(platform.width)
+            let newX = CGFloat(rngX) + platform.position.x - platform.width / 2
+            var newY = findHighestPoint() + GameEngineConstants.bufferFromHighestPoint
+            if let powerupLine = powerupLine {
+                newY = min(newY,powerupLine.position.y - GameEngineConstants.defaultPowerupPlatformHeight)
+            }
+            let newPosition = CGPoint(x: newX, y: newY)
+            let rect = CGRect(x: newPosition.x,
+                              y: newPosition.y,
+                              width: GameEngineConstants.defaultPowerupPlatformWidth,
+                              height: GameEngineConstants.defaultPowerupPlatformHeight)
+            let path = CGPath.create(from: rect)
+            
+            let newPlatform = createPlatform(path: path, at: newPosition)
+            
+            let otherBodies = gameObjects.map({ $0.fiziksBody })
+            
+            if !fiziksEngine.isIntersecting(body: newPlatform.fiziksBody, otherBodies: otherBodies) {
+                return newPlatform
+            }
+            
+            count += 1
+        }
+        
+        return nil
     }
 }

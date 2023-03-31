@@ -104,6 +104,18 @@ extension GameFiziksEngine: FiziksEngine {
         }
         return contactedFiziksBodies
     }
+    
+    func isIntersecting(body: FiziksBody, otherBodies: [FiziksBody]) -> Bool {
+        for otherBody in otherBodies {
+            if body.fiziksShapeNode.intersects(otherBody.fiziksShapeNode) {
+                print(body.position)
+                print(otherBody.position)
+                return true
+            }
+        }
+        
+        return false
+    }
 
     private func getSKPhysicsBody(of fiziksBody: FiziksBody) -> SKPhysicsBody? {
         return fiziksBody.fiziksShapeNode.physicsBody

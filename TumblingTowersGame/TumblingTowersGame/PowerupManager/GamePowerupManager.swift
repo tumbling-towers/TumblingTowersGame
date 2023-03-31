@@ -33,7 +33,9 @@ class GamePowerupManager: PowerupManager {
     }
     
     func createNextPowerup() {
-        let idx = Int(rng.next()) % GamePowerupManager.powerupTypes.count
+        // TODO: Why does it only generate even numbers?
+        let next = rng.next() / 1000
+        let idx = Int(next) % GamePowerupManager.powerupTypes.count
         let type = GamePowerupManager.powerupTypes[idx]
         
         nextPowerup = type.create()
