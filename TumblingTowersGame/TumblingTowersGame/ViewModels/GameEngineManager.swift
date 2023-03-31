@@ -17,7 +17,12 @@ class GameEngineManager: ObservableObject {
     @Published var levelPlatform: GameObjectPlatform = .samplePlatform
     
     private weak var mainGameMgr: MainGameManager?
-    var eventManager: EventManager?
+    var eventManager: EventManager? {
+        didSet {
+            gameEngine.eventManager = eventManager
+            registerEvents()
+        }
+    }
     
     // MARK: Game logic related attributes
     var platformPosition: CGPoint? {
@@ -30,6 +35,8 @@ class GameEngineManager: ObservableObject {
             }
         }
     }
+    
+    var powerup: Powerup.Type?
     
     var level: Level = Level.sampleLevel
     
@@ -63,9 +70,8 @@ class GameEngineManager: ObservableObject {
 
     init(levelDimensions: CGRect) {
         self.levelDimensions = levelDimensions
-        self.gameEngine = GameEngine(levelDimensions: levelDimensions)
         
-        gameEngine.eventManager = eventManager
+        self.gameEngine = GameEngine(levelDimensions: levelDimensions)
 
         inputSystem = TapInput()
 
@@ -108,6 +114,13 @@ class GameEngineManager: ObservableObject {
     func rotateCurrentBlock() {
         gameEngine.rotateCMBClockwise()
     }
+    
+    func usePowerup() {
+        guard let powerup = powerup else { return }
+        print("usePowerup game engine manager")
+        eventManager?.postEvent(PowerupActivatedEvent(type: powerup))
+        self.powerup = nil
+    }
 
     /// GameEngine outputs coordinates with the origin at the bottom-left.
     /// This method converts it such that the origin is at the top-left.
@@ -130,6 +143,20 @@ class GameEngineManager: ObservableObject {
         flip = CGAffineTransformTranslate(flip, width / 2, -height / 2)
         path.apply(flip)
         return path.cgPath
+    }
+    
+    private func registerEvents() {
+        eventManager?.registerClosure(for: PowerupAvailableEvent.self, closure: { event in
+            switch event {
+            case let powerupAvailableEvent as PowerupAvailableEvent:
+                print("inside gameEngine manager")
+                self.powerup = powerupAvailableEvent.type
+                print("powerup assigned in game engine manager")
+                print(self.powerup)
+            default:
+                return
+            }
+        })
     }
 }
 

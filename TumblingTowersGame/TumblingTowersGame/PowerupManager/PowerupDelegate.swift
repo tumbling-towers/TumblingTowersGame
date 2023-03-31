@@ -8,7 +8,7 @@
 import Foundation
 
 protocol PowerupDelegate {
-    func didActivateVinePowerup()
+    func didActivateGluePowerup()
     
     func didActivatePlatformPowerup()
 }

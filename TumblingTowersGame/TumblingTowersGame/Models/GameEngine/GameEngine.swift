@@ -28,9 +28,15 @@ class GameEngine {
     
     let fiziksEngine: FiziksEngine
     
-    var eventManager: EventManager?
+    var eventManager: EventManager? {
+        didSet {
+            powerupManager.eventManager = eventManager
+        }
+    }
     
     var powerupLine: PowerupLine?
+    
+    var powerupManager: PowerupManager
     
     var platform: Platform? {
         didSet {
@@ -108,9 +114,11 @@ class GameEngine {
         self.fiziksEngine.insertBounds(fiziksEngineBoundingRect)
 
         // TODO: pass in seed
-        self.shapeRandomizer = ShapeRandomizer(possibleShapes: TetrisType.allCases, seed: 1)
+        self.shapeRandomizer = ShapeRandomizer(possibleShapes: TetrisType.allCases, seed: seed)
+        self.powerupManager = GamePowerupManager(eventManager: eventManager, seed: seed)
         
         self.rng = RandomNumberGeneratorWithSeed(seed: seed)
+        
 
         fiziksEngine.fiziksContactDelegate = self
     }
@@ -298,6 +306,8 @@ class GameEngine {
         let position = powerupLine.position
         
         powerupLine.fiziksBody.position = position.add(by: CGVector(dx: 0, dy: GameEngine.defaultPowerupHeightStep))
+        
+        powerupManager.createNextPowerup()
     }
     
     private func createPowerupLine(at pos: CGPoint) -> PowerupLine {
@@ -340,14 +350,13 @@ extension GameEngine: FiziksContactDelegate {
                 && !contact.contains(body: leftBoundary)
                 && !contact.contains(body: rightBoundary) {
                 handlePlaceCMB()
-                currentBlock.fiziksBody.fiziksShapeNode.physicsBody?.charge = -1.0
             }
         }
         
         // TODO: Experiment with combine
-        if contact.bodyA.categoryBitMask == CategoryMask.block && contact.bodyB.categoryBitMask == CategoryMask.block {
-            fiziksEngine.combine(bodyA: contact.bodyA, bodyB: contact.bodyB, at: contact.contactPoint)
-        }
+//        if contact.bodyA.categoryBitMask == CategoryMask.block && contact.bodyB.categoryBitMask == CategoryMask.block {
+//            fiziksEngine.combine(bodyA: contact.bodyA, bodyB: contact.bodyB, at: contact.contactPoint)
+//        }
     }
 
     func didEnd(_ contact: FiziksContact) {
