@@ -18,7 +18,10 @@ struct LevelView: View {
                 BlockView(block: block)
             }
                         
-            PlatformView()
+            ForEach($gameEngineMgr.levelPlatforms) { platform in
+                PlatformView(platform: platform)
+            }
+            
             
             PowerupLineView()
             

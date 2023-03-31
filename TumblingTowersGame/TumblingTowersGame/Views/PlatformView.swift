@@ -9,25 +9,21 @@ import SwiftUI
 
 struct PlatformView: View {
     @EnvironmentObject var gameEngineMgr: GameEngineManager
+    @Binding var platform: GameObjectPlatform
 
     var body: some View {
-        if let position = gameEngineMgr.platformRenderPosition, let path = gameEngineMgr.platformPath {
             Image(ViewImageManager.platformImage)
                 .resizable()
                 .frame(
-                    width: path.width,
-                    height: path.height, alignment: .center)
-                .position(position)
-        } else {
-            EmptyView()
-        }
-        
+                    width: platform.width,
+                    height: platform.height, alignment: .center)
+                .position(platform.position)
     }
 }
 
 struct PlatformView_Previews: PreviewProvider {
     static var previews: some View {
-        PlatformView()
+        PlatformView(platform: .constant(GameObjectPlatform.samplePlatform))
             .environmentObject(GameEngineManager(levelDimensions: .infinite))
     }
 }

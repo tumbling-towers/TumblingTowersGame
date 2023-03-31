@@ -10,7 +10,7 @@ import Foundation
 class GamePowerupManager: PowerupManager {
     static let defaultNumPowerups = 10
     
-    static let powerupTypes: [Powerup.Type] = [GluePowerup.self, PlatformPowerup.self]
+    static let powerupTypes: [Powerup.Type] = [PlatformPowerup.self, GluePowerup.self]
     
     var eventManager: EventManager? {
         didSet {

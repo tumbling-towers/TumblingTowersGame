@@ -114,7 +114,6 @@ class GameEngine {
         self.fiziksEngine = GameFiziksEngine(size: levelDimensions)
         self.fiziksEngine.insertBounds(fiziksEngineBoundingRect)
 
-        // TODO: pass in seed
         self.shapeRandomizer = ShapeRandomizer(possibleShapes: TetrisType.allCases, seed: seed)
         self.powerupManager = GamePowerupManager(eventManager: eventManager, seed: seed)
         
@@ -141,7 +140,7 @@ class GameEngine {
     // This update method is called by the GameUpdater every frame.
     func update() {
         // MARK: Platform is always sampleplatform for now
-        var newLevel = Level(blocks: [], platform: .samplePlatform)
+        var newLevel = Level(blocks: [], platforms: [])
         for object in gameObjects {
             if isOutOfBounds(object) {
                 // TODO: Emit event that a block has gone out of bounds.
@@ -165,9 +164,16 @@ class GameEngine {
                 newLevel.add(block: newBlock)
                 checkAndHandleContactPowerupLine(currentBlock: block)
             }
+            
+            if object.fiziksBody.categoryBitMask == CategoryMask.platform {
+                let newPlatform = GameObjectPlatform(position: object.position,
+                                                     width: object.width,
+                                                     height: object.height)
+                newLevel.add(platform: newPlatform)
+            }
         }
 
-        gameRenderer?.renderLevel(level: newLevel, gameObjectBlocks: newLevel.blocks, gameObjectPlatform: newLevel.platform)
+        gameRenderer?.renderLevel(level: newLevel, gameObjectBlocks: newLevel.blocks, gameObjectPlatforms: newLevel.platforms)
 
         // Get curr input and move block
         if let currInput = gameRenderer?.getCurrInput() {
@@ -216,7 +222,7 @@ class GameEngine {
         fiziksBodyToMove.zRotation += CGFloat.pi / 2
     }
     
-    func setPlatform(position: CGPoint) {
+    func setInitialPlatform(position: CGPoint) {
         // TODO: Add random generation of platform sizes here
         let width = 200
         let height = 100
@@ -407,6 +413,10 @@ extension GameEngine {
         eventManager?.registerClosure(for: GluePowerupActivatedEvent.self, closure: { event in
             print("glue activated")
             self.currentlyMovingBlock?.isGlueBlock = true
+        })
+        eventManager?.registerClosure(for: PlatformPowerupActivatedEvent.self, closure: { event in
+            print("platform activated")
+            
         })
     }
 }
