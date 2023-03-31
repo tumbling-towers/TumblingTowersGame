@@ -31,6 +31,7 @@ class GameEngine {
     var eventManager: EventManager? {
         didSet {
             powerupManager.eventManager = eventManager
+            registerPowerupEvents()
         }
     }
     
@@ -127,6 +128,7 @@ class GameEngine {
         self.gameRenderer = gameRenderer
     }
 
+    // TODO: Maybe should move this to GameEngineManager - shouldn't use GameObjectBlock here!
     func getReferencePoints() -> (left: CGPoint, right: CGPoint)? {
         guard let block = currentlyMovingBlock, let shape = currentlyMovingBlock?.shape as? TetrisShape else { return nil }
         let movingGameObjectBlock = GameObjectBlock(position: block.position, path: shape.path, rotation: block.rotation)
@@ -154,8 +156,13 @@ class GameEngine {
                 let blockPosition = object.position
                 // TODO: more elegant way besides downcasting?
                 guard let block = object as? Block, let shape = block.shape as? TetrisShape else { continue }
-                newLevel.add(block: GameObjectBlock(position: blockPosition, path: shape.path, rotation: block.rotation))
                 
+                let newBlock = GameObjectBlock(position: blockPosition,
+                                               path: shape.path,
+                                               rotation: block.rotation,
+                                               isGlue: block.isGlueBlock)
+                
+                newLevel.add(block: newBlock)
                 checkAndHandleContactPowerupLine(currentBlock: block)
             }
         }
@@ -351,12 +358,11 @@ extension GameEngine: FiziksContactDelegate {
                 && !contact.contains(body: rightBoundary) {
                 handlePlaceCMB()
             }
+            
+            if currentBlock.isGlueBlock {
+                fiziksEngine.combine(bodyA: contact.bodyA, bodyB: contact.bodyB, at: contact.contactPoint)
+            }
         }
-        
-        // TODO: Experiment with combine
-//        if contact.bodyA.categoryBitMask == CategoryMask.block && contact.bodyB.categoryBitMask == CategoryMask.block {
-//            fiziksEngine.combine(bodyA: contact.bodyA, bodyB: contact.bodyB, at: contact.contactPoint)
-//        }
     }
 
     func didEnd(_ contact: FiziksContact) {
@@ -392,5 +398,15 @@ extension GameEngine: FiziksContactDelegate {
         eventManager?.postEvent(BlockPlacedEvent())
         
         self.currentlyMovingBlock = nil
+    }
+}
+
+// extension to support powerups
+extension GameEngine {
+    func registerPowerupEvents() {
+        eventManager?.registerClosure(for: GluePowerupActivatedEvent.self, closure: { event in
+            print("glue activated")
+            self.currentlyMovingBlock?.isGlueBlock = true
+        })
     }
 }

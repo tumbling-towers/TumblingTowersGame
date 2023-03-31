@@ -13,7 +13,7 @@ class GameEngineManager: ObservableObject {
     @Published var goalLinePosition: CGPoint = CGPoint()
     @Published var powerUpLinePosition: CGPoint = CGPoint()
     @Published var powerupLineDimensions: CGSize = CGSize()
-    @Published var levelBlocks: [GameObjectBlock] = [.sampleBlock]
+    @Published var levelBlocks: [GameObjectBlock] = []
     @Published var levelPlatform: GameObjectPlatform = .samplePlatform
     
     private weak var mainGameMgr: MainGameManager?
@@ -117,8 +117,7 @@ class GameEngineManager: ObservableObject {
     
     func usePowerup() {
         guard let powerup = powerup else { return }
-        print("usePowerup game engine manager")
-        eventManager?.postEvent(PowerupActivatedEvent(type: powerup))
+        eventManager?.postEvent(PowerupButtonTappedEvent(type: powerup))
         self.powerup = nil
     }
 
@@ -133,7 +132,7 @@ class GameEngineManager: ObservableObject {
         // Flips the block vertically (mirror image) due to difference in coordinate system
         let path = transformPath(path: block.path, width: block.width, height: block.height)
         let newPosition = adjustCoordinates(for: block.position)
-        let transformedBlock = GameObjectBlock(position: newPosition, path: path)
+        let transformedBlock = GameObjectBlock(position: newPosition, path: path, isGlue: block.isGlue)
         return transformedBlock
     }
     
@@ -149,10 +148,7 @@ class GameEngineManager: ObservableObject {
         eventManager?.registerClosure(for: PowerupAvailableEvent.self, closure: { event in
             switch event {
             case let powerupAvailableEvent as PowerupAvailableEvent:
-                print("inside gameEngine manager")
                 self.powerup = powerupAvailableEvent.type
-                print("powerup assigned in game engine manager")
-                print(self.powerup)
             default:
                 return
             }
