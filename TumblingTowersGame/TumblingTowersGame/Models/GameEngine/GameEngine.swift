@@ -410,7 +410,6 @@ extension GameEngine: FiziksContactDelegate {
         currentlyMovingBlock?.fiziksBody.collisionBitMask = Block.collisionBitMask
         currentlyMovingBlock?.fiziksBody.contactTestBitMask = Block.contactTestBitMask
 
-        print("block placed")
         eventManager?.postEvent(BlockPlacedEvent())
 
         self.currentlyMovingBlock = nil
@@ -438,7 +437,6 @@ extension GameEngine {
         eventManager?.registerClosure(for: PlatformPowerupActivatedEvent.self, closure: { _ in
             guard let newPlatform = self.createPowerupPlatform() else { return }
             self.gameObjects.append(newPlatform)
-            print(newPlatform.position)
             self.fiziksEngine.add(newPlatform.fiziksBody)
         })
     }

@@ -40,7 +40,6 @@ class GamePowerupManager: PowerupManager {
 
         nextPowerup = type.create()
         nextPowerup?.delegate = self
-        print("CHECK CREATENEXTPOWERUP")
         eventManager?.postEvent(PowerupAvailableEvent(type: type))
     }
 

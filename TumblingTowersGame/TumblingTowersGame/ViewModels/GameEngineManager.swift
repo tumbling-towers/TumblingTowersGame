@@ -147,11 +147,9 @@ class GameEngineManager: ObservableObject {
     }
 
     private func registerEvents() {
-        print("REGISTER EVENT")
         eventManager?.registerClosure(for: PowerupAvailableEvent.self, closure: { event in
             switch event {
             case let powerupAvailableEvent as PowerupAvailableEvent:
-                print("registerEvents")
                 self.powerup = powerupAvailableEvent.type
             default:
                 return
