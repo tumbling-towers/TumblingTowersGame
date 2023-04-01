@@ -24,6 +24,6 @@ struct PlatformView: View {
 struct PlatformView_Previews: PreviewProvider {
     static var previews: some View {
         PlatformView(platform: .constant(GameObjectPlatform.samplePlatform))
-            .environmentObject(GameEngineManager(levelDimensions: .infinite))
+            .environmentObject(GameEngineManager(levelDimensions: .infinite, eventManager: TumblingTowersEventManager()))
     }
 }

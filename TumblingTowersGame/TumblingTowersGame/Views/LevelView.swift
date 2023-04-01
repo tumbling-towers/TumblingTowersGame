@@ -77,6 +77,6 @@ struct LevelView: View {
 struct LevelView_Previews: PreviewProvider {
     static var previews: some View {
         LevelView()
-            .environmentObject(GameEngineManager(levelDimensions: .infinite))
+            .environmentObject(GameEngineManager(levelDimensions: .infinite, eventManager: TumblingTowersEventManager()))
     }
 }
