@@ -81,3 +81,5 @@ disabled_rules:
 line_length:
   warning: 120
   error: 150
+
+reporter: "xcode" # reporter type (xcode, json, csv, checkstyle)

@@ -35,8 +35,6 @@ struct ViewImageManager {
         .S: SBlockImage
     ]
 
-    // TODO: vines blocks
-
     static let powerupToImage: [PowerupType: String] = [
         .glue: GluePowerupImage,
         .platform: PlatformPowerupImage

@@ -62,7 +62,8 @@ struct ContentView_Previews: PreviewProvider {
     static var mainGameMgrPrev = MainGameManager()
 
     static var previews: some View {
-        ContentView(gameEngineMgr: GameEngineManager(levelDimensions: .infinite, eventManager: TumblingTowersEventManager()))
+        ContentView(gameEngineMgr: GameEngineManager(levelDimensions: .infinite,
+                                                     eventManager: TumblingTowersEventManager()))
             .environmentObject(mainGameMgrPrev)
     }
 }

@@ -28,8 +28,8 @@ struct InputData {
 }
 
 enum InputType: String {
-    case LEFT = "LEFT"
-    case NONE = "NONE"
-    case RIGHT = "RIGHT"
-    case DOWN = "DOWN"
+    case LEFT
+    case NONE
+    case RIGHT
+    case DOWN
 }

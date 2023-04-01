@@ -41,7 +41,9 @@ class GameEngine {
 
                 // set up initial powerup line relative to platform
                 let centerPosition = CGPoint(x: platform.position.x,
-                                             y: platform.position.y + platform.shape.height / 2 + GameEngineConstants.defaultInitialPowerupHeight)
+                                             y: platform.position.y
+                                             + platform.shape.height / 2
+                                             + GameEngineConstants.defaultInitialPowerupHeight)
 
                 powerupLine = createPowerupLine(at: centerPosition)
             }
@@ -67,7 +69,6 @@ class GameEngine {
         }
     }
 
-    // TODO: Add random generation of platform in the future
     private var rng: RandomNumberGeneratorWithSeed
 
     private weak var gameRenderer: GameRendererDelegate?
@@ -234,7 +235,6 @@ class GameEngine {
     }
 
     func setInitialPlatform(position: CGPoint) {
-        // TODO: Add random generation of platform sizes here
         let width = 200
         let height = 100
 

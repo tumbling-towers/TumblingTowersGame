@@ -27,7 +27,13 @@ class MockFiziksBody: FiziksBody {
 
     static let defaultSize = CGSize(width: 1, height: 1)
 
-    init(categoryBitMask: BitMask = 0x1, collisionBitMask: BitMask = 0x1, contactTestBitMask: BitMask = 0x1, position: CGPoint = .zero, zRotation: CGFloat = .zero, isDynamic: Bool = true, friction: Double = 1.0) {
+    init(categoryBitMask: BitMask = 0x1,
+         collisionBitMask: BitMask = 0x1,
+         contactTestBitMask: BitMask = 0x1,
+         position: CGPoint = .zero,
+         zRotation: CGFloat = .zero,
+         isDynamic: Bool = true,
+         friction: Double = 1.0) {
         self.categoryBitMask = categoryBitMask
         self.collisionBitMask = collisionBitMask
         self.contactTestBitMask = contactTestBitMask

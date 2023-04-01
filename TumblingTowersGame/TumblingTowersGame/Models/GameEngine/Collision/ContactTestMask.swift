@@ -7,7 +7,6 @@
 
 import Foundation
 
-// TODO: Update/add more
 struct ContactTestMask {
     static let none: BitMask = 0
 

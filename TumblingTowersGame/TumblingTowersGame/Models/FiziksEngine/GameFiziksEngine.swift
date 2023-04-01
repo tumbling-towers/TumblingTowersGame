@@ -106,12 +106,8 @@ extension GameFiziksEngine: FiziksEngine {
     }
 
     func isIntersecting(body: FiziksBody, otherBodies: [FiziksBody]) -> Bool {
-        for otherBody in otherBodies {
-            if body.fiziksShapeNode.intersects(otherBody.fiziksShapeNode) {
-                print(body.position)
-                print(otherBody.position)
-                return true
-            }
+        for otherBody in otherBodies where body.fiziksShapeNode.intersects(otherBody.fiziksShapeNode) {
+            return true
         }
 
         return false

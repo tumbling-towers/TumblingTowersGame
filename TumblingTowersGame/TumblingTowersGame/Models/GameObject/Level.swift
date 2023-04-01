@@ -11,9 +11,9 @@ struct Level {
     var blocks: [GameObjectBlock]
     var platforms: [GameObjectPlatform]
 
-    mutating func move(block: GameObjectBlock, to: CGPoint) {
-        for i in 0..<blocks.count where blocks[i] == block {
-            blocks[i].move(to: to)
+    mutating func move(block: GameObjectBlock, to newPoint: CGPoint) {
+        for idx in 0..<blocks.count where blocks[idx] == block {
+            blocks[idx].move(to: newPoint)
         }
     }
 
@@ -27,5 +27,6 @@ struct Level {
 }
 
 extension Level {
-    static let sampleLevel = Level(blocks: [GameObjectBlock.sampleBlock], platforms: [GameObjectPlatform.samplePlatform])
+    static let sampleLevel = Level(blocks: [GameObjectBlock.sampleBlock],
+                                   platforms: [GameObjectPlatform.samplePlatform])
 }

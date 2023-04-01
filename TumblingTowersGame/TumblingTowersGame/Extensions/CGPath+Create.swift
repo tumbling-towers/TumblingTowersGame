@@ -16,8 +16,8 @@ extension CGPath {
         let path = CGMutablePath()
         path.move(to: points[0])
 
-        for i in 1..<points.count {
-            path.addLine(to: points[i])
+        for point in 1..<points.count {
+            path.addLine(to: points[point])
         }
 
         path.addLine(to: points[0])

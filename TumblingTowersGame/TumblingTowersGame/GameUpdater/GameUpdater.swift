@@ -20,9 +20,7 @@ class GameUpdater {
     private weak var gameRenderer: GameRendererDelegate?
 
     var timePassed: Double {
-        get {
-            (Double(frameCount) + leftoverTime) * durationOfFrameFor60FPS
-        }
+        (Double(frameCount) + leftoverTime) * durationOfFrameFor60FPS
     }
 
     init(gameEngine: GameEngine, gameRenderer: GameRendererDelegate) {

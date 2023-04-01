@@ -8,10 +8,12 @@
 import CoreGraphics
 import Foundation
 
+// swiftlint:disable identifier_name
 enum TetrisType: CaseIterable {
     case I, J, L, O, S, T, Z
 }
 
+// swiftlint:disable type_name
 struct TetrisShape: PathObjectShape {
     typealias P = CGPoint
 
