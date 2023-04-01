@@ -50,7 +50,7 @@ struct ContentView: View {
                 }
                 .ignoresSafeArea(.all)
             } else if currGameScreen == .settings {
-                SettingsView(currGameScreen: $currGameScreen)
+                SettingsView(settingsMgr: SettingsManager(), currGameScreen: $currGameScreen)
                     .environmentObject(mainGameMgr)
                     .environmentObject(gameEngineMgr)
             } else if currGameScreen == .achievements {

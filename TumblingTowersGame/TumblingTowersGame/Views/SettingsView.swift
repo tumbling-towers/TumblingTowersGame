@@ -10,7 +10,7 @@ import SwiftUI
 struct SettingsView: View {
     @EnvironmentObject var mainGameMgr: MainGameManager
     @EnvironmentObject var gameEngineMgr: GameEngineManager
-    @StateObject var settingsMgr = SettingsManager()
+    @StateObject var settingsMgr: SettingsManager
     @Binding var currGameScreen: Constants.CurrGameScreens
 
     var body: some View {
@@ -26,7 +26,7 @@ struct SettingsView: View {
                     Text("Overall")
                         .modifier(BodyText())
 
-                    Slider(value: $settingsMgr.overallVolume, in: 0.0...3.0)
+                    Slider(value: $settingsMgr.overallVolume, in: 0.0...1.0)
                         .frame(width: 400)
                         .padding(.all)
                 }
@@ -36,7 +36,7 @@ struct SettingsView: View {
                     Text("Background Music")
                         .modifier(BodyText())
 
-                    Slider(value: $settingsMgr.backgroundMusicVolume, in: 0.0...3.0)
+                    Slider(value: $settingsMgr.backgroundMusicVolume, in: 0.0...1.0)
                         .frame(width: 400)
                         .padding(.all)
                 }
@@ -45,23 +45,22 @@ struct SettingsView: View {
                     Text("Other Sounds")
                         .modifier(BodyText())
 
-                    Slider(value: $settingsMgr.otherSoundVolume, in: 0.0...3.0)
+                    Slider(value: $settingsMgr.otherSoundVolume, in: 0.0...1.0)
                         .frame(width: 400)
                         .padding(.all)
                 }
 
-                Text("Input Sensitivity")
-                    .modifier(CategoryText())
-
-                HStack {
-                    Text("Block Movement Speed")
-                        .modifier(BodyText())
-
-                    // TODO: Should we add this?
-                    Slider(value: $settingsMgr.otherSoundVolume, in: 0.0...3.0)
-                        .frame(width: 400)
-                        .padding(.all)
-                }
+//                Text("Input Sensitivity")
+//                    .modifier(CategoryText())
+//
+//                HStack {
+//                    Text("Block Movement Speed")
+//                        .modifier(BodyText())
+//
+//                    Slider(value: $settingsMgr.otherSoundVolume, in: 0.0...3.0)
+//                        .frame(width: 400)
+//                        .padding(.all)
+//                }
 
                 Button {
                     currGameScreen = .mainMenu
@@ -93,7 +92,7 @@ struct SettingsView: View {
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsView(currGameScreen: .constant(.gameModeSelection))
+        SettingsView(settingsMgr: SettingsManager(), currGameScreen: .constant(.gameModeSelection))
             .environmentObject(GameEngineManager(levelDimensions: .infinite, eventManager: TumblingTowersEventManager()))
             .environmentObject(MainGameManager())
     }
