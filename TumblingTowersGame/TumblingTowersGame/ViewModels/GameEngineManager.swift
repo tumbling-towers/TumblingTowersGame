@@ -17,12 +17,7 @@ class GameEngineManager: ObservableObject {
     @Published var levelPlatforms: [GameObjectPlatform] = []
 
     private weak var mainGameMgr: MainGameManager?
-    var eventManager: EventManager? {
-        didSet {
-            gameEngine.eventManager = eventManager
-            registerEvents()
-        }
-    }
+    var eventManager: EventManager?
 
     // MARK: Game logic related attributes
     var platformPosition: CGPoint? {
@@ -67,6 +62,8 @@ class GameEngineManager: ObservableObject {
         gameEngine.eventManager = eventManager
 
         inputSystem = TapInput()
+
+        registerEvents()
     }
 
     func dragEvent(offset: CGSize) {
@@ -150,9 +147,11 @@ class GameEngineManager: ObservableObject {
     }
 
     private func registerEvents() {
+        print("REGISTER EVENT")
         eventManager?.registerClosure(for: PowerupAvailableEvent.self, closure: { event in
             switch event {
             case let powerupAvailableEvent as PowerupAvailableEvent:
+                print("registerEvents")
                 self.powerup = powerupAvailableEvent.type
             default:
                 return
