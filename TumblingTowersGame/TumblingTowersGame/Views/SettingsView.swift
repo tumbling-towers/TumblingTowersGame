@@ -63,8 +63,8 @@ struct SettingsView: View {
 
                     }
                 }
-                .onChange(of: selectedInputType) {
-                    gameEngineMgr.changeInput(to: selectedInputType)
+                .onChange(of: selectedInputType) { val in
+                    gameEngineMgr.changeInput(to: val)
                 }
                 
 //                HStack {
