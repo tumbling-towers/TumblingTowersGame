@@ -28,7 +28,7 @@ class TapInput: InputSystem {
         } else if offset.width < 0 && abs(offset.height) < 50 {
             // detected as a left drag
             inputData = InputData(inputType: .LEFT, vector: CGVector(dx: offset.width * xMultiplier, dy: 0))
-        } else if offset.width < 20 && offset.height > 0 {
+        } else if abs(offset.width) < 20 && offset.height > 0 {
             // detected as a swipe down
             inputData = InputData(inputType: .DOWN, vector: InputData.unitDown * yMultiplier)
         }

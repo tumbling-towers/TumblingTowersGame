@@ -11,7 +11,9 @@ import XCTest
 final class GameObjectBlockTests: XCTestCase {
 
     func test_init() {
-        let block = GameObjectBlock(position: CGPoint(x: 200, y: 200), blockShape: .J)
+        let path = CGPath(rect: CGRect(origin: .zero, size: .zero), transform: nil)
+        let block = GameObjectBlock(position: CGPoint(x: 200, y: 200),
+                                    path: path)
     }
 
     func test_sameBlockEquals() {
