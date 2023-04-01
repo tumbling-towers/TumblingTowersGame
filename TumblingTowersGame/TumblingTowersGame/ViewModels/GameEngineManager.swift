@@ -17,6 +17,7 @@ class GameEngineManager: ObservableObject {
     @Published var levelPlatform: GameObjectPlatform = .samplePlatform
     
     private weak var mainGameMgr: MainGameManager?
+    var eventManager: EventManager?
     
     // MARK: Game logic related attributes
     var platformPosition: CGPoint? {
@@ -40,6 +41,8 @@ class GameEngineManager: ObservableObject {
     var inputSystem: InputSystem
     
     private var gameUpdater: GameUpdater?
+
+    var gameMode: GameMode = SurvivalGameMode(eventMgr: TumblingTowersEventManager())
     
     var platformRenderPosition: CGPoint? {
         guard let position = platformPosition else { return nil }
@@ -63,12 +66,11 @@ class GameEngineManager: ObservableObject {
     init(levelDimensions: CGRect, eventManager: EventManager) {
         self.levelDimensions = levelDimensions
         self.gameEngine = GameEngine(levelDimensions: levelDimensions)
+        self.eventManager = eventManager
         
         gameEngine.eventManager = eventManager
 
-        inputSystem = GyroInput()
-
-        gameEngine.insertNewBlock()
+        inputSystem = TapInput()
         
         let statsTrackingSystem = StatsTrackingSystem(eventManager: eventManager)
         gameEngine.statsTrackingSystem = statsTrackingSystem
@@ -92,10 +94,6 @@ class GameEngineManager: ObservableObject {
     }
 
     func setUpLevelAndStartEngine(mainGameMgr: MainGameManager) {
-        // set up game loop
-        gameUpdater = GameUpdater(gameEngine: gameEngine, gameRenderer: self)
-        gameUpdater?.createCADisplayLink()
-        
         // set up renderer
         gameEngine.setRenderer(gameRenderer: self)
 
@@ -103,9 +101,29 @@ class GameEngineManager: ObservableObject {
         inputSystem.start(levelWidth: mainGameMgr.deviceWidth, levelHeight: mainGameMgr.deviceHeight)
 
         self.mainGameMgr = mainGameMgr
-        
+    }
+
+    func startGame(gameMode: Constants.GameModeTypes) {
+        // set up game loop
+        gameUpdater = GameUpdater(gameEngine: gameEngine, gameRenderer: self)
+        gameUpdater?.createCADisplayLink()
+
+        // set up game mode
+        if let eventManager = eventManager {
+            if gameMode == .SURVIVAL {
+                self.gameMode = SurvivalGameMode(eventMgr: eventManager)
+            } else if gameMode == .RACECLOCK {
+                self.gameMode = RaceTimeGameMode(eventMgr: eventManager)
+            }
+        }
+
+        // set up game in game engine
+        gameEngine.startGame()
+
         // set up initial platform
-        platformPosition = CGPoint(x: mainGameMgr.deviceWidth/2, y: 100)
+        if let mainGameMgr = mainGameMgr {
+            platformPosition = CGPoint(x: mainGameMgr.deviceWidth/2, y: 100)
+        }
     }
 
     func rotateCurrentBlock() {

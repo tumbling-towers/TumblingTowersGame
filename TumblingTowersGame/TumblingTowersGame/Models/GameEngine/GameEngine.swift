@@ -26,7 +26,7 @@ class GameEngine {
     
     var gameObjects: [any GameEngineObject]
     
-    let fiziksEngine: FiziksEngine
+    var fiziksEngine: FiziksEngine
     
     var eventManager: EventManager?
     
@@ -134,6 +134,31 @@ class GameEngine {
         let xPosRight: Double = movingGameObjectBlock.position.x + movingGameObjectBlock.width / 2
         let yPos: Double = 0
         return (left: CGPoint(x: xPosLeft, y: yPos), right: CGPoint(x: xPosRight, y: yPos))
+    }
+
+    func startGame() {
+        insertNewBlock()
+    }
+
+    func resetGame() {
+        // TODO: Remove all blocks from level, reset all game state
+        // Please help me to see if I resetted everything properly, thanks
+        self.gameObjects = []
+
+        self.platform = nil
+        self.currentlyMovingBlock = nil
+
+        let fiziksEngineBoundingRect = CGRect(x: levelDimensions.minX,
+                                              y: levelDimensions.minY - 100,
+                                              width: levelDimensions.width,
+                                              height: levelDimensions.height + 200)
+        self.fiziksEngine = GameFiziksEngine(size: levelDimensions)
+        self.fiziksEngine.insertBounds(fiziksEngineBoundingRect)
+
+        // Reset the rng generator?
+        // self.rng.resetWithCurrentSeed()
+
+        fiziksEngine.fiziksContactDelegate = self
     }
 
     // This update method is called by the GameUpdater every frame.

@@ -29,6 +29,9 @@
 		124B02F329C9ED6A00094CF5 /* NotificationCenterFacade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124B02F229C9ED6A00094CF5 /* NotificationCenterFacade.swift */; };
 		124B02F529C9F10300094CF5 /* TumblingTowersNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124B02F429C9F10300094CF5 /* TumblingTowersNotification.swift */; };
 		124B02F729C9F54B00094CF5 /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124B02F629C9F54B00094CF5 /* NotificationName.swift */; };
+		1421B0CC29D41C530002E4AA /* GameMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1421B0CB29D41C530002E4AA /* GameMode.swift */; };
+		1421B0CE29D41F740002E4AA /* SurvivalGameMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1421B0CD29D41F740002E4AA /* SurvivalGameMode.swift */; };
+		1421B0D229D435950002E4AA /* RaceTimeGameMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1421B0D129D435950002E4AA /* RaceTimeGameMode.swift */; };
 		1445F84A29C71DC900F94751 /* TapInputTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1445F84929C71DC900F94751 /* TapInputTests.swift */; };
 		146E2DB429C0D07200BFC757 /* TumblingTowersGameApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146E2DB329C0D07200BFC757 /* TumblingTowersGameApp.swift */; };
 		146E2DB629C0D07200BFC757 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146E2DB529C0D07200BFC757 /* ContentView.swift */; };
@@ -54,6 +57,16 @@
 		146E2E1729C0E33900BFC757 /* CGPoint+Hashable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146E2E1529C0E33900BFC757 /* CGPoint+Hashable.swift */; };
 		146E2E1929C0E5B400BFC757 /* GameplayLevelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146E2E1829C0E5B400BFC757 /* GameplayLevelView.swift */; };
 		14C53B2629C5E9D10035EC17 /* GameUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C53B2529C5E9D10035EC17 /* GameUpdater.swift */; };
+		14C6732029D366D300D8DF78 /* MainMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C6731F29D366D300D8DF78 /* MainMenuView.swift */; };
+		14C6732229D368C900D8DF78 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C6732129D368C900D8DF78 /* Constants.swift */; };
+		14C6732429D36AB100D8DF78 /* GameModeSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C6732329D36AB100D8DF78 /* GameModeSelectView.swift */; };
+		14C6732729D36D4900D8DF78 /* MenuButtonText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C6732629D36D4900D8DF78 /* MenuButtonText.swift */; };
+		14C6732929D36F4D00D8DF78 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C6732829D36F4D00D8DF78 /* SettingsView.swift */; };
+		14C6732B29D370AE00D8DF78 /* SettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C6732A29D370AE00D8DF78 /* SettingsManager.swift */; };
+		14C6732D29D3712A00D8DF78 /* CategoryText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C6732C29D3712A00D8DF78 /* CategoryText.swift */; };
+		14C6732F29D371D700D8DF78 /* BodyText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C6732E29D371D700D8DF78 /* BodyText.swift */; };
+		14C6733529D3737200D8DF78 /* bkgMusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 14C6733429D3737200D8DF78 /* bkgMusic.mp3 */; };
+		14DAFDF729CE3146003BE140 /* SoundSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DAFDF629CE3146003BE140 /* SoundSystem.swift */; };
 		2F469D5129D2AA3200C4152E /* CGPath+Create.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F469D5029D2AA3200C4152E /* CGPath+Create.swift */; };
 		2F469D5529D2AB1500C4152E /* FiziksContact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F469D5329D2AB1500C4152E /* FiziksContact.swift */; };
 		2F469D5629D2AB1500C4152E /* FiziksContactDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F469D5429D2AB1500C4152E /* FiziksContactDelegate.swift */; };
@@ -71,6 +84,7 @@
 		2FB69D6829D5B9F6008D81AC /* SkyscraperAchievementDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB69D6729D5B9F6008D81AC /* SkyscraperAchievementDataSource.swift */; };
 		2FB69D6A29D5BC63008D81AC /* TowerHeightStatTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB69D6929D5BC63008D81AC /* TowerHeightStatTracker.swift */; };
 		2FB69D6C29D5BD0E008D81AC /* TowerHeightIncreasedEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB69D6B29D5BD0E008D81AC /* TowerHeightIncreasedEvent.swift */; };
+		2FB69D7E29D83E7B008D81AC /* BlockDroppedEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB69D7D29D83E7B008D81AC /* BlockDroppedEvent.swift */; };
 		2FBBD79E29C6C1C100C30582 /* BiMapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FBBD79D29C6C1C100C30582 /* BiMapTests.swift */; };
 		2FC4652C29D2EA1500A5B4F3 /* StatsTrackingSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC4652B29D2EA1500A5B4F3 /* StatsTrackingSystem.swift */; };
 		2FC4652E29D2EA9A00A5B4F3 /* StatTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC4652D29D2EA9A00A5B4F3 /* StatTracker.swift */; };
@@ -179,6 +193,9 @@
 		124B02F229C9ED6A00094CF5 /* NotificationCenterFacade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenterFacade.swift; sourceTree = "<group>"; };
 		124B02F429C9F10300094CF5 /* TumblingTowersNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TumblingTowersNotification.swift; sourceTree = "<group>"; };
 		124B02F629C9F54B00094CF5 /* NotificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationName.swift; sourceTree = "<group>"; };
+		1421B0CB29D41C530002E4AA /* GameMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameMode.swift; sourceTree = "<group>"; };
+		1421B0CD29D41F740002E4AA /* SurvivalGameMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurvivalGameMode.swift; sourceTree = "<group>"; };
+		1421B0D129D435950002E4AA /* RaceTimeGameMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaceTimeGameMode.swift; sourceTree = "<group>"; };
 		1445F84929C71DC900F94751 /* TapInputTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapInputTests.swift; sourceTree = "<group>"; };
 		146E2DB029C0D07200BFC757 /* TumblingTowersGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TumblingTowersGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		146E2DB329C0D07200BFC757 /* TumblingTowersGameApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TumblingTowersGameApp.swift; sourceTree = "<group>"; };
@@ -207,6 +224,16 @@
 		146E2E1529C0E33900BFC757 /* CGPoint+Hashable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGPoint+Hashable.swift"; sourceTree = "<group>"; };
 		146E2E1829C0E5B400BFC757 /* GameplayLevelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameplayLevelView.swift; sourceTree = "<group>"; };
 		14C53B2529C5E9D10035EC17 /* GameUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GameUpdater.swift; path = TumblingTowersGame/GameUpdater/GameUpdater.swift; sourceTree = SOURCE_ROOT; };
+		14C6731F29D366D300D8DF78 /* MainMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuView.swift; sourceTree = "<group>"; };
+		14C6732129D368C900D8DF78 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		14C6732329D36AB100D8DF78 /* GameModeSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModeSelectView.swift; sourceTree = "<group>"; };
+		14C6732629D36D4900D8DF78 /* MenuButtonText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuButtonText.swift; sourceTree = "<group>"; };
+		14C6732829D36F4D00D8DF78 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		14C6732A29D370AE00D8DF78 /* SettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsManager.swift; sourceTree = "<group>"; };
+		14C6732C29D3712A00D8DF78 /* CategoryText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryText.swift; sourceTree = "<group>"; };
+		14C6732E29D371D700D8DF78 /* BodyText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyText.swift; sourceTree = "<group>"; };
+		14C6733429D3737200D8DF78 /* bkgMusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bkgMusic.mp3; sourceTree = "<group>"; };
+		14DAFDF629CE3146003BE140 /* SoundSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundSystem.swift; sourceTree = "<group>"; };
 		2F469D5029D2AA3200C4152E /* CGPath+Create.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGPath+Create.swift"; sourceTree = "<group>"; };
 		2F469D5329D2AB1500C4152E /* FiziksContact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiziksContact.swift; sourceTree = "<group>"; };
 		2F469D5429D2AB1500C4152E /* FiziksContactDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiziksContactDelegate.swift; sourceTree = "<group>"; };
@@ -224,6 +251,7 @@
 		2FB69D6729D5B9F6008D81AC /* SkyscraperAchievementDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkyscraperAchievementDataSource.swift; sourceTree = "<group>"; };
 		2FB69D6929D5BC63008D81AC /* TowerHeightStatTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TowerHeightStatTracker.swift; sourceTree = "<group>"; };
 		2FB69D6B29D5BD0E008D81AC /* TowerHeightIncreasedEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TowerHeightIncreasedEvent.swift; sourceTree = "<group>"; };
+		2FB69D7D29D83E7B008D81AC /* BlockDroppedEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockDroppedEvent.swift; sourceTree = "<group>"; };
 		2FBBD79D29C6C1C100C30582 /* BiMapTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiMapTests.swift; sourceTree = "<group>"; };
 		2FC4652B29D2EA1500A5B4F3 /* StatsTrackingSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsTrackingSystem.swift; sourceTree = "<group>"; };
 		2FC4652D29D2EA9A00A5B4F3 /* StatTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatTracker.swift; sourceTree = "<group>"; };
@@ -345,6 +373,16 @@
 			path = EventManager;
 			sourceTree = "<group>";
 		};
+		1421B0CA29D41C1B0002E4AA /* GameMode */ = {
+			isa = PBXGroup;
+			children = (
+				1421B0CB29D41C530002E4AA /* GameMode.swift */,
+				1421B0CD29D41F740002E4AA /* SurvivalGameMode.swift */,
+				1421B0D129D435950002E4AA /* RaceTimeGameMode.swift */,
+			);
+			path = GameMode;
+			sourceTree = "<group>";
+		};
 		1445F84829C71DB500F94751 /* Input */ = {
 			isa = PBXGroup;
 			children = (
@@ -381,6 +419,7 @@
 				2F7E13A429C0F044000E6FA9 /* DataStructures */,
 				124B02E429C9DA8E00094CF5 /* EventManager */,
 				146E2E1329C0E32500BFC757 /* Extensions */,
+				1421B0CA29D41C1B0002E4AA /* GameMode */,
 				14C53B2729C5EB5F0035EC17 /* GameUpdater */,
 				146E2DE029C0D0CC00BFC757 /* Input */,
 				146E2DDD29C0D0AF00BFC757 /* Models */,
@@ -388,6 +427,7 @@
 				146E2DB329C0D07200BFC757 /* TumblingTowersGameApp.swift */,
 				146E2DDE29C0D0B500BFC757 /* ViewModels */,
 				146E2DDF29C0D0BB00BFC757 /* Views */,
+				14DAFDF529CE312D003BE140 /* Sound */,
 			);
 			path = TumblingTowersGame;
 			sourceTree = "<group>";
@@ -434,6 +474,7 @@
 				146E2E0429C0E2D800BFC757 /* FiziksEngine */,
 				146E2DEE29C0D62F00BFC757 /* Point.swift */,
 				146E2DED29C0D62F00BFC757 /* Vector.swift */,
+				14C6732129D368C900D8DF78 /* Constants.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -445,6 +486,7 @@
 				146E2DE229C0D61A00BFC757 /* GameRendererDelegate.swift */,
 				146E2DE329C0D61A00BFC757 /* MainGameManager.swift */,
 				124B02C829C4171400094CF5 /* ViewImageManager.swift */,
+				14C6732A29D370AE00D8DF78 /* SettingsManager.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -452,14 +494,18 @@
 		146E2DDF29C0D0BB00BFC757 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				14C6732529D36CFE00D8DF78 /* CustomViewModifiers */,
 				124B02C029C415CC00094CF5 /* BlockView.swift */,
 				124B02D829C568FE00094CF5 /* BackgroundView.swift */,
 				146E2DB529C0D07200BFC757 /* ContentView.swift */,
 				146E2E1829C0E5B400BFC757 /* GameplayLevelView.swift */,
 				124B02D629C567F600094CF5 /* LevelView.swift */,
 				124B02C229C415DC00094CF5 /* PlatformView.swift */,
-				61FC031229CCBDE300CE2CE5 /* PathViewShape.swift */,
 				61AE15B429D1786700D04E95 /* PowerupLineView.swift */,
+				61FC031229CCBDE300CE2CE5 /* PathViewShape.swift */,
+				14C6731F29D366D300D8DF78 /* MainMenuView.swift */,
+				14C6732329D36AB100D8DF78 /* GameModeSelectView.swift */,
+				14C6732829D36F4D00D8DF78 /* SettingsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -509,6 +555,25 @@
 				14C53B2529C5E9D10035EC17 /* GameUpdater.swift */,
 			);
 			path = GameUpdater;
+			sourceTree = "<group>";
+		};
+		14C6732529D36CFE00D8DF78 /* CustomViewModifiers */ = {
+			isa = PBXGroup;
+			children = (
+				14C6732629D36D4900D8DF78 /* MenuButtonText.swift */,
+				14C6732C29D3712A00D8DF78 /* CategoryText.swift */,
+				14C6732E29D371D700D8DF78 /* BodyText.swift */,
+			);
+			path = CustomViewModifiers;
+			sourceTree = "<group>";
+		};
+		14DAFDF529CE312D003BE140 /* Sound */ = {
+			isa = PBXGroup;
+			children = (
+				14C6733429D3737200D8DF78 /* bkgMusic.mp3 */,
+				14DAFDF629CE3146003BE140 /* SoundSystem.swift */,
+			);
+			path = Sound;
 			sourceTree = "<group>";
 		};
 		2F469D5229D2AB1500C4152E /* FiziksContact */ = {
@@ -603,6 +668,7 @@
 				2FC4654429D4272C00A5B4F3 /* BlockLostEvent.swift */,
 				2FC4655029D43CEF00A5B4F3 /* GameEndedEvent.swift */,
 				2FB69D6B29D5BD0E008D81AC /* TowerHeightIncreasedEvent.swift */,
+				2FB69D7D29D83E7B008D81AC /* BlockDroppedEvent.swift */,
 			);
 			path = Events;
 			sourceTree = "<group>";
@@ -847,6 +913,7 @@
 			files = (
 				146E2DBB29C0D07300BFC757 /* Preview Assets.xcassets in Resources */,
 				146E2DB829C0D07300BFC757 /* Assets.xcassets in Resources */,
+				14C6733529D3737200D8DF78 /* bkgMusic.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -892,10 +959,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14C6732B29D370AE00D8DF78 /* SettingsManager.swift in Sources */,
 				124B02E829C9DABA00094CF5 /* TumblingTowersEventManager.swift in Sources */,
 				146E2DB629C0D07200BFC757 /* ContentView.swift in Sources */,
+				14C6732429D36AB100D8DF78 /* GameModeSelectView.swift in Sources */,
+				1421B0CC29D41C530002E4AA /* GameMode.swift in Sources */,
 				146E2DEA29C0D62800BFC757 /* InputSystem.swift in Sources */,
 				61CD55E829C35D1E00DB6000 /* PathFiziksBody.swift in Sources */,
+				14C6732929D36F4D00D8DF78 /* SettingsView.swift in Sources */,
 				146E2E1929C0E5B400BFC757 /* GameplayLevelView.swift in Sources */,
 				2FC4655129D43CEF00A5B4F3 /* GameEndedEvent.swift in Sources */,
 				2FB69D5B29D55A6C008D81AC /* BlockPlacedEvent.swift in Sources */,
@@ -906,6 +977,7 @@
 				61CD55F029C35D9600DB6000 /* CollisionMask.swift in Sources */,
 				124B02D729C567F600094CF5 /* LevelView.swift in Sources */,
 				61A10F1F29D30BED000EB4B4 /* PowerupManager.swift in Sources */,
+				14C6732729D36D4900D8DF78 /* MenuButtonText.swift in Sources */,
 				2FA2AC0529C74541001C5B7C /* GameEngine.swift in Sources */,
 				2FC7FAD429C50C3C00B56850 /* ShapeRandomizer.swift in Sources */,
 				2FC4654329D4264E00A5B4F3 /* NumBlocksLostStatTracker.swift in Sources */,
@@ -916,6 +988,7 @@
 				124B02C329C415DC00094CF5 /* PlatformView.swift in Sources */,
 				146E2DEC29C0D62800BFC757 /* GyroInput.swift in Sources */,
 				146E2DEB29C0D62800BFC757 /* TapInput.swift in Sources */,
+				1421B0D229D435950002E4AA /* RaceTimeGameMode.swift in Sources */,
 				61A10F3B29D30E9E000EB4B4 /* VinePowerup.swift in Sources */,
 				146E2DB429C0D07200BFC757 /* TumblingTowersGameApp.swift in Sources */,
 				2FC7FAD229C50C2C00B56850 /* RandomNumberGeneratorWithSeed.swift in Sources */,
@@ -926,11 +999,13 @@
 				124B02ED29C9ED0000094CF5 /* EventIdentifier.swift in Sources */,
 				61CD55E629C35CDB00DB6000 /* FiziksEngine.swift in Sources */,
 				61A10F4529D31357000EB4B4 /* PowerupFactory.swift in Sources */,
+				1421B0CE29D41F740002E4AA /* SurvivalGameMode.swift in Sources */,
 				2FC4654F29D43C0900A5B4F3 /* BobTheBuilderAchievementDataSource.swift in Sources */,
 				2FC7FADE29C510F200B56850 /* CGPoint+arithmeticMean.swift in Sources */,
 				124B02D329C4204300094CF5 /* GameObjectPlatform.swift in Sources */,
 				2FC4652C29D2EA1500A5B4F3 /* StatsTrackingSystem.swift in Sources */,
 				61FC031729CD498400CE2CE5 /* Shape+Fill.swift in Sources */,
+				14C6732F29D371D700D8DF78 /* BodyText.swift in Sources */,
 				61FC031129CC483400CE2CE5 /* CGPath+Rotate.swift in Sources */,
 				2FB69D6C29D5BD0E008D81AC /* TowerHeightIncreasedEvent.swift in Sources */,
 				2FB69D5F29D55ED1008D81AC /* BlockTouchedPowerupLineEvent.swift in Sources */,
@@ -955,8 +1030,10 @@
 				124B02CF29C41FD000094CF5 /* GameObjectBlock.swift in Sources */,
 				146E2DFE29C0E05A00BFC757 /* TetrisShape.swift in Sources */,
 				146E2E0829C0E2FE00BFC757 /* FiziksBody.swift in Sources */,
+				14DAFDF729CE3146003BE140 /* SoundSystem.swift in Sources */,
 				61CD55EE29C35D8A00DB6000 /* CategoryMask.swift in Sources */,
 				2F7E13A629C0F054000E6FA9 /* BiMap.swift in Sources */,
+				14C6732D29D3712A00D8DF78 /* CategoryText.swift in Sources */,
 				146E2E1729C0E33900BFC757 /* CGPoint+Hashable.swift in Sources */,
 				146E2E1029C0E30700BFC757 /* Block.swift in Sources */,
 				2FB69D6129D55F06008D81AC /* PlatformPowerupActivatedEvent.swift in Sources */,
@@ -964,9 +1041,11 @@
 				2FC4655329D440D000A5B4F3 /* AchievementSystemDataSource.swift in Sources */,
 				2F469D5529D2AB1500C4152E /* FiziksContact.swift in Sources */,
 				2FC4654B29D42E4000A5B4F3 /* Achievement.swift in Sources */,
+				2FB69D7E29D83E7B008D81AC /* BlockDroppedEvent.swift in Sources */,
 				2FC4654529D4272C00A5B4F3 /* BlockLostEvent.swift in Sources */,
 				124B02D929C568FE00094CF5 /* BackgroundView.swift in Sources */,
 				61CD55F229C35DA700DB6000 /* ContactTestMask.swift in Sources */,
+				14C6732229D368C900D8DF78 /* Constants.swift in Sources */,
 				124B02CD29C41F7100094CF5 /* GameObject.swift in Sources */,
 				146E2DF129C0D62F00BFC757 /* Point.swift in Sources */,
 				146E2DE629C0D61A00BFC757 /* MainGameManager.swift in Sources */,
@@ -978,6 +1057,7 @@
 				61A10F2629D30CAB000EB4B4 /* LinkedList.swift in Sources */,
 				14C53B2629C5E9D10035EC17 /* GameUpdater.swift in Sources */,
 				146E2DE429C0D61A00BFC757 /* GameEngineManager.swift in Sources */,
+				14C6732029D366D300D8DF78 /* MainMenuView.swift in Sources */,
 				614B458829D3EB9100BDD2F0 /* CGVector+Multiply.swift in Sources */,
 				2FC4653129D30FF700A5B4F3 /* PerGameStat.swift in Sources */,
 				2FB69D6629D5B9E6008D81AC /* SkyscraperAchievement.swift in Sources */,
