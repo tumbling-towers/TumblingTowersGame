@@ -8,7 +8,7 @@
 import Foundation
 
 class TapInput: InputSystem {
-    private var inputData = InputData.none
+    var inputData = InputData.none
 
     private var xMultiplier: Double = 0.01
     private var yMultiplier: Double = 5.0

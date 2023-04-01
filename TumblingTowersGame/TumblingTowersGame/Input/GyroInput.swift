@@ -15,7 +15,7 @@ class GyroInput: InputSystem {
 
     private var inputVal = InputType.NONE
 
-    private var inputData = InputData.none
+    var inputData = InputData.none
 
     private var yMultiplier: Double = 5.0
 
