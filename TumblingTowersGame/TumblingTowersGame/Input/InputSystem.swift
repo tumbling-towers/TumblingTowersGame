@@ -9,8 +9,6 @@ import Foundation
 
 protocol InputSystem {
 
-    func start(levelWidth: CGFloat, levelHeight: CGFloat)
-
     func getInput() -> InputData
 
     func dragEvent(offset: CGSize)

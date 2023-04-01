@@ -8,18 +8,10 @@
 import Foundation
 
 class TapInput: InputSystem {
-    private var levelWidth: CGFloat = 0
-    private var levelHeight: CGFloat = 0
-
     private var inputData: InputData = InputData.none
     
     private var xMultiplier: Double = 0.01
     private var yMultiplier: Double = 5.0
-
-    func start(levelWidth: CGFloat, levelHeight: CGFloat) {
-        self.levelWidth = levelWidth
-        self.levelHeight = levelHeight
-    }
 
     func getInput() -> InputData {
         inputData

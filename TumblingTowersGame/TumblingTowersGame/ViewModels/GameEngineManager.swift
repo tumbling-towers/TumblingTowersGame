@@ -89,9 +89,6 @@ class GameEngineManager: ObservableObject {
         // set up renderer
         gameEngine.setRenderer(gameRenderer: self)
 
-        // set up input system
-        inputSystem.start(levelWidth: mainGameMgr.deviceWidth, levelHeight: mainGameMgr.deviceHeight)
-
         self.mainGameMgr = mainGameMgr
     }
 

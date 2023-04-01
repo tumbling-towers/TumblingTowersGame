@@ -10,6 +10,7 @@ import CoreMotion
 
 class GyroInput: InputSystem {
     private weak var mainGameMgr: MainGameManager?
+    
     private var motionManager: CMMotionManager
 
     private var inputVal = InputType.NONE
@@ -35,10 +36,6 @@ class GyroInput: InputSystem {
         if motionManager.isAccelerometerAvailable {
             motionManager.startAccelerometerUpdates()
         }
-    }
-
-    func start(levelWidth: CGFloat, levelHeight: CGFloat) {
-
     }
 
     func getInput() -> InputData {
