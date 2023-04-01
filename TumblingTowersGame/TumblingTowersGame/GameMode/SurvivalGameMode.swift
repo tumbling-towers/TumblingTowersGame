@@ -23,7 +23,7 @@ class SurvivalGameMode: GameMode {
 
     var isGameEnded = false
 
-    init(eventMgr: EventManager) {
+    required init(eventMgr: EventManager) {
         // Register all events that affect game state
 
         eventMgr.registerClosure(for: BlockPlacedEvent.self, closure: blockPlaced)

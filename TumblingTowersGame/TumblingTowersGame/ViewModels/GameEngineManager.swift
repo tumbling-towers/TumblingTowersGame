@@ -78,11 +78,18 @@ class GameEngineManager: ObservableObject {
         
         gameEngine.eventManager = eventManager
 
-        inputSystem = GyroInput()
+        inputSystem = TapInput()
     }
 
     func dragEvent(offset: CGSize) {
         inputSystem.dragEvent(offset: offset)
+    }
+
+    func changeInput(to inputType: Constants.GameInputTypes) {
+        let inputClass = Constants.getGameInputType(fromGameInputType: inputType)
+        if let inputClass = inputClass {
+            inputSystem = inputClass.init()
+        }
     }
 
     func resetInput() {
@@ -114,14 +121,10 @@ class GameEngineManager: ObservableObject {
         gameUpdater?.createCADisplayLink()
 
         // set up game mode
-        if let eventManager = eventManager {
-            if gameMode == .SURVIVAL {
-                self.gameMode = SurvivalGameMode(eventMgr: eventManager)
-            } else if gameMode == .RACECLOCK {
-                self.gameMode = RaceTimeGameMode(eventMgr: eventManager)
-            } else if gameMode == .SANDBOX {
-                self.gameMode = SandboxGameMode(eventMgr: eventManager)
-            }
+        let gameModeClass = Constants.getGameModeType(from: gameMode)
+
+        if let eventManager = eventManager, let gameModeClass = gameModeClass {
+            self.gameMode = gameModeClass.init(eventMgr: eventManager)
         }
 
         self.gameMode.startTimer()

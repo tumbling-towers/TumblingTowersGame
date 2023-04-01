@@ -11,6 +11,8 @@ protocol GameMode {
 
     var name: String { get }
 
+    init(eventMgr: EventManager)
+
     func getGameState() -> Constants.GameState
 
     func hasGameEnded() -> Bool

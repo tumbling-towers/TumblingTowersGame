@@ -18,10 +18,19 @@ class Constants {
         case achievements
     }
 
+
+    static let gameModeTypeToClass: [String: GameMode.Type] = [GameModeTypes.SURVIVAL.rawValue: SurvivalGameMode.self,
+                                                               GameModeTypes.RACECLOCK.rawValue: RaceTimeGameMode.self,
+                                                               GameModeTypes.SANDBOX.rawValue: SandboxGameMode.self]
+
     enum GameModeTypes: String {
         case SURVIVAL = "Survival"
         case RACECLOCK = "Race Against the Clock"
         case SANDBOX = "Sandbox"
+    }
+
+    static func getGameModeType(from: GameModeTypes) -> GameMode.Type? {
+        gameModeTypeToClass[from.rawValue]
     }
 
     enum GameState {
@@ -31,6 +40,18 @@ class Constants {
         case LOSE_RACE
         case RUNNING
         case PAUSED
+    }
+
+    static let gameInputTypeToClass: [String: InputSystem.Type] = [GameInputTypes.TAP.rawValue: TapInput.self,
+                                       GameInputTypes.GYRO.rawValue: GyroInput.self]
+
+    enum GameInputTypes: String, Equatable, CaseIterable {
+        case TAP = "Tap"
+        case GYRO = "Gyro"
+    }
+
+    static func getGameInputType(fromGameInputType: GameInputTypes) -> InputSystem.Type? {
+        gameInputTypeToClass[fromGameInputType.rawValue]
     }
 
 }

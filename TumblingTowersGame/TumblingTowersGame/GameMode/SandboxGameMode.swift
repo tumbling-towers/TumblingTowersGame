@@ -15,7 +15,7 @@ class SandboxGameMode: GameMode {
 
     var isGameEnded = false
 
-    init(eventMgr: EventManager) {
+    required init(eventMgr: EventManager) {
 
     }
 

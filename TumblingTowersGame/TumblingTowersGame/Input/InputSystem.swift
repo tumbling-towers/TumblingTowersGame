@@ -17,6 +17,8 @@ protocol InputSystem {
 
     func resetInput()
 
+    init()
+
 }
 
 struct InputData {

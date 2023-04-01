@@ -16,6 +16,9 @@ class TapInput: InputSystem {
     private var xMultiplier: Double = 0.01
     private var yMultiplier: Double = 5.0
 
+    required init() {
+    }
+
     func start(levelWidth: CGFloat, levelHeight: CGFloat) {
         self.levelWidth = levelWidth
         self.levelHeight = levelHeight

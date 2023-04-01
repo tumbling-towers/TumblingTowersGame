@@ -13,6 +13,9 @@ struct SettingsView: View {
     @StateObject var settingsMgr: SettingsManager
     @Binding var currGameScreen: Constants.CurrGameScreens
 
+    // MARK: Retrieve from storage in future
+    @State private var selectedInputType = Constants.GameInputTypes.TAP
+
     var body: some View {
         ZStack {
 
@@ -50,9 +53,20 @@ struct SettingsView: View {
                         .padding(.all)
                 }
 
-//                Text("Input Sensitivity")
-//                    .modifier(CategoryText())
-//
+                Text("Input Options")
+                    .modifier(CategoryText())
+
+                Picker(selection: $selectedInputType, label: Text("Input Type").modifier(BodyText())) {
+                    ForEach(Constants.GameInputTypes.allCases, id: \.self) { value in
+                        Text(value.rawValue)
+                            .modifier(BodyText())
+
+                    }
+                }
+                .onChange(of: selectedInputType) {
+                    gameEngineMgr.changeInput(to: selectedInputType)
+                }
+                
 //                HStack {
 //                    Text("Block Movement Speed")
 //                        .modifier(BodyText())
