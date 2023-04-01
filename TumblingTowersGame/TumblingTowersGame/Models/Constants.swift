@@ -21,6 +21,7 @@ class Constants {
     enum GameModeTypes: String {
         case SURVIVAL = "Survival"
         case RACECLOCK = "Race Against the Clock"
+        case SANDBOX = "Sandbox"
     }
 
     enum GameState {

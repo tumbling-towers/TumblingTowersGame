@@ -119,6 +119,8 @@ class GameEngineManager: ObservableObject {
                 self.gameMode = SurvivalGameMode(eventMgr: eventManager)
             } else if gameMode == .RACECLOCK {
                 self.gameMode = RaceTimeGameMode(eventMgr: eventManager)
+            } else if gameMode == .SANDBOX {
+                self.gameMode = SandboxGameMode(eventMgr: eventManager)
             }
         }
 

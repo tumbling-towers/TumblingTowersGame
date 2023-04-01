@@ -33,6 +33,7 @@
 		14168DE029D82C6F00EF5C22 /* GameplayGoBackMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14168DDF29D82C6F00EF5C22 /* GameplayGoBackMenuView.swift */; };
 		14168DE229D831F500EF5C22 /* GameTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14168DE129D831F500EF5C22 /* GameTimer.swift */; };
 		14168DE429D8B6EA00EF5C22 /* BlockInsertedEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14168DE329D8B6EA00EF5C22 /* BlockInsertedEvent.swift */; };
+		14168DE629D8C47A00EF5C22 /* SandboxGameMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14168DE529D8C47A00EF5C22 /* SandboxGameMode.swift */; };
 		1421B0CC29D41C530002E4AA /* GameMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1421B0CB29D41C530002E4AA /* GameMode.swift */; };
 		1421B0CE29D41F740002E4AA /* SurvivalGameMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1421B0CD29D41F740002E4AA /* SurvivalGameMode.swift */; };
 		1421B0D029D424A70002E4AA /* BlockDroppedEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1421B0CF29D424A70002E4AA /* BlockDroppedEvent.swift */; };
@@ -186,6 +187,7 @@
 		14168DDF29D82C6F00EF5C22 /* GameplayGoBackMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameplayGoBackMenuView.swift; sourceTree = "<group>"; };
 		14168DE129D831F500EF5C22 /* GameTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTimer.swift; sourceTree = "<group>"; };
 		14168DE329D8B6EA00EF5C22 /* BlockInsertedEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockInsertedEvent.swift; sourceTree = "<group>"; };
+		14168DE529D8C47A00EF5C22 /* SandboxGameMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SandboxGameMode.swift; sourceTree = "<group>"; };
 		1421B0CB29D41C530002E4AA /* GameMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameMode.swift; sourceTree = "<group>"; };
 		1421B0CD29D41F740002E4AA /* SurvivalGameMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurvivalGameMode.swift; sourceTree = "<group>"; };
 		1421B0CF29D424A70002E4AA /* BlockDroppedEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockDroppedEvent.swift; sourceTree = "<group>"; };
@@ -372,6 +374,7 @@
 				1421B0CB29D41C530002E4AA /* GameMode.swift */,
 				1421B0CD29D41F740002E4AA /* SurvivalGameMode.swift */,
 				1421B0D129D435950002E4AA /* RaceTimeGameMode.swift */,
+				14168DE529D8C47A00EF5C22 /* SandboxGameMode.swift */,
 				14168DE129D831F500EF5C22 /* GameTimer.swift */,
 			);
 			path = GameMode;
@@ -906,13 +909,13 @@
 				14168DE029D82C6F00EF5C22 /* GameplayGoBackMenuView.swift in Sources */,
 				61CD55E629C35CDB00DB6000 /* FiziksEngine.swift in Sources */,
 				14168DDE29D82AC200EF5C22 /* GameEndView.swift in Sources */,
-				61A10F4529D31357000EB4B4 /* PowerupFactory.swift in Sources */,
 				1421B0CE29D41F740002E4AA /* SurvivalGameMode.swift in Sources */,
 				2FC7FADE29C510F200B56850 /* CGPoint+arithmeticMean.swift in Sources */,
 				14168DE229D831F500EF5C22 /* GameTimer.swift in Sources */,
 				124B02D329C4204300094CF5 /* GameObjectPlatform.swift in Sources */,
 				61FC031729CD498400CE2CE5 /* Shape+Fill.swift in Sources */,
 				14C6732F29D371D700D8DF78 /* BodyText.swift in Sources */,
+				14168DE629D8C47A00EF5C22 /* SandboxGameMode.swift in Sources */,
 				61FC031129CC483400CE2CE5 /* CGPath+Rotate.swift in Sources */,
 				61A10F2829D30CBB000EB4B4 /* LinkedListNode.swift in Sources */,
 				61AE15B329D16DD500D04E95 /* BlockPlacedEvent.swift in Sources */,
