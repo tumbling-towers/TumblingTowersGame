@@ -18,7 +18,7 @@ struct GameplayGoBackMenuView: View {
             Button("Back") {
                 withAnimation {
                     currGameScreen = .mainMenu
-                    gameEngineMgr.stopGame()
+                    gameEngineMgr.resetGame()
                 }
             }
             .modifier(MenuButtonText(fontSize: 20))

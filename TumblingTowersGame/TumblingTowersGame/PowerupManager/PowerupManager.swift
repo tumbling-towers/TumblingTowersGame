@@ -9,16 +9,8 @@ import Foundation
 
 protocol PowerupManager: PowerupDelegate {
     var eventManager: EventManager? { get set }
-    var powerupQueue: Queue<Powerup> { get set }
     var rng: RandomNumberGeneratorWithSeed { get }
-    
+    var nextPowerup: Powerup? { get set }
+    func createNextPowerup() -> Void
     func activateNextPowerup() -> Void
 }
-
-extension PowerupManager {
-    mutating func activateNextPowerup() {
-        let nextPowerup = powerupQueue.dequeue()
-        nextPowerup?.activate()
-    }
-}
-

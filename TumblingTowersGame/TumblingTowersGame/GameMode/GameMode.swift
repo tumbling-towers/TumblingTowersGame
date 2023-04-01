@@ -13,9 +13,11 @@ protocol GameMode {
 
     func getGameState() -> Constants.GameState
 
+    func hasGameEnded() -> Bool
+
     func getScore() -> Int
 
-    func getTimeRemaining() -> Float
+    func getTimeRemaining() -> Int
 
     func restartGame()
 

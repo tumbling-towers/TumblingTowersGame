@@ -11,7 +11,7 @@ protocol GameRendererDelegate: AnyObject {
 
     func rerender()
 
-    func renderLevel(level: Level, gameObjectBlocks: [GameObjectBlock], gameObjectPlatform: GameObjectPlatform)
+    func renderLevel(level: Level, gameObjectBlocks: [GameObjectBlock], gameObjectPlatforms: [GameObjectPlatform])
 
     func getCurrInput() -> InputData
 

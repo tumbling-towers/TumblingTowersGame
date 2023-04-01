@@ -18,6 +18,8 @@ class Block: GameEngineObject {
         fiziksBody.zRotation
     }
     
+    var isGlueBlock: Bool = false
+    
     static var fallingCollisionBitMask: BitMask = CollisionMask.fallingBlock
 
     static var collisionBitMask: BitMask = CollisionMask.block

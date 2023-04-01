@@ -18,6 +18,8 @@ class RaceTimeGameMode: GameMode {
 
     var currBlocksPlaced = 0
 
+    var isGameEnded = false
+
     init(eventMgr: EventManager) {
         // Register all events that affect game state
         eventMgr.registerClosure(for: BlockPlacedEvent.self, closure: blockPlaced)
@@ -27,8 +29,12 @@ class RaceTimeGameMode: GameMode {
 
     func getGameState() -> Constants.GameState {
         if currBlocksPlaced >= blocksToPlace {
+            isGameEnded = true
+            endTimer()
             return .WIN_RACE
         } else if realTimeTimer.count < 0 {
+            isGameEnded = true
+            endTimer()
             return .LOSE_RACE
         }
 
@@ -40,11 +46,16 @@ class RaceTimeGameMode: GameMode {
         realTimeTimer.count
     }
 
-    func getTimeRemaining() -> Float {
-        Float(realTimeTimer.count)
+    func hasGameEnded() -> Bool {
+        isGameEnded
+    }
+
+    func getTimeRemaining() -> Int {
+        realTimeTimer.count
     }
 
     func restartGame() {
+        isGameEnded = false
         currBlocksPlaced = 0
         realTimeTimer = GameTimer()
     }

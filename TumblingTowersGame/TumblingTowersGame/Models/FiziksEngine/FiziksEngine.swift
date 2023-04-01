@@ -19,7 +19,8 @@ protocol FiziksEngine: AnyObject {
     func contains(_ fiziksBody: FiziksBody) -> Bool
     func add(_ fiziksBody: FiziksBody)
     func delete(_ fiziksBody: FiziksBody)
-    func combine(_ fiziksBodies: [FiziksBody])
+    func combine(bodyA: FiziksBody, bodyB: FiziksBody, at anchorPoint: CGPoint?)
     func setWorldGravity(to newValue: CGVector)
     func allBodiesContacted(with fiziksBody: FiziksBody) -> [FiziksBody]
+    func isIntersecting(body: FiziksBody, otherBodies: [FiziksBody]) -> Bool
 }

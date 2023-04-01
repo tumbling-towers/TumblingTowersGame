@@ -9,7 +9,7 @@ import Foundation
 
 struct Level {
     var blocks: [GameObjectBlock]
-    var platform: GameObjectPlatform
+    var platforms: [GameObjectPlatform]
 
     mutating func move(block: GameObjectBlock, to: CGPoint) {
         for i in 0..<blocks.count where blocks[i] == block {
@@ -20,8 +20,12 @@ struct Level {
     mutating func add(block: GameObjectBlock) {
         blocks.append(block)
     }
+    
+    mutating func add(platform: GameObjectPlatform) {
+        platforms.append(platform)
+    }
 }
 
 extension Level {
-    static let sampleLevel = Level(blocks: [GameObjectBlock.sampleBlock], platform: GameObjectPlatform.samplePlatform)
+    static let sampleLevel = Level(blocks: [GameObjectBlock.sampleBlock], platforms: [GameObjectPlatform.samplePlatform])
 }

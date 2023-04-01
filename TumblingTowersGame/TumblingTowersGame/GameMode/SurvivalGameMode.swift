@@ -21,6 +21,8 @@ class SurvivalGameMode: GameMode {
 
     var realTimeTimer = GameTimer()
 
+    var isGameEnded = false
+
     init(eventMgr: EventManager) {
         // Register all events that affect game state
 
@@ -35,27 +37,34 @@ class SurvivalGameMode: GameMode {
         print("Blocks Inserted \(currBlocksInserted)\n")
 
         if currBlocksDropped >= blocksDroppedThreshold {
+            isGameEnded = true
+            endTimer()
             return .LOSE_SURVIVAL
         }
 
         if currBlocksPlaced >= blocksToPlace {
+            isGameEnded = true
+            endTimer()
             return .WIN_SURVIVAL
         }
 
         return .RUNNING
     }
 
+    func hasGameEnded() -> Bool {
+        isGameEnded
+    }
+
     func getScore() -> Int {
-        // TODO: Implement
         realTimeTimer.count - currBlocksDropped * 10
     }
 
-    func getTimeRemaining() -> Float {
-        // TODO: Implement
-        Float(realTimeTimer.count)
+    func getTimeRemaining() -> Int {
+        realTimeTimer.count
     }
 
     func restartGame() {
+        isGameEnded = false
         currBlocksInserted = 0
         currBlocksPlaced = 0
         currBlocksDropped = 0

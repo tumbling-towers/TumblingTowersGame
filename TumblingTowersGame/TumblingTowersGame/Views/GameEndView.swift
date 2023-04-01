@@ -21,7 +21,7 @@ struct GameEndView: View {
 
                     drawGameWinText()
 
-                    Text("Time Remaining: " + String(gameEngineMgr.timeRemaining) + "!")
+                    Text("Timer: " + String(gameEngineMgr.timeRemaining) + "!")
                         .font(.system(size: 30))
                 }
             }
@@ -60,6 +60,9 @@ struct GameEndView: View {
                     Text("Congratulations...")
                         .font(.system(size: 30))
                     Text("You stacked enough blocks!")
+                        .font(.system(size: 50))
+                        .fontWeight(.heavy)
+                    Text("Score: \(gameEngineMgr.score)")
                         .font(.system(size: 50))
                         .fontWeight(.heavy)
                 }
