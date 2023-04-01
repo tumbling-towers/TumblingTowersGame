@@ -74,8 +74,8 @@ extension GameFiziksEngine: FiziksEngine {
         
         if let point = anchorPoint {
             pinJoint = SKPhysicsJointPin.joint(withBodyA: bodyA, bodyB: bodyB, anchor: point)
-        } else if let pos = bodyA.node?.position, let posB = bodyB.node?.position {
-            let meanPos = CGPoint(x: (pos.x + posB.x) / 2, y: (pos.y + posB.y) / 2)
+        } else if let posA = bodyA.node?.position, let posB = bodyB.node?.position {
+            let meanPos = CGPoint.arithmeticMean(points: [posA, posB])
             pinJoint = SKPhysicsJointPin.joint(withBodyA: bodyA, bodyB: bodyB, anchor: meanPos)
         }
         
