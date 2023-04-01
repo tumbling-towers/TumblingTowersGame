@@ -15,7 +15,7 @@ struct GameplayGoBackMenuView: View {
         HStack {
             Spacer()
 
-            Button("Back") {
+            Button("BACK") {
                 withAnimation {
                     currGameScreen = .mainMenu
                     gameEngineMgr.resetGame()

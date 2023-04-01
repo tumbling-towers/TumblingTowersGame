@@ -54,7 +54,11 @@ struct ContentView: View {
                     .environmentObject(mainGameMgr)
                     .environmentObject(gameEngineMgr)
             } else if currGameScreen == .achievements {
-                EmptyView()
+                ZStack {
+                    BackgroundView()
+                    GameplayGoBackMenuView(currGameScreen: $currGameScreen)
+                        .environmentObject(gameEngineMgr)
+                }
             }
 
             if gameEngineMgr.gameState != .RUNNING && gameEngineMgr.gameState != .PAUSED {
