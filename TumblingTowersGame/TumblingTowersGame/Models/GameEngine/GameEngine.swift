@@ -410,7 +410,7 @@ extension GameEngine: FiziksContactDelegate {
 // extension to support powerups
 extension GameEngine {
     func registerPowerupEvents() {
-        eventManager?.registerClosure(for: GluePowerupActivatedEvent.self, closure: { event in
+        eventManager?.registerClosure(for: VinePowerupActivatedEvent.self, closure: { event in
             self.currentlyMovingBlock?.isGlueBlock = true
         })
         eventManager?.registerClosure(for: PlatformPowerupActivatedEvent.self, closure: { event in

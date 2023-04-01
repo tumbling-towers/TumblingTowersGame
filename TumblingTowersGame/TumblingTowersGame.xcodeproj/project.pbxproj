@@ -102,10 +102,10 @@
 		61A10F3429D30D0C000EB4B4 /* LinkedListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A10F3329D30D0C000EB4B4 /* LinkedListTests.swift */; };
 		61A10F3629D30D1C000EB4B4 /* LinkedListNodeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A10F3529D30D1C000EB4B4 /* LinkedListNodeTests.swift */; };
 		61A10F3829D30DCA000EB4B4 /* PowerupDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A10F3729D30DCA000EB4B4 /* PowerupDelegate.swift */; };
-		61A10F3B29D30E9E000EB4B4 /* GluePowerup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A10F3A29D30E9E000EB4B4 /* GluePowerup.swift */; };
+		61A10F3B29D30E9E000EB4B4 /* VinePowerup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A10F3A29D30E9E000EB4B4 /* VinePowerup.swift */; };
 		61A10F3D29D30F93000EB4B4 /* PlatformPowerup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A10F3C29D30F93000EB4B4 /* PlatformPowerup.swift */; };
 		61A10F3F29D30FB0000EB4B4 /* GamePowerupManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A10F3E29D30FB0000EB4B4 /* GamePowerupManager.swift */; };
-		61A10F4129D31083000EB4B4 /* GluePowerupActivatedEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A10F4029D31083000EB4B4 /* GluePowerupActivatedEvent.swift */; };
+		61A10F4129D31083000EB4B4 /* VinePowerupActivatedEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A10F4029D31083000EB4B4 /* VinePowerupActivatedEvent.swift */; };
 		61A10F4329D310CA000EB4B4 /* PlatformPowerupActivatedEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A10F4229D310CA000EB4B4 /* PlatformPowerupActivatedEvent.swift */; };
 		61AE15B329D16DD500D04E95 /* BlockPlacedEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61AE15B229D16DD500D04E95 /* BlockPlacedEvent.swift */; };
 		61AE15B529D1786700D04E95 /* PowerupLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61AE15B429D1786700D04E95 /* PowerupLineView.swift */; };
@@ -230,10 +230,10 @@
 		61A10F3329D30D0C000EB4B4 /* LinkedListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedListTests.swift; sourceTree = "<group>"; };
 		61A10F3529D30D1C000EB4B4 /* LinkedListNodeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedListNodeTests.swift; sourceTree = "<group>"; };
 		61A10F3729D30DCA000EB4B4 /* PowerupDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerupDelegate.swift; sourceTree = "<group>"; };
-		61A10F3A29D30E9E000EB4B4 /* GluePowerup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GluePowerup.swift; sourceTree = "<group>"; };
+		61A10F3A29D30E9E000EB4B4 /* VinePowerup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VinePowerup.swift; sourceTree = "<group>"; };
 		61A10F3C29D30F93000EB4B4 /* PlatformPowerup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformPowerup.swift; sourceTree = "<group>"; };
 		61A10F3E29D30FB0000EB4B4 /* GamePowerupManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePowerupManager.swift; sourceTree = "<group>"; };
-		61A10F4029D31083000EB4B4 /* GluePowerupActivatedEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GluePowerupActivatedEvent.swift; path = TumblingTowersGame/PowerupManager/Powerups/GluePowerupActivatedEvent.swift; sourceTree = SOURCE_ROOT; };
+		61A10F4029D31083000EB4B4 /* VinePowerupActivatedEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = VinePowerupActivatedEvent.swift; path = TumblingTowersGame/PowerupManager/Powerups/VinePowerupActivatedEvent.swift; sourceTree = SOURCE_ROOT; };
 		61A10F4229D310CA000EB4B4 /* PlatformPowerupActivatedEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PlatformPowerupActivatedEvent.swift; path = TumblingTowersGame/PowerupManager/Powerups/PlatformPowerupActivatedEvent.swift; sourceTree = SOURCE_ROOT; };
 		61AE15B229D16DD500D04E95 /* BlockPlacedEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BlockPlacedEvent.swift; path = TumblingTowersGame/Extensions/BlockPlacedEvent.swift; sourceTree = SOURCE_ROOT; };
 		61AE15B429D1786700D04E95 /* PowerupLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerupLineView.swift; sourceTree = "<group>"; };
@@ -320,7 +320,7 @@
 			children = (
 				61AE15B229D16DD500D04E95 /* BlockPlacedEvent.swift */,
 				61A10F1B29D2EB4B000EB4B4 /* BlockTouchedPowerupLineEvent.swift */,
-				61A10F4029D31083000EB4B4 /* GluePowerupActivatedEvent.swift */,
+				61A10F4029D31083000EB4B4 /* VinePowerupActivatedEvent.swift */,
 				61A10F4229D310CA000EB4B4 /* PlatformPowerupActivatedEvent.swift */,
 				616EAD0729D6D6A2006D602A /* PowerupAvailableEvent.swift */,
 				616EAD0929D6F709006D602A /* PowerupButtonTappedEvent.swift */,
@@ -614,7 +614,7 @@
 		61A10F3929D30E92000EB4B4 /* Powerups */ = {
 			isa = PBXGroup;
 			children = (
-				61A10F3A29D30E9E000EB4B4 /* GluePowerup.swift */,
+				61A10F3A29D30E9E000EB4B4 /* VinePowerup.swift */,
 				61A10F3C29D30F93000EB4B4 /* PlatformPowerup.swift */,
 			);
 			path = Powerups;
@@ -796,7 +796,7 @@
 				146E2DEA29C0D62800BFC757 /* InputSystem.swift in Sources */,
 				61CD55E829C35D1E00DB6000 /* PathFiziksBody.swift in Sources */,
 				146E2E1929C0E5B400BFC757 /* GameplayLevelView.swift in Sources */,
-				61A10F4129D31083000EB4B4 /* GluePowerupActivatedEvent.swift in Sources */,
+				61A10F4129D31083000EB4B4 /* VinePowerupActivatedEvent.swift in Sources */,
 				124B02E629C9DAA200094CF5 /* EventManager.swift in Sources */,
 				146E2DE529C0D61A00BFC757 /* GameRendererDelegate.swift in Sources */,
 				146E2E0E29C0E30700BFC757 /* GameEngineObject.swift in Sources */,
@@ -811,7 +811,7 @@
 				124B02C329C415DC00094CF5 /* PlatformView.swift in Sources */,
 				146E2DEC29C0D62800BFC757 /* GyroInput.swift in Sources */,
 				146E2DEB29C0D62800BFC757 /* TapInput.swift in Sources */,
-				61A10F3B29D30E9E000EB4B4 /* GluePowerup.swift in Sources */,
+				61A10F3B29D30E9E000EB4B4 /* VinePowerup.swift in Sources */,
 				146E2DB429C0D07200BFC757 /* TumblingTowersGameApp.swift in Sources */,
 				2FC7FAD229C50C2C00B56850 /* RandomNumberGeneratorWithSeed.swift in Sources */,
 				616EAD0E29D74C5C006D602A /* GameEngineConstants.swift in Sources */,

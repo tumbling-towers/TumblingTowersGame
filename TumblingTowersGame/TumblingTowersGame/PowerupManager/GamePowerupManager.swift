@@ -10,7 +10,7 @@ import Foundation
 class GamePowerupManager: PowerupManager {
     static let defaultNumPowerups = 10
     
-    static let powerupTypes: [Powerup.Type] = [PlatformPowerup.self, GluePowerup.self]
+    static let powerupTypes: [Powerup.Type] = [PlatformPowerup.self, VinePowerup.self]
     
     var eventManager: EventManager? {
         didSet {
@@ -44,7 +44,7 @@ class GamePowerupManager: PowerupManager {
     }
     
     func didActivateGluePowerup() {
-        eventManager?.postEvent(GluePowerupActivatedEvent())
+        eventManager?.postEvent(VinePowerupActivatedEvent())
     }
     
     func didActivatePlatformPowerup() {
