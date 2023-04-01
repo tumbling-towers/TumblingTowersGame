@@ -21,6 +21,9 @@ struct ViewImageManager {
 
     static let powerUpLineImage = ""
     static let goalLineImage = ""
+    
+    static let GluePowerupImage = "glue"
+    static let PlatformPowerupImage = "platform"
 
     static let blockShapeToImage: [TetrisType: String] = [
         .L: LBlockImage,
@@ -31,13 +34,11 @@ struct ViewImageManager {
         .T: TBlockImage,
         .S: SBlockImage
     ]
-
-    // TODO: should throw / remove
-//    static func getBlockImage(_ block: GameObjectBlock) -> String? {
-//        guard let image = blockShapeToImage[block.blockShape] else {
-//            return ""
-//        }
-//        return image
-//    }
+    
     // TODO: vines blocks
+    
+    static let powerupToImage: [PowerupType: String] = [
+        .glue: GluePowerupImage,
+        .platform: PlatformPowerupImage
+    ]
 }

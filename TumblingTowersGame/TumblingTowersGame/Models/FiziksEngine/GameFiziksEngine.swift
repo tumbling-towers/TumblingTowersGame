@@ -65,30 +65,24 @@ extension GameFiziksEngine: FiziksEngine {
         skNodeToFiziksBody[fiziksBody.fiziksShapeNode] = nil
         fiziksScene.remove(fiziksBody)
     }
-
-    // TODO: Figure out logic on how to create new FiziksBody from combined node
-    // As it turns out, SKPhysicsBody(bodies:) doesn't really do what we need, cos
-    // it seems to just take the bodies and put them as children of the new body.
-    // The problem is that if in that frame there is some overlap, the overlap will
-    // stay in the new body. I think this is a good place to use double dispatch actually.
-    // Might consider coming up with ways to combine different shapes.
-    func combine(_ fiziksBodies: [FiziksBody]) {
-        let skPhysicsBodies = fiziksBodies.compactMap({ getSKPhysicsBody(of: $0) })
-        var newCollisionBitmask: BitMask = 0x0
-        var newCategoryBitmask: BitMask = 0x0
-        var newContactTestBitmask: BitMask = 0x0
-
-        fiziksBodies.forEach({
-            newCollisionBitmask = newCollisionBitmask | ($0.collisionBitMask ?? 0)
-            newCategoryBitmask = newCategoryBitmask | ($0.categoryBitMask ?? 0)
-            newContactTestBitmask = newContactTestBitmask | ($0.contactTestBitMask ?? 0)
-            delete($0)
-        })
-
-        let combinedNode = SKShapeNode()
-        combinedNode.physicsBody = SKPhysicsBody(bodies: skPhysicsBodies)
-
-        fiziksScene.addChild(combinedNode)
+    
+    func combine(bodyA: FiziksBody, bodyB: FiziksBody, at anchorPoint: CGPoint? = nil) {
+        guard let bodyA = bodyA.fiziksShapeNode.physicsBody,
+              let bodyB = bodyB.fiziksShapeNode.physicsBody else { return }
+        
+        var pinJoint: SKPhysicsJointPin?
+        
+        if let point = anchorPoint {
+            pinJoint = SKPhysicsJointPin.joint(withBodyA: bodyA, bodyB: bodyB, anchor: point)
+        } else if let posA = bodyA.node?.position, let posB = bodyB.node?.position {
+            let meanPos = CGPoint.arithmeticMean(points: [posA, posB])
+            pinJoint = SKPhysicsJointPin.joint(withBodyA: bodyA, bodyB: bodyB, anchor: meanPos)
+        }
+        
+        guard let pinJoint = pinJoint else { return }
+        
+        pinJoint.shouldEnableLimits = true
+        fiziksScene.scene?.physicsWorld.add(pinJoint)
     }
 
     func setWorldGravity(to newValue: CGVector) {
@@ -109,6 +103,18 @@ extension GameFiziksEngine: FiziksEngine {
             contactedFiziksBodies.append(contactedFiziksBody)
         }
         return contactedFiziksBodies
+    }
+    
+    func isIntersecting(body: FiziksBody, otherBodies: [FiziksBody]) -> Bool {
+        for otherBody in otherBodies {
+            if body.fiziksShapeNode.intersects(otherBody.fiziksShapeNode) {
+                print(body.position)
+                print(otherBody.position)
+                return true
+            }
+        }
+        
+        return false
     }
 
     private func getSKPhysicsBody(of fiziksBody: FiziksBody) -> SKPhysicsBody? {

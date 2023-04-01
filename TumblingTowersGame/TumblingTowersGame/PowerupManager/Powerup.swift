@@ -9,6 +9,7 @@ import Foundation
 
 protocol Powerup {
     var delegate: PowerupDelegate? { get set }
+    static var type: PowerupType { get }
     
     static func create() -> Powerup
     

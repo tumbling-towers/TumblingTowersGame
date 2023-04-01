@@ -13,11 +13,16 @@ class GameEngineManager: ObservableObject {
     @Published var goalLinePosition: CGPoint = CGPoint()
     @Published var powerUpLinePosition: CGPoint = CGPoint()
     @Published var powerupLineDimensions: CGSize = CGSize()
-    @Published var levelBlocks: [GameObjectBlock] = [.sampleBlock]
-    @Published var levelPlatform: GameObjectPlatform = .samplePlatform
+    @Published var levelBlocks: [GameObjectBlock] = []
+    @Published var levelPlatforms: [GameObjectPlatform] = []
     
     private weak var mainGameMgr: MainGameManager?
-    var eventManager: EventManager?
+    var eventManager: EventManager? {
+        didSet {
+            gameEngine.eventManager = eventManager
+            registerEvents()
+        }
+    }
     
     // MARK: Game logic related attributes
     var platformPosition: CGPoint? {
@@ -26,10 +31,12 @@ class GameEngineManager: ObservableObject {
         }
         set {
             if let newPosition = newValue {
-                gameEngine.setPlatform(position: newPosition)
+                gameEngine.setInitialPlatform(position: newPosition)
             }
         }
     }
+    
+    var powerup: Powerup.Type?
     
     var level: Level = Level.sampleLevel
     
@@ -44,18 +51,6 @@ class GameEngineManager: ObservableObject {
 
     var gameMode: GameMode = SurvivalGameMode(eventMgr: TumblingTowersEventManager())
     
-    var platformRenderPosition: CGPoint? {
-        guard let position = platformPosition else { return nil }
-        
-        return adjustCoordinates(for: position)
-    }
-    
-    var platformPath: CGPath? {
-        guard let platformShape = gameEngine.platform?.shape as? PlatformShape else { return nil }
-        
-        return platformShape.path
-    }
-    
     var referenceBox: CGRect? {
         guard let refPoints = gameEngine.getReferencePoints() else { return nil }
 
@@ -65,6 +60,7 @@ class GameEngineManager: ObservableObject {
 
     init(levelDimensions: CGRect, eventManager: EventManager) {
         self.levelDimensions = levelDimensions
+        
         self.gameEngine = GameEngine(levelDimensions: levelDimensions)
         self.eventManager = eventManager
         
@@ -125,6 +121,12 @@ class GameEngineManager: ObservableObject {
     func rotateCurrentBlock() {
         gameEngine.rotateCMBClockwise()
     }
+    
+    func usePowerup() {
+        guard let powerup = powerup else { return }
+        eventManager?.postEvent(PowerupButtonTappedEvent(type: powerup))
+        self.powerup = nil
+    }
 
     /// GameEngine outputs coordinates with the origin at the bottom-left.
     /// This method converts it such that the origin is at the top-left.
@@ -137,7 +139,8 @@ class GameEngineManager: ObservableObject {
         // Flips the block vertically (mirror image) due to difference in coordinate system
         let path = transformPath(path: block.path, width: block.width, height: block.height)
         let newPosition = adjustCoordinates(for: block.position)
-        let transformedBlock = GameObjectBlock(position: newPosition, path: path)
+        // TODO: Don't return a new block
+        let transformedBlock = GameObjectBlock(position: newPosition, path: path, isGlue: block.isGlue)
         return transformedBlock
     }
     
@@ -148,6 +151,17 @@ class GameEngineManager: ObservableObject {
         path.apply(flip)
         return path.cgPath
     }
+    
+    private func registerEvents() {
+        eventManager?.registerClosure(for: PowerupAvailableEvent.self, closure: { event in
+            switch event {
+            case let powerupAvailableEvent as PowerupAvailableEvent:
+                self.powerup = powerupAvailableEvent.type
+            default:
+                return
+            }
+        })
+    }
 }
 
 extension GameEngineManager: GameRendererDelegate {
@@ -155,14 +169,21 @@ extension GameEngineManager: GameRendererDelegate {
         objectWillChange.send()
     }
 
-    func renderLevel(level: Level, gameObjectBlocks: [GameObjectBlock], gameObjectPlatform: GameObjectPlatform) {
+    func renderLevel(level: Level, gameObjectBlocks: [GameObjectBlock], gameObjectPlatforms: [GameObjectPlatform]) {
         self.level = level
 
         var invertedGameObjBlocks: [GameObjectBlock] = []
+        var invertedGameObjPlatforms: [GameObjectPlatform] = []
 
         for gameObjectBlock in gameObjectBlocks {
             let transformedBlock = transformRenderable(for: gameObjectBlock)
             invertedGameObjBlocks.append(transformedBlock)
+        }
+        
+        for var platform in gameObjectPlatforms {
+            let transformedPlatformPosition = adjustCoordinates(for: platform.position)
+            platform.position = transformedPlatformPosition
+            invertedGameObjPlatforms.append(platform)
         }
         
         if let powerupLine = gameEngine.powerupLine {
@@ -173,7 +194,7 @@ extension GameEngineManager: GameRendererDelegate {
         }
 
         self.levelBlocks = invertedGameObjBlocks
-        self.levelPlatform = gameObjectPlatform
+        self.levelPlatforms = invertedGameObjPlatforms
     }
 
     func getCurrInput() -> InputData {
