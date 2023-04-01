@@ -13,6 +13,7 @@ class SurvivalGameMode: GameMode {
     let blocksToPlace = 10
     let blocksDroppedThreshold = 5
 
+    var currBlocksInserted = 0
     var currBlocksPlaced = 0
     var currBlocksDropped = 0
 
@@ -25,9 +26,14 @@ class SurvivalGameMode: GameMode {
 
         eventMgr.registerClosure(for: BlockPlacedEvent.self, closure: blockPlaced)
         eventMgr.registerClosure(for: BlockDroppedEvent.self, closure: blockDropped)
+        eventMgr.registerClosure(for: BlockInsertedEvent.self, closure: blockInserted)
     }
 
     func getGameState() -> Constants.GameState {
+        print("Blocks Dropped \(currBlocksDropped)")
+        print("Blocks Placed \(currBlocksPlaced)")
+        print("Blocks Inserted \(currBlocksInserted)\n")
+
         if currBlocksDropped >= blocksDroppedThreshold {
             return .LOSE_SURVIVAL
         }
@@ -41,22 +47,23 @@ class SurvivalGameMode: GameMode {
 
     func getScore() -> Int {
         // TODO: Implement
-        -realTimeTimer.count - currBlocksDropped * 10
+        realTimeTimer.count - currBlocksDropped * 10
     }
 
     func getTimeRemaining() -> Float {
         // TODO: Implement
-        Float(-realTimeTimer.count)
+        Float(realTimeTimer.count)
     }
 
     func restartGame() {
+        currBlocksInserted = 0
         currBlocksPlaced = 0
         currBlocksDropped = 0
         realTimeTimer = GameTimer()
     }
 
     func startTimer() {
-        realTimeTimer.start(timeInSeconds: 0)
+        realTimeTimer.start(timeInSeconds: 0, countsUp: true)
     }
 
     func endTimer() {
@@ -64,12 +71,16 @@ class SurvivalGameMode: GameMode {
     }
 
     private func blockPlaced(event: Event) {
-        currBlocksPlaced += 1
+        if let placedEvent = event as? BlockPlacedEvent {
+            currBlocksPlaced = placedEvent.totalBlocksInLevel
+        }
     }
 
     private func blockDropped(event: Event) {
         currBlocksDropped += 1
-        currBlocksPlaced -= 1
     }
 
+    private func blockInserted(event: Event) {
+        currBlocksInserted += 1
+    }
 }

@@ -98,8 +98,6 @@ class GameEngineManager: ObservableObject {
     }
 
     func setUpLevelAndStartEngine(mainGameMgr: MainGameManager) {
-        // set up renderer
-        gameEngine.setRenderer(gameRenderer: self)
 
         // set up input system
         inputSystem.start(levelWidth: mainGameMgr.deviceWidth, levelHeight: mainGameMgr.deviceHeight)
@@ -108,6 +106,9 @@ class GameEngineManager: ObservableObject {
     }
 
     func startGame(gameMode: Constants.GameModeTypes) {
+        gameEngine = GameEngine(levelDimensions: gameEngine.levelDimensions)
+        gameEngine.eventManager = eventManager
+
         // set up game loop
         gameUpdater = GameUpdater(runThisEveryFrame: update)
         gameUpdater?.createCADisplayLink()
@@ -121,6 +122,8 @@ class GameEngineManager: ObservableObject {
             }
         }
 
+        self.gameMode.startTimer()
+
         // set up game in game engine
         gameEngine.startGame()
 
@@ -133,6 +136,8 @@ class GameEngineManager: ObservableObject {
     func stopGame() {
         gameUpdater?.stopLevel()
         gameEngine.resetGame()
+
+        gameMode.endTimer()
         gameMode.restartGame()
     }
 

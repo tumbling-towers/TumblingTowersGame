@@ -74,9 +74,7 @@ class GameEngine {
     
     // TODO: Add random generation of platform in the future
     private var rng: RandomNumberGeneratorWithSeed
-    
-    private weak var gameRenderer: GameRendererDelegate?
-    
+
     private var shapeRandomizer: ShapeRandomizer
 
     private var currentlyMovingBlock: Block? {
@@ -112,10 +110,6 @@ class GameEngine {
         self.rng = RandomNumberGeneratorWithSeed(seed: seed)
 
         fiziksEngine.fiziksContactDelegate = self
-    }
-
-    func setRenderer(gameRenderer: GameRendererDelegate) {
-        self.gameRenderer = gameRenderer
     }
 
     func getReferencePoints() -> (left: CGPoint, right: CGPoint)? {
@@ -200,6 +194,8 @@ class GameEngine {
         insertedBlock.fiziksBody.allowsRotation = false
         
         currentlyMovingBlock = insertedBlock
+
+        eventManager?.postEvent(BlockInsertedEvent())
         return insertedBlock
     }
 
@@ -405,7 +401,7 @@ extension GameEngine: FiziksContactDelegate {
         currentlyMovingBlock?.fiziksBody.contactTestBitMask = Block.contactTestBitMask
         
         print("block placed")
-        eventManager?.postEvent(BlockPlacedEvent())
+        eventManager?.postEvent(BlockPlacedEvent(totalBlocksInLevel: gameObjects.count))
         
         self.currentlyMovingBlock = nil
     }

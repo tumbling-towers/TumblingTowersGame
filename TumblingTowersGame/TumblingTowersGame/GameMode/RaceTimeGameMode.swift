@@ -45,12 +45,12 @@ class RaceTimeGameMode: GameMode {
     }
 
     func restartGame() {
-
+        currBlocksPlaced = 0
         realTimeTimer = GameTimer()
     }
 
     func startTimer() {
-        realTimeTimer.start(timeInSeconds: timeToPlaceBy)
+        realTimeTimer.start(timeInSeconds: timeToPlaceBy, countsUp: false)
     }
 
     func endTimer() {
