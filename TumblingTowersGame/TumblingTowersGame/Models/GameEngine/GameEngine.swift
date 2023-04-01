@@ -155,11 +155,12 @@ class GameEngine {
     // This update method is called by the GameUpdater every frame.
     func update() {
         // MARK: Platform is always sampleplatform for now
-        var newLevel = Level(blocks: [], platform: .samplePlatform)
         for object in gameObjects {
             if isOutOfBounds(object) {
                 // TODO: Emit event that a block has gone out of bounds.
                 removeObject(object: object)
+
+                eventManager?.postEvent(BlockDroppedEvent())
                 
                 if object === currentlyMovingBlock {
                     currentlyMovingBlock = nil
@@ -167,21 +168,27 @@ class GameEngine {
             }
             
             if object.fiziksBody.categoryBitMask == CategoryMask.block {
+                // TODO: more elegant way besides downcasting?
+                guard let block = object as? Block else { continue }
+                checkAndHandleContactPowerupLine(currentBlock: block)
+            }
+        }
+    }
+
+    func getLevelToRender() -> (Level, [GameObjectBlock], GameObjectPlatform) {
+        // MARK: Platform is always sampleplatform for now
+        var newLevel = Level(blocks: [], platform: .samplePlatform)
+        for object in gameObjects {
+
+            if object.fiziksBody.categoryBitMask == CategoryMask.block {
                 let blockPosition = object.position
                 // TODO: more elegant way besides downcasting?
                 guard let block = object as? Block, let shape = block.shape as? TetrisShape else { continue }
                 newLevel.add(block: GameObjectBlock(position: blockPosition, path: shape.path, rotation: block.rotation))
-                
-                checkAndHandleContactPowerupLine(currentBlock: block)
             }
         }
 
-        gameRenderer?.renderLevel(level: newLevel, gameObjectBlocks: newLevel.blocks, gameObjectPlatform: newLevel.platform)
-
-        // Get curr input and move block
-        if let currInput = gameRenderer?.getCurrInput() {
-            moveCMB(by: currInput.vector)
-        }
+        return (newLevel, newLevel.blocks, newLevel.platform)
     }
 
     @discardableResult

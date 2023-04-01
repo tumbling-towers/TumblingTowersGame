@@ -18,4 +18,8 @@ protocol GameMode {
     func getTimeRemaining() -> Float
 
     func restartGame()
+
+    func startTimer()
+
+    func endTimer()
 }

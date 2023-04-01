@@ -24,8 +24,10 @@ class Constants {
     }
 
     enum GameState {
-        case WIN
-        case LOSE
+        case WIN_SURVIVAL
+        case LOSE_SURVIVAL
+        case WIN_RACE
+        case LOSE_RACE
         case RUNNING
         case PAUSED
     }

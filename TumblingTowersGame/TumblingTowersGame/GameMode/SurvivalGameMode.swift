@@ -8,14 +8,17 @@
 import Foundation
 
 class SurvivalGameMode: GameMode {
+
     // Place N blocks wo dropping more than M blocks in shortest time possible (Score is time taken?)
-    let blocksToPlace = 20
+    let blocksToPlace = 10
     let blocksDroppedThreshold = 5
 
     var currBlocksPlaced = 0
     var currBlocksDropped = 0
 
     var name = "Survival"
+
+    var realTimeTimer = GameTimer()
 
     init(eventMgr: EventManager) {
         // Register all events that affect game state
@@ -26,11 +29,11 @@ class SurvivalGameMode: GameMode {
 
     func getGameState() -> Constants.GameState {
         if currBlocksDropped >= blocksDroppedThreshold {
-            return .LOSE
+            return .LOSE_SURVIVAL
         }
 
         if currBlocksPlaced >= blocksToPlace {
-            return .WIN
+            return .WIN_SURVIVAL
         }
 
         return .RUNNING
@@ -38,19 +41,27 @@ class SurvivalGameMode: GameMode {
 
     func getScore() -> Int {
         // TODO: Implement
-        1
+        -realTimeTimer.count - currBlocksDropped * 10
     }
 
     func getTimeRemaining() -> Float {
         // TODO: Implement
-        2
+        Float(-realTimeTimer.count)
     }
 
     func restartGame() {
         currBlocksPlaced = 0
         currBlocksDropped = 0
+        realTimeTimer = GameTimer()
     }
 
+    func startTimer() {
+        realTimeTimer.start(timeInSeconds: 0)
+    }
+
+    func endTimer() {
+        realTimeTimer.stop()
+    }
 
     private func blockPlaced(event: Event) {
         currBlocksPlaced += 1
@@ -58,6 +69,7 @@ class SurvivalGameMode: GameMode {
 
     private func blockDropped(event: Event) {
         currBlocksDropped += 1
+        currBlocksPlaced -= 1
     }
 
 }

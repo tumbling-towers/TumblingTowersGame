@@ -63,6 +63,14 @@ class GameEngineManager: ObservableObject {
         return CGRect(x: refPoints.left.x - 1, y: 0, width: width + 2, height: 3000)
     }
 
+    var timeRemaining: Float {
+        0
+    }
+
+    var gameState: Constants.GameState {
+        gameMode.getGameState()
+    }
+
     init(levelDimensions: CGRect, eventManager: EventManager) {
         self.levelDimensions = levelDimensions
         self.gameEngine = GameEngine(levelDimensions: levelDimensions)
@@ -101,7 +109,7 @@ class GameEngineManager: ObservableObject {
 
     func startGame(gameMode: Constants.GameModeTypes) {
         // set up game loop
-        gameUpdater = GameUpdater(gameEngine: gameEngine, gameRenderer: self)
+        gameUpdater = GameUpdater(runThisEveryFrame: update)
         gameUpdater?.createCADisplayLink()
 
         // set up game mode
@@ -120,6 +128,39 @@ class GameEngineManager: ObservableObject {
         if let mainGameMgr = mainGameMgr {
             platformPosition = CGPoint(x: mainGameMgr.deviceWidth/2, y: 100)
         }
+    }
+
+    func stopGame() {
+        gameUpdater?.stopLevel()
+        gameEngine.resetGame()
+        gameMode.restartGame()
+    }
+
+    func update() {
+        updateGameEngine()
+        renderCurrentFrame()
+    }
+
+    func updateGameEngine() {
+        gameEngine.update()
+        let currInput = inputSystem.getInput()
+
+        gameEngine.moveCMBSideways(by: currInput.vector)
+        gameEngine.moveCMBDown(by: currInput.vector)
+
+//        let gameState = gameMode.getGameState()
+//
+//        if gameState == .WIN {
+//            // Win Screen
+//        } else if gameState == .LOSE {
+//            // Lose Screen
+//        }
+    }
+
+    func renderCurrentFrame() {
+        let renderThese = gameEngine.getLevelToRender()
+        renderLevel(level: renderThese.0, gameObjectBlocks: renderThese.1, gameObjectPlatform: renderThese.2)
+        rerender()
     }
 
     func rotateCurrentBlock() {
