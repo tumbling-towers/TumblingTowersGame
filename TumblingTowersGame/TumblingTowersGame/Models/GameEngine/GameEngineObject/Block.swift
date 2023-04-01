@@ -9,7 +9,7 @@ import CoreGraphics
 import Foundation
 
 class Block: GameEngineObject {
-    
+
     let fiziksBody: FiziksBody
 
     let shape: ObjectShape
@@ -17,13 +17,13 @@ class Block: GameEngineObject {
     var rotation: Double {
         fiziksBody.zRotation
     }
-    
-    var isGlueBlock: Bool = false
-    
+
+    var isGlueBlock = false
+
     static var fallingCollisionBitMask: BitMask = CollisionMask.fallingBlock
 
     static var collisionBitMask: BitMask = CollisionMask.block
-    
+
     static var fallingContactTestBitMask: BitMask = ContactTestMask.fallingBlock
 
     static var contactTestBitMask: BitMask = ContactTestMask.block

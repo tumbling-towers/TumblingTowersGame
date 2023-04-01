@@ -5,17 +5,17 @@
  */
 struct Queue<T> {
     private var linkedList: LinkedList<T>
-    
+
     /// Constructs an empty queue.
     init() {
         self.linkedList = LinkedList<T>()
     }
-    
+
     /// Constructs a queue with a linked list.
     init(_ linkedList: LinkedList<T>) {
         self.linkedList = linkedList
     }
-    
+
     /// Adds an element to the tail of the queue.
     /// - Parameter item: The element to be added to the queue
     mutating func enqueue(_ item: T) throws {
@@ -61,14 +61,14 @@ struct Queue<T> {
     func toArray() -> [T] {
         var queueElements: [T] = []
         var linkedListNode = linkedList.head
-        
+
         while linkedListNode != nil {
             if let value = linkedListNode?.value {
                 queueElements.append(value)
             }
             linkedListNode = linkedListNode?.next
         }
-        
+
         return queueElements
     }
 }

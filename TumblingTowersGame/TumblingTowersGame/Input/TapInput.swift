@@ -8,8 +8,8 @@
 import Foundation
 
 class TapInput: InputSystem {
-    private var inputData: InputData = InputData.none
-    
+    private var inputData = InputData.none
+
     private var xMultiplier: Double = 0.01
     private var yMultiplier: Double = 5.0
 
@@ -20,7 +20,7 @@ class TapInput: InputSystem {
     func resetInput() {
         inputData = InputData.none
     }
-    
+
     func dragEvent(offset: CGSize) {
         // detected as a right drag
         if offset.width > 0 && abs(offset.height) < 50 {

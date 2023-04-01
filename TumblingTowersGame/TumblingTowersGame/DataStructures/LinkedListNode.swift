@@ -12,12 +12,12 @@
  Reference: https://medium.com/geekculture/linked-lists-in-swift-5-69ba9748f4b6
  */
 class LinkedListNode<T>: Equatable {
-    
+
     /// Checks that two objects are referencing the same object in memory.
     static func == (lhs: LinkedListNode<T>, rhs: LinkedListNode<T>) -> Bool {
         lhs === rhs
     }
-    
+
     var value: T
     var next: LinkedListNode<T>?
 

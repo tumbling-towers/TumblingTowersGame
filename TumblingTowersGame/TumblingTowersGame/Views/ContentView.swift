@@ -15,7 +15,7 @@ struct ContentView: View {
 
     // for tracking drag movement
     @State private var offset = CGSize.zero
-    
+
     var body: some View {
 
         if currGameScreen == .mainMenu {

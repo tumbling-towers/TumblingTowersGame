@@ -10,14 +10,14 @@ import SwiftUI
 
 struct PowerupLineView: View {
     @EnvironmentObject var gameEngineMgr: GameEngineManager
-    
+
     var body: some View {
-        return PathViewShape(cgPath: CGPath(rect: CGRect(x: gameEngineMgr.powerUpLinePosition.x,
+        PathViewShape(cgPath: CGPath(rect: CGRect(x: gameEngineMgr.powerUpLinePosition.x,
                                                          y: gameEngineMgr.powerUpLinePosition.y,
                                                          width: gameEngineMgr.powerupLineDimensions.width,
                                                          height: gameEngineMgr.powerupLineDimensions.height), transform: nil))
         .fill(.red, strokeBorder: .white, lineWidth: 1)
-                
+
     }
 }
 //

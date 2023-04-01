@@ -74,11 +74,11 @@ struct TetrisShape: PathObjectShape {
     var path: CGPath {
         CGPath.create(from: points)
     }
-    
+
     var height: Double {
         path.height
     }
-    
+
     var width: Double {
         path.width
     }

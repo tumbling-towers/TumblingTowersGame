@@ -21,7 +21,7 @@ struct ViewImageManager {
 
     static let powerUpLineImage = ""
     static let goalLineImage = ""
-    
+
     static let GluePowerupImage = "glue"
     static let PlatformPowerupImage = "platform"
 
@@ -34,9 +34,9 @@ struct ViewImageManager {
         .T: TBlockImage,
         .S: SBlockImage
     ]
-    
+
     // TODO: vines blocks
-    
+
     static let powerupToImage: [PowerupType: String] = [
         .glue: GluePowerupImage,
         .platform: PlatformPowerupImage

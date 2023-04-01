@@ -10,12 +10,12 @@ import SwiftUI
 import SpriteKit
 
 class GameEngineManager: ObservableObject {
-    @Published var goalLinePosition: CGPoint = CGPoint()
-    @Published var powerUpLinePosition: CGPoint = CGPoint()
-    @Published var powerupLineDimensions: CGSize = CGSize()
+    @Published var goalLinePosition = CGPoint()
+    @Published var powerUpLinePosition = CGPoint()
+    @Published var powerupLineDimensions = CGSize()
     @Published var levelBlocks: [GameObjectBlock] = []
     @Published var levelPlatforms: [GameObjectPlatform] = []
-    
+
     private weak var mainGameMgr: MainGameManager?
     var eventManager: EventManager? {
         didSet {
@@ -23,7 +23,7 @@ class GameEngineManager: ObservableObject {
             registerEvents()
         }
     }
-    
+
     // MARK: Game logic related attributes
     var platformPosition: CGPoint? {
         get {
@@ -35,35 +35,35 @@ class GameEngineManager: ObservableObject {
             }
         }
     }
-    
+
     var powerup: Powerup.Type?
-    
-    var level: Level = Level.sampleLevel
-    
+
+    var level = Level.sampleLevel
+
     var levelDimensions: CGRect
-    
+
     private var gameEngine: GameEngine
 
     // MARK: UI/UX related attributes
     var inputSystem: InputSystem
-    
+
     private var gameUpdater: GameUpdater?
 
     var gameMode: GameMode = SurvivalGameMode(eventMgr: TumblingTowersEventManager())
-    
+
     var referenceBox: CGRect? {
         guard let refPoints = gameEngine.getReferencePoints() else { return nil }
 
         let width = refPoints.right.x - refPoints.left.x
-        return CGRect(x: refPoints.left.x - 1, y: 0, width: width + 2, height: 3000)
+        return CGRect(x: refPoints.left.x - 1, y: 0, width: width + 2, height: 3_000)
     }
 
     init(levelDimensions: CGRect, eventManager: EventManager) {
         self.levelDimensions = levelDimensions
-        
+
         self.gameEngine = GameEngine(levelDimensions: levelDimensions)
         self.eventManager = eventManager
-        
+
         gameEngine.eventManager = eventManager
 
         inputSystem = TapInput()
@@ -111,14 +111,14 @@ class GameEngineManager: ObservableObject {
 
         // set up initial platform
         if let mainGameMgr = mainGameMgr {
-            platformPosition = CGPoint(x: mainGameMgr.deviceWidth/2, y: 100)
+            platformPosition = CGPoint(x: mainGameMgr.deviceWidth / 2, y: 100)
         }
     }
 
     func rotateCurrentBlock() {
         gameEngine.rotateCMBClockwise()
     }
-    
+
     func usePowerup() {
         guard let powerup = powerup else { return }
         eventManager?.postEvent(PowerupButtonTappedEvent(type: powerup))
@@ -140,7 +140,7 @@ class GameEngineManager: ObservableObject {
         let transformedBlock = GameObjectBlock(position: newPosition, path: path, isGlue: block.isGlue)
         return transformedBlock
     }
-    
+
     private func transformPath(path: CGPath, width: Double, height: Double) -> CGPath {
         let path = UIBezierPath(cgPath: path)
         var flip = CGAffineTransformMakeScale(1, -1)
@@ -148,7 +148,7 @@ class GameEngineManager: ObservableObject {
         path.apply(flip)
         return path.cgPath
     }
-    
+
     private func registerEvents() {
         eventManager?.registerClosure(for: PowerupAvailableEvent.self, closure: { event in
             switch event {
@@ -176,13 +176,13 @@ extension GameEngineManager: GameRendererDelegate {
             let transformedBlock = transformRenderable(for: gameObjectBlock)
             invertedGameObjBlocks.append(transformedBlock)
         }
-        
+
         for var platform in gameObjectPlatforms {
             let transformedPlatformPosition = adjustCoordinates(for: platform.position)
             platform.position = transformedPlatformPosition
             invertedGameObjPlatforms.append(platform)
         }
-        
+
         if let powerupLine = gameEngine.powerupLine {
             powerUpLinePosition = adjustCoordinates(for: powerupLine.position)
                                   .add(by: CGVector(dx: -powerupLineDimensions.width / 2,

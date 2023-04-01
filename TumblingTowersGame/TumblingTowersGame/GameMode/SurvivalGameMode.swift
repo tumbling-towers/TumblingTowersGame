@@ -51,7 +51,6 @@ class SurvivalGameMode: GameMode {
         currBlocksDropped = 0
     }
 
-
     private func blockPlaced(event: Event) {
         currBlocksPlaced += 1
     }

@@ -259,9 +259,9 @@ class PathFiziksBody: FiziksBody {
             }
         }
     }
-    
+
     init(path: CGPath,
-         position: CGPoint=FiziksConstants.defaultPosition,
+         position: CGPoint = FiziksConstants.defaultPosition,
          zRotation: CGFloat = FiziksConstants.defaultZRotation,
          velocity: CGVector = FiziksConstants.defaultVelocity,
          angularVelocity: CGFloat = FiziksConstants.defaultAngularVelocity,
@@ -282,25 +282,25 @@ class PathFiziksBody: FiziksBody {
         fiziksShapeNode = FiziksShapeNode(path: path)
         fiziksShapeNode.physicsBody = SKPhysicsBody(polygonFrom: path)
         fiziksShapeNode.fiziksBody = self
-        
+
         self.position = position
         self.zRotation = zRotation
-        
+
         self.velocity = velocity
         self.angularVelocity = angularVelocity
         self.isResting = isResting
-        
+
         self.affectedByGravity = affectedByGravity
         self.allowsRotation = allowsRotation
         self.isDynamic = isDynamic
-        
+
         self.mass = mass
         self.density = density
         self.friction = friction
         self.restitution = restitution
         self.linearDamping = linearDamping
         self.angularDamping = angularDamping
-        
+
         self.categoryBitMask = categoryBitMask
         self.collisionBitMask = collisionBitMask
         self.contactTestBitMask = contactTestBitMask

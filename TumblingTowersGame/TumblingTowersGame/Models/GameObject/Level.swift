@@ -20,7 +20,7 @@ struct Level {
     mutating func add(block: GameObjectBlock) {
         blocks.append(block)
     }
-    
+
     mutating func add(platform: GameObjectPlatform) {
         platforms.append(platform)
     }

@@ -19,10 +19,10 @@ class EventIdentifier {
 
 extension EventIdentifier: Hashable {
     static func == (lhs: EventIdentifier, rhs: EventIdentifier) -> Bool {
-        return lhs.id == rhs.id
+        lhs.id == rhs.id
     }
 
     public func hash(into hasher: inout Hasher) {
-        return hasher.combine(id)
+        hasher.combine(id)
     }
 }
