@@ -72,6 +72,11 @@ class GameEngineManager: ObservableObject {
         self.eventManager = eventManager
 
         gameEngine.eventManager = eventManager
+        
+        // TODO: need a cleaner way to set up systems when GodManager implemented
+        let statsTrackingSystem = StatsTrackingSystem(eventManager: eventManager)
+        gameEngine.statsTrackingSystem = statsTrackingSystem
+        gameEngine.achievementSystem = AchievementSystem(eventManager: eventManager, dataSource: statsTrackingSystem)
 
         inputSystem = GyroInput()
 
@@ -109,6 +114,13 @@ class GameEngineManager: ObservableObject {
     func startGame(gameMode: Constants.GameModeTypes) {
         gameEngine = GameEngine(levelDimensions: gameEngine.levelDimensions)
         gameEngine.eventManager = eventManager
+        
+        // TODO: need a cleaner way to set up systems when GodManager implemented
+        if let unwrappedEventManager = eventManager {
+            let statsTrackingSystem = StatsTrackingSystem(eventManager: unwrappedEventManager)
+            gameEngine.statsTrackingSystem = statsTrackingSystem
+            gameEngine.achievementSystem = AchievementSystem(eventManager: unwrappedEventManager, dataSource: statsTrackingSystem)
+        }
 
         // set up game loop
         gameUpdater = GameUpdater(runThisEveryFrame: update)

@@ -26,6 +26,10 @@ class GameEngine {
     var powerupLine: PowerupLine?
 
     var powerupManager: PowerupManager
+    
+    var statsTrackingSystem: StatsTrackingSystem?
+    
+    var achievementSystem: AchievementSystem?
 
     var platform: Platform? {
         didSet {
@@ -67,6 +71,11 @@ class GameEngine {
                 fiziksEngine.delete(oldValue)
             }
         }
+    }
+    
+    var towerHeight: CGFloat {
+        let gameObjectHeights = gameObjects.map({ $0.position.y })
+        return gameObjectHeights.max() ?? 0
     }
 
     private var rng: RandomNumberGeneratorWithSeed
@@ -422,6 +431,7 @@ extension GameEngine: FiziksContactDelegate {
             }
         }
         eventManager?.postEvent(BlockPlacedEvent(totalBlocksInLevel: placedBlockCount))
+        eventManager?.postEvent(TowerHeightIncreasedEvent(newHeight: towerHeight))
 
         self.currentlyMovingBlock = nil
     }
