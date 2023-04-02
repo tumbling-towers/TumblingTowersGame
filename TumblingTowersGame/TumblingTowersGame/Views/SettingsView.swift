@@ -63,6 +63,8 @@ struct SettingsView: View {
 
                     }
                 }
+                .pickerStyle(SegmentedPickerStyle())
+                .frame(width: 400)
                 .onChange(of: selectedInputType) { val in
                     gameEngineMgr.changeInput(to: val)
                 }
