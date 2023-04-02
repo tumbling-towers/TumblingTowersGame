@@ -15,7 +15,8 @@ class MainGameManager: ObservableObject {
 
     private var eventManager: EventManager?
 
-    private var gameEngineMgr = GameEngineManager(levelDimensions: .infinite, eventManager: TumblingTowersEventManager())
+    private var gameEngineMgr = GameEngineManager(levelDimensions: .infinite,
+                                                  eventManager: TumblingTowersEventManager())
 
     func setDeviceDimensionsAndGetGameEngineMgr(deviceHeight: CGFloat, deviceWidth: CGFloat) -> GameEngineManager {
         self.deviceHeight = deviceHeight
@@ -23,7 +24,8 @@ class MainGameManager: ObservableObject {
 
         let eventManager = TumblingTowersEventManager()
 
-        gameEngineMgr = GameEngineManager(levelDimensions: CGRect(x: 0, y: 0, width: deviceWidth, height: deviceHeight), eventManager: eventManager)
+        gameEngineMgr = GameEngineManager(levelDimensions: CGRect(x: 0, y: 0,
+                                                                  width: deviceWidth, height: deviceHeight), eventManager: eventManager)
 
         self.eventManager = eventManager
 

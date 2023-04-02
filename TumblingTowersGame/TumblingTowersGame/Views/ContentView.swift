@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
-
     @EnvironmentObject var mainGameMgr: MainGameManager
+
     @StateObject var gameEngineMgr: GameEngineManager
     @State var currGameScreen = Constants.CurrGameScreens.mainMenu
 
