@@ -10,12 +10,12 @@ import SwiftUI
 struct SettingsView: View {
     @EnvironmentObject var mainGameMgr: MainGameManager
     @EnvironmentObject var gameEngineMgr: GameEngineManager
-    @StateObject var settingsMgr = SettingsManager()
+    @EnvironmentObject var settingsMgr: SettingsManager
+
     @Binding var currGameScreen: Constants.CurrGameScreens
 
     var body: some View {
         ZStack {
-
             BackgroundView()
 
             VStack {
@@ -72,6 +72,8 @@ struct SettingsView: View {
             }
         }
         .ignoresSafeArea(.all)
+        .onAppear {
+        }
 
     }
 
@@ -95,5 +97,6 @@ struct SettingsView_Previews: PreviewProvider {
         SettingsView(currGameScreen: .constant(.gameModeSelection))
             .environmentObject(GameEngineManager(levelDimensions: .infinite, eventManager: TumblingTowersEventManager()))
             .environmentObject(MainGameManager())
+            .environmentObject(SettingsManager())
     }
 }

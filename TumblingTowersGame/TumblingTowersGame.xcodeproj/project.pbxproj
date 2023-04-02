@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		122BA13729D9595100196052 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122BA13629D9595100196052 /* StorageManager.swift */; };
+		122BA13A29D9AF9600196052 /* StorageManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122BA13929D9AF9600196052 /* StorageManagerTests.swift */; };
 		124B02C129C415CC00094CF5 /* BlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124B02C029C415CC00094CF5 /* BlockView.swift */; };
 		124B02C329C415DC00094CF5 /* PlatformView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124B02C229C415DC00094CF5 /* PlatformView.swift */; };
 		124B02C929C4171400094CF5 /* ViewImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124B02C829C4171400094CF5 /* ViewImageManager.swift */; };
@@ -156,6 +158,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		122BA13629D9595100196052 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
+		122BA13929D9AF9600196052 /* StorageManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManagerTests.swift; sourceTree = "<group>"; };
 		124B02C029C415CC00094CF5 /* BlockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockView.swift; sourceTree = "<group>"; };
 		124B02C229C415DC00094CF5 /* PlatformView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformView.swift; sourceTree = "<group>"; };
 		124B02C829C4171400094CF5 /* ViewImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewImageManager.swift; sourceTree = "<group>"; };
@@ -295,6 +299,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		122BA13529D9594900196052 /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				122BA13629D9595100196052 /* StorageManager.swift */,
+			);
+			path = Storage;
+			sourceTree = "<group>";
+		};
+		122BA13829D9AF8500196052 /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				122BA13929D9AF9600196052 /* StorageManagerTests.swift */,
+			);
+			path = Storage;
+			sourceTree = "<group>";
+		};
 		124B02CB29C41F6400094CF5 /* GameObject */ = {
 			isa = PBXGroup;
 			children = (
@@ -388,6 +408,7 @@
 		146E2DB229C0D07200BFC757 /* TumblingTowersGame */ = {
 			isa = PBXGroup;
 			children = (
+				122BA13529D9594900196052 /* Storage */,
 				61A10F1D29D30BC8000EB4B4 /* PowerupManager */,
 				146E2DB729C0D07300BFC757 /* Assets.xcassets */,
 				2F7E13A429C0F044000E6FA9 /* DataStructures */,
@@ -417,6 +438,7 @@
 		146E2DC329C0D07300BFC757 /* TumblingTowersGameTests */ = {
 			isa = PBXGroup;
 			children = (
+				122BA13829D9AF8500196052 /* Storage */,
 				61A10F2929D30CDD000EB4B4 /* DataStructures */,
 				124B02DA29C74B9700094CF5 /* GameObject */,
 				1445F84829C71DB500F94751 /* Input */,
@@ -868,6 +890,7 @@
 				124B02D329C4204300094CF5 /* GameObjectPlatform.swift in Sources */,
 				61FC031729CD498400CE2CE5 /* Shape+Fill.swift in Sources */,
 				14C6732F29D371D700D8DF78 /* BodyText.swift in Sources */,
+				122BA13729D9595100196052 /* StorageManager.swift in Sources */,
 				61FC031129CC483400CE2CE5 /* CGPath+Rotate.swift in Sources */,
 				61AE15B329D16DD500D04E95 /* BlockPlacedEvent.swift in Sources */,
 				61FC031529CCBFB100CE2CE5 /* CGPoint+Arithmetic.swift in Sources */,
@@ -943,6 +966,7 @@
 				619D44BB29C69BAA00EE00CE /* GameFiziksEngineTests.swift in Sources */,
 				61EC652E29D8BD3D00B9E018 /* CGVector+Multiply.swift in Sources */,
 				61EC652F29D8BD3D00B9E018 /* CGPath+Create.swift in Sources */,
+				122BA13A29D9AF9600196052 /* StorageManagerTests.swift in Sources */,
 				124B02DC29C74C1400094CF5 /* ViewImageManagerTests.swift in Sources */,
 				124B02E229C754F400094CF5 /* LevelTests.swift in Sources */,
 				61EC652829D8BAB700B9E018 /* GyroInput.swift in Sources */,
@@ -1111,7 +1135,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TumblingTowersGame/Preview Content\"";
-				DEVELOPMENT_TEAM = T95PZMKKDH;
+				DEVELOPMENT_TEAM = ZR5Q6K8Q24;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -1124,7 +1148,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.taubar.TumblingTowersGame;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yongler.TumblingTowersGame;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -1140,7 +1164,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TumblingTowersGame/Preview Content\"";
-				DEVELOPMENT_TEAM = T95PZMKKDH;
+				DEVELOPMENT_TEAM = ZR5Q6K8Q24;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -1153,7 +1177,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.taubar.TumblingTowersGame;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yongler.TumblingTowersGame;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

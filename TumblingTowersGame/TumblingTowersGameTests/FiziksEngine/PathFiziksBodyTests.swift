@@ -5,11 +5,11 @@
 //  Created by Taufiq Abdul Rahman on 19/3/23.
 //
 
-import Foundation
-import CoreGraphics
-import XCTest
+ import Foundation
+ import CoreGraphics
+ import XCTest
 
-class PathFiziksBodyTests: XCTest {
+ class PathFiziksBodyTests: XCTest {
     typealias P = CGPoint
 
     var pathBody: PathFiziksBody?
@@ -47,4 +47,4 @@ class PathFiziksBodyTests: XCTest {
         XCTAssertEqual(body.node?.zRotation, 5)
         XCTAssertEqual(body.node?.position, .zero)
     }
-}
+ }
