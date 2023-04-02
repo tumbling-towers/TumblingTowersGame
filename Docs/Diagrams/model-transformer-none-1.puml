@@ -1,0 +1,25 @@
+@startuml
+
+group Every Display Frame
+GameUpdater -> GameEngineManager: update()
+
+activate GameEngineManager
+
+GameEngineManager -> GameEngine: getLevelToRender()
+
+group for each Game Object
+
+GameEngineManager -> GameEngineManager: transformRenderable()
+
+end
+
+GameEngineManager -> InputSystem: getInput()
+GameEngineManager -> GameEngineManager: adjustCoordinates()
+activate GameEngineManager
+deactivate GameEngineManager
+
+deactivate GameEngineManager
+
+end
+
+@enduml
