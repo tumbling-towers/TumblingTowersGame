@@ -71,8 +71,6 @@ class GameEngine {
 
     private var rng: RandomNumberGeneratorWithSeed
 
-    private weak var gameRenderer: GameRendererDelegate?
-
     private var shapeRandomizer: ShapeRandomizer
 
     private var currentlyMovingBlock: Block? {
@@ -110,11 +108,6 @@ class GameEngine {
         fiziksEngine.fiziksContactDelegate = self
     }
 
-    func setRenderer(gameRenderer: GameRendererDelegate) {
-        self.gameRenderer = gameRenderer
-    }
-
-    // TODO: Maybe should move this to GameEngineManager - shouldn't use GameObjectBlock here!
     func getReferencePoints() -> (left: CGPoint, right: CGPoint)? {
         guard let block = currentlyMovingBlock, let shape = currentlyMovingBlock?.shape as? TetrisShape else { return nil }
         let movingGameObjectBlock = GameObjectBlock(position: block.position, path: shape.path, rotation: block.rotation)
@@ -152,16 +145,31 @@ class GameEngine {
     // This update method is called by the GameUpdater every frame.
     func update() {
         // MARK: Platform is always sampleplatform for now
-        var newLevel = Level(blocks: [], platforms: [])
+
         for object in gameObjects {
             if isOutOfBounds(object) {
                 // TODO: Emit event that a block has gone out of bounds.
                 removeObject(object: object)
 
+                eventManager?.postEvent(BlockDroppedEvent())
+
                 if object === currentlyMovingBlock {
                     currentlyMovingBlock = nil
                 }
             }
+
+            if object.fiziksBody.categoryBitMask == CategoryMask.block {
+                // TODO: more elegant way besides downcasting?
+                guard let block = object as? Block else { continue }
+                checkAndHandleContactPowerupLine(currentBlock: block)
+            }
+        }
+    }
+
+    func getLevelToRender() -> (Level, [GameObjectBlock], [GameObjectPlatform]) {
+        // MARK: Platform is always sampleplatform for now
+        var newLevel = Level(blocks: [], platforms: [])
+        for object in gameObjects {
 
             if object.fiziksBody.categoryBitMask == CategoryMask.block {
                 let blockPosition = object.position
@@ -185,12 +193,7 @@ class GameEngine {
             }
         }
 
-        gameRenderer?.renderLevel(level: newLevel, gameObjectBlocks: newLevel.blocks, gameObjectPlatforms: newLevel.platforms)
-
-        // Get curr input and move block
-        if let currInput = gameRenderer?.getCurrInput() {
-            moveCMB(by: currInput.vector)
-        }
+        return (newLevel, newLevel.blocks, newLevel.platforms)
     }
 
     @discardableResult
@@ -202,6 +205,8 @@ class GameEngine {
         insertedBlock.fiziksBody.allowsRotation = false
 
         currentlyMovingBlock = insertedBlock
+
+        eventManager?.postEvent(BlockInsertedEvent())
         return insertedBlock
     }
 
@@ -410,7 +415,13 @@ extension GameEngine: FiziksContactDelegate {
         currentlyMovingBlock?.fiziksBody.collisionBitMask = Block.collisionBitMask
         currentlyMovingBlock?.fiziksBody.contactTestBitMask = Block.contactTestBitMask
 
-        eventManager?.postEvent(BlockPlacedEvent())
+        var placedBlockCount = 0
+        for gameObject in gameObjects {
+            if gameObject.fiziksBody.categoryBitMask == CategoryMask.block {
+                placedBlockCount += 1
+            }
+        }
+        eventManager?.postEvent(BlockPlacedEvent(totalBlocksInLevel: placedBlockCount))
 
         self.currentlyMovingBlock = nil
     }

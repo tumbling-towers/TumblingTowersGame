@@ -53,6 +53,18 @@ class GameEngineManager: ObservableObject {
         return CGRect(x: refPoints.left.x - 1, y: 0, width: width + 2, height: 3_000)
     }
 
+    var timeRemaining: Int {
+        gameMode.getTimeRemaining()
+    }
+
+    var score: Int {
+        gameMode.getScore()
+    }
+
+    var gameState: Constants.GameState {
+        gameMode.getGameState()
+    }
+
     init(levelDimensions: CGRect, eventManager: EventManager) {
         self.levelDimensions = levelDimensions
 
@@ -61,13 +73,20 @@ class GameEngineManager: ObservableObject {
 
         gameEngine.eventManager = eventManager
 
-        inputSystem = TapInput()
+        inputSystem = GyroInput()
 
         registerEvents()
     }
 
     func dragEvent(offset: CGSize) {
         inputSystem.dragEvent(offset: offset)
+    }
+
+    func changeInput(to inputType: Constants.GameInputTypes) {
+        let inputClass = Constants.getGameInputType(fromGameInputType: inputType)
+        if let inputClass = inputClass {
+            inputSystem = inputClass.init()
+        }
     }
 
     func resetInput() {
@@ -83,25 +102,26 @@ class GameEngineManager: ObservableObject {
     }
 
     func setUpLevelAndStartEngine(mainGameMgr: MainGameManager) {
-        // set up renderer
-        gameEngine.setRenderer(gameRenderer: self)
 
         self.mainGameMgr = mainGameMgr
     }
 
     func startGame(gameMode: Constants.GameModeTypes) {
+        gameEngine = GameEngine(levelDimensions: gameEngine.levelDimensions)
+        gameEngine.eventManager = eventManager
+
         // set up game loop
-        gameUpdater = GameUpdater(gameEngine: gameEngine, gameRenderer: self)
+        gameUpdater = GameUpdater(runThisEveryFrame: update)
         gameUpdater?.createCADisplayLink()
 
         // set up game mode
-        if let eventManager = eventManager {
-            if gameMode == .SURVIVAL {
-                self.gameMode = SurvivalGameMode(eventMgr: eventManager)
-            } else if gameMode == .RACECLOCK {
-                self.gameMode = RaceTimeGameMode(eventMgr: eventManager)
-            }
+        let gameModeClass = Constants.getGameModeType(from: gameMode)
+
+        if let eventManager = eventManager, let gameModeClass = gameModeClass {
+            self.gameMode = gameModeClass.init(eventMgr: eventManager)
         }
+
+        self.gameMode.startTimer()
 
         // set up game in game engine
         gameEngine.startGame()
@@ -110,6 +130,47 @@ class GameEngineManager: ObservableObject {
         if let mainGameMgr = mainGameMgr {
             platformPosition = CGPoint(x: mainGameMgr.deviceWidth / 2, y: 100)
         }
+    }
+
+    func stopGame() {
+        gameUpdater?.stopLevel()
+        gameMode.endTimer()
+    }
+
+    func resetGame() {
+        gameEngine.resetGame()
+        gameMode.restartGame()
+    }
+
+    func update() {
+        updateGameEngine()
+        renderCurrentFrame()
+    }
+
+    func updateGameEngine() {
+        gameEngine.update()
+        let currInput = inputSystem.getInput()
+
+        gameEngine.moveCMBSideways(by: currInput.vector)
+        gameEngine.moveCMBDown(by: currInput.vector)
+
+        if gameMode.hasGameEnded() {
+            stopGame()
+        }
+
+//        let gameState = gameMode.getGameState()
+//
+//        if gameState == .WIN {
+//            // Win Screen
+//        } else if gameState == .LOSE {
+//            // Lose Screen
+//        }
+    }
+
+    func renderCurrentFrame() {
+        let renderThese = gameEngine.getLevelToRender()
+        renderLevel(level: renderThese.0, gameObjectBlocks: renderThese.1, gameObjectPlatforms: renderThese.2)
+        rerender()
     }
 
     func rotateCurrentBlock() {

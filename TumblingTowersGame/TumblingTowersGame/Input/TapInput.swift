@@ -13,6 +13,9 @@ class TapInput: InputSystem {
     private var xMultiplier: Double = 0.01
     private var yMultiplier: Double = 5.0
 
+    required init() {
+    }
+
     func getInput() -> InputData {
         inputData
     }

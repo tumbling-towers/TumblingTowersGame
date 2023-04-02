@@ -10,22 +10,19 @@ import SwiftUI
 
 class GameUpdater {
 
-    private let gameEngine: GameEngine
-
     private var time: Date = .now
     private var leftoverTime: Double = 0.0
     private let durationOfFrameFor60FPS = TimeInterval(1.0 / 60.0)
     private var displayLink: CADisplayLink?
     private var frameCount = 0
-    private weak var gameRenderer: GameRendererDelegate?
+    private var runThisEveryFrame: () -> Void
 
     var timePassed: Double {
         (Double(frameCount) + leftoverTime) * durationOfFrameFor60FPS
     }
 
-    init(gameEngine: GameEngine, gameRenderer: GameRendererDelegate) {
-        self.gameEngine = gameEngine
-        self.gameRenderer = gameRenderer
+    init(runThisEveryFrame: @escaping () -> Void) {
+        self.runThisEveryFrame = runThisEveryFrame
     }
 
     func createCADisplayLink() {
@@ -60,7 +57,7 @@ class GameUpdater {
 
         var framesPassed = timePassed.magnitude / durationOfFrameFor60FPS
         while framesPassed > 1 {
-            gameEngine.update()
+            runThisEveryFrame()
 
             if frameCount.isMultiple(of: 60) {
                 // Things to do every 1s
