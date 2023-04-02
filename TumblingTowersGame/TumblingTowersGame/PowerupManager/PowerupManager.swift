@@ -11,6 +11,6 @@ protocol PowerupManager: PowerupDelegate {
     var eventManager: EventManager? { get set }
     var rng: RandomNumberGeneratorWithSeed { get }
     var nextPowerup: Powerup? { get set }
-    func createNextPowerup() -> Void
-    func activateNextPowerup() -> Void
+    func createNextPowerup()
+    func activateNextPowerup()
 }

@@ -84,7 +84,6 @@ struct GameEndView_Previews: PreviewProvider {
     static var gameEngineMgr: GameEngineManager = {
         let gameEngineManager = GameEngineManager(levelDimensions: .infinite, eventManager: TumblingTowersEventManager())
 
-
         return gameEngineManager
 
     }()

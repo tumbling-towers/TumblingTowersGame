@@ -1,0 +1,13 @@
+@startuml
+create GameEngine
+
+create GamePowerupManager
+GameEngine -> GamePowerupManager: GamePowerupManager()
+
+[-> GameEngine: user receives powerup
+
+GameEngine-> GamePowerupManager: createNextPowerup(PowerupType)
+
+create GluePowerup
+GamePowerupManager-> GluePowerup: GluePowerup.create()
+@enduml

@@ -74,6 +74,7 @@ struct GameModeSelectView: View {
 struct GameModeSelectView_Previews: PreviewProvider {
     static var previews: some View {
         GameModeSelectView(currGameScreen: .constant(.gameModeSelection))
-            .environmentObject(GameEngineManager(levelDimensions: .infinite, eventManager: TumblingTowersEventManager()))
+            .environmentObject(GameEngineManager(levelDimensions: .infinite,
+                                                 eventManager: TumblingTowersEventManager()))
     }
 }

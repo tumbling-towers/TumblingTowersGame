@@ -26,7 +26,7 @@ class FiziksContact {
         self.collisionImpulse = collisionImpulse
         self.contactNormal = contactNormal
     }
-    
+
     func contains(body: FiziksBody?) -> Bool {
         if let body = body {
             return bodyA === body || bodyB === body

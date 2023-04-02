@@ -52,8 +52,6 @@
 		146E2DEA29C0D62800BFC757 /* InputSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146E2DE729C0D62800BFC757 /* InputSystem.swift */; };
 		146E2DEB29C0D62800BFC757 /* TapInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146E2DE829C0D62800BFC757 /* TapInput.swift */; };
 		146E2DEC29C0D62800BFC757 /* GyroInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146E2DE929C0D62800BFC757 /* GyroInput.swift */; };
-		146E2DF029C0D62F00BFC757 /* Vector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146E2DED29C0D62F00BFC757 /* Vector.swift */; };
-		146E2DF129C0D62F00BFC757 /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146E2DEE29C0D62F00BFC757 /* Point.swift */; };
 		146E2DFE29C0E05A00BFC757 /* TetrisShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146E2DFD29C0E05A00BFC757 /* TetrisShape.swift */; };
 		146E2E0829C0E2FE00BFC757 /* FiziksBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146E2E0529C0E2FE00BFC757 /* FiziksBody.swift */; };
 		146E2E0A29C0E2FE00BFC757 /* GameFiziksEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146E2E0729C0E2FE00BFC757 /* GameFiziksEngine.swift */; };
@@ -78,7 +76,6 @@
 		2F469D5629D2AB1500C4152E /* FiziksContactDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F469D5429D2AB1500C4152E /* FiziksContactDelegate.swift */; };
 		2F469D5829D2AB2700C4152E /* FiziksScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F469D5729D2AB2700C4152E /* FiziksScene.swift */; };
 		2F469D5A29D2AB3300C4152E /* FiziksShapeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F469D5929D2AB3300C4152E /* FiziksShapeNode.swift */; };
-		2F469D5C29D2ABD900C4152E /* MockFIziksSceneUpdateDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F469D5B29D2ABD900C4152E /* MockFIziksSceneUpdateDelegate.swift */; };
 		2F7E13A629C0F054000E6FA9 /* BiMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F7E13A529C0F054000E6FA9 /* BiMap.swift */; };
 		2FA2AC0329C74528001C5B7C /* GameEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA2AC0229C74528001C5B7C /* GameEngineTests.swift */; };
 		2FA2AC0529C74541001C5B7C /* GameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA2AC0429C74541001C5B7C /* GameEngine.swift */; };
@@ -103,23 +100,13 @@
 		619D44B729C6986000EE00CE /* PathFiziksBodyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619D44B629C6986000EE00CE /* PathFiziksBodyTests.swift */; };
 		619D44B929C699EA00EE00CE /* CategoryMask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61CD55ED29C35D8A00DB6000 /* CategoryMask.swift */; };
 		619D44BB29C69BAA00EE00CE /* GameFiziksEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619D44BA29C69BAA00EE00CE /* GameFiziksEngineTests.swift */; };
-		619D44BD29C69CE500EE00CE /* MockFiziksContactDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619D44BC29C69CE500EE00CE /* MockFiziksContactDelegate.swift */; };
 		619D44C029C6F35300EE00CE /* ObjectShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619D44BF29C6F35300EE00CE /* ObjectShape.swift */; };
 		619D44C329C6F3AE00EE00CE /* PathObjectShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619D44C229C6F3AE00EE00CE /* PathObjectShape.swift */; };
 		619D44C529C70EFA00EE00CE /* PlatformShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619D44C429C70EFA00EE00CE /* PlatformShape.swift */; };
 		61A10F1C29D2EB4B000EB4B4 /* BlockTouchedPowerupLineEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A10F1B29D2EB4B000EB4B4 /* BlockTouchedPowerupLineEvent.swift */; };
 		61A10F1F29D30BED000EB4B4 /* PowerupManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A10F1E29D30BED000EB4B4 /* PowerupManager.swift */; };
 		61A10F2129D30C02000EB4B4 /* Powerup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A10F2029D30C02000EB4B4 /* Powerup.swift */; };
-		61A10F2429D30C7F000EB4B4 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A10F2329D30C7F000EB4B4 /* Queue.swift */; };
-		61A10F2629D30CAB000EB4B4 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A10F2529D30CAB000EB4B4 /* LinkedList.swift */; };
-		61A10F2829D30CBB000EB4B4 /* LinkedListNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A10F2729D30CBB000EB4B4 /* LinkedListNode.swift */; };
-		61A10F2B29D30CF0000EB4B4 /* QueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A10F2A29D30CF0000EB4B4 /* QueueTests.swift */; };
 		61A10F2F29D30D03000EB4B4 /* BiMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F7E13A529C0F054000E6FA9 /* BiMap.swift */; };
-		61A10F3029D30D03000EB4B4 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A10F2529D30CAB000EB4B4 /* LinkedList.swift */; };
-		61A10F3129D30D03000EB4B4 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A10F2329D30C7F000EB4B4 /* Queue.swift */; };
-		61A10F3229D30D03000EB4B4 /* LinkedListNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A10F2729D30CBB000EB4B4 /* LinkedListNode.swift */; };
-		61A10F3429D30D0C000EB4B4 /* LinkedListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A10F3329D30D0C000EB4B4 /* LinkedListTests.swift */; };
-		61A10F3629D30D1C000EB4B4 /* LinkedListNodeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A10F3529D30D1C000EB4B4 /* LinkedListNodeTests.swift */; };
 		61A10F3829D30DCA000EB4B4 /* PowerupDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A10F3729D30DCA000EB4B4 /* PowerupDelegate.swift */; };
 		61A10F3B29D30E9E000EB4B4 /* GluePowerup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A10F3A29D30E9E000EB4B4 /* GluePowerup.swift */; };
 		61A10F3D29D30F93000EB4B4 /* PlatformPowerup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A10F3C29D30F93000EB4B4 /* PlatformPowerup.swift */; };
@@ -136,6 +123,19 @@
 		61CD55EE29C35D8A00DB6000 /* CategoryMask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61CD55ED29C35D8A00DB6000 /* CategoryMask.swift */; };
 		61CD55F029C35D9600DB6000 /* CollisionMask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61CD55EF29C35D9600DB6000 /* CollisionMask.swift */; };
 		61CD55F229C35DA700DB6000 /* ContactTestMask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61CD55F129C35DA700DB6000 /* ContactTestMask.swift */; };
+		61EC652629D8BAB700B9E018 /* TapInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146E2DE829C0D62800BFC757 /* TapInput.swift */; };
+		61EC652729D8BAB700B9E018 /* InputSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146E2DE729C0D62800BFC757 /* InputSystem.swift */; };
+		61EC652829D8BAB700B9E018 /* GyroInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146E2DE929C0D62800BFC757 /* GyroInput.swift */; };
+		61EC652929D8BC3A00B9E018 /* FiziksContact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F469D5329D2AB1500C4152E /* FiziksContact.swift */; };
+		61EC652A29D8BD0300B9E018 /* FiziksShapeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F469D5929D2AB3300C4152E /* FiziksShapeNode.swift */; };
+		61EC652B29D8BD3D00B9E018 /* Shape+Fill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FC031629CD498400CE2CE5 /* Shape+Fill.swift */; };
+		61EC652C29D8BD3D00B9E018 /* CGPoint+Hashable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146E2E1529C0E33900BFC757 /* CGPoint+Hashable.swift */; };
+		61EC652D29D8BD3D00B9E018 /* CGPath+Dimensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FC030E29CC3AE100CE2CE5 /* CGPath+Dimensions.swift */; };
+		61EC652E29D8BD3D00B9E018 /* CGVector+Multiply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614B458729D3EB9100BDD2F0 /* CGVector+Multiply.swift */; };
+		61EC652F29D8BD3D00B9E018 /* CGPath+Create.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F469D5029D2AA3200C4152E /* CGPath+Create.swift */; };
+		61EC653029D8BD3D00B9E018 /* CGPath+Rotate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FC031029CC483400CE2CE5 /* CGPath+Rotate.swift */; };
+		61EC653129D8BD3D00B9E018 /* CGPoint+Arithmetic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FC031429CCBFB100CE2CE5 /* CGPoint+Arithmetic.swift */; };
+		61EC653229D8BD3D00B9E018 /* CGPoint+arithmeticMean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC7FADD29C510F200B56850 /* CGPoint+arithmeticMean.swift */; };
 		61FC030F29CC3AE100CE2CE5 /* CGPath+Dimensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FC030E29CC3AE100CE2CE5 /* CGPath+Dimensions.swift */; };
 		61FC031129CC483400CE2CE5 /* CGPath+Rotate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FC031029CC483400CE2CE5 /* CGPath+Rotate.swift */; };
 		61FC031329CCBDE300CE2CE5 /* PathViewShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FC031229CCBDE300CE2CE5 /* PathViewShape.swift */; };
@@ -209,8 +209,6 @@
 		146E2DE729C0D62800BFC757 /* InputSystem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputSystem.swift; sourceTree = "<group>"; };
 		146E2DE829C0D62800BFC757 /* TapInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TapInput.swift; sourceTree = "<group>"; };
 		146E2DE929C0D62800BFC757 /* GyroInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GyroInput.swift; sourceTree = "<group>"; };
-		146E2DED29C0D62F00BFC757 /* Vector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vector.swift; sourceTree = "<group>"; };
-		146E2DEE29C0D62F00BFC757 /* Point.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
 		146E2DFD29C0E05A00BFC757 /* TetrisShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TetrisShape.swift; sourceTree = "<group>"; };
 		146E2E0529C0E2FE00BFC757 /* FiziksBody.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiziksBody.swift; sourceTree = "<group>"; };
 		146E2E0729C0E2FE00BFC757 /* GameFiziksEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameFiziksEngine.swift; sourceTree = "<group>"; };
@@ -235,7 +233,6 @@
 		2F469D5429D2AB1500C4152E /* FiziksContactDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiziksContactDelegate.swift; sourceTree = "<group>"; };
 		2F469D5729D2AB2700C4152E /* FiziksScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiziksScene.swift; sourceTree = "<group>"; };
 		2F469D5929D2AB3300C4152E /* FiziksShapeNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiziksShapeNode.swift; sourceTree = "<group>"; };
-		2F469D5B29D2ABD900C4152E /* MockFIziksSceneUpdateDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockFIziksSceneUpdateDelegate.swift; sourceTree = "<group>"; };
 		2F7E13A529C0F054000E6FA9 /* BiMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiMap.swift; sourceTree = "<group>"; };
 		2FA2AC0229C74528001C5B7C /* GameEngineTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameEngineTests.swift; sourceTree = "<group>"; };
 		2FA2AC0429C74541001C5B7C /* GameEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameEngine.swift; sourceTree = "<group>"; };
@@ -254,19 +251,12 @@
 		619D44B429C6972000EE00CE /* FiziksSceneTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiziksSceneTests.swift; sourceTree = "<group>"; };
 		619D44B629C6986000EE00CE /* PathFiziksBodyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathFiziksBodyTests.swift; sourceTree = "<group>"; };
 		619D44BA29C69BAA00EE00CE /* GameFiziksEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameFiziksEngineTests.swift; sourceTree = "<group>"; };
-		619D44BC29C69CE500EE00CE /* MockFiziksContactDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockFiziksContactDelegate.swift; sourceTree = "<group>"; };
 		619D44BF29C6F35300EE00CE /* ObjectShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectShape.swift; sourceTree = "<group>"; };
 		619D44C229C6F3AE00EE00CE /* PathObjectShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathObjectShape.swift; sourceTree = "<group>"; };
 		619D44C429C70EFA00EE00CE /* PlatformShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformShape.swift; sourceTree = "<group>"; };
 		61A10F1B29D2EB4B000EB4B4 /* BlockTouchedPowerupLineEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BlockTouchedPowerupLineEvent.swift; path = TumblingTowersGame/Models/GameEngine/GameEngineObject/ObjectShape/BlockTouchedPowerupLineEvent.swift; sourceTree = SOURCE_ROOT; };
 		61A10F1E29D30BED000EB4B4 /* PowerupManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerupManager.swift; sourceTree = "<group>"; };
 		61A10F2029D30C02000EB4B4 /* Powerup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Powerup.swift; sourceTree = "<group>"; };
-		61A10F2329D30C7F000EB4B4 /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
-		61A10F2529D30CAB000EB4B4 /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
-		61A10F2729D30CBB000EB4B4 /* LinkedListNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedListNode.swift; sourceTree = "<group>"; };
-		61A10F2A29D30CF0000EB4B4 /* QueueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueTests.swift; sourceTree = "<group>"; };
-		61A10F3329D30D0C000EB4B4 /* LinkedListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedListTests.swift; sourceTree = "<group>"; };
-		61A10F3529D30D1C000EB4B4 /* LinkedListNodeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedListNodeTests.swift; sourceTree = "<group>"; };
 		61A10F3729D30DCA000EB4B4 /* PowerupDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerupDelegate.swift; sourceTree = "<group>"; };
 		61A10F3A29D30E9E000EB4B4 /* GluePowerup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GluePowerup.swift; sourceTree = "<group>"; };
 		61A10F3C29D30F93000EB4B4 /* PlatformPowerup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformPowerup.swift; sourceTree = "<group>"; };
@@ -467,8 +457,6 @@
 				124B02CB29C41F6400094CF5 /* GameObject */,
 				2F7E13A829C0F5E5000E6FA9 /* GameEngine */,
 				146E2E0429C0E2D800BFC757 /* FiziksEngine */,
-				146E2DEE29C0D62F00BFC757 /* Point.swift */,
-				146E2DED29C0D62F00BFC757 /* Vector.swift */,
 				14C6732129D368C900D8DF78 /* Constants.swift */,
 			);
 			path = Models;
@@ -585,10 +573,7 @@
 		2F7E13A429C0F044000E6FA9 /* DataStructures */ = {
 			isa = PBXGroup;
 			children = (
-				61A10F2229D30C74000EB4B4 /* Queue */,
 				2F7E13A529C0F054000E6FA9 /* BiMap.swift */,
-				61A10F2529D30CAB000EB4B4 /* LinkedList.swift */,
-				61A10F2729D30CBB000EB4B4 /* LinkedListNode.swift */,
 			);
 			path = DataStructures;
 			sourceTree = "<group>";
@@ -642,8 +627,6 @@
 			isa = PBXGroup;
 			children = (
 				619D44AF29C6312100EE00CE /* MockFiziksBody.swift */,
-				2F469D5B29D2ABD900C4152E /* MockFIziksSceneUpdateDelegate.swift */,
-				619D44BC29C69CE500EE00CE /* MockFiziksContactDelegate.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -673,21 +656,10 @@
 			path = PowerupManager;
 			sourceTree = "<group>";
 		};
-		61A10F2229D30C74000EB4B4 /* Queue */ = {
-			isa = PBXGroup;
-			children = (
-				61A10F2329D30C7F000EB4B4 /* Queue.swift */,
-			);
-			path = Queue;
-			sourceTree = "<group>";
-		};
 		61A10F2929D30CDD000EB4B4 /* DataStructures */ = {
 			isa = PBXGroup;
 			children = (
 				2FBBD79D29C6C1C100C30582 /* BiMapTests.swift */,
-				61A10F2A29D30CF0000EB4B4 /* QueueTests.swift */,
-				61A10F3329D30D0C000EB4B4 /* LinkedListTests.swift */,
-				61A10F3529D30D1C000EB4B4 /* LinkedListNodeTests.swift */,
 			);
 			path = DataStructures;
 			sourceTree = "<group>";
@@ -864,7 +836,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\nexit 0 \n\nif test -d \"/opt/homebrew/bin/\"; then\n  PATH=\"/opt/homebrew/bin/:${PATH}\"\nfi\n\nexport PATH\n\nif which swiftlint >/dev/null; then\n  swiftlint --fix && swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n \nexit 0\n\nif test -d \"/opt/homebrew/bin/\"; then\n  PATH=\"/opt/homebrew/bin/:${PATH}\"\nfi\n\nexport PATH\n\nif which swiftlint >/dev/null; then\n  swiftlint --fix && swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -904,7 +876,6 @@
 				2FC7FAD229C50C2C00B56850 /* RandomNumberGeneratorWithSeed.swift in Sources */,
 				616EAD0E29D74C5C006D602A /* GameEngineConstants.swift in Sources */,
 				61FC030F29CC3AE100CE2CE5 /* CGPath+Dimensions.swift in Sources */,
-				61A10F2429D30C7F000EB4B4 /* Queue.swift in Sources */,
 				124B02ED29C9ED0000094CF5 /* EventIdentifier.swift in Sources */,
 				14168DE029D82C6F00EF5C22 /* GameplayGoBackMenuView.swift in Sources */,
 				61CD55E629C35CDB00DB6000 /* FiziksEngine.swift in Sources */,
@@ -917,7 +888,6 @@
 				14C6732F29D371D700D8DF78 /* BodyText.swift in Sources */,
 				14168DE629D8C47A00EF5C22 /* SandboxGameMode.swift in Sources */,
 				61FC031129CC483400CE2CE5 /* CGPath+Rotate.swift in Sources */,
-				61A10F2829D30CBB000EB4B4 /* LinkedListNode.swift in Sources */,
 				61AE15B329D16DD500D04E95 /* BlockPlacedEvent.swift in Sources */,
 				61FC031529CCBFB100CE2CE5 /* CGPoint+Arithmetic.swift in Sources */,
 				616EAD0829D6D6A2006D602A /* PowerupAvailableEvent.swift in Sources */,
@@ -955,14 +925,11 @@
 				61CD55F229C35DA700DB6000 /* ContactTestMask.swift in Sources */,
 				14C6732229D368C900D8DF78 /* Constants.swift in Sources */,
 				124B02CD29C41F7100094CF5 /* GameObject.swift in Sources */,
-				146E2DF129C0D62F00BFC757 /* Point.swift in Sources */,
 				146E2DE629C0D61A00BFC757 /* MainGameManager.swift in Sources */,
-				146E2DF029C0D62F00BFC757 /* Vector.swift in Sources */,
 				61A10F3829D30DCA000EB4B4 /* PowerupDelegate.swift in Sources */,
 				14168DE429D8B6EA00EF5C22 /* BlockInsertedEvent.swift in Sources */,
 				124B02F529C9F10300094CF5 /* TumblingTowersNotification.swift in Sources */,
 				619D44C029C6F35300EE00CE /* ObjectShape.swift in Sources */,
-				61A10F2629D30CAB000EB4B4 /* LinkedList.swift in Sources */,
 				14C53B2629C5E9D10035EC17 /* GameUpdater.swift in Sources */,
 				146E2DE429C0D61A00BFC757 /* GameEngineManager.swift in Sources */,
 				14C6732029D366D300D8DF78 /* MainMenuView.swift in Sources */,
@@ -982,33 +949,38 @@
 			files = (
 				619D44A429C630FD00EE00CE /* FiziksBody.swift in Sources */,
 				619D44AE29C6310100EE00CE /* FiziksConstants.swift in Sources */,
-				61A10F3029D30D03000EB4B4 /* LinkedList.swift in Sources */,
 				619D44B729C6986000EE00CE /* PathFiziksBodyTests.swift in Sources */,
+				61EC652729D8BAB700B9E018 /* InputSystem.swift in Sources */,
+				61EC652C29D8BD3D00B9E018 /* CGPoint+Hashable.swift in Sources */,
 				2FC7FACC29C50B4500B56850 /* ShapeRandomizerTests.swift in Sources */,
 				2FBBD79E29C6C1C100C30582 /* BiMapTests.swift in Sources */,
 				619D44A529C630FD00EE00CE /* PathFiziksBody.swift in Sources */,
 				619D44B929C699EA00EE00CE /* CategoryMask.swift in Sources */,
+				61EC652929D8BC3A00B9E018 /* FiziksContact.swift in Sources */,
 				619D44A029C62FFC00EE00CE /* FiziksContactTests.swift in Sources */,
-				619D44BD29C69CE500EE00CE /* MockFiziksContactDelegate.swift in Sources */,
 				124B02DE29C74D8800094CF5 /* GameObjectBlockTests.swift in Sources */,
 				2FA2AC0329C74528001C5B7C /* GameEngineTests.swift in Sources */,
 				619D44BB29C69BAA00EE00CE /* GameFiziksEngineTests.swift in Sources */,
+				61EC652E29D8BD3D00B9E018 /* CGVector+Multiply.swift in Sources */,
+				61EC652F29D8BD3D00B9E018 /* CGPath+Create.swift in Sources */,
 				124B02DC29C74C1400094CF5 /* ViewImageManagerTests.swift in Sources */,
 				124B02E229C754F400094CF5 /* LevelTests.swift in Sources */,
+				61EC652829D8BAB700B9E018 /* GyroInput.swift in Sources */,
+				61EC652629D8BAB700B9E018 /* TapInput.swift in Sources */,
 				619D44B529C6972000EE00CE /* FiziksSceneTests.swift in Sources */,
+				61EC653229D8BD3D00B9E018 /* CGPoint+arithmeticMean.swift in Sources */,
+				61EC652D29D8BD3D00B9E018 /* CGPath+Dimensions.swift in Sources */,
+				61EC653129D8BD3D00B9E018 /* CGPoint+Arithmetic.swift in Sources */,
+				61EC652A29D8BD0300B9E018 /* FiziksShapeNode.swift in Sources */,
 				61A10F2F29D30D03000EB4B4 /* BiMap.swift in Sources */,
-				61A10F3129D30D03000EB4B4 /* Queue.swift in Sources */,
-				61A10F3429D30D0C000EB4B4 /* LinkedListTests.swift in Sources */,
-				61A10F3229D30D03000EB4B4 /* LinkedListNode.swift in Sources */,
 				619D44B029C6312100EE00CE /* MockFiziksBody.swift in Sources */,
 				619D44AB29C6310100EE00CE /* FiziksEngine.swift in Sources */,
 				619D44AD29C6310100EE00CE /* GameFiziksEngine.swift in Sources */,
-				61A10F2B29D30CF0000EB4B4 /* QueueTests.swift in Sources */,
 				1445F84A29C71DC900F94751 /* TapInputTests.swift in Sources */,
 				146E2DC529C0D07300BFC757 /* TumblingTowersGameTests.swift in Sources */,
-				2F469D5C29D2ABD900C4152E /* MockFIziksSceneUpdateDelegate.swift in Sources */,
 				124B02E029C74F3900094CF5 /* GameObjectPlatformTests.swift in Sources */,
-				61A10F3629D30D1C000EB4B4 /* LinkedListNodeTests.swift in Sources */,
+				61EC652B29D8BD3D00B9E018 /* Shape+Fill.swift in Sources */,
+				61EC653029D8BD3D00B9E018 /* CGPath+Rotate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

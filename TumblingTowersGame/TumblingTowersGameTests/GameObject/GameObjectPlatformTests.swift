@@ -11,6 +11,6 @@ import XCTest
 final class GameObjectPlatformTests: XCTestCase {
 
     func test_init() {
-        let platform = GameObjectPlatform(position: CGPoint(x: 200, y: 1000))
+        let platform = GameObjectPlatform(position: CGPoint(x: 200, y: 1_000))
     }
 }

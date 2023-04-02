@@ -65,22 +65,22 @@ extension GameFiziksEngine: FiziksEngine {
         skNodeToFiziksBody[fiziksBody.fiziksShapeNode] = nil
         fiziksScene.remove(fiziksBody)
     }
-    
+
     func combine(bodyA: FiziksBody, bodyB: FiziksBody, at anchorPoint: CGPoint? = nil) {
         guard let bodyA = bodyA.fiziksShapeNode.physicsBody,
               let bodyB = bodyB.fiziksShapeNode.physicsBody else { return }
-        
+
         var pinJoint: SKPhysicsJointPin?
-        
+
         if let point = anchorPoint {
             pinJoint = SKPhysicsJointPin.joint(withBodyA: bodyA, bodyB: bodyB, anchor: point)
         } else if let posA = bodyA.node?.position, let posB = bodyB.node?.position {
             let meanPos = CGPoint.arithmeticMean(points: [posA, posB])
             pinJoint = SKPhysicsJointPin.joint(withBodyA: bodyA, bodyB: bodyB, anchor: meanPos)
         }
-        
+
         guard let pinJoint = pinJoint else { return }
-        
+
         pinJoint.shouldEnableLimits = true
         fiziksScene.scene?.physicsWorld.add(pinJoint)
     }
@@ -88,7 +88,7 @@ extension GameFiziksEngine: FiziksEngine {
     func setWorldGravity(to newValue: CGVector) {
         fiziksScene.gravity = newValue
     }
-    
+
     func allBodiesContacted(with fiziksBody: FiziksBody) -> [FiziksBody] {
         guard let skPhysicsBody = fiziksBody.fiziksShapeNode.physicsBody else {
             return []
@@ -104,21 +104,17 @@ extension GameFiziksEngine: FiziksEngine {
         }
         return contactedFiziksBodies
     }
-    
+
     func isIntersecting(body: FiziksBody, otherBodies: [FiziksBody]) -> Bool {
-        for otherBody in otherBodies {
-            if body.fiziksShapeNode.intersects(otherBody.fiziksShapeNode) {
-                print(body.position)
-                print(otherBody.position)
-                return true
-            }
+        for otherBody in otherBodies where body.fiziksShapeNode.intersects(otherBody.fiziksShapeNode) {
+            return true
         }
-        
+
         return false
     }
 
     private func getSKPhysicsBody(of fiziksBody: FiziksBody) -> SKPhysicsBody? {
-        return fiziksBody.fiziksShapeNode.physicsBody
+        fiziksBody.fiziksShapeNode.physicsBody
     }
 }
 

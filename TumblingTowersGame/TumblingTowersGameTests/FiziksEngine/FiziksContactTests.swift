@@ -9,7 +9,11 @@ import XCTest
 
 final class FiziksContactTests: XCTestCase {
     func testConstruct() {
-        let contact = FiziksContact(bodyA: MockFiziksBody(), bodyB: MockFiziksBody(), contactPoint: .zero, collisionImpulse: .zero, contactNormal: .zero)
+        let contact = FiziksContact(bodyA: MockFiziksBody(),
+                                    bodyB: MockFiziksBody(),
+                                    contactPoint: .zero,
+                                    collisionImpulse: .zero,
+                                    contactNormal: .zero)
 
         XCTAssertNotNil(contact)
     }

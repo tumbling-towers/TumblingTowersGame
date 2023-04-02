@@ -10,10 +10,10 @@ import XCTest
 import SpriteKit
 
 class GameFiziksEngineTests: XCTest {
-    let defaultLevelDimensions: CGRect = CGRect(x: 0, y: 0, width: 500, height: 500)
+    let defaultLevelDimensions = CGRect(x: 0, y: 0, width: 500, height: 500)
     var engine: GameFiziksEngine?
-    let skView: SKView = SKView()
-    let delegate: MockFiziksContactDelegate = MockFiziksContactDelegate()
+    let skView = SKView()
+    let delegate = MockFiziksContactDelegate()
     let fiziksBody: FiziksBody = MockFiziksBody()
 
     override func setUp() {
@@ -206,7 +206,7 @@ class GameFiziksEngineTests: XCTest {
     }
 
     func setWorldGravity() {
-        let newGravity = CGVector(dx: 0, dy: 1000)
+        let newGravity = CGVector(dx: 0, dy: 1_000)
         XCTAssertNotEqual(newGravity, engine?.fiziksScene.gravity)
 
         engine?.setWorldGravity(to: newGravity)

@@ -9,6 +9,6 @@ import Foundation
 
 protocol PowerupDelegate {
     func didActivateGluePowerup()
-    
+
     func didActivatePlatformPowerup()
 }

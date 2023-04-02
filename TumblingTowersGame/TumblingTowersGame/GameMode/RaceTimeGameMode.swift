@@ -26,7 +26,6 @@ class RaceTimeGameMode: GameMode {
         eventMgr.registerClosure(for: BlockDroppedEvent.self, closure: blockDropped)
     }
 
-
     func getGameState() -> Constants.GameState {
         if currBlocksPlaced >= blocksToPlace {
             isGameEnded = true
@@ -40,7 +39,6 @@ class RaceTimeGameMode: GameMode {
 
         return .RUNNING
     }
-
 
     func getScore() -> Int {
         realTimeTimer.count

@@ -18,7 +18,6 @@ class Constants {
         case achievements
     }
 
-
     static let gameModeTypeToClass: [String: GameMode.Type] = [GameModeTypes.SURVIVAL.rawValue: SurvivalGameMode.self,
                                                                GameModeTypes.RACECLOCK.rawValue: RaceTimeGameMode.self,
                                                                GameModeTypes.SANDBOX.rawValue: SandboxGameMode.self]

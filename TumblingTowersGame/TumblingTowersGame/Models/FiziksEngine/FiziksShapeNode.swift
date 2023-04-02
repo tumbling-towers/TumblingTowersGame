@@ -170,7 +170,8 @@ class FiziksShapeNode: SKShapeNode {
             physicsBody?.usesPreciseCollisionDetection
         }
         set {
-            physicsBody?.usesPreciseCollisionDetection = newValue ?? FiziksConstants.defaultUsesPreciseCollisionDetection
+            physicsBody?.usesPreciseCollisionDetection = newValue
+            ?? FiziksConstants.defaultUsesPreciseCollisionDetection
         }
     }
 

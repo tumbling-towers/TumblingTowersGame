@@ -15,15 +15,13 @@ class GameUpdater {
     private let durationOfFrameFor60FPS = TimeInterval(1.0 / 60.0)
     private var displayLink: CADisplayLink?
     private var frameCount = 0
-    private var runThisEveryFrame: () -> ()
+    private var runThisEveryFrame: () -> Void
 
     var timePassed: Double {
-        get {
-            (Double(frameCount) + leftoverTime) * durationOfFrameFor60FPS
-        }
+        (Double(frameCount) + leftoverTime) * durationOfFrameFor60FPS
     }
 
-    init(runThisEveryFrame: @escaping () -> ()) {
+    init(runThisEveryFrame: @escaping () -> Void) {
         self.runThisEveryFrame = runThisEveryFrame
     }
 

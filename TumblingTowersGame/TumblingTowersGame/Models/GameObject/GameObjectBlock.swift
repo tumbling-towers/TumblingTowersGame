@@ -29,7 +29,7 @@ struct GameObjectBlock: GameObject {
     }
 
     var rotation: Double
-    
+
     var isGlue: Bool
 
     init(position: CGPoint, path: CGPath, rotation: Double = 0, isGlue: Bool = false) {

@@ -34,7 +34,6 @@ struct SettingsView: View {
                         .padding(.all)
                 }
 
-
                 HStack {
                     Text("Background Music")
                         .modifier(BodyText())
@@ -68,7 +67,7 @@ struct SettingsView: View {
                 .onChange(of: selectedInputType) { val in
                     gameEngineMgr.changeInput(to: val)
                 }
-                
+
 //                HStack {
 //                    Text("Block Movement Speed")
 //                        .modifier(BodyText())

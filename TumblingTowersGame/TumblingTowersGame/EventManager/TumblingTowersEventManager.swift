@@ -11,7 +11,7 @@
 import NotificationCenter
 
 class TumblingTowersEventManager: EventManager {
-    var NCfacade: NotificationCenterFacade = NotificationCenterFacade.shared
+    var NCfacade = NotificationCenterFacade.shared
     var observerClosures: [EventIdentifier: [EventClosure]]
 
     init() {

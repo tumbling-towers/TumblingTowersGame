@@ -19,11 +19,9 @@ class SandboxGameMode: GameMode {
 
     }
 
-
     func getGameState() -> Constants.GameState {
         return .RUNNING
     }
-
 
     func getScore() -> Int {
         realTimeTimer.count
