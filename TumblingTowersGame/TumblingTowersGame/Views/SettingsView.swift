@@ -15,7 +15,6 @@ struct SettingsView: View {
 
     var body: some View {
         ZStack {
-
             BackgroundView()
 
             VStack {
@@ -72,6 +71,10 @@ struct SettingsView: View {
             }
         }
         .ignoresSafeArea(.all)
+        .onAppear {
+            settingsMgr.setStorageManager(storageManager: mainGameMgr.storageManager)
+            settingsMgr.loadSettings()
+        }
 
     }
 

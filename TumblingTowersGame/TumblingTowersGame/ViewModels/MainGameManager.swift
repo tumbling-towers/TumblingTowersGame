@@ -8,10 +8,11 @@
 import Foundation
 
 class MainGameManager: ObservableObject {
-
+    var storageManager =  StorageManager()
+    
     private(set) var deviceHeight: CGFloat = 1_920
     private(set) var deviceWidth: CGFloat = 1_080
-
+    
     private var eventManager: EventManager?
 
     private var gameEngineMgr = GameEngineManager(levelDimensions: .infinite, eventManager: TumblingTowersEventManager())
