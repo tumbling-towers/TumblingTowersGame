@@ -31,7 +31,6 @@ struct SettingsView: View {
                         .padding(.all)
                 }
 
-
                 HStack {
                     Text("Background Music")
                         .modifier(BodyText())

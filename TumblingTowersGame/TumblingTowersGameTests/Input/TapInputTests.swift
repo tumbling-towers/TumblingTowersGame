@@ -13,33 +13,34 @@ final class TapInputTests: XCTestCase {
     func testConstruct() {
         let tapInput = TapInput()
 
-        tapInput.start(levelWidth: 1_000, levelHeight: 1_000)
-
         let currInput = tapInput.getInput()
 
-        XCTAssertEqual(currInput, .NONE)
+        XCTAssertEqual(currInput.inputType, .NONE)
+        XCTAssertEqual(currInput.vector, .zero)
     }
 
     func testLeftMove() {
         let tapInput = TapInput()
 
-        tapInput.start(levelWidth: 1_000, levelHeight: 1_000)
-        tapInput.tapEvent(at: CGPoint(x: 20, y: 500))
+        tapInput.dragEvent(offset: CGSize(width: -100, height: 0))
+        var currInput = tapInput.getInput()
+        XCTAssertEqual(currInput.inputType, .LEFT)
 
-        let currInput = tapInput.getInput()
-
-        XCTAssertEqual(currInput, .LEFT)
+        tapInput.dragEvent(offset: CGSize(width: -100, height: 51))
+        currInput = tapInput.getInput()
+        XCTAssertEqual(currInput.inputType, .NONE)
     }
 
     func testRightMove() {
         let tapInput = TapInput()
 
-        tapInput.start(levelWidth: 1_000, levelHeight: 1_000)
-        tapInput.tapEvent(at: CGPoint(x: 720, y: 500))
+        tapInput.dragEvent(offset: CGSize(width: 100, height: 0))
+        var currInput = tapInput.getInput()
+        XCTAssertEqual(currInput.inputType, .RIGHT)
 
-        let currInput = tapInput.getInput()
-
-        XCTAssertEqual(currInput, .RIGHT)
+        tapInput.dragEvent(offset: CGSize(width: 100, height: 51))
+        currInput = tapInput.getInput()
+        XCTAssertEqual(currInput.inputType, .NONE)
     }
 
 }

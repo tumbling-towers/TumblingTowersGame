@@ -19,7 +19,7 @@ class PathFiziksBodyTests: XCTest {
                              P(x: 30, y: 10),
                              P(x: 30, y: 20),
                              P(x: 0, y: 20)]
-    let path: CGPath = CGPath.create(from: PathFiziksBodyTests.points)
+    let path = CGPath.create(from: PathFiziksBodyTests.points)
 
     override func setUp() {
         pathBody = PathFiziksBody(path: path, position: .zero, zRotation: 5, categoryBitMask: 0x1, collisionBitMask: 0x1, contactTestBitMask: 0x1, isDynamic: true)

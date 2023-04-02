@@ -11,20 +11,19 @@ struct LevelView: View {
     @EnvironmentObject var gameEngineMgr: GameEngineManager
 
     var body: some View {
-        return ZStack {
+        ZStack {
             BackgroundView()
 
             ForEach($gameEngineMgr.levelBlocks) { block in
                 BlockView(block: block)
             }
-                        
+
             ForEach($gameEngineMgr.levelPlatforms) { platform in
                 PlatformView(platform: platform)
             }
-            
-            
+
             PowerupLineView()
-            
+
             Button {
                 gameEngineMgr.rotateCurrentBlock()
             } label: {
@@ -41,8 +40,7 @@ struct LevelView: View {
             // TODO: Potentially could make this adjustable to be on left/right of screen (in settings)
             .position(x: gameEngineMgr.levelDimensions.width - 100, y: gameEngineMgr.levelDimensions.height - 100)
             .shadow(color: .black, radius: 5, x: 1, y: 1)
-            
-            
+
             if let powerup = gameEngineMgr.powerup,
                let image = ViewImageManager.powerupToImage[powerup.type] {
                 Button {
@@ -62,7 +60,6 @@ struct LevelView: View {
                 .position(x: 100, y: gameEngineMgr.levelDimensions.height - 100)
                 .shadow(color: .black, radius: 5, x: 1, y: 1)
             }
-            
 
             if let box = gameEngineMgr.referenceBox {
                 Rectangle()

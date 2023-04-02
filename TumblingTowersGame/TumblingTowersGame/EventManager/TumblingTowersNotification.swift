@@ -16,6 +16,6 @@ class TumblingTowersNotification {
     }
 
     func toNotification() -> Notification {
-        return notification
+        notification
     }
 }

@@ -8,5 +8,5 @@
 import Foundation
 
 class PlatformPowerupActivatedEvent: TumblingTowersEvent {
-    
+
 }

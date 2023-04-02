@@ -18,7 +18,7 @@ struct BlockView: View {
     )
 
     var body: some View {
-        return PathViewShape(cgPath: block.path)
+        PathViewShape(cgPath: block.path)
             .fill(BlockView.color, strokeBorder: block.isGlue
                   ? .white : .black, lineWidth: 2)
             .frame(width: block.width, height: block.height)
@@ -29,6 +29,7 @@ struct BlockView: View {
 struct BlockView_Previews: PreviewProvider {
     static var previews: some View {
         BlockView(block: .constant(GameObjectBlock.sampleBlock))
-            .environmentObject(GameEngineManager(levelDimensions: .infinite, eventManager: TumblingTowersEventManager()))
+            .environmentObject(GameEngineManager(levelDimensions: .infinite,
+                                                 eventManager: TumblingTowersEventManager()))
     }
 }

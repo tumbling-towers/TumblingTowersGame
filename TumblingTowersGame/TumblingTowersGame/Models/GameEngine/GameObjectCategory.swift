@@ -26,12 +26,10 @@ enum GameObjectCategory {
          max: 0xFFFFFFFF]
 
     var categoryBitMask: BitMask {
-        // TODO: currently setting default value to 0 (no collisions) because I don't want return value to be optional
         return GameObjectCategory.categoryToBitMaskMap[self] ?? 0
     }
 
     var collisionBitMask: BitMask {
-        // TODO: currently setting default value to 0 (no collisions) because I don't want return value to be optional
         return GameObjectCategory.categoryToCollisionBitMaskMap[self] ?? 0
     }
 

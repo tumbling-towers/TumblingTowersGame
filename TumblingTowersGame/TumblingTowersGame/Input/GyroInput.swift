@@ -10,12 +10,13 @@ import CoreMotion
 
 class GyroInput: InputSystem {
     private weak var mainGameMgr: MainGameManager?
+
     private var motionManager: CMMotionManager
 
     private var inputVal = InputType.NONE
-    
-    private var inputData: InputData = InputData.none
-    
+
+    var inputData = InputData.none
+
     private var yMultiplier: Double = 5.0
 
     // TODO: Allow for sensitivity adjustment?
@@ -37,10 +38,6 @@ class GyroInput: InputSystem {
         }
     }
 
-    func start(levelWidth: CGFloat, levelHeight: CGFloat) {
-
-    }
-
     func getInput() -> InputData {
 
         if let rate = motionManager.accelerometerData?.acceleration.x {
@@ -60,7 +57,7 @@ class GyroInput: InputSystem {
         }
         return InputData.none
     }
-    
+
     func dragEvent(offset: CGSize) {
         if offset.height > 0 {
             // detected as a swipe down

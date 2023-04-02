@@ -9,7 +9,7 @@ import Foundation
 
 protocol InputSystem {
 
-    func start(levelWidth: CGFloat, levelHeight: CGFloat)
+    var inputData: InputData { get set }
 
     func getInput() -> InputData
 
@@ -24,14 +24,14 @@ struct InputData {
     let vector: CGVector
 
     static let none = InputData(inputType: .NONE, vector: .zero)
-    static let unitLeft: CGVector = CGVector(dx: -1.0, dy: 0)
-    static let unitRight: CGVector = CGVector(dx: 1.0, dy: 0)
-    static let unitDown: CGVector = CGVector(dx: 0, dy: -1.0)
+    static let unitLeft = CGVector(dx: -1.0, dy: 0)
+    static let unitRight = CGVector(dx: 1.0, dy: 0)
+    static let unitDown = CGVector(dx: 0, dy: -1.0)
 }
 
 enum InputType: String {
-    case LEFT = "LEFT"
-    case NONE = "NONE"
-    case RIGHT = "RIGHT"
-    case DOWN = "DOWN"
+    case LEFT
+    case NONE
+    case RIGHT
+    case DOWN
 }

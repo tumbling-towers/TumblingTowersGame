@@ -16,11 +16,9 @@ class RaceTimeGameMode: GameMode {
 
     }
 
-
     func getGameState() -> Constants.GameState {
         .RUNNING
     }
-
 
     func getScore() -> Int {
         0
@@ -33,6 +31,5 @@ class RaceTimeGameMode: GameMode {
     func restartGame() {
 
     }
-
 
 }

@@ -16,8 +16,8 @@ extension CGPath {
         let path = CGMutablePath()
         path.move(to: points[0])
 
-        for i in 1..<points.count {
-            path.addLine(to: points[i])
+        for point in 1..<points.count {
+            path.addLine(to: points[point])
         }
 
         path.addLine(to: points[0])
@@ -35,13 +35,13 @@ extension CGPath {
         }
         return path
     }
-    
+
     static func create(from rect: CGRect, centered: Bool = true) -> CGPath {
         let path = CGPath.create(from: [CGPoint(x: rect.minX, y: rect.minY),
                              CGPoint(x: rect.maxX, y: rect.minY),
                              CGPoint(x: rect.maxX, y: rect.maxY),
                              CGPoint(x: rect.minX, y: rect.maxY)], centered: centered)
-        
+
         return path
     }
 }
