@@ -12,7 +12,7 @@ class StorageManager {
     static let achievementsFileName = "achievements"
 
     /// Get file URL from specified file name.
-    private  func getFileURL(from name: String) throws -> URL {
+    private func getFileURL(from name: String) throws -> URL {
         let directory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
         return directory.appendingPathComponent(name).appendingPathExtension(".data")
     }
