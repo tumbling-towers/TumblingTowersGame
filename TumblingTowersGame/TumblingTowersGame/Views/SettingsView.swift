@@ -11,14 +11,14 @@ struct SettingsView: View {
     @EnvironmentObject var mainGameMgr: MainGameManager
     @EnvironmentObject var gameEngineMgr: GameEngineManager
     @StateObject var settingsMgr: SettingsManager
+
     @Binding var currGameScreen: Constants.CurrGameScreens
 
     // MARK: Retrieve from storage in future
-    @State private var selectedInputType = Constants.GameInputTypes.TAP
+    @State private var selectedInputType = Constants.GameInputTypes.GYRO
 
     var body: some View {
         ZStack {
-
             BackgroundView()
 
             VStack {
@@ -87,6 +87,8 @@ struct SettingsView: View {
             }
         }
         .ignoresSafeArea(.all)
+        .onAppear {
+        }
 
     }
 
@@ -110,5 +112,6 @@ struct SettingsView_Previews: PreviewProvider {
         SettingsView(settingsMgr: SettingsManager(), currGameScreen: .constant(.gameModeSelection))
             .environmentObject(GameEngineManager(levelDimensions: .infinite, eventManager: TumblingTowersEventManager()))
             .environmentObject(MainGameManager())
+            .environmentObject(SettingsManager())
     }
 }
