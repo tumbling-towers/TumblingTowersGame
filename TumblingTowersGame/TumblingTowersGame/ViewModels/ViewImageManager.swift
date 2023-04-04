@@ -39,4 +39,8 @@ struct ViewImageManager {
         .glue: GluePowerupImage,
         .platform: PlatformPowerupImage
     ]
+    
+    static let pauseButton = "pause"
+    static let resumeButton = "resume"
+    static let exitButton = "exit"
 }

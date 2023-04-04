@@ -28,7 +28,7 @@ struct ContentView: View {
                     .environmentObject(gameEngineMgr)
             } else if currGameScreen == .gameplay {
                 ZStack {
-                    GameplayLevelView()
+                    GameplayLevelView(currGameScreen: $currGameScreen)
                         .environmentObject(gameEngineMgr)
                         .gesture(DragGesture(minimumDistance: 0)
                             .onChanged { gesture in

@@ -156,6 +156,7 @@
 		61FC031329CCBDE300CE2CE5 /* PathViewShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FC031229CCBDE300CE2CE5 /* PathViewShape.swift */; };
 		61FC031529CCBFB100CE2CE5 /* CGPoint+Arithmetic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FC031429CCBFB100CE2CE5 /* CGPoint+Arithmetic.swift */; };
 		61FC031729CD498400CE2CE5 /* Shape+Fill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FC031629CD498400CE2CE5 /* Shape+Fill.swift */; };
+		61FC3A4E29DC3BD7005A91D7 /* PauseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FC3A4D29DC3BD7005A91D7 /* PauseView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -308,6 +309,7 @@
 		61FC031229CCBDE300CE2CE5 /* PathViewShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathViewShape.swift; sourceTree = "<group>"; };
 		61FC031429CCBFB100CE2CE5 /* CGPoint+Arithmetic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGPoint+Arithmetic.swift"; sourceTree = "<group>"; };
 		61FC031629CD498400CE2CE5 /* Shape+Fill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Shape+Fill.swift"; sourceTree = "<group>"; };
+		61FC3A4D29DC3BD7005A91D7 /* PauseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PauseView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -542,6 +544,7 @@
 				14C6732829D36F4D00D8DF78 /* SettingsView.swift */,
 				14168DDD29D82AC200EF5C22 /* GameEndView.swift */,
 				14168DDF29D82C6F00EF5C22 /* GameplayGoBackMenuView.swift */,
+				61FC3A4D29DC3BD7005A91D7 /* PauseView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1051,6 +1054,7 @@
 				14168DE429D8B6EA00EF5C22 /* BlockInsertedEvent.swift in Sources */,
 				124B02F529C9F10300094CF5 /* TumblingTowersNotification.swift in Sources */,
 				619D44C029C6F35300EE00CE /* ObjectShape.swift in Sources */,
+				61FC3A4E29DC3BD7005A91D7 /* PauseView.swift in Sources */,
 				14C53B2629C5E9D10035EC17 /* GameUpdater.swift in Sources */,
 				2FFED5A429D9ED4500BA072F /* StatsTrackingSystem.swift in Sources */,
 				2FFED59D29D9ED4500BA072F /* AchievementSystemDataSource.swift in Sources */,
@@ -1255,7 +1259,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TumblingTowersGame/Preview Content\"";
-				DEVELOPMENT_TEAM = 9K4QZ59W8A;
+				DEVELOPMENT_TEAM = T95PZMKKDH;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -1268,7 +1272,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.tlc.TumblingTowersGame;
+				PRODUCT_BUNDLE_IDENTIFIER = com.taubar2.TumblingTowersGame;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -1284,7 +1288,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TumblingTowersGame/Preview Content\"";
-				DEVELOPMENT_TEAM = 9K4QZ59W8A;
+				DEVELOPMENT_TEAM = T95PZMKKDH;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -1297,7 +1301,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.tlc.TumblingTowersGame;
+				PRODUCT_BUNDLE_IDENTIFIER = com.taubar2.TumblingTowersGame;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
