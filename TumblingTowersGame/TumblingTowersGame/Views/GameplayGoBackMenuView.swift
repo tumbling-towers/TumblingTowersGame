@@ -21,7 +21,7 @@ struct GameplayGoBackMenuView: View {
                     gameEngineMgr.resetGame()
                 }
             }
-            .modifier(MenuButtonText(fontSize: 20))
+            .modifier(CustomButton(fontSize: 20))
 
             Spacer()
         }

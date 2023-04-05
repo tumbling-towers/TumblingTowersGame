@@ -18,14 +18,13 @@ struct GameModeSelectView: View {
 
             VStack {
                 Spacer()
-                Text("Select Game Mode::")
-                    .font(.system(size: 30))
-                    .padding(.all, 30)
-
+                Text("Choose your game mode:")
+                    .modifier(MenuButtonText(fontSize: 50))
+                Spacer().frame(height: 100)
                 HStack {
-                    drawGameModeOption(gameMode: .SURVIVAL, name: "SURVIVAL", fontSize: 30.0)
+                    drawGameModeOption(gameMode: .SURVIVAL, name: "SURVIVAL", fontSize: 30.0, red: 1, green: 0.341, blue: 0.341)
 
-                    drawGameModeOption(gameMode: .SANDBOX, name: "SANDBOX", fontSize: 30.0)
+                    drawGameModeOption(gameMode: .SANDBOX, name: "SANDBOX", fontSize: 30.0, red: 0.322, green: 0.443, blue: 1)
 
                     // MARK: Add back later
 //                    drawGameModeOption(gameMode: .RACECLOCK, name: "RACE AGAINST CLOCK", fontSize: 30.0)
@@ -35,11 +34,9 @@ struct GameModeSelectView: View {
                     currGameScreen = .mainMenu
                 } label: {
                     Text("BACK")
-                        .modifier(MenuButtonText(fontSize: 20))
+                        .modifier(CustomButton(fontSize: 25))
                 }
                 .padding(.top, 35.0)
-
-                drawInstructions()
 
                 Spacer()
             }
@@ -48,7 +45,7 @@ struct GameModeSelectView: View {
 
     }
 
-    private func drawGameModeOption(gameMode: Constants.GameModeTypes, name: String, fontSize: CGFloat) -> AnyView {
+    private func drawGameModeOption(gameMode: Constants.GameModeTypes, name: String, fontSize: CGFloat, red: Double, green: Double, blue: Double) -> AnyView {
         AnyView(
             Button {
 //                gameEngineMgr.setGameMode(gameMode: gameMode)
@@ -56,17 +53,8 @@ struct GameModeSelectView: View {
                 currGameScreen = .gameplay
             } label: {
                 Text(name)
-                    .modifier(MenuButtonText(fontSize: fontSize))
+                    .modifier(SecondaryButton(fontSize: fontSize, red: red, green: green, blue: blue))
             }
-        )
-    }
-
-    private func drawInstructions() -> AnyView {
-        AnyView(
-            Text("Choose your Game Mode!")
-                .foregroundColor(.black)
-                .font(.system(size: 20, weight: .bold))
-                .padding(.top, 100)
         )
     }
 }

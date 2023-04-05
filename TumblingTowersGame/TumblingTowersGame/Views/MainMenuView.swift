@@ -20,32 +20,41 @@ struct MainMenuView: View {
             VStack {
                 Spacer()
 
-                Text("Welcome to.....")
-                Text("TUBMLING TOWERS")
-                    .font(.system(size: 60, weight: .heavy))
+                Image(ViewImageManager.mainLogo)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 500)
+                    
 
                 Spacer()
 
-                Button {
-                    currGameScreen = .gameModeSelection
-                } label: {
-                    Text("START GAME")
-                        .modifier(MenuButtonText(fontSize: 30))
+                Button("Start") {
+                    withAnimation {
+                        currGameScreen = .gameModeSelection
+                    }
                 }
+                .modifier(CustomButton(fontSize: 40))
+                .frame(width: 300)
+                
+                Spacer().frame(height: 50)
+                
+                Button("Achievements") {
+                    withAnimation {
+                        currGameScreen = .achievements
+                    }
+                }
+                .modifier(CustomButton(fontSize: 40))
+                .frame(width: 300)
+                
+                Spacer().frame(height: 50)
 
-                Button {
-                    currGameScreen = .achievements
-                } label: {
-                    Text("ACHIEVEMENTS")
-                        .modifier(MenuButtonText(fontSize: 30, padding: 50))
+                Button("Settings") {
+                    withAnimation {
+                        currGameScreen = .settings
+                    }
                 }
-
-                Button {
-                    currGameScreen = .settings
-                } label: {
-                    Text("SETTINGS")
-                        .modifier(MenuButtonText(fontSize: 30))
-                }
+                .modifier(CustomButton(fontSize: 40))
+                .frame(width: 300)
 
                 Spacer()
                 Spacer()
