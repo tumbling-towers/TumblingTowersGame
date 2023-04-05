@@ -29,7 +29,7 @@ class GameWorld {
     // MARK: Engines & Managers
     var fiziksEngine: FiziksEngine
     
-    var eventManager: EventManager? {
+    var eventManager: EventManager {
         didSet {
             powerupManager.eventManager = eventManager
         }
@@ -45,7 +45,8 @@ class GameWorld {
 
     
     // MARK: Initializer
-    init(levelDimensions: CGRect, seed: Int = GameWorldConstants.defaultSeed) {
+    init(levelDimensions: CGRect, seed: Int = GameWorldConstants.defaultSeed, eventManager: EventManager) {
+        self.eventManager = eventManager
         self.level = GameWorldLevel(levelDimensions: levelDimensions)
         self.fiziksEngine = GameFiziksEngine(size: levelDimensions)
         self.shapeRandomizer = ShapeRandomizer(possibleShapes: TetrisType.allCases, seed: seed)
@@ -87,7 +88,7 @@ class GameWorld {
                 // TODO: Emit event that a block has gone out of bounds.
                 removeObject(object: object)
 
-                eventManager?.postEvent(BlockDroppedEvent())
+                eventManager.postEvent(BlockDroppedEvent())
 
                 if object === currentlyMovingBlock {
                     currentlyMovingBlock = nil
@@ -113,7 +114,7 @@ class GameWorld {
 
         currentlyMovingBlock = insertedBlock
 
-        eventManager?.postEvent(BlockInsertedEvent())
+        eventManager.postEvent(BlockInsertedEvent())
         return insertedBlock
     }
     
@@ -278,7 +279,7 @@ extension GameWorld: FiziksContactDelegate {
             if pos.y + height / 2 > powerupLine.position.y
                 && pos.y - height / 2 < powerupLine.position.y
                 && currentBlock.fiziksBody.velocity == .zero {
-                eventManager?.postEvent(BlockTouchedPowerupLineEvent())
+                eventManager.postEvent(BlockTouchedPowerupLineEvent())
                 updatePowerupHeight()
             }
         }
@@ -299,10 +300,10 @@ extension GameWorld: FiziksContactDelegate {
                 placedBlockCount += 1
             }
         }
-        eventManager?.postEvent(BlockPlacedEvent(totalBlocksInLevel: placedBlockCount))
+        eventManager.postEvent(BlockPlacedEvent(totalBlocksInLevel: placedBlockCount))
         
         let towerHeight = findHighestPoint()
-        eventManager?.postEvent(TowerHeightIncreasedEvent(newHeight: towerHeight))
+        eventManager.postEvent(TowerHeightIncreasedEvent(newHeight: towerHeight))
 
         self.currentlyMovingBlock = nil
     }

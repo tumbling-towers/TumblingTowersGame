@@ -18,7 +18,7 @@ class GameEngine {
     }
     
     init(levelDimensions: CGRect, eventManager: EventManager) {
-        self.gameWorld = GameWorld(levelDimensions: levelDimensions)
+        self.gameWorld = GameWorld(levelDimensions: levelDimensions, eventManager: eventManager)
         self.eventManager = eventManager
         let statsTrackingSystem = StatsTrackingSystem(eventManager: eventManager)
         self.statsTrackingSystem = statsTrackingSystem
