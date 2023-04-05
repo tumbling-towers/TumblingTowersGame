@@ -28,33 +28,38 @@ struct MainMenuView: View {
 
                 Spacer()
 
-                Button("Start") {
+                Button {
                     withAnimation {
                         currGameScreen = .gameModeSelection
                     }
+                } label: {
+                    Text("Start")
+                        .modifier(CustomButton(fontSize: 40))
                 }
-                .modifier(CustomButton(fontSize: 40))
-                .frame(width: 300)
                 
                 Spacer().frame(height: 50)
                 
-                Button("Achievements") {
+                Button {
                     withAnimation {
                         currGameScreen = .achievements
                     }
+                } label: {
+                    Text("Achievements")
+                        .modifier(CustomButton(fontSize: 40))
                 }
                 .modifier(CustomButton(fontSize: 40))
-                .frame(width: 300)
                 
                 Spacer().frame(height: 50)
 
-                Button("Settings") {
+                Button {
                     withAnimation {
                         currGameScreen = .settings
                     }
+                } label: {
+                    Text("Settings")
+                        .modifier(CustomButton(fontSize: 40))
                 }
                 .modifier(CustomButton(fontSize: 40))
-                .frame(width: 300)
 
                 Spacer()
                 Spacer()
