@@ -147,11 +147,13 @@ class GameEngineManager: ObservableObject {
     func stopGame() {
         gameUpdater?.stopLevel()
         gameMode.endTimer()
+        resetGame()
     }
 
     func resetGame() {
         gameEngine.resetGame()
         gameMode.restartGame()
+        powerup = nil
     }
 
     func update() {
@@ -193,6 +195,14 @@ class GameEngineManager: ObservableObject {
         guard let powerup = powerup else { return }
         eventManager?.postEvent(PowerupButtonTappedEvent(type: powerup))
         self.powerup = nil
+    }
+    
+    func pause() {
+        gameUpdater?.pauseGame()
+    }
+    
+    func unpause() {
+        gameUpdater?.unpauseGame()
     }
 
     /// GameEngine outputs coordinates with the origin at the bottom-left.

@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol PowerupManager: PowerupDelegate {
+protocol PowerupManager: AnyObject, PowerupDelegate {
     var eventManager: EventManager? { get set }
     var rng: RandomNumberGeneratorWithSeed { get }
     var nextPowerup: Powerup? { get set }

@@ -18,20 +18,20 @@ class GameEngine {
 
     var eventManager: EventManager? {
         didSet {
-            powerupManager.eventManager = eventManager
+            powerupManager?.eventManager = eventManager
             registerPowerupEvents()
         }
     }
 
     var powerupLine: PowerupLine?
 
-    var powerupManager: PowerupManager
+    var powerupManager: PowerupManager?
     
-    var statsTrackingSystem: StatsTrackingSystem?
+    weak var statsTrackingSystem: StatsTrackingSystem?
     
-    var achievementSystem: AchievementSystem?
+    weak var achievementSystem: AchievementSystem?
 
-    var platform: Platform? {
+    weak var platform: Platform? {
         didSet {
             if let platform = platform {
                 // boundaries set to have a buffer to allow blocks to fall off or creative gameplay
@@ -55,7 +55,7 @@ class GameEngine {
         }
     }
 
-    var leftBoundary: FiziksBody? {
+    weak var leftBoundary: FiziksBody? {
         didSet {
             // remove the old boundary
             if let oldValue = oldValue {
@@ -64,7 +64,7 @@ class GameEngine {
         }
     }
 
-    var rightBoundary: FiziksBody? {
+    weak var rightBoundary: FiziksBody? {
         didSet {
             // remove the old boundary
             if let oldValue = oldValue {
@@ -144,6 +144,10 @@ class GameEngine {
                                               height: levelDimensions.height + 200)
         self.fiziksEngine = GameFiziksEngine(size: levelDimensions)
         self.fiziksEngine.insertBounds(fiziksEngineBoundingRect)
+        
+        powerupManager = nil
+        statsTrackingSystem = nil
+        achievementSystem = nil
 
         // Reset the rng generator?
         // self.rng.resetWithCurrentSeed()
@@ -344,7 +348,7 @@ class GameEngine {
 
         powerupLine.fiziksBody.position = position.add(by: CGVector(dx: 0, dy: GameEngineConstants.defaultPowerupHeightStep))
 
-        powerupManager.createNextPowerup()
+        powerupManager?.createNextPowerup()
     }
 
     private func createPowerupLine(at pos: CGPoint) -> PowerupLine {
@@ -493,4 +497,5 @@ extension GameEngine {
 
         return nil
     }
+    
 }
