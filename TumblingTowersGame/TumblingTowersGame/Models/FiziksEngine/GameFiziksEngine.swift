@@ -112,6 +112,14 @@ extension GameFiziksEngine: FiziksEngine {
 
         return false
     }
+    
+    func deleteAllBodies() {
+        for (id, fiziksBody) in idToFiziksBody {
+            idToFiziksBody[id] = nil
+            skNodeToFiziksBody[fiziksBody.fiziksShapeNode] = nil
+            fiziksScene.remove(fiziksBody)
+        }
+    }
 
     private func getSKPhysicsBody(of fiziksBody: FiziksBody) -> SKPhysicsBody? {
         fiziksBody.fiziksShapeNode.physicsBody

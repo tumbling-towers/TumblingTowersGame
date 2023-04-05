@@ -51,7 +51,6 @@ struct GameModeSelectView: View {
     private func drawGameModeOption(gameMode: Constants.GameModeTypes, name: String, fontSize: CGFloat) -> AnyView {
         AnyView(
             Button {
-//                gameEngineMgr.setGameMode(gameMode: gameMode)
                 gameEngineMgr.startGame(gameMode: gameMode)
                 currGameScreen = .gameplay
             } label: {
