@@ -16,7 +16,7 @@ struct GameWorldConstants {
 
     static let defaultPowerupHeightStep: Double = 50
 
-    static let defaultInitialPowerupHeight: Double = 20
+    static let defaultInitialPowerupHeight: Double = 200
 
     static let defaultPowerupLineDimensions = CGSize(width: 400, height: 5)
     
