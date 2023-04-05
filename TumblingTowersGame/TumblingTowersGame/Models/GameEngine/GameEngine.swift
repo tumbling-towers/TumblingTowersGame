@@ -37,7 +37,7 @@ class GameEngine {
     }
     
     func stopGame() {
-        gameWorld.resetGame()
+        gameWorld.endGame()
         gameMode?.endTimer()
     }
     

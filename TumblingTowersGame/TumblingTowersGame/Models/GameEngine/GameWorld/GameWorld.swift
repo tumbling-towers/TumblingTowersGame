@@ -15,7 +15,7 @@ class GameWorld {
     
     private var currentlyMovingBlock: Block? {
         didSet {
-            if currentlyMovingBlock == nil {
+            if currentlyMovingBlock == nil && !isGameEnded {
                 insertNewBlock()
             }
         }
@@ -42,6 +42,8 @@ class GameWorld {
     private var rng: RandomNumberGeneratorWithSeed
 
     private var shapeRandomizer: ShapeRandomizer
+    
+    private var isGameEnded: Bool = false
 
     
     // MARK: Initializer
@@ -67,6 +69,7 @@ class GameWorld {
     }
 
     func startGame() {
+        self.isGameEnded = false
         setUpLevel()
         insertNewBlock()
     }
@@ -80,9 +83,18 @@ class GameWorld {
         self.fiziksEngine = GameFiziksEngine(size: dimensions)
         setUpFiziksEngine()
     }
+    
+    func endGame() {
+        self.level.reset()
+        self.isGameEnded = true
+        self.currentlyMovingBlock = nil
+        // TODO: Possibly need to remove all fiziksBodies due to cycle?
+        fiziksEngine.deleteAllBodies()
+    }
 
     /// Update method called by GameEngine every frame
     func update() {
+        print(level.gameObjects.count)
         for object in level.gameObjects {
             if level.isOutOfBounds(object) {
                 // TODO: Emit event that a block has gone out of bounds.
