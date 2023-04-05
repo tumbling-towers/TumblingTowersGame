@@ -156,11 +156,9 @@
 		61FC031729CD498400CE2CE5 /* Shape+Fill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FC031629CD498400CE2CE5 /* Shape+Fill.swift */; };
 		61FC3A5029DD1815005A91D7 /* BlockTouchedPowerupLineEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FC3A4F29DD1815005A91D7 /* BlockTouchedPowerupLineEvent.swift */; };
 		61FC3A5229DD1886005A91D7 /* GameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FC3A5129DD1886005A91D7 /* GameEngine.swift */; };
-		61FC3A5329DD1886005A91D7 /* GameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FC3A5129DD1886005A91D7 /* GameEngine.swift */; };
 		61FC3A5529DD19C6005A91D7 /* GameWorldLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FC3A5429DD19C6005A91D7 /* GameWorldLevel.swift */; };
-		61FC3A5629DD19C6005A91D7 /* GameWorldLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FC3A5429DD19C6005A91D7 /* GameWorldLevel.swift */; };
 		61FC3A5929DD2504005A91D7 /* PowerupLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FC3A5829DD2504005A91D7 /* PowerupLine.swift */; };
-		61FC3A5A29DD2504005A91D7 /* PowerupLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FC3A5829DD2504005A91D7 /* PowerupLine.swift */; };
+		61FC3A4E29DC3BD7005A91D7 /* PauseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FC3A4D29DC3BD7005A91D7 /* PauseView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -315,6 +313,7 @@
 		61FC3A5129DD1886005A91D7 /* GameEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngine.swift; sourceTree = "<group>"; };
 		61FC3A5429DD19C6005A91D7 /* GameWorldLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameWorldLevel.swift; sourceTree = "<group>"; };
 		61FC3A5829DD2504005A91D7 /* PowerupLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerupLine.swift; sourceTree = "<group>"; };
+		61FC3A4D29DC3BD7005A91D7 /* PauseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PauseView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -549,6 +548,7 @@
 				14C6732829D36F4D00D8DF78 /* SettingsView.swift */,
 				14168DDD29D82AC200EF5C22 /* GameEndView.swift */,
 				14168DDF29D82C6F00EF5C22 /* GameplayGoBackMenuView.swift */,
+				61FC3A4D29DC3BD7005A91D7 /* PauseView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1068,6 +1068,7 @@
 				14168DE429D8B6EA00EF5C22 /* BlockInsertedEvent.swift in Sources */,
 				124B02F529C9F10300094CF5 /* TumblingTowersNotification.swift in Sources */,
 				619D44C029C6F35300EE00CE /* ObjectShape.swift in Sources */,
+				61FC3A4E29DC3BD7005A91D7 /* PauseView.swift in Sources */,
 				14C53B2629C5E9D10035EC17 /* GameUpdater.swift in Sources */,
 				61FC3A5929DD2504005A91D7 /* PowerupLine.swift in Sources */,
 				2FFED5A429D9ED4500BA072F /* StatsTrackingSystem.swift in Sources */,

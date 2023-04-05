@@ -33,6 +33,7 @@ struct GameModeSelectView: View {
 
                 Button {
                     currGameScreen = .mainMenu
+                    gameEngineMgr.stopGame()
                 } label: {
                     Text("BACK")
                         .modifier(MenuButtonText(fontSize: 20))

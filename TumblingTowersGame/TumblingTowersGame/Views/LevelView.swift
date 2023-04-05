@@ -9,9 +9,18 @@ import SwiftUI
 
 struct LevelView: View {
     @EnvironmentObject var gameEngineMgr: GameEngineManager
+    @State var isPaused: Bool = false
+    @Binding var currGameScreen: Constants.CurrGameScreens
 
     var body: some View {
         ZStack {
+//            Button {
+//                isPaused = true
+//            } label: {
+//                Text("Pause")
+//            }
+//
+//
             BackgroundView()
 
             ForEach($gameEngineMgr.levelBlocks) { block in
@@ -66,14 +75,36 @@ struct LevelView: View {
                     .path(in: box)
                     .fill(.blue.opacity(0.1), strokeBorder: .blue)
             }
-
+            
+            Button {
+                isPaused = true
+                gameEngineMgr.pause()
+            } label: {
+                Image(ViewImageManager.pauseButton)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(height: 50)
+            }
+            .frame(width: 50, height: 50)
+            .position(x: gameEngineMgr.levelDimensions.width - 50, y: 50)
+            .sheet(isPresented: $isPaused) {
+                PauseView(unpause: {
+                    isPaused = false
+                    gameEngineMgr.unpause()
+                },
+                          exit: {
+                    gameEngineMgr.stopGame()
+                    currGameScreen = .mainMenu
+                    
+                })
+            }
         }
     }
 }
 
 struct LevelView_Previews: PreviewProvider {
     static var previews: some View {
-        LevelView()
+        LevelView(currGameScreen: .constant(.gameplay))
             .environmentObject(GameEngineManager(levelDimensions: .infinite, eventManager: TumblingTowersEventManager()))
     }
 }

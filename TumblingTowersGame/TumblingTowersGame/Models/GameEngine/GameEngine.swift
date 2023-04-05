@@ -37,6 +37,7 @@ class GameEngine {
     }
     
     func stopGame() {
+        gameWorld.resetGame()
         gameMode?.endTimer()
     }
     
@@ -68,4 +69,5 @@ class GameEngine {
     func rotateCMBCounterClockwise() {
         gameWorld.rotateCMB(by: CGFloat.pi / 2)
     }
+    
 }

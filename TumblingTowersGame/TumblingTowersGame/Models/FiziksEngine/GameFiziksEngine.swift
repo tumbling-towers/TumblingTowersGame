@@ -119,6 +119,8 @@ extension GameFiziksEngine: FiziksEngine {
             skNodeToFiziksBody[fiziksBody.fiziksShapeNode] = nil
             fiziksScene.remove(fiziksBody)
         }
+        
+        fiziksScene.removeAllChildren()
     }
 
     private func getSKPhysicsBody(of fiziksBody: FiziksBody) -> SKPhysicsBody? {

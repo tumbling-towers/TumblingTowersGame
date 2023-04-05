@@ -10,14 +10,16 @@ import SwiftUI
 
 struct GameplayLevelView: View {
     @EnvironmentObject var gameEngineMgr: GameEngineManager
+    
+    @Binding var currGameScreen: Constants.CurrGameScreens
 
     var body: some View {
-//        LevelView()z
+//        LevelView()
         // sprite view required for sprite kit to run, hidden
         SpriteView(scene: getUselessSKSceneToPresent())
 
         // present actual level rendered by swift ui above sprite view
-        LevelView()
+        LevelView(currGameScreen: $currGameScreen)
     }
 
     private func getUselessSKSceneToPresent() -> SKScene {
@@ -33,7 +35,7 @@ struct GameplayLevelView: View {
 
 struct GameplayLevelView_Previews: PreviewProvider {
     static var previews: some View {
-        GameplayLevelView()
+        GameplayLevelView(currGameScreen: .constant(.gameplay))
             .environmentObject(GameEngineManager(levelDimensions: .infinite, eventManager: TumblingTowersEventManager()))
     }
 }

@@ -148,6 +148,14 @@ class GameEngineManager: ObservableObject {
         eventManager?.postEvent(PowerupButtonTappedEvent(type: powerup))
         self.powerup = nil
     }
+    
+    func pause() {
+        gameUpdater?.pauseGame()
+    }
+    
+    func unpause() {
+        gameUpdater?.unpauseGame()
+    }
 
     /// GameEngine outputs coordinates with the origin at the bottom-left.
     /// This method converts it such that the origin is at the top-left.
