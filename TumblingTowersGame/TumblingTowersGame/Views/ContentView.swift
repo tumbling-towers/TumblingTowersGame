@@ -40,13 +40,6 @@ struct ContentView: View {
                                 gameEngineMgr.resetInput()
                             }
                         )
-
-                    // MARK: Comment this out later. This is for testing only
-                    // We need to keep this view to receive tap input
-                    VStack {
-                        Text("Move: " + gameEngineMgr.getInput().inputType.rawValue)
-                        Text("Selected GameMode: " + gameEngineMgr.gameMode.name)
-                    }
                 }
                 .ignoresSafeArea(.all)
             } else if currGameScreen == .settings {
@@ -60,8 +53,8 @@ struct ContentView: View {
                         .environmentObject(gameEngineMgr)
                 }
             }
-
-            if gameEngineMgr.gameState != .RUNNING && gameEngineMgr.gameState != .PAUSED {
+            
+            if gameEngineMgr.gameState != nil && gameEngineMgr.gameState != .RUNNING && gameEngineMgr.gameState != .PAUSED {
                 GameEndView(currGameScreen: $currGameScreen)
                     .environmentObject(gameEngineMgr)
             }

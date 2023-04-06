@@ -14,13 +14,6 @@ struct LevelView: View {
 
     var body: some View {
         ZStack {
-//            Button {
-//                isPaused = true
-//            } label: {
-//                Text("Pause")
-//            }
-//
-//
             BackgroundView()
 
             ForEach($gameEngineMgr.levelBlocks) { block in
