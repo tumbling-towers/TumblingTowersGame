@@ -40,7 +40,7 @@ final class GameEngineTests: XCTestCase {
         let blockOriginalPosition = block.position
         let expectedBlockFinalPosition = CGPoint(x: blockOriginalPosition.x + 10, y: blockOriginalPosition.y)
 
-        testGameEngine?.moveSideways(by: movementVector)
+        testGameEngine?.moveCMBSideways(by: movementVector)
 
         XCTAssertEqual(block.position, expectedBlockFinalPosition)
     }
@@ -52,7 +52,7 @@ final class GameEngineTests: XCTestCase {
         let blockOriginalPosition = block.position
         let expectedBlockFinalPosition = CGPoint(x: blockOriginalPosition.x - 10, y: blockOriginalPosition.y)
 
-        testGameEngine?.moveSideways(by: movementVector)
+        testGameEngine?.moveCMBSideways(by: movementVector)
 
         XCTAssertEqual(block.position, expectedBlockFinalPosition)
     }
@@ -64,7 +64,7 @@ final class GameEngineTests: XCTestCase {
         let blockOriginalPosition = block.position
         let expectedBlockFinalPosition = CGPoint(x: blockOriginalPosition.x, y: blockOriginalPosition.y - 10)
 
-        testGameEngine?.moveDown(by: movementVector)
+        testGameEngine?.moveCMBDown(by: movementVector)
 
         XCTAssertEqual(block.position, expectedBlockFinalPosition)
     }
@@ -76,7 +76,7 @@ final class GameEngineTests: XCTestCase {
         let blockOriginalPosition = block.position
         let expectedBlockFinalPosition = blockOriginalPosition
 
-        testGameEngine?.moveDown(by: movementVector)
+        testGameEngine?.moveCMBDown(by: movementVector)
 
         XCTAssertEqual(block.position, expectedBlockFinalPosition)
     }
@@ -86,9 +86,9 @@ final class GameEngineTests: XCTestCase {
         let blockOriginalZRotation = block.zRotation
         let expectedBlockFinalZRotation = blockOriginalZRotation - (Double.pi / 2)
 
-        testGameEngine?.rotateClockwise()
+        testGameEngine?.rotateCMBClockwise()
 
-        XCTAssertEqual(block.zRotation, expectedBlockFinalZRotation)
+        XCTAssertEqual(block.zRotation, expectedBlockFinalZRotation, accuracy: 1e-4)
     }
 
     func testRotateCounterClockwise() throws {
@@ -96,8 +96,8 @@ final class GameEngineTests: XCTestCase {
         let blockOriginalZRotation = block.zRotation
         let expectedBlockFinalZRotation = blockOriginalZRotation + (Double.pi / 2)
 
-        testGameEngine?.rotateCounterClockwise()
+        testGameEngine?.rotateCMBCounterClockwise()
 
-        XCTAssertEqual(block.zRotation, expectedBlockFinalZRotation)
+        XCTAssertEqual(block.zRotation, expectedBlockFinalZRotation, accuracy: 1e-4)
     }
 }
