@@ -30,13 +30,13 @@ struct GameObjectBlock: GameObject {
 
     var rotation: Double
 
-    var isGlue: Bool
+    var specialProperties: SpecialProperties
 
-    init(position: CGPoint, path: CGPath, rotation: Double = 0, isGlue: Bool = false) {
+    init(position: CGPoint, path: CGPath, rotation: Double = 0, specialProperties: SpecialProperties) {
         self.position = position
         self.rawPath = path
         self.rotation = rotation
-        self.isGlue = isGlue
+        self.specialProperties = specialProperties
     }
 }
 
@@ -47,5 +47,5 @@ extension GameObjectBlock: Equatable {
 }
 
 extension GameObjectBlock {
-    static let sampleBlock = GameObjectBlock(position: CGPoint(x: 500, y: 500), path: TetrisShape(type: .I).path)
+    static let sampleBlock = GameObjectBlock(position: CGPoint(x: 500, y: 500), path: TetrisShape(type: .I).path, specialProperties: SpecialProperties())
 }

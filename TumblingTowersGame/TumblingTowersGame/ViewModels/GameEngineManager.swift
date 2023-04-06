@@ -169,7 +169,7 @@ class GameEngineManager: ObservableObject {
         let path = transformPath(path: block.path, width: block.width, height: block.height)
         let newPosition = adjustCoordinates(for: block.position)
         // TODO: Don't return a new block
-        let transformedBlock = GameObjectBlock(position: newPosition, path: path, isGlue: block.isGlue)
+        let transformedBlock = GameObjectBlock(position: newPosition, path: path, specialProperties: block.specialProperties)
         return transformedBlock
     }
     
@@ -180,7 +180,7 @@ class GameEngineManager: ObservableObject {
         for object in gameEngine.level.gameObjects {
             if type(of: object) == Block.self {
                 guard let block = object as? Block, let tetrisShape = block.shape as? TetrisShape else { continue }
-                blocks.append(GameObjectBlock(position: block.position, path: tetrisShape.path, rotation: block.rotation, isGlue: block.isGlueBlock))
+                blocks.append(GameObjectBlock(position: block.position, path: tetrisShape.path, rotation: block.rotation, specialProperties: block.specialProperties))
             } else if type(of: object) == Platform.self {
                 guard object is Platform else { continue }
                 platforms.append(GameObjectPlatform(position: object.position, width: object.width, height: object.height))

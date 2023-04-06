@@ -18,7 +18,7 @@ class Block: GameWorldObject {
         fiziksBody.zRotation
     }
 
-    var isGlueBlock = false
+    var specialProperties: SpecialProperties
 
     static var fallingCollisionBitMask: BitMask = CollisionMask.fallingBlock
 
@@ -33,6 +33,7 @@ class Block: GameWorldObject {
     init(fiziksBody: FiziksBody, shape: ObjectShape) {
         self.fiziksBody = fiziksBody
         self.shape = shape
+        self.specialProperties = SpecialProperties()
     }
 }
 

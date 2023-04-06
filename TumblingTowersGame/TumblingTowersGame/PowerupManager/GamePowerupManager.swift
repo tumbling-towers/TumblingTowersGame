@@ -9,26 +9,24 @@ import Foundation
 import CoreGraphics
 
 class GamePowerupManager: PowerupManager {
-    var gameEngine: GameEngine
+    var gameWorld: GameWorld
     
     static let defaultNumPowerups = 10
 
     static let powerupTypes: [Powerup.Type] = [PlatformPowerup.self, GluePowerup.self]
 
-    var eventManager: EventManager? {
-        didSet {
-            registerEvents()
-        }
-    }
+    var eventManager: EventManager
 
     var rng: RandomNumberGeneratorWithSeed
 
     var nextPowerup: Powerup?
 
-    init(eventManager: EventManager? = nil, gameEngine: GameEngine, seed: Int) {
+    init(eventManager: EventManager, gameWorld: GameWorld, seed: Int) {
         self.eventManager = eventManager
-        self.gameEngine = gameEngine
+        self.gameWorld = gameWorld
         self.rng = RandomNumberGeneratorWithSeed(seed: seed)
+        
+        registerEvents()
     }
 
     func activateNextPowerup() {
@@ -44,41 +42,42 @@ class GamePowerupManager: PowerupManager {
 
         nextPowerup = type.create()
         nextPowerup?.delegate = self
-        eventManager?.postEvent(PowerupAvailableEvent(type: type))
+        eventManager.postEvent(PowerupAvailableEvent(type: type))
     }
 
     func didActivateGluePowerup() {
-        eventManager?.postEvent(GluePowerupActivatedEvent())
+        gameWorld.currentlyMovingBlock?.specialProperties.isGlue = true
+        eventManager.postEvent(GluePowerupActivatedEvent())
     }
 
     func didActivatePlatformPowerup() {
         guard let newPlatform = createPowerupPlatform() else { return }
-        gameEngine.addObject(object: newPlatform)
-        eventManager?.postEvent(PlatformPowerupActivatedEvent())
+        gameWorld.addObject(object: newPlatform)
+        eventManager.postEvent(PlatformPowerupActivatedEvent())
     }
     
     func createPowerupPlatform() -> Platform? {
-        guard let platform = gameEngine.platform else { return nil }
+        guard let platform = gameWorld.level.platform else { return nil }
         var count = 0
-        while count < GameEngineConstants.defaultTriesToFindPlatformPosition {
+        while count < GameWorldConstants.defaultTriesToFindPlatformPosition {
             let rngX = Int(rng.next()) % Int(platform.width)
             let newX = CGFloat(rngX) + platform.position.x - platform.width / 2
-            var newY = gameEngine.findHighestPoint() + GameEngineConstants.bufferFromHighestPoint
-            if let powerupLine = gameEngine.powerupLine {
-                newY = min(newY, powerupLine.position.y - GameEngineConstants.defaultPowerupPlatformHeight)
+            var newY = gameWorld.findHighestPoint() + GameWorldConstants.bufferFromHighestPoint
+            if let powerupLine = gameWorld.level.powerupLine {
+                newY = min(newY, powerupLine.position.y - GameWorldConstants.defaultPowerupPlatformHeight)
             }
             let newPosition = CGPoint(x: newX, y: newY)
             let rect = CGRect(x: newPosition.x,
                               y: newPosition.y,
-                              width: GameEngineConstants.defaultPowerupPlatformWidth,
-                              height: GameEngineConstants.defaultPowerupPlatformHeight)
+                              width: GameWorldConstants.defaultPowerupPlatformWidth,
+                              height: GameWorldConstants.defaultPowerupPlatformHeight)
             let path = CGPath.create(from: rect)
 
-            let newPlatform = gameEngine.createPlatform(path: path, at: newPosition)
+            let newPlatform = gameWorld.createPlatform(path: path, at: newPosition)
 
-            let otherBodies = gameEngine.gameObjects.map({ $0.fiziksBody })
+            let otherBodies = gameWorld.level.gameObjects.map({ $0.fiziksBody })
 
-            if !gameEngine.fiziksEngine.isIntersecting(body: newPlatform.fiziksBody, otherBodies: otherBodies) {
+            if !gameWorld.fiziksEngine.isIntersecting(body: newPlatform.fiziksBody, otherBodies: otherBodies) {
                 return newPlatform
             }
 
@@ -90,7 +89,7 @@ class GamePowerupManager: PowerupManager {
 
     private func registerEvents() {
         // remove the powerup when it is used
-        eventManager?.registerClosure(for: PowerupButtonTappedEvent.self, closure: { _ in
+        eventManager.registerClosure(for: PowerupButtonTappedEvent.self, closure: { _ in
             self.activateNextPowerup()
         })
     }
