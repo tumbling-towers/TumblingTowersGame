@@ -8,7 +8,7 @@
 import CoreGraphics
 import Foundation
 
-class Platform: GameEngineObject {
+class Platform: GameWorldObject {
 
     let fiziksBody: FiziksBody
 
