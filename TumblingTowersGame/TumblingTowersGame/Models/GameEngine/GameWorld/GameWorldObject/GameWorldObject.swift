@@ -14,6 +14,8 @@ protocol GameWorldObject: AnyObject {
     var shape: ObjectShape { get }
 
     var rotation: Double { get }
+    
+    var specialProperties: SpecialProperties { get set }
 
     static var categoryBitMask: BitMask { get }
 

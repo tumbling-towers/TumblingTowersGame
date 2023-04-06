@@ -15,6 +15,7 @@ class GameEngineManager: ObservableObject {
     @Published var powerupLineDimensions = CGSize()
     @Published var levelBlocks: [GameObjectBlock] = []
     @Published var levelPlatforms: [GameObjectPlatform] = []
+    @Published var powerups: [Powerup.Type?] = [Powerup.Type?](repeating: nil, count: 5)
 
     var eventManager: EventManager?
 
@@ -24,8 +25,6 @@ class GameEngineManager: ObservableObject {
             gameEngine.level.platform?.position
         }
     }
-
-    var powerup: Powerup.Type?
 
     var levelDimensions: CGRect
 
@@ -143,10 +142,9 @@ class GameEngineManager: ObservableObject {
         gameEngine.rotateCMBClockwise()
     }
 
-    func usePowerup() {
-        guard let powerup = powerup else { return }
-        eventManager?.postEvent(PowerupButtonTappedEvent(type: powerup))
-        self.powerup = nil
+    func usePowerup(at idx: Int) {
+        eventManager?.postEvent(PowerupButtonTappedEvent(idx: idx))
+        self.powerups[idx] = nil
     }
     
     func pause() {
@@ -169,7 +167,7 @@ class GameEngineManager: ObservableObject {
         let path = transformPath(path: block.path, width: block.width, height: block.height)
         let newPosition = adjustCoordinates(for: block.position)
         // TODO: Don't return a new block
-        let transformedBlock = GameObjectBlock(position: newPosition, path: path, isGlue: block.isGlue)
+        let transformedBlock = GameObjectBlock(position: newPosition, path: path, specialProperties: block.specialProperties)
         return transformedBlock
     }
     
@@ -180,7 +178,7 @@ class GameEngineManager: ObservableObject {
         for object in gameEngine.level.gameObjects {
             if type(of: object) == Block.self {
                 guard let block = object as? Block, let tetrisShape = block.shape as? TetrisShape else { continue }
-                blocks.append(GameObjectBlock(position: block.position, path: tetrisShape.path, rotation: block.rotation, isGlue: block.isGlueBlock))
+                blocks.append(GameObjectBlock(position: block.position, path: tetrisShape.path, rotation: block.rotation, specialProperties: block.specialProperties))
             } else if type(of: object) == Platform.self {
                 guard object is Platform else { continue }
                 platforms.append(GameObjectPlatform(position: object.position, width: object.width, height: object.height))
@@ -202,7 +200,7 @@ class GameEngineManager: ObservableObject {
         eventManager?.registerClosure(for: PowerupAvailableEvent.self, closure: { event in
             switch event {
             case let powerupAvailableEvent as PowerupAvailableEvent:
-                self.powerup = powerupAvailableEvent.type
+                self.powerups[powerupAvailableEvent.idx] = powerupAvailableEvent.type
             default:
                 return
             }

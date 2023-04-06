@@ -46,7 +46,7 @@ class SettingsManager: ObservableObject {
         }
 
         guard settings.count > 0 else {
-            print("returning")
+//            print("returning")
             return
         }
         backgroundMusicVolume = settings[0]
@@ -57,7 +57,7 @@ class SettingsManager: ObservableObject {
         SoundSystem.shared.changeSoundVolume(otherSoundVolume)
         SoundSystem.shared.changeOverallVolume(overallVolume)
 
-        print("done set")
+//        print("done set")
     }
 
     func setStorageManager(storageManager: StorageManager) {
