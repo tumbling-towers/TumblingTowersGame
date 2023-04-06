@@ -16,24 +16,16 @@ class GameEngineManager: ObservableObject {
     @Published var levelBlocks: [GameObjectBlock] = []
     @Published var levelPlatforms: [GameObjectPlatform] = []
 
-    private weak var mainGameMgr: MainGameManager?
     var eventManager: EventManager?
 
     // MARK: Game logic related attributes
     var platformPosition: CGPoint? {
         get {
-            gameEngine.platform?.position
-        }
-        set {
-            if let newPosition = newValue {
-                gameEngine.setInitialPlatform(position: newPosition)
-            }
+            gameEngine.level.platform?.position
         }
     }
 
     var powerup: Powerup.Type?
-
-    var level = Level.sampleLevel
 
     var levelDimensions: CGRect
 
@@ -44,39 +36,33 @@ class GameEngineManager: ObservableObject {
 
     private var gameUpdater: GameUpdater?
 
-    var gameMode: GameMode = SurvivalGameMode(eventMgr: TumblingTowersEventManager())
+    var gameMode: GameMode? {
+        gameEngine.gameMode
+    }
 
     var referenceBox: CGRect? {
-        guard let refPoints = gameEngine.getReferencePoints() else { return nil }
+        guard let refPoints = gameEngine.gameWorld.getReferencePoints() else { return nil }
 
         let width = refPoints.right.x - refPoints.left.x
         return CGRect(x: refPoints.left.x - 1, y: 0, width: width + 2, height: 3_000)
     }
 
-    var timeRemaining: Int {
-        gameMode.getTimeRemaining()
+    var timeRemaining: Int? {
+        gameMode?.getTimeRemaining()
     }
 
-    var score: Int {
-        gameMode.getScore()
+    var score: Int? {
+        gameMode?.getScore()
     }
 
-    var gameState: Constants.GameState {
-        gameMode.getGameState()
+    var gameState: Constants.GameState? {
+        gameMode?.getGameState()
     }
 
     init(levelDimensions: CGRect, eventManager: EventManager) {
         self.levelDimensions = levelDimensions
-
-        self.gameEngine = GameEngine(levelDimensions: levelDimensions)
         self.eventManager = eventManager
-
-        gameEngine.eventManager = eventManager
-        
-        // TODO: need a cleaner way to set up systems when GodManager implemented
-        let statsTrackingSystem = StatsTrackingSystem(eventManager: eventManager)
-        gameEngine.statsTrackingSystem = statsTrackingSystem
-        gameEngine.achievementSystem = AchievementSystem(eventManager: eventManager, dataSource: statsTrackingSystem)
+        self.gameEngine = GameEngine(levelDimensions: levelDimensions, eventManager: eventManager)
 
         inputSystem = GyroInput()
 
@@ -103,57 +89,31 @@ class GameEngineManager: ObservableObject {
     }
 
     func getPhysicsEngine() -> FiziksEngine {
-        gameEngine.fiziksEngine
-    }
-
-    func setUpLevelAndStartEngine(mainGameMgr: MainGameManager) {
-
-        self.mainGameMgr = mainGameMgr
+        gameEngine.gameWorld.fiziksEngine
     }
 
     func startGame(gameMode: Constants.GameModeTypes) {
-        gameEngine = GameEngine(levelDimensions: gameEngine.levelDimensions)
-        gameEngine.eventManager = eventManager
-        
-        // TODO: need a cleaner way to set up systems when GodManager implemented
-        if let unwrappedEventManager = eventManager {
-            let statsTrackingSystem = StatsTrackingSystem(eventManager: unwrappedEventManager)
-            gameEngine.statsTrackingSystem = statsTrackingSystem
-            gameEngine.achievementSystem = AchievementSystem(eventManager: unwrappedEventManager, dataSource: statsTrackingSystem)
-        }
-
         // set up game loop
         gameUpdater = GameUpdater(runThisEveryFrame: update)
         gameUpdater?.createCADisplayLink()
 
         // set up game mode
         let gameModeClass = Constants.getGameModeType(from: gameMode)
-
         if let eventManager = eventManager, let gameModeClass = gameModeClass {
-            self.gameMode = gameModeClass.init(eventMgr: eventManager)
+            self.gameEngine.gameMode = gameModeClass.init(eventMgr: eventManager)
         }
-
-        self.gameMode.startTimer()
 
         // set up game in game engine
         gameEngine.startGame()
-
-        // set up initial platform
-        if let mainGameMgr = mainGameMgr {
-            platformPosition = CGPoint(x: mainGameMgr.deviceWidth / 2, y: 100)
-        }
     }
 
     func stopGame() {
         gameUpdater?.stopLevel()
-        gameMode.endTimer()
-        resetGame()
+        gameEngine.stopGame()
     }
 
     func resetGame() {
         gameEngine.resetGame()
-        gameMode.restartGame()
-        powerup = nil
     }
 
     func update() {
@@ -168,22 +128,14 @@ class GameEngineManager: ObservableObject {
         gameEngine.moveCMBSideways(by: currInput.vector)
         gameEngine.moveCMBDown(by: currInput.vector)
 
-        if gameMode.hasGameEnded() {
+        if let gameMode = gameMode, gameMode.hasGameEnded() {
             stopGame()
         }
-
-//        let gameState = gameMode.getGameState()
-//
-//        if gameState == .WIN {
-//            // Win Screen
-//        } else if gameState == .LOSE {
-//            // Lose Screen
-//        }
     }
 
     func renderCurrentFrame() {
-        let renderThese = gameEngine.getLevelToRender()
-        renderLevel(level: renderThese.0, gameObjectBlocks: renderThese.1, gameObjectPlatforms: renderThese.2)
+        let levelToRender = convertLevel(gameWorldLevel: gameEngine.gameWorld.level)
+        renderLevel(gameObjectBlocks: levelToRender.blocks, gameObjectPlatforms: levelToRender.platforms)
         rerender()
     }
 
@@ -220,6 +172,23 @@ class GameEngineManager: ObservableObject {
         let transformedBlock = GameObjectBlock(position: newPosition, path: path, isGlue: block.isGlue)
         return transformedBlock
     }
+    
+    private func convertLevel(gameWorldLevel: GameWorldLevel) -> Level {
+        var blocks: [GameObjectBlock] = []
+        var platforms: [GameObjectPlatform] = []
+        
+        for object in gameEngine.level.gameObjects {
+            if type(of: object) == Block.self {
+                guard let block = object as? Block, let tetrisShape = block.shape as? TetrisShape else { continue }
+                blocks.append(GameObjectBlock(position: block.position, path: tetrisShape.path, rotation: block.rotation, isGlue: block.isGlueBlock))
+            } else if type(of: object) == Platform.self {
+                guard object is Platform else { continue }
+                platforms.append(GameObjectPlatform(position: object.position, width: object.width, height: object.height))
+            }
+        }
+        
+        return Level(blocks: blocks, platforms: platforms)
+    }
 
     private func transformPath(path: CGPath, width: Double, height: Double) -> CGPath {
         let path = UIBezierPath(cgPath: path)
@@ -246,9 +215,7 @@ extension GameEngineManager: GameRendererDelegate {
         objectWillChange.send()
     }
 
-    func renderLevel(level: Level, gameObjectBlocks: [GameObjectBlock], gameObjectPlatforms: [GameObjectPlatform]) {
-        self.level = level
-
+    func renderLevel(gameObjectBlocks: [GameObjectBlock], gameObjectPlatforms: [GameObjectPlatform]) {
         var invertedGameObjBlocks: [GameObjectBlock] = []
         var invertedGameObjPlatforms: [GameObjectPlatform] = []
 
@@ -263,11 +230,11 @@ extension GameEngineManager: GameRendererDelegate {
             invertedGameObjPlatforms.append(platform)
         }
 
-        if let powerupLine = gameEngine.powerupLine {
+        if let powerupLine = gameEngine.level.powerupLine {
             powerUpLinePosition = adjustCoordinates(for: powerupLine.position)
                                   .add(by: CGVector(dx: -powerupLineDimensions.width / 2,
                                                     dy: 0))
-            powerupLineDimensions = CGSize(width: powerupLine.shape.width, height: powerupLine.shape.height)
+            powerupLineDimensions = CGSize(width: powerupLine.dimensions.width, height: powerupLine.dimensions.height)
         }
 
         self.levelBlocks = invertedGameObjBlocks

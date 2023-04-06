@@ -11,11 +11,13 @@ import XCTest
 final class LevelTests: XCTestCase {
 
     func test_init() {
-        let level = Level(blocks: [GameObjectBlock.sampleBlock], platform: GameObjectPlatform.samplePlatform)
+        let level = Level(blocks: [GameObjectBlock.sampleBlock],
+                          platforms: [GameObjectPlatform.samplePlatform])
     }
 
     func test_moveBlock() {
-        var level = Level(blocks: [GameObjectBlock.sampleBlock], platform: GameObjectPlatform.samplePlatform)
+        var level = Level(blocks: [GameObjectBlock.sampleBlock],
+                          platforms: [GameObjectPlatform.samplePlatform])
         XCTAssertEqual(level.blocks.count, 1)
 
         level.move(block: GameObjectBlock.sampleBlock, to: CGPoint(x: 500, y: 500))

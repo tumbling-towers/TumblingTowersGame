@@ -21,8 +21,11 @@ struct GameEndView: View {
 
                     drawGameWinText()
 
-                    Text("Timer: " + String(gameEngineMgr.timeRemaining) + "!")
-                        .font(.system(size: 30))
+                    if let timeLeft = gameEngineMgr.timeRemaining {
+                        Text("Timer: " + String(timeLeft) + "!")
+                            .font(.system(size: 30))
+                    }
+                    
                 }
             }
 
@@ -62,9 +65,12 @@ struct GameEndView: View {
                     Text("You stacked enough blocks!")
                         .font(.system(size: 50))
                         .fontWeight(.heavy)
-                    Text("Score: \(gameEngineMgr.score)")
-                        .font(.system(size: 50))
-                        .fontWeight(.heavy)
+                    if let score = gameEngineMgr.score {
+                        Text("Score: \(score)")
+                            .font(.system(size: 50))
+                            .fontWeight(.heavy)
+                    }
+                    
                 }
 
                 if gameEngineMgr.gameState == .WIN_RACE {
