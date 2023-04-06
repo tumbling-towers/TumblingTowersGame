@@ -40,14 +40,11 @@ class GamePowerupManager: PowerupManager {
         let idx = Int(next) % GamePowerupManager.powerupTypes.count
         let type = GamePowerupManager.powerupTypes[idx]
         
-        for powerupIndex in 0..<availablePowerups.count {
-            if availablePowerups[powerupIndex] == nil {
-                var nextPowerup = type.create()
-                nextPowerup.delegate = self
-                availablePowerups[powerupIndex] = nextPowerup
-                eventManager.postEvent(PowerupAvailableEvent(type: type, idx: powerupIndex))
-                break
-            }
+        if let index = availablePowerups.firstIndex(where: { $0 == nil }) {
+            var nextPowerup = type.create()
+            nextPowerup.delegate = self
+            availablePowerups[index] = nextPowerup
+            eventManager.postEvent(PowerupAvailableEvent(type: type, idx: index))
         }
     }
 

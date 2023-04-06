@@ -60,8 +60,8 @@ class GameWorld {
 
     /// Obtains the leftmost and rightmost points of the CMB.
     func getReferencePoints() -> (left: CGPoint, right: CGPoint)? {
-        guard let block = currentlyMovingBlock, let shape = currentlyMovingBlock?.shape as? TetrisShape else { return nil }
-        let width = shape.width
+        guard let block = currentlyMovingBlock else { return nil }
+        let width = block.width
         let xPosLeft: Double = block.position.x - width / 2
         let xPosRight: Double = block.position.x + width / 2
         let yPos: Double = 0
