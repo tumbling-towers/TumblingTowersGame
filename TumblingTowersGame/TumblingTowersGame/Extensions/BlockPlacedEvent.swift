@@ -8,4 +8,9 @@
 import Foundation
 
 class BlockPlacedEvent: TumblingTowersEvent {
+    let totalBlocksInLevel: Int
+
+    init(totalBlocksInLevel: Int) {
+        self.totalBlocksInLevel = totalBlocksInLevel
+    }
 }

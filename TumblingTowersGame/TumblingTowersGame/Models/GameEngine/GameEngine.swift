@@ -18,16 +18,20 @@ class GameEngine {
 
     var eventManager: EventManager? {
         didSet {
-            powerupManager.eventManager = eventManager
+            powerupManager?.eventManager = eventManager
             registerPowerupEvents()
         }
     }
 
     var powerupLine: PowerupLine?
 
-    var powerupManager: PowerupManager
+    var powerupManager: PowerupManager?
+    
+    weak var statsTrackingSystem: StatsTrackingSystem?
+    
+    weak var achievementSystem: AchievementSystem?
 
-    var platform: Platform? {
+    weak var platform: Platform? {
         didSet {
             if let platform = platform {
                 // boundaries set to have a buffer to allow blocks to fall off or creative gameplay
@@ -51,7 +55,7 @@ class GameEngine {
         }
     }
 
-    var leftBoundary: FiziksBody? {
+    weak var leftBoundary: FiziksBody? {
         didSet {
             // remove the old boundary
             if let oldValue = oldValue {
@@ -60,18 +64,21 @@ class GameEngine {
         }
     }
 
-    var rightBoundary: FiziksBody? {
+    weak var rightBoundary: FiziksBody? {
         didSet {
             // remove the old boundary
             if let oldValue = oldValue {
                 fiziksEngine.delete(oldValue)
             }
         }
+    }
+    
+    var towerHeight: CGFloat {
+        let gameObjectHeights = gameObjects.map({ $0.position.y })
+        return gameObjectHeights.max() ?? 0
     }
 
     private var rng: RandomNumberGeneratorWithSeed
-
-    private weak var gameRenderer: GameRendererDelegate?
 
     private var shapeRandomizer: ShapeRandomizer
 
@@ -110,11 +117,6 @@ class GameEngine {
         fiziksEngine.fiziksContactDelegate = self
     }
 
-    func setRenderer(gameRenderer: GameRendererDelegate) {
-        self.gameRenderer = gameRenderer
-    }
-
-    // TODO: Maybe should move this to GameEngineManager - shouldn't use GameObjectBlock here!
     func getReferencePoints() -> (left: CGPoint, right: CGPoint)? {
         guard let block = currentlyMovingBlock, let shape = currentlyMovingBlock?.shape as? TetrisShape else { return nil }
         let movingGameObjectBlock = GameObjectBlock(position: block.position, path: shape.path, rotation: block.rotation)
@@ -142,6 +144,10 @@ class GameEngine {
                                               height: levelDimensions.height + 200)
         self.fiziksEngine = GameFiziksEngine(size: levelDimensions)
         self.fiziksEngine.insertBounds(fiziksEngineBoundingRect)
+        
+        powerupManager = nil
+        statsTrackingSystem = nil
+        achievementSystem = nil
 
         // Reset the rng generator?
         // self.rng.resetWithCurrentSeed()
@@ -152,16 +158,31 @@ class GameEngine {
     // This update method is called by the GameUpdater every frame.
     func update() {
         // MARK: Platform is always sampleplatform for now
-        var newLevel = Level(blocks: [], platforms: [])
+
         for object in gameObjects {
             if isOutOfBounds(object) {
                 // TODO: Emit event that a block has gone out of bounds.
                 removeObject(object: object)
 
+                eventManager?.postEvent(BlockDroppedEvent())
+
                 if object === currentlyMovingBlock {
                     currentlyMovingBlock = nil
                 }
             }
+
+            if object.fiziksBody.categoryBitMask == CategoryMask.block {
+                // TODO: more elegant way besides downcasting?
+                guard let block = object as? Block else { continue }
+                checkAndHandleContactPowerupLine(currentBlock: block)
+            }
+        }
+    }
+
+    func getLevelToRender() -> (Level, [GameObjectBlock], [GameObjectPlatform]) {
+        // MARK: Platform is always sampleplatform for now
+        var newLevel = Level(blocks: [], platforms: [])
+        for object in gameObjects {
 
             if object.fiziksBody.categoryBitMask == CategoryMask.block {
                 let blockPosition = object.position
@@ -185,12 +206,7 @@ class GameEngine {
             }
         }
 
-        gameRenderer?.renderLevel(level: newLevel, gameObjectBlocks: newLevel.blocks, gameObjectPlatforms: newLevel.platforms)
-
-        // Get curr input and move block
-        if let currInput = gameRenderer?.getCurrInput() {
-            moveCMB(by: currInput.vector)
-        }
+        return (newLevel, newLevel.blocks, newLevel.platforms)
     }
 
     @discardableResult
@@ -202,6 +218,8 @@ class GameEngine {
         insertedBlock.fiziksBody.allowsRotation = false
 
         currentlyMovingBlock = insertedBlock
+
+        eventManager?.postEvent(BlockInsertedEvent())
         return insertedBlock
     }
 
@@ -330,7 +348,7 @@ class GameEngine {
 
         powerupLine.fiziksBody.position = position.add(by: CGVector(dx: 0, dy: GameEngineConstants.defaultPowerupHeightStep))
 
-        powerupManager.createNextPowerup()
+        powerupManager?.createNextPowerup()
     }
 
     private func createPowerupLine(at pos: CGPoint) -> PowerupLine {
@@ -410,7 +428,14 @@ extension GameEngine: FiziksContactDelegate {
         currentlyMovingBlock?.fiziksBody.collisionBitMask = Block.collisionBitMask
         currentlyMovingBlock?.fiziksBody.contactTestBitMask = Block.contactTestBitMask
 
-        eventManager?.postEvent(BlockPlacedEvent())
+        var placedBlockCount = 0
+        for gameObject in gameObjects {
+            if gameObject.fiziksBody.categoryBitMask == CategoryMask.block {
+                placedBlockCount += 1
+            }
+        }
+        eventManager?.postEvent(BlockPlacedEvent(totalBlocksInLevel: placedBlockCount))
+        eventManager?.postEvent(TowerHeightIncreasedEvent(newHeight: towerHeight))
 
         self.currentlyMovingBlock = nil
     }
@@ -472,4 +497,5 @@ extension GameEngine {
 
         return nil
     }
+    
 }

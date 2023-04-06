@@ -25,7 +25,10 @@ struct GameModeSelectView: View {
                 HStack {
                     drawGameModeOption(gameMode: .SURVIVAL, name: "SURVIVAL", fontSize: 30.0)
 
-                    drawGameModeOption(gameMode: .RACECLOCK, name: "RACE AGAINST CLOCK", fontSize: 30.0)
+                    drawGameModeOption(gameMode: .SANDBOX, name: "SANDBOX", fontSize: 30.0)
+
+                    // MARK: Add back later
+//                    drawGameModeOption(gameMode: .RACECLOCK, name: "RACE AGAINST CLOCK", fontSize: 30.0)
                 }
 
                 Button {

@@ -9,6 +9,8 @@ import Foundation
 
 protocol InputSystem {
 
+    init()
+
     var inputData: InputData { get set }
 
     func getInput() -> InputData

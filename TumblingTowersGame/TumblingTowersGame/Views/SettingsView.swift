@@ -10,12 +10,15 @@ import SwiftUI
 struct SettingsView: View {
     @EnvironmentObject var mainGameMgr: MainGameManager
     @EnvironmentObject var gameEngineMgr: GameEngineManager
-    @StateObject var settingsMgr = SettingsManager()
+    @StateObject var settingsMgr: SettingsManager
+
     @Binding var currGameScreen: Constants.CurrGameScreens
+
+    // MARK: Retrieve from storage in future
+    @State private var selectedInputType = Constants.GameInputTypes.GYRO
 
     var body: some View {
         ZStack {
-
             BackgroundView()
 
             VStack {
@@ -26,7 +29,7 @@ struct SettingsView: View {
                     Text("Overall")
                         .modifier(BodyText())
 
-                    Slider(value: $settingsMgr.overallVolume, in: 0.0...3.0)
+                    Slider(value: $settingsMgr.overallVolume, in: 0.0...1.0)
                         .frame(width: 400)
                         .padding(.all)
                 }
@@ -35,7 +38,7 @@ struct SettingsView: View {
                     Text("Background Music")
                         .modifier(BodyText())
 
-                    Slider(value: $settingsMgr.backgroundMusicVolume, in: 0.0...3.0)
+                    Slider(value: $settingsMgr.backgroundMusicVolume, in: 0.0...1.0)
                         .frame(width: 400)
                         .padding(.all)
                 }
@@ -44,23 +47,35 @@ struct SettingsView: View {
                     Text("Other Sounds")
                         .modifier(BodyText())
 
-                    Slider(value: $settingsMgr.otherSoundVolume, in: 0.0...3.0)
+                    Slider(value: $settingsMgr.otherSoundVolume, in: 0.0...1.0)
                         .frame(width: 400)
                         .padding(.all)
                 }
 
-                Text("Input Sensitivity")
+                Text("Input Options")
                     .modifier(CategoryText())
 
-                HStack {
-                    Text("Block Movement Speed")
-                        .modifier(BodyText())
+                Picker(selection: $selectedInputType, label: Text("Input Type").modifier(BodyText())) {
+                    ForEach(Constants.GameInputTypes.allCases, id: \.self) { value in
+                        Text(value.rawValue)
+                            .modifier(BodyText())
 
-                    // TODO: Should we add this?
-                    Slider(value: $settingsMgr.otherSoundVolume, in: 0.0...3.0)
-                        .frame(width: 400)
-                        .padding(.all)
+                    }
                 }
+                .pickerStyle(SegmentedPickerStyle())
+                .frame(width: 400)
+                .onChange(of: selectedInputType) { val in
+                    gameEngineMgr.changeInput(to: val)
+                }
+
+//                HStack {
+//                    Text("Block Movement Speed")
+//                        .modifier(BodyText())
+//
+//                    Slider(value: $settingsMgr.otherSoundVolume, in: 0.0...3.0)
+//                        .frame(width: 400)
+//                        .padding(.all)
+//                }
 
                 Button {
                     currGameScreen = .mainMenu
@@ -72,6 +87,8 @@ struct SettingsView: View {
             }
         }
         .ignoresSafeArea(.all)
+        .onAppear {
+        }
 
     }
 
@@ -92,8 +109,9 @@ struct SettingsView: View {
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsView(currGameScreen: .constant(.gameModeSelection))
+        SettingsView(settingsMgr: SettingsManager(), currGameScreen: .constant(.gameModeSelection))
             .environmentObject(GameEngineManager(levelDimensions: .infinite, eventManager: TumblingTowersEventManager()))
             .environmentObject(MainGameManager())
+            .environmentObject(SettingsManager())
     }
 }

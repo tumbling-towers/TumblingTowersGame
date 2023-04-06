@@ -30,14 +30,15 @@ class SoundSystem {
     }
 
     var overallVolume: Float {
-        let mpVolumeView = MPVolumeView()
-        let slider = mpVolumeView.subviews.first(where: { $0 is UISlider }) as? UISlider
-
-        if let currVol = slider?.value {
-            return currVol
-        } else {
-            return 0
-        }
+        AVAudioSession.sharedInstance().outputVolume
+//        let mpVolumeView = MPVolumeView()
+//        let slider = mpVolumeView.subviews.first(where: { $0 is UISlider }) as? UISlider
+//
+//        if let currVol = slider?.value {
+//            return currVol
+//        } else {
+//            return 0
+//        }
     }
 
     private init() {
@@ -87,7 +88,7 @@ class SoundSystem {
     }
 
     func changeBackgroundMusicVolume(_ newVolume: Float) {
-        backgroundMusicPlayer?.setVolume(exp(newVolume), fadeDuration: TimeInterval(0.2))
+        backgroundMusicPlayer?.setVolume(exp(newVolume) - 1, fadeDuration: TimeInterval(0.2))
     }
 
     func changeSoundVolume(_ newVolume: Float) {
@@ -98,7 +99,9 @@ class SoundSystem {
         let mpVolumeView = MPVolumeView()
         let slider = mpVolumeView.subviews.first(where: { $0 is UISlider }) as? UISlider
 
-        slider?.value = newVolume
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1) {
+            slider?.value = newVolume
+        }
     }
 
     enum GameSound: String, CaseIterable {

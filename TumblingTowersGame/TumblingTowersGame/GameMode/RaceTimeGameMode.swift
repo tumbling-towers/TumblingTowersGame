@@ -11,25 +11,66 @@ class RaceTimeGameMode: GameMode {
 
     var name = "Race Against the Clock"
 
-    init(eventMgr: EventManager) {
-        // Register all events that affect game state
+    var realTimeTimer = GameTimer()
 
+    let blocksToPlace = 10
+    let timeToPlaceBy = 15
+
+    var currBlocksPlaced = 0
+
+    var isGameEnded = false
+
+    required init(eventMgr: EventManager) {
+        // Register all events that affect game state
+        eventMgr.registerClosure(for: BlockPlacedEvent.self, closure: blockPlaced)
+        eventMgr.registerClosure(for: BlockDroppedEvent.self, closure: blockDropped)
     }
 
     func getGameState() -> Constants.GameState {
-        .RUNNING
+        if currBlocksPlaced >= blocksToPlace {
+            isGameEnded = true
+            endTimer()
+            return .WIN_RACE
+        } else if realTimeTimer.count < 0 {
+            isGameEnded = true
+            endTimer()
+            return .LOSE_RACE
+        }
+
+        return .RUNNING
     }
 
     func getScore() -> Int {
-        0
+        realTimeTimer.count
     }
 
-    func getTimeRemaining() -> Float {
-        0
+    func hasGameEnded() -> Bool {
+        isGameEnded
+    }
+
+    func getTimeRemaining() -> Int {
+        realTimeTimer.count
     }
 
     func restartGame() {
-
+        isGameEnded = false
+        currBlocksPlaced = 0
+        realTimeTimer = GameTimer()
     }
 
+    func startTimer() {
+        realTimeTimer.start(timeInSeconds: timeToPlaceBy, countsUp: false)
+    }
+
+    func endTimer() {
+        realTimeTimer.stop()
+    }
+
+    private func blockPlaced(event: Event) {
+        currBlocksPlaced += 1
+    }
+
+    private func blockDropped(event: Event) {
+        currBlocksPlaced -= 1
+    }
 }

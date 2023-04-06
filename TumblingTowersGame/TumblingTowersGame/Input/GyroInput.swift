@@ -22,7 +22,7 @@ class GyroInput: InputSystem {
     // TODO: Allow for sensitivity adjustment?
     let sensitivity: Double = 5
 
-    init() {
+    required init() {
         motionManager = CMMotionManager()
 
         if motionManager.isDeviceMotionAvailable {
