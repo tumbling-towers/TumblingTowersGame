@@ -1,5 +1,5 @@
 //
-//  GameEngineTests.swift
+//  GameWorldTests.swift
 //  TumblingTowersGameTests
 //
 //  Created by Quan Teng Foong on 19/3/23.
@@ -8,39 +8,39 @@
 import XCTest
 @testable import TumblingTowersGame
 
-final class GameEngineTests: XCTestCase {
+final class GameWorldTests: XCTestCase {
 
-    var testGameEngine: GameEngine?
+    var testGameWorld: GameWorld?
 
     override func setUp() {
         let levelDimensions = CGRect(x: 0, y: 0, width: 500, height: 500)
-        testGameEngine = GameEngine(levelDimensions: levelDimensions)
+        testGameWorld = GameWorld(levelDimensions: levelDimensions)
     }
 
     func testConstruct() {
         let levelDimensions = CGRect(x: 0, y: 0, width: 100, height: 100)
-        let gameEngine = GameEngine(levelDimensions: levelDimensions)
+        let GameWorld = GameWorld(levelDimensions: levelDimensions)
 
-        XCTAssertEqual(gameEngine.levelDimensions, levelDimensions)
-        XCTAssertTrue(gameEngine.fiziksEngine.fiziksContactDelegate === gameEngine)
+        XCTAssertEqual(GameWorld.levelDimensions, levelDimensions)
+        XCTAssertTrue(GameWorld.fiziksEngine.fiziksContactDelegate === GameWorld)
     }
 
     func testInsertNewBlock() throws {
-        let originalNumOfGameObjects = try XCTUnwrap(testGameEngine?.gameObjects.count)
+        let originalNumOfGameObjects = try XCTUnwrap(testGameWorld?.gameObjects.count)
 
-        testGameEngine?.insertNewBlock()
+        testGameWorld?.insertNewBlock()
 
-        XCTAssertEqual(testGameEngine?.gameObjects.count, originalNumOfGameObjects + 1)
+        XCTAssertEqual(testGameWorld?.gameObjects.count, originalNumOfGameObjects + 1)
     }
 
     func testMoveSideways_right() throws {
         let movementVector = CGVector(dx: 10, dy: 10)
 
-        let block = try XCTUnwrap(testGameEngine?.insertNewBlock())
+        let block = try XCTUnwrap(testGameWorld?.insertNewBlock())
         let blockOriginalPosition = block.position
         let expectedBlockFinalPosition = CGPoint(x: blockOriginalPosition.x + 10, y: blockOriginalPosition.y)
 
-        testGameEngine?.moveSideways(by: movementVector)
+        testGameEngine?.moveCMBSideways(by: movementVector)
 
         XCTAssertEqual(block.position, expectedBlockFinalPosition)
     }
@@ -48,11 +48,11 @@ final class GameEngineTests: XCTestCase {
     func testMoveSideways_left() throws {
         let movementVector = CGVector(dx: -10, dy: 10)
 
-        let block = try XCTUnwrap(testGameEngine?.insertNewBlock())
+        let block = try XCTUnwrap(testGameWorld?.insertNewBlock())
         let blockOriginalPosition = block.position
         let expectedBlockFinalPosition = CGPoint(x: blockOriginalPosition.x - 10, y: blockOriginalPosition.y)
 
-        testGameEngine?.moveSideways(by: movementVector)
+        testGameEngine?.moveCMBSideways(by: movementVector)
 
         XCTAssertEqual(block.position, expectedBlockFinalPosition)
     }
@@ -60,11 +60,11 @@ final class GameEngineTests: XCTestCase {
     func testMoveDown_downwardVector() throws {
         let movementVector = CGVector(dx: -10, dy: -10)
 
-        let block = try XCTUnwrap(testGameEngine?.insertNewBlock())
+        let block = try XCTUnwrap(testGameWorld?.insertNewBlock())
         let blockOriginalPosition = block.position
         let expectedBlockFinalPosition = CGPoint(x: blockOriginalPosition.x, y: blockOriginalPosition.y - 10)
 
-        testGameEngine?.moveDown(by: movementVector)
+        testGameEngine?.moveCMBDown(by: movementVector)
 
         XCTAssertEqual(block.position, expectedBlockFinalPosition)
     }
@@ -72,32 +72,32 @@ final class GameEngineTests: XCTestCase {
     func testMoveDown_upwardVector_doesNotMove() throws {
         let movementVector = CGVector(dx: -10, dy: 10)
 
-        let block = try XCTUnwrap(testGameEngine?.insertNewBlock())
+        let block = try XCTUnwrap(testGameWorld?.insertNewBlock())
         let blockOriginalPosition = block.position
         let expectedBlockFinalPosition = blockOriginalPosition
 
-        testGameEngine?.moveDown(by: movementVector)
+        testGameEngine?.moveCMBDown(by: movementVector)
 
         XCTAssertEqual(block.position, expectedBlockFinalPosition)
     }
 
     func testRotateClockwise() throws {
-        let block = try XCTUnwrap(testGameEngine?.insertNewBlock())
+        let block = try XCTUnwrap(testGameWorld?.insertNewBlock())
         let blockOriginalZRotation = block.zRotation
         let expectedBlockFinalZRotation = blockOriginalZRotation - (Double.pi / 2)
 
-        testGameEngine?.rotateClockwise()
+        testGameEngine?.rotateCMBClockwise()
 
-        XCTAssertEqual(block.zRotation, expectedBlockFinalZRotation)
+        XCTAssertEqual(block.zRotation, expectedBlockFinalZRotation, accuracy: 1e-4)
     }
 
     func testRotateCounterClockwise() throws {
-        let block = try XCTUnwrap(testGameEngine?.insertNewBlock())
+        let block = try XCTUnwrap(testGameWorld?.insertNewBlock())
         let blockOriginalZRotation = block.zRotation
         let expectedBlockFinalZRotation = blockOriginalZRotation + (Double.pi / 2)
 
-        testGameEngine?.rotateCounterClockwise()
+        testGameEngine?.rotateCMBCounterClockwise()
 
-        XCTAssertEqual(block.zRotation, expectedBlockFinalZRotation)
+        XCTAssertEqual(block.zRotation, expectedBlockFinalZRotation, accuracy: 1e-4)
     }
 }

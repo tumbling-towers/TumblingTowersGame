@@ -10,8 +10,8 @@ import Foundation
 class SurvivalGameMode: GameMode {
 
     // Place N blocks wo dropping more than M blocks in shortest time possible (Score is time taken?)
-    let blocksToPlace = 10
-    let blocksDroppedThreshold = 5
+    let blocksToPlace = 3
+    let blocksDroppedThreshold = 1
 
     var currBlocksInserted = 0
     var currBlocksPlaced = 0
@@ -32,9 +32,9 @@ class SurvivalGameMode: GameMode {
     }
 
     func getGameState() -> Constants.GameState {
-        print("Blocks Dropped \(currBlocksDropped)")
-        print("Blocks Placed \(currBlocksPlaced)")
-        print("Blocks Inserted \(currBlocksInserted)\n")
+//        print("Blocks Dropped \(currBlocksDropped)")
+//        print("Blocks Placed \(currBlocksPlaced)")
+//        print("Blocks Inserted \(currBlocksInserted)\n")
 
         if currBlocksDropped >= blocksDroppedThreshold {
             isGameEnded = true

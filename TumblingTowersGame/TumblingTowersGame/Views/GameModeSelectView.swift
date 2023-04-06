@@ -32,6 +32,7 @@ struct GameModeSelectView: View {
 
                 Button {
                     currGameScreen = .mainMenu
+                    gameEngineMgr.stopGame()
                 } label: {
                     Text("Back")
                         .modifier(CustomButton(fontSize: 25))
@@ -48,7 +49,6 @@ struct GameModeSelectView: View {
     private func drawGameModeOption(gameMode: Constants.GameModeTypes, name: String, fontSize: CGFloat, red: Double, green: Double, blue: Double) -> AnyView {
         AnyView(
             Button {
-//                gameEngineMgr.setGameMode(gameMode: gameMode)
                 gameEngineMgr.startGame(gameMode: gameMode)
                 currGameScreen = .gameplay
             } label: {

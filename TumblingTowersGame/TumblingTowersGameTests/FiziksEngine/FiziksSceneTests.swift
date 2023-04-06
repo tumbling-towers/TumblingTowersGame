@@ -6,20 +6,29 @@
 //
 
 import XCTest
+@testable import TumblingTowersGame
 
 final class FiziksSceneTests: XCTestCase {
-    var delegate: MockFiziksSceneUpdateDelegate?
+
+    var fiziksScene: FiziksScene!
 
     override func setUp() {
-        delegate = MockFiziksSceneUpdateDelegate()
+        let testSize = CGSize(width: 100, height: 100)
+        fiziksScene = FiziksScene(size: testSize)
     }
 
-    func test_didFinishUpdate() {
-        let fiziksScene = FiziksScene(size: .zero, boundingRect: .zero)
-        fiziksScene.fiziksSceneUpdateDelegate = delegate
+    func testAddChild_childAdded() {
+        let testFiziksBody = MockFiziksBody()
+        fiziksScene.addChild(testFiziksBody)
+        XCTAssertTrue(fiziksScene.children.contains(testFiziksBody.fiziksShapeNode))
+    }
 
-        fiziksScene.didFinishUpdate()
+    func testRemove_childRemoved() {
+        let testFiziksBody = MockFiziksBody()
+        fiziksScene.addChild(testFiziksBody)
+        XCTAssertTrue(fiziksScene.children.contains(testFiziksBody.fiziksShapeNode))
 
-        XCTAssertTrue(delegate?.updatedFiziksScene ?? false)
+        fiziksScene.remove(testFiziksBody)
+        XCTAssertFalse(fiziksScene.children.contains(testFiziksBody.fiziksShapeNode))
     }
 }

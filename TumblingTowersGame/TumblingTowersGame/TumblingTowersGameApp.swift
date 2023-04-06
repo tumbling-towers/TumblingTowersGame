@@ -16,7 +16,7 @@ struct TumblingTowersGameApp: App {
         WindowGroup {
             GeometryReader { geo in
                 ContentView(gameEngineMgr: mainGameMgr
-                    .setDeviceDimensionsAndGetGameEngineMgr(
+                    .createGameEngineManager(
                         deviceHeight: geo.size.height,
                         deviceWidth: geo.size.width))
                 .environmentObject(mainGameMgr)

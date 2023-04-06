@@ -11,7 +11,7 @@ class TowerHeightStatTracker: StatTracker {
     static let name: String = "TowerHeight"
     var height: CGFloat {
         didSet {
-            print(height)
+//            print(height)
         }
     }
     

@@ -9,8 +9,10 @@ import Foundation
 
 class PowerupAvailableEvent: TumblingTowersEvent {
     let type: Powerup.Type
+    let idx: Int
 
-    init(type: Powerup.Type) {
+    init(type: Powerup.Type, idx: Int) {
         self.type = type
+        self.idx = idx
     }
 }

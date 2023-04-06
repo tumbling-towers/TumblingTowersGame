@@ -14,13 +14,6 @@ struct LevelView: View {
 
     var body: some View {
         ZStack {
-//            Button {
-//                isPaused = true
-//            } label: {
-//                Text("Pause")
-//            }
-//
-//
             BackgroundView()
 
             ForEach($gameEngineMgr.levelBlocks) { block in
@@ -41,35 +34,31 @@ struct LevelView: View {
                     .frame(width: 50, height: 50)
                     .padding(20)
             }
-            .padding()
-            .foregroundColor(.white)
-            .background(Color.blue)
-            .frame(width: 70, height: 70)
-            .clipShape(Circle())
-            // TODO: Potentially could make this adjustable to be on left/right of screen (in settings)
-            .position(x: gameEngineMgr.levelDimensions.width - 100, y: gameEngineMgr.levelDimensions.height - 100)
-            .shadow(color: .black, radius: 5, x: 1, y: 1)
+            .modifier(PowerupButton(height: 70,
+                                    width: 70,
+                                    position: CGPoint(x: gameEngineMgr.levelDimensions.width - 100,
+                                                      y: gameEngineMgr.levelDimensions.height - 100)))
 
-            if let powerup = gameEngineMgr.powerup,
-               let image = ViewImageManager.powerupToImage[powerup.type] {
-                Button {
-                    gameEngineMgr.usePowerup()
-                } label: {
-                    Image(image)
-                        .resizable()
-                        .frame(width: 50, height: 50)
-                        .padding(20)
+            ForEach(1..<$gameEngineMgr.powerups.count + 1) { i in
+                if let powerup0 = $gameEngineMgr.powerups[i - 1],
+                   let type = powerup0.wrappedValue?.type,
+                   let image = ViewImageManager.powerupToImage[type] {
+                    Button {
+                        gameEngineMgr.usePowerup(at: i - 1)
+                    } label: {
+                        Image(image)
+                            .resizable()
+                            .frame(width: 50, height: 50)
+                            .padding(20)
+                    }
+                    .modifier(PowerupButton(height: 70,
+                                             width: 70,
+                                             position: CGPoint(x: 100,
+                                                               y: Int(gameEngineMgr.levelDimensions.height) - 100 * (i))))
                 }
-                .padding()
-                .foregroundColor(.white)
-                .background(Color.blue)
-                .frame(width: 70, height: 70)
-                .clipShape(Circle())
-                // TODO: Potentially could make this adjustable to be on left/right of screen (in settings)
-                .position(x: 100, y: gameEngineMgr.levelDimensions.height - 100)
-                .shadow(color: .black, radius: 5, x: 1, y: 1)
-            }
 
+            }
+            
             if let box = gameEngineMgr.referenceBox {
                 Rectangle()
                     .path(in: box)

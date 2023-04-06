@@ -8,7 +8,7 @@
 import CoreGraphics
 import Foundation
 
-class Platform: GameEngineObject {
+class Platform: GameWorldObject {
 
     let fiziksBody: FiziksBody
 
@@ -17,6 +17,8 @@ class Platform: GameEngineObject {
     var rotation: Double {
         fiziksBody.zRotation
     }
+    
+    var specialProperties: SpecialProperties
 
     static var categoryBitMask: BitMask = CategoryMask.platform
 
@@ -24,9 +26,10 @@ class Platform: GameEngineObject {
 
     static var contactTestBitMask: BitMask = ContactTestMask.platform
 
-    init(fiziksBody: FiziksBody, shape: ObjectShape) {
+    init(fiziksBody: FiziksBody, shape: ObjectShape, specialProperties: SpecialProperties = SpecialProperties()) {
         self.fiziksBody = fiziksBody
         self.shape = shape
+        self.specialProperties = specialProperties
     }
 }
 

@@ -8,9 +8,11 @@
 import Foundation
 
 protocol PowerupManager: AnyObject, PowerupDelegate {
-    var eventManager: EventManager? { get set }
+    var eventManager: EventManager { get set }
+    var gameWorld: GameWorld { get set }
     var rng: RandomNumberGeneratorWithSeed { get }
-    var nextPowerup: Powerup? { get set }
+    var availablePowerups: [Powerup?] { get set }
     func createNextPowerup()
-    func activateNextPowerup()
+    func activatePowerup(at idx: Int)
+    func createPowerupPlatform() -> Platform?
 }

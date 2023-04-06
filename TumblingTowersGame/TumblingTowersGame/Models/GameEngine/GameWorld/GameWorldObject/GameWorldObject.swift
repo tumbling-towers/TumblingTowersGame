@@ -1,5 +1,5 @@
 //
-//  GameEngineObject.swift
+//  GameWorldObject.swift
 //  Facade
 //
 //  Created by Taufiq Abdul Rahman on 8/3/23.
@@ -8,12 +8,14 @@
 import CoreGraphics
 import Foundation
 
-protocol GameEngineObject: AnyObject {
+protocol GameWorldObject: AnyObject {
     var fiziksBody: FiziksBody { get }
 
     var shape: ObjectShape { get }
 
     var rotation: Double { get }
+    
+    var specialProperties: SpecialProperties { get set }
 
     static var categoryBitMask: BitMask { get }
 
@@ -22,7 +24,7 @@ protocol GameEngineObject: AnyObject {
     static var contactTestBitMask: BitMask { get }
 }
 
-extension GameEngineObject {
+extension GameWorldObject {
     var position: CGPoint {
         fiziksBody.position
     }

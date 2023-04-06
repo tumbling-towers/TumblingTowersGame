@@ -8,7 +8,7 @@
 import CoreGraphics
 import Foundation
 
-class Block: GameEngineObject {
+class Block: GameWorldObject {
 
     let fiziksBody: FiziksBody
 
@@ -18,7 +18,7 @@ class Block: GameEngineObject {
         fiziksBody.zRotation
     }
 
-    var isGlueBlock = false
+    var specialProperties: SpecialProperties
 
     static var fallingCollisionBitMask: BitMask = CollisionMask.fallingBlock
 
@@ -33,6 +33,7 @@ class Block: GameEngineObject {
     init(fiziksBody: FiziksBody, shape: ObjectShape) {
         self.fiziksBody = fiziksBody
         self.shape = shape
+        self.specialProperties = SpecialProperties()
     }
 }
 
