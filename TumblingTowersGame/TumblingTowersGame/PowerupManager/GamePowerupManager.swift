@@ -6,8 +6,11 @@
 //
 
 import Foundation
+import CoreGraphics
 
 class GamePowerupManager: PowerupManager {
+    var gameEngine: GameEngine
+    
     static let defaultNumPowerups = 10
 
     static let powerupTypes: [Powerup.Type] = [PlatformPowerup.self, GluePowerup.self]
@@ -22,8 +25,9 @@ class GamePowerupManager: PowerupManager {
 
     var nextPowerup: Powerup?
 
-    init(eventManager: EventManager? = nil, seed: Int) {
+    init(eventManager: EventManager? = nil, gameEngine: GameEngine, seed: Int) {
         self.eventManager = eventManager
+        self.gameEngine = gameEngine
         self.rng = RandomNumberGeneratorWithSeed(seed: seed)
     }
 
@@ -48,7 +52,40 @@ class GamePowerupManager: PowerupManager {
     }
 
     func didActivatePlatformPowerup() {
+        guard let newPlatform = createPowerupPlatform() else { return }
+        gameEngine.addObject(object: newPlatform)
         eventManager?.postEvent(PlatformPowerupActivatedEvent())
+    }
+    
+    func createPowerupPlatform() -> Platform? {
+        guard let platform = gameEngine.platform else { return nil }
+        var count = 0
+        while count < GameEngineConstants.defaultTriesToFindPlatformPosition {
+            let rngX = Int(rng.next()) % Int(platform.width)
+            let newX = CGFloat(rngX) + platform.position.x - platform.width / 2
+            var newY = gameEngine.findHighestPoint() + GameEngineConstants.bufferFromHighestPoint
+            if let powerupLine = gameEngine.powerupLine {
+                newY = min(newY, powerupLine.position.y - GameEngineConstants.defaultPowerupPlatformHeight)
+            }
+            let newPosition = CGPoint(x: newX, y: newY)
+            let rect = CGRect(x: newPosition.x,
+                              y: newPosition.y,
+                              width: GameEngineConstants.defaultPowerupPlatformWidth,
+                              height: GameEngineConstants.defaultPowerupPlatformHeight)
+            let path = CGPath.create(from: rect)
+
+            let newPlatform = gameEngine.createPlatform(path: path, at: newPosition)
+
+            let otherBodies = gameEngine.gameObjects.map({ $0.fiziksBody })
+
+            if !gameEngine.fiziksEngine.isIntersecting(body: newPlatform.fiziksBody, otherBodies: otherBodies) {
+                return newPlatform
+            }
+
+            count += 1
+        }
+
+        return nil
     }
 
     private func registerEvents() {
