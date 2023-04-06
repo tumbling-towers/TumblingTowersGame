@@ -19,7 +19,7 @@ class GamePowerupManager: PowerupManager {
 
     var rng: RandomNumberGeneratorWithSeed
 
-    var nextPowerup: Powerup?
+    var availablePowerups: [Powerup?] = [Powerup?](repeating: nil, count: 5)
 
     init(eventManager: EventManager, gameWorld: GameWorld, seed: Int) {
         self.eventManager = eventManager
@@ -29,9 +29,9 @@ class GamePowerupManager: PowerupManager {
         registerEvents()
     }
 
-    func activateNextPowerup() {
-        nextPowerup?.activate()
-        nextPowerup = nil
+    func activatePowerup(at idx: Int) {
+        availablePowerups[idx]?.activate()
+        availablePowerups[idx] = nil
     }
 
     func createNextPowerup() {
@@ -39,10 +39,16 @@ class GamePowerupManager: PowerupManager {
         let next = rng.next() / 1_000
         let idx = Int(next) % GamePowerupManager.powerupTypes.count
         let type = GamePowerupManager.powerupTypes[idx]
-
-        nextPowerup = type.create()
-        nextPowerup?.delegate = self
-        eventManager.postEvent(PowerupAvailableEvent(type: type))
+        
+        for powerupIndex in 0..<availablePowerups.count {
+            if availablePowerups[powerupIndex] == nil {
+                var nextPowerup = type.create()
+                nextPowerup.delegate = self
+                availablePowerups[powerupIndex] = nextPowerup
+                eventManager.postEvent(PowerupAvailableEvent(type: type, idx: powerupIndex))
+                break
+            }
+        }
     }
 
     func didActivateGluePowerup() {
@@ -89,8 +95,11 @@ class GamePowerupManager: PowerupManager {
 
     private func registerEvents() {
         // remove the powerup when it is used
-        eventManager.registerClosure(for: PowerupButtonTappedEvent.self, closure: { _ in
-            self.activateNextPowerup()
+        eventManager.registerClosure(for: PowerupButtonTappedEvent.self, closure: { event in
+            if let event = event as? PowerupButtonTappedEvent {
+                self.activatePowerup(at: event.idx)
+            }
+            
         })
     }
 }

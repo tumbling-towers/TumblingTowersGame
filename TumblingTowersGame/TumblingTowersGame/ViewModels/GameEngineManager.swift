@@ -15,6 +15,7 @@ class GameEngineManager: ObservableObject {
     @Published var powerupLineDimensions = CGSize()
     @Published var levelBlocks: [GameObjectBlock] = []
     @Published var levelPlatforms: [GameObjectPlatform] = []
+    @Published var powerups: [Powerup.Type?] = [Powerup.Type?](repeating: nil, count: 5)
 
     var eventManager: EventManager?
 
@@ -24,8 +25,6 @@ class GameEngineManager: ObservableObject {
             gameEngine.level.platform?.position
         }
     }
-
-    var powerup: Powerup.Type?
 
     var levelDimensions: CGRect
 
@@ -143,10 +142,9 @@ class GameEngineManager: ObservableObject {
         gameEngine.rotateCMBClockwise()
     }
 
-    func usePowerup() {
-        guard let powerup = powerup else { return }
-        eventManager?.postEvent(PowerupButtonTappedEvent(type: powerup))
-        self.powerup = nil
+    func usePowerup(at idx: Int) {
+        eventManager?.postEvent(PowerupButtonTappedEvent(idx: idx))
+        self.powerups[idx] = nil
     }
     
     func pause() {
@@ -202,7 +200,7 @@ class GameEngineManager: ObservableObject {
         eventManager?.registerClosure(for: PowerupAvailableEvent.self, closure: { event in
             switch event {
             case let powerupAvailableEvent as PowerupAvailableEvent:
-                self.powerup = powerupAvailableEvent.type
+                self.powerups[powerupAvailableEvent.idx] = powerupAvailableEvent.type
             default:
                 return
             }
