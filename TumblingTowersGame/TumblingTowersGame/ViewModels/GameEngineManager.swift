@@ -54,8 +54,28 @@ class GameEngineManager: ObservableObject {
         gameMode?.getScore()
     }
 
-    var gameState: Constants.GameState? {
-        gameMode?.getGameState()
+    var gameEnded: Bool {
+        if let ended = gameMode?.hasGameEnded() {
+            return ended
+        } else {
+            return false
+        }
+    }
+
+    var gameEndMainMessage: String {
+        if let msg = gameMode?.getGameEndMainMessage() {
+            return msg
+        } else {
+            return "The game has ended."
+        }
+    }
+
+    var gameEndSubMessage: String {
+        if let msg = gameMode?.getGameEndSubMessage() {
+            return msg
+        } else {
+            return "Please try again!"
+        }
     }
 
     init(levelDimensions: CGRect, eventManager: EventManager) {

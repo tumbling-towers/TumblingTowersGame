@@ -26,4 +26,10 @@ protocol GameMode {
     func startTimer()
 
     func endTimer()
+
+    func getGameEndMainMessage() -> String
+
+    func getGameEndSubMessage() -> String
+
+    func update()
 }

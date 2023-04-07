@@ -54,7 +54,7 @@ struct ContentView: View {
                 }
             }
             
-            if gameEngineMgr.gameState != nil && gameEngineMgr.gameState != .RUNNING && gameEngineMgr.gameState != .PAUSED {
+            if gameEngineMgr.gameEnded {
                 GameEndView(currGameScreen: $currGameScreen)
                     .environmentObject(gameEngineMgr)
             }

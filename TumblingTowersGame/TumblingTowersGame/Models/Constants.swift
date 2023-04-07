@@ -51,10 +51,8 @@ Rotate button: rotate the block clockwise.
     }
 
     enum GameState {
-        case WIN_SURVIVAL
-        case LOSE_SURVIVAL
-        case WIN_RACE
-        case LOSE_RACE
+        case WIN
+        case LOSE
         case RUNNING
         case PAUSED
     }
