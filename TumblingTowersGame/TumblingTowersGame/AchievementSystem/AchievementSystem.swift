@@ -24,12 +24,33 @@ class AchievementSystem {
     }
     
     private func setupAchievements() {
-        add(BobTheBuilderAchievement(name: "BobTheBuilder I", goal: 2, dataSource: dataSource))
-        add(BobTheBuilderAchievement(name: "BobTheBuilder II", goal: 20, dataSource: dataSource))
-        add(BobTheBuilderAchievement(name: "BobTheBuilder III", goal: 50, dataSource: dataSource))
-        add(SkyscraperAchievement(name: "Skyscraper I", goal: 300, dataSource: dataSource))
-        add(SkyscraperAchievement(name: "Skyscraper II", goal: 8000, dataSource: dataSource))
-        add(SkyscraperAchievement(name: "Skyscraper III", goal: 1500, dataSource: dataSource))
+        // TODO: get from storage
+        // Info that needs to be stored:
+        // * achievement type (enum type)
+        // * goal (Any type, i think best to store as string)
+        // * name
+        // * achieved (bool)
+        // Then can use the factory to make the achievement
+        add(AchievementFactory.createAchievement(ofType: .BobTheBuilder,
+                                                 name: "BobTheBuilder I",
+                                                 goal: 2,
+                                                 achieved: false,
+                                                 dataSource: dataSource))
+        add(AchievementFactory.createAchievement(ofType: .BobTheBuilder,
+                                                 name: "BobTheBuilder II",
+                                                 goal: 20,
+                                                 achieved: false,
+                                                 dataSource: dataSource))
+        add(AchievementFactory.createAchievement(ofType: .Skyscraper,
+                                                 name: "SkyScraper I",
+                                                 goal: 300,
+                                                 achieved: false,
+                                                 dataSource: dataSource))
+        add(AchievementFactory.createAchievement(ofType: .Skyscraper,
+                                                 name: "SkyScraper II",
+                                                 goal: 8000,
+                                                 achieved: false,
+                                                 dataSource: dataSource))
     }
     
     private func add(_ achievement: Achievement) {
@@ -40,5 +61,6 @@ class AchievementSystem {
         for achievement in achievements {
             achievement.update()
         }
+        // TODO: I think this is a good place to call a saveToStorage method
     }
 }
