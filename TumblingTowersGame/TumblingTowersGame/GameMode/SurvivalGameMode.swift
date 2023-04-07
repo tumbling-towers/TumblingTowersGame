@@ -90,6 +90,14 @@ class SurvivalGameMode: GameMode {
         realTimeTimer.start(timeInSeconds: 0, countsUp: true)
     }
 
+    func pauseGame() {
+        realTimeTimer.pause()
+    }
+
+    func resumeGame() {
+        realTimeTimer.resume()
+    }
+
     func endGame() {
         isGameEnded = true
         realTimeTimer.stop()

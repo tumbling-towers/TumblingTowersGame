@@ -23,6 +23,10 @@ protocol GameMode {
 
     func startGame()
 
+    func pauseGame()
+
+    func resumeGame()
+
     func resetGame()
 
     func endGame()
