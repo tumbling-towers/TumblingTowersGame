@@ -55,6 +55,7 @@ Rotate button: rotate the block clockwise.
         case LOSE
         case RUNNING
         case PAUSED
+        case NONE
     }
 
     static let gameInputTypeToClass: [String: InputSystem.Type] = [GameInputTypes.TAP.rawValue: TapInput.self,

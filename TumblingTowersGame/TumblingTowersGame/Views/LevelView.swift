@@ -83,6 +83,7 @@ struct LevelView: View {
                 },
                           exit: {
                     gameEngineMgr.stopGame()
+                    gameEngineMgr.resetGame()
                     currGameScreen = .mainMenu
                     
                 })

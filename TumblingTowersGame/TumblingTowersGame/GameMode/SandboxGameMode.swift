@@ -13,6 +13,7 @@ class SandboxGameMode: GameMode {
 
     var realTimeTimer = GameTimer()
 
+    var isStarted = false
     var isGameEnded = false
 
     var eventMgr: EventManager
@@ -25,12 +26,16 @@ class SandboxGameMode: GameMode {
         let gameState = getGameState()
 
         if gameState != .RUNNING && gameState != .PAUSED {
-            endGame()
+            eventMgr.postEvent(GameEndedEvent())
         }
     }
 
     func getGameState() -> Constants.GameState {
-        return .RUNNING
+        if isStarted {
+            return .RUNNING
+        } else {
+            return .NONE
+        }
     }
 
     func getScore() -> Int {
@@ -46,11 +51,13 @@ class SandboxGameMode: GameMode {
     }
 
     func resetGame() {
+        isStarted = false
         isGameEnded = false
         realTimeTimer = GameTimer()
     }
 
     func startGame() {
+        isStarted = true
         realTimeTimer.start(timeInSeconds: 0, countsUp: true)
     }
 

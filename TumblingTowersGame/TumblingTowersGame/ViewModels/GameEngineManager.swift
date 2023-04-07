@@ -127,6 +127,10 @@ class GameEngineManager: ObservableObject {
     }
 
     func stopGame() {
+        eventManager?.postEvent(GameEndedEvent())
+    }
+
+    func stopGame(event: Event) {
         gameUpdater?.stopLevel()
         gameEngine.stopGame()
         gameMode?.endGame()
@@ -134,6 +138,7 @@ class GameEngineManager: ObservableObject {
 
     func resetGame() {
         gameEngine.resetGame()
+        gameMode?.resetGame()
     }
 
     func update() {
@@ -148,9 +153,6 @@ class GameEngineManager: ObservableObject {
         gameEngine.moveCMBSideways(by: currInput.vector)
         gameEngine.moveCMBDown(by: currInput.vector)
 
-        if let gameMode = gameMode, gameMode.hasGameEnded() {
-            stopGame()
-        }
     }
 
     func renderCurrentFrame() {
@@ -226,6 +228,8 @@ class GameEngineManager: ObservableObject {
                 return
             }
         })
+
+        eventManager?.registerClosure(for: GameEndedEvent.self, closure: stopGame)
     }
 }
 
