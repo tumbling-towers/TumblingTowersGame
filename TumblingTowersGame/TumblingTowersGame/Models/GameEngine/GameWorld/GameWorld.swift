@@ -13,7 +13,7 @@ class GameWorld {
     // MARK: Model objects / properties
     var level: GameWorldLevel
     
-    private var currentlyMovingBlock: Block? {
+    var currentlyMovingBlock: Block? {
         didSet {
             if currentlyMovingBlock == nil && !isGameEnded {
                 insertNewBlock()
@@ -31,11 +31,11 @@ class GameWorld {
     
     var eventManager: EventManager {
         didSet {
-            powerupManager.eventManager = eventManager
+            powerupManager?.eventManager = eventManager
         }
     }
     
-    var powerupManager: PowerupManager
+    var powerupManager: PowerupManager?
     
 
     // MARK: Generators
@@ -52,18 +52,18 @@ class GameWorld {
         self.level = GameWorldLevel(levelDimensions: levelDimensions)
         self.fiziksEngine = GameFiziksEngine(size: levelDimensions)
         self.shapeRandomizer = ShapeRandomizer(possibleShapes: TetrisType.allCases, seed: seed)
-        self.powerupManager = GamePowerupManager(eventManager: eventManager, seed: seed)
         self.rng = RandomNumberGeneratorWithSeed(seed: seed)
+        self.powerupManager = GamePowerupManager(eventManager: eventManager, gameWorld: self, seed: seed)
         
         setUpFiziksEngine()
     }
 
     /// Obtains the leftmost and rightmost points of the CMB.
     func getReferencePoints() -> (left: CGPoint, right: CGPoint)? {
-        guard let block = currentlyMovingBlock, let shape = currentlyMovingBlock?.shape as? TetrisShape else { return nil }
-        let movingGameObjectBlock = GameObjectBlock(position: block.position, path: shape.path, rotation: block.rotation)
-        let xPosLeft: Double = movingGameObjectBlock.position.x - movingGameObjectBlock.width / 2
-        let xPosRight: Double = movingGameObjectBlock.position.x + movingGameObjectBlock.width / 2
+        guard let block = currentlyMovingBlock else { return nil }
+        let width = block.width
+        let xPosLeft: Double = block.position.x - width / 2
+        let xPosRight: Double = block.position.x + width / 2
         let yPos: Double = 0
         return (left: CGPoint(x: xPosLeft, y: yPos), right: CGPoint(x: xPosRight, y: yPos))
     }
@@ -94,7 +94,6 @@ class GameWorld {
 
     /// Update method called by GameEngine every frame
     func update() {
-        print(level.gameObjects.count)
         for object in level.gameObjects {
             if level.isOutOfBounds(object) {
                 // TODO: Emit event that a block has gone out of bounds.
@@ -221,7 +220,11 @@ class GameWorld {
     }
     
     // MARK: Other methods
-    private func createPlatform(path: CGPath, at position: CGPoint) -> Platform {
+    func addObject(object: GameWorldObject) {
+        level.gameObjects.append(object)
+        fiziksEngine.add(object.fiziksBody)
+    }
+    func createPlatform(path: CGPath, at position: CGPoint) -> Platform {
         let newFiziksBody = PathFiziksBody(path: path,
                                            position: position,
                                            zRotation: .zero,
@@ -257,7 +260,7 @@ class GameWorld {
 
     private func updatePowerupHeight() {
         level.updatePowerupLineHeight()
-        powerupManager.createNextPowerup()
+        powerupManager?.createNextPowerup()
     }
 }
 
@@ -271,9 +274,9 @@ extension GameWorld: FiziksContactDelegate {
                 handlePlaceCMB()
             }
 
-            if currentBlock.isGlueBlock {
-                fiziksEngine.combine(bodyA: contact.bodyA, bodyB: contact.bodyB, at: contact.contactPoint)
-            }
+            SpecialPropertiesContactResolver.resolve(fiziksEngine: fiziksEngine,
+                                                     contact: contact,
+                                                     specialProperties: currentBlock.specialProperties)
         }
     }
 
@@ -321,7 +324,7 @@ extension GameWorld: FiziksContactDelegate {
     }
 
     /// Returns the y-coordinate of the highest point in the level
-    private func findHighestPoint() -> Double {
+    func findHighestPoint() -> Double {
         var maxY: Double = -.infinity
         level.gameObjects.forEach({ obj in
             if let block = obj as? Block, block !== currentlyMovingBlock {
@@ -332,50 +335,3 @@ extension GameWorld: FiziksContactDelegate {
         return maxY
     }
 }
-
-// TODO: Move this to powerup
-// extension to support powerups
-//extension GameWorld {
-//    func registerPowerupEvents() {
-//        eventManager?.registerClosure(for: GluePowerupActivatedEvent.self, closure: { _ in
-//            self.currentlyMovingBlock?.isGlueBlock = true
-//        })
-//        eventManager?.registerClosure(for: PlatformPowerupActivatedEvent.self, closure: { _ in
-//            guard let newPlatform = self.createPowerupPlatform() else { return }
-//            self.gameObjects.append(newPlatform)
-//            self.fiziksEngine.add(newPlatform.fiziksBody)
-//        })
-//    }
-//
-//    // used when platform powerup is activated
-//    private func createPowerupPlatform() -> Platform? {
-//        guard let platform = platform else { return nil }
-//        var count = 0
-//        while count < GameWorldConstants.defaultTriesToFindPlatformPosition {
-//            let rngX = Int(rng.next()) % Int(platform.width)
-//            let newX = CGFloat(rngX) + platform.position.x - platform.width / 2
-//            var newY = findHighestPoint() + GameWorldConstants.bufferFromHighestPoint
-//            if let powerupLine = powerupLine {
-//                newY = min(newY, powerupLine.position.y - GameWorldConstants.defaultPowerupPlatformHeight)
-//            }
-//            let newPosition = CGPoint(x: newX, y: newY)
-//            let rect = CGRect(x: newPosition.x,
-//                              y: newPosition.y,
-//                              width: GameWorldConstants.defaultPowerupPlatformWidth,
-//                              height: GameWorldConstants.defaultPowerupPlatformHeight)
-//            let path = CGPath.create(from: rect)
-//
-//            let newPlatform = createPlatform(path: path, at: newPosition)
-//
-//            let otherBodies = gameObjects.map({ $0.fiziksBody })
-//
-//            if !fiziksEngine.isIntersecting(body: newPlatform.fiziksBody, otherBodies: otherBodies) {
-//                return newPlatform
-//            }
-//
-//            count += 1
-//        }
-//
-//        return nil
-//    }
-//}

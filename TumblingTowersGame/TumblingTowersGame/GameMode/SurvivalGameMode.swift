@@ -80,19 +80,16 @@ class SurvivalGameMode: GameMode {
     }
 
     private func blockPlaced(event: Event) {
-        print("block placed")
         if let placedEvent = event as? BlockPlacedEvent {
             currBlocksPlaced = placedEvent.totalBlocksInLevel
         }
     }
 
     private func blockDropped(event: Event) {
-        print("block dropped")
         currBlocksDropped += 1
     }
 
     private func blockInserted(event: Event) {
-        print("block inserted")
         currBlocksInserted += 1
     }
 }

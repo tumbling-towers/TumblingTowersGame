@@ -140,6 +140,12 @@
 		61EC653029D8BD3D00B9E018 /* CGPath+Rotate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FC031029CC483400CE2CE5 /* CGPath+Rotate.swift */; };
 		61EC653129D8BD3D00B9E018 /* CGPoint+Arithmetic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FC031429CCBFB100CE2CE5 /* CGPoint+Arithmetic.swift */; };
 		61EC653229D8BD3D00B9E018 /* CGPoint+arithmeticMean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC7FADD29C510F200B56850 /* CGPoint+arithmeticMean.swift */; };
+		61ECC59229DE916500086794 /* SpecialProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61ECC59129DE916500086794 /* SpecialProperties.swift */; };
+		61ECC59329DE916500086794 /* SpecialProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61ECC59129DE916500086794 /* SpecialProperties.swift */; };
+		61ECC59529DE95C600086794 /* SpecialPropertiesContactResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61ECC59429DE95C600086794 /* SpecialPropertiesContactResolver.swift */; };
+		61ECC59629DE95C600086794 /* SpecialPropertiesContactResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61ECC59429DE95C600086794 /* SpecialPropertiesContactResolver.swift */; };
+		61ECC59829DEBA6100086794 /* PowerupButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61ECC59729DEBA6100086794 /* PowerupButton.swift */; };
+		61ECC59929DEBA6100086794 /* PowerupButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61ECC59729DEBA6100086794 /* PowerupButton.swift */; };
 		61FC030F29CC3AE100CE2CE5 /* CGPath+Dimensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FC030E29CC3AE100CE2CE5 /* CGPath+Dimensions.swift */; };
 		61FC031129CC483400CE2CE5 /* CGPath+Rotate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FC031029CC483400CE2CE5 /* CGPath+Rotate.swift */; };
 		61FC031329CCBDE300CE2CE5 /* PathViewShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FC031229CCBDE300CE2CE5 /* PathViewShape.swift */; };
@@ -288,6 +294,9 @@
 		61CD55ED29C35D8A00DB6000 /* CategoryMask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryMask.swift; sourceTree = "<group>"; };
 		61CD55EF29C35D9600DB6000 /* CollisionMask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollisionMask.swift; sourceTree = "<group>"; };
 		61CD55F129C35DA700DB6000 /* ContactTestMask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactTestMask.swift; sourceTree = "<group>"; };
+		61ECC59129DE916500086794 /* SpecialProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialProperties.swift; sourceTree = "<group>"; };
+		61ECC59429DE95C600086794 /* SpecialPropertiesContactResolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialPropertiesContactResolver.swift; sourceTree = "<group>"; };
+		61ECC59729DEBA6100086794 /* PowerupButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerupButton.swift; sourceTree = "<group>"; };
 		61FC030E29CC3AE100CE2CE5 /* CGPath+Dimensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGPath+Dimensions.swift"; sourceTree = "<group>"; };
 		61FC031029CC483400CE2CE5 /* CGPath+Rotate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGPath+Rotate.swift"; sourceTree = "<group>"; };
 		61FC031229CCBDE300CE2CE5 /* PathViewShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathViewShape.swift; sourceTree = "<group>"; };
@@ -570,6 +579,7 @@
 				14C6732629D36D4900D8DF78 /* MenuButtonText.swift */,
 				14C6732C29D3712A00D8DF78 /* CategoryText.swift */,
 				14C6732E29D371D700D8DF78 /* BodyText.swift */,
+				61ECC59729DEBA6100086794 /* PowerupButton.swift */,
 			);
 			path = CustomViewModifiers;
 			sourceTree = "<group>";
@@ -775,6 +785,8 @@
 				2FA2AC0429C74541001C5B7C /* GameWorld.swift */,
 				2F7E13A729C0F56F000E6FA9 /* GameWorldObject */,
 				61FC3A5829DD2504005A91D7 /* PowerupLine.swift */,
+				61ECC59129DE916500086794 /* SpecialProperties.swift */,
+				61ECC59429DE95C600086794 /* SpecialPropertiesContactResolver.swift */,
 			);
 			path = GameWorld;
 			sourceTree = "<group>";
@@ -933,6 +945,7 @@
 				146E2DEC29C0D62800BFC757 /* GyroInput.swift in Sources */,
 				146E2DEB29C0D62800BFC757 /* TapInput.swift in Sources */,
 				1421B0D229D435950002E4AA /* RaceTimeGameMode.swift in Sources */,
+				61ECC59529DE95C600086794 /* SpecialPropertiesContactResolver.swift in Sources */,
 				2FFED5A629D9EDB400BA072F /* TowerHeightIncreasedEvent.swift in Sources */,
 				61A10F3B29D30E9E000EB4B4 /* GluePowerup.swift in Sources */,
 				146E2DB429C0D07200BFC757 /* TumblingTowersGameApp.swift in Sources */,
@@ -946,11 +959,13 @@
 				61CD55E629C35CDB00DB6000 /* FiziksEngine.swift in Sources */,
 				14168DDE29D82AC200EF5C22 /* GameEndView.swift in Sources */,
 				1421B0CE29D41F740002E4AA /* SurvivalGameMode.swift in Sources */,
+				61ECC59829DEBA6100086794 /* PowerupButton.swift in Sources */,
 				2FC7FADE29C510F200B56850 /* CGPoint+arithmeticMean.swift in Sources */,
 				14168DE229D831F500EF5C22 /* GameTimer.swift in Sources */,
 				124B02D329C4204300094CF5 /* GameObjectPlatform.swift in Sources */,
 				61FC031729CD498400CE2CE5 /* Shape+Fill.swift in Sources */,
 				14C6732F29D371D700D8DF78 /* BodyText.swift in Sources */,
+				61ECC59229DE916500086794 /* SpecialProperties.swift in Sources */,
 				14168DE629D8C47A00EF5C22 /* SandboxGameMode.swift in Sources */,
 				122BA13729D9595100196052 /* StorageManager.swift in Sources */,
 				61FC031129CC483400CE2CE5 /* CGPath+Rotate.swift in Sources */,
@@ -1028,6 +1043,7 @@
 				619D44A029C62FFC00EE00CE /* FiziksContactTests.swift in Sources */,
 				124B02DE29C74D8800094CF5 /* GameObjectBlockTests.swift in Sources */,
 				2FA2AC0329C74528001C5B7C /* GameEngineTests.swift in Sources */,
+				61ECC59629DE95C600086794 /* SpecialPropertiesContactResolver.swift in Sources */,
 				619D44BB29C69BAA00EE00CE /* GameFiziksEngineTests.swift in Sources */,
 				2FFED51C29D9A93800BA072F /* MockFiziksShapeNode.swift in Sources */,
 				61EC652E29D8BD3D00B9E018 /* CGVector+Multiply.swift in Sources */,
@@ -1035,6 +1051,7 @@
 				122BA13A29D9AF9600196052 /* StorageManagerTests.swift in Sources */,
 				124B02DC29C74C1400094CF5 /* ViewImageManagerTests.swift in Sources */,
 				124B02E229C754F400094CF5 /* LevelTests.swift in Sources */,
+				61ECC59929DEBA6100086794 /* PowerupButton.swift in Sources */,
 				2FFED53229D9B65500BA072F /* PathFiziksBodyTestsA.swift in Sources */,
 				61EC652629D8BAB700B9E018 /* TapInput.swift in Sources */,
 				619D44B529C6972000EE00CE /* FiziksSceneTests.swift in Sources */,
@@ -1042,6 +1059,7 @@
 				61EC652D29D8BD3D00B9E018 /* CGPath+Dimensions.swift in Sources */,
 				61EC653129D8BD3D00B9E018 /* CGPoint+Arithmetic.swift in Sources */,
 				61A10F2F29D30D03000EB4B4 /* BiMap.swift in Sources */,
+				61ECC59329DE916500086794 /* SpecialProperties.swift in Sources */,
 				619D44B029C6312100EE00CE /* MockFiziksBody.swift in Sources */,
 				2FFED51D29D9A93800BA072F /* MockFiziksContactDelegate.swift in Sources */,
 				1445F84A29C71DC900F94751 /* TapInputTests.swift in Sources */,

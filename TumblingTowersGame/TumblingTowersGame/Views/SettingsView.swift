@@ -67,6 +67,9 @@ struct SettingsView: View {
                 .onChange(of: selectedInputType) { val in
                     gameEngineMgr.changeInput(to: val)
                 }
+                
+                Text(Constants.gameInputTypeToDescription[selectedInputType.rawValue] ?? "<input type description>")
+                    .modifier(BodyText())
 
 //                HStack {
 //                    Text("Block Movement Speed")

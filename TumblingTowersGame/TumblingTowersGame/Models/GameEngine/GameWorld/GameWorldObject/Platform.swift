@@ -17,6 +17,8 @@ class Platform: GameWorldObject {
     var rotation: Double {
         fiziksBody.zRotation
     }
+    
+    var specialProperties: SpecialProperties
 
     static var categoryBitMask: BitMask = CategoryMask.platform
 
@@ -24,9 +26,10 @@ class Platform: GameWorldObject {
 
     static var contactTestBitMask: BitMask = ContactTestMask.platform
 
-    init(fiziksBody: FiziksBody, shape: ObjectShape) {
+    init(fiziksBody: FiziksBody, shape: ObjectShape, specialProperties: SpecialProperties = SpecialProperties()) {
         self.fiziksBody = fiziksBody
         self.shape = shape
+        self.specialProperties = specialProperties
     }
 }
 
