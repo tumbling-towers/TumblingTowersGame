@@ -39,7 +39,7 @@ class SandboxGameMode: GameMode {
     }
 
     func getScore() -> Int {
-        realTimeTimer.count
+        0
     }
 
     func hasGameEnded() -> Bool {

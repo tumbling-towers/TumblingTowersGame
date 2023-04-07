@@ -12,16 +12,21 @@ class RaceTimeGameMode: GameMode {
     var name = "Race Against the Clock"
 
     var realTimeTimer = GameTimer()
+    var eventMgr: EventManager
 
-    let blocksToPlace = 10
+    // MARK: Constants for this game mode
+    let blocksToPlace = 5
     let timeToPlaceBy = 15
+    let scoreTimeLeftMultiplier = 10
+    let scoreBlocksPlacedMultiplier = 10
+    let scoreBlocksDroppedMultiplier = 25
 
+    // MARK: Tracking State of Game
     var currBlocksPlaced = 0
+    var currBlocksDropped = 0
 
     var isStarted = false
     var isGameEnded = false
-
-    var eventMgr: EventManager
 
     required init(eventMgr: EventManager) {
         self.eventMgr = eventMgr
@@ -42,7 +47,7 @@ class RaceTimeGameMode: GameMode {
     func getGameState() -> Constants.GameState {
         if currBlocksPlaced >= blocksToPlace {
             return .WIN
-        } else if realTimeTimer.count < 0 {
+        } else if realTimeTimer.count <= 0 {
             return .LOSE
         }
 
@@ -54,7 +59,9 @@ class RaceTimeGameMode: GameMode {
     }
 
     func getScore() -> Int {
-        realTimeTimer.count
+        max(realTimeTimer.count * scoreTimeLeftMultiplier
+            + currBlocksPlaced * scoreBlocksPlacedMultiplier
+            - currBlocksDropped * scoreBlocksDroppedMultiplier, 0)
     }
 
     func hasGameEnded() -> Bool {
@@ -69,6 +76,7 @@ class RaceTimeGameMode: GameMode {
         isStarted = false
         isGameEnded = false
         currBlocksPlaced = 0
+        currBlocksDropped = 0
         realTimeTimer = GameTimer()
     }
 
@@ -84,9 +92,9 @@ class RaceTimeGameMode: GameMode {
 
     func getGameEndMainMessage() -> String {
         if getGameState() == .WIN {
-            return "Congratulations..."
+            return Constants.defaultWinMainString
         } else if getGameState() == .LOSE {
-            return "You LOST!"
+            return Constants.defaultLoseMainString
         }
 
         return ""
@@ -103,10 +111,12 @@ class RaceTimeGameMode: GameMode {
     }
 
     private func blockPlaced(event: Event) {
-        currBlocksPlaced += 1
+        if let placedEvent = event as? BlockPlacedEvent {
+            currBlocksPlaced = placedEvent.totalBlocksInLevel
+        }
     }
 
     private func blockDropped(event: Event) {
-        currBlocksPlaced -= 1
+        currBlocksDropped += 1
     }
 }

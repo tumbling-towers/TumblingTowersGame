@@ -69,7 +69,7 @@ class SurvivalGameMode: GameMode {
     }
 
     func getScore() -> Int {
-        realTimeTimer.count - currBlocksDropped * 10
+        max(realTimeTimer.count - currBlocksDropped * 10, 0)
     }
 
     func getTime() -> Int {
@@ -97,9 +97,9 @@ class SurvivalGameMode: GameMode {
 
     func getGameEndMainMessage() -> String {
         if getGameState() == .WIN {
-            return "Congratulations..."
+            return Constants.defaultWinMainString
         } else if getGameState() == .LOSE {
-            return "You LOST!"
+            return Constants.defaultLoseMainString
         }
 
         return ""

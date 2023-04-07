@@ -28,6 +28,10 @@ Powerup button: activate the currently available powerup.
 Rotate button: rotate the block clockwise.
 """
 
+    static let defaultWinMainString = "Congratulations..."
+
+    static let defaultLoseMainString = "You LOST!!!"
+
     enum CurrGameScreens {
         case mainMenu
         case gameModeSelection
