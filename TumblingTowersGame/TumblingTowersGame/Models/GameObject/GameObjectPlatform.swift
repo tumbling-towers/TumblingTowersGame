@@ -8,6 +8,7 @@
 import Foundation
 
 struct GameObjectPlatform: GameObject {
+    
     static let defaultWidth: Double = 500
     static let defaultHeight: Double = 100
 
@@ -15,15 +16,18 @@ struct GameObjectPlatform: GameObject {
     var position: CGPoint
     var width: Double
     var height: Double
+    var specialProperties: SpecialProperties
 
     init(id: UUID = UUID(),
          position: CGPoint,
          width: Double = GameObjectPlatform.defaultWidth,
-         height: Double = GameObjectPlatform.defaultHeight) {
+         height: Double = GameObjectPlatform.defaultHeight,
+         specialProperties: SpecialProperties = SpecialProperties()) {
         self.id = id
         self.position = position
         self.width = width
         self.height = height
+        self.specialProperties = specialProperties
     }
 }
 

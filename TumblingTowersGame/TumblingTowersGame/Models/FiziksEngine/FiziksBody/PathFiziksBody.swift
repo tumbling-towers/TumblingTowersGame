@@ -7,6 +7,29 @@ import Foundation
 import SpriteKit
 
 class PathFiziksBody: FiziksBody {
+    // MARK: Attributes of a physics body with respect to the world
+    var position: CGPoint {
+        get {
+            fiziksShapeNode.position
+        }
+        set {
+            if newValue != position {
+                fiziksShapeNode.didUpdatePosition(to: newValue)
+            }
+        }
+    }
+
+    var zRotation: CGFloat {
+        get {
+            fiziksShapeNode.zRotation
+        }
+        set {
+            if newValue != zRotation {
+                fiziksShapeNode.didUpdateZRotation(to: newValue)
+            }
+        }
+    }
+
     var velocity: CGVector? {
         get {
             fiziksShapeNode.velocity
@@ -43,6 +66,44 @@ class PathFiziksBody: FiziksBody {
         }
     }
 
+    // MARK: Attributes defining how forces affect a physics body
+    var affectedByGravity: Bool? {
+        get {
+            fiziksShapeNode.affectedByGravity
+        }
+        set {
+            if let unwrappedNewValue = newValue,
+                unwrappedNewValue != affectedByGravity {
+                fiziksShapeNode.didUpdateAffectedByGravity(to: unwrappedNewValue)
+            }
+        }
+    }
+
+    var allowsRotation: Bool? {
+        get {
+            fiziksShapeNode.allowsRotation
+        }
+        set {
+            if let unwrappedNewValue = newValue,
+                unwrappedNewValue != allowsRotation {
+                fiziksShapeNode.didUpdateAllowsRotation(to: unwrappedNewValue)
+            }
+        }
+    }
+
+    var isDynamic: Bool? {
+        get {
+            fiziksShapeNode.isDynamic
+        }
+        set {
+            if let unwrappedNewValue = newValue,
+                unwrappedNewValue != isDynamic {
+                fiziksShapeNode.didUpdateIsDynamic(to: unwrappedNewValue)
+            }
+        }
+    }
+
+    // MARK: Attributes defining a physics body's physical properties
     var mass: CGFloat? {
         get {
             fiziksShapeNode.mass
@@ -71,6 +132,42 @@ class PathFiziksBody: FiziksBody {
         fiziksShapeNode.area
     }
 
+    var friction: CGFloat? {
+        get {
+            fiziksShapeNode.friction
+        }
+        set {
+            if let unwrappedNewValue = newValue,
+                unwrappedNewValue != friction {
+                fiziksShapeNode.didUpdateFriction(to: unwrappedNewValue)
+            }
+        }
+    }
+
+    var restitution: CGFloat? {
+        get {
+            fiziksShapeNode.restitution
+        }
+        set {
+            if let unwrappedNewValue = newValue,
+                unwrappedNewValue != restitution {
+                fiziksShapeNode.didUpdateRestitution(to: unwrappedNewValue)
+            }
+        }
+    }
+
+    var linearDamping: CGFloat? {
+        get {
+            fiziksShapeNode.linearDamping
+        }
+        set {
+            if let unwrappedNewValue = newValue,
+                unwrappedNewValue != linearDamping {
+                fiziksShapeNode.didUpdateLinearDamping(to: unwrappedNewValue)
+            }
+        }
+    }
+
     var angularDamping: CGFloat? {
         get {
             fiziksShapeNode.angularDamping
@@ -83,75 +180,7 @@ class PathFiziksBody: FiziksBody {
         }
     }
 
-    var usesPreciseCollisionDetection: Bool? {
-        get {
-            fiziksShapeNode.usesPreciseCollisionDetection
-        }
-        set {
-            if let unwrappedNewValue = newValue,
-                unwrappedNewValue != usesPreciseCollisionDetection {
-                fiziksShapeNode.didUpdateUsesPreciseCollisionDetection(to: unwrappedNewValue)
-            }
-        }
-    }
-
-    func applyForce(_ force: CGVector) {
-        fiziksShapeNode.applyForce(force)
-    }
-
-    func applyTorque(_ torque: CGFloat) {
-        fiziksShapeNode.applyTorque(torque)
-    }
-
-    func applyForce(_ force: CGVector, at point: CGPoint) {
-        fiziksShapeNode.applyForce(force, at: point)
-    }
-
-    func applyImpulse(_ impulse: CGVector) {
-        fiziksShapeNode.applyImpulse(impulse)
-    }
-
-    func applyAngularImpulse(_ angularImpulse: CGFloat) {
-        fiziksShapeNode.applyAngularImpulse(angularImpulse)
-    }
-
-    func applyImpulse(_ impulse: CGVector, at point: CGPoint) {
-        fiziksShapeNode.applyImpulse(impulse, at: point)
-    }
-
-    var fiziksShapeNode: FiziksShapeNode
-
-    var path: CGPath? {
-        get {
-            fiziksShapeNode.path
-        }
-        set {
-            fiziksShapeNode.path = newValue
-        }
-    }
-
-    var position: CGPoint {
-        get {
-            fiziksShapeNode.position
-        }
-        set {
-            if newValue != position {
-                fiziksShapeNode.didUpdatePosition(to: newValue)
-            }
-        }
-    }
-
-    var zRotation: CGFloat {
-        get {
-            fiziksShapeNode.zRotation
-        }
-        set {
-            if newValue != zRotation {
-                fiziksShapeNode.didUpdateZRotation(to: newValue)
-            }
-        }
-    }
-
+    // MARK: Attributes for working with collisions and contacts
     var categoryBitMask: BitMask? {
         get {
             fiziksShapeNode.categoryBitMask
@@ -188,75 +217,51 @@ class PathFiziksBody: FiziksBody {
         }
     }
 
-    var isDynamic: Bool? {
+    var usesPreciseCollisionDetection: Bool? {
         get {
-            fiziksShapeNode.isDynamic
+            fiziksShapeNode.usesPreciseCollisionDetection
         }
         set {
             if let unwrappedNewValue = newValue,
-                unwrappedNewValue != isDynamic {
-                fiziksShapeNode.didUpdateIsDynamic(to: unwrappedNewValue)
+                unwrappedNewValue != usesPreciseCollisionDetection {
+                fiziksShapeNode.didUpdateUsesPreciseCollisionDetection(to: unwrappedNewValue)
             }
         }
     }
 
-    var friction: CGFloat? {
-        get {
-            fiziksShapeNode.friction
-        }
-        set {
-            if let unwrappedNewValue = newValue,
-                unwrappedNewValue != friction {
-                fiziksShapeNode.didUpdateFriction(to: unwrappedNewValue)
-            }
-        }
+    // MARK: Methods to apply forces and impulses to a physics body
+    func applyForce(_ force: CGVector) {
+        fiziksShapeNode.applyForce(force)
     }
 
-    var linearDamping: CGFloat? {
-        get {
-            fiziksShapeNode.linearDamping
-        }
-        set {
-            if let unwrappedNewValue = newValue,
-                unwrappedNewValue != linearDamping {
-                fiziksShapeNode.didUpdateLinearDamping(to: unwrappedNewValue)
-            }
-        }
+    func applyTorque(_ torque: CGFloat) {
+        fiziksShapeNode.applyTorque(torque)
     }
 
-    var affectedByGravity: Bool? {
-        get {
-            fiziksShapeNode.affectedByGravity
-        }
-        set {
-            if let unwrappedNewValue = newValue,
-                unwrappedNewValue != affectedByGravity {
-                fiziksShapeNode.didUpdateAffectedByGravity(to: unwrappedNewValue)
-            }
-        }
+    func applyForce(_ force: CGVector, at point: CGPoint) {
+        fiziksShapeNode.applyForce(force, at: point)
     }
 
-    var restitution: CGFloat? {
-        get {
-            fiziksShapeNode.restitution
-        }
-        set {
-            if let unwrappedNewValue = newValue,
-                unwrappedNewValue != restitution {
-                fiziksShapeNode.didUpdateRestitution(to: unwrappedNewValue)
-            }
-        }
+    func applyImpulse(_ impulse: CGVector) {
+        fiziksShapeNode.applyImpulse(impulse)
     }
 
-    var allowsRotation: Bool? {
+    func applyAngularImpulse(_ angularImpulse: CGFloat) {
+        fiziksShapeNode.applyAngularImpulse(angularImpulse)
+    }
+
+    func applyImpulse(_ impulse: CGVector, at point: CGPoint) {
+        fiziksShapeNode.applyImpulse(impulse, at: point)
+    }
+
+    var fiziksShapeNode: FiziksShapeNode
+
+    var path: CGPath? {
         get {
-            fiziksShapeNode.allowsRotation
+            fiziksShapeNode.path
         }
         set {
-            if let unwrappedNewValue = newValue,
-                unwrappedNewValue != allowsRotation {
-                fiziksShapeNode.didUpdateAllowsRotation(to: unwrappedNewValue)
-            }
+            fiziksShapeNode.path = newValue
         }
     }
 

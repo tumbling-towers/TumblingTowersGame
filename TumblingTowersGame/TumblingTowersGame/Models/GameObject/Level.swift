@@ -25,8 +25,3 @@ struct Level {
         platforms.append(platform)
     }
 }
-
-extension Level {
-    static let sampleLevel = Level(blocks: [GameObjectBlock.sampleBlock],
-                                   platforms: [GameObjectPlatform.samplePlatform])
-}

@@ -23,4 +23,5 @@ protocol FiziksEngine: AnyObject {
     func setWorldGravity(to newValue: CGVector)
     func allBodiesContacted(with fiziksBody: FiziksBody) -> [FiziksBody]
     func isIntersecting(body: FiziksBody, otherBodies: [FiziksBody]) -> Bool
+    func deleteAllBodies()
 }

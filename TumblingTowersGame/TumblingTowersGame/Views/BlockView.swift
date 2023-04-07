@@ -19,7 +19,7 @@ struct BlockView: View {
 
     var body: some View {
         PathViewShape(cgPath: block.path)
-            .fill(BlockView.color, strokeBorder: block.isGlue
+            .fill(BlockView.color, strokeBorder: block.specialProperties.isGlue
                   ? .white : .black, lineWidth: 2)
             .frame(width: block.width, height: block.height)
             .position(block.position)
