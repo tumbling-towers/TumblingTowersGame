@@ -69,6 +69,7 @@
 		14C6733529D3737200D8DF78 /* bkgMusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 14C6733429D3737200D8DF78 /* bkgMusic.mp3 */; };
 		14DAFDF729CE3146003BE140 /* SoundSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DAFDF629CE3146003BE140 /* SoundSystem.swift */; };
 		14E8158D29E064BC007F6489 /* GameEndEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E8158C29E064BC007F6489 /* GameEndEvent.swift */; };
+		14E8159129E09DD1007F6489 /* GameplayGuiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E8159029E09DD1007F6489 /* GameplayGuiView.swift */; };
 		2F469D5129D2AA3200C4152E /* CGPath+Create.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F469D5029D2AA3200C4152E /* CGPath+Create.swift */; };
 		2F469D5529D2AB1500C4152E /* FiziksContact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F469D5329D2AB1500C4152E /* FiziksContact.swift */; };
 		2F469D5629D2AB1500C4152E /* FiziksContactDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F469D5429D2AB1500C4152E /* FiziksContactDelegate.swift */; };
@@ -237,6 +238,7 @@
 		14C6733429D3737200D8DF78 /* bkgMusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bkgMusic.mp3; sourceTree = "<group>"; };
 		14DAFDF629CE3146003BE140 /* SoundSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundSystem.swift; sourceTree = "<group>"; };
 		14E8158C29E064BC007F6489 /* GameEndEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEndEvent.swift; sourceTree = "<group>"; };
+		14E8159029E09DD1007F6489 /* GameplayGuiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameplayGuiView.swift; sourceTree = "<group>"; };
 		2F469D5029D2AA3200C4152E /* CGPath+Create.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGPath+Create.swift"; sourceTree = "<group>"; };
 		2F469D5329D2AB1500C4152E /* FiziksContact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiziksContact.swift; sourceTree = "<group>"; };
 		2F469D5429D2AB1500C4152E /* FiziksContactDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiziksContactDelegate.swift; sourceTree = "<group>"; };
@@ -521,6 +523,7 @@
 				124B02C029C415CC00094CF5 /* BlockView.swift */,
 				124B02D829C568FE00094CF5 /* BackgroundView.swift */,
 				146E2DB529C0D07200BFC757 /* ContentView.swift */,
+				14E8159029E09DD1007F6489 /* GameplayGuiView.swift */,
 				146E2E1829C0E5B400BFC757 /* GameplayLevelView.swift */,
 				124B02D629C567F600094CF5 /* LevelView.swift */,
 				124B02C229C415DC00094CF5 /* PlatformView.swift */,
@@ -961,6 +964,7 @@
 				146E2E1929C0E5B400BFC757 /* GameplayLevelView.swift in Sources */,
 				2FFED52C29D9AEE600BA072F /* GameFiziksEngine.swift in Sources */,
 				61A10F4129D31083000EB4B4 /* GluePowerupActivatedEvent.swift in Sources */,
+				14E8159129E09DD1007F6489 /* GameplayGuiView.swift in Sources */,
 				124B02E629C9DAA200094CF5 /* EventManager.swift in Sources */,
 				61FC3A5529DD19C6005A91D7 /* GameWorldLevel.swift in Sources */,
 				146E2DE529C0D61A00BFC757 /* GameRendererDelegate.swift in Sources */,

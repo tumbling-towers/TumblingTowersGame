@@ -17,7 +17,7 @@ class SurvivalGameMode: GameMode {
     var currBlocksPlaced = 0
     var currBlocksDropped = 0
 
-    var name = "Survival"
+    var name = Constants.GameModeTypes.SURVIVAL.rawValue
 
     var realTimeTimer = GameTimer()
 

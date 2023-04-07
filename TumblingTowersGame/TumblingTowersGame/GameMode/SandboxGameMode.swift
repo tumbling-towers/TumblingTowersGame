@@ -9,7 +9,7 @@ import Foundation
 
 class SandboxGameMode: GameMode {
 
-    var name = "Sandbox"
+    var name = Constants.GameModeTypes.SANDBOX.rawValue
 
     var realTimeTimer = GameTimer()
 

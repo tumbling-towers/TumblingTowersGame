@@ -46,7 +46,7 @@ Rotate button: rotate the block clockwise.
 
     enum GameModeTypes: String {
         case SURVIVAL = "Survival"
-        case RACECLOCK = "Race Against the Clock"
+        case RACECLOCK = "Race the Clock"
         case SANDBOX = "Sandbox"
     }
 

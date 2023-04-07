@@ -9,7 +9,7 @@ import Foundation
 
 class RaceTimeGameMode: GameMode {
 
-    var name = "Race Against the Clock"
+    var name = Constants.GameModeTypes.RACECLOCK.rawValue
 
     var realTimeTimer = GameTimer()
     var eventMgr: EventManager
