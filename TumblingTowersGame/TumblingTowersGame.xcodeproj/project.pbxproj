@@ -138,6 +138,10 @@
 		61EC653029D8BD3D00B9E018 /* CGPath+Rotate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FC031029CC483400CE2CE5 /* CGPath+Rotate.swift */; };
 		61EC653129D8BD3D00B9E018 /* CGPoint+Arithmetic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FC031429CCBFB100CE2CE5 /* CGPoint+Arithmetic.swift */; };
 		61EC653229D8BD3D00B9E018 /* CGPoint+arithmeticMean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC7FADD29C510F200B56850 /* CGPoint+arithmeticMean.swift */; };
+		61F4F01929DDF9C30002AD69 /* JosefinSans-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 61F4F01829DDF9C30002AD69 /* JosefinSans-Medium.ttf */; };
+		61F4F01A29DDF9C30002AD69 /* JosefinSans-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 61F4F01829DDF9C30002AD69 /* JosefinSans-Medium.ttf */; };
+		61F4F01D29DDFC090002AD69 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F4F01C29DDFC090002AD69 /* CustomButton.swift */; };
+		61F4F01F29DE016B0002AD69 /* SecondaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F4F01E29DE016B0002AD69 /* SecondaryButton.swift */; };
 		61ECC59229DE916500086794 /* SpecialProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61ECC59129DE916500086794 /* SpecialProperties.swift */; };
 		61ECC59329DE916500086794 /* SpecialProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61ECC59129DE916500086794 /* SpecialProperties.swift */; };
 		61ECC59529DE95C600086794 /* SpecialPropertiesContactResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61ECC59429DE95C600086794 /* SpecialPropertiesContactResolver.swift */; };
@@ -290,6 +294,10 @@
 		61CD55ED29C35D8A00DB6000 /* CategoryMask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryMask.swift; sourceTree = "<group>"; };
 		61CD55EF29C35D9600DB6000 /* CollisionMask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollisionMask.swift; sourceTree = "<group>"; };
 		61CD55F129C35DA700DB6000 /* ContactTestMask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactTestMask.swift; sourceTree = "<group>"; };
+		61F4F01829DDF9C30002AD69 /* JosefinSans-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "JosefinSans-Medium.ttf"; sourceTree = "<group>"; };
+		61F4F01B29DDFA5B0002AD69 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		61F4F01C29DDFC090002AD69 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		61F4F01E29DE016B0002AD69 /* SecondaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondaryButton.swift; sourceTree = "<group>"; };
 		61ECC59129DE916500086794 /* SpecialProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialProperties.swift; sourceTree = "<group>"; };
 		61ECC59429DE95C600086794 /* SpecialPropertiesContactResolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialPropertiesContactResolver.swift; sourceTree = "<group>"; };
 		61ECC59729DEBA6100086794 /* PowerupButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerupButton.swift; sourceTree = "<group>"; };
@@ -434,6 +442,8 @@
 		146E2DB229C0D07200BFC757 /* TumblingTowersGame */ = {
 			isa = PBXGroup;
 			children = (
+				61F4F01B29DDFA5B0002AD69 /* Info.plist */,
+				61F4F01729DDF9A20002AD69 /* Fonts */,
 				122BA13529D9594900196052 /* Storage */,
 				61A10F1D29D30BC8000EB4B4 /* PowerupManager */,
 				146E2DB729C0D07300BFC757 /* Assets.xcassets */,
@@ -575,6 +585,8 @@
 				14C6732629D36D4900D8DF78 /* MenuButtonText.swift */,
 				14C6732C29D3712A00D8DF78 /* CategoryText.swift */,
 				14C6732E29D371D700D8DF78 /* BodyText.swift */,
+				61F4F01C29DDFC090002AD69 /* CustomButton.swift */,
+				61F4F01E29DE016B0002AD69 /* SecondaryButton.swift */,
 				61ECC59729DEBA6100086794 /* PowerupButton.swift */,
 			);
 			path = CustomViewModifiers;
@@ -789,6 +801,14 @@
 			path = Collision;
 			sourceTree = "<group>";
 		};
+		61F4F01729DDF9A20002AD69 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				61F4F01829DDF9C30002AD69 /* JosefinSans-Medium.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		61FC3A5729DD24F2005A91D7 /* GameWorld */ = {
 			isa = PBXGroup;
 			children = (
@@ -886,6 +906,7 @@
 				146E2DBB29C0D07300BFC757 /* Preview Assets.xcassets in Resources */,
 				146E2DB829C0D07300BFC757 /* Assets.xcassets in Resources */,
 				14C6733529D3737200D8DF78 /* bkgMusic.mp3 in Resources */,
+				61F4F01929DDF9C30002AD69 /* JosefinSans-Medium.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -893,6 +914,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				61F4F01A29DDF9C30002AD69 /* JosefinSans-Medium.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -971,6 +993,7 @@
 				61ECC59829DEBA6100086794 /* PowerupButton.swift in Sources */,
 				2FC7FADE29C510F200B56850 /* CGPoint+arithmeticMean.swift in Sources */,
 				14168DE229D831F500EF5C22 /* GameTimer.swift in Sources */,
+				61F4F01D29DDFC090002AD69 /* CustomButton.swift in Sources */,
 				124B02D329C4204300094CF5 /* GameObjectPlatform.swift in Sources */,
 				61FC031729CD498400CE2CE5 /* Shape+Fill.swift in Sources */,
 				14C6732F29D371D700D8DF78 /* BodyText.swift in Sources */,
@@ -980,6 +1003,7 @@
 				61FC031129CC483400CE2CE5 /* CGPath+Rotate.swift in Sources */,
 				61AE15B329D16DD500D04E95 /* BlockPlacedEvent.swift in Sources */,
 				2FFED59B29D9ED4500BA072F /* BobTheBuilderAchievementDataSource.swift in Sources */,
+				61F4F01F29DE016B0002AD69 /* SecondaryButton.swift in Sources */,
 				61FC031529CCBFB100CE2CE5 /* CGPoint+Arithmetic.swift in Sources */,
 				616EAD0829D6D6A2006D602A /* PowerupAvailableEvent.swift in Sources */,
 				61FC031329CCBDE300CE2CE5 /* PathViewShape.swift in Sources */,
@@ -1214,6 +1238,7 @@
 				DEVELOPMENT_TEAM = T95PZMKKDH;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TumblingTowersGame/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -1243,6 +1268,7 @@
 				DEVELOPMENT_TEAM = T95PZMKKDH;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TumblingTowersGame/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

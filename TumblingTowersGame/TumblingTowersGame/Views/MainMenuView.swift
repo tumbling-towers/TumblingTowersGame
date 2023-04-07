@@ -20,32 +20,46 @@ struct MainMenuView: View {
             VStack {
                 Spacer()
 
-                Text("Welcome to.....")
-                Text("TUBMLING TOWERS")
-                    .font(.system(size: 60, weight: .heavy))
+                Image(ViewImageManager.mainLogo)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 500)
+                    
 
                 Spacer()
 
                 Button {
-                    currGameScreen = .gameModeSelection
+                    withAnimation {
+                        currGameScreen = .gameModeSelection
+                    }
                 } label: {
-                    Text("START GAME")
-                        .modifier(MenuButtonText(fontSize: 30))
+                    Text("Start")
+                        .modifier(CustomButton(fontSize: 40))
                 }
+                
+                Spacer().frame(height: 50)
+                
+                Button {
+                    withAnimation {
+                        currGameScreen = .achievements
+                    }
+                } label: {
+                    Text("Achievements")
+                        .modifier(CustomButton(fontSize: 40))
+                }
+                .modifier(CustomButton(fontSize: 40))
+                
+                Spacer().frame(height: 50)
 
                 Button {
-                    currGameScreen = .achievements
+                    withAnimation {
+                        currGameScreen = .settings
+                    }
                 } label: {
-                    Text("ACHIEVEMENTS")
-                        .modifier(MenuButtonText(fontSize: 30, padding: 50))
+                    Text("Settings")
+                        .modifier(CustomButton(fontSize: 40))
                 }
-
-                Button {
-                    currGameScreen = .settings
-                } label: {
-                    Text("SETTINGS")
-                        .modifier(MenuButtonText(fontSize: 30))
-                }
+                .modifier(CustomButton(fontSize: 40))
 
                 Spacer()
                 Spacer()
