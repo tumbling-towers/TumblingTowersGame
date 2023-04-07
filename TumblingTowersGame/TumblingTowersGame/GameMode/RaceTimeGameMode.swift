@@ -20,21 +20,33 @@ class RaceTimeGameMode: GameMode {
 
     var isGameEnded = false
 
+    var eventMgr: EventManager
+
     required init(eventMgr: EventManager) {
         // Register all events that affect game state
         eventMgr.registerClosure(for: BlockPlacedEvent.self, closure: blockPlaced)
         eventMgr.registerClosure(for: BlockDroppedEvent.self, closure: blockDropped)
+
+        self.eventMgr = eventMgr
+    }
+
+    func update() {
+        let gameState = getGameState()
+
+        if gameState != .RUNNING && gameState != .PAUSED {
+            endGame()
+        }
     }
 
     func getGameState() -> Constants.GameState {
         if currBlocksPlaced >= blocksToPlace {
             isGameEnded = true
-            endTimer()
-            return .WIN_RACE
+            endGame()
+            return .WIN
         } else if realTimeTimer.count < 0 {
             isGameEnded = true
-            endTimer()
-            return .LOSE_RACE
+            endGame()
+            return .LOSE
         }
 
         return .RUNNING
@@ -48,22 +60,41 @@ class RaceTimeGameMode: GameMode {
         isGameEnded
     }
 
-    func getTimeRemaining() -> Int {
+    func getTime() -> Int {
         realTimeTimer.count
     }
 
-    func restartGame() {
+    func resetGame() {
         isGameEnded = false
         currBlocksPlaced = 0
         realTimeTimer = GameTimer()
     }
 
-    func startTimer() {
+    func startGame() {
         realTimeTimer.start(timeInSeconds: timeToPlaceBy, countsUp: false)
     }
 
-    func endTimer() {
+    func endGame() {
+        isGameEnded = true
         realTimeTimer.stop()
+
+        eventMgr.postEvent(GameEndedEvent())
+    }
+
+    func getGameEndMainMessage() -> String {
+        if getGameState() == .WIN {
+            return "Congratulations..."
+        } else if getGameState() == .LOSE {
+            return "You LOST!"
+        }
+    }
+
+    func getGameEndSubMessage() -> String {
+        if getGameState() == .WIN {
+            return "You beat the clock!"
+        } else if getGameState() == .LOSE {
+            return "You ran out of time!."
+        }
     }
 
     private func blockPlaced(event: Event) {

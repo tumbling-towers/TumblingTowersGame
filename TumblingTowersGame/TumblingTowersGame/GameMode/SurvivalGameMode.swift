@@ -23,12 +23,24 @@ class SurvivalGameMode: GameMode {
 
     var isGameEnded = false
 
+    var eventMgr: EventManager
+
     required init(eventMgr: EventManager) {
         // Register all events that affect game state
 
         eventMgr.registerClosure(for: BlockPlacedEvent.self, closure: blockPlaced)
         eventMgr.registerClosure(for: BlockDroppedEvent.self, closure: blockDropped)
         eventMgr.registerClosure(for: BlockInsertedEvent.self, closure: blockInserted)
+
+        self.eventMgr = eventMgr
+    }
+
+    func update() {
+        let gameState = getGameState()
+
+        if gameState != .RUNNING && gameState != .PAUSED {
+            endGame()
+        }
     }
 
     func getGameState() -> Constants.GameState {
@@ -38,14 +50,18 @@ class SurvivalGameMode: GameMode {
 
         if currBlocksDropped >= blocksDroppedThreshold {
             isGameEnded = true
-            endTimer()
-            return .LOSE_SURVIVAL
+            endGame()
+
+            // TODO: Post event
+            return .LOSE
         }
 
         if currBlocksPlaced >= blocksToPlace {
             isGameEnded = true
-            endTimer()
-            return .WIN_SURVIVAL
+            endGame()
+
+            // Post event
+            return .WIN
         }
 
         return .RUNNING
@@ -59,11 +75,11 @@ class SurvivalGameMode: GameMode {
         realTimeTimer.count - currBlocksDropped * 10
     }
 
-    func getTimeRemaining() -> Int {
+    func getTime() -> Int {
         realTimeTimer.count
     }
 
-    func restartGame() {
+    func resetGame() {
         isGameEnded = false
         currBlocksInserted = 0
         currBlocksPlaced = 0
@@ -71,13 +87,33 @@ class SurvivalGameMode: GameMode {
         realTimeTimer = GameTimer()
     }
 
-    func startTimer() {
+    func startGame() {
         realTimeTimer.start(timeInSeconds: 0, countsUp: true)
     }
 
-    func endTimer() {
+    func endGame() {
+        isGameEnded = true
         realTimeTimer.stop()
+
+
     }
+
+    func getGameEndMainMessage() -> String {
+        if getGameState() == .WIN {
+            return "Congratulations..."
+        } else if getGameState() == .LOSE {
+            return "You LOST!"
+        }
+    }
+
+    func getGameEndSubMessage() -> String {
+        if getGameState() == .WIN {
+            return "You stacked enough blocks!"
+        } else if getGameState() == .LOSE {
+            return "You dropped too many blocks!."
+        }
+    }
+
 
     private func blockPlaced(event: Event) {
         if let placedEvent = event as? BlockPlacedEvent {

@@ -47,7 +47,7 @@ class GameEngineManager: ObservableObject {
     }
 
     var timeRemaining: Int? {
-        gameMode?.getTimeRemaining()
+        gameMode?.getTime()
     }
 
     var score: Int? {
@@ -129,6 +129,7 @@ class GameEngineManager: ObservableObject {
     func stopGame() {
         gameUpdater?.stopLevel()
         gameEngine.stopGame()
+        gameMode?.endGame()
     }
 
     func resetGame() {

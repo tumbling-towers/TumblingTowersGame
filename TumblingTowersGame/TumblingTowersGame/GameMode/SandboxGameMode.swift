@@ -15,8 +15,18 @@ class SandboxGameMode: GameMode {
 
     var isGameEnded = false
 
-    required init(eventMgr: EventManager) {
+    var eventMgr: EventManager
 
+    required init(eventMgr: EventManager) {
+        self.eventMgr = eventMgr
+    }
+
+    func update() {
+        let gameState = getGameState()
+
+        if gameState != .RUNNING && gameState != .PAUSED {
+            endGame()
+        }
     }
 
     func getGameState() -> Constants.GameState {
@@ -31,20 +41,29 @@ class SandboxGameMode: GameMode {
         isGameEnded
     }
 
-    func getTimeRemaining() -> Int {
+    func getTime() -> Int {
         realTimeTimer.count
     }
 
-    func restartGame() {
+    func resetGame() {
         isGameEnded = false
         realTimeTimer = GameTimer()
     }
 
-    func startTimer() {
+    func startGame() {
         realTimeTimer.start(timeInSeconds: 0, countsUp: true)
     }
 
-    func endTimer() {
+    func endGame() {
+        isGameEnded = true
         realTimeTimer.stop()
+    }
+
+    func getGameEndMainMessage() -> String {
+        "Thank you for playing!"
+    }
+
+    func getGameEndSubMessage() -> String {
+        "Please Try Again!"
     }
 }

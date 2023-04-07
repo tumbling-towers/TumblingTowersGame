@@ -19,13 +19,13 @@ protocol GameMode {
 
     func getScore() -> Int
 
-    func getTimeRemaining() -> Int
+    func getTime() -> Int
 
-    func restartGame()
+    func startGame()
 
-    func startTimer()
+    func resetGame()
 
-    func endTimer()
+    func endGame()
 
     func getGameEndMainMessage() -> String
 
