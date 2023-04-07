@@ -10,17 +10,18 @@ import Foundation
 class SkyscraperAchievement: Achievement {
     var name: String
     var description: String {
-        "Build a tower 10m high. Highest tower: \(highScore)"
+        "Build a tower \(goal)m high. Highest tower: \(highScore)"
     }
+    let goal: Any
     var achieved: Bool {
-        highScore >= goal
+        highScore >= (goal as? CGFloat ?? 0.0)
     }
+    let achievementType: AchievementType = .Skyscraper
+    let dataSource: AchievementSystemDataSource
     
-    let dataSource: SkyscraperAchievementDataSource
     var highScore: CGFloat
-    let goal: CGFloat
     
-    init(name: String, goal: CGFloat, dataSource: SkyscraperAchievementDataSource) {
+    init(name: String, goal: Any, dataSource: AchievementSystemDataSource) {
         self.name = name
         self.goal = goal
         self.dataSource = dataSource
@@ -28,9 +29,9 @@ class SkyscraperAchievement: Achievement {
     }
     
     func update() {
-        guard let height = dataSource.towerHeight else {
+        guard let newHeight = dataSource.getStat(for: .towerHeight) as? CGFloat else {
             return
         }
-        highScore = max(highScore, height)
+        highScore = max(highScore, newHeight)
     }
 }

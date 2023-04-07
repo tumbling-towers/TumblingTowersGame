@@ -7,5 +7,6 @@
 
 import Foundation
 
-protocol AchievementSystemDataSource: BobTheBuilderAchievementDataSource, SkyscraperAchievementDataSource {
+protocol AchievementSystemDataSource {
+    func getStat(for statTrackerType: StatTrackerType) -> Any?
 }

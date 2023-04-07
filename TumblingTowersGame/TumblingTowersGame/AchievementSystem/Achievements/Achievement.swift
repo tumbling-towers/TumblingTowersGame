@@ -10,6 +10,9 @@ import Foundation
 protocol Achievement {
     var name: String { get }
     var description: String { get }
+    var goal: Any { get }
     var achieved: Bool { get }
+    var achievementType: AchievementType { get }
+    var dataSource: AchievementSystemDataSource { get }
     func update()
 }

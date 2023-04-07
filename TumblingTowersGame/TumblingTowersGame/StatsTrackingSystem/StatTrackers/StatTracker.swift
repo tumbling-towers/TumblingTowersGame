@@ -8,5 +8,6 @@
 import Foundation
 
 protocol StatTracker {
-    static var name: String { get }
+    var stat: Any { get }
+    var statTrackerType: StatTrackerType { get }
 }
