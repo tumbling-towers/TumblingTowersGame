@@ -46,12 +46,20 @@ class GameEngineManager: ObservableObject {
         return CGRect(x: refPoints.left.x - 1, y: 0, width: width + 2, height: 3_000)
     }
 
-    var timeRemaining: Int? {
-        gameMode?.getTime()
+    var timeRemaining: Int {
+        if let currTime = gameMode?.getTime() {
+            return currTime
+        } else {
+            return 0
+        }
     }
 
-    var score: Int? {
-        gameMode?.getScore()
+    var score: Int {
+        if let currScore = gameMode?.getScore() {
+            return currScore
+        } else {
+            return 0
+        }
     }
 
     var gameEnded: Bool {

@@ -18,6 +18,7 @@ struct GameEndView: View {
 
                 VStack {
 
+                    Spacer()
 
                     drawGameEndText()
 
@@ -30,12 +31,15 @@ struct GameEndView: View {
                         Text("Timer: " + String(timeLeft))
                             .font(.system(size: 30))
                     }
+
+                    Spacer()
+
+                    GameplayGoBackMenuView(currGameScreen: $currGameScreen)
+                        .padding(.bottom, 1)
                     
                 }
-            }
 
-            GameplayGoBackMenuView(currGameScreen: $currGameScreen)
-                .padding(.bottom, 1)
+            }
         }
     }
 

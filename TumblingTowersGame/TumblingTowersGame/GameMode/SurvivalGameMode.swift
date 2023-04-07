@@ -10,21 +10,25 @@ import Foundation
 class SurvivalGameMode: GameMode {
 
     // Place N blocks wo dropping more than M blocks in shortest time possible (Score is time taken?)
+    var name = Constants.GameModeTypes.SURVIVAL.rawValue
+
+    var realTimeTimer = GameTimer()
+    var eventMgr: EventManager
+
+    // MARK: Constants for this game mode
     let blocksToPlace = 3
     let blocksDroppedThreshold = 1
+    let scoreBlocksPlacedMultiplier = 10
+    let scoreBlocksDroppedMultiplier = 25
+    let scoreTimeWithBonusScore = 30
 
+    // MARK: Tracking State of Game
     var currBlocksInserted = 0
     var currBlocksPlaced = 0
     var currBlocksDropped = 0
 
-    var name = Constants.GameModeTypes.SURVIVAL.rawValue
-
-    var realTimeTimer = GameTimer()
-
     var isStarted = false
     var isGameEnded = false
-
-    var eventMgr: EventManager
 
     required init(eventMgr: EventManager) {
         self.eventMgr = eventMgr
@@ -69,7 +73,9 @@ class SurvivalGameMode: GameMode {
     }
 
     func getScore() -> Int {
-        max(realTimeTimer.count - currBlocksDropped * 10, 0)
+        max(scoreTimeWithBonusScore - realTimeTimer.count
+            + currBlocksPlaced * scoreBlocksPlacedMultiplier
+            - currBlocksDropped * scoreBlocksDroppedMultiplier, 0)
     }
 
     func getTime() -> Int {

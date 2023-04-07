@@ -70,6 +70,7 @@
 		14DAFDF729CE3146003BE140 /* SoundSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DAFDF629CE3146003BE140 /* SoundSystem.swift */; };
 		14E8158D29E064BC007F6489 /* GameEndEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E8158C29E064BC007F6489 /* GameEndEvent.swift */; };
 		14E8159129E09DD1007F6489 /* GameplayGuiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E8159029E09DD1007F6489 /* GameplayGuiView.swift */; };
+		14E8159329E0B198007F6489 /* GameplayGuiText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E8159229E0B198007F6489 /* GameplayGuiText.swift */; };
 		2F469D5129D2AA3200C4152E /* CGPath+Create.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F469D5029D2AA3200C4152E /* CGPath+Create.swift */; };
 		2F469D5529D2AB1500C4152E /* FiziksContact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F469D5329D2AB1500C4152E /* FiziksContact.swift */; };
 		2F469D5629D2AB1500C4152E /* FiziksContactDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F469D5429D2AB1500C4152E /* FiziksContactDelegate.swift */; };
@@ -239,6 +240,7 @@
 		14DAFDF629CE3146003BE140 /* SoundSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundSystem.swift; sourceTree = "<group>"; };
 		14E8158C29E064BC007F6489 /* GameEndEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEndEvent.swift; sourceTree = "<group>"; };
 		14E8159029E09DD1007F6489 /* GameplayGuiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameplayGuiView.swift; sourceTree = "<group>"; };
+		14E8159229E0B198007F6489 /* GameplayGuiText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameplayGuiText.swift; sourceTree = "<group>"; };
 		2F469D5029D2AA3200C4152E /* CGPath+Create.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGPath+Create.swift"; sourceTree = "<group>"; };
 		2F469D5329D2AB1500C4152E /* FiziksContact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiziksContact.swift; sourceTree = "<group>"; };
 		2F469D5429D2AB1500C4152E /* FiziksContactDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiziksContactDelegate.swift; sourceTree = "<group>"; };
@@ -594,6 +596,7 @@
 				61F4F01C29DDFC090002AD69 /* CustomButton.swift */,
 				61F4F01E29DE016B0002AD69 /* SecondaryButton.swift */,
 				61ECC59729DEBA6100086794 /* PowerupButton.swift */,
+				14E8159229E0B198007F6489 /* GameplayGuiText.swift */,
 			);
 			path = CustomViewModifiers;
 			sourceTree = "<group>";
@@ -1020,6 +1023,7 @@
 				619D44C529C70EFA00EE00CE /* PlatformShape.swift in Sources */,
 				124B02C929C4171400094CF5 /* ViewImageManager.swift in Sources */,
 				2F469D5829D2AB2700C4152E /* FiziksScene.swift in Sources */,
+				14E8159329E0B198007F6489 /* GameplayGuiText.swift in Sources */,
 				124B02C129C415CC00094CF5 /* BlockView.swift in Sources */,
 				61AE15B929D18BB400D04E95 /* PowerupLineShape.swift in Sources */,
 				1421B0D029D424A70002E4AA /* BlockDroppedEvent.swift in Sources */,
