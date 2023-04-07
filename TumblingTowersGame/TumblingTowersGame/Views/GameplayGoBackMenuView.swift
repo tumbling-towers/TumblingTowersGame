@@ -15,13 +15,15 @@ struct GameplayGoBackMenuView: View {
         HStack {
             Spacer()
 
-            Button("BACK") {
+            Button {
                 withAnimation {
                     currGameScreen = .mainMenu
                     gameEngineMgr.resetGame()
                 }
+            } label: {
+                Text("Back")
+                    .modifier(CustomButton(fontSize: 40))
             }
-            .modifier(MenuButtonText(fontSize: 20))
 
             Spacer()
         }

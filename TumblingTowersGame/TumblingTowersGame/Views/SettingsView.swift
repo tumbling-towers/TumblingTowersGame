@@ -83,8 +83,8 @@ struct SettingsView: View {
                 Button {
                     currGameScreen = .mainMenu
                 } label: {
-                    Text("BACK")
-                        .modifier(MenuButtonText(fontSize: 20))
+                    Text("Back")
+                        .modifier(CustomButton(fontSize: 25))
                 }
                 .padding(.top, 35.0)
             }

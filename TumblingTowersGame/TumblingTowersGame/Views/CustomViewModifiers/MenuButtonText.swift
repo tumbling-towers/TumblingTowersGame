@@ -14,7 +14,7 @@ struct MenuButtonText: ViewModifier {
     func body(content: Content) -> some View {
         content
             .foregroundColor(.black)
-            .font(.system(size: fontSize, weight: .bold))
+            .font(.custom("JosefinSans-Medium", size: fontSize))
             .padding(.all, padding)
     }
 }

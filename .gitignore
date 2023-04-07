@@ -6,6 +6,9 @@
 
 .DS_Store
 
+## User State
+TumblingTowersGame/TumblingTowersGame.xcodeproj/project.xcworkspace/xcuserdata/
+
 ## Build generated
 build/
 DerivedData/
