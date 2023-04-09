@@ -149,10 +149,12 @@ class GameEngineManager: ObservableObject {
     
     func pause() {
         gameUpdater?.pauseGame()
+        gameEngine.pauseGame()
     }
     
     func unpause() {
         gameUpdater?.unpauseGame()
+        gameEngine.unpauseGame()
     }
 
     /// GameEngine outputs coordinates with the origin at the bottom-left.

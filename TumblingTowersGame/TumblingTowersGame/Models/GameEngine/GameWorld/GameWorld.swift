@@ -200,6 +200,14 @@ class GameWorld {
     }
     
     // MARK: Other methods
+    func pauseGame() {
+        fiziksEngine.pause()
+    }
+    
+    func unpauseGame() {
+        fiziksEngine.unpause()
+    }
+    
     func addObject(object: GameWorldObject) {
         level.add(gameWorldObject: object)
         fiziksEngine.add(object.fiziksBody)

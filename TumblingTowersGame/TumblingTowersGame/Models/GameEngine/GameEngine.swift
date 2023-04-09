@@ -41,6 +41,14 @@ class GameEngine {
         gameMode?.endTimer()
     }
     
+    func pauseGame() {
+        gameWorld.pauseGame()
+    }
+    
+    func unpauseGame() {
+        gameWorld.unpauseGame()
+    }
+    
     func resetGame() {
         gameWorld.resetGame()
         gameMode?.restartGame()

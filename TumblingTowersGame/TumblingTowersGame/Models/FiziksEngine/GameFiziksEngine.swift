@@ -122,6 +122,14 @@ extension GameFiziksEngine: FiziksEngine {
         
         fiziksScene.removeAllChildren()
     }
+    
+    func pause() {
+        fiziksScene.pause()
+    }
+    
+    func unpause() {
+        fiziksScene.unpause()
+    }
 
     private func getSKPhysicsBody(of fiziksBody: FiziksBody) -> SKPhysicsBody? {
         fiziksBody.fiziksShapeNode.physicsBody
