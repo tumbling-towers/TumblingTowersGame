@@ -55,18 +55,25 @@ struct TutorialView: View {
                     .modifier(GameplayGuiText(fontSize: 20))
 
                 Text(Constants.instructionsGameModes)
-                    .modifier(BodyText(fontSize: 20))
+                    .modifier(GameplayBodyText(fontSize: 20))
 
-                Text("\n").hidden()
+                Divider().modifier(MenuDividerLine())
 
                 drawGameModeDescriptions()
 
+                Divider().modifier(MenuDividerLine())
+                
                 Text(Constants.instructionsAfterSelectGameMode)
-                    .modifier(BodyText(fontSize: 25))
+                    .modifier(GameplayBodyText(fontSize: 25))
                     .padding(.all, 3)
 
                 drawGameplayHelp()
 
+                Text(Constants.instructionsStackBlocks)
+                    .modifier(GameplayBodyText(fontSize: 20))
+
+                Text(Constants.instructionsHaveFun)
+                    .modifier(GameplayGuiText(fontSize: 40))
             }
 
         )
@@ -74,7 +81,7 @@ struct TutorialView: View {
 
     private func drawGameModeDescriptions() -> AnyView {
         AnyView(
-            VStack {
+            VStack(alignment: .leading) {
 
                 ForEach(Constants.GameModeTypes.allCases, id: \.self) { value in
 
@@ -83,13 +90,14 @@ struct TutorialView: View {
                             .modifier(CategoryText())
 
                         Text(Constants.getGameModeType(from: value)?.description ?? Constants.instructionsDefaultGamemodeText)
-                            .modifier(BodyText(fontSize: 15))
+                            .modifier(GameplayBodyText(fontSize: 30))
                     }
-                    .padding(.all, 3)
+                    .padding(.all, 10)
                 }
 
             }
-
+            .background(
+                RoundedRectangle(cornerRadius: 10, style: .continuous).fill(Color.init(red: 0.969, green: 0.933, blue: 0.855)))
         )
     }
 
@@ -97,28 +105,29 @@ struct TutorialView: View {
         AnyView(
             VStack {
                 Text(Constants.instructionsInputControl)
-                    .modifier(BodyText(fontSize: 20))
+                    .modifier(GameplayBodyText(fontSize: 20))
+
+                Divider().modifier(MenuDividerLine())
 
                 drawInputDescriptions()
 
+                Divider().modifier(MenuDividerLine())
+
                 Text(Constants.instructionsBlockContact)
-                    .modifier(BodyText(fontSize: 20))
+                    .modifier(GameplayBodyText(fontSize: 20))
+
+                VStack {
+                    Text(Constants.instructionsOtherGuiButtons)
+                        .modifier(GameplayBodyText(fontSize: 20))
+
+                    Text(Constants.generalInputDescription)
+                        .modifier(BodyText(fontSize: 20))
+                }
+                .padding(.all, 10)
+                .background(
+                    RoundedRectangle(cornerRadius: 10, style: .continuous).fill(Color.init(red: 0.969, green: 0.933, blue: 0.855)))
 
                 Text("\n").hidden()
-
-                Text(Constants.instructionsOtherGuiButtons)
-                    .modifier(BodyText(fontSize: 20))
-
-                Text(Constants.generalInputDescription)
-                    .modifier(BodyText(fontSize: 20))
-
-                Text("\n").hidden()
-
-                Text(Constants.instructionsStackBlocks)
-                    .modifier(BodyText(fontSize: 20))
-
-                Text(Constants.instructionsHaveFun)
-                    .modifier(GameplayGuiText(fontSize: 40))
 
             }
 
@@ -127,7 +136,7 @@ struct TutorialView: View {
 
     private func drawInputDescriptions() -> AnyView {
         AnyView(
-            VStack {
+            VStack(alignment: .leading) {
 
                 ForEach(Constants.GameInputTypes.allCases, id: \.self) { value in
 
@@ -136,12 +145,14 @@ struct TutorialView: View {
                             .modifier(CategoryText())
 
                         Text(Constants.getGameInputType(fromGameInputType: value)?.description ?? Constants.instructionsDefaultInputText)
-                            .modifier(BodyText(fontSize: 15))
+                            .modifier(BodyText(fontSize: 20))
                     }
-                    .padding(.all, 3)
+                    .padding(.all, 10)
                 }
 
             }
+            .background(
+                RoundedRectangle(cornerRadius: 10, style: .continuous).fill(Color.init(red: 0.969, green: 0.933, blue: 0.855)))
 
         )
     }

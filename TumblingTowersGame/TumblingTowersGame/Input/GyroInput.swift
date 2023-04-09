@@ -10,8 +10,8 @@ import CoreMotion
 
 class GyroInput: InputSystem {
     static var description = """
-Tilt Left / Right: Moves the block in the tilted direction based on tilt amount.
-Swipe Down: Speeds up the downward movement of the block
+Tilt Left / Right: Moves the block in the tilted direction.
+Swipe Down: Speeds up the downward movement of the block.
 """
     
     private weak var mainGameMgr: MainGameManager?
