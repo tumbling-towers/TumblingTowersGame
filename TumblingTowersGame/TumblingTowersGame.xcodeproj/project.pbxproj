@@ -68,6 +68,8 @@
 		14C6732F29D371D700D8DF78 /* BodyText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C6732E29D371D700D8DF78 /* BodyText.swift */; };
 		14C6733529D3737200D8DF78 /* bkgMusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 14C6733429D3737200D8DF78 /* bkgMusic.mp3 */; };
 		14DAFDF729CE3146003BE140 /* SoundSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DAFDF629CE3146003BE140 /* SoundSystem.swift */; };
+		2F256EA629E341880062BCFF /* AchievementsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F256EA529E341880062BCFF /* AchievementsView.swift */; };
+		2F256EA829E3480E0062BCFF /* DisplayableAchievement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F256EA729E3480E0062BCFF /* DisplayableAchievement.swift */; };
 		2F469D5129D2AA3200C4152E /* CGPath+Create.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F469D5029D2AA3200C4152E /* CGPath+Create.swift */; };
 		2F469D5529D2AB1500C4152E /* FiziksContact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F469D5329D2AB1500C4152E /* FiziksContact.swift */; };
 		2F469D5629D2AB1500C4152E /* FiziksContactDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F469D5429D2AB1500C4152E /* FiziksContactDelegate.swift */; };
@@ -237,6 +239,8 @@
 		14C6732E29D371D700D8DF78 /* BodyText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyText.swift; sourceTree = "<group>"; };
 		14C6733429D3737200D8DF78 /* bkgMusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bkgMusic.mp3; sourceTree = "<group>"; };
 		14DAFDF629CE3146003BE140 /* SoundSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundSystem.swift; sourceTree = "<group>"; };
+		2F256EA529E341880062BCFF /* AchievementsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementsView.swift; sourceTree = "<group>"; };
+		2F256EA729E3480E0062BCFF /* DisplayableAchievement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayableAchievement.swift; sourceTree = "<group>"; };
 		2F469D5029D2AA3200C4152E /* CGPath+Create.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGPath+Create.swift"; sourceTree = "<group>"; };
 		2F469D5329D2AB1500C4152E /* FiziksContact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiziksContact.swift; sourceTree = "<group>"; };
 		2F469D5429D2AB1500C4152E /* FiziksContactDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiziksContactDelegate.swift; sourceTree = "<group>"; };
@@ -533,6 +537,7 @@
 				14168DDD29D82AC200EF5C22 /* GameEndView.swift */,
 				14168DDF29D82C6F00EF5C22 /* GameplayGoBackMenuView.swift */,
 				61FC3A4D29DC3BD7005A91D7 /* PauseView.swift */,
+				2F256EA529E341880062BCFF /* AchievementsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -682,6 +687,7 @@
 				2FFED58729D9ED4500BA072F /* Achievement.swift */,
 				2FFED58529D9ED4500BA072F /* SkyscraperAchievement.swift */,
 				2FFED58929D9ED4500BA072F /* BobTheBuilderAchievement.swift */,
+				2F256EA729E3480E0062BCFF /* DisplayableAchievement.swift */,
 			);
 			path = Achievements;
 			sourceTree = "<group>";
@@ -980,6 +986,7 @@
 				2FFED5A229D9ED4500BA072F /* NumBlocksDroppedStatTracker.swift in Sources */,
 				61CD55E629C35CDB00DB6000 /* FiziksEngine.swift in Sources */,
 				14168DDE29D82AC200EF5C22 /* GameEndView.swift in Sources */,
+				2F256EA629E341880062BCFF /* AchievementsView.swift in Sources */,
 				1421B0CE29D41F740002E4AA /* SurvivalGameMode.swift in Sources */,
 				61ECC59829DEBA6100086794 /* PowerupButton.swift in Sources */,
 				2FC7FADE29C510F200B56850 /* CGPoint+arithmeticMean.swift in Sources */,
@@ -1009,6 +1016,7 @@
 				2F469D5629D2AB1500C4152E /* FiziksContactDelegate.swift in Sources */,
 				146E2E0F29C0E30700BFC757 /* Platform.swift in Sources */,
 				61FC3A5029DD1815005A91D7 /* BlockTouchedPowerupLineEvent.swift in Sources */,
+				2F256EA829E3480E0062BCFF /* DisplayableAchievement.swift in Sources */,
 				616EAD0C29D70259006D602A /* PowerupType.swift in Sources */,
 				61A10F3F29D30FB0000EB4B4 /* GamePowerupManager.swift in Sources */,
 				2FFED5A329D9ED4500BA072F /* StatTracker.swift in Sources */,

@@ -16,6 +16,7 @@ class GameEngineManager: ObservableObject {
     @Published var levelBlocks: [GameObjectBlock] = []
     @Published var levelPlatforms: [GameObjectPlatform] = []
     @Published var powerups: [Powerup.Type?] = [Powerup.Type?](repeating: nil, count: 5)
+    @Published var achievements: [DisplayableAchievement] = []
 
     var eventManager: EventManager?
 
@@ -118,6 +119,7 @@ class GameEngineManager: ObservableObject {
     func update() {
         updateGameEngine()
         renderCurrentFrame()
+        updateAchievements()
     }
 
     func updateGameEngine() {
@@ -205,6 +207,19 @@ class GameEngineManager: ObservableObject {
                 return
             }
         })
+    }
+    
+    private func updateAchievements() {
+        var newAchievements = [DisplayableAchievement]()
+        for achievement in gameEngine.achiementSystem.getUpdatedAchievements() {
+            let newAchievement = DisplayableAchievement(id: UUID(),
+                                                        name: achievement.name,
+                                                        description: achievement.description,
+                                                        goal: achievement.goal,
+                                                        achieved: achievement.achieved)
+            newAchievements.append(newAchievement)
+        }
+        achievements = newAchievements
     }
 }
 
