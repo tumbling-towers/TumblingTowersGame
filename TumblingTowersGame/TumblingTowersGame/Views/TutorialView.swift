@@ -40,9 +40,10 @@ struct TutorialView: View {
 
                         drawInstructionsBody()
                     }
-                    .frame(width: geo.size.width)
+                    .frame(width: geo.size.width - 100)
                     .frame(minHeight: geo.size.height)
                 }
+                .padding([.leading, .trailing], 50)
             }
         )
     }
@@ -99,6 +100,26 @@ struct TutorialView: View {
                     .modifier(BodyText(fontSize: 20))
 
                 drawInputDescriptions()
+
+                Text(Constants.instructionsBlockContact)
+                    .modifier(BodyText(fontSize: 20))
+
+                Text("\n").hidden()
+
+                Text(Constants.instructionsOtherGuiButtons)
+                    .modifier(BodyText(fontSize: 20))
+
+                Text(Constants.generalInputDescription)
+                    .modifier(BodyText(fontSize: 20))
+
+                Text("\n").hidden()
+
+                Text(Constants.instructionsStackBlocks)
+                    .modifier(BodyText(fontSize: 20))
+
+                Text(Constants.instructionsHaveFun)
+                    .modifier(GameplayGuiText(fontSize: 40))
+
             }
 
         )
