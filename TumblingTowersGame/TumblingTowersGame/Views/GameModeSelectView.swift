@@ -21,22 +21,25 @@ struct GameModeSelectView: View {
                 Text("Choose your game mode:")
                     .modifier(MenuButtonText(fontSize: 50))
                 Spacer().frame(height: 100)
-                HStack {
-                    drawGameModeOption(gameMode: .SURVIVAL, name: "SURVIVAL", fontSize: 30.0, red: 1, green: 0.341, blue: 0.341)
+                VStack {
+                    HStack {
+                        drawGameModeOption(gameMode: .SURVIVAL,
+                                           name: Constants.GameModeTypes.SURVIVAL.rawValue.uppercased(),
+                                           fontSize: 30.0, red: 1, green: 0.341, blue: 0.341)
 
-                    drawGameModeOption(gameMode: .SANDBOX, name: "SANDBOX", fontSize: 30.0, red: 0.322, green: 0.443, blue: 1)
+                        drawGameModeOption(gameMode: .SANDBOX,
+                                           name: Constants.GameModeTypes.SANDBOX.rawValue.uppercased(),
+                                           fontSize: 30.0, red: 0.322, green: 0.443, blue: 1)
+                    }
 
-                    // MARK: Add back later
-//                    drawGameModeOption(gameMode: .RACECLOCK, name: "RACE AGAINST CLOCK", fontSize: 30.0)
+                    HStack {
+                        drawGameModeOption(gameMode: .RACECLOCK,
+                                           name: Constants.GameModeTypes.RACECLOCK.rawValue.uppercased(),
+                                           fontSize: 30.0, red: 0.322, green: 1, blue: 0.322)
+                    }
                 }
 
-                Button {
-                    currGameScreen = .mainMenu
-                    gameEngineMgr.stopGame()
-                } label: {
-                    Text("Back")
-                        .modifier(CustomButton(fontSize: 25))
-                }
+                GameplayGoBackMenuView(currGameScreen: $currGameScreen)
                 .padding(.top, 35.0)
 
                 Spacer()

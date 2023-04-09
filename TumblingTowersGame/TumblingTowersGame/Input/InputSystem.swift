@@ -11,6 +11,8 @@ protocol InputSystem {
 
     init()
 
+    static var description: String { get }
+
     var inputData: InputData { get set }
 
     func getInput() -> InputData

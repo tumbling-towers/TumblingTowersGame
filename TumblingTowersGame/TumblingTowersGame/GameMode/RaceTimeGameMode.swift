@@ -9,68 +9,123 @@ import Foundation
 
 class RaceTimeGameMode: GameMode {
 
-    var name = "Race Against the Clock"
+    static var name = Constants.GameModeTypes.RACECLOCK.rawValue
+    static var description = "Place \(blocksToPlace) blocks in \(timeToPlaceBy) seconds!"
 
     var realTimeTimer = GameTimer()
+    var eventMgr: EventManager
 
-    let blocksToPlace = 10
-    let timeToPlaceBy = 15
+    // MARK: Constants for this game mode
+    static let blocksToPlace = 5
+    static let timeToPlaceBy = 15
+    let scoreTimeLeftMultiplier = 10
+    let scoreBlocksPlacedMultiplier = 10
+    let scoreBlocksDroppedMultiplier = 25
 
+    // MARK: Tracking State of Game
     var currBlocksPlaced = 0
+    var currBlocksDropped = 0
 
+    var isStarted = false
     var isGameEnded = false
 
     required init(eventMgr: EventManager) {
+        self.eventMgr = eventMgr
+
         // Register all events that affect game state
         eventMgr.registerClosure(for: BlockPlacedEvent.self, closure: blockPlaced)
         eventMgr.registerClosure(for: BlockDroppedEvent.self, closure: blockDropped)
     }
 
+    func update() {
+        let gameState = getGameState()
+
+        if gameState != .RUNNING && gameState != .PAUSED {
+            eventMgr.postEvent(GameEndedEvent())
+        }
+    }
+
     func getGameState() -> Constants.GameState {
-        if currBlocksPlaced >= blocksToPlace {
-            isGameEnded = true
-            endTimer()
-            return .WIN_RACE
-        } else if realTimeTimer.count < 0 {
-            isGameEnded = true
-            endTimer()
-            return .LOSE_RACE
+        if currBlocksPlaced >= RaceTimeGameMode.blocksToPlace {
+            return .WIN
+        } else if realTimeTimer.count <= 0 {
+            return .LOSE
         }
 
-        return .RUNNING
+        if isStarted {
+            return .RUNNING
+        } else {
+            return .NONE
+        }
     }
 
     func getScore() -> Int {
-        realTimeTimer.count
+        max(realTimeTimer.count * scoreTimeLeftMultiplier
+            + currBlocksPlaced * scoreBlocksPlacedMultiplier
+            - currBlocksDropped * scoreBlocksDroppedMultiplier, 0)
     }
 
     func hasGameEnded() -> Bool {
         isGameEnded
     }
 
-    func getTimeRemaining() -> Int {
+    func getTime() -> Int {
         realTimeTimer.count
     }
 
-    func restartGame() {
+    func resetGame() {
+        isStarted = false
         isGameEnded = false
         currBlocksPlaced = 0
+        currBlocksDropped = 0
         realTimeTimer = GameTimer()
     }
 
-    func startTimer() {
-        realTimeTimer.start(timeInSeconds: timeToPlaceBy, countsUp: false)
+    func startGame() {
+        isStarted = true
+        realTimeTimer.start(timeInSeconds: RaceTimeGameMode.timeToPlaceBy, countsUp: false)
     }
 
-    func endTimer() {
+    func pauseGame() {
+        realTimeTimer.pause()
+    }
+
+    func resumeGame() {
+        realTimeTimer.resume()
+    }
+
+    func endGame() {
+        isGameEnded = true
         realTimeTimer.stop()
     }
 
+    func getGameEndMainMessage() -> String {
+        if getGameState() == .WIN {
+            return Constants.defaultWinMainString
+        } else if getGameState() == .LOSE {
+            return Constants.defaultLoseMainString
+        }
+
+        return ""
+    }
+
+    func getGameEndSubMessage() -> String {
+        if getGameState() == .WIN {
+            return "You beat the clock!"
+        } else if getGameState() == .LOSE {
+            return "You ran out of time!."
+        }
+
+        return ""
+    }
+
     private func blockPlaced(event: Event) {
-        currBlocksPlaced += 1
+        if let placedEvent = event as? BlockPlacedEvent {
+            currBlocksPlaced = placedEvent.totalBlocksInLevel
+        }
     }
 
     private func blockDropped(event: Event) {
-        currBlocksPlaced -= 1
+        currBlocksDropped += 1
     }
 }
