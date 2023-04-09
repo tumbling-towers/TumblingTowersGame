@@ -9,7 +9,9 @@ import Foundation
 
 protocol GameMode {
 
-    var name: String { get }
+    static var name: String { get }
+
+    static var description: String { get }
 
     init(eventMgr: EventManager)
 

@@ -9,14 +9,15 @@ import Foundation
 
 class RaceTimeGameMode: GameMode {
 
-    var name = Constants.GameModeTypes.RACECLOCK.rawValue
+    static var name = Constants.GameModeTypes.RACECLOCK.rawValue
+    static var description = "Place \(blocksToPlace) blocks in \(timeToPlaceBy) seconds!"
 
     var realTimeTimer = GameTimer()
     var eventMgr: EventManager
 
     // MARK: Constants for this game mode
-    let blocksToPlace = 5
-    let timeToPlaceBy = 15
+    static let blocksToPlace = 5
+    static let timeToPlaceBy = 15
     let scoreTimeLeftMultiplier = 10
     let scoreBlocksPlacedMultiplier = 10
     let scoreBlocksDroppedMultiplier = 25
@@ -45,7 +46,7 @@ class RaceTimeGameMode: GameMode {
     }
 
     func getGameState() -> Constants.GameState {
-        if currBlocksPlaced >= blocksToPlace {
+        if currBlocksPlaced >= RaceTimeGameMode.blocksToPlace {
             return .WIN
         } else if realTimeTimer.count <= 0 {
             return .LOSE
@@ -82,7 +83,7 @@ class RaceTimeGameMode: GameMode {
 
     func startGame() {
         isStarted = true
-        realTimeTimer.start(timeInSeconds: timeToPlaceBy, countsUp: false)
+        realTimeTimer.start(timeInSeconds: RaceTimeGameMode.timeToPlaceBy, countsUp: false)
     }
 
     func pauseGame() {

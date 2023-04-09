@@ -10,14 +10,17 @@ import Foundation
 class SurvivalGameMode: GameMode {
 
     // Place N blocks wo dropping more than M blocks in shortest time possible (Score is time taken?)
-    var name = Constants.GameModeTypes.SURVIVAL.rawValue
+    static var name = Constants.GameModeTypes.SURVIVAL.rawValue
+
+    static var description = "Place \(blocksToPlace) blocks without dropping more than \(blocksDroppedThreshold) blocks!"
+
 
     var realTimeTimer = GameTimer()
     var eventMgr: EventManager
 
     // MARK: Constants for this game mode
-    let blocksToPlace = 3
-    let blocksDroppedThreshold = 1
+    static let blocksToPlace = 3
+    static let blocksDroppedThreshold = 1
     let scoreBlocksPlacedMultiplier = 10
     let scoreBlocksDroppedMultiplier = 25
     let scoreTimeWithBonusScore = 30
@@ -53,11 +56,11 @@ class SurvivalGameMode: GameMode {
 //        print("Blocks Placed \(currBlocksPlaced)")
 //        print("Blocks Inserted \(currBlocksInserted)\n")
 
-        if currBlocksDropped >= blocksDroppedThreshold {
+        if currBlocksDropped >= SurvivalGameMode.blocksDroppedThreshold {
             return .LOSE
         }
 
-        if currBlocksPlaced >= blocksToPlace {
+        if currBlocksPlaced >= SurvivalGameMode.blocksToPlace {
             return .WIN
         }
 

@@ -32,11 +32,22 @@ Rotate button: rotate the block clockwise.
 
     static let defaultLoseMainString = "You LOST!!!"
 
+    static let instructionsTitle = "Welcome to Tumbling Towers!"
+    static let instructionsPressStart = "Press Start to begin the game!"
+    static let instructionsGameModes = "First, we need to choose a game mode. Choose from:"
+    static let instructionsAfterSelectGameMode = "After you select a game mode, the game starts!"
+    static let instructionsInputControl = "Now a new tetris shaped block gets inserted into the game. You can control it using your chosen input method in Settings. Input Methods includes: "
+
+    static let instructionsDefaultGamemodeText = "A Tumbling Towers Game Mode."
+    static let instructionsDefaultInputText = "A Tumbling Towers Input Method"
+
+
     enum CurrGameScreens {
         case mainMenu
         case gameModeSelection
         case gameplay
         case settings
+        case tutorial
         case achievements
     }
 
@@ -44,7 +55,7 @@ Rotate button: rotate the block clockwise.
                                                                GameModeTypes.RACECLOCK.rawValue: RaceTimeGameMode.self,
                                                                GameModeTypes.SANDBOX.rawValue: SandboxGameMode.self]
 
-    enum GameModeTypes: String {
+    enum GameModeTypes: String, Equatable, CaseIterable {
         case SURVIVAL = "Survival"
         case RACECLOCK = "Race the Clock"
         case SANDBOX = "Sandbox"

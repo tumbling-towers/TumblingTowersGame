@@ -15,6 +15,7 @@ struct BodyText: ViewModifier {
         content
             .foregroundColor(.black)
             .font(.system(size: fontSize, weight: .light))
+            .fixedSize(horizontal: false, vertical: true)
             .padding(.all, padding)
     }
 }
