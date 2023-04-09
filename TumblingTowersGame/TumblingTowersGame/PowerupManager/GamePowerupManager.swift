@@ -60,12 +60,12 @@ class GamePowerupManager: PowerupManager {
     }
     
     func createPowerupPlatform() -> Platform? {
-        guard let platform = gameWorld.level.platform else { return nil }
+        guard let platform = gameWorld.level.mainPlatform else { return nil }
         var count = 0
         while count < GameWorldConstants.defaultTriesToFindPlatformPosition {
             let rngX = Int(rng.next()) % Int(platform.width)
             let newX = CGFloat(rngX) + platform.position.x - platform.width / 2
-            var newY = gameWorld.findHighestPoint() + GameWorldConstants.bufferFromHighestPoint
+            var newY = gameWorld.highestPoint + GameWorldConstants.bufferFromHighestPoint
             if let powerupLine = gameWorld.level.powerupLine {
                 newY = min(newY, powerupLine.position.y - GameWorldConstants.defaultPowerupPlatformHeight)
             }
@@ -75,8 +75,15 @@ class GamePowerupManager: PowerupManager {
                               width: GameWorldConstants.defaultPowerupPlatformWidth,
                               height: GameWorldConstants.defaultPowerupPlatformHeight)
             let path = CGPath.create(from: rect)
+            let shape = GamePathObjectShape(path: path)
 
-            let newPlatform = gameWorld.createPlatform(path: path, at: newPosition)
+            guard let newPlatform: Platform = GameWorldObjectFactory.create(ofType: .platform,
+                                                                                     ofShape: shape,
+                                                                                           at: newPosition) else {
+                // TODO: throw error
+                assert(false)
+                return nil
+            }
 
             let otherBodies = gameWorld.level.gameObjects.map({ $0.fiziksBody })
 

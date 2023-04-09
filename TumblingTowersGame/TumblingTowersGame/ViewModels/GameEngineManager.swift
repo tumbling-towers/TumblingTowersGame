@@ -22,7 +22,7 @@ class GameEngineManager: ObservableObject {
     // MARK: Game logic related attributes
     var platformPosition: CGPoint? {
         get {
-            gameEngine.level.platform?.position
+            gameEngine.level.mainPlatform?.position
         }
     }
 
@@ -40,7 +40,7 @@ class GameEngineManager: ObservableObject {
     }
 
     var referenceBox: CGRect? {
-        guard let refPoints = gameEngine.gameWorld.getReferencePoints() else { return nil }
+        guard let refPoints = gameEngine.gameWorld.referencePoints else { return nil }
 
         let width = refPoints.right.x - refPoints.left.x
         return CGRect(x: refPoints.left.x - 1, y: 0, width: width + 2, height: 3_000)

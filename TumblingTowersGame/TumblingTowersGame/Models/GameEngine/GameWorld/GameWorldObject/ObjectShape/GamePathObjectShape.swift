@@ -1,14 +1,14 @@
 //
-//  PowerupLineShape.swift
+//  GamePathObjectShape.swift
 //  TumblingTowersGame
 //
-//  Created by Taufiq Abdul Rahman on 27/3/23.
+//  Created by Quan Teng Foong on 9/4/23.
 //
 
 import Foundation
 import CoreGraphics
 
-struct PowerupLineShape: PathObjectShape {
+struct GamePathObjectShape: PathObjectShape {
     var height: Double {
         path.height
     }

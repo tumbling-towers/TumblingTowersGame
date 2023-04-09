@@ -68,6 +68,11 @@
 		14C6732F29D371D700D8DF78 /* BodyText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C6732E29D371D700D8DF78 /* BodyText.swift */; };
 		14C6733529D3737200D8DF78 /* bkgMusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 14C6733429D3737200D8DF78 /* bkgMusic.mp3 */; };
 		14DAFDF729CE3146003BE140 /* SoundSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DAFDF629CE3146003BE140 /* SoundSystem.swift */; };
+		2F05841529E1D19E00605AEC /* LevelBoundary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F05841429E1D19E00605AEC /* LevelBoundary.swift */; };
+		2F05841929E1D73C00605AEC /* GameWorld+FiziksContactDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F05841829E1D73C00605AEC /* GameWorld+FiziksContactDelegate.swift */; };
+		2F05841D29E29B4E00605AEC /* GameWorldObjectFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F05841C29E29B4E00605AEC /* GameWorldObjectFactory.swift */; };
+		2F05841F29E29B7800605AEC /* GameWorldObjectType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F05841E29E29B7800605AEC /* GameWorldObjectType.swift */; };
+		2F05842129E29CCE00605AEC /* GamePathObjectShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F05842029E29CCE00605AEC /* GamePathObjectShape.swift */; };
 		2F469D5129D2AA3200C4152E /* CGPath+Create.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F469D5029D2AA3200C4152E /* CGPath+Create.swift */; };
 		2F469D5529D2AB1500C4152E /* FiziksContact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F469D5329D2AB1500C4152E /* FiziksContact.swift */; };
 		2F469D5629D2AB1500C4152E /* FiziksContactDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F469D5429D2AB1500C4152E /* FiziksContactDelegate.swift */; };
@@ -112,7 +117,6 @@
 		619D44BB29C69BAA00EE00CE /* GameFiziksEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619D44BA29C69BAA00EE00CE /* GameFiziksEngineTests.swift */; };
 		619D44C029C6F35300EE00CE /* ObjectShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619D44BF29C6F35300EE00CE /* ObjectShape.swift */; };
 		619D44C329C6F3AE00EE00CE /* PathObjectShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619D44C229C6F3AE00EE00CE /* PathObjectShape.swift */; };
-		619D44C529C70EFA00EE00CE /* PlatformShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619D44C429C70EFA00EE00CE /* PlatformShape.swift */; };
 		61A10F1F29D30BED000EB4B4 /* PowerupManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A10F1E29D30BED000EB4B4 /* PowerupManager.swift */; };
 		61A10F2129D30C02000EB4B4 /* Powerup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A10F2029D30C02000EB4B4 /* Powerup.swift */; };
 		61A10F2F29D30D03000EB4B4 /* BiMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F7E13A529C0F054000E6FA9 /* BiMap.swift */; };
@@ -124,7 +128,6 @@
 		61A10F4329D310CA000EB4B4 /* PlatformPowerupActivatedEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A10F4229D310CA000EB4B4 /* PlatformPowerupActivatedEvent.swift */; };
 		61AE15B329D16DD500D04E95 /* BlockPlacedEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61AE15B229D16DD500D04E95 /* BlockPlacedEvent.swift */; };
 		61AE15B529D1786700D04E95 /* PowerupLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61AE15B429D1786700D04E95 /* PowerupLineView.swift */; };
-		61AE15B929D18BB400D04E95 /* PowerupLineShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61AE15B829D18BB400D04E95 /* PowerupLineShape.swift */; };
 		61CD55E629C35CDB00DB6000 /* FiziksEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61CD55E529C35CDB00DB6000 /* FiziksEngine.swift */; };
 		61CD55E829C35D1E00DB6000 /* PathFiziksBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61CD55E729C35D1E00DB6000 /* PathFiziksBody.swift */; };
 		61CD55EA29C35D2C00DB6000 /* FiziksConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61CD55E929C35D2C00DB6000 /* FiziksConstants.swift */; };
@@ -237,6 +240,11 @@
 		14C6732E29D371D700D8DF78 /* BodyText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyText.swift; sourceTree = "<group>"; };
 		14C6733429D3737200D8DF78 /* bkgMusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bkgMusic.mp3; sourceTree = "<group>"; };
 		14DAFDF629CE3146003BE140 /* SoundSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundSystem.swift; sourceTree = "<group>"; };
+		2F05841429E1D19E00605AEC /* LevelBoundary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelBoundary.swift; sourceTree = "<group>"; };
+		2F05841829E1D73C00605AEC /* GameWorld+FiziksContactDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameWorld+FiziksContactDelegate.swift"; sourceTree = "<group>"; };
+		2F05841C29E29B4E00605AEC /* GameWorldObjectFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameWorldObjectFactory.swift; sourceTree = "<group>"; };
+		2F05841E29E29B7800605AEC /* GameWorldObjectType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameWorldObjectType.swift; sourceTree = "<group>"; };
+		2F05842029E29CCE00605AEC /* GamePathObjectShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePathObjectShape.swift; sourceTree = "<group>"; };
 		2F469D5029D2AA3200C4152E /* CGPath+Create.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGPath+Create.swift"; sourceTree = "<group>"; };
 		2F469D5329D2AB1500C4152E /* FiziksContact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiziksContact.swift; sourceTree = "<group>"; };
 		2F469D5429D2AB1500C4152E /* FiziksContactDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiziksContactDelegate.swift; sourceTree = "<group>"; };
@@ -280,7 +288,6 @@
 		619D44BA29C69BAA00EE00CE /* GameFiziksEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameFiziksEngineTests.swift; sourceTree = "<group>"; };
 		619D44BF29C6F35300EE00CE /* ObjectShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectShape.swift; sourceTree = "<group>"; };
 		619D44C229C6F3AE00EE00CE /* PathObjectShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathObjectShape.swift; sourceTree = "<group>"; };
-		619D44C429C70EFA00EE00CE /* PlatformShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformShape.swift; sourceTree = "<group>"; };
 		61A10F1E29D30BED000EB4B4 /* PowerupManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerupManager.swift; sourceTree = "<group>"; };
 		61A10F2029D30C02000EB4B4 /* Powerup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Powerup.swift; sourceTree = "<group>"; };
 		61A10F3729D30DCA000EB4B4 /* PowerupDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerupDelegate.swift; sourceTree = "<group>"; };
@@ -291,7 +298,6 @@
 		61A10F4229D310CA000EB4B4 /* PlatformPowerupActivatedEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PlatformPowerupActivatedEvent.swift; path = TumblingTowersGame/PowerupManager/Powerups/PlatformPowerupActivatedEvent.swift; sourceTree = SOURCE_ROOT; };
 		61AE15B229D16DD500D04E95 /* BlockPlacedEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BlockPlacedEvent.swift; path = TumblingTowersGame/Extensions/BlockPlacedEvent.swift; sourceTree = SOURCE_ROOT; };
 		61AE15B429D1786700D04E95 /* PowerupLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerupLineView.swift; sourceTree = "<group>"; };
-		61AE15B829D18BB400D04E95 /* PowerupLineShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerupLineShape.swift; sourceTree = "<group>"; };
 		61CD55E529C35CDB00DB6000 /* FiziksEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiziksEngine.swift; sourceTree = "<group>"; };
 		61CD55E729C35D1E00DB6000 /* PathFiziksBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathFiziksBody.swift; sourceTree = "<group>"; };
 		61CD55E929C35D2C00DB6000 /* FiziksConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiziksConstants.swift; sourceTree = "<group>"; };
@@ -630,6 +636,9 @@
 				146E2E0B29C0E30700BFC757 /* GameWorldObject.swift */,
 				146E2E0C29C0E30700BFC757 /* Platform.swift */,
 				61FC3A5429DD19C6005A91D7 /* GameWorldLevel.swift */,
+				2F05841429E1D19E00605AEC /* LevelBoundary.swift */,
+				2F05841C29E29B4E00605AEC /* GameWorldObjectFactory.swift */,
+				2F05841E29E29B7800605AEC /* GameWorldObjectType.swift */,
 			);
 			path = GameWorldObject;
 			sourceTree = "<group>";
@@ -736,8 +745,7 @@
 				146E2DFD29C0E05A00BFC757 /* TetrisShape.swift */,
 				619D44BF29C6F35300EE00CE /* ObjectShape.swift */,
 				619D44C229C6F3AE00EE00CE /* PathObjectShape.swift */,
-				619D44C429C70EFA00EE00CE /* PlatformShape.swift */,
-				61AE15B829D18BB400D04E95 /* PowerupLineShape.swift */,
+				2F05842029E29CCE00605AEC /* GamePathObjectShape.swift */,
 			);
 			path = ObjectShape;
 			sourceTree = "<group>";
@@ -803,6 +811,7 @@
 			isa = PBXGroup;
 			children = (
 				2FA2AC0429C74541001C5B7C /* GameWorld.swift */,
+				2F05841829E1D73C00605AEC /* GameWorld+FiziksContactDelegate.swift */,
 				2F7E13A729C0F56F000E6FA9 /* GameWorldObject */,
 				61FC3A5829DD2504005A91D7 /* PowerupLine.swift */,
 				61ECC59129DE916500086794 /* SpecialProperties.swift */,
@@ -952,6 +961,7 @@
 				61FC3A5529DD19C6005A91D7 /* GameWorldLevel.swift in Sources */,
 				146E2DE529C0D61A00BFC757 /* GameRendererDelegate.swift in Sources */,
 				2FFED59E29D9ED4500BA072F /* NumBlocksPlacedStatTracker.swift in Sources */,
+				2F05841929E1D73C00605AEC /* GameWorld+FiziksContactDelegate.swift in Sources */,
 				146E2E0E29C0E30700BFC757 /* GameWorldObject.swift in Sources */,
 				61CD55F029C35D9600DB6000 /* CollisionMask.swift in Sources */,
 				124B02D729C567F600094CF5 /* LevelView.swift in Sources */,
@@ -987,23 +997,24 @@
 				61F4F01D29DDFC090002AD69 /* CustomButton.swift in Sources */,
 				124B02D329C4204300094CF5 /* GameObjectPlatform.swift in Sources */,
 				61FC031729CD498400CE2CE5 /* Shape+Fill.swift in Sources */,
+				2F05841F29E29B7800605AEC /* GameWorldObjectType.swift in Sources */,
 				14C6732F29D371D700D8DF78 /* BodyText.swift in Sources */,
 				61ECC59229DE916500086794 /* SpecialProperties.swift in Sources */,
 				14168DE629D8C47A00EF5C22 /* SandboxGameMode.swift in Sources */,
 				122BA13729D9595100196052 /* StorageManager.swift in Sources */,
 				61FC031129CC483400CE2CE5 /* CGPath+Rotate.swift in Sources */,
+				2F05842129E29CCE00605AEC /* GamePathObjectShape.swift in Sources */,
 				61AE15B329D16DD500D04E95 /* BlockPlacedEvent.swift in Sources */,
 				61F4F01F29DE016B0002AD69 /* SecondaryButton.swift in Sources */,
 				61FC031529CCBFB100CE2CE5 /* CGPoint+Arithmetic.swift in Sources */,
 				616EAD0829D6D6A2006D602A /* PowerupAvailableEvent.swift in Sources */,
 				61FC031329CCBDE300CE2CE5 /* PathViewShape.swift in Sources */,
+				2F05841529E1D19E00605AEC /* LevelBoundary.swift in Sources */,
 				124B02EB29C9DB8300094CF5 /* Event.swift in Sources */,
 				2FFED59729D9ED4500BA072F /* SkyscraperAchievement.swift in Sources */,
-				619D44C529C70EFA00EE00CE /* PlatformShape.swift in Sources */,
 				124B02C929C4171400094CF5 /* ViewImageManager.swift in Sources */,
 				2F469D5829D2AB2700C4152E /* FiziksScene.swift in Sources */,
 				124B02C129C415CC00094CF5 /* BlockView.swift in Sources */,
-				61AE15B929D18BB400D04E95 /* PowerupLineShape.swift in Sources */,
 				1421B0D029D424A70002E4AA /* BlockDroppedEvent.swift in Sources */,
 				61A10F2129D30C02000EB4B4 /* Powerup.swift in Sources */,
 				2F469D5629D2AB1500C4152E /* FiziksContactDelegate.swift in Sources */,
@@ -1043,6 +1054,7 @@
 				61FC3A5929DD2504005A91D7 /* PowerupLine.swift in Sources */,
 				2FFED5A429D9ED4500BA072F /* StatsTrackingSystem.swift in Sources */,
 				2FFED59D29D9ED4500BA072F /* AchievementSystemDataSource.swift in Sources */,
+				2F05841D29E29B4E00605AEC /* GameWorldObjectFactory.swift in Sources */,
 				146E2DE429C0D61A00BFC757 /* GameEngineManager.swift in Sources */,
 				2F98477529DFEA4A008803E7 /* AchievementFactory.swift in Sources */,
 				14C6732029D366D300D8DF78 /* MainMenuView.swift in Sources */,
