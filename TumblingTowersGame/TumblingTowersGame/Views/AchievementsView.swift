@@ -17,12 +17,30 @@ struct AchievementsView: View {
             BackgroundView()
 
             VStack {
-                Text("Volume")
-                    .modifier(CategoryText())
-                
                 ForEach($gameEngineMgr.achievements) { achievment in
-                    Text(achievment.name)
+                    VStack {
+                        HStack {
+                            Text(achievment.wrappedValue.name)
+                                .modifier(CategoryText())
+                            if achievment.wrappedValue.achieved {
+                                Image(ViewImageManager.tickImage)
+                                    .resizable()
+                                    .frame(
+                                        width: 20,
+                                        height: 20, alignment: .center)
+                            } else {
+                                Image(ViewImageManager.crossImage)
+                                    .resizable()
+                                    .frame(
+                                        width: 20,
+                                        height: 20, alignment: .center)
+                            }
+                        }
+                        Text(achievment.wrappedValue.description)
+                            .modifier(BodyText())
+                    }
                 }
+                
                 
                 Button {
                     currGameScreen = .mainMenu

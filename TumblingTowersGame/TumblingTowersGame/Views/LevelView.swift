@@ -39,6 +39,7 @@ struct LevelView: View {
                                     position: CGPoint(x: gameEngineMgr.levelDimensions.width - 100,
                                                       y: gameEngineMgr.levelDimensions.height - 100)))
 
+            /*
             ForEach(1..<$gameEngineMgr.powerups.count + 1) { i in
                 if let powerup0 = $gameEngineMgr.powerups[i - 1],
                    let type = powerup0.wrappedValue?.type,
@@ -58,6 +59,7 @@ struct LevelView: View {
                 }
 
             }
+             */
             
             if let box = gameEngineMgr.referenceBox {
                 Rectangle()

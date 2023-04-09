@@ -40,6 +40,9 @@ struct ViewImageManager {
         .platform: PlatformPowerupImage
     ]
     
+    static let tickImage = "tick"
+    static let crossImage = "cross"
+    
     static let pauseButton = "pause"
     static let resumeButton = "resume"
     static let exitButton = "exit"
