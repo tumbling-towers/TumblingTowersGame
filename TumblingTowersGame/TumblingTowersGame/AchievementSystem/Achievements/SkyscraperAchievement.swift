@@ -14,12 +14,12 @@ class SkyscraperAchievement: Achievement {
     }
     let goal: Any
     var achieved: Bool {
-        highScore >= (goal as? CGFloat ?? 0.0)
+        highScore >= (goal as? Double ?? 0.0)
     }
     let achievementType: AchievementType = .Skyscraper
     let dataSource: AchievementSystemDataSource
     
-    var highScore: CGFloat
+    var highScore: Double
     
     init(name: String, goal: Any, dataSource: AchievementSystemDataSource) {
         self.name = name
@@ -29,7 +29,7 @@ class SkyscraperAchievement: Achievement {
     }
     
     func update() {
-        guard let newHeight = dataSource.getStat(for: .towerHeight) as? CGFloat else {
+        guard let newHeight = dataSource.getStat(for: .towerHeight) as? Double else {
             return
         }
         highScore = max(highScore, newHeight)

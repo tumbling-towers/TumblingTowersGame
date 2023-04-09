@@ -18,11 +18,11 @@ class TowerHeightStatTracker: StatTracker {
     }
     
     private lazy var towerHeightUpdatedClosure = { [weak self] (_ event: Event) -> Void in
-        guard let self = self,
+        guard
               let towerHeightIncreasedEvent = event as? TowerHeightIncreasedEvent else {
             return
         }
-        self.stat = max(self.stat as? CGFloat ?? 0.0, towerHeightIncreasedEvent.newHeight)
-        print("new tower height: \(self.stat)")
+        self?.stat = max(self?.stat as? Double ?? 0.0, towerHeightIncreasedEvent.newHeight)
+        print("new tower height: \(self?.stat)")
     }
 }

@@ -8,9 +8,9 @@
 import Foundation
 
 class SurvivalGameMode: GameMode {
-
+    let eventMgr: EventManager
     // Place N blocks wo dropping more than M blocks in shortest time possible (Score is time taken?)
-    let blocksToPlace = 3
+    let blocksToPlace = 1
     let blocksDroppedThreshold = 1
 
     var currBlocksInserted = 0
@@ -25,7 +25,8 @@ class SurvivalGameMode: GameMode {
 
     required init(eventMgr: EventManager) {
         // Register all events that affect game state
-
+        self.eventMgr = eventMgr
+        
         eventMgr.registerClosure(for: BlockPlacedEvent.self, closure: blockPlaced)
         eventMgr.registerClosure(for: BlockDroppedEvent.self, closure: blockDropped)
         eventMgr.registerClosure(for: BlockInsertedEvent.self, closure: blockInserted)
@@ -39,12 +40,14 @@ class SurvivalGameMode: GameMode {
         if currBlocksDropped >= blocksDroppedThreshold {
             isGameEnded = true
             endTimer()
+            eventMgr.postEvent(GameEndedEvent())
             return .LOSE_SURVIVAL
         }
 
         if currBlocksPlaced >= blocksToPlace {
             isGameEnded = true
             endTimer()
+            eventMgr.postEvent(GameEndedEvent())
             return .WIN_SURVIVAL
         }
 

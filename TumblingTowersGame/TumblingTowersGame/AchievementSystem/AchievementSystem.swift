@@ -10,10 +10,12 @@ import Foundation
 class AchievementSystem {
     private var achievements: [Achievement]
     private let dataSource: AchievementSystemDataSource
+    private let storageManager: StorageManager
     
-    init(eventManager: EventManager, dataSource: AchievementSystemDataSource) {
+    init(eventManager: EventManager, dataSource: AchievementSystemDataSource, storageManager: StorageManager) {
         self.achievements = []
         self.dataSource = dataSource
+        self.storageManager = storageManager
         setupAchievements()
     }
     
@@ -24,13 +26,25 @@ class AchievementSystem {
     }
     
     private func setupAchievements() {
-        // TODO: get from storage
-        // Info that needs to be stored:
-        // * achievement type (enum type)
-        // * goal (Any type, i think best to store as string)
-        // * name
-        // * achieved (bool)
-        // Then can use the factory to make the achievement
+        guard let achievementsStorage = try? storageManager.loadAchievements() else {
+            return
+        }
+        
+        if achievementsStorage.count == 0 {
+            loadDefaultAchievements()
+            return
+        }
+        
+        for achievementStorage in achievementsStorage {
+            add(AchievementFactory.createAchievement(ofType: achievementStorage.achievementType,
+                                                     name: achievementStorage.name,
+                                                     goal: achievementStorage.goal,
+                                                     achieved: achievementStorage.achieved,
+                                                     dataSource: dataSource))
+        }
+    }
+    
+    private func loadDefaultAchievements() {
         add(AchievementFactory.createAchievement(ofType: .BobTheBuilder,
                                                  name: "BobTheBuilder I",
                                                  goal: 2,
@@ -61,6 +75,6 @@ class AchievementSystem {
         for achievement in achievements {
             achievement.update()
         }
-        // TODO: I think this is a good place to call a saveToStorage method
+        try? storageManager.saveAchievements(achievements)
     }
 }

@@ -1,6 +1,5 @@
 //
 //  GameEngineManager.swift
-//  Gyro
 //
 //  Created by Elvis on 13/3/23.
 //
@@ -18,6 +17,7 @@ class GameEngineManager: ObservableObject {
     @Published var powerups: [Powerup.Type?] = [Powerup.Type?](repeating: nil, count: 5)
 
     var eventManager: EventManager?
+    var storageManager: StorageManager
 
     // MARK: Game logic related attributes
     var platformPosition: CGPoint? {
@@ -58,12 +58,13 @@ class GameEngineManager: ObservableObject {
         gameMode?.getGameState()
     }
 
-    init(levelDimensions: CGRect, eventManager: EventManager) {
+    init(levelDimensions: CGRect, eventManager: EventManager, storageManager: StorageManager) {
         self.levelDimensions = levelDimensions
         self.eventManager = eventManager
-        self.gameEngine = GameEngine(levelDimensions: levelDimensions, eventManager: eventManager)
+        self.storageManager = storageManager
+        self.gameEngine = GameEngine(levelDimensions: levelDimensions, eventManager: eventManager, storageManager: storageManager)
 
-        inputSystem = GyroInput()
+        inputSystem = TapInput()
 
         registerEvents()
     }

@@ -18,5 +18,6 @@ class NumBlocksPlacedStatTracker: StatTracker {
     
     private lazy var blockPlacedClosure = { [weak self] (_ event: Event) -> Void in
         self?.stat = (self?.stat as? Int ?? 0) + 1
+        print("placed \(self?.stat) blocks")
     }
 }

@@ -10,20 +10,46 @@ import Foundation
 class StatsTrackingSystem {
     let eventManager: EventManager
     var statTrackerTypeToStatTracker: [StatTrackerType: StatTracker]
+    private let storageManager: StorageManager
     
-    init(eventManager: EventManager) {
+    init(eventManager: EventManager, storageManager: StorageManager) {
         self.eventManager = eventManager
         self.statTrackerTypeToStatTracker = [:]
+        self.storageManager = storageManager
+        
         setupStatTrackers()
+        eventManager.registerClosure(for: GameEndedEvent.self, closure: saveStats)
+    }
+    
+    private lazy var saveStats = { [weak self] (_ event: Event) -> Void in
+        guard let values = self?.statTrackerTypeToStatTracker.values else {
+            return
+        }
+        
+        let statTrackers = Array(values)
+        try? self?.storageManager.saveStats(statTrackers)
     }
     
     private func setupStatTrackers() {
-        // TODO: get from storage
-        // Info that needs to be stored:
-        // * stat tracker type (enum type)
-        // * stat (Any type i think best to store as string)
-        // Then can use the factory to make the stat tracker (note factory has an extra optional parameter `stat` that can take in the stored stat
-        // TODO: as for saving to storage, maybe can listen for some event e.g. GameEndedEvent then call the save method
+        guard let statsStorage = try? storageManager.loadStats() else {
+            print("load fail")
+            return
+        }
+        
+        if statsStorage.count == 0 {
+            loadDefaultStats()
+            return
+        }
+        
+        for storage in statsStorage {
+            print("loading \(storage)")
+            add(StatTrackerFactory.createStatTracker(ofType: storage.statTrackerType, eventManager: eventManager, stat: storage.stat))
+        }
+
+    }
+    
+    private func loadDefaultStats() {
+        print("loading default stats")
         add(StatTrackerFactory.createStatTracker(ofType: .numBlocksPlaced, eventManager: eventManager))
         add(StatTrackerFactory.createStatTracker(ofType: .numBlocksDropped, eventManager: eventManager))
         add(StatTrackerFactory.createStatTracker(ofType: .towerHeight, eventManager: eventManager))

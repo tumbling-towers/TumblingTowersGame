@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		122BA13729D9595100196052 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122BA13629D9595100196052 /* StorageManager.swift */; };
 		122BA13A29D9AF9600196052 /* StorageManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122BA13929D9AF9600196052 /* StorageManagerTests.swift */; };
+		122BA14729E1652B00196052 /* GameEndedEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122BA14629E1652B00196052 /* GameEndedEvent.swift */; };
+		122BA14929E1665E00196052 /* AchievementStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122BA14829E1665E00196052 /* AchievementStorage.swift */; };
+		122BA14B29E1688E00196052 /* AnyCodable+Any.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122BA14A29E1688E00196052 /* AnyCodable+Any.swift */; };
+		122BA14F29E267D400196052 /* StatStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122BA14E29E267D400196052 /* StatStorage.swift */; };
 		124B02C129C415CC00094CF5 /* BlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124B02C029C415CC00094CF5 /* BlockView.swift */; };
 		124B02C329C415DC00094CF5 /* PlatformView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124B02C229C415DC00094CF5 /* PlatformView.swift */; };
 		124B02C929C4171400094CF5 /* ViewImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124B02C829C4171400094CF5 /* ViewImageManager.swift */; };
@@ -175,6 +179,10 @@
 /* Begin PBXFileReference section */
 		122BA13629D9595100196052 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		122BA13929D9AF9600196052 /* StorageManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManagerTests.swift; sourceTree = "<group>"; };
+		122BA14629E1652B00196052 /* GameEndedEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEndedEvent.swift; sourceTree = "<group>"; };
+		122BA14829E1665E00196052 /* AchievementStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementStorage.swift; sourceTree = "<group>"; };
+		122BA14A29E1688E00196052 /* AnyCodable+Any.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnyCodable+Any.swift"; sourceTree = "<group>"; };
+		122BA14E29E267D400196052 /* StatStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatStorage.swift; sourceTree = "<group>"; };
 		124B02C029C415CC00094CF5 /* BlockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockView.swift; sourceTree = "<group>"; };
 		124B02C229C415DC00094CF5 /* PlatformView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformView.swift; sourceTree = "<group>"; };
 		124B02C829C4171400094CF5 /* ViewImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewImageManager.swift; sourceTree = "<group>"; };
@@ -339,6 +347,8 @@
 			isa = PBXGroup;
 			children = (
 				122BA13629D9595100196052 /* StorageManager.swift */,
+				122BA14829E1665E00196052 /* AchievementStorage.swift */,
+				122BA14E29E267D400196052 /* StatStorage.swift */,
 			);
 			path = Storage;
 			sourceTree = "<group>";
@@ -401,6 +411,7 @@
 				616EAD0729D6D6A2006D602A /* PowerupAvailableEvent.swift */,
 				616EAD0929D6F709006D602A /* PowerupButtonTappedEvent.swift */,
 				61FC3A4F29DD1815005A91D7 /* BlockTouchedPowerupLineEvent.swift */,
+				122BA14629E1652B00196052 /* GameEndedEvent.swift */,
 			);
 			path = Events;
 			sourceTree = "<group>";
@@ -571,6 +582,7 @@
 				61FC031429CCBFB100CE2CE5 /* CGPoint+Arithmetic.swift */,
 				61FC031629CD498400CE2CE5 /* Shape+Fill.swift */,
 				614B458729D3EB9100BDD2F0 /* CGVector+Multiply.swift */,
+				122BA14A29E1688E00196052 /* AnyCodable+Any.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -965,10 +977,12 @@
 				61CD55EA29C35D2C00DB6000 /* FiziksConstants.swift in Sources */,
 				124B02C329C415DC00094CF5 /* PlatformView.swift in Sources */,
 				146E2DEC29C0D62800BFC757 /* GyroInput.swift in Sources */,
+				122BA14729E1652B00196052 /* GameEndedEvent.swift in Sources */,
 				146E2DEB29C0D62800BFC757 /* TapInput.swift in Sources */,
 				1421B0D229D435950002E4AA /* RaceTimeGameMode.swift in Sources */,
 				61ECC59529DE95C600086794 /* SpecialPropertiesContactResolver.swift in Sources */,
 				2FFED5A629D9EDB400BA072F /* TowerHeightIncreasedEvent.swift in Sources */,
+				122BA14B29E1688E00196052 /* AnyCodable+Any.swift in Sources */,
 				61A10F3B29D30E9E000EB4B4 /* GluePowerup.swift in Sources */,
 				146E2DB429C0D07200BFC757 /* TumblingTowersGameApp.swift in Sources */,
 				2FFED59C29D9ED4500BA072F /* AchievementSystem.swift in Sources */,
@@ -976,6 +990,7 @@
 				616EAD0E29D74C5C006D602A /* GameWorldConstants.swift in Sources */,
 				61FC030F29CC3AE100CE2CE5 /* CGPath+Dimensions.swift in Sources */,
 				124B02ED29C9ED0000094CF5 /* EventIdentifier.swift in Sources */,
+				122BA14929E1665E00196052 /* AchievementStorage.swift in Sources */,
 				14168DE029D82C6F00EF5C22 /* GameplayGoBackMenuView.swift in Sources */,
 				2FFED5A229D9ED4500BA072F /* NumBlocksDroppedStatTracker.swift in Sources */,
 				61CD55E629C35CDB00DB6000 /* FiziksEngine.swift in Sources */,
@@ -1032,6 +1047,7 @@
 				124B02D929C568FE00094CF5 /* BackgroundView.swift in Sources */,
 				61CD55F229C35DA700DB6000 /* ContactTestMask.swift in Sources */,
 				14C6732229D368C900D8DF78 /* Constants.swift in Sources */,
+				122BA14F29E267D400196052 /* StatStorage.swift in Sources */,
 				124B02CD29C41F7100094CF5 /* GameObject.swift in Sources */,
 				146E2DE629C0D61A00BFC757 /* MainGameManager.swift in Sources */,
 				61A10F3829D30DCA000EB4B4 /* PowerupDelegate.swift in Sources */,

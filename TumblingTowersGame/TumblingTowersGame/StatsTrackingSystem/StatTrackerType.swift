@@ -12,3 +12,7 @@ enum StatTrackerType {
     case numBlocksDropped
     case towerHeight
 }
+
+extension StatTrackerType: Codable {
+    
+}
