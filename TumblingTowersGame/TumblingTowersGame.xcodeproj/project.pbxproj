@@ -13,6 +13,7 @@
 		122BA14929E1665E00196052 /* AchievementStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122BA14829E1665E00196052 /* AchievementStorage.swift */; };
 		122BA14B29E1688E00196052 /* AnyCodable+Any.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122BA14A29E1688E00196052 /* AnyCodable+Any.swift */; };
 		122BA14F29E267D400196052 /* StatStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122BA14E29E267D400196052 /* StatStorage.swift */; };
+		122BA15129E2F98600196052 /* StorageFacade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122BA15029E2F98600196052 /* StorageFacade.swift */; };
 		124B02C129C415CC00094CF5 /* BlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124B02C029C415CC00094CF5 /* BlockView.swift */; };
 		124B02C329C415DC00094CF5 /* PlatformView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124B02C229C415DC00094CF5 /* PlatformView.swift */; };
 		124B02C929C4171400094CF5 /* ViewImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124B02C829C4171400094CF5 /* ViewImageManager.swift */; };
@@ -183,6 +184,7 @@
 		122BA14829E1665E00196052 /* AchievementStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementStorage.swift; sourceTree = "<group>"; };
 		122BA14A29E1688E00196052 /* AnyCodable+Any.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnyCodable+Any.swift"; sourceTree = "<group>"; };
 		122BA14E29E267D400196052 /* StatStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatStorage.swift; sourceTree = "<group>"; };
+		122BA15029E2F98600196052 /* StorageFacade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageFacade.swift; sourceTree = "<group>"; };
 		124B02C029C415CC00094CF5 /* BlockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockView.swift; sourceTree = "<group>"; };
 		124B02C229C415DC00094CF5 /* PlatformView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformView.swift; sourceTree = "<group>"; };
 		124B02C829C4171400094CF5 /* ViewImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewImageManager.swift; sourceTree = "<group>"; };
@@ -346,6 +348,7 @@
 		122BA13529D9594900196052 /* Storage */ = {
 			isa = PBXGroup;
 			children = (
+				122BA15029E2F98600196052 /* StorageFacade.swift */,
 				122BA13629D9595100196052 /* StorageManager.swift */,
 				122BA14829E1665E00196052 /* AchievementStorage.swift */,
 				122BA14E29E267D400196052 /* StatStorage.swift */,
@@ -1021,6 +1024,7 @@
 				61AE15B929D18BB400D04E95 /* PowerupLineShape.swift in Sources */,
 				1421B0D029D424A70002E4AA /* BlockDroppedEvent.swift in Sources */,
 				61A10F2129D30C02000EB4B4 /* Powerup.swift in Sources */,
+				122BA15129E2F98600196052 /* StorageFacade.swift in Sources */,
 				2F469D5629D2AB1500C4152E /* FiziksContactDelegate.swift in Sources */,
 				146E2E0F29C0E30700BFC757 /* Platform.swift in Sources */,
 				61FC3A5029DD1815005A91D7 /* BlockTouchedPowerupLineEvent.swift in Sources */,

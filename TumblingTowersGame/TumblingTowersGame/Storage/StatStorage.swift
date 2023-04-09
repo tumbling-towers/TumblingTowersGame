@@ -8,16 +8,16 @@
 import Foundation
 
 class StatStorage: Codable {
-    var stat: AnyCodable
+    var stat: Double
     var statTrackerType: StatTrackerType
     
-    init(stat: AnyCodable, statTrackerType: StatTrackerType) {
+    init(stat: Double, statTrackerType: StatTrackerType) {
         self.stat = stat
         self.statTrackerType = statTrackerType
     }
     
     init(_ statTracker: StatTracker) {
-        self.stat = try! AnyCodable(with: statTracker.stat)
+        self.stat = statTracker.stat
         self.statTrackerType = statTracker.statTrackerType
     }
 }

@@ -32,7 +32,6 @@ class StatsTrackingSystem {
     
     private func setupStatTrackers() {
         guard let statsStorage = try? storageManager.loadStats() else {
-            print("load fail")
             return
         }
         
@@ -42,14 +41,13 @@ class StatsTrackingSystem {
         }
         
         for storage in statsStorage {
-            print("loading \(storage)")
+            print(storage)
             add(StatTrackerFactory.createStatTracker(ofType: storage.statTrackerType, eventManager: eventManager, stat: storage.stat))
         }
 
     }
     
     private func loadDefaultStats() {
-        print("loading default stats")
         add(StatTrackerFactory.createStatTracker(ofType: .numBlocksPlaced, eventManager: eventManager))
         add(StatTrackerFactory.createStatTracker(ofType: .numBlocksDropped, eventManager: eventManager))
         add(StatTrackerFactory.createStatTracker(ofType: .towerHeight, eventManager: eventManager))

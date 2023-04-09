@@ -9,10 +9,10 @@ import Foundation
 
 class TowerHeightStatTracker: StatTracker {
     static let name: String = "TowerHeight"
-    var stat: Any
+    var stat: Double
     let statTrackerType: StatTrackerType = .towerHeight
     
-    init(eventManager: EventManager, stat: Any? = 0.0) {
+    init(eventManager: EventManager, stat: Double? = 0.0) {
         self.stat = stat ?? 0
         eventManager.registerClosure(for: TowerHeightIncreasedEvent.self, closure: towerHeightUpdatedClosure)
     }
