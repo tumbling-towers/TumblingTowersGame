@@ -70,7 +70,7 @@ struct GameEndView: View {
                             .font(.system(size: 50))
                             .fontWeight(.heavy)
                     }
-                    
+
                 }
 
                 if gameEngineMgr.gameState == .WIN_RACE {
@@ -80,7 +80,6 @@ struct GameEndView: View {
                         .font(.system(size: 50))
                         .fontWeight(.heavy)
                 }
-
             }
         )
     }

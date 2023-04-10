@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct GameplayGoBackMenuView: View {
+    @EnvironmentObject var mainGameMgr: MainGameManager
     @EnvironmentObject var gameEngineMgr: GameEngineManager
     @Binding var currGameScreen: Constants.CurrGameScreens
 
@@ -19,6 +20,8 @@ struct GameplayGoBackMenuView: View {
                 withAnimation {
                     currGameScreen = .mainMenu
                     gameEngineMgr.resetGame()
+                    mainGameMgr.removeAllGameEngineMgrs()
+                    mainGameMgr.gameMode = nil
                 }
             } label: {
                 Text("Back")

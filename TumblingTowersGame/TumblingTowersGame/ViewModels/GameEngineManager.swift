@@ -38,8 +38,6 @@ class GameEngineManager: ObservableObject {
     var gameMode: GameMode? {
         gameEngine.gameMode
     }
-    
-    var playersMode: PlayersMode?
 
     var referenceBox: CGRect? {
         guard let refPoints = gameEngine.gameWorld.getReferencePoints() else { return nil }
@@ -70,10 +68,7 @@ class GameEngineManager: ObservableObject {
         registerEvents()
     }
 
-    func dragEvent(offset: CGSize) {
-        inputSystem.dragEvent(offset: offset)
-    }
-
+    // TODO: REMOVE THIS
     func changeInput(to inputType: Constants.GameInputTypes) {
         let inputClass = Constants.getGameInputType(fromGameInputType: inputType)
         if let inputClass = inputClass {

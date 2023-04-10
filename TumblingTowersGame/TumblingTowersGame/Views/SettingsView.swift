@@ -9,7 +9,6 @@ import SwiftUI
 
 struct SettingsView: View {
     @EnvironmentObject var mainGameMgr: MainGameManager
-    @EnvironmentObject var gameEngineMgr: GameEngineManager
     @StateObject var settingsMgr: SettingsManager
 
     @Binding var currGameScreen: Constants.CurrGameScreens
@@ -65,7 +64,7 @@ struct SettingsView: View {
                 .pickerStyle(SegmentedPickerStyle())
                 .frame(width: 400)
                 .onChange(of: selectedInputType) { val in
-                    gameEngineMgr.changeInput(to: val)
+                    mainGameMgr.changeInput(to: val)
                 }
 
 //                HStack {
@@ -91,20 +90,6 @@ struct SettingsView: View {
         }
 
     }
-
-    private func drawGameModeOption(gameMode: Constants.GameModeTypes, name: String, fontSize: CGFloat) -> AnyView {
-        AnyView(
-            Button {
-//                gameEngineMgr.setGameMode(gameMode: gameMode)
-                gameEngineMgr.startGame(gameMode: gameMode)
-                currGameScreen = .singleplayerGameplay
-            } label: {
-                Text(name)
-                    .modifier(MenuButtonText(fontSize: fontSize))
-            }
-        )
-    }
-
 }
 
 struct SettingsView_Previews: PreviewProvider {

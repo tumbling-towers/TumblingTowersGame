@@ -9,9 +9,9 @@ import SpriteKit
 import SwiftUI
 
 struct GameplayLevelView: View {
-    @EnvironmentObject var gameEngineMgr: GameEngineManager
-    
     @Binding var currGameScreen: Constants.CurrGameScreens
+    @StateObject var gameEngineMgr: GameEngineManager
+    @State var gameMode: Constants.GameModeTypes
 
     var body: some View {
 //        LevelView()
@@ -20,6 +20,10 @@ struct GameplayLevelView: View {
 
         // present actual level rendered by swift ui above sprite view
         LevelView(currGameScreen: $currGameScreen)
+        .environmentObject(gameEngineMgr)
+        .onAppear(perform: {
+            gameEngineMgr.startGame(gameMode: gameMode)
+        })
     }
 
     private func getUselessSKSceneToPresent() -> SKScene {
@@ -35,7 +39,6 @@ struct GameplayLevelView: View {
 
 struct GameplayLevelView_Previews: PreviewProvider {
     static var previews: some View {
-        GameplayLevelView(currGameScreen: .constant(.singleplayerGameplay))
-            .environmentObject(GameEngineManager(levelDimensions: .infinite, eventManager: TumblingTowersEventManager()))
+        GameplayLevelView(currGameScreen: .constant(.singleplayerGameplay), gameEngineMgr: GameEngineManager(levelDimensions: .infinite, eventManager: TumblingTowersEventManager()), gameMode: .SANDBOX)
     }
 }

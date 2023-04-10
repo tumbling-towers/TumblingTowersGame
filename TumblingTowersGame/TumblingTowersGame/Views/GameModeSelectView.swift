@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct GameModeSelectView: View {
-    @EnvironmentObject var gameEngineMgr: GameEngineManager
+    @EnvironmentObject var mainGameMgr: MainGameManager
     @Binding var currGameScreen: Constants.CurrGameScreens
 
     var body: some View {
@@ -22,11 +22,11 @@ struct GameModeSelectView: View {
                     .modifier(MenuButtonText(fontSize: 50))
                 Spacer().frame(height: 100)
                 HStack {
-                    if $gameEngineMgr.playersMode.wrappedValue == .singleplayer {
+                    if $mainGameMgr.playersMode.wrappedValue == .singleplayer {
                         drawGameModeOption(gameMode: .SURVIVAL, playerMode: .singleplayer, name: "SURVIVAL", fontSize: 30.0, red: 1, green: 0.341, blue: 0.341)
 
                         drawGameModeOption(gameMode: .SANDBOX, playerMode: .singleplayer, name: "SANDBOX", fontSize: 30.0, red: 0.322, green: 0.443, blue: 1)
-                    } else if $gameEngineMgr.playersMode.wrappedValue == .multiplayer {
+                    } else if $mainGameMgr.playersMode.wrappedValue == .multiplayer {
                         // TODO: add a multiplayer game mode
                         drawGameModeOption(gameMode: .SANDBOX, playerMode: . multiplayer, name: "SANDBOX", fontSize: 30.0, red: 0.322, green: 0.443, blue: 1)
                     }
@@ -37,7 +37,7 @@ struct GameModeSelectView: View {
                 Button {
                     withAnimation {
                         currGameScreen = .playerOptionSelection
-                        gameEngineMgr.stopGame()
+                        mainGameMgr.stopGames()
                     }
                 } label: {
                     Text("Back")
@@ -55,12 +55,11 @@ struct GameModeSelectView: View {
     private func drawGameModeOption(gameMode: Constants.GameModeTypes, playerMode: PlayersMode, name: String, fontSize: CGFloat, red: Double, green: Double, blue: Double) -> AnyView {
         AnyView(
             Button {
+                mainGameMgr.gameMode = gameMode
                 if playerMode == .singleplayer {
-                    gameEngineMgr.startGame(gameMode: gameMode)
                     currGameScreen = .singleplayerGameplay
                 } else if playerMode == .multiplayer {
                     // do something
-                    gameEngineMgr.startGame(gameMode: gameMode)
                     currGameScreen = .multiplayerGameplay
                 }
             } label: {
@@ -74,7 +73,5 @@ struct GameModeSelectView: View {
 struct GameModeSelectView_Previews: PreviewProvider {
     static var previews: some View {
         GameModeSelectView(currGameScreen: .constant(.gameModeSelection))
-            .environmentObject(GameEngineManager(levelDimensions: .infinite,
-                                                 eventManager: TumblingTowersEventManager()))
     }
 }

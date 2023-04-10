@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PlayersSelectView: View {
-    @EnvironmentObject var gameEngineMgr: GameEngineManager
+    @EnvironmentObject var mainGameMgr: MainGameManager
     @Binding var currGameScreen: Constants.CurrGameScreens
     
     var body: some View {
@@ -33,7 +33,6 @@ struct PlayersSelectView: View {
                 Button {
                     withAnimation {
                         currGameScreen = .mainMenu
-                        gameEngineMgr.stopGame()
                     }
                 } label: {
                     Text("Back")
@@ -52,7 +51,7 @@ struct PlayersSelectView: View {
         AnyView(
             Button {
                 withAnimation {
-                    gameEngineMgr.playersMode = playersMode
+                    mainGameMgr.playersMode = playersMode
                     currGameScreen = .gameModeSelection
                 }
             } label: {
