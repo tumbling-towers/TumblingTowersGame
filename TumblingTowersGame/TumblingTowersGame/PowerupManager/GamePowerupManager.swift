@@ -44,7 +44,7 @@ class GamePowerupManager: PowerupManager {
             var nextPowerup = type.create()
             nextPowerup.delegate = self
             availablePowerups[index] = nextPowerup
-            eventManager.postEvent(PowerupAvailableEvent(type: type, idx: index))
+            eventManager.postEvent(PowerupAvailableEvent(type: type, idx: index, for: gameWorld))
         }
     }
 
@@ -94,7 +94,7 @@ class GamePowerupManager: PowerupManager {
     private func registerEvents() {
         // remove the powerup when it is used
         eventManager.registerClosure(for: PowerupButtonTappedEvent.self, closure: { event in
-            if let event = event as? PowerupButtonTappedEvent {
+            if let event = event as? PowerupButtonTappedEvent, event.gameWorld === self.gameWorld {
                 self.activatePowerup(at: event.idx)
             }
         })

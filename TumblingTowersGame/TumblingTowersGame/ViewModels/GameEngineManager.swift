@@ -144,7 +144,7 @@ class GameEngineManager: ObservableObject {
     }
 
     func usePowerup(at idx: Int) {
-        eventManager?.postEvent(PowerupButtonTappedEvent(idx: idx))
+        eventManager?.postEvent(PowerupButtonTappedEvent(idx: idx, for: gameEngine.gameWorld))
         self.powerups[idx] = nil
     }
     
@@ -198,10 +198,12 @@ class GameEngineManager: ObservableObject {
     }
 
     private func registerEvents() {
-        eventManager?.registerClosure(for: PowerupAvailableEvent.self, closure: { event in
+        eventManager?.registerClosure(for: PowerupAvailableEvent.self, closure: { [self] event in
             switch event {
             case let powerupAvailableEvent as PowerupAvailableEvent:
-                self.powerups[powerupAvailableEvent.idx] = powerupAvailableEvent.type
+                if powerupAvailableEvent.gameWorld === gameEngine.gameWorld {
+                    self.powerups[powerupAvailableEvent.idx] = powerupAvailableEvent.type
+                }
             default:
                 return
             }
