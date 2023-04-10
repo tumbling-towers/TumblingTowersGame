@@ -20,6 +20,7 @@ struct GameplayGoBackMenuView: View {
                 withAnimation {
                     currGameScreen = .mainMenu
                     gameEngineMgr.resetGame()
+                    mainGameMgr.stopGames()
                     mainGameMgr.removeAllGameEngineMgrs()
                     mainGameMgr.gameMode = nil
                 }

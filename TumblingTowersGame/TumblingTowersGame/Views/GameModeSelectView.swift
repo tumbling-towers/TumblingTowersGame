@@ -21,17 +21,26 @@ struct GameModeSelectView: View {
                 Text("Choose your game mode:")
                     .modifier(MenuButtonText(fontSize: 50))
                 Spacer().frame(height: 100)
-                HStack {
-                    if $mainGameMgr.playersMode.wrappedValue == .singleplayer {
-                        drawGameModeOption(gameMode: .SURVIVAL, playerMode: .singleplayer, name: "SURVIVAL", fontSize: 30.0, red: 1, green: 0.341, blue: 0.341)
 
-                        drawGameModeOption(gameMode: .SANDBOX, playerMode: .singleplayer, name: "SANDBOX", fontSize: 30.0, red: 0.322, green: 0.443, blue: 1)
-                    } else if $mainGameMgr.playersMode.wrappedValue == .multiplayer {
-                        // TODO: add a multiplayer game mode
-                        drawGameModeOption(gameMode: .SANDBOX, playerMode: . multiplayer, name: "SANDBOX", fontSize: 30.0, red: 0.322, green: 0.443, blue: 1)
+                VStack {
+
+                    if $mainGameMgr.playersMode.wrappedValue == .singleplayer {
+                        HStack {
+                            drawGameModeOption(gameMode: .SURVIVAL, playerMode: .singleplayer,
+                                               name: Constants.GameModeTypes.SURVIVAL.rawValue.uppercased(),
+                                               fontSize: 30.0, red: 1, green: 0.341, blue: 0.341)
+
+                            drawGameModeOption(gameMode: .SANDBOX, playerMode: .singleplayer,
+                                               name: Constants.GameModeTypes.SANDBOX.rawValue.uppercased(),
+                                               fontSize: 30.0, red: 0.322, green: 0.443, blue: 1)
+                        }
+
+                        HStack {
+                            drawGameModeOption(gameMode: .RACECLOCK, playerMode: .singleplayer,
+                                               name: Constants.GameModeTypes.RACECLOCK.rawValue.uppercased(),
+                                               fontSize: 30.0, red: 0.322, green: 1, blue: 0.322)
+                        }
                     }
-                    // MARK: Add back later
-//                    drawGameModeOption(gameMode: .RACECLOCK, name: "RACE AGAINST CLOCK", fontSize: 30.0)
                 }
 
                 Button {
@@ -43,7 +52,9 @@ struct GameModeSelectView: View {
                     Text("Back")
                         .modifier(CustomButton(fontSize: 25))
                 }
-                .padding(.top, 35.0)
+
+//                GameplayGoBackMenuView(currGameScreen: $currGameScreen)
+//                .padding(.top, 35.0)
 
                 Spacer()
             }

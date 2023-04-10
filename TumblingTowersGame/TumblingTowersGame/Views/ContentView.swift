@@ -47,8 +47,10 @@ struct ContentView: View {
                 ZStack {
                     PlayersSelectView(currGameScreen: $currGameScreen)
                 }
+            } else if currGameScreen == .tutorial {
+                TutorialView(currGameScreen: $currGameScreen)
             }
-            
+
             
             // TODO: Check if this works correctly
             if mainGameMgr.playersMode == .singleplayer {
@@ -71,7 +73,6 @@ struct ContentView: View {
                     }
                 }
             }
-            
 
         }
     }

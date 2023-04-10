@@ -9,42 +9,77 @@ import Foundation
 
 class SandboxGameMode: GameMode {
 
-    var name = "Sandbox"
+    static var name = Constants.GameModeTypes.SANDBOX.rawValue
+    static var description = "A chill, infinite game mode for you to do anything you want. Get creative!"
 
     var realTimeTimer = GameTimer()
 
+    var isStarted = false
     var isGameEnded = false
 
-    required init(eventMgr: EventManager) {
+    var eventMgr: EventManager
 
+    required init(eventMgr: EventManager) {
+        self.eventMgr = eventMgr
+    }
+
+    func update() {
+        let gameState = getGameState()
+
+        if gameState != .RUNNING && gameState != .PAUSED {
+            eventMgr.postEvent(GameEndedEvent())
+        }
     }
 
     func getGameState() -> Constants.GameState {
-        return .RUNNING
+        if isStarted {
+            return .RUNNING
+        } else {
+            return .NONE
+        }
     }
 
     func getScore() -> Int {
-        realTimeTimer.count
+        0
     }
 
     func hasGameEnded() -> Bool {
         isGameEnded
     }
 
-    func getTimeRemaining() -> Int {
+    func getTime() -> Int {
         realTimeTimer.count
     }
 
-    func restartGame() {
+    func resetGame() {
+        isStarted = false
         isGameEnded = false
         realTimeTimer = GameTimer()
     }
 
-    func startTimer() {
+    func startGame() {
+        isStarted = true
         realTimeTimer.start(timeInSeconds: 0, countsUp: true)
     }
 
-    func endTimer() {
+    func pauseGame() {
+        realTimeTimer.pause()
+    }
+
+    func resumeGame() {
+        realTimeTimer.resume()
+    }
+
+    func endGame() {
+        isGameEnded = true
         realTimeTimer.stop()
+    }
+
+    func getGameEndMainMessage() -> String {
+        "Thank you for playing!"
+    }
+
+    func getGameEndSubMessage() -> String {
+        "Please Try Again!"
     }
 }

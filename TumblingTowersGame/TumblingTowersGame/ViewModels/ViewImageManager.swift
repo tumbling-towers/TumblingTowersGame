@@ -9,7 +9,7 @@ import Foundation
 
 struct ViewImageManager {
     static let backgroundImage = "backgroundImage"
-    static let platformImage = "platformImage"
+    static let platformImage = "newPlatform"
 
     static let LBlockImage = "LBlockImage"
     static let IBlockImage = "IBlockImage"
