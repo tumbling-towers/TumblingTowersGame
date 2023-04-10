@@ -44,6 +44,19 @@ class MainGameManager: ObservableObject {
         }
     }
 
+    func pauseGame() {
+        for gameEngineMgr in gameEngineMgrs {
+            gameEngineMgr.pause()
+        }
+    }
+
+    func unpauseGame() {
+        for gameEngineMgr in gameEngineMgrs {
+            gameEngineMgr.unpause()
+        }
+    }
+
+    // MARK: Remove
     func hasAnyGameEnded() -> Bool {
         for gameEngineMgr in gameEngineMgrs {
             if gameEngineMgr.gameEnded {
@@ -54,6 +67,7 @@ class MainGameManager: ObservableObject {
         return false
     }
 
+    // MARK: Remove
     func countGEM() -> Bool {
         print(gameEngineMgrs.count)
         return true
@@ -65,6 +79,10 @@ class MainGameManager: ObservableObject {
     
     func stopGames() {
         gameEngineMgrs.forEach({ $0.stopGame() })
+    }
+
+    func resetGames() {
+        gameEngineMgrs.forEach({ $0.resetGame() })
     }
     
     func removeAllGameEngineMgrs() {

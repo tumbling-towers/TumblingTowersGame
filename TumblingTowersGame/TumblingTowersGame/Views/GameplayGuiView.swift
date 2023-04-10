@@ -52,7 +52,7 @@ struct GameplayGuiView: View {
 
             Button {
                 isPaused = true
-                gameEngineMgr.pause()
+                mainGameMgr.pauseGame()
             } label: {
                 Image(ViewImageManager.pauseButton)
                     .resizable()
@@ -64,11 +64,11 @@ struct GameplayGuiView: View {
             .sheet(isPresented: $isPaused) {
                 PauseView(unpause: {
                     isPaused = false
-                    gameEngineMgr.unpause()
+                    mainGameMgr.unpauseGame()
                 },
                           exit: {
-                    gameEngineMgr.stopGame()
-                    gameEngineMgr.resetGame()
+                    mainGameMgr.stopGames()
+                    mainGameMgr.resetGames()
                     mainGameMgr.removeAllGameEngineMgrs()
                     currGameScreen = .mainMenu
                 })
