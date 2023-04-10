@@ -14,7 +14,7 @@ struct LevelView: View {
 
     var body: some View {
         ZStack {
-            BackgroundView()
+            LevelBackgroundView()
 
             ForEach($gameEngineMgr.levelBlocks) { block in
                 BlockView(block: block)

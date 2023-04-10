@@ -42,34 +42,29 @@ struct ContentView: View {
                 .ignoresSafeArea(.all)
             } else if currGameScreen == .multiplayerGameplay, let gameMode = mainGameMgr.gameMode {
                 VStack {
-                    ZStack {
-                        GameplayLevelView(currGameScreen: $currGameScreen, gameEngineMgr: mainGameMgr.createGameEngineManager(height: deviceWidth, width: deviceHeight / 2), gameMode: gameMode)
-                            .gesture(DragGesture(minimumDistance: 0)
-                                .onChanged { gesture in
-                                    offset = gesture.translation
-                                    mainGameMgr.dragEvent(offset: offset)
-                                }
-                                .onEnded { _ in
-                                    offset = .zero
-                                    mainGameMgr.resetInput()
-                                }
-                            )
-                    }
-                    .rotation3DEffect(.degrees(90), axis: (x: 0, y: 0, z: 1))
-                    ZStack {
-                        GameplayLevelView(currGameScreen: $currGameScreen, gameEngineMgr: mainGameMgr.createGameEngineManager(height: deviceWidth, width: deviceHeight / 2), gameMode: gameMode)
-                            .gesture(DragGesture(minimumDistance: 0)
-                                .onChanged { gesture in
-                                    offset = gesture.translation
-                                    mainGameMgr.dragEvent(offset: offset)
-                                }
-                                .onEnded { _ in
-                                    offset = .zero
-                                    mainGameMgr.resetInput()
-                                }
-                            )
-                    }
-                    .rotation3DEffect(.degrees(270), axis: (x: 0, y: 0, z: 1))
+                    GameplayLevelView(currGameScreen: $currGameScreen, gameEngineMgr: mainGameMgr.createGameEngineManager(height: deviceHeight / 2, width: deviceWidth), gameMode: gameMode)
+                        .gesture(DragGesture(minimumDistance: 0)
+                            .onChanged { gesture in
+                                offset = gesture.translation
+                                mainGameMgr.dragEvent(offset: offset)
+                            }
+                            .onEnded { _ in
+                                offset = .zero
+                                mainGameMgr.resetInput()
+                            }
+                        )
+                    .rotation3DEffect(.degrees(180), axis: (x: 0, y: 0, z: 1))
+                    GameplayLevelView(currGameScreen: $currGameScreen, gameEngineMgr: mainGameMgr.createGameEngineManager(height: deviceHeight / 2, width: deviceWidth), gameMode: gameMode)
+                        .gesture(DragGesture(minimumDistance: 0)
+                            .onChanged { gesture in
+                                offset = gesture.translation
+                                mainGameMgr.dragEvent(offset: offset)
+                            }
+                            .onEnded { _ in
+                                offset = .zero
+                                mainGameMgr.resetInput()
+                            }
+                        )
                 }
             } else if currGameScreen == .settings {
                 SettingsView(settingsMgr: SettingsManager(), currGameScreen: $currGameScreen)

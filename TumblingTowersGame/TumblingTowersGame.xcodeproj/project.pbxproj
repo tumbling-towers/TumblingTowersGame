@@ -100,6 +100,7 @@
 		2FFED5A429D9ED4500BA072F /* StatsTrackingSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FFED59629D9ED4500BA072F /* StatsTrackingSystem.swift */; };
 		2FFED5A629D9EDB400BA072F /* TowerHeightIncreasedEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FFED5A529D9EDB400BA072F /* TowerHeightIncreasedEvent.swift */; };
 		614B458829D3EB9100BDD2F0 /* CGVector+Multiply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614B458729D3EB9100BDD2F0 /* CGVector+Multiply.swift */; };
+		615C564129E3F13500E3256E /* LevelBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615C564029E3F13500E3256E /* LevelBackgroundView.swift */; };
 		616EAD0829D6D6A2006D602A /* PowerupAvailableEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 616EAD0729D6D6A2006D602A /* PowerupAvailableEvent.swift */; };
 		616EAD0A29D6F709006D602A /* PowerupButtonTappedEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 616EAD0929D6F709006D602A /* PowerupButtonTappedEvent.swift */; };
 		616EAD0C29D70259006D602A /* PowerupType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 616EAD0B29D70259006D602A /* PowerupType.swift */; };
@@ -269,6 +270,7 @@
 		2FFED59629D9ED4500BA072F /* StatsTrackingSystem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatsTrackingSystem.swift; sourceTree = "<group>"; };
 		2FFED5A529D9EDB400BA072F /* TowerHeightIncreasedEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TowerHeightIncreasedEvent.swift; sourceTree = "<group>"; };
 		614B458729D3EB9100BDD2F0 /* CGVector+Multiply.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGVector+Multiply.swift"; sourceTree = "<group>"; };
+		615C564029E3F13500E3256E /* LevelBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelBackgroundView.swift; sourceTree = "<group>"; };
 		616EAD0729D6D6A2006D602A /* PowerupAvailableEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PowerupAvailableEvent.swift; path = TumblingTowersGame/Extensions/PowerupAvailableEvent.swift; sourceTree = SOURCE_ROOT; };
 		616EAD0929D6F709006D602A /* PowerupButtonTappedEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PowerupButtonTappedEvent.swift; path = TumblingTowersGame/Extensions/PowerupButtonTappedEvent.swift; sourceTree = SOURCE_ROOT; };
 		616EAD0B29D70259006D602A /* PowerupType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerupType.swift; sourceTree = "<group>"; };
@@ -535,6 +537,7 @@
 				14168DDD29D82AC200EF5C22 /* GameEndView.swift */,
 				14168DDF29D82C6F00EF5C22 /* GameplayGoBackMenuView.swift */,
 				61FC3A4D29DC3BD7005A91D7 /* PauseView.swift */,
+				615C564029E3F13500E3256E /* LevelBackgroundView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1063,6 +1066,7 @@
 				2FFED59D29D9ED4500BA072F /* AchievementSystemDataSource.swift in Sources */,
 				146E2DE429C0D61A00BFC757 /* GameEngineManager.swift in Sources */,
 				14C6732029D366D300D8DF78 /* MainMenuView.swift in Sources */,
+				615C564129E3F13500E3256E /* LevelBackgroundView.swift in Sources */,
 				614B458829D3EB9100BDD2F0 /* CGVector+Multiply.swift in Sources */,
 				124B02F729C9F54B00094CF5 /* NotificationName.swift in Sources */,
 				2F469D5A29D2AB3300C4152E /* FiziksShapeNode.swift in Sources */,

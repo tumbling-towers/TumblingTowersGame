@@ -14,16 +14,17 @@ struct GameplayLevelView: View {
     @State var gameMode: Constants.GameModeTypes
 
     var body: some View {
-//        LevelView()
-        // sprite view required for sprite kit to run, hidden
-        SpriteView(scene: getUselessSKSceneToPresent())
+        ZStack {
+            // sprite view required for sprite kit to run, hidden
+            SpriteView(scene: getUselessSKSceneToPresent())
 
-        // present actual level rendered by swift ui above sprite view
-        LevelView(currGameScreen: $currGameScreen)
-        .environmentObject(gameEngineMgr)
-        .onAppear(perform: {
-            gameEngineMgr.startGame(gameMode: gameMode)
-        })
+            // present actual level rendered by swift ui above sprite view
+            LevelView(currGameScreen: $currGameScreen)
+            .environmentObject(gameEngineMgr)
+            .onAppear(perform: {
+                gameEngineMgr.startGame(gameMode: gameMode)
+            })
+        }
     }
 
     private func getUselessSKSceneToPresent() -> SKScene {
