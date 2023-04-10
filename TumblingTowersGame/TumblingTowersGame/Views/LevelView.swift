@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct LevelView: View {
+    @EnvironmentObject var mainGameMgr: MainGameManager
     @EnvironmentObject var gameEngineMgr: GameEngineManager
     @State var isPaused: Bool = false
     @Binding var currGameScreen: Constants.CurrGameScreens
@@ -83,8 +84,8 @@ struct LevelView: View {
                 },
                           exit: {
                     gameEngineMgr.stopGame()
+                    mainGameMgr.removeAllGameEngineMgrs()
                     currGameScreen = .mainMenu
-                    
                 })
             }
         }

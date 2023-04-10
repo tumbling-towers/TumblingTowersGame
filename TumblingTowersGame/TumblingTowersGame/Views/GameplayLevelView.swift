@@ -9,6 +9,7 @@ import SpriteKit
 import SwiftUI
 
 struct GameplayLevelView: View {
+    @EnvironmentObject var mainGameMgr: MainGameManager
     @Binding var currGameScreen: Constants.CurrGameScreens
     @StateObject var gameEngineMgr: GameEngineManager
     @State var gameMode: Constants.GameModeTypes

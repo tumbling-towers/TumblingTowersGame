@@ -24,7 +24,6 @@ class GameWorld {
     private var dimensions: CGRect {
         level.dimensions
     }
-
     
     // MARK: Engines & Managers
     var fiziksEngine: FiziksEngine

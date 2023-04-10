@@ -59,6 +59,7 @@ class GamePowerupManager: PowerupManager {
         eventManager.postEvent(PlatformPowerupActivatedEvent())
     }
     
+    // TODO: MOVE THESE INTO THE INDIVIDUAL POWERUPS
     func createPowerupPlatform() -> Platform? {
         guard let platform = gameWorld.level.platform else { return nil }
         var count = 0
@@ -96,7 +97,6 @@ class GamePowerupManager: PowerupManager {
             if let event = event as? PowerupButtonTappedEvent {
                 self.activatePowerup(at: event.idx)
             }
-            
         })
     }
 }
