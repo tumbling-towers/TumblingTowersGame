@@ -26,7 +26,7 @@ struct ContentView: View {
             } else if currGameScreen == .gameModeSelection {
                 GameModeSelectView(currGameScreen: $currGameScreen)
                     .environmentObject(gameEngineMgr)
-            } else if currGameScreen == .gameplay {
+            } else if currGameScreen == .singleplayerGameplay {
                 ZStack {
                     GameplayLevelView(currGameScreen: $currGameScreen)
                         .environmentObject(gameEngineMgr)
@@ -42,6 +42,39 @@ struct ContentView: View {
                         )
                 }
                 .ignoresSafeArea(.all)
+            } else if currGameScreen == .multiplayerGameplay {
+                HStack {
+                    ZStack {
+                        GameplayLevelView(currGameScreen: $currGameScreen)
+                            .environmentObject(gameEngineMgr)
+                            .gesture(DragGesture(minimumDistance: 0)
+                                .onChanged { gesture in
+                                    offset = gesture.translation
+                                    gameEngineMgr.dragEvent(offset: offset)
+                                }
+                                .onEnded { _ in
+                                    offset = .zero
+                                    gameEngineMgr.resetInput()
+                                }
+                            )
+                    }
+                    .ignoresSafeArea(.all)
+                    ZStack {
+                        GameplayLevelView(currGameScreen: $currGameScreen)
+                            .environmentObject(gameEngineMgr)
+                            .gesture(DragGesture(minimumDistance: 0)
+                                .onChanged { gesture in
+                                    offset = gesture.translation
+                                    gameEngineMgr.dragEvent(offset: offset)
+                                }
+                                .onEnded { _ in
+                                    offset = .zero
+                                    gameEngineMgr.resetInput()
+                                }
+                            )
+                    }
+                    .ignoresSafeArea(.all)
+                }
             } else if currGameScreen == .settings {
                 SettingsView(settingsMgr: SettingsManager(), currGameScreen: $currGameScreen)
                     .environmentObject(mainGameMgr)
@@ -50,6 +83,11 @@ struct ContentView: View {
                 ZStack {
                     BackgroundView()
                     GameplayGoBackMenuView(currGameScreen: $currGameScreen)
+                        .environmentObject(gameEngineMgr)
+                }
+            } else if currGameScreen == .playerOptionSelection {
+                ZStack {
+                    PlayersSelectView(currGameScreen: $currGameScreen)
                         .environmentObject(gameEngineMgr)
                 }
             }

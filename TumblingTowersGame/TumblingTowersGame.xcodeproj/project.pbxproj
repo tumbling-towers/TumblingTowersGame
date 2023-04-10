@@ -129,6 +129,9 @@
 		61CD55EE29C35D8A00DB6000 /* CategoryMask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61CD55ED29C35D8A00DB6000 /* CategoryMask.swift */; };
 		61CD55F029C35D9600DB6000 /* CollisionMask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61CD55EF29C35D9600DB6000 /* CollisionMask.swift */; };
 		61CD55F229C35DA700DB6000 /* ContactTestMask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61CD55F129C35DA700DB6000 /* ContactTestMask.swift */; };
+		61EB621E29DF38E400011A03 /* PlayersSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61EB621D29DF38E400011A03 /* PlayersSelectView.swift */; };
+		61EB622029DF395500011A03 /* PlayersMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61EB621F29DF395500011A03 /* PlayersMode.swift */; };
+		61EB622129DF395500011A03 /* PlayersMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61EB621F29DF395500011A03 /* PlayersMode.swift */; };
 		61EC652629D8BAB700B9E018 /* TapInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146E2DE829C0D62800BFC757 /* TapInput.swift */; };
 		61EC652729D8BAB700B9E018 /* InputSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146E2DE729C0D62800BFC757 /* InputSystem.swift */; };
 		61EC652B29D8BD3D00B9E018 /* Shape+Fill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FC031629CD498400CE2CE5 /* Shape+Fill.swift */; };
@@ -138,16 +141,16 @@
 		61EC653029D8BD3D00B9E018 /* CGPath+Rotate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FC031029CC483400CE2CE5 /* CGPath+Rotate.swift */; };
 		61EC653129D8BD3D00B9E018 /* CGPoint+Arithmetic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FC031429CCBFB100CE2CE5 /* CGPoint+Arithmetic.swift */; };
 		61EC653229D8BD3D00B9E018 /* CGPoint+arithmeticMean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC7FADD29C510F200B56850 /* CGPoint+arithmeticMean.swift */; };
-		61F4F01929DDF9C30002AD69 /* JosefinSans-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 61F4F01829DDF9C30002AD69 /* JosefinSans-Medium.ttf */; };
-		61F4F01A29DDF9C30002AD69 /* JosefinSans-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 61F4F01829DDF9C30002AD69 /* JosefinSans-Medium.ttf */; };
-		61F4F01D29DDFC090002AD69 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F4F01C29DDFC090002AD69 /* CustomButton.swift */; };
-		61F4F01F29DE016B0002AD69 /* SecondaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F4F01E29DE016B0002AD69 /* SecondaryButton.swift */; };
 		61ECC59229DE916500086794 /* SpecialProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61ECC59129DE916500086794 /* SpecialProperties.swift */; };
 		61ECC59329DE916500086794 /* SpecialProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61ECC59129DE916500086794 /* SpecialProperties.swift */; };
 		61ECC59529DE95C600086794 /* SpecialPropertiesContactResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61ECC59429DE95C600086794 /* SpecialPropertiesContactResolver.swift */; };
 		61ECC59629DE95C600086794 /* SpecialPropertiesContactResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61ECC59429DE95C600086794 /* SpecialPropertiesContactResolver.swift */; };
 		61ECC59829DEBA6100086794 /* PowerupButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61ECC59729DEBA6100086794 /* PowerupButton.swift */; };
 		61ECC59929DEBA6100086794 /* PowerupButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61ECC59729DEBA6100086794 /* PowerupButton.swift */; };
+		61F4F01929DDF9C30002AD69 /* JosefinSans-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 61F4F01829DDF9C30002AD69 /* JosefinSans-Medium.ttf */; };
+		61F4F01A29DDF9C30002AD69 /* JosefinSans-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 61F4F01829DDF9C30002AD69 /* JosefinSans-Medium.ttf */; };
+		61F4F01D29DDFC090002AD69 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F4F01C29DDFC090002AD69 /* CustomButton.swift */; };
+		61F4F01F29DE016B0002AD69 /* SecondaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F4F01E29DE016B0002AD69 /* SecondaryButton.swift */; };
 		61FC030F29CC3AE100CE2CE5 /* CGPath+Dimensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FC030E29CC3AE100CE2CE5 /* CGPath+Dimensions.swift */; };
 		61FC031129CC483400CE2CE5 /* CGPath+Rotate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FC031029CC483400CE2CE5 /* CGPath+Rotate.swift */; };
 		61FC031329CCBDE300CE2CE5 /* PathViewShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FC031229CCBDE300CE2CE5 /* PathViewShape.swift */; };
@@ -294,13 +297,15 @@
 		61CD55ED29C35D8A00DB6000 /* CategoryMask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryMask.swift; sourceTree = "<group>"; };
 		61CD55EF29C35D9600DB6000 /* CollisionMask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollisionMask.swift; sourceTree = "<group>"; };
 		61CD55F129C35DA700DB6000 /* ContactTestMask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactTestMask.swift; sourceTree = "<group>"; };
+		61EB621D29DF38E400011A03 /* PlayersSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayersSelectView.swift; sourceTree = "<group>"; };
+		61EB621F29DF395500011A03 /* PlayersMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayersMode.swift; sourceTree = "<group>"; };
+		61ECC59129DE916500086794 /* SpecialProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialProperties.swift; sourceTree = "<group>"; };
+		61ECC59429DE95C600086794 /* SpecialPropertiesContactResolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialPropertiesContactResolver.swift; sourceTree = "<group>"; };
+		61ECC59729DEBA6100086794 /* PowerupButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerupButton.swift; sourceTree = "<group>"; };
 		61F4F01829DDF9C30002AD69 /* JosefinSans-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "JosefinSans-Medium.ttf"; sourceTree = "<group>"; };
 		61F4F01B29DDFA5B0002AD69 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		61F4F01C29DDFC090002AD69 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		61F4F01E29DE016B0002AD69 /* SecondaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondaryButton.swift; sourceTree = "<group>"; };
-		61ECC59129DE916500086794 /* SpecialProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialProperties.swift; sourceTree = "<group>"; };
-		61ECC59429DE95C600086794 /* SpecialPropertiesContactResolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialPropertiesContactResolver.swift; sourceTree = "<group>"; };
-		61ECC59729DEBA6100086794 /* PowerupButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerupButton.swift; sourceTree = "<group>"; };
 		61FC030E29CC3AE100CE2CE5 /* CGPath+Dimensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGPath+Dimensions.swift"; sourceTree = "<group>"; };
 		61FC031029CC483400CE2CE5 /* CGPath+Rotate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGPath+Rotate.swift"; sourceTree = "<group>"; };
 		61FC031229CCBDE300CE2CE5 /* PathViewShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathViewShape.swift; sourceTree = "<group>"; };
@@ -409,6 +414,7 @@
 				1421B0D129D435950002E4AA /* RaceTimeGameMode.swift */,
 				14168DE529D8C47A00EF5C22 /* SandboxGameMode.swift */,
 				14168DE129D831F500EF5C22 /* GameTimer.swift */,
+				61EB621F29DF395500011A03 /* PlayersMode.swift */,
 			);
 			path = GameMode;
 			sourceTree = "<group>";
@@ -588,6 +594,7 @@
 				61F4F01C29DDFC090002AD69 /* CustomButton.swift */,
 				61F4F01E29DE016B0002AD69 /* SecondaryButton.swift */,
 				61ECC59729DEBA6100086794 /* PowerupButton.swift */,
+				61EB621D29DF38E400011A03 /* PlayersSelectView.swift */,
 			);
 			path = CustomViewModifiers;
 			sourceTree = "<group>";
@@ -959,6 +966,7 @@
 				2FFED52C29D9AEE600BA072F /* GameFiziksEngine.swift in Sources */,
 				61A10F4129D31083000EB4B4 /* GluePowerupActivatedEvent.swift in Sources */,
 				124B02E629C9DAA200094CF5 /* EventManager.swift in Sources */,
+				61EB622029DF395500011A03 /* PlayersMode.swift in Sources */,
 				61FC3A5529DD19C6005A91D7 /* GameWorldLevel.swift in Sources */,
 				146E2DE529C0D61A00BFC757 /* GameRendererDelegate.swift in Sources */,
 				2FFED59E29D9ED4500BA072F /* NumBlocksPlacedStatTracker.swift in Sources */,
@@ -993,6 +1001,7 @@
 				61ECC59829DEBA6100086794 /* PowerupButton.swift in Sources */,
 				2FC7FADE29C510F200B56850 /* CGPoint+arithmeticMean.swift in Sources */,
 				14168DE229D831F500EF5C22 /* GameTimer.swift in Sources */,
+				61EB621E29DF38E400011A03 /* PlayersSelectView.swift in Sources */,
 				61F4F01D29DDFC090002AD69 /* CustomButton.swift in Sources */,
 				124B02D329C4204300094CF5 /* GameObjectPlatform.swift in Sources */,
 				61FC031729CD498400CE2CE5 /* Shape+Fill.swift in Sources */,
@@ -1075,6 +1084,7 @@
 				619D44A029C62FFC00EE00CE /* FiziksContactTests.swift in Sources */,
 				124B02DE29C74D8800094CF5 /* GameObjectBlockTests.swift in Sources */,
 				2FA2AC0329C74528001C5B7C /* GameEngineTests.swift in Sources */,
+				61EB622129DF395500011A03 /* PlayersMode.swift in Sources */,
 				61ECC59629DE95C600086794 /* SpecialPropertiesContactResolver.swift in Sources */,
 				619D44BB29C69BAA00EE00CE /* GameFiziksEngineTests.swift in Sources */,
 				2FFED51C29D9A93800BA072F /* MockFiziksShapeNode.swift in Sources */,

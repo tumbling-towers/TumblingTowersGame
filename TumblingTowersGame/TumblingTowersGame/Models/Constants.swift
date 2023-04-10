@@ -12,8 +12,10 @@ class Constants {
 
     enum CurrGameScreens {
         case mainMenu
+        case playerOptionSelection
         case gameModeSelection
-        case gameplay
+        case singleplayerGameplay
+        case multiplayerGameplay
         case settings
         case achievements
     }

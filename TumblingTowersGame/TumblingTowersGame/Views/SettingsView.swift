@@ -97,7 +97,7 @@ struct SettingsView: View {
             Button {
 //                gameEngineMgr.setGameMode(gameMode: gameMode)
                 gameEngineMgr.startGame(gameMode: gameMode)
-                currGameScreen = .gameplay
+                currGameScreen = .singleplayerGameplay
             } label: {
                 Text(name)
                     .modifier(MenuButtonText(fontSize: fontSize))

@@ -38,6 +38,8 @@ class GameEngineManager: ObservableObject {
     var gameMode: GameMode? {
         gameEngine.gameMode
     }
+    
+    var playersMode: PlayersMode?
 
     var referenceBox: CGRect? {
         guard let refPoints = gameEngine.gameWorld.getReferencePoints() else { return nil }

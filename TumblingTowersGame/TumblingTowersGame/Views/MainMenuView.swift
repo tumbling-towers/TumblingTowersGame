@@ -9,7 +9,6 @@ import SwiftUI
 
 struct MainMenuView: View {
     @EnvironmentObject var mainGameMgr: MainGameManager
-    @EnvironmentObject var gameEngineMgr: GameEngineManager
 
     @Binding var currGameScreen: Constants.CurrGameScreens
 
@@ -30,10 +29,10 @@ struct MainMenuView: View {
 
                 Button {
                     withAnimation {
-                        currGameScreen = .gameModeSelection
+                        currGameScreen = .playerOptionSelection
                     }
                 } label: {
-                    Text("Start")
+                    Text("Play")
                         .modifier(CustomButton(fontSize: 40))
                 }
                 
@@ -73,6 +72,5 @@ struct MainMenuView_Previews: PreviewProvider {
     static var previews: some View {
         MainMenuView(currGameScreen: .constant(.mainMenu))
             .environmentObject(MainGameManager())
-            .environmentObject(GameEngineManager(levelDimensions: .infinite, eventManager: TumblingTowersEventManager()))
     }
 }

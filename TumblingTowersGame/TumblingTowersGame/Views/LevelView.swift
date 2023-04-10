@@ -93,7 +93,7 @@ struct LevelView: View {
 
 struct LevelView_Previews: PreviewProvider {
     static var previews: some View {
-        LevelView(currGameScreen: .constant(.gameplay))
+        LevelView(currGameScreen: .constant(.singleplayerGameplay))
             .environmentObject(GameEngineManager(levelDimensions: .infinite, eventManager: TumblingTowersEventManager()))
     }
 }

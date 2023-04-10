@@ -95,7 +95,7 @@ struct GameEndView_Previews: PreviewProvider {
     }()
 
     static var previews: some View {
-        GameEndView(currGameScreen: .constant(.gameplay))
+        GameEndView(currGameScreen: .constant(.singleplayerGameplay))
             .environmentObject(gameEngineMgr)
     }
 }
