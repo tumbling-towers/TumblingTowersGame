@@ -75,7 +75,11 @@ class GameEngineManager: ObservableObject {
             inputSystem = inputClass.init()
         }
     }
-
+    
+    func dragEvent(offset: CGSize) {
+        inputSystem.dragEvent(offset: offset)
+    }
+    
     func resetInput() {
         inputSystem.resetInput()
     }

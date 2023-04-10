@@ -14,9 +14,6 @@ struct ContentView: View {
     @State var deviceWidth: Double
     @State var currGameScreen = Constants.CurrGameScreens.mainMenu
 
-    // for tracking drag movement
-    @State private var offset = CGSize.zero
-
     var body: some View {
 
         ZStack {
@@ -28,43 +25,13 @@ struct ContentView: View {
             } else if currGameScreen == .singleplayerGameplay, let gameMode = mainGameMgr.gameMode {
                 ZStack {
                     GameplayLevelView(currGameScreen: $currGameScreen, gameEngineMgr: mainGameMgr.createGameEngineManager(height: deviceHeight, width: deviceWidth), gameMode: gameMode)
-                        .gesture(DragGesture(minimumDistance: 0)
-                            .onChanged { gesture in
-                                offset = gesture.translation
-                                mainGameMgr.dragEvent(offset: offset)
-                            }
-                            .onEnded { _ in
-                                offset = .zero
-                                mainGameMgr.resetInput()
-                            }
-                        )
                 }
                 .ignoresSafeArea(.all)
             } else if currGameScreen == .multiplayerGameplay, let gameMode = mainGameMgr.gameMode {
                 VStack {
                     GameplayLevelView(currGameScreen: $currGameScreen, gameEngineMgr: mainGameMgr.createGameEngineManager(height: deviceHeight / 2, width: deviceWidth), gameMode: gameMode)
-                        .gesture(DragGesture(minimumDistance: 0)
-                            .onChanged { gesture in
-                                offset = gesture.translation
-                                mainGameMgr.dragEvent(offset: offset)
-                            }
-                            .onEnded { _ in
-                                offset = .zero
-                                mainGameMgr.resetInput()
-                            }
-                        )
                     .rotation3DEffect(.degrees(180), axis: (x: 0, y: 0, z: 1))
                     GameplayLevelView(currGameScreen: $currGameScreen, gameEngineMgr: mainGameMgr.createGameEngineManager(height: deviceHeight / 2, width: deviceWidth), gameMode: gameMode)
-                        .gesture(DragGesture(minimumDistance: 0)
-                            .onChanged { gesture in
-                                offset = gesture.translation
-                                mainGameMgr.dragEvent(offset: offset)
-                            }
-                            .onEnded { _ in
-                                offset = .zero
-                                mainGameMgr.resetInput()
-                            }
-                        )
                 }
             } else if currGameScreen == .settings {
                 SettingsView(settingsMgr: SettingsManager(), currGameScreen: $currGameScreen)

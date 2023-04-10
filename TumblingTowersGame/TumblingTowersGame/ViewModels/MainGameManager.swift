@@ -19,7 +19,7 @@ class MainGameManager: ObservableObject {
     
     var playersMode: PlayersMode?
     
-    var inputSystem: InputSystem = GyroInput()
+    var inputSystem: InputSystem.Type = GyroInput.self
     
     var gameMode: Constants.GameModeTypes?
     
@@ -28,7 +28,7 @@ class MainGameManager: ObservableObject {
 
         let gameEngineMgr = GameEngineManager(levelDimensions: CGRect(x: 0, y: 0,
                                                                   width: width, height: height), eventManager: eventManager)
-        gameEngineMgr.inputSystem = self.inputSystem
+        gameEngineMgr.inputSystem = self.inputSystem.init()
         self.gameEngineMgrs.append(gameEngineMgr)
         self.eventManager = eventManager
         
@@ -38,20 +38,12 @@ class MainGameManager: ObservableObject {
     func changeInput(to inputType: Constants.GameInputTypes) {
         let inputClass = Constants.getGameInputType(fromGameInputType: inputType)
         if let inputClass = inputClass {
-            inputSystem = inputClass.init()
+            inputSystem = inputClass
         }
     }
     
     func stopGames() {
         gameEngineMgrs.forEach({ $0.stopGame() })
-    }
-    
-    func dragEvent(offset: CGSize) {
-        inputSystem.dragEvent(offset: offset)
-    }
-    
-    func resetInput() {
-        inputSystem.resetInput()
     }
     
     func removeAllGameEngineMgrs() {

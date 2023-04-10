@@ -12,6 +12,9 @@ struct GameplayLevelView: View {
     @Binding var currGameScreen: Constants.CurrGameScreens
     @StateObject var gameEngineMgr: GameEngineManager
     @State var gameMode: Constants.GameModeTypes
+    
+    // for tracking drag movement
+    @State private var offset = CGSize.zero
 
     var body: some View {
         ZStack {
@@ -24,6 +27,16 @@ struct GameplayLevelView: View {
             .onAppear(perform: {
                 gameEngineMgr.startGame(gameMode: gameMode)
             })
+            .gesture(DragGesture(minimumDistance: 0)
+                .onChanged { gesture in
+                    offset = gesture.translation
+                    gameEngineMgr.dragEvent(offset: offset)
+                }
+                .onEnded { _ in
+                    offset = .zero
+                    gameEngineMgr.resetInput()
+                }
+            )
         }
     }
 
