@@ -86,23 +86,23 @@ class GameEngineManager: ObservableObject {
         }
     }
 
-    init(levelDimensions: CGRect, eventManager: EventManager) {
+    init(levelDimensions: CGRect, eventManager: EventManager, inputType: InputSystem.Type) {
         self.levelDimensions = levelDimensions
         self.eventManager = eventManager
         self.gameEngine = GameEngine(levelDimensions: levelDimensions, eventManager: eventManager)
 
-        inputSystem = GyroInput()
+        inputSystem = inputType.init()
 
         registerEvents()
     }
 
     // TODO: REMOVE THIS
-    func changeInput(to inputType: Constants.GameInputTypes) {
-        let inputClass = Constants.getGameInputType(fromGameInputType: inputType)
-        if let inputClass = inputClass {
-            inputSystem = inputClass.init()
-        }
-    }
+//    func changeInput(to inputType: Constants.GameInputTypes) {
+//        let inputClass = Constants.getGameInputType(fromGameInputType: inputType)
+//        if let inputClass = inputClass {
+//            inputSystem = inputClass.init()
+//        }
+//    }
     
     func dragEvent(offset: CGSize) {
         inputSystem.dragEvent(offset: offset)

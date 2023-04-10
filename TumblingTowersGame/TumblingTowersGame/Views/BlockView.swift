@@ -30,6 +30,6 @@ struct BlockView_Previews: PreviewProvider {
     static var previews: some View {
         BlockView(block: .constant(GameObjectBlock.sampleBlock))
             .environmentObject(GameEngineManager(levelDimensions: .infinite,
-                                                 eventManager: TumblingTowersEventManager()))
+                                                 eventManager: TumblingTowersEventManager(), inputType: TapInput.self))
     }
 }

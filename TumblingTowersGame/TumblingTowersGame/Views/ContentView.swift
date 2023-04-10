@@ -41,7 +41,7 @@ struct ContentView: View {
                     BackgroundView()
                     // TODO: Change this
                                         GameplayGoBackMenuView(currGameScreen: $currGameScreen)
-                        .environmentObject(GameEngineManager(levelDimensions: .infinite, eventManager: TumblingTowersEventManager()))
+                        .environmentObject(GameEngineManager(levelDimensions: .infinite, eventManager: TumblingTowersEventManager(), inputType: mainGameMgr.inputSystem))
                 }
             } else if currGameScreen == .playerOptionSelection {
                 ZStack {

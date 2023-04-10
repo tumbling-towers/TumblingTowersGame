@@ -98,7 +98,7 @@ struct SettingsView: View {
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
         SettingsView(settingsMgr: SettingsManager(), currGameScreen: .constant(.gameModeSelection))
-            .environmentObject(GameEngineManager(levelDimensions: .infinite, eventManager: TumblingTowersEventManager()))
+            .environmentObject(GameEngineManager(levelDimensions: .infinite, eventManager: TumblingTowersEventManager(), inputType: TapInput.self))
             .environmentObject(MainGameManager())
             .environmentObject(SettingsManager())
     }

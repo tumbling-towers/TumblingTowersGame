@@ -23,7 +23,7 @@ struct TutorialView: View {
 
                 GameplayGoBackMenuView(currGameScreen: $currGameScreen)
                     .padding(.bottom, 1)
-                    .environmentObject(GameEngineManager(levelDimensions: .infinite, eventManager: TumblingTowersEventManager()))
+                    .environmentObject(GameEngineManager(levelDimensions: .infinite, eventManager: TumblingTowersEventManager(), inputType: TapInput.self))
 
             }
         }
