@@ -31,6 +31,8 @@ class MainGameManager: ObservableObject {
         gameEngineMgr.inputSystem = self.inputSystem.init()
         self.gameEngineMgrs.append(gameEngineMgr)
         self.eventManager = eventManager
+
+        eventManager.registerClosure(for: GameEndedEvent.self, closure: refresh)
         
         return gameEngineMgr
     }
@@ -40,6 +42,25 @@ class MainGameManager: ObservableObject {
         if let inputClass = inputClass {
             inputSystem = inputClass
         }
+    }
+
+    func hasAnyGameEnded() -> Bool {
+        for gameEngineMgr in gameEngineMgrs {
+            if gameEngineMgr.gameEnded {
+                return true
+            }
+        }
+
+        return false
+    }
+
+    func countGEM() -> Bool {
+        print(gameEngineMgrs.count)
+        return true
+    }
+
+    func refresh(event: Event) {
+        objectWillChange.send()
     }
     
     func stopGames() {

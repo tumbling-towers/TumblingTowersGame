@@ -59,8 +59,8 @@ struct ContentView: View {
     private func drawGameEndScreens() -> AnyView {
         AnyView(
             ZStack {
-                if mainGameMgr.playersMode == .singleplayer {
-                    if mainGameMgr.gameEngineMgrs.count == 1,
+                if mainGameMgr.playersMode == .singleplayer, mainGameMgr.countGEM() {
+                    if mainGameMgr.gameEngineMgrs.count >= 1,
                        let gameEngineMgr = mainGameMgr.gameEngineMgrs[0],
                        gameEngineMgr.gameEnded {
                                 GameEndView(currGameScreen: $currGameScreen)

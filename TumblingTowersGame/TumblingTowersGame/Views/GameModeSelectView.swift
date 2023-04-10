@@ -40,6 +40,12 @@ struct GameModeSelectView: View {
                                                name: Constants.GameModeTypes.RACECLOCK.rawValue.uppercased(),
                                                fontSize: 30.0, red: 0.322, green: 1, blue: 0.322)
                         }
+                    } else if $mainGameMgr.playersMode.wrappedValue == .multiplayer {
+                        HStack {
+                            drawGameModeOption(gameMode: .SANDBOX, playerMode: .multiplayer,
+                                               name: Constants.GameModeTypes.SANDBOX.rawValue.uppercased(),
+                                               fontSize: 30.0, red: 0.322, green: 0.443, blue: 1)
+                        }
                     }
                 }
 
