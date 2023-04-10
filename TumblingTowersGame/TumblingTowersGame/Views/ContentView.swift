@@ -52,9 +52,12 @@ struct ContentView: View {
                     GameplayGoBackMenuView(currGameScreen: $currGameScreen)
                         .environmentObject(gameEngineMgr)
                 }
+            } else if currGameScreen == .tutorial {
+                TutorialView(currGameScreen: $currGameScreen)
+                    .environmentObject(gameEngineMgr)
             }
             
-            if gameEngineMgr.gameState != nil && gameEngineMgr.gameState != .RUNNING && gameEngineMgr.gameState != .PAUSED {
+            if gameEngineMgr.gameEnded {
                 GameEndView(currGameScreen: $currGameScreen)
                     .environmentObject(gameEngineMgr)
             }

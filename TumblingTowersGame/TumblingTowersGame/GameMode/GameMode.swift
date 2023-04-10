@@ -9,7 +9,9 @@ import Foundation
 
 protocol GameMode {
 
-    var name: String { get }
+    static var name: String { get }
+
+    static var description: String { get }
 
     init(eventMgr: EventManager)
 
@@ -19,11 +21,21 @@ protocol GameMode {
 
     func getScore() -> Int
 
-    func getTimeRemaining() -> Int
+    func getTime() -> Int
 
-    func restartGame()
+    func startGame()
 
-    func startTimer()
+    func pauseGame()
 
-    func endTimer()
+    func resumeGame()
+
+    func resetGame()
+
+    func endGame()
+
+    func getGameEndMainMessage() -> String
+
+    func getGameEndSubMessage() -> String
+
+    func update()
 }
