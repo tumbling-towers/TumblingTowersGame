@@ -24,27 +24,25 @@ class SoundSystem {
         }
     }
 
-    var otherSoundVolume: Float {
-        // TODO: Update when storage implemented
-        0
-    }
+    var otherSoundVolume: Float
 
     var overallVolume: Float {
         AVAudioSession.sharedInstance().outputVolume
-//        let mpVolumeView = MPVolumeView()
-//        let slider = mpVolumeView.subviews.first(where: { $0 is UISlider }) as? UISlider
-//
-//        if let currVol = slider?.value {
-//            return currVol
-//        } else {
-//            return 0
-//        }
     }
 
     private init() {
+        otherSoundVolume = 0.0
+
         for sound in GameSound.allCases {
             loadSound(sound)
         }
+
+        var eventMgr = TumblingTowersEventManager()
+        eventMgr.registerClosure(for: BlockPlacedEvent.self, closure: { (event: Event) -> Void in self.playSound(.COLLIDE) })
+        eventMgr.registerClosure(for: BlockTouchedPowerupLineEvent.self, closure: { (event: Event) -> Void in self.playSound(.POWERUPCOLLECT) })
+        eventMgr.registerClosure(for: GluePowerupActivatedEvent.self, closure: { (event: Event) -> Void in self.playSound(.POWERUPGLUE) })
+        eventMgr.registerClosure(for: PlatformPowerupActivatedEvent.self, closure: { (event: Event) -> Void in self.playSound(.POWERUPPLATFORM) })
+        eventMgr.registerClosure(for: GameEndedEvent.self, closure: { (event: Event) -> Void in self.playSound(.GAMEEND) })
     }
 
     private func loadSound(_ sound: GameSound) {
@@ -67,6 +65,8 @@ class SoundSystem {
         guard let currPlayer = soundPlayers[sound] else {
             return
         }
+
+        currPlayer.volume = otherSoundVolume
 
         currPlayer.play()
     }
@@ -92,7 +92,7 @@ class SoundSystem {
     }
 
     func changeSoundVolume(_ newVolume: Float) {
-        // TODO: Implement
+        otherSoundVolume = newVolume
     }
 
     func changeOverallVolume(_ newVolume: Float) {
@@ -106,9 +106,10 @@ class SoundSystem {
 
     enum GameSound: String, CaseIterable {
         case COLLIDE = "collide.mp3"
-        case POWERUP = "powerup-collect.mp3"
-        case GAMEWIN = "game-win.mp3"
-        case GAMELOSE = "game-lose.mp3"
-        case VINES = "powerup-vines.mp3"
+        case POWERUPCOLLECT = "powerup-collect.mp3"
+        case POWERUPGLUE = "powerup-glue.mp3"
+        case POWERUPPLATFORM = "powerup-platform.mp3"
+        case GAMEEND = "result.mp3"
+
     }
 }
