@@ -10,7 +10,7 @@ import SwiftUI
 struct GameModeSelectView: View {
     @EnvironmentObject var mainGameMgr: MainGameManager
     @Binding var currGameScreen: Constants.CurrGameScreens
-
+    
     var body: some View {
         ZStack {
 
@@ -42,9 +42,19 @@ struct GameModeSelectView: View {
                         }
                     } else if $mainGameMgr.playersMode.wrappedValue == .multiplayer {
                         HStack {
+                            drawGameModeOption(gameMode: .SURVIVAL, playerMode: .multiplayer,
+                                               name: Constants.GameModeTypes.SURVIVAL.rawValue.uppercased(),
+                                               fontSize: 30.0, red: 1, green: 0.341, blue: 0.341)
+
                             drawGameModeOption(gameMode: .SANDBOX, playerMode: .multiplayer,
                                                name: Constants.GameModeTypes.SANDBOX.rawValue.uppercased(),
                                                fontSize: 30.0, red: 0.322, green: 0.443, blue: 1)
+                        }
+
+                        HStack {
+                            drawGameModeOption(gameMode: .RACECLOCK, playerMode: .multiplayer,
+                                               name: Constants.GameModeTypes.RACECLOCK.rawValue.uppercased(),
+                                               fontSize: 30.0, red: 0.322, green: 1, blue: 0.322)
                         }
                     }
                 }

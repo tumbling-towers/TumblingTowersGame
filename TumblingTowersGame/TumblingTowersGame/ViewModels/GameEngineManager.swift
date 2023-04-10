@@ -17,6 +17,8 @@ class GameEngineManager: ObservableObject {
     @Published var levelPlatforms: [GameObjectPlatform] = []
     @Published var powerups: [Powerup.Type?] = [Powerup.Type?](repeating: nil, count: 5)
 
+    var playerId = UUID()
+
     var eventManager: EventManager?
 
     // MARK: Game logic related attributes
@@ -89,7 +91,7 @@ class GameEngineManager: ObservableObject {
     init(levelDimensions: CGRect, eventManager: EventManager, inputType: InputSystem.Type) {
         self.levelDimensions = levelDimensions
         self.eventManager = eventManager
-        self.gameEngine = GameEngine(levelDimensions: levelDimensions, eventManager: eventManager)
+        self.gameEngine = GameEngine(levelDimensions: levelDimensions, eventManager: eventManager, playerId: playerId)
 
         inputSystem = inputType.init()
 
@@ -128,7 +130,7 @@ class GameEngineManager: ObservableObject {
         // set up game mode
         let gameModeClass = Constants.getGameModeType(from: gameMode)
         if let eventManager = eventManager, let gameModeClass = gameModeClass {
-            self.gameEngine.gameMode = gameModeClass.init(eventMgr: eventManager)
+            self.gameEngine.gameMode = gameModeClass.init(eventMgr: eventManager, playerId: playerId)
         }
 
         // set up game in game engine
@@ -136,13 +138,15 @@ class GameEngineManager: ObservableObject {
     }
 
     func stopGame() {
-        eventManager?.postEvent(GameEndedEvent())
+        eventManager?.postEvent(GameEndedEvent(playerId: playerId, endState: .NONE))
     }
 
     func stopGame(event: Event) {
-        gameUpdater?.stopLevel()
-        gameEngine.stopGame()
-        gameMode?.endGame()
+        if let gameEndEvent = event as? GameEndedEvent {
+            gameUpdater?.stopLevel()
+            gameEngine.stopGame()
+            gameMode?.endGame(endedBy: gameEndEvent.playerId, endState: gameEndEvent.endState)
+        }
     }
 
     func resetGame() {

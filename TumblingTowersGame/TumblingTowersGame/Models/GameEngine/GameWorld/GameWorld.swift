@@ -24,7 +24,9 @@ class GameWorld {
     private var dimensions: CGRect {
         level.dimensions
     }
-    
+
+    private var playerId: UUID
+
     // MARK: Engines & Managers
     var fiziksEngine: FiziksEngine
     
@@ -46,9 +48,10 @@ class GameWorld {
 
     
     // MARK: Initializer
-    init(levelDimensions: CGRect, seed: Int = GameWorldConstants.defaultSeed, eventManager: EventManager) {
+    init(levelDimensions: CGRect, seed: Int = GameWorldConstants.defaultSeed, eventManager: EventManager, playerId: UUID) {
         self.eventManager = eventManager
         self.level = GameWorldLevel(levelDimensions: levelDimensions)
+        self.playerId = playerId
         self.fiziksEngine = GameFiziksEngine(size: levelDimensions)
         self.shapeRandomizer = ShapeRandomizer(possibleShapes: TetrisType.allCases, seed: seed)
         self.rng = RandomNumberGeneratorWithSeed(seed: seed)
@@ -98,7 +101,7 @@ class GameWorld {
                 // TODO: Emit event that a block has gone out of bounds.
                 removeObject(object: object)
 
-                eventManager.postEvent(BlockDroppedEvent())
+                eventManager.postEvent(BlockDroppedEvent(playerId: playerId))
 
                 if object === currentlyMovingBlock {
                     currentlyMovingBlock = nil
@@ -124,7 +127,7 @@ class GameWorld {
 
         currentlyMovingBlock = insertedBlock
 
-        eventManager.postEvent(BlockInsertedEvent())
+        eventManager.postEvent(BlockInsertedEvent(playerId: playerId))
         return insertedBlock
     }
     
@@ -314,7 +317,7 @@ extension GameWorld: FiziksContactDelegate {
                 placedBlockCount += 1
             }
         }
-        eventManager.postEvent(BlockPlacedEvent(totalBlocksInLevel: placedBlockCount))
+        eventManager.postEvent(BlockPlacedEvent(totalBlocksInLevel: placedBlockCount, playerId: playerId))
         
         let towerHeight = findHighestPoint()
         eventManager.postEvent(TowerHeightIncreasedEvent(newHeight: towerHeight))

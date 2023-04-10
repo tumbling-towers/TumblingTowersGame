@@ -29,12 +29,18 @@ class SurvivalGameMode: GameMode {
     var currBlocksInserted = 0
     var currBlocksPlaced = 0
     var currBlocksDropped = 0
+    let playerId: UUID
 
     var isStarted = false
     var isGameEnded = false
 
-    required init(eventMgr: EventManager) {
+    // MARK: Multiplayer States
+    var isEndedByOtherPlayer = false
+    var overwriteGameState: Constants.GameState?
+
+    required init(eventMgr: EventManager, playerId: UUID) {
         self.eventMgr = eventMgr
+        self.playerId = playerId
 
         // Register all events that affect game state
 
@@ -47,7 +53,7 @@ class SurvivalGameMode: GameMode {
         let gameState = getGameState()
 
         if gameState != .RUNNING && gameState != .PAUSED {
-            eventMgr.postEvent(GameEndedEvent())
+            eventMgr.postEvent(GameEndedEvent(playerId: playerId, endState: getGameState()))
         }
     }
 
@@ -55,6 +61,10 @@ class SurvivalGameMode: GameMode {
 //        print("Blocks Dropped \(currBlocksDropped)")
 //        print("Blocks Placed \(currBlocksPlaced)")
 //        print("Blocks Inserted \(currBlocksInserted)\n")
+
+        if let overwriteGameState = overwriteGameState {
+            return overwriteGameState
+        }
 
         if currBlocksDropped >= SurvivalGameMode.blocksDroppedThreshold {
             return .LOSE
@@ -92,6 +102,9 @@ class SurvivalGameMode: GameMode {
         currBlocksPlaced = 0
         currBlocksDropped = 0
         realTimeTimer = GameTimer()
+
+        isEndedByOtherPlayer = false
+        overwriteGameState = nil
     }
 
     func startGame() {
@@ -107,9 +120,20 @@ class SurvivalGameMode: GameMode {
         realTimeTimer.resume()
     }
 
-    func endGame() {
+    func endGame(endedBy: UUID, endState: Constants.GameState) {
         isGameEnded = true
         realTimeTimer.stop()
+
+        if endedBy != playerId {
+            isEndedByOtherPlayer = true
+
+            if endState == .WIN {
+                overwriteGameState = .LOSE
+            } else if endState == .LOSE {
+                overwriteGameState = .WIN
+            }
+
+        }
     }
 
     func getGameEndMainMessage() -> String {
@@ -124,9 +148,19 @@ class SurvivalGameMode: GameMode {
 
     func getGameEndSubMessage() -> String {
         if getGameState() == .WIN {
-            return "You stacked enough blocks!"
+            if isEndedByOtherPlayer {
+                // Opponent dropped too many blocks out of the screen
+                return "You beat your opponent!"
+            } else {
+                return "You stacked enough blocks!"
+            }
         } else if getGameState() == .LOSE {
-            return "You dropped too many blocks!."
+            if isEndedByOtherPlayer {
+                // Opponent stacked enough blocks faster than you
+                return "You opponent beat you at stacking blocks!"
+            } else {
+                return "You dropped too many blocks!."
+            }
         }
 
         return ""
@@ -134,16 +168,20 @@ class SurvivalGameMode: GameMode {
 
 
     private func blockPlaced(event: Event) {
-        if let placedEvent = event as? BlockPlacedEvent {
+        if let placedEvent = event as? BlockPlacedEvent, placedEvent.playerId == playerId {
             currBlocksPlaced = placedEvent.totalBlocksInLevel
         }
     }
 
     private func blockDropped(event: Event) {
-        currBlocksDropped += 1
+        if let droppedEvent = event as? BlockDroppedEvent, droppedEvent.playerId == playerId {
+            currBlocksDropped += 1
+        }
     }
 
     private func blockInserted(event: Event) {
-        currBlocksInserted += 1
+        if let insertedEvent = event as? BlockInsertedEvent, insertedEvent.playerId == playerId {
+            currBlocksInserted += 1
+        }
     }
 }

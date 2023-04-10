@@ -17,8 +17,8 @@ class GameEngine {
         gameWorld.level
     }
     
-    init(levelDimensions: CGRect, eventManager: EventManager) {
-        self.gameWorld = GameWorld(levelDimensions: levelDimensions, eventManager: eventManager)
+    init(levelDimensions: CGRect, eventManager: EventManager, playerId: UUID) {
+        self.gameWorld = GameWorld(levelDimensions: levelDimensions, eventManager: eventManager, playerId: playerId)
         self.eventManager = eventManager
         let statsTrackingSystem = StatsTrackingSystem(eventManager: eventManager)
         self.statsTrackingSystem = statsTrackingSystem
@@ -38,7 +38,6 @@ class GameEngine {
     
     func stopGame() {
         gameWorld.endGame()
-        gameMode?.endGame()
     }
     
     func resetGame() {

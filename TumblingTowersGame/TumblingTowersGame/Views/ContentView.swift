@@ -74,6 +74,7 @@ struct ContentView: View {
                         VStack {
                             GameEndView(currGameScreen: $currGameScreen)
                                 .environmentObject(gameEngineMgr)
+                                .rotation3DEffect(.degrees(180), axis: (x: 0, y: 0, z: 1))
                             GameEndView(currGameScreen: $currGameScreen)
                                 .environmentObject(gameEngineMgr2)
                         }
