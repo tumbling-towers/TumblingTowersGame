@@ -9,6 +9,24 @@ import Foundation
 
 class Constants {
     static let backgroundMusicFileName = "bkgMusic.mp3"
+    
+    static let tapInputDescription =
+"""
+Swipe left/right: move the block in that direction.
+Swipe down: speed up the downward movement of the block.\n
+""" + generalInputDescription
+    
+    static let gyroInputDescription =
+"""
+Tilt left/right: move the block in that direction.
+Swipe down: speed up the downward movement of the block.\n
+""" + generalInputDescription
+    
+    static let generalInputDescription =
+"""
+Powerup button: activate the currently available powerup.
+Rotate button: rotate the block clockwise.
+"""
 
     enum CurrGameScreens {
         case mainMenu
@@ -44,12 +62,15 @@ class Constants {
     }
 
     static let gameInputTypeToClass: [String: InputSystem.Type] = [GameInputTypes.TAP.rawValue: TapInput.self,
-                                       GameInputTypes.GYRO.rawValue: GyroInput.self]
+                                                                   GameInputTypes.GYRO.rawValue: GyroInput.self]
 
     enum GameInputTypes: String, Equatable, CaseIterable {
         case TAP = "Tap"
         case GYRO = "Gyro"
     }
+    
+    static let gameInputTypeToDescription: [String: String] = [GameInputTypes.TAP.rawValue: Constants.tapInputDescription,
+                                                               GameInputTypes.GYRO.rawValue: Constants.gyroInputDescription]
 
     static func getGameInputType(fromGameInputType: GameInputTypes) -> InputSystem.Type? {
         gameInputTypeToClass[fromGameInputType.rawValue]

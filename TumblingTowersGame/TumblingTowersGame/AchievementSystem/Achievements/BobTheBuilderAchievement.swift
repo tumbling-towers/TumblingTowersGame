@@ -12,15 +12,16 @@ class BobTheBuilderAchievement: Achievement {
     var description: String {
         "Place \(goal) blocks without them falling off the platform. Progress: \(progress)/\(goal)"
     }
+    let goal: Any
     var achieved: Bool {
-        progress >= goal
+        progress >= (goal as? Int ?? 0)
     }
+    let achievementType: AchievementType = .BobTheBuilder
+    let dataSource: AchievementSystemDataSource
     
-    let dataSource: BobTheBuilderAchievementDataSource
     var progress: Int
-    let goal: Int
     
-    init(name: String, goal: Int, dataSource: BobTheBuilderAchievementDataSource) {
+    init(name: String, goal: Any, dataSource: AchievementSystemDataSource) {
         self.name = name
         self.goal = goal
         self.dataSource = dataSource
@@ -28,8 +29,8 @@ class BobTheBuilderAchievement: Achievement {
     }
     
     func update() {
-        guard let numBlocksPlaced = dataSource.numBlocksPlaced,
-              let numBlocksDropped = dataSource.numBlocksDropped else {
+        guard let numBlocksPlaced = dataSource.getStat(for: .numBlocksPlaced) as? Int,
+              let numBlocksDropped = dataSource.getStat(for: .numBlocksDropped) as? Int else {
             return
         }
         progress = (numBlocksPlaced - numBlocksDropped)
