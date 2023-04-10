@@ -40,8 +40,8 @@ struct ContentView: View {
                 ZStack {
                     BackgroundView()
                     // TODO: Change this
-                    //                    GameplayGoBackMenuView(currGameScreen: $currGameScreen)
-                    //                        .environmentObject(gameEngineMgr)
+                                        GameplayGoBackMenuView(currGameScreen: $currGameScreen)
+                        .environmentObject(GameEngineManager(levelDimensions: .infinite, eventManager: TumblingTowersEventManager()))
                 }
             } else if currGameScreen == .playerOptionSelection {
                 ZStack {
@@ -51,30 +51,36 @@ struct ContentView: View {
                 TutorialView(currGameScreen: $currGameScreen)
             }
 
-            
-            // TODO: Check if this works correctly
-            if mainGameMgr.playersMode == .singleplayer {
-                if mainGameMgr.gameEngineMgrs.count == 1,
-                   let gameEngineMgr = mainGameMgr.gameEngineMgrs[0],
-                   gameEngineMgr.gameState != nil && gameEngineMgr.gameState != .RUNNING && gameEngineMgr.gameState != .PAUSED {
+            drawGameEndScreens()
+
+        }
+    }
+
+    private func drawGameEndScreens() -> AnyView {
+        AnyView(
+            ZStack {
+                if mainGameMgr.playersMode == .singleplayer {
+                    if mainGameMgr.gameEngineMgrs.count == 1,
+                       let gameEngineMgr = mainGameMgr.gameEngineMgrs[0],
+                       gameEngineMgr.gameEnded {
+                                GameEndView(currGameScreen: $currGameScreen)
+                                    .environmentObject(gameEngineMgr)
+                    }
+                } else if mainGameMgr.playersMode == .multiplayer {
+                    if mainGameMgr.gameEngineMgrs.count == 2,
+                       let gameEngineMgr = mainGameMgr.gameEngineMgrs[0],
+                       let gameEngineMgr2 = mainGameMgr.gameEngineMgrs[1],
+                       gameEngineMgr.gameEnded {
+                        VStack {
                             GameEndView(currGameScreen: $currGameScreen)
                                 .environmentObject(gameEngineMgr)
-                }
-            } else if mainGameMgr.playersMode == .multiplayer {
-                if mainGameMgr.gameEngineMgrs.count == 2,
-                   let gameEngineMgr = mainGameMgr.gameEngineMgrs[0],
-                   let gameEngineMgr2 = mainGameMgr.gameEngineMgrs[1],
-                   gameEngineMgr.gameState != nil && gameEngineMgr.gameState != .RUNNING && gameEngineMgr.gameState != .PAUSED {
-                    VStack {
-                        GameEndView(currGameScreen: $currGameScreen)
-                            .environmentObject(gameEngineMgr)
-                        GameEndView(currGameScreen: $currGameScreen)
-                            .environmentObject(gameEngineMgr2)
+                            GameEndView(currGameScreen: $currGameScreen)
+                                .environmentObject(gameEngineMgr2)
+                        }
                     }
                 }
             }
-
-        }
+        )
     }
 }
 
