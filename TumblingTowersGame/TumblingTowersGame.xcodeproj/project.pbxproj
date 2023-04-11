@@ -31,6 +31,9 @@
 		124B02F329C9ED6A00094CF5 /* NotificationCenterFacade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124B02F229C9ED6A00094CF5 /* NotificationCenterFacade.swift */; };
 		124B02F529C9F10300094CF5 /* TumblingTowersNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124B02F429C9F10300094CF5 /* TumblingTowersNotification.swift */; };
 		124B02F729C9F54B00094CF5 /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124B02F629C9F54B00094CF5 /* NotificationName.swift */; };
+		140CBB0329E4C2C8008E7F93 /* powerup-collect.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 140CBB0029E4C2C7008E7F93 /* powerup-collect.mp3 */; };
+		140CBB0429E4C2C8008E7F93 /* powerup-glue.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 140CBB0129E4C2C7008E7F93 /* powerup-glue.mp3 */; };
+		140CBB0529E4C2C8008E7F93 /* powerup-platform.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 140CBB0229E4C2C8008E7F93 /* powerup-platform.mp3 */; };
 		14168DDE29D82AC200EF5C22 /* GameEndView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14168DDD29D82AC200EF5C22 /* GameEndView.swift */; };
 		14168DE029D82C6F00EF5C22 /* GameplayGoBackMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14168DDF29D82C6F00EF5C22 /* GameplayGoBackMenuView.swift */; };
 		14168DE229D831F500EF5C22 /* GameTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14168DE129D831F500EF5C22 /* GameTimer.swift */; };
@@ -45,6 +48,7 @@
 		1430401829E3422F005B7D70 /* GameplayBodyText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1430401729E3422F005B7D70 /* GameplayBodyText.swift */; };
 		1430401A29E343C2005B7D70 /* MenuDividerLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1430401929E343C2005B7D70 /* MenuDividerLine.swift */; };
 		1445F84A29C71DC900F94751 /* TapInputTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1445F84929C71DC900F94751 /* TapInputTests.swift */; };
+		146034D229E5EAF60006C4F4 /* collide.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 146034D129E5EAF60006C4F4 /* collide.mp3 */; };
 		146E2DB429C0D07200BFC757 /* TumblingTowersGameApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146E2DB329C0D07200BFC757 /* TumblingTowersGameApp.swift */; };
 		146E2DB629C0D07200BFC757 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146E2DB529C0D07200BFC757 /* ContentView.swift */; };
 		146E2DB829C0D07300BFC757 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 146E2DB729C0D07300BFC757 /* Assets.xcassets */; };
@@ -213,6 +217,9 @@
 		124B02F229C9ED6A00094CF5 /* NotificationCenterFacade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenterFacade.swift; sourceTree = "<group>"; };
 		124B02F429C9F10300094CF5 /* TumblingTowersNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TumblingTowersNotification.swift; sourceTree = "<group>"; };
 		124B02F629C9F54B00094CF5 /* NotificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationName.swift; sourceTree = "<group>"; };
+		140CBB0029E4C2C7008E7F93 /* powerup-collect.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "powerup-collect.mp3"; sourceTree = "<group>"; };
+		140CBB0129E4C2C7008E7F93 /* powerup-glue.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "powerup-glue.mp3"; sourceTree = "<group>"; };
+		140CBB0229E4C2C8008E7F93 /* powerup-platform.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "powerup-platform.mp3"; sourceTree = "<group>"; };
 		14168DDD29D82AC200EF5C22 /* GameEndView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEndView.swift; sourceTree = "<group>"; };
 		14168DDF29D82C6F00EF5C22 /* GameplayGoBackMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameplayGoBackMenuView.swift; sourceTree = "<group>"; };
 		14168DE129D831F500EF5C22 /* GameTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTimer.swift; sourceTree = "<group>"; };
@@ -227,6 +234,7 @@
 		1430401729E3422F005B7D70 /* GameplayBodyText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameplayBodyText.swift; sourceTree = "<group>"; };
 		1430401929E343C2005B7D70 /* MenuDividerLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuDividerLine.swift; sourceTree = "<group>"; };
 		1445F84929C71DC900F94751 /* TapInputTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapInputTests.swift; sourceTree = "<group>"; };
+		146034D129E5EAF60006C4F4 /* collide.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = collide.mp3; sourceTree = "<group>"; };
 		146E2DB029C0D07200BFC757 /* TumblingTowersGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TumblingTowersGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		146E2DB329C0D07200BFC757 /* TumblingTowersGameApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TumblingTowersGameApp.swift; sourceTree = "<group>"; };
 		146E2DB529C0D07200BFC757 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -643,6 +651,10 @@
 		14DAFDF529CE312D003BE140 /* Sound */ = {
 			isa = PBXGroup;
 			children = (
+				146034D129E5EAF60006C4F4 /* collide.mp3 */,
+				140CBB0029E4C2C7008E7F93 /* powerup-collect.mp3 */,
+				140CBB0129E4C2C7008E7F93 /* powerup-glue.mp3 */,
+				140CBB0229E4C2C8008E7F93 /* powerup-platform.mp3 */,
 				14C6733429D3737200D8DF78 /* bkgMusic.mp3 */,
 				14DAFDF629CE3146003BE140 /* SoundSystem.swift */,
 			);
@@ -942,8 +954,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				146E2DBB29C0D07300BFC757 /* Preview Assets.xcassets in Resources */,
+				140CBB0329E4C2C8008E7F93 /* powerup-collect.mp3 in Resources */,
+				140CBB0429E4C2C8008E7F93 /* powerup-glue.mp3 in Resources */,
 				146E2DB829C0D07300BFC757 /* Assets.xcassets in Resources */,
 				14C6733529D3737200D8DF78 /* bkgMusic.mp3 in Resources */,
+				146034D229E5EAF60006C4F4 /* collide.mp3 in Resources */,
+				140CBB0529E4C2C8008E7F93 /* powerup-platform.mp3 in Resources */,
 				61F4F01929DDF9C30002AD69 /* JosefinSans-Medium.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1291,7 +1307,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TumblingTowersGame/Preview Content\"";
-				DEVELOPMENT_TEAM = T95PZMKKDH;
+				DEVELOPMENT_TEAM = 9K4QZ59W8A;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TumblingTowersGame/Info.plist;
@@ -1305,7 +1321,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.taubar2.TumblingTowersGame;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tlc.TumblingTowersGame;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -1321,7 +1337,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TumblingTowersGame/Preview Content\"";
-				DEVELOPMENT_TEAM = T95PZMKKDH;
+				DEVELOPMENT_TEAM = 9K4QZ59W8A;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TumblingTowersGame/Info.plist;
@@ -1335,7 +1351,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.taubar2.TumblingTowersGame;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tlc.TumblingTowersGame;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
