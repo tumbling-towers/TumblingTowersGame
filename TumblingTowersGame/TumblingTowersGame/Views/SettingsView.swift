@@ -51,7 +51,7 @@ struct SettingsView: View {
                         .padding(.all)
                 }
 
-                Text("Input Options")
+                Text("Singleplayer Input Options")
                     .modifier(CategoryText())
 
                 Picker(selection: $selectedInputType, label: Text("Input Type").modifier(BodyText())) {
