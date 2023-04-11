@@ -36,8 +36,9 @@ class SoundSystem {
         for sound in GameSound.allCases {
             loadSound(sound)
         }
+    }
 
-        var eventMgr = TumblingTowersEventManager()
+    func registerSoundEvents(eventMgr: EventManager) {
         eventMgr.registerClosure(for: BlockPlacedEvent.self, closure: { (event: Event) -> Void in self.playSound(.COLLIDE) })
         eventMgr.registerClosure(for: BlockTouchedPowerupLineEvent.self, closure: { (event: Event) -> Void in self.playSound(.POWERUPCOLLECT) })
         eventMgr.registerClosure(for: GluePowerupActivatedEvent.self, closure: { (event: Event) -> Void in self.playSound(.POWERUPGLUE) })
@@ -57,16 +58,24 @@ class SoundSystem {
                 return
             }
 
+            print("Loaded " + sound.rawValue)
+
             soundPlayers[sound] = currPlayer
+
+            print(soundPlayers.count)
         }
     }
 
     private func playSound(_ sound: GameSound) {
+        print(soundPlayers.count)
         guard let currPlayer = soundPlayers[sound] else {
+            print("Cant find player for \(sound.rawValue)")
             return
         }
 
-        currPlayer.volume = otherSoundVolume
+        print("Playing Sound \(sound.rawValue) with volume \(otherSoundVolume)")
+
+        currPlayer.volume = exp(otherSoundVolume) - 1
 
         currPlayer.play()
     }

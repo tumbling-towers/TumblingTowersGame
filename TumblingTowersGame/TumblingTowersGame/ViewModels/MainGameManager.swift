@@ -23,6 +23,8 @@ class MainGameManager: ObservableObject {
 
         let eventManager = TumblingTowersEventManager()
 
+        SoundSystem.shared.registerSoundEvents(eventMgr: eventManager)
+
         let gameEngineMgr = GameEngineManager(levelDimensions: CGRect(x: 0, y: 0,
                                                                       width: deviceWidth, height: deviceHeight), eventManager: eventManager, storageManager: storageManager)
         self.gameEngineMgr = gameEngineMgr
