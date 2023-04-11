@@ -22,21 +22,15 @@ struct AchievementsView: View {
                         HStack {
                             Text(achievment.wrappedValue.name)
                                 .modifier(CategoryText())
-                            if achievment.wrappedValue.achieved {
-                                Image(ViewImageManager.tickImage)
-                                    .resizable()
-                                    .frame(
-                                        width: 20,
-                                        height: 20,
-                                        alignment: .center)
-                            } else {
-                                Image(ViewImageManager.crossImage)
-                                    .resizable()
-                                    .frame(
-                                        width: 20,
-                                        height: 20,
-                                        alignment: .center)
-                            }
+                            let image = achievment.wrappedValue.achieved
+                                        ? ViewImageManager.tickImage
+                                        : ViewImageManager.crossImage
+                            Image(image)
+                                .resizable()
+                                .frame(
+                                    width: 20,
+                                    height: 20,
+                                    alignment: .center)
                         }
                         Text(achievment.wrappedValue.description)
                             .modifier(BodyText())

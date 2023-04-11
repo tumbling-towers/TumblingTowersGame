@@ -85,6 +85,7 @@
 		2F379D5229E553F100783575 /* StatStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F379D4F29E553F100783575 /* StatStorage.swift */; };
 		2F379D5429E5542E00783575 /* DisplayableAchievement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F379D5329E5542E00783575 /* DisplayableAchievement.swift */; };
 		2F379D5629E5546500783575 /* AchievementsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F379D5529E5546500783575 /* AchievementsView.swift */; };
+		2F379D5829E55E0D00783575 /* Double+truncate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F379D5729E55E0D00783575 /* Double+truncate.swift */; };
 		2F469D5129D2AA3200C4152E /* CGPath+Create.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F469D5029D2AA3200C4152E /* CGPath+Create.swift */; };
 		2F469D5529D2AB1500C4152E /* FiziksContact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F469D5329D2AB1500C4152E /* FiziksContact.swift */; };
 		2F469D5629D2AB1500C4152E /* FiziksContactDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F469D5429D2AB1500C4152E /* FiziksContactDelegate.swift */; };
@@ -269,6 +270,7 @@
 		2F379D4F29E553F100783575 /* StatStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatStorage.swift; sourceTree = "<group>"; };
 		2F379D5329E5542E00783575 /* DisplayableAchievement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayableAchievement.swift; sourceTree = "<group>"; };
 		2F379D5529E5546500783575 /* AchievementsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementsView.swift; sourceTree = "<group>"; };
+		2F379D5729E55E0D00783575 /* Double+truncate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+truncate.swift"; sourceTree = "<group>"; };
 		2F469D5029D2AA3200C4152E /* CGPath+Create.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGPath+Create.swift"; sourceTree = "<group>"; };
 		2F469D5329D2AB1500C4152E /* FiziksContact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiziksContact.swift; sourceTree = "<group>"; };
 		2F469D5429D2AB1500C4152E /* FiziksContactDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiziksContactDelegate.swift; sourceTree = "<group>"; };
@@ -608,6 +610,7 @@
 				61FC031429CCBFB100CE2CE5 /* CGPoint+Arithmetic.swift */,
 				61FC031629CD498400CE2CE5 /* Shape+Fill.swift */,
 				614B458729D3EB9100BDD2F0 /* CGVector+Multiply.swift */,
+				2F379D5729E55E0D00783575 /* Double+truncate.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1089,6 +1092,7 @@
 				1430401629E33171005B7D70 /* SquareCustomButton.swift in Sources */,
 				61CD55F229C35DA700DB6000 /* ContactTestMask.swift in Sources */,
 				14C6732229D368C900D8DF78 /* Constants.swift in Sources */,
+				2F379D5829E55E0D00783575 /* Double+truncate.swift in Sources */,
 				124B02CD29C41F7100094CF5 /* GameObject.swift in Sources */,
 				146E2DE629C0D61A00BFC757 /* MainGameManager.swift in Sources */,
 				61A10F3829D30DCA000EB4B4 /* PowerupDelegate.swift in Sources */,
