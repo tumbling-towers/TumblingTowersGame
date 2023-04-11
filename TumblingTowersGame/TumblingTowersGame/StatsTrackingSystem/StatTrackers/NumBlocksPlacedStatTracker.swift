@@ -17,6 +17,6 @@ class NumBlocksPlacedStatTracker: StatTracker {
     }
     
     private lazy var blockPlacedClosure = { [weak self] (_ event: Event) -> Void in
-        self?.stat = (self?.stat as? Double ?? 0) + 1
+        self?.stat = self?.stat ?? 0 + 1
     }
 }
