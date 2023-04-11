@@ -99,7 +99,7 @@ struct GameplayGuiView: View {
 struct GameplayGuiView_Previews: PreviewProvider {
     static var previews: some View {
         GameplayGuiView(currGameScreen: .constant(.singleplayerGameplay))
-            .environmentObject(GameEngineManager(levelDimensions: .infinite, eventManager: TumblingTowersEventManager(), inputType: TapInput.self))
+            .environmentObject(GameEngineManager(levelDimensions: .infinite, eventManager: TumblingTowersEventManager(), inputType: TapInput.self, storageManager: StorageManager()))
             .environmentObject(MainGameManager())
     }
 }

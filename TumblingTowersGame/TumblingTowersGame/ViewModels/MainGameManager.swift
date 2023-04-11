@@ -26,8 +26,10 @@ class MainGameManager: ObservableObject {
     func createGameEngineManager(height: CGFloat, width: CGFloat) -> GameEngineManager {
         let eventManager = TumblingTowersEventManager()
 
+        SoundSystem.shared.registerSoundEvents(eventMgr: eventManager)
+
         let gameEngineMgr = GameEngineManager(levelDimensions: CGRect(x: 0, y: 0,
-                                                                      width: width, height: height), eventManager: eventManager, inputType: inputSystem)
+                                                                      width: width, height: height), eventManager: eventManager, inputType: inputSystem, storageManager: storageManager)
         self.gameEngineMgrs.append(gameEngineMgr)
         self.eventManager = eventManager
 

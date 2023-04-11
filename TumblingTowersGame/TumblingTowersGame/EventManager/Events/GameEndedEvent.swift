@@ -1,8 +1,8 @@
 //
-//  GameEndEvent.swift
+//  GameEndedEvent.swift
 //  TumblingTowersGame
 //
-//  Created by Elvis on 7/4/23.
+//  Created by Lee Yong Ler on 8/4/23.
 //
 
 import Foundation

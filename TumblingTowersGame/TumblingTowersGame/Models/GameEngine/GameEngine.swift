@@ -8,6 +8,7 @@
 import Foundation
 
 class GameEngine {
+    let storageManager: StorageManager
     let eventManager: EventManager
     let gameWorld: GameWorld
     let achiementSystem: AchievementSystem
@@ -16,13 +17,14 @@ class GameEngine {
     var level: GameWorldLevel {
         gameWorld.level
     }
-    
-    init(levelDimensions: CGRect, eventManager: EventManager, playerId: UUID) {
+
+    init(levelDimensions: CGRect, eventManager: EventManager, playerId: UUID, storageManager: StorageManager) {
         self.gameWorld = GameWorld(levelDimensions: levelDimensions, eventManager: eventManager, playerId: playerId)
         self.eventManager = eventManager
-        let statsTrackingSystem = StatsTrackingSystem(eventManager: eventManager)
+        let statsTrackingSystem = StatsTrackingSystem(eventManager: eventManager, storageManager: storageManager)
         self.statsTrackingSystem = statsTrackingSystem
-        self.achiementSystem = AchievementSystem(eventManager: eventManager, dataSource: statsTrackingSystem)
+        self.storageManager = storageManager
+        self.achiementSystem = AchievementSystem(eventManager: eventManager, dataSource: statsTrackingSystem, storageManager: storageManager)
     }
     
     func startGame() {
@@ -38,6 +40,14 @@ class GameEngine {
     
     func stopGame() {
         gameWorld.endGame()
+    }
+    
+    func pauseGame() {
+        gameWorld.pauseGame()
+    }
+    
+    func unpauseGame() {
+        gameWorld.unpauseGame()
     }
     
     func resetGame() {

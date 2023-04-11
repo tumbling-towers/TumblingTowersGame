@@ -10,18 +10,22 @@ import Foundation
 class BobTheBuilderAchievement: Achievement {
     var name: String
     var description: String {
-        "Place \(goal) blocks without them falling off the platform. Progress: \(progress)/\(goal)"
+        "Place \(goal) blocks without them falling off the platform.\nProgress: \(Int(progress))/\(Int(goal))"
     }
-    let goal: Any
+    let goal: Double
     var achieved: Bool {
-        progress >= (goal as? Int ?? 0)
+        progress >= goal
     }
     let achievementType: AchievementType = .BobTheBuilder
     let dataSource: AchievementSystemDataSource
     
-    var progress: Int
+    var progress: Double {
+        didSet {
+            progress = min(goal, progress)
+        }
+    }
     
-    init(name: String, goal: Any, dataSource: AchievementSystemDataSource) {
+    init(name: String, goal: Double, dataSource: AchievementSystemDataSource) {
         self.name = name
         self.goal = goal
         self.dataSource = dataSource
@@ -29,8 +33,8 @@ class BobTheBuilderAchievement: Achievement {
     }
     
     func update() {
-        guard let numBlocksPlaced = dataSource.getStat(for: .numBlocksPlaced) as? Int,
-              let numBlocksDropped = dataSource.getStat(for: .numBlocksDropped) as? Int else {
+        guard let numBlocksPlaced = dataSource.getStat(for: .numBlocksPlaced) as? Double,
+              let numBlocksDropped = dataSource.getStat(for: .numBlocksDropped) as? Double else {
             return
         }
         progress = (numBlocksPlaced - numBlocksDropped)

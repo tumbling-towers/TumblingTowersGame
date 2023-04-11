@@ -60,7 +60,7 @@ struct GameEndView: View {
 
 struct GameEndView_Previews: PreviewProvider {
     static var gameEngineMgr: GameEngineManager = {
-        let gameEngineManager = GameEngineManager(levelDimensions: .infinite, eventManager: TumblingTowersEventManager(), inputType: TapInput.self)
+        let gameEngineManager = GameEngineManager(levelDimensions: .infinite, eventManager: TumblingTowersEventManager(), inputType: TapInput.self, storageManager: StorageManager())
 
         return gameEngineManager
 

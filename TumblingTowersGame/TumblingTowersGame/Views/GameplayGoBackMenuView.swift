@@ -38,6 +38,6 @@ struct GameplayGoBackMenuView: View {
 struct GameplayGoBackMenuView_Previews: PreviewProvider {
     static var previews: some View {
         GameplayGoBackMenuView(currGameScreen: .constant(.singleplayerGameplay))
-            .environmentObject(GameEngineManager(levelDimensions: .infinite, eventManager: TumblingTowersEventManager(), inputType: TapInput.self))
+            .environmentObject(GameEngineManager(levelDimensions: .infinite, eventManager: TumblingTowersEventManager(), inputType: TapInput.self, storageManager: StorageManager()))
     }
 }

@@ -26,4 +26,12 @@ class FiziksScene: SKScene {
     func remove(_ fiziksBody: FiziksBody) {
         fiziksBody.fiziksShapeNode.removeFromParent()
     }
+    
+    func pause() {
+        physicsWorld.speed = .zero
+    }
+    
+    func unpause() {
+        physicsWorld.speed = 1.0
+    }
 }

@@ -37,6 +37,9 @@ struct ContentView: View {
                 SettingsView(settingsMgr: SettingsManager(), currGameScreen: $currGameScreen)
                     .environmentObject(mainGameMgr)
             } else if currGameScreen == .achievements {
+                AchievementsView(currGameScreen: $currGameScreen)
+                    .environmentObject(gameEngineMgr)
+                /*
                 ZStack {
                     BackgroundView()
                     // TODO: Change this
@@ -47,6 +50,7 @@ struct ContentView: View {
                 ZStack {
                     PlayersSelectView(currGameScreen: $currGameScreen)
                 }
+                 */
             } else if currGameScreen == .tutorial {
                 TutorialView(currGameScreen: $currGameScreen)
             }

@@ -1,6 +1,5 @@
 //
 //  GameEngineManager.swift
-//  Gyro
 //
 //  Created by Elvis on 13/3/23.
 //
@@ -16,15 +15,17 @@ class GameEngineManager: ObservableObject {
     @Published var levelBlocks: [GameObjectBlock] = []
     @Published var levelPlatforms: [GameObjectPlatform] = []
     @Published var powerups: [Powerup.Type?] = [Powerup.Type?](repeating: nil, count: 5)
+    @Published var achievements: [DisplayableAchievement] = []
 
     var playerId = UUID()
 
     var eventManager: EventManager?
+    var storageManager: StorageManager
 
     // MARK: Game logic related attributes
     var platformPosition: CGPoint? {
         get {
-            gameEngine.level.platform?.position
+            gameEngine.level.mainPlatform?.position
         }
     }
 
@@ -42,7 +43,7 @@ class GameEngineManager: ObservableObject {
     }
 
     var referenceBox: CGRect? {
-        guard let refPoints = gameEngine.gameWorld.getReferencePoints() else { return nil }
+        guard let refPoints = gameEngine.gameWorld.referencePoints else { return nil }
 
         let width = refPoints.right.x - refPoints.left.x
         return CGRect(x: refPoints.left.x - 1, y: 0, width: width + 2, height: 3_000)
@@ -88,14 +89,16 @@ class GameEngineManager: ObservableObject {
         }
     }
 
-    init(levelDimensions: CGRect, eventManager: EventManager, inputType: InputSystem.Type) {
+    init(levelDimensions: CGRect, eventManager: EventManager, inputType: InputSystem.Type, storageManager: StorageManager) {
         self.levelDimensions = levelDimensions
         self.eventManager = eventManager
-        self.gameEngine = GameEngine(levelDimensions: levelDimensions, eventManager: eventManager, playerId: playerId)
+        self.storageManager = storageManager
+        self.gameEngine = GameEngine(levelDimensions: levelDimensions, eventManager: eventManager, playerId: playerId, storageManager: storageManager)
 
         inputSystem = inputType.init()
 
         registerEvents()
+        updateAchievements()
     }
 
     // TODO: REMOVE THIS
@@ -157,6 +160,7 @@ class GameEngineManager: ObservableObject {
     func update() {
         updateGameEngine()
         renderCurrentFrame()
+        updateAchievements()
     }
 
     func updateGameEngine() {
@@ -185,11 +189,13 @@ class GameEngineManager: ObservableObject {
     
     func pause() {
         gameUpdater?.pauseGame()
+        gameEngine.pauseGame()
         gameMode?.pauseGame()
     }
     
     func unpause() {
         gameUpdater?.unpauseGame()
+        gameEngine.unpauseGame()
         gameMode?.resumeGame()
     }
 
@@ -247,6 +253,19 @@ class GameEngineManager: ObservableObject {
         })
 
         eventManager?.registerClosure(for: GameEndedEvent.self, closure: stopGame)
+    }
+    
+    private func updateAchievements() {
+        var newAchievements = [DisplayableAchievement]()
+        for achievement in gameEngine.achiementSystem.getUpdatedAchievements() {
+            let newAchievement = DisplayableAchievement(id: UUID(),
+                                                        name: achievement.name,
+                                                        description: achievement.description,
+                                                        goal: achievement.goal,
+                                                        achieved: achievement.achieved)
+            newAchievements.append(newAchievement)
+        }
+        achievements = newAchievements
     }
 }
 
