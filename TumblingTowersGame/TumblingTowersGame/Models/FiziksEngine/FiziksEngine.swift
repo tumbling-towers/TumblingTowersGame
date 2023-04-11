@@ -24,4 +24,6 @@ protocol FiziksEngine: AnyObject {
     func allBodiesContacted(with fiziksBody: FiziksBody) -> [FiziksBody]
     func isIntersecting(body: FiziksBody, otherBodies: [FiziksBody]) -> Bool
     func deleteAllBodies()
+    func pause()
+    func unpause()
 }
