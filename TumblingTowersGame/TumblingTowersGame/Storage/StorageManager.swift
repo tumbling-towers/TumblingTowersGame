@@ -24,7 +24,7 @@ class StorageManager {
    }
     
     
-    func saveAchievements(_ achievements: [Achievement]) throws {
+    func saveAchievements(_ achievements: [any Achievement]) throws {
         var achievementsStorage: [AchievementStorage] = []
         for achievement in achievements {
             achievementsStorage.append(AchievementStorage(achievement))

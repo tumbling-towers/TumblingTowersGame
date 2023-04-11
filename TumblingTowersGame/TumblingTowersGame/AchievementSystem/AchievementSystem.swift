@@ -8,7 +8,7 @@
 import Foundation
 
 class AchievementSystem {
-    private var achievements: [Achievement]
+    private var achievements: [any Achievement]
     private let dataSource: AchievementSystemDataSource
     private let storageManager: StorageManager
     
@@ -20,7 +20,7 @@ class AchievementSystem {
     }
     
     /// This method is used for to get the most updated list of achievements.
-    func getUpdatedAchievements() -> [Achievement] {
+    func getUpdatedAchievements() -> [any Achievement] {
         updateAllAchievements()
         return achievements
     }
@@ -62,12 +62,12 @@ class AchievementSystem {
                                                  dataSource: dataSource))
         add(AchievementFactory.createAchievement(ofType: .Skyscraper,
                                                  name: "SkyScraper II",
-                                                 goal: 8000,
+                                                 goal: 500,
                                                  achieved: false,
                                                  dataSource: dataSource))
     }
     
-    private func add(_ achievement: Achievement) {
+    private func add(_ achievement: any Achievement) {
         achievements.append(achievement)
     }
     

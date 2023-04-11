@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol Achievement {
+protocol Achievement: Identifiable {
     var name: String { get }
     var description: String { get }
     var goal: Double { get }

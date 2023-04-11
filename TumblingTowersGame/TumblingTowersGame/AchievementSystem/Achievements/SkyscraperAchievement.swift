@@ -10,7 +10,7 @@ import Foundation
 class SkyscraperAchievement: Achievement {
     var name: String
     var description: String {
-        "Build a tower \(goal)m high. Highest tower: \(highScore)"
+        "Build a tower \(goal)m high.\nHighest tower: \(highScore.truncate(places: 1))m"
     }
     let goal: Double
     var achieved: Bool {
@@ -19,7 +19,11 @@ class SkyscraperAchievement: Achievement {
     let achievementType: AchievementType = .Skyscraper
     let dataSource: AchievementSystemDataSource
     
-    var highScore: Double
+    var highScore: Double {
+        didSet {
+            highScore = min(goal, highScore)
+        }
+    }
     
     init(name: String, goal: Double, dataSource: AchievementSystemDataSource) {
         self.name = name

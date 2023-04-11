@@ -12,7 +12,7 @@ class AchievementFactory {
                                   name: String,
                                   goal: Double,
                                   achieved: Bool,
-                                  dataSource: AchievementSystemDataSource) -> Achievement {
+                                  dataSource: AchievementSystemDataSource) -> any Achievement {
         switch achievementType {
         case .BobTheBuilder:
             return BobTheBuilderAchievement(name: name, goal: goal, dataSource: dataSource)
