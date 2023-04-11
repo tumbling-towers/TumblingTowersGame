@@ -28,7 +28,11 @@ class MainGameManager: ObservableObject {
 
         SoundSystem.shared.registerSoundEvents(eventMgr: eventManager)
 
-        let inputClass = Constants.getGameInputType(fromGameInputType: inputSystem) ?? GyroInput.self
+        var inputClass: InputSystem.Type = TapInput.self
+
+        if playersMode == .singleplayer {
+            inputClass = Constants.getGameInputType(fromGameInputType: inputSystem) ?? GyroInput.self
+        }
 
         let gameEngineMgr = GameEngineManager(levelDimensions: CGRect(x: 0, y: 0,
                                                                       width: width, height: height), eventManager: eventManager, inputType: inputClass, storageManager: storageManager)
