@@ -15,13 +15,15 @@ struct AchievementsView: View {
     var body: some View {
         ZStack {
             BackgroundView()
-
             VStack {
+                Text("Achievements")
+                    .modifier(CategoryText())
                 ForEach($gameEngineMgr.achievements) { achievment in
                     VStack {
                         HStack {
                             Text(achievment.wrappedValue.name)
                                 .modifier(CategoryText())
+                            Spacer()
                             let image = achievment.wrappedValue.achieved
                                         ? ViewImageManager.tickImage
                                         : ViewImageManager.crossImage
@@ -31,10 +33,13 @@ struct AchievementsView: View {
                                     width: 20,
                                     height: 20,
                                     alignment: .center)
+                        }.frame(width: 2/3 * gameEngineMgr.levelDimensions.width)
+                        HStack {
+                            Text(achievment.wrappedValue.description)
+                                .modifier(BodyText())
+                            Spacer()
                         }
-                        Text(achievment.wrappedValue.description)
-                            .modifier(BodyText())
-                    }
+                    }.frame(width: 2/3 * gameEngineMgr.levelDimensions.width)
                 }
                 
                 

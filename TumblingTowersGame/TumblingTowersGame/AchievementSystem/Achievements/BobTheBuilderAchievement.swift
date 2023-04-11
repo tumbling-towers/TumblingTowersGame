@@ -10,7 +10,7 @@ import Foundation
 class BobTheBuilderAchievement: Achievement {
     var name: String
     var description: String {
-        "Place \(goal) blocks without them falling off the platform. Progress: \(progress)/\(goal)"
+        "Place \(goal) blocks without them falling off the platform.\nProgress: \(Int(progress))/\(Int(goal))"
     }
     let goal: Double
     var achieved: Bool {
@@ -19,7 +19,11 @@ class BobTheBuilderAchievement: Achievement {
     let achievementType: AchievementType = .BobTheBuilder
     let dataSource: AchievementSystemDataSource
     
-    var progress: Double
+    var progress: Double {
+        didSet {
+            progress = min(goal, progress)
+        }
+    }
     
     init(name: String, goal: Double, dataSource: AchievementSystemDataSource) {
         self.name = name
