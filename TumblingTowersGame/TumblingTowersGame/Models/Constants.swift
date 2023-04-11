@@ -48,6 +48,7 @@ Pause Button: Pauses the game.
     static let instructionsDefaultGamemodeText = "A Tumbling Towers Game Mode."
     static let instructionsDefaultInputText = "A Tumbling Towers Input Method"
 
+    static let levelNotTallEnoughThreshold = 600.0
 
     enum CurrGameScreens {
         case mainMenu

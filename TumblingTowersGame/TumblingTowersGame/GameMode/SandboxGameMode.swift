@@ -27,7 +27,7 @@ class SandboxGameMode: GameMode {
     var isStarted = false
     var isGameEnded = false
 
-    required init(eventMgr: EventManager, playerId: UUID) {
+    required init(eventMgr: EventManager, playerId: UUID, levelHeight: CGFloat) {
         self.eventMgr = eventMgr
         self.playerId = playerId
 

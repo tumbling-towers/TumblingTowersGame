@@ -13,7 +13,7 @@ protocol GameMode {
 
     static var description: String { get }
 
-    init(eventMgr: EventManager, playerId: UUID)
+    init(eventMgr: EventManager, playerId: UUID, levelHeight: CGFloat)
 
     func getGameState() -> Constants.GameState
 

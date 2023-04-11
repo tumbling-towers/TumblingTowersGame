@@ -133,7 +133,7 @@ class GameEngineManager: ObservableObject {
         // set up game mode
         let gameModeClass = Constants.getGameModeType(from: gameMode)
         if let eventManager = eventManager, let gameModeClass = gameModeClass {
-            self.gameEngine.gameMode = gameModeClass.init(eventMgr: eventManager, playerId: playerId)
+            self.gameEngine.gameMode = gameModeClass.init(eventMgr: eventManager, playerId: playerId, levelHeight: levelDimensions.height)
         }
 
         // set up game in game engine

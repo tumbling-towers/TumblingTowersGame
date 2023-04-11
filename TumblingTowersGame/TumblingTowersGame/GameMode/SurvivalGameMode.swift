@@ -12,17 +12,17 @@ class SurvivalGameMode: GameMode {
     // Place N blocks wo dropping more than M blocks in shortest time possible (Score is time taken?)
     static var name = Constants.GameModeTypes.SURVIVAL.rawValue
 
-    static var description = "Place \(blocksToPlace) blocks without dropping more than \(blocksDroppedThreshold) blocks!"
+    static var description = "Place \(blocksToPlace) blocks without dropping more than \(blocksDroppedThreshold) blocks! Finish faster than \(scoreTimeWithBonusScore)s for bonus score!"
 
 
     var realTimeTimer = GameTimer()
 
     // MARK: Constants for this game mode
-    static let blocksToPlace = 20
+    static let blocksToPlace = 30
     static let blocksDroppedThreshold = 3
     let scoreBlocksPlacedMultiplier = 10
     let scoreBlocksDroppedMultiplier = 25
-    let scoreTimeWithBonusScore = 30
+    static let scoreTimeWithBonusScore = 90
 
     // MARK: Tracking State of Game
     var currBlocksInserted = 0
@@ -37,7 +37,7 @@ class SurvivalGameMode: GameMode {
     var isEndedByOtherPlayer = false
     var overwriteGameState: Constants.GameState?
 
-    required init(eventMgr: EventManager, playerId: UUID) {
+    required init(eventMgr: EventManager, playerId: UUID, levelHeight: CGFloat) {
         self.eventMgr = eventMgr
         self.playerId = playerId
         
@@ -83,7 +83,7 @@ class SurvivalGameMode: GameMode {
     }
 
     func getScore() -> Int {
-        max(scoreTimeWithBonusScore - realTimeTimer.count
+        max(SurvivalGameMode.scoreTimeWithBonusScore - realTimeTimer.count
             + currBlocksPlaced * scoreBlocksPlacedMultiplier
             - currBlocksDropped * scoreBlocksDroppedMultiplier, 0)
     }

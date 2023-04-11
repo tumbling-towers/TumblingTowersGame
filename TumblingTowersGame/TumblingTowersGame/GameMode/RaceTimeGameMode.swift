@@ -10,17 +10,18 @@ import Foundation
 class RaceTimeGameMode: GameMode {
 
     static var name = Constants.GameModeTypes.RACECLOCK.rawValue
-    static var description = "Place \(blocksToPlace) blocks in \(timeToPlaceBy) seconds!"
+    static var description = "Place \(blocksToPlace) blocks in \(timeToPlaceBy)s (singleplayer) / \(timeToPlaceBy / RaceTimeGameMode.shortLevelTimeMultiplier)s (multiplayer)!"
 
     var realTimeTimer = GameTimer()
     var eventMgr: EventManager
 
     // MARK: Constants for this game mode
     static let blocksToPlace = 30
-    static let timeToPlaceBy = 30
+    static let timeToPlaceBy = 60
     let scoreTimeLeftMultiplier = 10
     let scoreBlocksPlacedMultiplier = 10
     let scoreBlocksDroppedMultiplier = 25
+    static let shortLevelTimeMultiplier = 2
 
     // MARK: Tracking State of Game
     var currBlocksPlaced = 0
@@ -30,14 +31,20 @@ class RaceTimeGameMode: GameMode {
     var isStarted = false
     var isGameEnded = false
 
+    var shortLevel = false
+
     // MARK: Multiplayer States
     var isEndedByOtherPlayer = false
     var overwriteGameState: Constants.GameState?
     var otherPlayerRanOutOfTime = false
 
-    required init(eventMgr: EventManager, playerId: UUID) {
+    required init(eventMgr: EventManager, playerId: UUID, levelHeight: CGFloat) {
         self.eventMgr = eventMgr
         self.playerId = playerId
+
+        if levelHeight < Constants.levelNotTallEnoughThreshold {
+            shortLevel = true
+        }
 
         // Register all events that affect game state
         eventMgr.registerClosure(for: BlockPlacedEvent.self, closure: blockPlaced)
@@ -98,7 +105,11 @@ class RaceTimeGameMode: GameMode {
 
     func startGame() {
         isStarted = true
-        realTimeTimer.start(timeInSeconds: RaceTimeGameMode.timeToPlaceBy, countsUp: false)
+        if shortLevel {
+            realTimeTimer.start(timeInSeconds: RaceTimeGameMode.timeToPlaceBy / RaceTimeGameMode.shortLevelTimeMultiplier, countsUp: false)
+        } else {
+            realTimeTimer.start(timeInSeconds: RaceTimeGameMode.timeToPlaceBy, countsUp: false)
+        }
     }
 
     func pauseGame() {
