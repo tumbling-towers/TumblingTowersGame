@@ -29,23 +29,23 @@ class GameEngine {
     
     func startGame() {
         gameWorld.startGame()
-        gameMode?.startTimer()
+        gameMode?.startGame()
     }
     
     func update() {
         // TODO: Support this by adding function ins Gamemode
-        // gameMode.update()
+        gameMode?.update()
         gameWorld.update()
     }
     
     func stopGame() {
         gameWorld.endGame()
-        gameMode?.endTimer()
+        gameMode?.endGame()
     }
     
     func resetGame() {
         gameWorld.resetGame()
-        gameMode?.restartGame()
+        gameMode?.resetGame()
     }
     
     // MARK: Game Control methods

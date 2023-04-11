@@ -37,6 +37,10 @@ class GameTimer {
         isPaused = true
     }
 
+    func resume() {
+        isPaused = false
+    }
+
     func stop() {
         timer?.invalidate()
         timer = nil

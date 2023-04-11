@@ -17,70 +17,42 @@ struct GameEndView: View {
                 BackgroundView()
 
                 VStack {
-                    drawGameLostText()
 
-                    drawGameWinText()
+                    Spacer()
 
-                    if let timeLeft = gameEngineMgr.timeRemaining {
-                        Text("Timer: " + String(timeLeft) + "!")
+                    drawGameEndText()
+
+                    if let score = gameEngineMgr.score {
+                        Text("Score: " + String(score))
                             .font(.system(size: 30))
                     }
+
+                    if let timeLeft = gameEngineMgr.timeRemaining {
+                        Text("Timer: " + String(timeLeft))
+                            .font(.system(size: 30))
+                    }
+
+                    Spacer()
+
+                    GameplayGoBackMenuView(currGameScreen: $currGameScreen)
+                        .padding(.bottom, 1)
                     
                 }
-            }
 
-            GameplayGoBackMenuView(currGameScreen: $currGameScreen)
-                .padding(.bottom, 1)
+            }
         }
     }
 
-    private func drawGameLostText() -> AnyView {
+    private func drawGameEndText() -> AnyView {
         AnyView(
             VStack {
-                if gameEngineMgr.gameState == .LOSE_SURVIVAL {
-                    Text("You LOST!")
+                if gameEngineMgr.gameEnded {
+                    Text(gameEngineMgr.gameEndMainMessage)
                         .font(.system(size: 70))
                         .fontWeight(.heavy)
-                    Text("You dropped too many blocks!.")
+                    Text(gameEngineMgr.gameEndSubMessage)
                         .font(.system(size: 30))
                 }
-
-                if gameEngineMgr.gameState == .LOSE_RACE {
-                    Text("You LOST!")
-                        .font(.system(size: 70))
-                        .fontWeight(.heavy)
-                    Text("You ran out of time!.")
-                        .font(.system(size: 30))
-                }
-            }
-        )
-    }
-
-    private func drawGameWinText() -> AnyView {
-        AnyView(
-            VStack {
-                if gameEngineMgr.gameState == .WIN_SURVIVAL {
-                    Text("Congratulations...")
-                        .font(.system(size: 30))
-                    Text("You stacked enough blocks!")
-                        .font(.system(size: 50))
-                        .fontWeight(.heavy)
-                    if let score = gameEngineMgr.score {
-                        Text("Score: \(score)")
-                            .font(.system(size: 50))
-                            .fontWeight(.heavy)
-                    }
-                    
-                }
-
-                if gameEngineMgr.gameState == .WIN_RACE {
-                    Text("Congratulations...")
-                        .font(.system(size: 30))
-                    Text("You beat the clock!")
-                        .font(.system(size: 50))
-                        .fontWeight(.heavy)
-                }
-
             }
         )
     }
