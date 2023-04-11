@@ -49,6 +49,7 @@
 		1430401A29E343C2005B7D70 /* MenuDividerLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1430401929E343C2005B7D70 /* MenuDividerLine.swift */; };
 		1445F84A29C71DC900F94751 /* TapInputTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1445F84929C71DC900F94751 /* TapInputTests.swift */; };
 		146034D229E5EAF60006C4F4 /* collide.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 146034D129E5EAF60006C4F4 /* collide.mp3 */; };
+		146034D429E607A60006C4F4 /* NormalGoBackButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146034D329E607A60006C4F4 /* NormalGoBackButtonView.swift */; };
 		146E2DB429C0D07200BFC757 /* TumblingTowersGameApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146E2DB329C0D07200BFC757 /* TumblingTowersGameApp.swift */; };
 		146E2DB629C0D07200BFC757 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146E2DB529C0D07200BFC757 /* ContentView.swift */; };
 		146E2DB829C0D07300BFC757 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 146E2DB729C0D07300BFC757 /* Assets.xcassets */; };
@@ -239,6 +240,7 @@
 		1430401929E343C2005B7D70 /* MenuDividerLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuDividerLine.swift; sourceTree = "<group>"; };
 		1445F84929C71DC900F94751 /* TapInputTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapInputTests.swift; sourceTree = "<group>"; };
 		146034D129E5EAF60006C4F4 /* collide.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = collide.mp3; sourceTree = "<group>"; };
+		146034D329E607A60006C4F4 /* NormalGoBackButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NormalGoBackButtonView.swift; sourceTree = "<group>"; };
 		146E2DB029C0D07200BFC757 /* TumblingTowersGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TumblingTowersGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		146E2DB329C0D07200BFC757 /* TumblingTowersGameApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TumblingTowersGameApp.swift; sourceTree = "<group>"; };
 		146E2DB529C0D07200BFC757 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -579,6 +581,7 @@
 				146E2E1829C0E5B400BFC757 /* GameplayLevelView.swift */,
 				124B02D629C567F600094CF5 /* LevelView.swift */,
 				124B02C229C415DC00094CF5 /* PlatformView.swift */,
+				61EB621D29DF38E400011A03 /* PlayersSelectView.swift */,
 				61AE15B429D1786700D04E95 /* PowerupLineView.swift */,
 				61FC031229CCBDE300CE2CE5 /* PathViewShape.swift */,
 				14C6731F29D366D300D8DF78 /* MainMenuView.swift */,
@@ -587,6 +590,7 @@
 				14C6732829D36F4D00D8DF78 /* SettingsView.swift */,
 				14168DDD29D82AC200EF5C22 /* GameEndView.swift */,
 				14168DDF29D82C6F00EF5C22 /* GameplayGoBackMenuView.swift */,
+				146034D329E607A60006C4F4 /* NormalGoBackButtonView.swift */,
 				61FC3A4D29DC3BD7005A91D7 /* PauseView.swift */,
 				615C564029E3F13500E3256E /* LevelBackgroundView.swift */,
 			);
@@ -649,7 +653,6 @@
 				61F4F01C29DDFC090002AD69 /* CustomButton.swift */,
 				61F4F01E29DE016B0002AD69 /* SecondaryButton.swift */,
 				61ECC59729DEBA6100086794 /* PowerupButton.swift */,
-				61EB621D29DF38E400011A03 /* PlayersSelectView.swift */,
 				14E8159229E0B198007F6489 /* GameplayGuiText.swift */,
 				1430401529E33171005B7D70 /* SquareCustomButton.swift */,
 				1430401729E3422F005B7D70 /* GameplayBodyText.swift */,
@@ -1106,6 +1109,7 @@
 				2F98476F29DEE797008803E7 /* AchievementType.swift in Sources */,
 				146E2E0829C0E2FE00BFC757 /* FiziksBody.swift in Sources */,
 				2F98477129DEE9D9008803E7 /* StatTrackerType.swift in Sources */,
+				146034D429E607A60006C4F4 /* NormalGoBackButtonView.swift in Sources */,
 				14DAFDF729CE3146003BE140 /* SoundSystem.swift in Sources */,
 				61A10F4329D310CA000EB4B4 /* PlatformPowerupActivatedEvent.swift in Sources */,
 				2FFED59929D9ED4500BA072F /* Achievement.swift in Sources */,

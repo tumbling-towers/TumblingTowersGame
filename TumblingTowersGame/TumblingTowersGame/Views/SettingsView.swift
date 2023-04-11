@@ -21,6 +21,38 @@ struct SettingsView: View {
             BackgroundView()
 
             VStack {
+
+                drawVolumeSettings()
+
+                Divider().modifier(MenuDividerLine())
+
+                drawInputSettings()
+
+                Divider().modifier(MenuDividerLine())
+
+                 //drawOtherSettings()
+
+//                HStack {
+//                    Text("Block Movement Speed")
+//                        .modifier(BodyText())
+//
+//                    Slider(value: $settingsMgr.otherSoundVolume, in: 0.0...3.0)
+//                        .frame(width: 400)
+//                        .padding(.all)
+//                }
+
+                NormalGoBackButtonView(currGameScreen: $currGameScreen)
+                .padding(.top, 35.0)
+            }
+            .frame(width: mainGameMgr.deviceWidth * 5 / 6)
+        }
+        .ignoresSafeArea(.all)
+
+    }
+
+    private func drawVolumeSettings() -> AnyView {
+        AnyView(
+            VStack {
                 Text("Volume")
                     .modifier(CategoryText())
 
@@ -50,7 +82,13 @@ struct SettingsView: View {
                         .frame(width: 400)
                         .padding(.all)
                 }
+            }
+        )
+    }
 
+    private func drawInputSettings() -> AnyView {
+        AnyView(
+            VStack {
                 Text("Singleplayer Input Options")
                     .modifier(CategoryText())
 
@@ -66,32 +104,31 @@ struct SettingsView: View {
                 .onChange(of: selectedInputType) { val in
                     mainGameMgr.changeInput(to: val)
                 }
-                
+
                 Text(Constants.gameInputTypeToDescription[selectedInputType.rawValue] ?? "<input type description>")
                     .modifier(BodyText())
+            }
+        )
+    }
 
-//                HStack {
-//                    Text("Block Movement Speed")
-//                        .modifier(BodyText())
-//
-//                    Slider(value: $settingsMgr.otherSoundVolume, in: 0.0...3.0)
-//                        .frame(width: 400)
-//                        .padding(.all)
-//                }
+    private func drawOtherSettings() -> AnyView {
+        AnyView(
+            VStack {
+                Text("Other Options")
+                    .modifier(CategoryText())
 
                 Button {
-                    currGameScreen = .mainMenu
+                    withAnimation {
+                        mainGameMgr.storageManager.resetAchievements()
+                        currGameScreen = .mainMenu
+                    }
                 } label: {
-                    Text("Back")
-                        .modifier(CustomButton(fontSize: 25))
+                    Text("Reset Achievements")
+                        .modifier(CustomButton(fontSize: 30))
                 }
-                .padding(.top, 35.0)
-            }
-        }
-        .ignoresSafeArea(.all)
-        .onAppear {
-        }
 
+            }
+        )
     }
 }
 

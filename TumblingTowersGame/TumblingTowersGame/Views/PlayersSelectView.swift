@@ -30,14 +30,7 @@ struct PlayersSelectView: View {
                     //                    drawGameModeOption(gameMode: .RACECLOCK, name: "RACE AGAINST CLOCK", fontSize: 30.0)
                 }
                 
-                Button {
-                    withAnimation {
-                        currGameScreen = .mainMenu
-                    }
-                } label: {
-                    Text("Back")
-                        .modifier(CustomButton(fontSize: 25))
-                }
+                NormalGoBackButtonView(currGameScreen: $currGameScreen)
                 .padding(.top, 35.0)
                 
                 Spacer()

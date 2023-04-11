@@ -43,8 +43,7 @@ struct AchievementsView: View {
                     }.frame(width: 2/3 * gameEngineMgr.levelDimensions.width)
                 }
                 
-                GameplayGoBackMenuView(currGameScreen: $currGameScreen)
-                    .environmentObject(gameEngineMgr)
+                NormalGoBackButtonView(currGameScreen: $currGameScreen)
 
             }
         }

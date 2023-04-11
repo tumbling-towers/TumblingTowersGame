@@ -21,9 +21,8 @@ struct TutorialView: View {
 
                 Spacer()
 
-                GameplayGoBackMenuView(currGameScreen: $currGameScreen)
+                NormalGoBackButtonView(currGameScreen: $currGameScreen)
                     .padding(.bottom, 1)
-                    .environmentObject(GameEngineManager(levelDimensions: .infinite, eventManager: TumblingTowersEventManager(), inputType: TapInput.self, storageManager: StorageManager()))
 
             }
         }

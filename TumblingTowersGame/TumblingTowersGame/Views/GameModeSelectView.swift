@@ -59,15 +59,17 @@ struct GameModeSelectView: View {
                     }
                 }
 
-                Button {
-                    withAnimation {
-                        currGameScreen = .playerOptionSelection
-                        mainGameMgr.stopGames()
-                    }
-                } label: {
-                    Text("Back")
-                        .modifier(CustomButton(fontSize: 25))
-                }
+                NormalGoBackButtonView(currGameScreen: $currGameScreen, destination: .playerOptionSelection)
+
+//                Button {
+//                    withAnimation {
+//                        currGameScreen = .playerOptionSelection
+//                        mainGameMgr.stopGames()
+//                    }
+//                } label: {
+//                    Text("Back")
+//                        .modifier(CustomButton(fontSize: 25))
+//                }
 
 //                GameplayGoBackMenuView(currGameScreen: $currGameScreen)
 //                .padding(.top, 35.0)
