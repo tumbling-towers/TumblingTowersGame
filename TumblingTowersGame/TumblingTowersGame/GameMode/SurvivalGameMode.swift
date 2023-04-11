@@ -40,10 +40,6 @@ class SurvivalGameMode: GameMode {
     required init(eventMgr: EventManager, playerId: UUID) {
         self.eventMgr = eventMgr
         self.playerId = playerId
-
-
-        // Register all events that affect game state
-        self.eventMgr = eventMgr
         
         eventMgr.registerClosure(for: BlockPlacedEvent.self, closure: blockPlaced)
         eventMgr.registerClosure(for: BlockDroppedEvent.self, closure: blockDropped)

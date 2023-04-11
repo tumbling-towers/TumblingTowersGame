@@ -15,6 +15,7 @@ struct AchievementsView: View {
     var body: some View {
         ZStack {
             BackgroundView()
+            
             VStack {
                 Text("Achievements")
                     .modifier(CategoryText())
@@ -42,14 +43,9 @@ struct AchievementsView: View {
                     }.frame(width: 2/3 * gameEngineMgr.levelDimensions.width)
                 }
                 
-                
-                Button {
-                    currGameScreen = .mainMenu
-                } label: {
-                    Text("Back")
-                        .modifier(CustomButton(fontSize: 25))
-                }
-                .padding(.top, 35.0)
+                GameplayGoBackMenuView(currGameScreen: $currGameScreen)
+                    .environmentObject(gameEngineMgr)
+
             }
         }
         .ignoresSafeArea(.all)

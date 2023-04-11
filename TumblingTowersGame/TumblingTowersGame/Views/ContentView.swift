@@ -38,19 +38,11 @@ struct ContentView: View {
                     .environmentObject(mainGameMgr)
             } else if currGameScreen == .achievements {
                 AchievementsView(currGameScreen: $currGameScreen)
-                    .environmentObject(gameEngineMgr)
-                /*
-                ZStack {
-                    BackgroundView()
-                    // TODO: Change this
-                                        GameplayGoBackMenuView(currGameScreen: $currGameScreen)
-                        .environmentObject(GameEngineManager(levelDimensions: .infinite, eventManager: TumblingTowersEventManager(), inputType: mainGameMgr.inputSystem))
-                }
+                    .environmentObject(GameEngineManager(levelDimensions: CGRect(x: 0, y: 0, width: mainGameMgr.deviceWidth, height: mainGameMgr.deviceHeight), eventManager: TumblingTowersEventManager(), inputType: TapInput.self, storageManager: mainGameMgr.storageManager))
             } else if currGameScreen == .playerOptionSelection {
                 ZStack {
                     PlayersSelectView(currGameScreen: $currGameScreen)
                 }
-                 */
             } else if currGameScreen == .tutorial {
                 TutorialView(currGameScreen: $currGameScreen)
             }
