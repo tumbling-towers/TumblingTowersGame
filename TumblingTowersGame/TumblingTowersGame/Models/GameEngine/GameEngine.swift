@@ -8,6 +8,7 @@
 import Foundation
 
 class GameEngine {
+    let storageManager: StorageManager
     let eventManager: EventManager
     let gameWorld: GameWorld
     let achiementSystem: AchievementSystem
@@ -17,33 +18,42 @@ class GameEngine {
         gameWorld.level
     }
     
-    init(levelDimensions: CGRect, eventManager: EventManager) {
+    init(levelDimensions: CGRect, eventManager: EventManager, storageManager: StorageManager) {
         self.gameWorld = GameWorld(levelDimensions: levelDimensions, eventManager: eventManager)
         self.eventManager = eventManager
-        let statsTrackingSystem = StatsTrackingSystem(eventManager: eventManager)
+        let statsTrackingSystem = StatsTrackingSystem(eventManager: eventManager, storageManager: storageManager)
         self.statsTrackingSystem = statsTrackingSystem
-        self.achiementSystem = AchievementSystem(eventManager: eventManager, dataSource: statsTrackingSystem)
+        self.storageManager = storageManager
+        self.achiementSystem = AchievementSystem(eventManager: eventManager, dataSource: statsTrackingSystem, storageManager: storageManager)
     }
     
     func startGame() {
         gameWorld.startGame()
-        gameMode?.startTimer()
+        gameMode?.startGame()
     }
     
     func update() {
         // TODO: Support this by adding function ins Gamemode
-        // gameMode.update()
+        gameMode?.update()
         gameWorld.update()
     }
     
     func stopGame() {
         gameWorld.endGame()
-        gameMode?.endTimer()
+        gameMode?.endGame()
+    }
+    
+    func pauseGame() {
+        gameWorld.pauseGame()
+    }
+    
+    func unpauseGame() {
+        gameWorld.unpauseGame()
     }
     
     func resetGame() {
         gameWorld.resetGame()
-        gameMode?.restartGame()
+        gameMode?.resetGame()
     }
     
     // MARK: Game Control methods

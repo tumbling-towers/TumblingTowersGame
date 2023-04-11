@@ -1,6 +1,5 @@
 //
 //  GameEngineManager.swift
-//  Gyro
 //
 //  Created by Elvis on 13/3/23.
 //
@@ -19,11 +18,12 @@ class GameEngineManager: ObservableObject {
     @Published var achievements: [DisplayableAchievement] = []
 
     var eventManager: EventManager?
+    var storageManager: StorageManager
 
     // MARK: Game logic related attributes
     var platformPosition: CGPoint? {
         get {
-            gameEngine.level.platform?.position
+            gameEngine.level.mainPlatform?.position
         }
     }
 
@@ -41,32 +41,62 @@ class GameEngineManager: ObservableObject {
     }
 
     var referenceBox: CGRect? {
-        guard let refPoints = gameEngine.gameWorld.getReferencePoints() else { return nil }
+        guard let refPoints = gameEngine.gameWorld.referencePoints else { return nil }
 
         let width = refPoints.right.x - refPoints.left.x
         return CGRect(x: refPoints.left.x - 1, y: 0, width: width + 2, height: 3_000)
     }
 
-    var timeRemaining: Int? {
-        gameMode?.getTimeRemaining()
+    var timeRemaining: Int {
+        if let currTime = gameMode?.getTime() {
+            return currTime
+        } else {
+            return 0
+        }
     }
 
-    var score: Int? {
-        gameMode?.getScore()
+    var score: Int {
+        if let currScore = gameMode?.getScore() {
+            return currScore
+        } else {
+            return 0
+        }
     }
 
-    var gameState: Constants.GameState? {
-        gameMode?.getGameState()
+    var gameEnded: Bool {
+        if let ended = gameMode?.hasGameEnded() {
+            return ended
+        } else {
+            return false
+        }
     }
 
-    init(levelDimensions: CGRect, eventManager: EventManager) {
+    var gameEndMainMessage: String {
+        if let msg = gameMode?.getGameEndMainMessage() {
+            return msg
+        } else {
+            return "The game has ended."
+        }
+    }
+
+    var gameEndSubMessage: String {
+        if let msg = gameMode?.getGameEndSubMessage() {
+            return msg
+        } else {
+            return "Please try again!"
+        }
+    }
+
+    init(levelDimensions: CGRect, eventManager: EventManager, storageManager: StorageManager) {
         self.levelDimensions = levelDimensions
         self.eventManager = eventManager
-        self.gameEngine = GameEngine(levelDimensions: levelDimensions, eventManager: eventManager)
+        self.storageManager = storageManager
+        self.gameEngine = GameEngine(levelDimensions: levelDimensions, eventManager: eventManager, storageManager: storageManager)
 
-        inputSystem = GyroInput()
+        inputSystem = TapInput()
 
         registerEvents()
+        updateAchievements()
     }
 
     func dragEvent(offset: CGSize) {
@@ -108,12 +138,18 @@ class GameEngineManager: ObservableObject {
     }
 
     func stopGame() {
+        eventManager?.postEvent(GameEndedEvent())
+    }
+
+    func stopGame(event: Event) {
         gameUpdater?.stopLevel()
         gameEngine.stopGame()
+        gameMode?.endGame()
     }
 
     func resetGame() {
         gameEngine.resetGame()
+        gameMode?.resetGame()
     }
 
     func update() {
@@ -129,9 +165,6 @@ class GameEngineManager: ObservableObject {
         gameEngine.moveCMBSideways(by: currInput.vector)
         gameEngine.moveCMBDown(by: currInput.vector)
 
-        if let gameMode = gameMode, gameMode.hasGameEnded() {
-            stopGame()
-        }
     }
 
     func renderCurrentFrame() {
@@ -151,10 +184,14 @@ class GameEngineManager: ObservableObject {
     
     func pause() {
         gameUpdater?.pauseGame()
+        gameEngine.pauseGame()
+        gameMode?.pauseGame()
     }
     
     func unpause() {
         gameUpdater?.unpauseGame()
+        gameEngine.unpauseGame()
+        gameMode?.resumeGame()
     }
 
     /// GameEngine outputs coordinates with the origin at the bottom-left.
@@ -207,6 +244,8 @@ class GameEngineManager: ObservableObject {
                 return
             }
         })
+
+        eventManager?.registerClosure(for: GameEndedEvent.self, closure: stopGame)
     }
     
     private func updateAchievements() {

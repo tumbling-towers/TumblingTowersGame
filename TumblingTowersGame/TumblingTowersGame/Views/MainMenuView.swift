@@ -64,6 +64,18 @@ struct MainMenuView: View {
                 Spacer()
                 Spacer()
             }
+
+            Button {
+                withAnimation {
+                    currGameScreen = .tutorial
+                }
+            } label: {
+                Text("?")
+                    .modifier(SquareCustomButton(fontSize: 50))
+            }
+            .modifier(SquareCustomButton(fontSize: 50))
+            .position(x: gameEngineMgr.levelDimensions.width - 100, y: gameEngineMgr.levelDimensions.height - 100)
+
         }
         .ignoresSafeArea(.all)
     }
@@ -73,6 +85,6 @@ struct MainMenuView_Previews: PreviewProvider {
     static var previews: some View {
         MainMenuView(currGameScreen: .constant(.mainMenu))
             .environmentObject(MainGameManager())
-            .environmentObject(GameEngineManager(levelDimensions: .infinite, eventManager: TumblingTowersEventManager()))
+            .environmentObject(GameEngineManager(levelDimensions: .infinite, eventManager: TumblingTowersEventManager(), storageManager: StorageManager()))
     }
 }

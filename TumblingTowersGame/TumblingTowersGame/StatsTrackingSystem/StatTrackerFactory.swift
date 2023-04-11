@@ -8,7 +8,7 @@
 import Foundation
 
 class StatTrackerFactory {
-    static func createStatTracker(ofType statTrackerType: StatTrackerType, eventManager: EventManager, stat: Any? = nil) -> StatTracker {
+    static func createStatTracker(ofType statTrackerType: StatTrackerType, eventManager: EventManager, stat: Double? = nil) -> StatTracker {
         switch statTrackerType {
         case .numBlocksPlaced:
             return NumBlocksPlacedStatTracker(eventManager: eventManager, stat: stat)

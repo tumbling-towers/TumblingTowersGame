@@ -27,13 +27,15 @@ struct AchievementsView: View {
                                     .resizable()
                                     .frame(
                                         width: 20,
-                                        height: 20, alignment: .center)
+                                        height: 20,
+                                        alignment: .center)
                             } else {
                                 Image(ViewImageManager.crossImage)
                                     .resizable()
                                     .frame(
                                         width: 20,
-                                        height: 20, alignment: .center)
+                                        height: 20,
+                                        alignment: .center)
                             }
                         }
                         Text(achievment.wrappedValue.description)
@@ -56,25 +58,11 @@ struct AchievementsView: View {
         }
 
     }
-
-    private func drawGameModeOption(gameMode: Constants.GameModeTypes, name: String, fontSize: CGFloat) -> AnyView {
-        AnyView(
-            Button {
-//                gameEngineMgr.setGameMode(gameMode: gameMode)
-                gameEngineMgr.startGame(gameMode: gameMode)
-                currGameScreen = .gameplay
-            } label: {
-                Text(name)
-                    .modifier(MenuButtonText(fontSize: fontSize))
-            }
-        )
-    }
-
 }
 
 struct AchievementsView_Previews: PreviewProvider {
     static var previews: some View {
         AchievementsView(currGameScreen: .constant(.achievements))
-            .environmentObject(GameEngineManager(levelDimensions: .infinite, eventManager: TumblingTowersEventManager()))
+            .environmentObject(GameEngineManager(levelDimensions: .infinite, eventManager: TumblingTowersEventManager(), storageManager: StorageManager()))
     }
 }

@@ -10,7 +10,7 @@ import Foundation
 protocol Achievement: Identifiable {
     var name: String { get }
     var description: String { get }
-    var goal: Any { get }
+    var goal: Double { get }
     var achieved: Bool { get }
     var achievementType: AchievementType { get }
     var dataSource: AchievementSystemDataSource { get }

@@ -8,6 +8,7 @@
 import Foundation
 
 protocol StatTracker {
-    var stat: Any { get }
+    var stat: Double { get }
     var statTrackerType: StatTrackerType { get }
 }
+
