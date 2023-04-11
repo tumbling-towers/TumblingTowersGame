@@ -96,5 +96,4 @@ Pause Button: Pauses the game.
     static func getGameInputType(fromGameInputType: GameInputTypes) -> InputSystem.Type? {
         gameInputTypeToClass[fromGameInputType.rawValue]
     }
-
 }

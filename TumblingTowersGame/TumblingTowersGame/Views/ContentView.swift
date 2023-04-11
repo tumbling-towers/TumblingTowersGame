@@ -34,7 +34,7 @@ struct ContentView: View {
                     GameplayLevelView(currGameScreen: $currGameScreen, gameEngineMgr: mainGameMgr.createGameEngineManager(height: deviceHeight / 2, width: deviceWidth), gameMode: gameMode)
                 }
             } else if currGameScreen == .settings {
-                SettingsView(settingsMgr: SettingsManager(), currGameScreen: $currGameScreen)
+                SettingsView(settingsMgr: SettingsManager(), currGameScreen: $currGameScreen, selectedInputType: mainGameMgr.inputSystem)
                     .environmentObject(mainGameMgr)
             } else if currGameScreen == .achievements {
                 AchievementsView(currGameScreen: $currGameScreen)

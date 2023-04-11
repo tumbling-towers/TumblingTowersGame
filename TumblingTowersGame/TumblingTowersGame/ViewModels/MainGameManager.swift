@@ -19,7 +19,7 @@ class MainGameManager: ObservableObject {
     
     var playersMode: PlayersMode?
     
-    var inputSystem: InputSystem.Type = GyroInput.self
+    var inputSystem = Constants.GameInputTypes.GYRO
     
     var gameMode: Constants.GameModeTypes?
     
@@ -28,8 +28,10 @@ class MainGameManager: ObservableObject {
 
         SoundSystem.shared.registerSoundEvents(eventMgr: eventManager)
 
+        let inputClass = Constants.getGameInputType(fromGameInputType: inputSystem) ?? GyroInput.self
+
         let gameEngineMgr = GameEngineManager(levelDimensions: CGRect(x: 0, y: 0,
-                                                                      width: width, height: height), eventManager: eventManager, inputType: inputSystem, storageManager: storageManager)
+                                                                      width: width, height: height), eventManager: eventManager, inputType: inputClass, storageManager: storageManager)
         self.gameEngineMgrs.append(gameEngineMgr)
         self.eventManager = eventManager
 
@@ -39,10 +41,7 @@ class MainGameManager: ObservableObject {
     }
     
     func changeInput(to inputType: Constants.GameInputTypes) {
-        let inputClass = Constants.getGameInputType(fromGameInputType: inputType)
-        if let inputClass = inputClass {
-            inputSystem = inputClass
-        }
+        inputSystem = inputType
     }
 
     func pauseGame() {
