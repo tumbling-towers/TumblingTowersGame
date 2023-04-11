@@ -10,7 +10,7 @@ import Foundation
 class SkyscraperAchievement: Achievement {
     var name: String
     var description: String {
-        "Build a tower \(goal)m high.\nHighest tower: \(highScore.truncate(places: 2))m"
+        "Build a tower \(goal)m high.\nHighest tower: \(highScore.truncate(places: 1))m"
     }
     let goal: Double
     var achieved: Bool {

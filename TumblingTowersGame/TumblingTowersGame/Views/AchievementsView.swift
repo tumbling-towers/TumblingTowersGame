@@ -22,7 +22,7 @@ struct AchievementsView: View {
                     VStack {
                         HStack {
                             Text(achievment.wrappedValue.name)
-                                .modifier(CategoryText())
+                                .modifier(CategoryText(fontSize: 18))
                             Spacer()
                             let image = achievment.wrappedValue.achieved
                                         ? ViewImageManager.tickImage
