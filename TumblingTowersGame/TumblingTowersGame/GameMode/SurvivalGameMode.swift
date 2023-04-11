@@ -8,7 +8,7 @@
 import Foundation
 
 class SurvivalGameMode: GameMode {
-
+    let eventMgr: EventManager
     // Place N blocks wo dropping more than M blocks in shortest time possible (Score is time taken?)
     static var name = Constants.GameModeTypes.SURVIVAL.rawValue
 
@@ -16,7 +16,6 @@ class SurvivalGameMode: GameMode {
 
 
     var realTimeTimer = GameTimer()
-    var eventMgr: EventManager
 
     // MARK: Constants for this game mode
     static let blocksToPlace = 3
@@ -34,10 +33,9 @@ class SurvivalGameMode: GameMode {
     var isGameEnded = false
 
     required init(eventMgr: EventManager) {
-        self.eventMgr = eventMgr
-
         // Register all events that affect game state
-
+        self.eventMgr = eventMgr
+        
         eventMgr.registerClosure(for: BlockPlacedEvent.self, closure: blockPlaced)
         eventMgr.registerClosure(for: BlockDroppedEvent.self, closure: blockDropped)
         eventMgr.registerClosure(for: BlockInsertedEvent.self, closure: blockInserted)

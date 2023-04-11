@@ -85,6 +85,6 @@ struct MainMenuView_Previews: PreviewProvider {
     static var previews: some View {
         MainMenuView(currGameScreen: .constant(.mainMenu))
             .environmentObject(MainGameManager())
-            .environmentObject(GameEngineManager(levelDimensions: .infinite, eventManager: TumblingTowersEventManager()))
+            .environmentObject(GameEngineManager(levelDimensions: .infinite, eventManager: TumblingTowersEventManager(), storageManager: StorageManager()))
     }
 }

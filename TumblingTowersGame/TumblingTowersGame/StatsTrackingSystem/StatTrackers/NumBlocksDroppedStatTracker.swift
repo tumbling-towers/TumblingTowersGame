@@ -8,15 +8,17 @@
 import Foundation
 
 class NumBlocksDroppedStatTracker: StatTracker {
-    var stat: Any
+    var stat: Double
     let statTrackerType: StatTrackerType = .numBlocksDropped
     
-    init(eventManager: EventManager, stat: Any? = 0) {
+    init(eventManager: EventManager, stat: Double? = 0) {
         self.stat = stat ?? 0
         eventManager.registerClosure(for: BlockDroppedEvent.self, closure: blockDroppedClosure)
     }
     
     private lazy var blockDroppedClosure = { [weak self] (_ event: Event) -> Void in
-        self?.stat = (self?.stat as? Int ?? 0) + 1
+        self?.stat = self?.stat ?? 0 + 1
+        print("blocks dropped \(self?.stat)")
     }
 }
+

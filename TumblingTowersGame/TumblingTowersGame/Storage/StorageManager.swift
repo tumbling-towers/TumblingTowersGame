@@ -10,25 +10,51 @@ import Foundation
 class StorageManager {
     static let settingsFileName = "settings"
     static let achievementsFileName = "achievements"
-
-    /// Get file URL from specified file name.
-    private func getFileURL(from name: String) throws -> URL {
-        let directory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-        return directory.appendingPathComponent(name).appendingPathExtension(".data")
-    }
+    static let statsFileName = "stats"
+    
+    let storageFacade = StorageFacade()
 
     func saveSettings(_ settings: [Float]) throws {
-        let data = try JSONEncoder().encode(settings)
-        let outfile = try getFileURL(from: StorageManager.settingsFileName)
-        try data.write(to: outfile)
+        try storageFacade.save(floats: settings, fileName: StorageManager.settingsFileName)
     }
 
     func loadSettings() throws -> [Float] {
-       let fileURL = try getFileURL(from: StorageManager.settingsFileName)
-       guard let file = try? FileHandle(forReadingFrom: fileURL) else {
-           return []
-       }
-        let settings = try JSONDecoder().decode([Float].self, from: file.availableData)
+        let settings = try storageFacade.loadFloats(fileName: StorageManager.settingsFileName)
        return settings
    }
+    
+    
+    func saveAchievements(_ achievements: [Achievement]) throws {
+        var achievementsStorage: [AchievementStorage] = []
+        for achievement in achievements {
+            achievementsStorage.append(AchievementStorage(achievement))
+        }
+        
+        try storageFacade.save(achievements: achievementsStorage, fileName: StorageManager.achievementsFileName)
+    }
+
+    func loadAchievements() throws -> [AchievementStorage] {
+        let achievementStorages = try storageFacade.loadAchievements(fileName: StorageManager.achievementsFileName)
+       return achievementStorages
+   }
+    
+    
+    
+    func saveStats(_ statTrackers: [StatTracker]) throws {
+        var statsStorage: [StatStorage] = []
+        for statTracker in statTrackers {
+            statsStorage.append(StatStorage(statTracker))
+        }
+        
+        try storageFacade.save(statStorages: statsStorage, fileName: StorageManager.statsFileName)
+        print("save stats manager")
+    }
+
+    func loadStats() throws -> [StatStorage] {
+        let statStorages = try storageFacade.loadStatStorages(fileName: StorageManager.statsFileName)
+        print("load stats manager")
+       return statStorages
+    
+   }
+    
 }

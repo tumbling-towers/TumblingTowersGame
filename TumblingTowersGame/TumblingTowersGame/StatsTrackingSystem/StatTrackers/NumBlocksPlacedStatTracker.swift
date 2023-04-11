@@ -8,15 +8,15 @@
 import Foundation
 
 class NumBlocksPlacedStatTracker: StatTracker {
-    var stat: Any
-    let statTrackerType: StatTrackerType = .numBlocksPlaced
+    var stat: Double
+    var statTrackerType: StatTrackerType = .numBlocksPlaced
     
-    init(eventManager: EventManager, stat: Any? = 0) {
+    init(eventManager: EventManager, stat: Double? = 0) {
         self.stat = stat ?? 0
         eventManager.registerClosure(for: BlockPlacedEvent.self, closure: blockPlacedClosure)
     }
     
     private lazy var blockPlacedClosure = { [weak self] (_ event: Event) -> Void in
-        self?.stat = (self?.stat as? Int ?? 0) + 1
+        self?.stat = self?.stat ?? 0 + 1
     }
 }
