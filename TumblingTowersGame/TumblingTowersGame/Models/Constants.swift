@@ -63,12 +63,14 @@ Pause Button: Pauses the game.
 
     static let gameModeTypeToClass: [String: GameMode.Type] = [GameModeTypes.SURVIVAL.rawValue: SurvivalGameMode.self,
                                                                GameModeTypes.RACECLOCK.rawValue: RaceTimeGameMode.self,
-                                                               GameModeTypes.SANDBOX.rawValue: SandboxGameMode.self]
+                                                               GameModeTypes.SANDBOX.rawValue: SandboxGameMode.self,
+                                                               GameModeTypes.TALLENOUGH.rawValue: TallEnoughGameMode.self]
 
     enum GameModeTypes: String, Equatable, CaseIterable {
         case SURVIVAL = "Survival"
         case RACECLOCK = "Race the Clock"
         case SANDBOX = "Sandbox"
+        case TALLENOUGH = "Scale the Heights"
     }
 
     static func getGameModeType(from: GameModeTypes) -> GameMode.Type? {

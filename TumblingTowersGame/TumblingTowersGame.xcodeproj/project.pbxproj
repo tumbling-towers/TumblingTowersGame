@@ -50,6 +50,7 @@
 		1445F84A29C71DC900F94751 /* TapInputTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1445F84929C71DC900F94751 /* TapInputTests.swift */; };
 		146034D229E5EAF60006C4F4 /* collide.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 146034D129E5EAF60006C4F4 /* collide.mp3 */; };
 		146034D429E607A60006C4F4 /* NormalGoBackButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146034D329E607A60006C4F4 /* NormalGoBackButtonView.swift */; };
+		146034D629E614ED0006C4F4 /* TallEnoughGameMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146034D529E614ED0006C4F4 /* TallEnoughGameMode.swift */; };
 		146E2DB429C0D07200BFC757 /* TumblingTowersGameApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146E2DB329C0D07200BFC757 /* TumblingTowersGameApp.swift */; };
 		146E2DB629C0D07200BFC757 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146E2DB529C0D07200BFC757 /* ContentView.swift */; };
 		146E2DB829C0D07300BFC757 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 146E2DB729C0D07300BFC757 /* Assets.xcassets */; };
@@ -241,6 +242,7 @@
 		1445F84929C71DC900F94751 /* TapInputTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapInputTests.swift; sourceTree = "<group>"; };
 		146034D129E5EAF60006C4F4 /* collide.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = collide.mp3; sourceTree = "<group>"; };
 		146034D329E607A60006C4F4 /* NormalGoBackButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NormalGoBackButtonView.swift; sourceTree = "<group>"; };
+		146034D529E614ED0006C4F4 /* TallEnoughGameMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TallEnoughGameMode.swift; sourceTree = "<group>"; };
 		146E2DB029C0D07200BFC757 /* TumblingTowersGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TumblingTowersGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		146E2DB329C0D07200BFC757 /* TumblingTowersGameApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TumblingTowersGameApp.swift; sourceTree = "<group>"; };
 		146E2DB529C0D07200BFC757 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -465,6 +467,7 @@
 				1421B0CD29D41F740002E4AA /* SurvivalGameMode.swift */,
 				1421B0D129D435950002E4AA /* RaceTimeGameMode.swift */,
 				14168DE529D8C47A00EF5C22 /* SandboxGameMode.swift */,
+				146034D529E614ED0006C4F4 /* TallEnoughGameMode.swift */,
 				14168DE129D831F500EF5C22 /* GameTimer.swift */,
 				61EB621F29DF395500011A03 /* PlayersMode.swift */,
 			);
@@ -1025,6 +1028,7 @@
 				14C6732929D36F4D00D8DF78 /* SettingsView.swift in Sources */,
 				146E2E1929C0E5B400BFC757 /* GameplayLevelView.swift in Sources */,
 				2FFED52C29D9AEE600BA072F /* GameFiziksEngine.swift in Sources */,
+				146034D629E614ED0006C4F4 /* TallEnoughGameMode.swift in Sources */,
 				61A10F4129D31083000EB4B4 /* GluePowerupActivatedEvent.swift in Sources */,
 				14E8159129E09DD1007F6489 /* GameplayGuiView.swift in Sources */,
 				124B02E629C9DAA200094CF5 /* EventManager.swift in Sources */,

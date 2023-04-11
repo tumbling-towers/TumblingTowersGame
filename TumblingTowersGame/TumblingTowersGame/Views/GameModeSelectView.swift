@@ -39,6 +39,10 @@ struct GameModeSelectView: View {
                             drawGameModeOption(gameMode: .RACECLOCK, playerMode: .singleplayer,
                                                name: Constants.GameModeTypes.RACECLOCK.rawValue.uppercased(),
                                                fontSize: 30.0, red: 0.322, green: 1, blue: 0.322)
+
+                            drawGameModeOption(gameMode: .TALLENOUGH, playerMode: .singleplayer,
+                                               name: Constants.GameModeTypes.TALLENOUGH.rawValue.uppercased(),
+                                               fontSize: 25.0, red: 1, green: 1, blue: 0.322)
                         }
                     } else if $mainGameMgr.playersMode.wrappedValue == .multiplayer {
                         HStack {
@@ -55,6 +59,10 @@ struct GameModeSelectView: View {
                             drawGameModeOption(gameMode: .RACECLOCK, playerMode: .multiplayer,
                                                name: Constants.GameModeTypes.RACECLOCK.rawValue.uppercased(),
                                                fontSize: 30.0, red: 0.322, green: 1, blue: 0.322)
+
+                            drawGameModeOption(gameMode: .TALLENOUGH, playerMode: .multiplayer,
+                                               name: Constants.GameModeTypes.TALLENOUGH.rawValue.uppercased(),
+                                               fontSize: 25.0, red: 1, green: 1, blue: 0.322)
                         }
                     }
                 }

@@ -10,7 +10,7 @@ import Foundation
 class RaceTimeGameMode: GameMode {
 
     static var name = Constants.GameModeTypes.RACECLOCK.rawValue
-    static var description = "Place \(blocksToPlace) blocks in \(timeToPlaceBy)s (singleplayer) / \(timeToPlaceBy / RaceTimeGameMode.shortLevelTimeMultiplier)s (multiplayer)!"
+    static var description = "Place \(blocksToPlace) blocks in \(timeToPlaceBy)s (singleplayer) / \(timeToPlaceBy / shortLevelTimeMultiplier)s (multiplayer)!"
 
     var realTimeTimer = GameTimer()
     var eventMgr: EventManager
@@ -155,13 +155,13 @@ class RaceTimeGameMode: GameMode {
             if isEndedByOtherPlayer {
                 if otherPlayerRanOutOfTime {
                     // Other player ran out of time
-                    return "You ran out of time!."
+                    return "You ran out of time!"
                 } else {
                     // Other player stacked enough blocks faster
-                    return "You were too slow!."
+                    return "You were too slow!"
                 }
             } else {
-                return "You ran out of time!."
+                return "You ran out of time!"
             }
         }
         return ""

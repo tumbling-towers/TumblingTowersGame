@@ -249,7 +249,7 @@ class GameWorld {
             return
         }
         if blocksInContact.count >= 1 {
-            eventManager.postEvent(BlockTouchedPowerupLineEvent())
+            eventManager.postEvent(BlockTouchedPowerupLineEvent(playerId: playerId))
             level.updatePowerupLineHeight()
             powerupManager?.createNextPowerup()
         }
