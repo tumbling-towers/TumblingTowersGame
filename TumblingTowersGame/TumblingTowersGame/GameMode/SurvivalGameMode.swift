@@ -16,7 +16,6 @@ class SurvivalGameMode: GameMode {
 
 
     var realTimeTimer = GameTimer()
-    var eventMgr: EventManager
 
     // MARK: Constants for this game mode
     static let blocksToPlace = 3
@@ -34,8 +33,6 @@ class SurvivalGameMode: GameMode {
     var isGameEnded = false
 
     required init(eventMgr: EventManager) {
-        self.eventMgr = eventMgr
-
         // Register all events that affect game state
         self.eventMgr = eventMgr
         
