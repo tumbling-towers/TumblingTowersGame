@@ -47,11 +47,15 @@ struct ContentView: View {
                     .environmentObject(mainGameMgr)
                     .environmentObject(gameEngineMgr)
             } else if currGameScreen == .achievements {
+                AchievementsView(currGameScreen: $currGameScreen)
+                    .environmentObject(gameEngineMgr)
+                /*
                 ZStack {
                     BackgroundView()
                     GameplayGoBackMenuView(currGameScreen: $currGameScreen)
                         .environmentObject(gameEngineMgr)
                 }
+                 */
             } else if currGameScreen == .tutorial {
                 TutorialView(currGameScreen: $currGameScreen)
                     .environmentObject(gameEngineMgr)
@@ -70,7 +74,7 @@ struct ContentView_Previews: PreviewProvider {
 
     static var previews: some View {
         ContentView(gameEngineMgr: GameEngineManager(levelDimensions: .infinite,
-                                                     eventManager: TumblingTowersEventManager()))
+                                                     eventManager: TumblingTowersEventManager(), storageManager: StorageManager()))
             .environmentObject(mainGameMgrPrev)
     }
 }

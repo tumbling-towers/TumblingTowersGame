@@ -10,9 +10,9 @@ import Foundation
 class AchievementFactory {
     static func createAchievement(ofType achievementType: AchievementType,
                                   name: String,
-                                  goal: Any,
+                                  goal: Double,
                                   achieved: Bool,
-                                  dataSource: AchievementSystemDataSource) -> Achievement {
+                                  dataSource: AchievementSystemDataSource) -> any Achievement {
         switch achievementType {
         case .BobTheBuilder:
             return BobTheBuilderAchievement(name: name, goal: goal, dataSource: dataSource)

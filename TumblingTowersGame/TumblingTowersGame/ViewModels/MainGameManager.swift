@@ -24,7 +24,7 @@ class MainGameManager: ObservableObject {
         let eventManager = TumblingTowersEventManager()
 
         let gameEngineMgr = GameEngineManager(levelDimensions: CGRect(x: 0, y: 0,
-                                                                  width: deviceWidth, height: deviceHeight), eventManager: eventManager)
+                                                                      width: deviceWidth, height: deviceHeight), eventManager: eventManager, storageManager: storageManager)
         self.gameEngineMgr = gameEngineMgr
         self.eventManager = eventManager
         

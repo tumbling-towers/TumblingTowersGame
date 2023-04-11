@@ -9,20 +9,20 @@ import Foundation
 
 class TowerHeightStatTracker: StatTracker {
     static let name: String = "TowerHeight"
-    var stat: Any
+    var stat: Double
     let statTrackerType: StatTrackerType = .towerHeight
     
-    init(eventManager: EventManager, stat: Any? = 0.0) {
+    init(eventManager: EventManager, stat: Double? = 0.0) {
         self.stat = stat ?? 0
         eventManager.registerClosure(for: TowerHeightIncreasedEvent.self, closure: towerHeightUpdatedClosure)
     }
     
     private lazy var towerHeightUpdatedClosure = { [weak self] (_ event: Event) -> Void in
-        guard let self = self,
+        guard
               let towerHeightIncreasedEvent = event as? TowerHeightIncreasedEvent else {
             return
         }
-        self.stat = max(self.stat as? CGFloat ?? 0.0, towerHeightIncreasedEvent.newHeight)
-        print("new tower height: \(self.stat)")
+        self?.stat = max(self?.stat ?? 0.0, towerHeightIncreasedEvent.newHeight)
+        print("new tower height: \(self?.stat)")
     }
 }

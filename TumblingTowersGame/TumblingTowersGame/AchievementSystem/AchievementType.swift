@@ -11,3 +11,7 @@ enum AchievementType {
     case BobTheBuilder
     case Skyscraper
 }
+
+extension AchievementType: Codable {
+    
+}

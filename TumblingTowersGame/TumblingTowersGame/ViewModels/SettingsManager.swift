@@ -8,7 +8,7 @@
 import Foundation
 
 class SettingsManager: ObservableObject {
-    var storageManager = StorageManager()
+    private var storageManager = StorageManager()
 
     @Published var backgroundMusicVolume: Float {
         // Cannot use get {} set {} because Property wrapper cannot be applied to a computed property

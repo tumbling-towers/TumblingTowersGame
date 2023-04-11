@@ -13,14 +13,23 @@ class GameWorld {
     // MARK: Model objects / properties
     var level: GameWorldLevel
     
-    var currentlyMovingBlock: Block? {
-        didSet {
-            if currentlyMovingBlock == nil && !isGameEnded {
-                insertNewBlock()
-            }
-        }
+    var currentlyMovingBlock: Block?
+    
+    var highestPoint: CGFloat {
+        level.getHighestPoint()
     }
     
+    /// Obtains the leftmost and rightmost points of the CMB.
+    var referencePoints: (left: CGPoint, right: CGPoint)? {
+        guard let block = currentlyMovingBlock else { return nil }
+        let width = block.width
+        let xPosLeft: Double = block.position.x - width / 2
+        let xPosRight: Double = block.position.x + width / 2
+        let yPos: Double = 0
+        return (left: CGPoint(x: xPosLeft, y: yPos),
+                right: CGPoint(x: xPosRight, y: yPos))
+    }
+
     private var dimensions: CGRect {
         level.dimensions
     }
@@ -58,145 +67,118 @@ class GameWorld {
         setUpFiziksEngine()
     }
 
-    /// Obtains the leftmost and rightmost points of the CMB.
-    func getReferencePoints() -> (left: CGPoint, right: CGPoint)? {
-        guard let block = currentlyMovingBlock else { return nil }
-        let width = block.width
-        let xPosLeft: Double = block.position.x - width / 2
-        let xPosRight: Double = block.position.x + width / 2
-        let yPos: Double = 0
-        return (left: CGPoint(x: xPosLeft, y: yPos), right: CGPoint(x: xPosRight, y: yPos))
-    }
-
     func startGame() {
-        self.isGameEnded = false
+        isGameEnded = false
         setUpLevel()
         insertNewBlock()
     }
 
     func resetGame() {
-        self.level.reset()
-        self.currentlyMovingBlock = nil
+        level.reset()
         // TODO: Possibly need to remove all fiziksBodies due to cycle?
         fiziksEngine.deleteAllBodies()
         
-        self.fiziksEngine = GameFiziksEngine(size: dimensions)
+        fiziksEngine = GameFiziksEngine(size: dimensions)
         setUpFiziksEngine()
     }
     
     func endGame() {
-        self.level.reset()
-        self.isGameEnded = true
-        self.currentlyMovingBlock = nil
+        level.reset()
+        isGameEnded = true
         // TODO: Possibly need to remove all fiziksBodies due to cycle?
         fiziksEngine.deleteAllBodies()
     }
 
     /// Update method called by GameEngine every frame
     func update() {
-        for object in level.gameObjects {
-            if level.isOutOfBounds(object) {
-                // TODO: Emit event that a block has gone out of bounds.
-                removeObject(object: object)
-
-                eventManager.postEvent(BlockDroppedEvent())
-
-                if object === currentlyMovingBlock {
-                    currentlyMovingBlock = nil
-                }
-            }
-
-            if object.fiziksBody.categoryBitMask == CategoryMask.block {
-                // TODO: more elegant way besides downcasting?
-                guard let block = object as? Block else { continue }
-                checkAndHandleContactPowerupLine(currentBlock: block)
-            }
-        }
+        removeOutOfBoundsObjects()
+        handleBlocksInContactWithPowerupLine()
     }
 
     // MARK: Block methods
-    @discardableResult
-    func insertNewBlock() -> Block {
+    func insertNewBlock() {
+        if isGameEnded {
+            return
+        }
+        
         let shape = shapeRandomizer.getShape()
         let insertedBlock = addBlock(ofShape: shape, at: level.blockInsertionPoint)
-
-        // prevent newly inserted blocks from rotating via collisions
-        insertedBlock.fiziksBody.allowsRotation = false
-
         currentlyMovingBlock = insertedBlock
 
         eventManager.postEvent(BlockInsertedEvent())
-        return insertedBlock
     }
     
     func moveCMB(by vector: CGVector) {
-        guard let fiziksBodyToMove = currentlyMovingBlock?.fiziksBody else {
+        guard let blockToMove = currentlyMovingBlock else {
             return
         }
-        let oldPosition = fiziksBodyToMove.position
-        let newPosition = CGPoint(x: oldPosition.x + vector.dx,
-                                  y: oldPosition.y + vector.dy)
-        fiziksBodyToMove.position = newPosition
+        level.move(gameWorldObject: blockToMove, by: vector)
     }
     
     func rotateCMB(by rotation: Double) {
-        guard let fiziksBodyToMove = currentlyMovingBlock?.fiziksBody else {
+        guard let blockToMove = currentlyMovingBlock else {
             return
         }
-        fiziksBodyToMove.zRotation += rotation
+        level.rotate(gameWorldObject: blockToMove, by: rotation)
     }
     
     @discardableResult
     private func addBlock(ofShape shape: TetrisShape, at position: CGPoint) -> Block {
-        let newBlock = createBlock(ofShape: shape, at: position)
-        level.gameObjects.append(newBlock)
-        fiziksEngine.add(newBlock.fiziksBody)
+        guard let newBlock: Block = GameWorldObjectFactory.create(ofType: .block,
+                                                                               ofShape: shape,
+                                                                               at: position) else {
+            // TODO: throw error
+            assert(false)
+        }
+        
+        addObject(object: newBlock)
+        
+        // make block move at constant speed
         newBlock.fiziksBody.affectedByGravity = false
         newBlock.fiziksBody.velocity = .zero
         newBlock.fiziksBody.applyImpulse(GameWorldConstants.defaultBlockVelocity)
+        
+        // prevent newly inserted blocks from rotating via collisions
+        newBlock.fiziksBody.allowsRotation = false
+        
         return newBlock
     }
     
-    private func createBlock(ofShape shape: TetrisShape, at position: CGPoint) -> Block {
-        let newFiziksBody = PathFiziksBody(path: shape.path,
-                                           position: position,
-                                           isDynamic: true,
-                                           restitution: .zero,
-                                           linearDamping: .zero,
-                                           categoryBitMask: Block.categoryBitMask,
-                                           collisionBitMask: Block.fallingCollisionBitMask,
-                                           contactTestBitMask: Block.fallingContactTestBitMask)
-        let newBlock = Block(fiziksBody: newFiziksBody, shape: shape)
-        return newBlock
-    }
-
     // MARK: Level setup methods
     private func setUpLevel() {
         // Set main platform
         setLevelPlatform()
         setLevelBoundaries()
         setPowerupLine()
-        
     }
 
     private func setLevelPlatform() {
         let platformPosition = CGPoint(x: Int(dimensions.width) / 2, y: GameWorldConstants.mainPlatformYPos)
         let path = CGPath.create(from: GameWorldConstants.mainPlatformPoints)
-        let platform = createPlatform(path: path, at: platformPosition)
+        let platformShape = GamePathObjectShape(path: path)
+        guard let platform: Platform = GameWorldObjectFactory.create(ofType: .platform,
+                                                                          ofShape: platformShape,
+                                                                          at: platformPosition) else {
+            assert(false)
+            return
+        }
         level.setMainPlatform(platform: platform)
         
         fiziksEngine.add(platform.fiziksBody)
-        platform.fiziksBody.affectedByGravity = false
     }
     
     private func setLevelBoundaries() {
         // left boundary
         let leftPosition = CGPoint(x: dimensions.midX - GameWorldConstants.defaultPlatformBoundaryBuffer, y: dimensions.midY)
-        level.leftBoundary = createLevelBoundary(at: leftPosition)
+        let leftBoundary = createLevelBoundary(at: leftPosition)
+        level.leftBoundary = leftBoundary
+        fiziksEngine.add(leftBoundary.fiziksBody)
         
         // right boundary
         let rightPosition = CGPoint(x: dimensions.midX + GameWorldConstants.defaultPlatformBoundaryBuffer, y: dimensions.midY)
-        level.rightBoundary = createLevelBoundary(at: rightPosition)
+        let rightBoundary = createLevelBoundary(at: rightPosition)
+        level.rightBoundary = rightBoundary
+        fiziksEngine.add(rightBoundary.fiziksBody)
     }
     
     private func setPowerupLine() {
@@ -213,125 +195,61 @@ class GameWorld {
                                               y: dimensions.minY - 100,
                                               width: dimensions.width,
                                               height: dimensions.height + 200)
-        
-        
-        self.fiziksEngine.insertBounds(fiziksEngineBoundingRect)
+        fiziksEngine.insertBounds(fiziksEngineBoundingRect)
         fiziksEngine.fiziksContactDelegate = self
     }
     
     // MARK: Other methods
-    func addObject(object: GameWorldObject) {
-        level.gameObjects.append(object)
-        fiziksEngine.add(object.fiziksBody)
-    }
-    func createPlatform(path: CGPath, at position: CGPoint) -> Platform {
-        let newFiziksBody = PathFiziksBody(path: path,
-                                           position: position,
-                                           zRotation: .zero,
-                                           isDynamic: false,
-                                           restitution: .zero,
-                                           categoryBitMask: Platform.categoryBitMask,
-                                           collisionBitMask: Platform.collisionBitMask,
-                                           contactTestBitMask: Platform.contactTestBitMask)
-        let newPlatform = Platform(fiziksBody: newFiziksBody, shape: PlatformShape(path: path))
-        return newPlatform
+    func pauseGame() {
+        fiziksEngine.pause()
     }
     
-    private func removeObject(object: GameWorldObject) {
-        level.gameObjects.removeAll(where: { $0 === object })
-        fiziksEngine.delete(object.fiziksBody)
+    func unpauseGame() {
+        fiziksEngine.unpause()
     }
-
-    /// Creates a FiziksBody to represent the level boundary.
-    private func createLevelBoundary(at position: CGPoint) -> FiziksBody {
-        let width = GameWorldConstants.levelBoundaryWidth
+    
+    func addObject(object: GameWorldObject) {
+        level.add(gameWorldObject: object)
+        fiziksEngine.add(object.fiziksBody)
+    }
+    
+    func removeObject(object: GameWorldObject) {
+        level.remove(gameWorldObject: object)
+        fiziksEngine.delete(object.fiziksBody)
+        if object === currentlyMovingBlock {
+            insertNewBlock()
+        }
+    }
+    
+    private func createLevelBoundary(ofWidth width: CGFloat = GameWorldConstants.levelBoundaryWidth,
+                                     at position: CGPoint) -> LevelBoundary {
         let rect = CGRect(origin: position, size: CGSize(width: width, height: dimensions.height))
         let path = CGPath.create(from: rect, centered: true)
-
-        let fiziksBody = PathFiziksBody(path: path,
-                                        position: position,
-                                        categoryBitMask: CategoryMask.levelBoundary,
-                                        collisionBitMask: CollisionMask.levelBoundary)
-        fiziksEngine.add(fiziksBody)
-        fiziksBody.isDynamic = false
-        
-        return fiziksBody
+        let shape = GamePathObjectShape(path: path)
+        guard let newBoundary: LevelBoundary = GameWorldObjectFactory.create(ofType: .levelBoundary,
+                                                                             ofShape: shape,
+                                                                             at: position) else {
+            // TODO: throw error
+            assert(false)
+        }
+        return newBoundary
     }
-
-    private func updatePowerupHeight() {
-        level.updatePowerupLineHeight()
-        powerupManager?.createNextPowerup()
-    }
-}
-
-extension GameWorld: FiziksContactDelegate {
-    func didBegin(_ contact: FiziksContact) {
-        // check whether it is contact between currently moving block & something else (not level boundaries)
-        if let currentBlock = currentlyMovingBlock {
-            if contact.contains(body: currentBlock.fiziksBody)
-                && !contact.contains(body: level.leftBoundary)
-                && !contact.contains(body: level.rightBoundary) {
-                handlePlaceCMB()
-            }
-
-            SpecialPropertiesContactResolver.resolve(fiziksEngine: fiziksEngine,
-                                                     contact: contact,
-                                                     specialProperties: currentBlock.specialProperties)
+    
+    private func removeOutOfBoundsObjects() {
+        for object in level.outOfBoundsObjects {
+            removeObject(object: object)
+            eventManager.postEvent(BlockDroppedEvent())
         }
     }
-
-    func didEnd(_ contact: FiziksContact) {
-        // pass
-    }
-
-    private func checkAndHandleContactPowerupLine(currentBlock: Block) {
-        // landed block in contact with powerup line
-        if let powerupLine = level.powerupLine, currentBlock.fiziksBody.contactTestBitMask == ContactTestMask.block {
-            let pos = currentBlock.position
-            let height = currentBlock.height
-
-            // if above powerup line & stable (velocity = 0), then give powerup
-            if pos.y + height / 2 > powerupLine.position.y
-                && pos.y - height / 2 < powerupLine.position.y
-                && currentBlock.fiziksBody.velocity == .zero {
-                eventManager.postEvent(BlockTouchedPowerupLineEvent())
-                updatePowerupHeight()
-            }
+    
+    private func handleBlocksInContactWithPowerupLine() {
+        guard let blocksInContact = level.blocksInContactWithPowerupLine else {
+            return
         }
-    }
-
-    func handlePlaceCMB() {
-        // allow gravity and rotation by collisions
-        currentlyMovingBlock?.fiziksBody.affectedByGravity = true
-        currentlyMovingBlock?.fiziksBody.allowsRotation = true
-
-        // update collsion and contact mask
-        currentlyMovingBlock?.fiziksBody.collisionBitMask = Block.collisionBitMask
-        currentlyMovingBlock?.fiziksBody.contactTestBitMask = Block.contactTestBitMask
-
-        var placedBlockCount = 0
-        for gameObject in level.gameObjects {
-            if gameObject.fiziksBody.categoryBitMask == CategoryMask.block {
-                placedBlockCount += 1
-            }
+        if blocksInContact.count >= 1 {
+            eventManager.postEvent(BlockTouchedPowerupLineEvent())
+            level.updatePowerupLineHeight()
+            powerupManager?.createNextPowerup()
         }
-        eventManager.postEvent(BlockPlacedEvent(totalBlocksInLevel: placedBlockCount))
-        
-        let towerHeight = findHighestPoint()
-        eventManager.postEvent(TowerHeightIncreasedEvent(newHeight: towerHeight))
-
-        self.currentlyMovingBlock = nil
-    }
-
-    /// Returns the y-coordinate of the highest point in the level
-    func findHighestPoint() -> Double {
-        var maxY: Double = -.infinity
-        level.gameObjects.forEach({ obj in
-            if let block = obj as? Block, block !== currentlyMovingBlock {
-                maxY = max(block.position.y + block.height / 2, maxY)
-            }
-        })
-
-        return maxY
     }
 }

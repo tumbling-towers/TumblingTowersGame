@@ -97,7 +97,7 @@ struct GameplayGuiView: View {
 
 struct GameplayGuiView_Previews: PreviewProvider {
     static var previews: some View {
-        GameplayGuiView(currGameScreen: .constant(.gameplay))
-            .environmentObject(GameEngineManager(levelDimensions: .infinite, eventManager: TumblingTowersEventManager()))
+        LevelView(currGameScreen: .constant(.gameplay))
+            .environmentObject(GameEngineManager(levelDimensions: .infinite, eventManager: TumblingTowersEventManager(), storageManager: StorageManager()))
     }
 }
