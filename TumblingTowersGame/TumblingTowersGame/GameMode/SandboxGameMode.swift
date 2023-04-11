@@ -53,8 +53,8 @@ class SandboxGameMode: GameMode {
     }
 
     func getScore() -> Int {
-        currBlocksPlaced * scoreBlocksPlacedMultiplier
-        - currBlocksDropped * scoreBlocksDroppedMultiplier
+        max(currBlocksPlaced * scoreBlocksPlacedMultiplier
+        - currBlocksDropped * scoreBlocksDroppedMultiplier, 0)
     }
 
     func hasGameEnded() -> Bool {

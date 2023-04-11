@@ -16,8 +16,8 @@ class RaceTimeGameMode: GameMode {
     var eventMgr: EventManager
 
     // MARK: Constants for this game mode
-    static let blocksToPlace = 5
-    static let timeToPlaceBy = 15
+    static let blocksToPlace = 30
+    static let timeToPlaceBy = 30
     let scoreTimeLeftMultiplier = 10
     let scoreBlocksPlacedMultiplier = 10
     let scoreBlocksDroppedMultiplier = 25
