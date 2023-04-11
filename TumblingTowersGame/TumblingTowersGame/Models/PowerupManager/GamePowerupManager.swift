@@ -19,6 +19,7 @@ class GamePowerupManager: PowerupManager {
 
     var rng: RandomNumberGeneratorWithSeed
 
+    // FIXME: count here is a magic number
     var availablePowerups: [Powerup?] = [Powerup?](repeating: nil, count: 5)
 
     init(eventManager: EventManager, gameWorld: GameWorld, seed: Int) {
@@ -59,6 +60,7 @@ class GamePowerupManager: PowerupManager {
         eventManager.postEvent(PlatformPowerupActivatedEvent())
     }
     
+    // FIXME: a lil too long, try to pull out private functions?
     func createPowerupPlatform() -> Platform? {
         guard let platform = gameWorld.level.mainPlatform else { return nil }
         var count = 0

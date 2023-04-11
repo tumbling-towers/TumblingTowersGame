@@ -50,7 +50,6 @@ class GameUpdater {
     }
 
     @objc func update() {
-
         let timeNow = Date()
         let timePassed = timeNow.timeIntervalSince(time) + leftoverTime
         time = timeNow
@@ -59,6 +58,7 @@ class GameUpdater {
         while framesPassed > 1 {
             runThisEveryFrame()
 
+            // FIXME: to be removed eventually
             if frameCount.isMultiple(of: 60) {
                 // Things to do every 1s
                 // Step every 1s instead (Temporary so that it doesnt keep printing)
@@ -74,5 +74,4 @@ class GameUpdater {
     @objc func step() {
 
     }
-
 }

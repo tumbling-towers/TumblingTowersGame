@@ -11,6 +11,7 @@ protocol Powerup {
     var delegate: PowerupDelegate? { get set }
     static var type: PowerupType { get }
 
+    // FIXME: Good use of factory pattern. DOCUMENT!!!
     static func create() -> Powerup
 
     func activate()

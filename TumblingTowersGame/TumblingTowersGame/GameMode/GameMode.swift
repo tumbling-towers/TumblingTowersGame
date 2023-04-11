@@ -15,12 +15,16 @@ protocol GameMode {
 
     init(eventMgr: EventManager)
 
+    // FIXME: can this be a computed variable?
     func getGameState() -> Constants.GameState
 
+    // FIXME: can this be a computed variable?
     func hasGameEnded() -> Bool
 
+    // FIXME: can this be a computed variable?
     func getScore() -> Int
 
+    // FIXME: can this be a computed variable?
     func getTime() -> Int
 
     func startGame()
@@ -33,8 +37,10 @@ protocol GameMode {
 
     func endGame()
 
+    // FIXME: can this be a computed variable?
     func getGameEndMainMessage() -> String
 
+    // FIXME: can this be a computed variable?
     func getGameEndSubMessage() -> String
 
     func update()

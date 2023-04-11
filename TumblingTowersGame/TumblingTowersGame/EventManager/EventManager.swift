@@ -17,5 +17,6 @@ protocol EventManager {
     func postEvent(_ event: Event)
 
     func registerClosure<T: Event>(for event: T.Type, closure: @escaping EventClosure)
+    // FIXME: not implementable right? rmb to delete this comment
 //    func degisterClosure<T: Event>(for event: T.Type, closure: @escaping EventClosure)
 }

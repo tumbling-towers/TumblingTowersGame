@@ -13,8 +13,6 @@ protocol FiziksEngine: AnyObject {
 
     func insertBounds(_ bounds: CGRect)
 
-    func activatePhysics()
-
     // FiziksBody related functions
     func contains(_ fiziksBody: FiziksBody) -> Bool
     func add(_ fiziksBody: FiziksBody)

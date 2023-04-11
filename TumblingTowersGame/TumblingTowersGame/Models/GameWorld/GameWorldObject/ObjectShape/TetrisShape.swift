@@ -69,7 +69,7 @@ struct TetrisShape: PathObjectShape {
     }
 
     var points: [P] {
-        // TODO: this coalace should not happen. Should throw error if cannot find.
+        // FIXME: this coalace should not happen. Should throw error if cannot find.
         TetrisShape.shapeToPoints[type] ?? [CGPoint()]
     }
 
