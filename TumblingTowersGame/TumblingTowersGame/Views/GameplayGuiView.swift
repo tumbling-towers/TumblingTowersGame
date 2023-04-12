@@ -84,13 +84,13 @@ struct GameplayGuiView: View {
             ZStack {
                 Text("Score: " + String(gameEngineMgr.score))
                     .modifier(GameplayGuiText(fontSize: 20))
-                    .frame(width: 200, height: 50)
-                    .position(x: 75, y: 50)
+                    .frame(width: 200, height: 50, alignment: .leading)
+                    .position(x: 130, y: 50)
 
-                Text("Time: " + String(gameEngineMgr.timeRemaining))
+                Text("Time: " + gameEngineMgr.timeRemaining.secondsToTimeStr())
                     .modifier(GameplayGuiText(fontSize: 20))
-                    .frame(width: 200, height: 50)
-                    .position(x: 75, y: 125)
+                    .frame(width: 200, height: 50, alignment: .leading)
+                    .position(x: 130, y: 125)
             }
         )
     }

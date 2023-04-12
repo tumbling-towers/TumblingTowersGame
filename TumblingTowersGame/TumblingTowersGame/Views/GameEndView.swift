@@ -28,7 +28,7 @@ struct GameEndView: View {
                     }
 
                     if let timeLeft = gameEngineMgr.timeRemaining {
-                        Text("Timer: " + String(timeLeft))
+                        Text("Timer: " + timeLeft.secondsToTimeStr())
                             .font(.system(size: 30))
                     }
 
