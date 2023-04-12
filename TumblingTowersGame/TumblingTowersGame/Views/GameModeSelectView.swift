@@ -24,43 +24,23 @@ struct GameModeSelectView: View {
 
                 VStack {
 
-                    if $mainGameMgr.playersMode.wrappedValue == .singleplayer {
+                    if let playersMode = mainGameMgr.playersMode {
                         HStack {
-                            drawGameModeOption(gameMode: .SURVIVAL, playerMode: .singleplayer,
+                            drawGameModeOption(gameMode: .SURVIVAL, playerMode: playersMode,
                                                name: Constants.GameModeTypes.SURVIVAL.rawValue.uppercased(),
                                                fontSize: 30.0, red: 1, green: 0.341, blue: 0.341)
 
-                            drawGameModeOption(gameMode: .SANDBOX, playerMode: .singleplayer,
+                            drawGameModeOption(gameMode: .SANDBOX, playerMode: playersMode,
                                                name: Constants.GameModeTypes.SANDBOX.rawValue.uppercased(),
                                                fontSize: 30.0, red: 0.322, green: 0.443, blue: 1)
                         }
 
                         HStack {
-                            drawGameModeOption(gameMode: .RACECLOCK, playerMode: .singleplayer,
+                            drawGameModeOption(gameMode: .RACECLOCK, playerMode: playersMode,
                                                name: Constants.GameModeTypes.RACECLOCK.rawValue.uppercased(),
                                                fontSize: 30.0, red: 0.322, green: 1, blue: 0.322)
 
-                            drawGameModeOption(gameMode: .TALLENOUGH, playerMode: .singleplayer,
-                                               name: Constants.GameModeTypes.TALLENOUGH.rawValue.uppercased(),
-                                               fontSize: 25.0, red: 1, green: 1, blue: 0.322)
-                        }
-                    } else if $mainGameMgr.playersMode.wrappedValue == .multiplayer {
-                        HStack {
-                            drawGameModeOption(gameMode: .SURVIVAL, playerMode: .multiplayer,
-                                               name: Constants.GameModeTypes.SURVIVAL.rawValue.uppercased(),
-                                               fontSize: 30.0, red: 1, green: 0.341, blue: 0.341)
-
-                            drawGameModeOption(gameMode: .SANDBOX, playerMode: .multiplayer,
-                                               name: Constants.GameModeTypes.SANDBOX.rawValue.uppercased(),
-                                               fontSize: 30.0, red: 0.322, green: 0.443, blue: 1)
-                        }
-
-                        HStack {
-                            drawGameModeOption(gameMode: .RACECLOCK, playerMode: .multiplayer,
-                                               name: Constants.GameModeTypes.RACECLOCK.rawValue.uppercased(),
-                                               fontSize: 30.0, red: 0.322, green: 1, blue: 0.322)
-
-                            drawGameModeOption(gameMode: .TALLENOUGH, playerMode: .multiplayer,
+                            drawGameModeOption(gameMode: .TALLENOUGH, playerMode: playersMode,
                                                name: Constants.GameModeTypes.TALLENOUGH.rawValue.uppercased(),
                                                fontSize: 25.0, red: 1, green: 1, blue: 0.322)
                         }
@@ -98,6 +78,10 @@ struct GameModeSelectView: View {
                 } else if playerMode == .multiplayer {
                     // do something
                     currGameScreen = .multiplayerGameplay
+                } else if playerMode == .threeplayer {
+                    currGameScreen = .threeplayerGameplay
+                } else if playerMode == .fourplayer {
+                    currGameScreen = .fourplayerGameplay
                 }
             } label: {
                 Text(name)

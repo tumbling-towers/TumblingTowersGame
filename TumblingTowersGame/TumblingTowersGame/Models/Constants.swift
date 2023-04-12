@@ -56,6 +56,8 @@ Pause Button: Pauses the game.
         case gameModeSelection
         case singleplayerGameplay
         case multiplayerGameplay
+        case threeplayerGameplay
+        case fourplayerGameplay
         case settings
         case tutorial
         case achievements

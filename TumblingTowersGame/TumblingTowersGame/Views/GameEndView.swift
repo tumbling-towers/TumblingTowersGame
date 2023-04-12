@@ -48,10 +48,10 @@ struct GameEndView: View {
             VStack {
                 if gameEngineMgr.gameEnded {
                     Text(gameEngineMgr.gameEndMainMessage)
-                        .font(.system(size: 70))
+                        .font(.system(size: 45))
                         .fontWeight(.heavy)
                     Text(gameEngineMgr.gameEndSubMessage)
-                        .font(.system(size: 30))
+                        .font(.system(size: 25))
                 }
             }
         )

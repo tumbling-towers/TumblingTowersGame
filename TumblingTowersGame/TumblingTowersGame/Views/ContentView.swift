@@ -30,8 +30,44 @@ struct ContentView: View {
             } else if currGameScreen == .multiplayerGameplay, let gameMode = mainGameMgr.gameMode {
                 VStack {
                     GameplayLevelView(currGameScreen: $currGameScreen, gameEngineMgr: mainGameMgr.createGameEngineManager(height: deviceHeight / 2, width: deviceWidth), gameMode: gameMode)
-                    .rotation3DEffect(.degrees(180), axis: (x: 0, y: 0, z: 1))
+                        .rotation3DEffect(.degrees(180), axis: (x: 0, y: 0, z: 1))
                     GameplayLevelView(currGameScreen: $currGameScreen, gameEngineMgr: mainGameMgr.createGameEngineManager(height: deviceHeight / 2, width: deviceWidth), gameMode: gameMode)
+                }
+            } else if currGameScreen == .threeplayerGameplay, let gameMode = mainGameMgr.gameMode {
+                VStack {
+                    HStack {
+                        GameplayLevelView(currGameScreen: $currGameScreen, gameEngineMgr: mainGameMgr.createGameEngineManager(height: deviceHeight / 2, width: deviceWidth / 2), gameMode: gameMode)
+                            .rotation3DEffect(.degrees(180), axis: (x: 0, y: 0, z: 1))
+                            .frame(width: deviceWidth / 2, height: deviceHeight / 2, alignment: .trailing)
+
+                        GameplayLevelView(currGameScreen: $currGameScreen, gameEngineMgr: mainGameMgr.createGameEngineManager(height: deviceHeight / 2, width: deviceWidth / 2), gameMode: gameMode)
+                            .rotation3DEffect(.degrees(180), axis: (x: 0, y: 0, z: 1))
+                            .frame(width: deviceWidth / 2, height: deviceHeight / 2, alignment: .trailing)
+                    }
+
+                    HStack {
+                        GameplayLevelView(currGameScreen: $currGameScreen, gameEngineMgr: mainGameMgr.createGameEngineManager(height: deviceHeight / 2, width: deviceWidth), gameMode: gameMode)
+                    }
+                }
+            } else if currGameScreen == .fourplayerGameplay, let gameMode = mainGameMgr.gameMode {
+                VStack {
+                    HStack {
+                        GameplayLevelView(currGameScreen: $currGameScreen, gameEngineMgr: mainGameMgr.createGameEngineManager(height: deviceHeight / 2, width: deviceWidth / 2), gameMode: gameMode)
+                            .rotation3DEffect(.degrees(180), axis: (x: 0, y: 0, z: 1))
+                            .frame(width: deviceWidth / 2, height: deviceHeight / 2, alignment: .trailing)
+
+                        GameplayLevelView(currGameScreen: $currGameScreen, gameEngineMgr: mainGameMgr.createGameEngineManager(height: deviceHeight / 2, width: deviceWidth / 2), gameMode: gameMode)
+                            .rotation3DEffect(.degrees(180), axis: (x: 0, y: 0, z: 1))
+                            .frame(width: deviceWidth / 2, height: deviceHeight / 2, alignment: .trailing)
+                    }
+
+                    HStack {
+                        GameplayLevelView(currGameScreen: $currGameScreen, gameEngineMgr: mainGameMgr.createGameEngineManager(height: deviceHeight / 2, width: deviceWidth / 2), gameMode: gameMode)
+                            .frame(width: deviceWidth / 2, height: deviceHeight / 2, alignment: .trailing)
+
+                        GameplayLevelView(currGameScreen: $currGameScreen, gameEngineMgr: mainGameMgr.createGameEngineManager(height: deviceHeight / 2, width: deviceWidth / 2), gameMode: gameMode)
+                            .frame(width: deviceWidth / 2, height: deviceHeight / 2, alignment: .trailing)
+                    }
                 }
             } else if currGameScreen == .settings {
                 SettingsView(settingsMgr: SettingsManager(), currGameScreen: $currGameScreen, selectedInputType: mainGameMgr.inputSystem)
@@ -73,6 +109,54 @@ struct ContentView: View {
                                 .rotation3DEffect(.degrees(180), axis: (x: 0, y: 0, z: 1))
                             GameEndView(currGameScreen: $currGameScreen)
                                 .environmentObject(gameEngineMgr2)
+                        }
+                    }
+                } else if mainGameMgr.playersMode == .threeplayer {
+                    if mainGameMgr.gameEngineMgrs.count == 3,
+                       let gameEngineMgr = mainGameMgr.gameEngineMgrs[0],
+                       let gameEngineMgr2 = mainGameMgr.gameEngineMgrs[1],
+                       let gameEngineMgr3 = mainGameMgr.gameEngineMgrs[2],
+                       gameEngineMgr.gameEnded {
+                        VStack {
+                            HStack {
+                                GameEndView(currGameScreen: $currGameScreen)
+                                    .environmentObject(gameEngineMgr)
+                                    .rotation3DEffect(.degrees(180), axis: (x: 0, y: 0, z: 1))
+                                GameEndView(currGameScreen: $currGameScreen)
+                                    .environmentObject(gameEngineMgr2)
+                                    .rotation3DEffect(.degrees(180), axis: (x: 0, y: 0, z: 1))
+                            }
+
+                            HStack {
+                                GameEndView(currGameScreen: $currGameScreen)
+                                    .environmentObject(gameEngineMgr3)
+                            }
+                        }
+                    }
+                } else if mainGameMgr.playersMode == .fourplayer {
+                    if mainGameMgr.gameEngineMgrs.count == 4,
+                       let gameEngineMgr = mainGameMgr.gameEngineMgrs[0],
+                       let gameEngineMgr2 = mainGameMgr.gameEngineMgrs[1],
+                       let gameEngineMgr3 = mainGameMgr.gameEngineMgrs[2],
+                       let gameEngineMgr4 = mainGameMgr.gameEngineMgrs[3],
+                       gameEngineMgr.gameEnded {
+                        VStack {
+                            HStack {
+                                GameEndView(currGameScreen: $currGameScreen)
+                                    .environmentObject(gameEngineMgr)
+                                    .rotation3DEffect(.degrees(180), axis: (x: 0, y: 0, z: 1))
+                                GameEndView(currGameScreen: $currGameScreen)
+                                    .environmentObject(gameEngineMgr2)
+                                    .rotation3DEffect(.degrees(180), axis: (x: 0, y: 0, z: 1))
+                            }
+
+                            HStack {
+                                GameEndView(currGameScreen: $currGameScreen)
+                                    .environmentObject(gameEngineMgr3)
+
+                                GameEndView(currGameScreen: $currGameScreen)
+                                    .environmentObject(gameEngineMgr4)
+                            }
                         }
                     }
                 }
