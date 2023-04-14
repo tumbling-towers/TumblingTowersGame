@@ -28,7 +28,7 @@ struct GameEndView: View {
                     }
 
                     if let timeLeft = gameEngineMgr.timeRemaining {
-                        Text("Timer: " + String(timeLeft))
+                        Text("Timer: " + timeLeft.secondsToTimeStr())
                             .font(.system(size: 30))
                     }
 
@@ -60,14 +60,14 @@ struct GameEndView: View {
 
 struct GameEndView_Previews: PreviewProvider {
     static var gameEngineMgr: GameEngineManager = {
-        let gameEngineManager = GameEngineManager(levelDimensions: .infinite, eventManager: TumblingTowersEventManager(), storageManager: StorageManager())
+        let gameEngineManager = GameEngineManager(levelDimensions: .infinite, eventManager: TumblingTowersEventManager(), inputType: TapInput.self, storageManager: StorageManager())
 
         return gameEngineManager
 
     }()
 
     static var previews: some View {
-        GameEndView(currGameScreen: .constant(.gameplay))
+        GameEndView(currGameScreen: .constant(.singleplayerGameplay))
             .environmentObject(gameEngineMgr)
     }
 }

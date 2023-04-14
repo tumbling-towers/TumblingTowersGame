@@ -9,7 +9,6 @@ import SwiftUI
 
 struct MainMenuView: View {
     @EnvironmentObject var mainGameMgr: MainGameManager
-    @EnvironmentObject var gameEngineMgr: GameEngineManager
 
     @Binding var currGameScreen: Constants.CurrGameScreens
 
@@ -30,10 +29,10 @@ struct MainMenuView: View {
 
                 Button {
                     withAnimation {
-                        currGameScreen = .gameModeSelection
+                        currGameScreen = .playerOptionSelection
                     }
                 } label: {
-                    Text("Start")
+                    Text("Play")
                         .modifier(CustomButton(fontSize: 40))
                 }
                 
@@ -65,16 +64,18 @@ struct MainMenuView: View {
                 Spacer()
             }
 
-            Button {
-                withAnimation {
-                    currGameScreen = .tutorial
+            GeometryReader { geo in
+                Button {
+                    withAnimation {
+                        currGameScreen = .tutorial
+                    }
+                } label: {
+                    Text("?")
+                        .modifier(SquareCustomButton(fontSize: 50))
                 }
-            } label: {
-                Text("?")
-                    .modifier(SquareCustomButton(fontSize: 50))
+                .modifier(SquareCustomButton(fontSize: 50))
+                .position(x: geo.size.width - 100, y: geo.size.height - 100)
             }
-            .modifier(SquareCustomButton(fontSize: 50))
-            .position(x: gameEngineMgr.levelDimensions.width - 100, y: gameEngineMgr.levelDimensions.height - 100)
 
         }
         .ignoresSafeArea(.all)
@@ -85,6 +86,5 @@ struct MainMenuView_Previews: PreviewProvider {
     static var previews: some View {
         MainMenuView(currGameScreen: .constant(.mainMenu))
             .environmentObject(MainGameManager())
-            .environmentObject(GameEngineManager(levelDimensions: .infinite, eventManager: TumblingTowersEventManager(), storageManager: StorageManager()))
     }
 }

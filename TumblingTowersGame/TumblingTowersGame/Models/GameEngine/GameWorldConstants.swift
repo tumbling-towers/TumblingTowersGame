@@ -30,7 +30,7 @@ struct GameWorldConstants {
                                      CGPoint(x: defaultMainPlatformDimensions.width, y: 0),
                                                   CGPoint(x: 0, y: 0)]
 
-    static let defaultTriesToFindPlatformPosition: Int = 2
+    static let defaultTriesToFindPlatformPosition: Int = 5
 
     static let bufferFromHighestPoint: Double = 50
 

@@ -1,20 +1,21 @@
 //
-//  BackgroundView.swift
+//  LevelBackgroundView.swift
 //  TumblingTowersGame
 //
-//  Created by Lee Yong Ler on 18/3/23.
+//  Created by Taufiq Abdul Rahman on 10/4/23.
 //
 
+import Foundation
 import SwiftUI
 
-struct BackgroundView: View {
+struct LevelBackgroundView: View {
     var body: some View {
         Image(ViewImageManager.backgroundImage)
             .resizable()
     }
 }
 
-struct BackgroundView_Previews: PreviewProvider {
+struct LevelBackgroundView_Previews: PreviewProvider {
     static var previews: some View {
         BackgroundView()
     }

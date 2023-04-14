@@ -8,4 +8,9 @@
 import Foundation
 
 class BlockTouchedPowerupLineEvent: TumblingTowersEvent {
+    let playerId: UUID
+
+    init(playerId: UUID) {
+        self.playerId = playerId
+    }
 }

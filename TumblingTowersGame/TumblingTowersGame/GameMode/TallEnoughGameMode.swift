@@ -1,37 +1,39 @@
 //
-//  SurvivalGameMode.swift
+//  TallEnoughGameMode.swift
 //  TumblingTowersGame
 //
-//  Created by Elvis on 29/3/23.
+//  Created by Elvis on 12/4/23.
 //
 
 import Foundation
 
-class SurvivalGameMode: GameMode {
-    let eventMgr: EventManager
-    // Place N blocks wo dropping more than M blocks in shortest time possible (Score is time taken?)
-    static var name = Constants.GameModeTypes.SURVIVAL.rawValue
+class TallEnoughGameMode: GameMode {
 
-    static var description = "Place \(blocksToPlace) blocks without dropping more than \(blocksDroppedThreshold) blocks! Score decays over time! Bonus Score Time: \(scoreTimeWithBonusScore)s"
-
+    static var name = Constants.GameModeTypes.RACECLOCK.rawValue
+    static var description = "Build your tower as high as you can... Until the \(powerupLinesToHit)th (singleplayer) / \(powerupLinesToHit / shortLevelMultiplier)th (multiplayer) powerup line! DO NOT drop more than \(blocksDroppedThreshold) blocks! Score decays over time! Bonus score time: \(scoreTimeWithBonusScore)s"
 
     var realTimeTimer = GameTimer()
+    var eventMgr: EventManager
 
     // MARK: Constants for this game mode
-    static let blocksToPlace = 30
-    static let blocksDroppedThreshold = 3
+    static let powerupLinesToHit = 10
+    static let blocksDroppedThreshold = 20
+    
     let scoreBlocksPlacedMultiplier = 10
-    let scoreBlocksDroppedMultiplier = 25
-    static let scoreTimeWithBonusScore = 90
+    let scoreBlocksDroppedMultiplier = 15
+    static let shortLevelMultiplier = 2
+    static let scoreTimeWithBonusScore = 60
 
     // MARK: Tracking State of Game
-    var currBlocksInserted = 0
+    var currPowerupLineAmt = 0
     var currBlocksPlaced = 0
     var currBlocksDropped = 0
     let playerId: UUID
 
     var isStarted = false
     var isGameEnded = false
+
+    var shortLevel = false
 
     // MARK: Multiplayer States
     var isEndedByOtherPlayer = false
@@ -40,10 +42,15 @@ class SurvivalGameMode: GameMode {
     required init(eventMgr: EventManager, playerId: UUID, levelHeight: CGFloat) {
         self.eventMgr = eventMgr
         self.playerId = playerId
-        
+
+        if levelHeight < Constants.levelNotTallEnoughThreshold {
+            shortLevel = true
+        }
+
+        // Register all events that affect game state
+        eventMgr.registerClosure(for: BlockTouchedPowerupLineEvent.self, closure: touchedPowerupLine)
         eventMgr.registerClosure(for: BlockPlacedEvent.self, closure: blockPlaced)
         eventMgr.registerClosure(for: BlockDroppedEvent.self, closure: blockDropped)
-        eventMgr.registerClosure(for: BlockInsertedEvent.self, closure: blockInserted)
     }
 
     func update() {
@@ -55,20 +62,16 @@ class SurvivalGameMode: GameMode {
     }
 
     func getGameState() -> Constants.GameState {
-//        print("Blocks Dropped \(currBlocksDropped)")
-//        print("Blocks Placed \(currBlocksPlaced)")
-//        print("Blocks Inserted \(currBlocksInserted)\n")
-
         if let overwriteGameState = overwriteGameState {
             return overwriteGameState
         }
 
-        if currBlocksDropped >= SurvivalGameMode.blocksDroppedThreshold {
-            return .LOSE
-        }
-
-        if currBlocksPlaced >= SurvivalGameMode.blocksToPlace {
+        if currPowerupLineAmt >= TallEnoughGameMode.powerupLinesToHit {
             return .WIN
+        } else if shortLevel && currPowerupLineAmt >= TallEnoughGameMode.powerupLinesToHit / TallEnoughGameMode.shortLevelMultiplier {
+            return .WIN
+        } else if currBlocksDropped >= TallEnoughGameMode.blocksDroppedThreshold {
+            return .LOSE
         }
 
         if isStarted {
@@ -78,14 +81,14 @@ class SurvivalGameMode: GameMode {
         }
     }
 
-    func hasGameEnded() -> Bool {
-        isGameEnded
-    }
-
     func getScore() -> Int {
-        max(SurvivalGameMode.scoreTimeWithBonusScore - realTimeTimer.count
+        max(TallEnoughGameMode.scoreTimeWithBonusScore - realTimeTimer.count
             + currBlocksPlaced * scoreBlocksPlacedMultiplier
             - currBlocksDropped * scoreBlocksDroppedMultiplier, 0)
+    }
+
+    func hasGameEnded() -> Bool {
+        isGameEnded
     }
 
     func getTime() -> Int {
@@ -95,9 +98,9 @@ class SurvivalGameMode: GameMode {
     func resetGame() {
         isStarted = false
         isGameEnded = false
-        currBlocksInserted = 0
         currBlocksPlaced = 0
         currBlocksDropped = 0
+        currPowerupLineAmt = 0
         realTimeTimer = GameTimer()
 
         isEndedByOtherPlayer = false
@@ -125,8 +128,10 @@ class SurvivalGameMode: GameMode {
             isEndedByOtherPlayer = true
 
             if endState == .WIN {
+                // Other player reached enough powerup line first
                 overwriteGameState = .LOSE
             } else if endState == .LOSE {
+                // Other player dropped too many blocks
                 overwriteGameState = .WIN
             }
 
@@ -146,23 +151,25 @@ class SurvivalGameMode: GameMode {
     func getGameEndSubMessage() -> String {
         if getGameState() == .WIN {
             if isEndedByOtherPlayer {
-                // Opponent dropped too many blocks out of the screen
-                return "You beat your opponent!"
+                return "Your opponent dropped too many blocks!"
             } else {
-                return "You stacked enough blocks!"
+                return "You reached enough powerup lines!"
             }
         } else if getGameState() == .LOSE {
             if isEndedByOtherPlayer {
-                // Opponent stacked enough blocks faster than you
-                return "You opponent beat you at stacking blocks!"
+                return "Your opponent reached enough powerup lines first!"
             } else {
-                return "You dropped too many blocks!."
+                return "You dropped too many blocks!"
             }
         }
-
         return ""
     }
 
+    private func touchedPowerupLine(event: Event) {
+        if let touchedEvent = event as? BlockTouchedPowerupLineEvent, touchedEvent.playerId == playerId {
+            currPowerupLineAmt += 1
+        }
+    }
 
     private func blockPlaced(event: Event) {
         if let placedEvent = event as? BlockPlacedEvent, placedEvent.playerId == playerId {
@@ -176,9 +183,4 @@ class SurvivalGameMode: GameMode {
         }
     }
 
-    private func blockInserted(event: Event) {
-        if let insertedEvent = event as? BlockInsertedEvent, insertedEvent.playerId == playerId {
-            currBlocksInserted += 1
-        }
-    }
 }

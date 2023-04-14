@@ -8,4 +8,9 @@
 import Foundation
 
 class BlockDroppedEvent: TumblingTowersEvent {
+    let playerId: UUID
+
+    init(playerId: UUID) {
+        self.playerId = playerId
+    }
 }

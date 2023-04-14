@@ -34,7 +34,8 @@ class GameWorld {
         level.dimensions
     }
 
-    
+    var playerId: UUID
+
     // MARK: Engines & Managers
     var fiziksEngine: FiziksEngine
     
@@ -56,9 +57,10 @@ class GameWorld {
 
     
     // MARK: Initializer
-    init(levelDimensions: CGRect, seed: Int = GameWorldConstants.defaultSeed, eventManager: EventManager) {
+    init(levelDimensions: CGRect, seed: Int = GameWorldConstants.defaultSeed, eventManager: EventManager, playerId: UUID) {
         self.eventManager = eventManager
         self.level = GameWorldLevel(levelDimensions: levelDimensions)
+        self.playerId = playerId
         self.fiziksEngine = GameFiziksEngine(size: levelDimensions)
         self.shapeRandomizer = ShapeRandomizer(possibleShapes: TetrisType.allCases, seed: seed)
         self.rng = RandomNumberGeneratorWithSeed(seed: seed)
@@ -105,7 +107,7 @@ class GameWorld {
         let insertedBlock = addBlock(ofShape: shape, at: level.blockInsertionPoint)
         currentlyMovingBlock = insertedBlock
 
-        eventManager.postEvent(BlockInsertedEvent())
+        eventManager.postEvent(BlockInsertedEvent(playerId: playerId))
     }
     
     func moveCMB(by vector: CGVector) {
@@ -234,11 +236,11 @@ class GameWorld {
         }
         return newBoundary
     }
-    
+
     private func removeOutOfBoundsObjects() {
         for object in level.outOfBoundsObjects {
             removeObject(object: object)
-            eventManager.postEvent(BlockDroppedEvent())
+            eventManager.postEvent(BlockDroppedEvent(playerId: playerId))
         }
     }
     
@@ -247,7 +249,7 @@ class GameWorld {
             return
         }
         if blocksInContact.count >= 1 {
-            eventManager.postEvent(BlockTouchedPowerupLineEvent())
+            eventManager.postEvent(BlockTouchedPowerupLineEvent(playerId: playerId))
             level.updatePowerupLineHeight()
             powerupManager?.createNextPowerup()
         }

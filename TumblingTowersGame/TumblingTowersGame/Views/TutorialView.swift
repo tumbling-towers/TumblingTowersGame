@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct TutorialView: View {
-    @EnvironmentObject var gameEngineMgr: GameEngineManager
     @Binding var currGameScreen: Constants.CurrGameScreens
 
     var body: some View {
@@ -22,7 +21,7 @@ struct TutorialView: View {
 
                 Spacer()
 
-                GameplayGoBackMenuView(currGameScreen: $currGameScreen)
+                NormalGoBackButtonView(currGameScreen: $currGameScreen)
                     .padding(.bottom, 1)
 
             }
@@ -113,8 +112,13 @@ struct TutorialView: View {
 
                 Divider().modifier(MenuDividerLine())
 
+                Text(Constants.instructionsMultiplayerInput)
+                    .modifier(GameplayBodyText(fontSize: 20))
+
                 Text(Constants.instructionsBlockContact)
                     .modifier(GameplayBodyText(fontSize: 20))
+
+                Divider().modifier(MenuDividerLine())
 
                 VStack {
                     Text(Constants.instructionsOtherGuiButtons)
@@ -127,7 +131,7 @@ struct TutorialView: View {
                 .background(
                     RoundedRectangle(cornerRadius: 10, style: .continuous).fill(Color.init(red: 0.969, green: 0.933, blue: 0.855)))
 
-                Text("\n").hidden()
+                Divider().modifier(MenuDividerLine())
 
             }
 
@@ -163,6 +167,5 @@ struct TutorialView: View {
 struct TutorialView_Previews: PreviewProvider {
     static var previews: some View {
         TutorialView(currGameScreen: .constant(.tutorial))
-            .environmentObject(GameEngineManager(levelDimensions: .infinite, eventManager: TumblingTowersEventManager(), storageManager: StorageManager()))
     }
 }

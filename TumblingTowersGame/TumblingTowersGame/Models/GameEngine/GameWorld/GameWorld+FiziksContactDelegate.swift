@@ -46,7 +46,7 @@ extension GameWorld: FiziksContactDelegate {
                 placedBlockCount += 1
             }
         }
-        eventManager.postEvent(BlockPlacedEvent(totalBlocksInLevel: placedBlockCount))
+        eventManager.postEvent(BlockPlacedEvent(totalBlocksInLevel: placedBlockCount, playerId: playerId))
         
         let towerHeight = level.getHighestPoint(excluding: currentlyMovingBlock)
         eventManager.postEvent(TowerHeightIncreasedEvent(newHeight: towerHeight))
