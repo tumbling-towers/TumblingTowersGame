@@ -60,9 +60,4 @@ class TumblingTowersEventManager: EventManager {
 
         NCfacade.createObserver(observer: observer, selector: selector, notificationName: notificationName, object: nil)
     }
-
-    // FIXME: delete?
-//    func degisterClosure<T: Event>(for event: T.Type, closure: @escaping EventClosure) {
-//        observerClosures[T.identifier]?.removeAll(where: {$0 == closure})
-//    }
 }

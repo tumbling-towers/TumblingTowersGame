@@ -37,14 +37,12 @@ class SandboxGameMode: GameMode {
     }
 
     func update() {
-        let gameState = getGameState()
-
         if gameState != .RUNNING && gameState != .PAUSED {
-            eventMgr.postEvent(GameEndedEvent(playerId: playerId, endState: getGameState()))
+            eventMgr.postEvent(GameEndedEvent(playerId: playerId, endState: gameState))
         }
     }
 
-    func getGameState() -> Constants.GameState {
+    var gameState: Constants.GameState {
         if isStarted {
             return .RUNNING
         } else {
@@ -52,16 +50,12 @@ class SandboxGameMode: GameMode {
         }
     }
 
-    func getScore() -> Int {
+    var score: Int {
         max(currBlocksPlaced * scoreBlocksPlacedMultiplier
         - currBlocksDropped * scoreBlocksDroppedMultiplier, 0)
     }
 
-    func hasGameEnded() -> Bool {
-        isGameEnded
-    }
-
-    func getTime() -> Int {
+    var time: Int {
         realTimeTimer.count
     }
 
@@ -89,11 +83,11 @@ class SandboxGameMode: GameMode {
         realTimeTimer.stop()
     }
 
-    func getGameEndMainMessage() -> String {
+    var gameEndMainMessage: String {
         "Thank you for playing!"
     }
 
-    func getGameEndSubMessage() -> String {
+    var gameEndSubMessage: String {
         "Please Try Again!"
     }
 

@@ -69,8 +69,10 @@ struct TetrisShape: PathObjectShape {
     }
 
     var points: [P] {
-        // FIXME: this coalace should not happen. Should throw error if cannot find.
-        TetrisShape.shapeToPoints[type] ?? [CGPoint()]
+        guard let pointArray = TetrisShape.shapeToPoints[type] else {
+            assert(false)
+        }
+        return pointArray
     }
 
     var path: CGPath {

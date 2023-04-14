@@ -52,14 +52,12 @@ class RaceTimeGameMode: GameMode {
     }
 
     func update() {
-        let gameState = getGameState()
-
         if gameState != .RUNNING && gameState != .PAUSED {
-            eventMgr.postEvent(GameEndedEvent(playerId: playerId, endState: getGameState()))
+            eventMgr.postEvent(GameEndedEvent(playerId: playerId, endState: gameState))
         }
     }
 
-    func getGameState() -> Constants.GameState {
+    var gameState: Constants.GameState {
         if let overwriteGameState = overwriteGameState {
             return overwriteGameState
         }
@@ -77,17 +75,13 @@ class RaceTimeGameMode: GameMode {
         }
     }
 
-    func getScore() -> Int {
+    var score: Int {
         max(realTimeTimer.count * scoreTimeLeftMultiplier
             + currBlocksPlaced * scoreBlocksPlacedMultiplier
             - currBlocksDropped * scoreBlocksDroppedMultiplier, 0)
     }
 
-    func hasGameEnded() -> Bool {
-        isGameEnded
-    }
-
-    func getTime() -> Int {
+    var time: Int {
         realTimeTimer.count
     }
 
@@ -138,20 +132,20 @@ class RaceTimeGameMode: GameMode {
         }
     }
 
-    func getGameEndMainMessage() -> String {
-        if getGameState() == .WIN {
+    var gameEndMainMessage: String {
+        if gameState == .WIN {
             return Constants.defaultWinMainString
-        } else if getGameState() == .LOSE {
+        } else if gameState == .LOSE {
             return Constants.defaultLoseMainString
         }
 
         return ""
     }
 
-    func getGameEndSubMessage() -> String {
-        if getGameState() == .WIN {
+    var gameEndSubMessage: String {
+        if gameState == .WIN {
             return "You beat the clock!"
-        } else if getGameState() == .LOSE {
+        } else if gameState == .LOSE {
             if isEndedByOtherPlayer {
                 if otherPlayerRanOutOfTime {
                     // Other player ran out of time

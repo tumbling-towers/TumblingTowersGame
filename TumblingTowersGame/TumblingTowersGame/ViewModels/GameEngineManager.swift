@@ -50,7 +50,7 @@ class GameEngineManager: ObservableObject {
     }
 
     var timeRemaining: Int {
-        if let currTime = gameMode?.getTime() {
+        if let currTime = gameMode?.time {
             return currTime
         } else {
             return 0
@@ -58,7 +58,7 @@ class GameEngineManager: ObservableObject {
     }
 
     var score: Int {
-        if let currScore = gameMode?.getScore() {
+        if let currScore = gameMode?.score {
             return currScore
         } else {
             return 0
@@ -66,7 +66,7 @@ class GameEngineManager: ObservableObject {
     }
 
     var gameEnded: Bool {
-        if let ended = gameMode?.hasGameEnded() {
+        if let ended = gameMode?.isGameEnded {
             return ended
         } else {
             return false
@@ -74,7 +74,7 @@ class GameEngineManager: ObservableObject {
     }
 
     var gameEndMainMessage: String {
-        if let msg = gameMode?.getGameEndMainMessage() {
+        if let msg = gameMode?.gameEndMainMessage {
             return msg
         } else {
             return "The game has ended."
@@ -82,7 +82,7 @@ class GameEngineManager: ObservableObject {
     }
 
     var gameEndSubMessage: String {
-        if let msg = gameMode?.getGameEndSubMessage() {
+        if let msg = gameMode?.gameEndSubMessage {
             return msg
         } else {
             return "Please try again!"

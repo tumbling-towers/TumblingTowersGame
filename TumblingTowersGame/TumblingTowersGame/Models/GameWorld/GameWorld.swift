@@ -133,7 +133,6 @@ class GameWorld {
         guard let newBlock: Block = GameWorldObjectFactory.create(ofType: .block,
                                                                                ofShape: shape,
                                                                                at: position) else {
-            // TODO: throw error
             assert(false)
         }
         
@@ -235,7 +234,6 @@ class GameWorld {
         guard let newBoundary: LevelBoundary = GameWorldObjectFactory.create(ofType: .levelBoundary,
                                                                              ofShape: shape,
                                                                              at: position) else {
-            // TODO: throw error
             assert(false)
         }
         return newBoundary
