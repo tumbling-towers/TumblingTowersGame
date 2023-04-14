@@ -105,7 +105,7 @@ struct SettingsView: View {
                     mainGameMgr.changeInput(to: val)
                 }
 
-                Text(Constants.gameInputTypeToDescription[selectedInputType.rawValue] ?? "<input type description>")
+                Text((Constants.getGameInputType(fromGameInputType: selectedInputType)?.description ?? "<input type description>") + "\n" + Constants.generalInputDescription)
                     .modifier(BodyText())
             }
         )
