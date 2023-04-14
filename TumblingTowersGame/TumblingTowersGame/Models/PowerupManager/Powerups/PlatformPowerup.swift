@@ -6,18 +6,76 @@
 //
 
 import Foundation
+import CoreGraphics
 
 // FIXME: off the top of my head, GameWorld can expose add(platform: Platform, at position: CGPoint)
 class PlatformPowerup: Powerup {
-    var delegate: PowerupDelegate?
+    var manager: PowerupManager
+    
+    private var gameWorld: GameWorld {
+        manager.gameWorld
+    }
+    
+    private var eventManager: EventManager {
+        manager.eventManager
+    }
+    
+    private var rng: RandomNumberGeneratorWithSeed {
+        manager.rng
+    }
 
     static var type: PowerupType = .platform
+    
+    init(manager: PowerupManager) {
+        self.manager = manager
+    }
 
-    static func create() -> Powerup {
-        PlatformPowerup()
+    static func create(manager: PowerupManager) -> Powerup {
+        PlatformPowerup(manager: manager)
     }
 
     func activate() {
-        delegate?.didActivatePlatformPowerup()
+        guard let newPlatform = createPowerupPlatform() else { return }
+        gameWorld.addObject(object: newPlatform)
+        eventManager.postEvent(PlatformPowerupActivatedEvent())
     }
+    
+    func createPowerupPlatform() -> Platform? {
+        guard let platform = manager.gameWorld.level.mainPlatform else { return nil }
+        var count = 0
+        while count < GameWorldConstants.defaultTriesToFindPlatformPosition {
+            let rngX = Int(rng.next()) % Int(platform.width)
+            let newX = CGFloat(rngX) + platform.position.x - platform.width / 2
+            var newY = gameWorld.highestPoint + GameWorldConstants.bufferFromHighestPoint
+            if let powerupLine = gameWorld.level.powerupLine {
+                newY = min(newY, powerupLine.position.y - GameWorldConstants.defaultPowerupPlatformHeight)
+            }
+            let newPosition = CGPoint(x: newX, y: newY)
+            let rect = CGRect(x: newPosition.x,
+                              y: newPosition.y,
+                              width: GameWorldConstants.defaultPowerupPlatformWidth,
+                              height: GameWorldConstants.defaultPowerupPlatformHeight)
+            let path = CGPath.create(from: rect)
+            let shape = GamePathObjectShape(path: path)
+
+            guard let newPlatform: Platform = GameWorldObjectFactory.create(ofType: .platform,
+                                                                                     ofShape: shape,
+                                                                                           at: newPosition) else {
+                // TODO: throw error
+                assert(false)
+                return nil
+            }
+
+            let otherBodies = gameWorld.level.gameObjects.map({ $0.fiziksBody })
+
+            if !gameWorld.fiziksEngine.isIntersecting(body: newPlatform.fiziksBody, otherBodies: otherBodies) {
+                return newPlatform
+            }
+
+            count += 1
+        }
+
+        return nil
+    }
+    
 }

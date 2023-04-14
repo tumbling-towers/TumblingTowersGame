@@ -8,11 +8,11 @@
 import Foundation
 
 protocol Powerup {
-    var delegate: PowerupDelegate? { get set }
+    var manager: PowerupManager { get set }
     static var type: PowerupType { get }
 
     // FIXME: Good use of factory pattern. DOCUMENT!!!
-    static func create() -> Powerup
+    static func create(manager: PowerupManager) -> Powerup
 
     func activate()
 }
