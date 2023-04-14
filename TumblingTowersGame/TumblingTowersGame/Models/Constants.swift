@@ -68,8 +68,8 @@ Pause Button: Pauses the game.
 
     enum GameModeTypes: String, Equatable, CaseIterable {
         case SURVIVAL = "Survival"
-        case RACECLOCK = "Race the Clock"
         case SANDBOX = "Sandbox"
+        case RACECLOCK = "Race the Clock"
         case TALLENOUGH = "Scale the Heights"
     }
 
