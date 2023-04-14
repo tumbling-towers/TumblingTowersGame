@@ -21,14 +21,14 @@ struct StorageFacade {
     }
     
     func loadFloats(fileName: String) throws -> [Float] {
-       let fileURL = try getFileURL(from: fileName)
-       guard let file = try? FileHandle(forReadingFrom: fileURL) else {
-           return []
-       }
-       
+        let fileURL = try getFileURL(from: fileName)
+        guard let file = try? FileHandle(forReadingFrom: fileURL) else {
+            return []
+        }
+        
         let floats = try JSONDecoder().decode([Float].self, from: file.availableData)
-       return floats
-   }
+        return floats
+    }
     
     func save(achievements: [AchievementStorage], fileName: String) throws {
         let data = try JSONEncoder().encode(achievements)
@@ -37,11 +37,11 @@ struct StorageFacade {
     }
     
     func loadAchievements(fileName: String) throws -> [AchievementStorage] {
-       let fileURL = try getFileURL(from: fileName)
-       guard let file = try? FileHandle(forReadingFrom: fileURL) else {
-           return []
-       }
-       
+        let fileURL = try getFileURL(from: fileName)
+        guard let file = try? FileHandle(forReadingFrom: fileURL) else {
+            return []
+        }
+        
         let achievementStorages = try JSONDecoder().decode([AchievementStorage].self, from: file.availableData)
         return achievementStorages
     }
@@ -57,18 +57,16 @@ struct StorageFacade {
         let data = try JSONEncoder().encode(statStorages)
         let outfile = try getFileURL(from: fileName)
         try data.write(to: outfile)
-        print("save stats facade")
-
+        
     }
     
     func loadStatStorages(fileName: String) throws -> [StatStorage] {
-       let fileURL = try getFileURL(from: fileName)
-       guard let file = try? FileHandle(forReadingFrom: fileURL) else {
-           return []
-       }
-       
+        let fileURL = try getFileURL(from: fileName)
+        guard let file = try? FileHandle(forReadingFrom: fileURL) else {
+            return []
+        }
+        
         let statStorages = try JSONDecoder().decode([StatStorage].self, from: file.availableData)
-        print("load stats facade")
-       return statStorages
-   }
+        return statStorages
+    }
 }

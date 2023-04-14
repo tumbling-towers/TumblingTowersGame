@@ -26,7 +26,9 @@ class Platform: GameWorldObject {
 
     static var contactTestBitMask: BitMask = ContactTestMask.platform
 
-    init(fiziksBody: FiziksBody, shape: ObjectShape, specialProperties: SpecialProperties = SpecialProperties()) {
+    init(fiziksBody: FiziksBody,
+         shape: ObjectShape,
+         specialProperties: SpecialProperties = SpecialProperties()) {
         self.fiziksBody = fiziksBody
         self.shape = shape
         self.specialProperties = specialProperties

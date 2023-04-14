@@ -7,6 +7,7 @@
 
 import Foundation
 
+// FIXME: off the top of my head, GameWorld can expose add(platform: Platform, at position: CGPoint)
 class PlatformPowerup: Powerup {
     var delegate: PowerupDelegate?
 

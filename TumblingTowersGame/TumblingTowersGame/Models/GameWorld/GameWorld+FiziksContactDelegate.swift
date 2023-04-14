@@ -10,16 +10,17 @@ import Foundation
 extension GameWorld: FiziksContactDelegate {
     func didBegin(_ contact: FiziksContact) {
         // check whether it is contact between currently moving block & something else (not level boundaries)
-        if let currentBlock = currentlyMovingBlock {
-            if contact.contains(body: currentBlock.fiziksBody)
-                && !cmbContactedBoundary(contact: contact) {
-                handlePlaceCMB()
-            }
-
-            SpecialPropertiesContactResolver.resolve(fiziksEngine: fiziksEngine,
-                                                     contact: contact,
-                                                     specialProperties: currentBlock.specialProperties)
+        guard let currentBlock = currentlyMovingBlock else {
+            return
         }
+        if contact.contains(body: currentBlock.fiziksBody)
+            && !cmbContactedBoundary(contact: contact) {
+            handlePlaceCMB()
+        }
+        
+        SpecialPropertiesContactResolver.resolve(fiziksEngine: fiziksEngine,
+                                                 contact: contact,
+                                                 specialProperties: currentBlock.specialProperties)
     }
     
     private func cmbContactedBoundary(contact: FiziksContact) -> Bool {

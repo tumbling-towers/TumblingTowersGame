@@ -30,8 +30,8 @@ Swipe Down: Speeds up the downward movement of the block.
     }
 
     func dragEvent(offset: CGSize) {
-        // detected as a right drag
         if offset.width > 0 && abs(offset.height) < 50 {
+            // detected as a right drag
             inputData = InputData(inputType: .RIGHT, vector: CGVector(dx: offset.width * xMultiplier, dy: 0))
         } else if offset.width < 0 && abs(offset.height) < 50 {
             // detected as a left drag

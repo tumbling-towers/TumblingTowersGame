@@ -16,7 +16,7 @@ class GameWorldObjectFactory {
             guard let pathObjectShape = shape as? PathObjectShape else {
                 return nil
             }
-            let newFiziksBody = PathFiziksBody(path: pathObjectShape.path,
+            let newFiziksBody = GameFiziksBody(path: pathObjectShape.path,
                                                position: position,
                                                isDynamic: true,
                                                restitution: .zero,
@@ -30,7 +30,7 @@ class GameWorldObjectFactory {
             guard let pathObjectShape = shape as? PathObjectShape else {
                 return nil
             }
-            let newFiziksBody = PathFiziksBody(path: pathObjectShape.path,
+            let newFiziksBody = GameFiziksBody(path: pathObjectShape.path,
                                                position: position,
                                                zRotation: .zero,
                                                affectedByGravity: false,
@@ -45,7 +45,7 @@ class GameWorldObjectFactory {
             guard let pathObjectShape = shape as? PathObjectShape else {
                 return nil
             }
-            let newFiziksBody = PathFiziksBody(path: pathObjectShape.path,
+            let newFiziksBody = GameFiziksBody(path: pathObjectShape.path,
                                                position: position,
                                                isDynamic: false,
                                                categoryBitMask: CategoryMask.levelBoundary,

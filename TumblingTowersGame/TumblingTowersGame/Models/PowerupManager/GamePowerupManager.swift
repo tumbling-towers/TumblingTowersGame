@@ -19,6 +19,7 @@ class GamePowerupManager: PowerupManager {
 
     var rng: RandomNumberGeneratorWithSeed
 
+    // FIXME: count here is a magic number
     var availablePowerups: [Powerup?] = [Powerup?](repeating: nil, count: 5)
 
     init(eventManager: EventManager, gameWorld: GameWorld, seed: Int) {

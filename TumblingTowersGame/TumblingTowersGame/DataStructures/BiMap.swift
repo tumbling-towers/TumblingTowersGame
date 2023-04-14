@@ -7,6 +7,7 @@
 
 import Foundation
 
+// FIXME: find a place that can be simplified using this. If not, just delete.
 public struct BiMap<Key: Hashable, Value: Hashable> {
     internal var keyValueDict: [Key: Value]
     internal var valueKeyDict: [Value: Key]

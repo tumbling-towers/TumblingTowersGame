@@ -13,16 +13,15 @@ class StorageManager {
     static let statsFileName = "stats"
     
     let storageFacade = StorageFacade()
-
+    
     func saveSettings(_ settings: [Float]) throws {
         try storageFacade.save(floats: settings, fileName: StorageManager.settingsFileName)
     }
-
+    
     func loadSettings() throws -> [Float] {
         let settings = try storageFacade.loadFloats(fileName: StorageManager.settingsFileName)
-       return settings
-   }
-    
+        return settings
+    }
     
     func saveAchievements(_ achievements: [any Achievement]) throws {
         var achievementsStorage: [AchievementStorage] = []
@@ -32,10 +31,10 @@ class StorageManager {
         
         try storageFacade.save(achievements: achievementsStorage, fileName: StorageManager.achievementsFileName)
     }
-
+    
     func loadAchievements() throws -> [AchievementStorage] {
         let achievementStorages = try storageFacade.loadAchievements(fileName: StorageManager.achievementsFileName)
-       return achievementStorages
+        return achievementStorages
     }
 
     func resetAchievements() {
@@ -49,14 +48,10 @@ class StorageManager {
         }
         
         try storageFacade.save(statStorages: statsStorage, fileName: StorageManager.statsFileName)
-        print("save stats manager")
     }
-
+    
     func loadStats() throws -> [StatStorage] {
         let statStorages = try storageFacade.loadStatStorages(fileName: StorageManager.statsFileName)
-        print("load stats manager")
-       return statStorages
-    
-   }
-    
+        return statStorages
+    }
 }

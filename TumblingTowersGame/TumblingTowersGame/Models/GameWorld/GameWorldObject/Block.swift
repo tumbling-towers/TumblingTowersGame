@@ -30,7 +30,9 @@ class Block: GameWorldObject {
 
     static let categoryBitMask: BitMask = CategoryMask.block
 
-    init(fiziksBody: FiziksBody, shape: ObjectShape) {
+    init(fiziksBody: FiziksBody,
+         shape: ObjectShape,
+         specialProperties: SpecialProperties = SpecialProperties()) {
         self.fiziksBody = fiziksBody
         self.shape = shape
         self.specialProperties = SpecialProperties()

@@ -14,5 +14,7 @@ protocol PowerupManager: AnyObject, PowerupDelegate {
     var availablePowerups: [Powerup?] { get set }
     func createNextPowerup()
     func activatePowerup(at idx: Int)
+    
+    // FIXME: maybe this function is too specific, should not be in a general PowerupManager protocol
     func createPowerupPlatform() -> Platform?
 }

@@ -16,7 +16,7 @@ class GameWorld {
     var currentlyMovingBlock: Block?
     
     var highestPoint: CGFloat {
-        level.getHighestPoint()
+        level.getHighestPoint(excluding: currentlyMovingBlock)
     }
     
     /// Obtains the leftmost and rightmost points of the CMB.
@@ -159,8 +159,8 @@ class GameWorld {
         let path = CGPath.create(from: GameWorldConstants.mainPlatformPoints)
         let platformShape = GamePathObjectShape(path: path)
         guard let platform: Platform = GameWorldObjectFactory.create(ofType: .platform,
-                                                                          ofShape: platformShape,
-                                                                          at: platformPosition) else {
+                                                                     ofShape: platformShape,
+                                                                     at: platformPosition) else {
             assert(false)
             return
         }

@@ -46,7 +46,6 @@ struct GameplayLevelView: View {
             // TODO: throw error
             return SKScene()
         }
-        gameFiziksEngine.activatePhysics()
         return gameFiziksEngine.fiziksScene
     }
 }

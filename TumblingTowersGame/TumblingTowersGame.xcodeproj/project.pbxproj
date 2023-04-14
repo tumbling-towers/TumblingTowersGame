@@ -110,6 +110,8 @@
 		2FC7FAD229C50C2C00B56850 /* RandomNumberGeneratorWithSeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC7FAD129C50C2C00B56850 /* RandomNumberGeneratorWithSeed.swift */; };
 		2FC7FAD429C50C3C00B56850 /* ShapeRandomizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC7FAD329C50C3C00B56850 /* ShapeRandomizer.swift */; };
 		2FC7FADE29C510F200B56850 /* CGPoint+arithmeticMean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC7FADD29C510F200B56850 /* CGPoint+arithmeticMean.swift */; };
+		2FDC510E29E5F744002BE1E6 /* GluePowerupActivatedEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDC510D29E5F744002BE1E6 /* GluePowerupActivatedEvent.swift */; };
+		2FDC511029E5F756002BE1E6 /* PlatformPowerupActivatedEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDC510F29E5F756002BE1E6 /* PlatformPowerupActivatedEvent.swift */; };
 		2FFED51C29D9A93800BA072F /* MockFiziksShapeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FFED51A29D9A93800BA072F /* MockFiziksShapeNode.swift */; };
 		2FFED51D29D9A93800BA072F /* MockFiziksContactDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FFED51B29D9A93800BA072F /* MockFiziksContactDelegate.swift */; };
 		2FFED52C29D9AEE600BA072F /* GameFiziksEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146E2E0729C0E2FE00BFC757 /* GameFiziksEngine.swift */; };
@@ -145,12 +147,10 @@
 		61A10F3B29D30E9E000EB4B4 /* GluePowerup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A10F3A29D30E9E000EB4B4 /* GluePowerup.swift */; };
 		61A10F3D29D30F93000EB4B4 /* PlatformPowerup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A10F3C29D30F93000EB4B4 /* PlatformPowerup.swift */; };
 		61A10F3F29D30FB0000EB4B4 /* GamePowerupManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A10F3E29D30FB0000EB4B4 /* GamePowerupManager.swift */; };
-		61A10F4129D31083000EB4B4 /* GluePowerupActivatedEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A10F4029D31083000EB4B4 /* GluePowerupActivatedEvent.swift */; };
-		61A10F4329D310CA000EB4B4 /* PlatformPowerupActivatedEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A10F4229D310CA000EB4B4 /* PlatformPowerupActivatedEvent.swift */; };
 		61AE15B329D16DD500D04E95 /* BlockPlacedEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61AE15B229D16DD500D04E95 /* BlockPlacedEvent.swift */; };
 		61AE15B529D1786700D04E95 /* PowerupLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61AE15B429D1786700D04E95 /* PowerupLineView.swift */; };
 		61CD55E629C35CDB00DB6000 /* FiziksEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61CD55E529C35CDB00DB6000 /* FiziksEngine.swift */; };
-		61CD55E829C35D1E00DB6000 /* PathFiziksBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61CD55E729C35D1E00DB6000 /* PathFiziksBody.swift */; };
+		61CD55E829C35D1E00DB6000 /* GameFiziksBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61CD55E729C35D1E00DB6000 /* GameFiziksBody.swift */; };
 		61CD55EA29C35D2C00DB6000 /* FiziksConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61CD55E929C35D2C00DB6000 /* FiziksConstants.swift */; };
 		61CD55EE29C35D8A00DB6000 /* CategoryMask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61CD55ED29C35D8A00DB6000 /* CategoryMask.swift */; };
 		61CD55F029C35D9600DB6000 /* CollisionMask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61CD55EF29C35D9600DB6000 /* CollisionMask.swift */; };
@@ -306,6 +306,8 @@
 		2FC7FAD129C50C2C00B56850 /* RandomNumberGeneratorWithSeed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandomNumberGeneratorWithSeed.swift; sourceTree = "<group>"; };
 		2FC7FAD329C50C3C00B56850 /* ShapeRandomizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeRandomizer.swift; sourceTree = "<group>"; };
 		2FC7FADD29C510F200B56850 /* CGPoint+arithmeticMean.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGPoint+arithmeticMean.swift"; sourceTree = "<group>"; };
+		2FDC510D29E5F744002BE1E6 /* GluePowerupActivatedEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GluePowerupActivatedEvent.swift; path = TumblingTowersGame/Models/PowerupManager/Powerups/GluePowerupActivatedEvent.swift; sourceTree = SOURCE_ROOT; };
+		2FDC510F29E5F756002BE1E6 /* PlatformPowerupActivatedEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlatformPowerupActivatedEvent.swift; path = TumblingTowersGame/Models/PowerupManager/Powerups/PlatformPowerupActivatedEvent.swift; sourceTree = SOURCE_ROOT; };
 		2FFED51A29D9A93800BA072F /* MockFiziksShapeNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockFiziksShapeNode.swift; sourceTree = "<group>"; };
 		2FFED51B29D9A93800BA072F /* MockFiziksContactDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockFiziksContactDelegate.swift; sourceTree = "<group>"; };
 		2FFED53129D9B65500BA072F /* PathFiziksBodyTestsA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathFiziksBodyTestsA.swift; sourceTree = "<group>"; };
@@ -339,12 +341,10 @@
 		61A10F3A29D30E9E000EB4B4 /* GluePowerup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GluePowerup.swift; sourceTree = "<group>"; };
 		61A10F3C29D30F93000EB4B4 /* PlatformPowerup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformPowerup.swift; sourceTree = "<group>"; };
 		61A10F3E29D30FB0000EB4B4 /* GamePowerupManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePowerupManager.swift; sourceTree = "<group>"; };
-		61A10F4029D31083000EB4B4 /* GluePowerupActivatedEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GluePowerupActivatedEvent.swift; path = TumblingTowersGame/PowerupManager/Powerups/GluePowerupActivatedEvent.swift; sourceTree = SOURCE_ROOT; };
-		61A10F4229D310CA000EB4B4 /* PlatformPowerupActivatedEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PlatformPowerupActivatedEvent.swift; path = TumblingTowersGame/PowerupManager/Powerups/PlatformPowerupActivatedEvent.swift; sourceTree = SOURCE_ROOT; };
 		61AE15B229D16DD500D04E95 /* BlockPlacedEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BlockPlacedEvent.swift; path = TumblingTowersGame/Extensions/BlockPlacedEvent.swift; sourceTree = SOURCE_ROOT; };
 		61AE15B429D1786700D04E95 /* PowerupLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerupLineView.swift; sourceTree = "<group>"; };
 		61CD55E529C35CDB00DB6000 /* FiziksEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiziksEngine.swift; sourceTree = "<group>"; };
-		61CD55E729C35D1E00DB6000 /* PathFiziksBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathFiziksBody.swift; sourceTree = "<group>"; };
+		61CD55E729C35D1E00DB6000 /* GameFiziksBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameFiziksBody.swift; sourceTree = "<group>"; };
 		61CD55E929C35D2C00DB6000 /* FiziksConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiziksConstants.swift; sourceTree = "<group>"; };
 		61CD55ED29C35D8A00DB6000 /* CategoryMask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryMask.swift; sourceTree = "<group>"; };
 		61CD55EF29C35D9600DB6000 /* CollisionMask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollisionMask.swift; sourceTree = "<group>"; };
@@ -451,8 +451,8 @@
 				2FFED5A529D9EDB400BA072F /* TowerHeightIncreasedEvent.swift */,
 				61AE15B229D16DD500D04E95 /* BlockPlacedEvent.swift */,
 				14168DE329D8B6EA00EF5C22 /* BlockInsertedEvent.swift */,
-				61A10F4029D31083000EB4B4 /* GluePowerupActivatedEvent.swift */,
-				61A10F4229D310CA000EB4B4 /* PlatformPowerupActivatedEvent.swift */,
+				2FDC510D29E5F744002BE1E6 /* GluePowerupActivatedEvent.swift */,
+				2FDC510F29E5F756002BE1E6 /* PlatformPowerupActivatedEvent.swift */,
 				1421B0CF29D424A70002E4AA /* BlockDroppedEvent.swift */,
 				616EAD0729D6D6A2006D602A /* PowerupAvailableEvent.swift */,
 				616EAD0929D6F709006D602A /* PowerupButtonTappedEvent.swift */,
@@ -508,12 +508,9 @@
 				61F4F01B29DDFA5B0002AD69 /* Info.plist */,
 				61F4F01729DDF9A20002AD69 /* Fonts */,
 				122BA13529D9594900196052 /* Storage */,
-				61A10F1D29D30BC8000EB4B4 /* PowerupManager */,
 				146E2DB729C0D07300BFC757 /* Assets.xcassets */,
 				2F7E13A429C0F044000E6FA9 /* DataStructures */,
 				124B02E429C9DA8E00094CF5 /* EventManager */,
-				2FFED58229D9ED4500BA072F /* AchievementSystem */,
-				2FFED58D29D9ED4500BA072F /* StatsTrackingSystem */,
 				146E2E1329C0E32500BFC757 /* Extensions */,
 				1421B0CA29D41C1B0002E4AA /* GameMode */,
 				14C53B2729C5EB5F0035EC17 /* GameUpdater */,
@@ -556,6 +553,10 @@
 			children = (
 				124B02CB29C41F6400094CF5 /* GameObject */,
 				2F7E13A829C0F5E5000E6FA9 /* GameEngine */,
+				61FC3A5729DD24F2005A91D7 /* GameWorld */,
+				2FFED58D29D9ED4500BA072F /* StatsTrackingSystem */,
+				2FFED58229D9ED4500BA072F /* AchievementSystem */,
+				61A10F1D29D30BC8000EB4B4 /* PowerupManager */,
 				146E2E0429C0E2D800BFC757 /* FiziksEngine */,
 				14C6732129D368C900D8DF78 /* Constants.swift */,
 			);
@@ -701,13 +702,12 @@
 			isa = PBXGroup;
 			children = (
 				619D44C129C6F39E00EE00CE /* ObjectShape */,
-				146E2E0D29C0E30700BFC757 /* Block.swift */,
 				146E2E0B29C0E30700BFC757 /* GameWorldObject.swift */,
+				2F05841E29E29B7800605AEC /* GameWorldObjectType.swift */,
+				146E2E0D29C0E30700BFC757 /* Block.swift */,
 				146E2E0C29C0E30700BFC757 /* Platform.swift */,
-				61FC3A5429DD19C6005A91D7 /* GameWorldLevel.swift */,
 				2F05841429E1D19E00605AEC /* LevelBoundary.swift */,
 				2F05841C29E29B4E00605AEC /* GameWorldObjectFactory.swift */,
-				2F05841E29E29B7800605AEC /* GameWorldObjectType.swift */,
 			);
 			path = GameWorldObject;
 			sourceTree = "<group>";
@@ -715,12 +715,11 @@
 		2F7E13A829C0F5E5000E6FA9 /* GameEngine */ = {
 			isa = PBXGroup;
 			children = (
-				61FC3A5729DD24F2005A91D7 /* GameWorld */,
 				61CD55EC29C35D7A00DB6000 /* Collision */,
+				61FC3A5129DD1886005A91D7 /* GameEngine.swift */,
+				616EAD0D29D74C5C006D602A /* GameWorldConstants.swift */,
 				2FC7FAD129C50C2C00B56850 /* RandomNumberGeneratorWithSeed.swift */,
 				2FC7FAD329C50C3C00B56850 /* ShapeRandomizer.swift */,
-				616EAD0D29D74C5C006D602A /* GameWorldConstants.swift */,
-				61FC3A5129DD1886005A91D7 /* GameEngine.swift */,
 			);
 			path = GameEngine;
 			sourceTree = "<group>";
@@ -731,6 +730,15 @@
 				2FA2AC0229C74528001C5B7C /* GameEngineTests.swift */,
 			);
 			path = GameEngine;
+			sourceTree = "<group>";
+		};
+		2FDC510C29E5E55E002BE1E6 /* SpecialProperties */ = {
+			isa = PBXGroup;
+			children = (
+				61ECC59429DE95C600086794 /* SpecialPropertiesContactResolver.swift */,
+				61ECC59129DE916500086794 /* SpecialProperties.swift */,
+			);
+			path = SpecialProperties;
 			sourceTree = "<group>";
 		};
 		2FFED53329D9BFA300BA072F /* PathFiziksBody */ = {
@@ -854,7 +862,7 @@
 			isa = PBXGroup;
 			children = (
 				146E2E0529C0E2FE00BFC757 /* FiziksBody.swift */,
-				61CD55E729C35D1E00DB6000 /* PathFiziksBody.swift */,
+				61CD55E729C35D1E00DB6000 /* GameFiziksBody.swift */,
 			);
 			path = FiziksBody;
 			sourceTree = "<group>";
@@ -880,12 +888,12 @@
 		61FC3A5729DD24F2005A91D7 /* GameWorld */ = {
 			isa = PBXGroup;
 			children = (
+				2FDC510C29E5E55E002BE1E6 /* SpecialProperties */,
+				2F7E13A729C0F56F000E6FA9 /* GameWorldObject */,
 				2FA2AC0429C74541001C5B7C /* GameWorld.swift */,
 				2F05841829E1D73C00605AEC /* GameWorld+FiziksContactDelegate.swift */,
-				2F7E13A729C0F56F000E6FA9 /* GameWorldObject */,
+				61FC3A5429DD19C6005A91D7 /* GameWorldLevel.swift */,
 				61FC3A5829DD2504005A91D7 /* PowerupLine.swift */,
-				61ECC59129DE916500086794 /* SpecialProperties.swift */,
-				61ECC59429DE95C600086794 /* SpecialPropertiesContactResolver.swift */,
 			);
 			path = GameWorld;
 			sourceTree = "<group>";
@@ -1027,12 +1035,11 @@
 				14C6732429D36AB100D8DF78 /* GameModeSelectView.swift in Sources */,
 				1421B0CC29D41C530002E4AA /* GameMode.swift in Sources */,
 				146E2DEA29C0D62800BFC757 /* InputSystem.swift in Sources */,
-				61CD55E829C35D1E00DB6000 /* PathFiziksBody.swift in Sources */,
+				61CD55E829C35D1E00DB6000 /* GameFiziksBody.swift in Sources */,
 				14C6732929D36F4D00D8DF78 /* SettingsView.swift in Sources */,
 				146E2E1929C0E5B400BFC757 /* GameplayLevelView.swift in Sources */,
 				2FFED52C29D9AEE600BA072F /* GameFiziksEngine.swift in Sources */,
 				146034D629E614ED0006C4F4 /* TallEnoughGameMode.swift in Sources */,
-				61A10F4129D31083000EB4B4 /* GluePowerupActivatedEvent.swift in Sources */,
 				14E8159129E09DD1007F6489 /* GameplayGuiView.swift in Sources */,
 				124B02E629C9DAA200094CF5 /* EventManager.swift in Sources */,
 				61EB622029DF395500011A03 /* PlayersMode.swift in Sources */,
@@ -1083,6 +1090,7 @@
 				2F379D5629E5546500783575 /* AchievementsView.swift in Sources */,
 				14C6732F29D371D700D8DF78 /* BodyText.swift in Sources */,
 				61ECC59229DE916500086794 /* SpecialProperties.swift in Sources */,
+				2FDC510E29E5F744002BE1E6 /* GluePowerupActivatedEvent.swift in Sources */,
 				14168DE629D8C47A00EF5C22 /* SandboxGameMode.swift in Sources */,
 				122BA13729D9595100196052 /* StorageManager.swift in Sources */,
 				61FC031129CC483400CE2CE5 /* CGPath+Rotate.swift in Sources */,
@@ -1118,7 +1126,6 @@
 				2F98477129DEE9D9008803E7 /* StatTrackerType.swift in Sources */,
 				146034D429E607A60006C4F4 /* NormalGoBackButtonView.swift in Sources */,
 				14DAFDF729CE3146003BE140 /* SoundSystem.swift in Sources */,
-				61A10F4329D310CA000EB4B4 /* PlatformPowerupActivatedEvent.swift in Sources */,
 				2FFED59929D9ED4500BA072F /* Achievement.swift in Sources */,
 				61CD55EE29C35D8A00DB6000 /* CategoryMask.swift in Sources */,
 				2FFED59A29D9ED4500BA072F /* BobTheBuilderAchievement.swift in Sources */,
@@ -1146,6 +1153,7 @@
 				2FFED59D29D9ED4500BA072F /* AchievementSystemDataSource.swift in Sources */,
 				2F05841D29E29B4E00605AEC /* GameWorldObjectFactory.swift in Sources */,
 				146E2DE429C0D61A00BFC757 /* GameEngineManager.swift in Sources */,
+				2FDC511029E5F756002BE1E6 /* PlatformPowerupActivatedEvent.swift in Sources */,
 				2F379D5029E553F100783575 /* StorageFacade.swift in Sources */,
 				2F98477529DFEA4A008803E7 /* AchievementFactory.swift in Sources */,
 				14C6732029D366D300D8DF78 /* MainMenuView.swift in Sources */,

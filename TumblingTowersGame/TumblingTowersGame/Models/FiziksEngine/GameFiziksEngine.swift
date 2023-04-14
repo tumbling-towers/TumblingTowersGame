@@ -11,9 +11,6 @@ import SpriteKit
 class GameFiziksEngine: NSObject {
     let fiziksScene: FiziksScene
 
-    // Basically a Set<FiziksBody>, except we can't hash
-    // a protocol, so this is the temp solution. May consider
-    // creating a new data structure for this purpose.
     var idToFiziksBody: [ObjectIdentifier: FiziksBody]
     var skNodeToFiziksBody: [SKNode: FiziksBody]
 
@@ -27,6 +24,7 @@ class GameFiziksEngine: NSObject {
         self.skNodeToFiziksBody = [:]
         super.init()
         setUpFiziksScene()
+        fiziksScene.view?.showsPhysics = true
     }
 
     private func setUpFiziksScene() {
@@ -41,10 +39,6 @@ extension GameFiziksEngine: FiziksEngine {
 
     func insertBounds(_ bounds: CGRect) {
         fiziksScene.physicsBody = SKPhysicsBody(edgeLoopFrom: bounds)
-    }
-
-    func activatePhysics() {
-        fiziksScene.view?.showsPhysics = true
     }
 
     func contains(_ fiziksBody: FiziksBody) -> Bool {
