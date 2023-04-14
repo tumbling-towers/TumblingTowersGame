@@ -23,6 +23,5 @@ class TowerHeightStatTracker: StatTracker {
             return
         }
         self?.stat = max(self?.stat ?? 0.0, towerHeightIncreasedEvent.newHeight)
-        print("new tower height: \(self?.stat)")
     }
 }

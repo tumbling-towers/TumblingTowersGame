@@ -8,7 +8,6 @@
 import Foundation
 import CoreGraphics
 
-// FIXME: off the top of my head, GameWorld can expose add(platform: Platform, at position: CGPoint)
 class PlatformPowerup: Powerup {
     var manager: PowerupManager
     
@@ -61,7 +60,6 @@ class PlatformPowerup: Powerup {
             guard let newPlatform: Platform = GameWorldObjectFactory.create(ofType: .platform,
                                                                                      ofShape: shape,
                                                                                            at: newPosition) else {
-                // TODO: throw error
                 assert(false)
                 return nil
             }
