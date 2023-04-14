@@ -22,15 +22,11 @@ struct GameEndView: View {
 
                     drawGameEndText()
 
-                    if let score = gameEngineMgr.score {
-                        Text("Score: " + String(score))
+                    Text("Score: " + String(gameEngineMgr.score))
                             .font(.system(size: 30))
-                    }
 
-                    if let timeLeft = gameEngineMgr.timeRemaining {
-                        Text("Timer: " + timeLeft.secondsToTimeStr())
+                    Text("Timer: " + gameEngineMgr.timeRemaining.secondsToTimeStr())
                             .font(.system(size: 30))
-                    }
 
                     Spacer()
 
