@@ -26,9 +26,7 @@ class ShapeRandomizer {
 
     func getShape() -> TetrisShape {
         guard let randomShape = bagOfShapes.randomElement(using: &rng) else {
-            // TODO: throw error as this should never happen. Using assert(false) to catch for now
             assert(false)
-            return TetrisShape(type: .L)
         }
         bagOfShapes.remove(randomShape)
         return TetrisShape(type: randomShape)
