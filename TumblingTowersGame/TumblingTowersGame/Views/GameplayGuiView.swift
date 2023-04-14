@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct GameplayGuiView: View {
+    @EnvironmentObject var mainGameMgr: MainGameManager
     @EnvironmentObject var gameEngineMgr: GameEngineManager
     @State var isPaused: Bool = false
 
@@ -51,7 +52,7 @@ struct GameplayGuiView: View {
 
             Button {
                 isPaused = true
-                gameEngineMgr.pause()
+                mainGameMgr.pauseGame()
             } label: {
                 Image(ViewImageManager.pauseButton)
                     .resizable()
@@ -63,13 +64,13 @@ struct GameplayGuiView: View {
             .sheet(isPresented: $isPaused) {
                 PauseView(unpause: {
                     isPaused = false
-                    gameEngineMgr.unpause()
+                    mainGameMgr.unpauseGame()
                 },
                           exit: {
-                    gameEngineMgr.stopGame()
-                    gameEngineMgr.resetGame()
+                    mainGameMgr.stopGames()
+                    mainGameMgr.resetGames()
+                    mainGameMgr.removeAllGameEngineMgrs()
                     currGameScreen = .mainMenu
-
                 })
             }
 
@@ -83,13 +84,13 @@ struct GameplayGuiView: View {
             ZStack {
                 Text("Score: " + String(gameEngineMgr.score))
                     .modifier(GameplayGuiText(fontSize: 20))
-                    .frame(width: 200, height: 50)
-                    .position(x: 75, y: 50)
+                    .frame(width: 200, height: 50, alignment: .leading)
+                    .position(x: 130, y: 50)
 
-                Text("Time: " + String(gameEngineMgr.timeRemaining))
+                Text("Time: " + gameEngineMgr.timeRemaining.secondsToTimeStr())
                     .modifier(GameplayGuiText(fontSize: 20))
-                    .frame(width: 200, height: 50)
-                    .position(x: 75, y: 125)
+                    .frame(width: 200, height: 50, alignment: .leading)
+                    .position(x: 130, y: 125)
             }
         )
     }
@@ -97,7 +98,8 @@ struct GameplayGuiView: View {
 
 struct GameplayGuiView_Previews: PreviewProvider {
     static var previews: some View {
-        LevelView(currGameScreen: .constant(.gameplay))
-            .environmentObject(GameEngineManager(levelDimensions: .infinite, eventManager: TumblingTowersEventManager(), storageManager: StorageManager()))
+        GameplayGuiView(currGameScreen: .constant(.singleplayerGameplay))
+            .environmentObject(GameEngineManager(levelDimensions: .infinite, eventManager: TumblingTowersEventManager(), inputType: TapInput.self, storageManager: StorageManager()))
+            .environmentObject(MainGameManager())
     }
 }

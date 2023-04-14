@@ -11,7 +11,6 @@ struct BackgroundView: View {
     var body: some View {
         Image(ViewImageManager.backgroundImage)
             .resizable()
-//            .scaledToFill()
     }
 }
 

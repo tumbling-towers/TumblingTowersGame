@@ -45,6 +45,13 @@ struct StorageFacade {
         let achievementStorages = try JSONDecoder().decode([AchievementStorage].self, from: file.availableData)
         return achievementStorages
     }
+
+    func deleteAchievements(fileName: String) throws {
+        let fileURL = try getFileURL(from: fileName)
+
+        let fileManager = FileManager.default
+        try fileManager.removeItem(at: fileURL)
+    }
     
     func save(statStorages: [StatStorage], fileName: String) throws {
         let data = try JSONEncoder().encode(statStorages)

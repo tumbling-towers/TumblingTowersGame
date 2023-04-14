@@ -9,8 +9,10 @@ import Foundation
 
 class BlockPlacedEvent: TumblingTowersEvent {
     let totalBlocksInLevel: Int
+    let playerId: UUID
 
-    init(totalBlocksInLevel: Int) {
+    init(totalBlocksInLevel: Int, playerId: UUID) {
         self.totalBlocksInLevel = totalBlocksInLevel
+        self.playerId = playerId
     }
 }

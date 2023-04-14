@@ -8,4 +8,11 @@
 import Foundation
 
 class GameEndedEvent: TumblingTowersEvent {
+    let playerId: UUID
+    let endState: Constants.GameState
+
+    init(playerId: UUID, endState: Constants.GameState) {
+        self.playerId = playerId
+        self.endState = endState
+    }
 }

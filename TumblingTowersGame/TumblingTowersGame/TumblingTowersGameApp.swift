@@ -15,10 +15,12 @@ struct TumblingTowersGameApp: App {
     var body: some Scene {
         WindowGroup {
             GeometryReader { geo in
-                ContentView(gameEngineMgr: mainGameMgr
-                    .createGameEngineManager(
-                        deviceHeight: geo.size.height,
-                        deviceWidth: geo.size.width))
+//                ContentView(gameEngineMgr: mainGameMgr
+//                    .createGameEngineManager(
+//                        deviceHeight: geo.size.height,
+//                        deviceWidth: geo.size.width))
+                ContentView(deviceHeight: geo.size.height,
+                        deviceWidth: geo.size.width)
                 .environmentObject(mainGameMgr)
                 .environmentObject(settingsMgr)
                 .statusBarHidden(true)
@@ -26,6 +28,8 @@ struct TumblingTowersGameApp: App {
                     SoundSystem.shared.startBackgroundMusic()
                     settingsMgr.setStorageManager(storageManager: mainGameMgr.storageManager)
                     settingsMgr.loadSettings()
+                    mainGameMgr.deviceWidth = geo.size.width
+                    mainGameMgr.deviceHeight = geo.size.height
                 }
             }
         }

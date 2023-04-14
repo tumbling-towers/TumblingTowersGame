@@ -17,6 +17,8 @@ class GameEngineManager: ObservableObject {
     @Published var powerups: [Powerup.Type?] = [Powerup.Type?](repeating: nil, count: 5)
     @Published var achievements: [DisplayableAchievement] = []
 
+    var playerId = UUID()
+
     var eventManager: EventManager?
     var storageManager: StorageManager
 
@@ -87,29 +89,30 @@ class GameEngineManager: ObservableObject {
         }
     }
 
-    init(levelDimensions: CGRect, eventManager: EventManager, storageManager: StorageManager) {
+    init(levelDimensions: CGRect, eventManager: EventManager, inputType: InputSystem.Type, storageManager: StorageManager) {
         self.levelDimensions = levelDimensions
         self.eventManager = eventManager
         self.storageManager = storageManager
-        self.gameEngine = GameEngine(levelDimensions: levelDimensions, eventManager: eventManager, storageManager: storageManager)
+        self.gameEngine = GameEngine(levelDimensions: levelDimensions, eventManager: eventManager, playerId: playerId, storageManager: storageManager)
 
-        inputSystem = TapInput()
+        inputSystem = inputType.init()
 
         registerEvents()
         updateAchievements()
     }
 
+    // TODO: REMOVE THIS
+//    func changeInput(to inputType: Constants.GameInputTypes) {
+//        let inputClass = Constants.getGameInputType(fromGameInputType: inputType)
+//        if let inputClass = inputClass {
+//            inputSystem = inputClass.init()
+//        }
+//    }
+    
     func dragEvent(offset: CGSize) {
         inputSystem.dragEvent(offset: offset)
     }
-
-    func changeInput(to inputType: Constants.GameInputTypes) {
-        let inputClass = Constants.getGameInputType(fromGameInputType: inputType)
-        if let inputClass = inputClass {
-            inputSystem = inputClass.init()
-        }
-    }
-
+    
     func resetInput() {
         inputSystem.resetInput()
     }
@@ -130,7 +133,7 @@ class GameEngineManager: ObservableObject {
         // set up game mode
         let gameModeClass = Constants.getGameModeType(from: gameMode)
         if let eventManager = eventManager, let gameModeClass = gameModeClass {
-            self.gameEngine.gameMode = gameModeClass.init(eventMgr: eventManager)
+            self.gameEngine.gameMode = gameModeClass.init(eventMgr: eventManager, playerId: playerId, levelHeight: levelDimensions.height)
         }
 
         // set up game in game engine
@@ -138,13 +141,15 @@ class GameEngineManager: ObservableObject {
     }
 
     func stopGame() {
-        eventManager?.postEvent(GameEndedEvent())
+        eventManager?.postEvent(GameEndedEvent(playerId: playerId, endState: .NONE))
     }
 
     func stopGame(event: Event) {
-        gameUpdater?.stopLevel()
-        gameEngine.stopGame()
-        gameMode?.endGame()
+        if let gameEndEvent = event as? GameEndedEvent {
+            gameUpdater?.stopLevel()
+            gameEngine.stopGame()
+            gameMode?.endGame(endedBy: gameEndEvent.playerId, endState: gameEndEvent.endState)
+        }
     }
 
     func resetGame() {
@@ -178,7 +183,7 @@ class GameEngineManager: ObservableObject {
     }
 
     func usePowerup(at idx: Int) {
-        eventManager?.postEvent(PowerupButtonTappedEvent(idx: idx))
+        eventManager?.postEvent(PowerupButtonTappedEvent(idx: idx, for: gameEngine.gameWorld))
         self.powerups[idx] = nil
     }
     
@@ -236,10 +241,12 @@ class GameEngineManager: ObservableObject {
     }
 
     private func registerEvents() {
-        eventManager?.registerClosure(for: PowerupAvailableEvent.self, closure: { event in
+        eventManager?.registerClosure(for: PowerupAvailableEvent.self, closure: { [self] event in
             switch event {
             case let powerupAvailableEvent as PowerupAvailableEvent:
-                self.powerups[powerupAvailableEvent.idx] = powerupAvailableEvent.type
+                if powerupAvailableEvent.gameWorld === gameEngine.gameWorld {
+                    self.powerups[powerupAvailableEvent.idx] = powerupAvailableEvent.type
+                }
             default:
                 return
             }

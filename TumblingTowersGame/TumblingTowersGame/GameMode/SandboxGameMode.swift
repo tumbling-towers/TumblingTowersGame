@@ -13,21 +13,34 @@ class SandboxGameMode: GameMode {
     static var description = "A chill, infinite game mode for you to do anything you want. Get creative!"
 
     var realTimeTimer = GameTimer()
+    var eventMgr: EventManager
+
+    // MARK: Constants for this game mode
+    let scoreBlocksPlacedMultiplier = 10
+    let scoreBlocksDroppedMultiplier = 25
+    
+    // MARK: Tracking State of Game
+    var currBlocksPlaced = 0
+    var currBlocksDropped = 0
+    let playerId: UUID
 
     var isStarted = false
     var isGameEnded = false
 
-    var eventMgr: EventManager
-
-    required init(eventMgr: EventManager) {
+    required init(eventMgr: EventManager, playerId: UUID, levelHeight: CGFloat) {
         self.eventMgr = eventMgr
+        self.playerId = playerId
+
+        // Register all events that affect game state
+        eventMgr.registerClosure(for: BlockPlacedEvent.self, closure: blockPlaced)
+        eventMgr.registerClosure(for: BlockDroppedEvent.self, closure: blockDropped)
     }
 
     func update() {
         let gameState = getGameState()
 
         if gameState != .RUNNING && gameState != .PAUSED {
-            eventMgr.postEvent(GameEndedEvent())
+            eventMgr.postEvent(GameEndedEvent(playerId: playerId, endState: getGameState()))
         }
     }
 
@@ -40,7 +53,8 @@ class SandboxGameMode: GameMode {
     }
 
     func getScore() -> Int {
-        0
+        max(currBlocksPlaced * scoreBlocksPlacedMultiplier
+        - currBlocksDropped * scoreBlocksDroppedMultiplier, 0)
     }
 
     func hasGameEnded() -> Bool {
@@ -70,7 +84,7 @@ class SandboxGameMode: GameMode {
         realTimeTimer.resume()
     }
 
-    func endGame() {
+    func endGame(endedBy: UUID, endState: Constants.GameState) {
         isGameEnded = true
         realTimeTimer.stop()
     }
@@ -82,4 +96,17 @@ class SandboxGameMode: GameMode {
     func getGameEndSubMessage() -> String {
         "Please Try Again!"
     }
+
+    private func blockPlaced(event: Event) {
+        if let placedEvent = event as? BlockPlacedEvent, placedEvent.playerId == playerId {
+            currBlocksPlaced = placedEvent.totalBlocksInLevel
+        }
+    }
+
+    private func blockDropped(event: Event) {
+        if let droppedEvent = event as? BlockDroppedEvent, droppedEvent.playerId == playerId {
+            currBlocksDropped += 1
+        }
+    }
+
 }

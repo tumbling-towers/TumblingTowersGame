@@ -8,12 +8,13 @@
 import SwiftUI
 
 struct LevelView: View {
+    @EnvironmentObject var mainGameMgr: MainGameManager
     @EnvironmentObject var gameEngineMgr: GameEngineManager
     @Binding var currGameScreen: Constants.CurrGameScreens
 
     var body: some View {
         ZStack {
-            BackgroundView()
+            LevelBackgroundView()
 
             ForEach($gameEngineMgr.levelBlocks) { block in
                 BlockView(block: block)
@@ -30,7 +31,9 @@ struct LevelView: View {
                     .path(in: box)
                     .fill(.blue.opacity(0.1), strokeBorder: .blue)
             }
+
             
+
             GameplayGuiView(currGameScreen: $currGameScreen)
         }
     }
@@ -38,7 +41,7 @@ struct LevelView: View {
 
 struct LevelView_Previews: PreviewProvider {
     static var previews: some View {
-        LevelView(currGameScreen: .constant(.gameplay))
-            .environmentObject(GameEngineManager(levelDimensions: .infinite, eventManager: TumblingTowersEventManager(), storageManager: StorageManager()))
+        LevelView(currGameScreen: .constant(.singleplayerGameplay))
+            .environmentObject(GameEngineManager(levelDimensions: .infinite, eventManager: TumblingTowersEventManager(), inputType: TapInput.self, storageManager: StorageManager()))
     }
 }

@@ -15,6 +15,7 @@ struct AchievementsView: View {
     var body: some View {
         ZStack {
             BackgroundView()
+            
             VStack {
                 Text("Achievements")
                     .modifier(CategoryText())
@@ -42,14 +43,8 @@ struct AchievementsView: View {
                     }.frame(width: 2/3 * gameEngineMgr.levelDimensions.width)
                 }
                 
-                
-                Button {
-                    currGameScreen = .mainMenu
-                } label: {
-                    Text("Back")
-                        .modifier(CustomButton(fontSize: 25))
-                }
-                .padding(.top, 35.0)
+                NormalGoBackButtonView(currGameScreen: $currGameScreen)
+
             }
         }
         .ignoresSafeArea(.all)
@@ -62,6 +57,6 @@ struct AchievementsView: View {
 struct AchievementsView_Previews: PreviewProvider {
     static var previews: some View {
         AchievementsView(currGameScreen: .constant(.achievements))
-            .environmentObject(GameEngineManager(levelDimensions: .infinite, eventManager: TumblingTowersEventManager(), storageManager: StorageManager()))
+            .environmentObject(GameEngineManager(levelDimensions: .infinite, eventManager: TumblingTowersEventManager(), inputType: TapInput.self, storageManager: StorageManager()))
     }
 }

@@ -36,6 +36,10 @@ class StorageManager {
         let achievementStorages = try storageFacade.loadAchievements(fileName: StorageManager.achievementsFileName)
         return achievementStorages
     }
+
+    func resetAchievements() {
+        try? storageFacade.deleteAchievements(fileName: StorageManager.achievementsFileName)
+    }
     
     func saveStats(_ statTrackers: [StatTracker]) throws {
         var statsStorage: [StatStorage] = []
