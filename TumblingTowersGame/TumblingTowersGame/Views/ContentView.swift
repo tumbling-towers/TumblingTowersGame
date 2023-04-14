@@ -49,13 +49,6 @@ struct ContentView: View {
             } else if currGameScreen == .achievements {
                 AchievementsView(currGameScreen: $currGameScreen)
                     .environmentObject(gameEngineMgr)
-                /*
-                ZStack {
-                    BackgroundView()
-                    GameplayGoBackMenuView(currGameScreen: $currGameScreen)
-                        .environmentObject(gameEngineMgr)
-                }
-                 */
             } else if currGameScreen == .tutorial {
                 TutorialView(currGameScreen: $currGameScreen)
                     .environmentObject(gameEngineMgr)
