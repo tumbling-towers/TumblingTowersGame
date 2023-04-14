@@ -132,7 +132,6 @@
 		615C564129E3F13500E3256E /* LevelBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615C564029E3F13500E3256E /* LevelBackgroundView.swift */; };
 		616EAD0829D6D6A2006D602A /* PowerupAvailableEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 616EAD0729D6D6A2006D602A /* PowerupAvailableEvent.swift */; };
 		616EAD0A29D6F709006D602A /* PowerupButtonTappedEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 616EAD0929D6F709006D602A /* PowerupButtonTappedEvent.swift */; };
-		616EAD0C29D70259006D602A /* PowerupType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 616EAD0B29D70259006D602A /* PowerupType.swift */; };
 		616EAD0E29D74C5C006D602A /* GameWorldConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 616EAD0D29D74C5C006D602A /* GameWorldConstants.swift */; };
 		619D44A029C62FFC00EE00CE /* FiziksContactTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619D449F29C62FFC00EE00CE /* FiziksContactTests.swift */; };
 		619D44B029C6312100EE00CE /* MockFiziksBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619D44AF29C6312100EE00CE /* MockFiziksBody.swift */; };
@@ -143,7 +142,6 @@
 		61A10F1F29D30BED000EB4B4 /* PowerupManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A10F1E29D30BED000EB4B4 /* PowerupManager.swift */; };
 		61A10F2129D30C02000EB4B4 /* Powerup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A10F2029D30C02000EB4B4 /* Powerup.swift */; };
 		61A10F2F29D30D03000EB4B4 /* BiMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F7E13A529C0F054000E6FA9 /* BiMap.swift */; };
-		61A10F3829D30DCA000EB4B4 /* PowerupDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A10F3729D30DCA000EB4B4 /* PowerupDelegate.swift */; };
 		61A10F3B29D30E9E000EB4B4 /* GluePowerup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A10F3A29D30E9E000EB4B4 /* GluePowerup.swift */; };
 		61A10F3D29D30F93000EB4B4 /* PlatformPowerup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A10F3C29D30F93000EB4B4 /* PlatformPowerup.swift */; };
 		61A10F3F29D30FB0000EB4B4 /* GamePowerupManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A10F3E29D30FB0000EB4B4 /* GamePowerupManager.swift */; };
@@ -173,6 +171,7 @@
 		61ECC59629DE95C600086794 /* SpecialPropertiesContactResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61ECC59429DE95C600086794 /* SpecialPropertiesContactResolver.swift */; };
 		61ECC59829DEBA6100086794 /* PowerupButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61ECC59729DEBA6100086794 /* PowerupButton.swift */; };
 		61ECC59929DEBA6100086794 /* PowerupButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61ECC59729DEBA6100086794 /* PowerupButton.swift */; };
+		61F16E1129E946280028A1E4 /* PowerupType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F16E1029E946280028A1E4 /* PowerupType.swift */; };
 		61F4F01929DDF9C30002AD69 /* JosefinSans-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 61F4F01829DDF9C30002AD69 /* JosefinSans-Medium.ttf */; };
 		61F4F01A29DDF9C30002AD69 /* JosefinSans-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 61F4F01829DDF9C30002AD69 /* JosefinSans-Medium.ttf */; };
 		61F4F01D29DDFC090002AD69 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F4F01C29DDFC090002AD69 /* CustomButton.swift */; };
@@ -327,7 +326,6 @@
 		615C564029E3F13500E3256E /* LevelBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelBackgroundView.swift; sourceTree = "<group>"; };
 		616EAD0729D6D6A2006D602A /* PowerupAvailableEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PowerupAvailableEvent.swift; path = TumblingTowersGame/Extensions/PowerupAvailableEvent.swift; sourceTree = SOURCE_ROOT; };
 		616EAD0929D6F709006D602A /* PowerupButtonTappedEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PowerupButtonTappedEvent.swift; path = TumblingTowersGame/Extensions/PowerupButtonTappedEvent.swift; sourceTree = SOURCE_ROOT; };
-		616EAD0B29D70259006D602A /* PowerupType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerupType.swift; sourceTree = "<group>"; };
 		616EAD0D29D74C5C006D602A /* GameWorldConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameWorldConstants.swift; sourceTree = "<group>"; };
 		619D449F29C62FFC00EE00CE /* FiziksContactTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiziksContactTests.swift; sourceTree = "<group>"; };
 		619D44AF29C6312100EE00CE /* MockFiziksBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockFiziksBody.swift; sourceTree = "<group>"; };
@@ -337,7 +335,6 @@
 		619D44C229C6F3AE00EE00CE /* PathObjectShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathObjectShape.swift; sourceTree = "<group>"; };
 		61A10F1E29D30BED000EB4B4 /* PowerupManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerupManager.swift; sourceTree = "<group>"; };
 		61A10F2029D30C02000EB4B4 /* Powerup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Powerup.swift; sourceTree = "<group>"; };
-		61A10F3729D30DCA000EB4B4 /* PowerupDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerupDelegate.swift; sourceTree = "<group>"; };
 		61A10F3A29D30E9E000EB4B4 /* GluePowerup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GluePowerup.swift; sourceTree = "<group>"; };
 		61A10F3C29D30F93000EB4B4 /* PlatformPowerup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformPowerup.swift; sourceTree = "<group>"; };
 		61A10F3E29D30FB0000EB4B4 /* GamePowerupManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePowerupManager.swift; sourceTree = "<group>"; };
@@ -354,6 +351,7 @@
 		61ECC59129DE916500086794 /* SpecialProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialProperties.swift; sourceTree = "<group>"; };
 		61ECC59429DE95C600086794 /* SpecialPropertiesContactResolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialPropertiesContactResolver.swift; sourceTree = "<group>"; };
 		61ECC59729DEBA6100086794 /* PowerupButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerupButton.swift; sourceTree = "<group>"; };
+		61F16E1029E946280028A1E4 /* PowerupType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerupType.swift; sourceTree = "<group>"; };
 		61F4F01829DDF9C30002AD69 /* JosefinSans-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "JosefinSans-Medium.ttf"; sourceTree = "<group>"; };
 		61F4F01B29DDFA5B0002AD69 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		61F4F01C29DDFC090002AD69 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
@@ -835,8 +833,7 @@
 				61A10F3929D30E92000EB4B4 /* Powerups */,
 				61A10F1E29D30BED000EB4B4 /* PowerupManager.swift */,
 				61A10F2029D30C02000EB4B4 /* Powerup.swift */,
-				61A10F3729D30DCA000EB4B4 /* PowerupDelegate.swift */,
-				616EAD0B29D70259006D602A /* PowerupType.swift */,
+				61F16E1029E946280028A1E4 /* PowerupType.swift */,
 			);
 			path = PowerupManager;
 			sourceTree = "<group>";
@@ -1107,6 +1104,7 @@
 				124B02C929C4171400094CF5 /* ViewImageManager.swift in Sources */,
 				2F469D5829D2AB2700C4152E /* FiziksScene.swift in Sources */,
 				1430401429E32CBB005B7D70 /* TutorialView.swift in Sources */,
+				61F16E1129E946280028A1E4 /* PowerupType.swift in Sources */,
 				14E8159329E0B198007F6489 /* GameplayGuiText.swift in Sources */,
 				124B02C129C415CC00094CF5 /* BlockView.swift in Sources */,
 				1421B0D029D424A70002E4AA /* BlockDroppedEvent.swift in Sources */,
@@ -1114,7 +1112,6 @@
 				2F469D5629D2AB1500C4152E /* FiziksContactDelegate.swift in Sources */,
 				146E2E0F29C0E30700BFC757 /* Platform.swift in Sources */,
 				61FC3A5029DD1815005A91D7 /* BlockTouchedPowerupLineEvent.swift in Sources */,
-				616EAD0C29D70259006D602A /* PowerupType.swift in Sources */,
 				61A10F3F29D30FB0000EB4B4 /* GamePowerupManager.swift in Sources */,
 				2FFED5A329D9ED4500BA072F /* StatTracker.swift in Sources */,
 				61A10F3D29D30F93000EB4B4 /* PlatformPowerup.swift in Sources */,
@@ -1141,7 +1138,6 @@
 				2F379D5829E55E0D00783575 /* Double+truncate.swift in Sources */,
 				124B02CD29C41F7100094CF5 /* GameObject.swift in Sources */,
 				146E2DE629C0D61A00BFC757 /* MainGameManager.swift in Sources */,
-				61A10F3829D30DCA000EB4B4 /* PowerupDelegate.swift in Sources */,
 				2F379D5429E5542E00783575 /* DisplayableAchievement.swift in Sources */,
 				14168DE429D8B6EA00EF5C22 /* BlockInsertedEvent.swift in Sources */,
 				124B02F529C9F10300094CF5 /* TumblingTowersNotification.swift in Sources */,
@@ -1341,7 +1337,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TumblingTowersGame/Preview Content\"";
-				DEVELOPMENT_TEAM = 9K4QZ59W8A;
+				DEVELOPMENT_TEAM = T95PZMKKDH;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TumblingTowersGame/Info.plist;
@@ -1355,7 +1351,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.tlc.TumblingTowersGame;
+				PRODUCT_BUNDLE_IDENTIFIER = com.taubarTumblingTowersGame;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -1371,7 +1367,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TumblingTowersGame/Preview Content\"";
-				DEVELOPMENT_TEAM = 9K4QZ59W8A;
+				DEVELOPMENT_TEAM = T95PZMKKDH;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TumblingTowersGame/Info.plist;
@@ -1385,7 +1381,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.tlc.TumblingTowersGame;
+				PRODUCT_BUNDLE_IDENTIFIER = com.taubar.TumblingTowersGame;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

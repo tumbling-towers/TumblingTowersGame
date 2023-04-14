@@ -124,6 +124,10 @@ class GameWorld {
         level.rotate(gameWorldObject: blockToMove, by: rotation)
     }
     
+    func setCMBSpecialProperties(properties: SpecialProperties) {
+        currentlyMovingBlock?.specialProperties = properties
+    }
+    
     @discardableResult
     private func addBlock(ofShape shape: TetrisShape, at position: CGPoint) -> Block {
         guard let newBlock: Block = GameWorldObjectFactory.create(ofType: .block,
