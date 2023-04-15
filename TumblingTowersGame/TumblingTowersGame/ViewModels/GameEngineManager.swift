@@ -80,7 +80,7 @@ class GameEngineManager {
         }
     }
     
-    var rendererDelegate: GameRendererDelegate
+    var rendererDelegate: GameRendererDelegate!
     
     var powerups: [Powerup.Type?] = [Powerup.Type?](repeating: nil, count: 5)
     
@@ -162,8 +162,14 @@ class GameEngineManager {
     func update() {
         updateGameEngine()
         
-        let levelToRender = gameEngine.gameWorld.level
-        rendererDelegate.renderCurrentFrame(levelToRender)
+        if let referenceBoxToUpdate = referenceBox, let gameModeToUpdate = gameMode {
+            rendererDelegate.updateViewVariables(referenceBoxToUpdate: referenceBoxToUpdate, powerupsToUpdate: powerups, achievementsToUpdate: achievements, gameModeToUpdate: gameModeToUpdate, timeRemainingToUpdate: timeRemaining, scoreToUpdate: score, gameEndedToUpdate: gameEnded, gameEndMainMessageToUpdate: gameEndMainMessage, gameEndSubMessageToUpdate: gameEndSubMessage)
+        }
+//        let levelToRender = gameEngine.gameWorld.level
+            
+        if let powerupLine = gameEngine.level.powerupLine {
+            rendererDelegate.renderCurrentFrame(gameObjects: gameEngine.level.gameObjects, powerUpLine: powerupLine)
+        }
         
         updateAchievements()
     }

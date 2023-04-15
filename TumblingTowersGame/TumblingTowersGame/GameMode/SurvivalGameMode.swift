@@ -18,7 +18,7 @@ class SurvivalGameMode: GameMode {
     var realTimeTimer = GameTimer()
 
     // MARK: Constants for this game mode
-    static let blocksToPlace = 30
+    static let blocksToPlace = 2
     static let blocksDroppedThreshold = 3
     let scoreBlocksPlacedMultiplier = 10
     let scoreBlocksDroppedMultiplier = 25

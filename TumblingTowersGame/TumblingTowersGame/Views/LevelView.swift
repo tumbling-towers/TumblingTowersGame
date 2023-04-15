@@ -26,13 +26,10 @@ struct LevelView: View {
 
             PowerupLineView()
 
-            if let box = viewAdapter.referenceBox {
-                Rectangle()
-                    .path(in: box)
-                    .fill(.blue.opacity(0.1), strokeBorder: .blue)
-            }
+            Rectangle()
+                .path(in: viewAdapter.referenceBox)
+                .fill(.blue.opacity(0.1), strokeBorder: .blue)
 
-            
 
             GameplayGuiView(currGameScreen: $currGameScreen)
         }

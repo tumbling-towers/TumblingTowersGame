@@ -11,7 +11,6 @@ import SwiftUI
 struct TumblingTowersGameApp: App {
     @StateObject var mainGameMgr = MainGameManager()
     @StateObject var settingsMgr = SettingsManager()
-    @StateObject var viewAdapter = SettingsManager()
 
     var body: some Scene {
         WindowGroup {

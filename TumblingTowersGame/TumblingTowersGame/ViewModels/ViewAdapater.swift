@@ -10,7 +10,6 @@ import SwiftUI
 import SpriteKit
 
 class ViewAdapter: GameRendererDelegate, ObservableObject {
-    @Published var goalLinePosition = CGPoint()
     @Published var powerUpLinePosition = CGPoint()
     @Published var powerupLineDimensions = CGSize()
     @Published var levelBlocks: [GameObjectBlock] = []
@@ -37,12 +36,26 @@ class ViewAdapter: GameRendererDelegate, ObservableObject {
         gameEngineMgr.dragEvent(offset: offset)
     }
     
-    var referenceBox: CGRect?
+    @Published var referenceBox: CGRect = .infinite
+    
+    func updateViewVariables(referenceBoxToUpdate: CGRect, powerupsToUpdate: [Powerup.Type?], achievementsToUpdate: [DisplayableAchievement], gameModeToUpdate: GameMode, timeRemainingToUpdate: Int, scoreToUpdate: Int, gameEndedToUpdate: Bool, gameEndMainMessageToUpdate: String, gameEndSubMessageToUpdate: String) {
+        referenceBox = referenceBoxToUpdate
+        powerups = powerupsToUpdate
+        achievements = achievementsToUpdate
+        
+        gameMode = gameModeToUpdate
+        timeRemaining = timeRemainingToUpdate
+        score = scoreToUpdate
+        gameEndSubMessage = gameEndSubMessageToUpdate
+        gameEndMainMessage = gameEndMainMessageToUpdate
+    }
     
     func renderCurrentFrame(gameObjects: [any GameWorldObject], powerUpLine: PowerupLine) {
+        
         let levelToRender = convertLevel(gameObjects: gameObjects)
         renderLevel(gameObjectBlocks: levelToRender.blocks, gameObjectPlatforms: levelToRender.platforms, powerupLine: powerUpLine)
         rerender()
+        
     }
 
     /// GameEngine outputs coordinates with the origin at the bottom-left.
@@ -130,13 +143,11 @@ class ViewAdapter: GameRendererDelegate, ObservableObject {
             invertedGameObjPlatforms.append(platform)
         }
 
-        if powerupLine != nil {
-            powerUpLinePosition = adjustCoordinates(for: powerupLine.position)
-                                  .add(by: CGVector(dx: -powerupLineDimensions.width / 2,
-                                                    dy: 0))
-            powerupLineDimensions = CGSize(width: powerupLine.dimensions.width, height: powerupLine.dimensions.height)
-        }
-
+        powerUpLinePosition = adjustCoordinates(for: powerupLine.position)
+                              .add(by: CGVector(dx: -powerupLineDimensions.width / 2,
+                                                dy: 0))
+        powerupLineDimensions = CGSize(width: powerupLine.dimensions.width, height: powerupLine.dimensions.height)
+        
         self.levelBlocks = invertedGameObjBlocks
         self.levelPlatforms = invertedGameObjPlatforms
     }
