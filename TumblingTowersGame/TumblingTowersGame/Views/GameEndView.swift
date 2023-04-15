@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct GameEndView: View {
-    @EnvironmentObject var gameEngineMgr: GameEngineManager
     @Binding var currGameScreen: Constants.CurrGameScreens
+    var gameEngineMgr: GameEngineManager
 
     var body: some View {
         VStack {
@@ -23,10 +23,10 @@ struct GameEndView: View {
                     drawGameEndText()
 
                     Text("Score: " + String(gameEngineMgr.score))
-                            .font(.system(size: 30))
+                        .font(.system(size: 30))
 
                     Text("Timer: " + gameEngineMgr.timeRemaining.secondsToTimeStr())
-                            .font(.system(size: 30))
+                        .font(.system(size: 30))
 
                     Spacer()
 
@@ -55,15 +55,7 @@ struct GameEndView: View {
 }
 
 struct GameEndView_Previews: PreviewProvider {
-    static var gameEngineMgr: GameEngineManager = {
-        let gameEngineManager = GameEngineManager(levelDimensions: .infinite, eventManager: TumblingTowersEventManager(), inputType: TapInput.self, storageManager: StorageManager())
-
-        return gameEngineManager
-
-    }()
-
     static var previews: some View {
-        GameEndView(currGameScreen: .constant(.singleplayerGameplay))
-            .environmentObject(gameEngineMgr)
+        GameEndView(currGameScreen: .constant(.singleplayerGameplay),  gameEngineMgr: GameEngineManager(levelDimensions: .infinite, eventManager: TumblingTowersEventManager(), inputType: TapInput.self, storageManager: StorageManager(), playersMode: .singleplayer))
     }
 }

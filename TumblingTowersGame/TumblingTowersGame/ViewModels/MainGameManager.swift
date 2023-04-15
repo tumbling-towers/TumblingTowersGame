@@ -35,7 +35,7 @@ class MainGameManager: ObservableObject {
         }
 
         let gameEngineMgr = GameEngineManager(levelDimensions: CGRect(x: 0, y: 0,
-                                                                      width: width, height: height), eventManager: eventManager, inputType: inputClass, storageManager: storageManager)
+                                                                      width: width, height: height), eventManager: eventManager, inputType: inputClass, storageManager: storageManager, playersMode: playersMode)
         self.gameEngineMgrs.append(gameEngineMgr)
         self.eventManager = eventManager
 
@@ -48,6 +48,11 @@ class MainGameManager: ObservableObject {
         inputSystem = inputType
     }
 
+    func countGEM() -> Bool {
+        print("GEM COUNT:  \(gameEngineMgrs.count)")
+        return true
+    }
+
     func pauseGame() {
         for gameEngineMgr in gameEngineMgrs {
             gameEngineMgr.pause()
@@ -58,23 +63,6 @@ class MainGameManager: ObservableObject {
         for gameEngineMgr in gameEngineMgrs {
             gameEngineMgr.unpause()
         }
-    }
-
-    // MARK: Remove
-    func hasAnyGameEnded() -> Bool {
-        for gameEngineMgr in gameEngineMgrs {
-            if gameEngineMgr.gameEnded {
-                return true
-            }
-        }
-
-        return false
-    }
-
-    // MARK: Remove
-    func countGEM() -> Bool {
-        print(gameEngineMgrs.count)
-        return true
     }
 
     func refresh(event: Event) {
