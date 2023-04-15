@@ -61,7 +61,7 @@ struct AchievementsView: View {
         let statsSystem = StatsTrackingSystem(eventManager: TumblingTowersEventManager(), storageManager: storage)
         let achievementSystem = AchievementSystem(eventManager: TumblingTowersEventManager(), dataSource: statsSystem, storageManager: storage)
 
-        let achievements = achievementSystem.getUpdatedAchievements()
+        let achievements = achievementSystem.calculateAndGetUpdatedAchievements()
 
         let displayableAchievements = convertToRenderableAchievement(achievements: achievements)
 

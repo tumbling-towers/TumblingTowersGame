@@ -89,6 +89,10 @@ class GameEngineManager: ObservableObject {
         }
     }
 
+    var physicsEngine: FiziksEngine {
+        gameEngine.gameWorld.fiziksEngine
+    }
+
     init(levelDimensions: CGRect, eventManager: EventManager, inputType: InputSystem.Type, storageManager: StorageManager) {
         self.levelDimensions = levelDimensions
         self.eventManager = eventManager
@@ -100,14 +104,6 @@ class GameEngineManager: ObservableObject {
         registerEvents()
         updateAchievements()
     }
-
-    // TODO: REMOVE THIS
-//    func changeInput(to inputType: Constants.GameInputTypes) {
-//        let inputClass = Constants.getGameInputType(fromGameInputType: inputType)
-//        if let inputClass = inputClass {
-//            inputSystem = inputClass.init()
-//        }
-//    }
     
     func dragEvent(offset: CGSize) {
         inputSystem.dragEvent(offset: offset)
@@ -115,10 +111,6 @@ class GameEngineManager: ObservableObject {
     
     func resetInput() {
         inputSystem.resetInput()
-    }
-
-    func getPhysicsEngine() -> FiziksEngine {
-        gameEngine.gameWorld.fiziksEngine
     }
 
     func startGame(gameMode: Constants.GameModeTypes) {
@@ -250,7 +242,7 @@ class GameEngineManager: ObservableObject {
     
     private func updateAchievements() {
         var newAchievements = [DisplayableAchievement]()
-        for achievement in gameEngine.achiementSystem.getUpdatedAchievements() {
+        for achievement in gameEngine.achiementSystem.calculateAndGetUpdatedAchievements() {
             let newAchievement = DisplayableAchievement(id: UUID(),
                                                         name: achievement.name,
                                                         description: achievement.description,

@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum GameWorldObjectType {
+enum GameWorldObjectType: String {
     case block
     case platform
     case levelBoundary

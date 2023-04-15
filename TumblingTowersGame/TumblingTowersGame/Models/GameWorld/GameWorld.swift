@@ -77,7 +77,6 @@ class GameWorld {
 
     func resetGame() {
         level.reset()
-        // TODO: Possibly need to remove all fiziksBodies due to cycle?
         fiziksEngine.deleteAllBodies()
         
         fiziksEngine = GameFiziksEngine(size: dimensions)
@@ -87,7 +86,6 @@ class GameWorld {
     func endGame() {
         level.reset()
         isGameEnded = true
-        // TODO: Possibly need to remove all fiziksBodies due to cycle?
         fiziksEngine.deleteAllBodies()
     }
 
@@ -103,7 +101,7 @@ class GameWorld {
             return
         }
         
-        let shape = shapeRandomizer.getShape()
+        let shape = shapeRandomizer.createRandomShape()
         let insertedBlock = addBlock(ofShape: shape, at: level.blockInsertionPoint)
         currentlyMovingBlock = insertedBlock
 

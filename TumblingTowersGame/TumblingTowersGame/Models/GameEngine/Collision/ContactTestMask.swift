@@ -10,7 +10,6 @@ import Foundation
 struct ContactTestMask {
     static let none: BitMask = 0
 
-    // only interested in contact with powerup line when block has landed
     static let fallingBlock: BitMask = CategoryMask.block | CategoryMask.platform
     static let block: BitMask = ContactTestMask.block | ContactTestMask.powerupLine
 

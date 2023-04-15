@@ -19,9 +19,7 @@ class AchievementSystem {
         setupAchievements()
     }
 
-    // FIXME: Rename function? updateAllAchievements looks like side effect not included in fn name
-    /// This method is used for to get the most updated list of achievements.
-    func getUpdatedAchievements() -> [any Achievement] {
+    func calculateAndGetUpdatedAchievements() -> [any Achievement] {
         updateAllAchievements()
         return achievements
     }

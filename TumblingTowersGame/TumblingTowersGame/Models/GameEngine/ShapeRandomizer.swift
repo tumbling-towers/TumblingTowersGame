@@ -24,7 +24,7 @@ class ShapeRandomizer {
         bagOfShapes = Set(possibleShapes)
     }
 
-    func getShape() -> TetrisShape {
+    func createRandomShape() -> TetrisShape {
         guard let randomShape = bagOfShapes.randomElement(using: &rng) else {
             assert(false)
         }
