@@ -8,14 +8,24 @@
 import Foundation
 
 class GluePowerup: Powerup {
-    var manager: PowerupManager
-    
-    private var gameWorld: GameWorld {
-        manager.gameWorld
+    // This is needed to avoid strong reference cycle to PowerupManager
+    private weak var realManager: PowerupManager?
+
+    var manager: PowerupManager? {
+        get {
+            realManager
+        }
+        set {
+            realManager = newValue
+        }
     }
     
-    private var eventManager: EventManager {
-        manager.eventManager
+    private var gameWorld: GameWorld? {
+        manager?.gameWorld
+    }
+    
+    private var eventManager: EventManager? {
+        manager?.eventManager
     }
 
     static var type: PowerupType = .glue
@@ -30,7 +40,7 @@ class GluePowerup: Powerup {
 
     func activate() {
         let newProperties = SpecialProperties(isGlueBlock: true)
-        gameWorld.setCMBSpecialProperties(properties: newProperties)
-        eventManager.postEvent(GluePowerupActivatedEvent())
+        gameWorld?.setCMBSpecialProperties(properties: newProperties)
+        eventManager?.postEvent(GluePowerupActivatedEvent())
     }
 }

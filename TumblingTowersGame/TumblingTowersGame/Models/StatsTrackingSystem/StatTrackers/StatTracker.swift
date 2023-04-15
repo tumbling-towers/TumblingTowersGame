@@ -8,7 +8,9 @@
 import Foundation
 
 protocol StatTracker {
+
+    init(eventManager: EventManager, stat: Double?)
+
     var stat: Double { get }
     var statTrackerType: StatTrackerType { get }
 }
-

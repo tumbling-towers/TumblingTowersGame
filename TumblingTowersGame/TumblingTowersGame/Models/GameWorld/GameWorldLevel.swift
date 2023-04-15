@@ -34,18 +34,13 @@ class GameWorldLevel {
         return gameObjects.filter({ isOutOfBounds($0) })
     }
     
-    var blocksInContactWithPowerupLine: [Block]? {
+    var blocksInContactWithPowerupLineAndStable: [Block]? {
         guard let powerupLineHeight = powerupLine?.position.y else {
             return nil
         }
-        return blocks.filter({ block in
-            let blockHighestPoint = block.position.y + block.height / 2
-            let blockLowestPoint = block.position.y - block.height / 2
-            // if above powerup line & stable (velocity = 0), then give powerup
-            return blockHighestPoint > powerupLineHeight
-                && blockLowestPoint < powerupLineHeight
-                && block.fiziksBody.velocity == .zero
-        })
+
+        return blocks.filter({ block in isBlockTouchingPowerupLineAndStable(block: block,
+                                                                            powerupLineHeight: powerupLineHeight)})
     }
     
     init(levelDimensions: CGRect) {
@@ -115,5 +110,15 @@ class GameWorldLevel {
         })
 
         return maxY
+    }
+
+    private func isBlockTouchingPowerupLineAndStable(block: Block, powerupLineHeight: CGFloat) -> Bool {
+        let blockHighestPoint = block.position.y + block.height / 2
+        let blockLowestPoint = block.position.y - block.height / 2
+
+        // Stable means velocity = 0
+        return blockHighestPoint > powerupLineHeight
+            && blockLowestPoint < powerupLineHeight
+            && block.fiziksBody.velocity == .zero
     }
 }

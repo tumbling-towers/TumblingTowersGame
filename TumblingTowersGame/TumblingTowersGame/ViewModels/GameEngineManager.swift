@@ -89,6 +89,10 @@ class GameEngineManager: ObservableObject {
         }
     }
 
+    var physicsEngine: FiziksEngine {
+        gameEngine.gameWorld.fiziksEngine
+    }
+
     init(levelDimensions: CGRect, eventManager: EventManager, inputType: InputSystem.Type, storageManager: StorageManager) {
         self.levelDimensions = levelDimensions
         self.eventManager = eventManager
@@ -100,14 +104,6 @@ class GameEngineManager: ObservableObject {
         registerEvents()
         updateAchievements()
     }
-
-    // TODO: REMOVE THIS
-//    func changeInput(to inputType: Constants.GameInputTypes) {
-//        let inputClass = Constants.getGameInputType(fromGameInputType: inputType)
-//        if let inputClass = inputClass {
-//            inputSystem = inputClass.init()
-//        }
-//    }
     
     func dragEvent(offset: CGSize) {
         inputSystem.dragEvent(offset: offset)
@@ -115,14 +111,6 @@ class GameEngineManager: ObservableObject {
     
     func resetInput() {
         inputSystem.resetInput()
-    }
-
-    func getInput() -> InputData {
-        inputSystem.getInput()
-    }
-
-    func getPhysicsEngine() -> FiziksEngine {
-        gameEngine.gameWorld.fiziksEngine
     }
 
     func startGame(gameMode: Constants.GameModeTypes) {
@@ -144,28 +132,20 @@ class GameEngineManager: ObservableObject {
         eventManager?.postEvent(GameEndedEvent(playerId: playerId, endState: .NONE))
     }
 
-    func stopGame(event: Event) {
-        if let gameEndEvent = event as? GameEndedEvent {
-            gameUpdater?.stopLevel()
-            gameEngine.stopGame()
-            gameMode?.endGame(endedBy: gameEndEvent.playerId, endState: gameEndEvent.endState)
-        }
-    }
-
     func resetGame() {
         gameEngine.resetGame()
         gameMode?.resetGame()
     }
 
-    func update() {
-        updateGameEngine()
-        renderCurrentFrame()
-        updateAchievements()
+    private lazy var update = { [weak self] () -> Void in
+        self?.updateGameEngine()
+        self?.renderCurrentFrame()
+        self?.updateAchievements()
     }
 
     func updateGameEngine() {
         gameEngine.update()
-        let currInput = inputSystem.getInput()
+        let currInput = inputSystem.calculateInput()
 
         gameEngine.moveCMBSideways(by: currInput.vector)
         gameEngine.moveCMBDown(by: currInput.vector)
@@ -241,23 +221,28 @@ class GameEngineManager: ObservableObject {
     }
 
     private func registerEvents() {
-        eventManager?.registerClosure(for: PowerupAvailableEvent.self, closure: { [self] event in
-            switch event {
-            case let powerupAvailableEvent as PowerupAvailableEvent:
-                if powerupAvailableEvent.gameWorld === gameEngine.gameWorld {
-                    self.powerups[powerupAvailableEvent.idx] = powerupAvailableEvent.type
-                }
-            default:
-                return
-            }
-        })
+        eventManager?.registerClosure(for: PowerupAvailableEvent.self, closure: powerupAvailableEventFired)
+        eventManager?.registerClosure(for: GameEndedEvent.self, closure: stopGameEventFired)
+    }
 
-        eventManager?.registerClosure(for: GameEndedEvent.self, closure: stopGame)
+    private lazy var powerupAvailableEventFired = { [weak self] (_ event: Event) -> Void in
+        if let powerupAvailableEvent = event as? PowerupAvailableEvent,
+           powerupAvailableEvent.gameWorld === self?.gameEngine.gameWorld {
+                self?.powerups[powerupAvailableEvent.idx] = powerupAvailableEvent.type
+        }
+    }
+
+    private lazy var stopGameEventFired = { [weak self] (_ event: Event) -> Void in
+        if let gameEndEvent = event as? GameEndedEvent {
+            self?.gameUpdater?.stopLevel()
+            self?.gameEngine.stopGame()
+            self?.gameMode?.endGame(endedBy: gameEndEvent.playerId, endState: gameEndEvent.endState)
+        }
     }
     
     private func updateAchievements() {
         var newAchievements = [DisplayableAchievement]()
-        for achievement in gameEngine.achiementSystem.getUpdatedAchievements() {
+        for achievement in gameEngine.achiementSystem.calculateAndGetUpdatedAchievements() {
             let newAchievement = DisplayableAchievement(id: UUID(),
                                                         name: achievement.name,
                                                         description: achievement.description,
@@ -301,6 +286,6 @@ extension GameEngineManager: GameRendererDelegate {
     }
 
     func getCurrInput() -> InputData {
-        inputSystem.getInput()
+        inputSystem.calculateInput()
     }
 }

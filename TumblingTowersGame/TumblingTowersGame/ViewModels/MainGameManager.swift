@@ -90,6 +90,10 @@ class MainGameManager: ObservableObject {
     }
     
     func removeAllGameEngineMgrs() {
+        for gameEngineMgr in gameEngineMgrs {
+            gameEngineMgr.eventManager?.removeAllClosures()
+        }
+
         gameEngineMgrs.removeAll()
     }
 }

@@ -89,6 +89,33 @@ class TallEnoughGameMode: GameMode {
         realTimeTimer.count
     }
 
+    var gameEndMainMessage: String {
+        if gameState == .WIN {
+            return Constants.defaultWinMainString
+        } else if gameState == .LOSE {
+            return Constants.defaultLoseMainString
+        }
+
+        return ""
+    }
+
+    var gameEndSubMessage: String {
+        if gameState == .WIN {
+            if isEndedByOtherPlayer {
+                return "Your opponent dropped too many blocks!"
+            } else {
+                return "You reached enough powerup lines!"
+            }
+        } else if gameState == .LOSE {
+            if isEndedByOtherPlayer {
+                return "Your opponent reached enough powerup lines first!"
+            } else {
+                return "You dropped too many blocks!"
+            }
+        }
+        return ""
+    }
+
     func resetGame() {
         isStarted = false
         isGameEnded = false
@@ -103,7 +130,7 @@ class TallEnoughGameMode: GameMode {
 
     func startGame() {
         isStarted = true
-        realTimeTimer.start(timeInSeconds: 0, countsUp: true)
+        realTimeTimer.start(timeInSeconds: 0, isCountsUp: true)
     }
 
     func pauseGame() {
@@ -132,48 +159,21 @@ class TallEnoughGameMode: GameMode {
         }
     }
 
-    var gameEndMainMessage: String {
-        if gameState == .WIN {
-            return Constants.defaultWinMainString
-        } else if gameState == .LOSE {
-            return Constants.defaultLoseMainString
-        }
-
-        return ""
-    }
-
-    var gameEndSubMessage: String {
-        if gameState == .WIN {
-            if isEndedByOtherPlayer {
-                return "Your opponent dropped too many blocks!"
-            } else {
-                return "You reached enough powerup lines!"
-            }
-        } else if gameState == .LOSE {
-            if isEndedByOtherPlayer {
-                return "Your opponent reached enough powerup lines first!"
-            } else {
-                return "You dropped too many blocks!"
-            }
-        }
-        return ""
-    }
-
-    private func touchedPowerupLine(event: Event) {
-        if let touchedEvent = event as? BlockTouchedPowerupLineEvent, touchedEvent.playerId == playerId {
-            currPowerupLineAmt += 1
+    private lazy var touchedPowerupLine = { [weak self] (_ event: Event) -> Void in
+        if let touchedEvent = event as? BlockTouchedPowerupLineEvent, touchedEvent.playerId == self?.playerId {
+            self?.currPowerupLineAmt += 1
         }
     }
 
-    private func blockPlaced(event: Event) {
-        if let placedEvent = event as? BlockPlacedEvent, placedEvent.playerId == playerId {
-            currBlocksPlaced = placedEvent.totalBlocksInLevel
+    private lazy var blockPlaced = { [weak self] (_ event: Event) -> Void in
+        if let placedEvent = event as? BlockPlacedEvent, placedEvent.playerId == self?.playerId {
+            self?.currBlocksPlaced = placedEvent.totalBlocksInLevel
         }
     }
 
-    private func blockDropped(event: Event) {
-        if let droppedEvent = event as? BlockDroppedEvent, droppedEvent.playerId == playerId {
-            currBlocksDropped += 1
+    private lazy var blockDropped = { [weak self] (_ event: Event) -> Void in
+        if let droppedEvent = event as? BlockDroppedEvent, droppedEvent.playerId == self?.playerId {
+            self?.currBlocksDropped += 1
         }
     }
 

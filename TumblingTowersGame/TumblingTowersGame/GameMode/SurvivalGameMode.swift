@@ -25,7 +25,6 @@ class SurvivalGameMode: GameMode {
     static let scoreTimeWithBonusScore = 90
 
     // MARK: Tracking State of Game
-    var currBlocksInserted = 0
     var currBlocksPlaced = 0
     var currBlocksDropped = 0
     let playerId: UUID
@@ -43,7 +42,6 @@ class SurvivalGameMode: GameMode {
         
         eventMgr.registerClosure(for: BlockPlacedEvent.self, closure: blockPlaced)
         eventMgr.registerClosure(for: BlockDroppedEvent.self, closure: blockDropped)
-        eventMgr.registerClosure(for: BlockInsertedEvent.self, closure: blockInserted)
     }
 
     func update() {
@@ -82,47 +80,6 @@ class SurvivalGameMode: GameMode {
         realTimeTimer.count
     }
 
-    func resetGame() {
-        isStarted = false
-        isGameEnded = false
-        currBlocksInserted = 0
-        currBlocksPlaced = 0
-        currBlocksDropped = 0
-        realTimeTimer = GameTimer()
-
-        isEndedByOtherPlayer = false
-        overwriteGameState = nil
-    }
-
-    func startGame() {
-        isStarted = true
-        realTimeTimer.start(timeInSeconds: 0, countsUp: true)
-    }
-
-    func pauseGame() {
-        realTimeTimer.pause()
-    }
-
-    func resumeGame() {
-        realTimeTimer.resume()
-    }
-
-    func endGame(endedBy: UUID, endState: Constants.GameState) {
-        isGameEnded = true
-        realTimeTimer.stop()
-
-        if endedBy != playerId {
-            isEndedByOtherPlayer = true
-
-            if endState == .WIN {
-                overwriteGameState = .LOSE
-            } else if endState == .LOSE {
-                overwriteGameState = .WIN
-            }
-
-        }
-    }
-
     var gameEndMainMessage: String {
         if gameState == .WIN {
             return Constants.defaultWinMainString
@@ -153,22 +110,56 @@ class SurvivalGameMode: GameMode {
         return ""
     }
 
+    func resetGame() {
+        isStarted = false
+        isGameEnded = false
+        currBlocksPlaced = 0
+        currBlocksDropped = 0
+        realTimeTimer = GameTimer()
 
-    private func blockPlaced(event: Event) {
-        if let placedEvent = event as? BlockPlacedEvent, placedEvent.playerId == playerId {
-            currBlocksPlaced = placedEvent.totalBlocksInLevel
+        isEndedByOtherPlayer = false
+        overwriteGameState = nil
+    }
+
+    func startGame() {
+        isStarted = true
+        realTimeTimer.start(timeInSeconds: 0, isCountsUp: true)
+    }
+
+    func pauseGame() {
+        realTimeTimer.pause()
+    }
+
+    func resumeGame() {
+        realTimeTimer.resume()
+    }
+
+    func endGame(endedBy: UUID, endState: Constants.GameState) {
+        isGameEnded = true
+        realTimeTimer.stop()
+
+        if endedBy != playerId {
+            isEndedByOtherPlayer = true
+
+            if endState == .WIN {
+                overwriteGameState = .LOSE
+            } else if endState == .LOSE {
+                overwriteGameState = .WIN
+            }
+
         }
     }
 
-    private func blockDropped(event: Event) {
-        if let droppedEvent = event as? BlockDroppedEvent, droppedEvent.playerId == playerId {
-            currBlocksDropped += 1
+    private lazy var blockPlaced = { [weak self] (_ event: Event) -> Void in
+        if let placedEvent = event as? BlockPlacedEvent, placedEvent.playerId == self?.playerId {
+            self?.currBlocksPlaced = placedEvent.totalBlocksInLevel
         }
     }
 
-    private func blockInserted(event: Event) {
-        if let insertedEvent = event as? BlockInsertedEvent, insertedEvent.playerId == playerId {
-            currBlocksInserted += 1
+    private lazy var blockDropped = { [weak self] (_ event: Event) -> Void in
+        if let droppedEvent = event as? BlockDroppedEvent, droppedEvent.playerId == self?.playerId {
+            self?.currBlocksDropped += 1
         }
     }
+
 }

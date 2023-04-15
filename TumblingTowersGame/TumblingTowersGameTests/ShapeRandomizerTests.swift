@@ -18,7 +18,7 @@ final class ShapeRandomizerTests: XCTestCase {
         for _ in 1...10 {
             var expectedShapes = Set(TetrisType.allCases)
             for _ in 0..<TetrisType.allCases.count {
-                let randomShape = shapeRandomizer.getShape()
+                let randomShape = shapeRandomizer.createRandomShape()
                 XCTAssertNotNil(expectedShapes.remove(randomShape.type))
             }
             XCTAssertTrue(expectedShapes.isEmpty)
