@@ -41,14 +41,9 @@ struct ContentView: View {
                 SettingsView(settingsMgr: SettingsManager(), currGameScreen: $currGameScreen, selectedInputType: mainGameMgr.inputSystem)
                     .environmentObject(mainGameMgr)
             } else if currGameScreen == .achievements {
-                let gameEngineMgr = GameEngineManager(levelDimensions: CGRect(x: 0, y: 0, width: mainGameMgr.deviceWidth, height: mainGameMgr.deviceHeight), eventManager: TumblingTowersEventManager(), inputType: TapInput.self, storageManager: mainGameMgr.storageManager)
-                  let viewAdapter = ViewAdapter(levelDimensions: CGRect(x: 0, y: 0, width: deviceWidth, height: deviceHeight), gameEngineMgr: gameEngineMgr)
                 
                 AchievementsView(currGameScreen: $currGameScreen)
-                    .environmentObject(viewAdapter)
-                    .onAppear {
-                        gameEngineMgr.setRendererDelegate(viewAdapter)
-                    }
+
             } else if currGameScreen == .playerOptionSelection {
                 ZStack {
                     PlayersSelectView(currGameScreen: $currGameScreen)

@@ -88,11 +88,11 @@ class GameEngineManager {
         gameEngine.gameWorld.fiziksEngine
     }
 
-    init(levelDimensions: CGRect, eventManager: EventManager, inputType: InputSystem.Type, storageManager: StorageManager) {
+    init(levelDimensions: CGRect, eventManager: EventManager, inputType: InputSystem.Type, storageManager: StorageManager, playersMode: PlayersMode?) {
         self.levelDimensions = levelDimensions
         self.eventManager = eventManager
         self.storageManager = storageManager
-        self.gameEngine = GameEngine(levelDimensions: levelDimensions, eventManager: eventManager, playerId: playerId, storageManager: storageManager)
+        self.gameEngine = GameEngine(levelDimensions: levelDimensions, eventManager: eventManager, playerId: playerId, storageManager: storageManager, playersMode: playersMode)
 
         inputSystem = inputType.init()
 
@@ -201,5 +201,4 @@ class GameEngineManager {
             self?.gameMode?.endGame(endedBy: gameEndEvent.playerId, endState: gameEndEvent.endState)
         }
     }
-
 }

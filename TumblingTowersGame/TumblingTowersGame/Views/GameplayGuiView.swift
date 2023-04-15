@@ -115,6 +115,6 @@ struct GameplayGuiView_Previews: PreviewProvider {
     static var previews: some View {
         GameplayGuiView(currGameScreen: .constant(.singleplayerGameplay))
             .environmentObject(MainGameManager())
-            .environmentObject(ViewAdapter(levelDimensions: .infinite, gameEngineMgr: GameEngineManager(levelDimensions: .infinite, eventManager: TumblingTowersEventManager(), inputType: TapInput.self, storageManager: StorageManager())))
+            .environmentObject(ViewAdapter(levelDimensions: .infinite, gameEngineMgr: GameEngineManager(levelDimensions: .infinite, eventManager: TumblingTowersEventManager(), inputType: TapInput.self, storageManager: StorageManager(), playersMode: .singleplayer)))
     }
 }

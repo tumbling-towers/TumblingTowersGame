@@ -39,6 +39,6 @@ struct LevelView: View {
 struct LevelView_Previews: PreviewProvider {
     static var previews: some View {
         LevelView(currGameScreen: .constant(.singleplayerGameplay))
-            .environmentObject(ViewAdapter(levelDimensions: .infinite, gameEngineMgr: GameEngineManager(levelDimensions: .infinite, eventManager: TumblingTowersEventManager(), inputType: TapInput.self, storageManager: StorageManager())))
+            .environmentObject(ViewAdapter(levelDimensions: .infinite, gameEngineMgr: GameEngineManager(levelDimensions: .infinite, eventManager: TumblingTowersEventManager(), inputType: TapInput.self, storageManager: StorageManager(), playersMode: .singleplayer)))
     }
 }
