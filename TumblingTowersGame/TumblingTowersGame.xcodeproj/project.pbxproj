@@ -69,6 +69,7 @@
 		146E2E0F29C0E30700BFC757 /* Platform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146E2E0C29C0E30700BFC757 /* Platform.swift */; };
 		146E2E1029C0E30700BFC757 /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146E2E0D29C0E30700BFC757 /* Block.swift */; };
 		146E2E1929C0E5B400BFC757 /* GameplayLevelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146E2E1829C0E5B400BFC757 /* GameplayLevelView.swift */; };
+		14731DD529EB42F8003CFAF4 /* AchievementViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14731DD429EB42F8003CFAF4 /* AchievementViewModel.swift */; };
 		14C53B2629C5E9D10035EC17 /* GameUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C53B2529C5E9D10035EC17 /* GameUpdater.swift */; };
 		14C6732029D366D300D8DF78 /* MainMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C6731F29D366D300D8DF78 /* MainMenuView.swift */; };
 		14C6732229D368C900D8DF78 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C6732129D368C900D8DF78 /* Constants.swift */; };
@@ -263,6 +264,7 @@
 		146E2E0C29C0E30700BFC757 /* Platform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Platform.swift; sourceTree = "<group>"; };
 		146E2E0D29C0E30700BFC757 /* Block.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
 		146E2E1829C0E5B400BFC757 /* GameplayLevelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameplayLevelView.swift; sourceTree = "<group>"; };
+		14731DD429EB42F8003CFAF4 /* AchievementViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementViewModel.swift; sourceTree = "<group>"; };
 		14C53B2529C5E9D10035EC17 /* GameUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GameUpdater.swift; path = TumblingTowersGame/GameUpdater/GameUpdater.swift; sourceTree = SOURCE_ROOT; };
 		14C6731F29D366D300D8DF78 /* MainMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuView.swift; sourceTree = "<group>"; };
 		14C6732129D368C900D8DF78 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -568,6 +570,7 @@
 				124B02C829C4171400094CF5 /* ViewImageManager.swift */,
 				14C6732A29D370AE00D8DF78 /* SettingsManager.swift */,
 				1202340F29E9A1490021A8E1 /* ViewAdapter.swift */,
+				14731DD429EB42F8003CFAF4 /* AchievementViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -1069,6 +1072,7 @@
 				1421B0CE29D41F740002E4AA /* SurvivalGameMode.swift in Sources */,
 				61ECC59829DEBA6100086794 /* PowerupButton.swift in Sources */,
 				2FC7FADE29C510F200B56850 /* CGPoint+arithmeticMean.swift in Sources */,
+				14731DD529EB42F8003CFAF4 /* AchievementViewModel.swift in Sources */,
 				14168DE229D831F500EF5C22 /* GameTimer.swift in Sources */,
 				61EB621E29DF38E400011A03 /* PlayersSelectView.swift in Sources */,
 				61F4F01D29DDFC090002AD69 /* CustomButton.swift in Sources */,

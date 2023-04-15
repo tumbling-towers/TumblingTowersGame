@@ -15,8 +15,7 @@ class ViewAdapter: GameRendererDelegate, ObservableObject {
     @Published var levelBlocks: [GameObjectBlock] = []
     @Published var levelPlatforms: [GameObjectPlatform] = []
     @Published var powerups: [Powerup.Type?] = [Powerup.Type?](repeating: nil, count: 5)
-    @Published var achievements: [DisplayableAchievement] = []
-    
+
     var levelDimensions: CGRect
     var gameEngineMgr: GameEngineManager
 
@@ -30,6 +29,7 @@ class ViewAdapter: GameRendererDelegate, ObservableObject {
     init(levelDimensions: CGRect, gameEngineMgr: GameEngineManager) {
         self.levelDimensions = levelDimensions
         self.gameEngineMgr = gameEngineMgr
+        gameEngineMgr.setRendererDelegate(self)
     }
     
     func dragEvent(offset: CGSize) {
@@ -38,11 +38,10 @@ class ViewAdapter: GameRendererDelegate, ObservableObject {
     
     @Published var referenceBox: CGRect = .infinite
     
-    func updateViewVariables(referenceBoxToUpdate: CGRect, powerupsToUpdate: [Powerup.Type?], achievementsToUpdate: [DisplayableAchievement], gameModeToUpdate: GameMode, timeRemainingToUpdate: Int, scoreToUpdate: Int, gameEndedToUpdate: Bool, gameEndMainMessageToUpdate: String, gameEndSubMessageToUpdate: String) {
+    func updateViewVariables(referenceBoxToUpdate: CGRect, powerupsToUpdate: [Powerup.Type?], gameModeToUpdate: GameMode, timeRemainingToUpdate: Int, scoreToUpdate: Int, gameEndedToUpdate: Bool, gameEndMainMessageToUpdate: String, gameEndSubMessageToUpdate: String) {
         referenceBox = referenceBoxToUpdate
         powerups = powerupsToUpdate
-        achievements = achievementsToUpdate
-        
+
         gameMode = gameModeToUpdate
         timeRemaining = timeRemainingToUpdate
         score = scoreToUpdate
@@ -100,7 +99,7 @@ class ViewAdapter: GameRendererDelegate, ObservableObject {
     }
     
     func rerender() {
-//        objectWillChange.send()
+        objectWillChange.send()
     }
 
     func getCurrInput() -> InputData {
@@ -150,6 +149,36 @@ class ViewAdapter: GameRendererDelegate, ObservableObject {
         
         self.levelBlocks = invertedGameObjBlocks
         self.levelPlatforms = invertedGameObjPlatforms
+    }
+
+    func usePowerup(at: Int) {
+        gameEngineMgr.usePowerup(at: at)
+    }
+
+
+    func getUpdatedAchievements() -> [DisplayableAchievement] {
+        let storage = gameEngineMgr.storageManager
+        let statsSystem = StatsTrackingSystem(eventManager: TumblingTowersEventManager(), storageManager: storage)
+        let achievementSystem = AchievementSystem(eventManager: TumblingTowersEventManager(), dataSource: statsSystem, storageManager: storage)
+
+        let updatedAchievements = achievementSystem.calculateAndGetUpdatedAchievements()
+
+        let displayableAchievements = convertToRenderableAchievement(achievements: updatedAchievements)
+
+        return displayableAchievements
+    }
+
+    private func convertToRenderableAchievement(achievements: [any Achievement]) -> [DisplayableAchievement] {
+        var displayableAchievements = [DisplayableAchievement]()
+        for achievement in achievements {
+            let displayableAchievement = DisplayableAchievement(id: UUID(),
+                                                        name: achievement.name,
+                                                        description: achievement.description,
+                                                        goal: achievement.goal,
+                                                        achieved: achievement.achieved)
+            displayableAchievements.append(displayableAchievement)
+        }
+        return displayableAchievements
     }
 
 }

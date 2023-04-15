@@ -48,6 +48,11 @@ class MainGameManager: ObservableObject {
         inputSystem = inputType
     }
 
+    func countGEM() -> Bool {
+        print("GEM COUNT:  \(gameEngineMgrs.count)")
+        return true
+    }
+
     func pauseGame() {
         for gameEngineMgr in gameEngineMgrs {
             gameEngineMgr.pause()

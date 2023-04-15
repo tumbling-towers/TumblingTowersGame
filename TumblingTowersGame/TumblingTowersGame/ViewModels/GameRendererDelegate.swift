@@ -11,7 +11,7 @@ protocol GameRendererDelegate: AnyObject {
 
     func rerender()
     
-    func updateViewVariables(referenceBoxToUpdate: CGRect, powerupsToUpdate: [Powerup.Type?], achievementsToUpdate: [DisplayableAchievement], gameModeToUpdate: GameMode, timeRemainingToUpdate: Int, scoreToUpdate: Int, gameEndedToUpdate: Bool, gameEndMainMessageToUpdate: String, gameEndSubMessageToUpdate: String)
+    func updateViewVariables(referenceBoxToUpdate: CGRect, powerupsToUpdate: [Powerup.Type?], gameModeToUpdate: GameMode, timeRemainingToUpdate: Int, scoreToUpdate: Int, gameEndedToUpdate: Bool, gameEndMainMessageToUpdate: String, gameEndSubMessageToUpdate: String)
     
     func renderCurrentFrame(gameObjects: [any GameWorldObject], powerUpLine: PowerupLine) 
 

@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct GameEndView: View {
-    @EnvironmentObject var viewAdapter: ViewAdapter
     @Binding var currGameScreen: Constants.CurrGameScreens
+    var gameEngineMgr: GameEngineManager
 
     var body: some View {
         VStack {
@@ -22,15 +22,11 @@ struct GameEndView: View {
 
                     drawGameEndText()
 
-//                    if let score = viewAdapter.score {
-                        Text("Score: " + String(viewAdapter.score))
-                            .font(.system(size: 30))
-//                    }
+                    Text("Score: " + String(gameEngineMgr.score))
+                        .font(.system(size: 30))
 
-//                    if let timeLeft = viewAdapter.timeRemaining {
-                        Text("Timer: " + viewAdapter.timeRemaining.secondsToTimeStr())
-                            .font(.system(size: 30))
-//                    }
+                    Text("Timer: " + gameEngineMgr.timeRemaining.secondsToTimeStr())
+                        .font(.system(size: 30))
 
                     Spacer()
 
@@ -46,11 +42,11 @@ struct GameEndView: View {
     private func drawGameEndText() -> AnyView {
         AnyView(
             VStack {
-                if viewAdapter.gameEnded {
-                    Text(viewAdapter.gameEndMainMessage)
+                if gameEngineMgr.gameEnded {
+                    Text(gameEngineMgr.gameEndMainMessage)
                         .font(.system(size: 70))
                         .fontWeight(.heavy)
-                    Text(viewAdapter.gameEndSubMessage)
+                    Text(gameEngineMgr.gameEndSubMessage)
                         .font(.system(size: 30))
                 }
             }
@@ -60,7 +56,6 @@ struct GameEndView: View {
 
 struct GameEndView_Previews: PreviewProvider {
     static var previews: some View {
-        GameEndView(currGameScreen: .constant(.singleplayerGameplay))
-            .environmentObject(ViewAdapter(levelDimensions: .infinite, gameEngineMgr: GameEngineManager(levelDimensions: .infinite, eventManager: TumblingTowersEventManager(), inputType: TapInput.self, storageManager: StorageManager())))
+        GameEndView(currGameScreen: .constant(.singleplayerGameplay),  gameEngineMgr: GameEngineManager(levelDimensions: .infinite, eventManager: TumblingTowersEventManager(), inputType: TapInput.self, storageManager: StorageManager()))
     }
 }

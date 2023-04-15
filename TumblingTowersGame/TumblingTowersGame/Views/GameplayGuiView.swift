@@ -31,28 +31,7 @@ struct GameplayGuiView: View {
                                     position: CGPoint(x: viewAdapter.levelDimensions.width - 100,
                                                       y: viewAdapter.levelDimensions.height - 100)))
 
-
-
-//            ForEach(1..<Int($viewAdapter.powerups.count) + 1) { i in
-//                if let powerup0 = $viewAdapter.powerups[i - 1],
-//                   let type = powerup0.wrappedValue?.type,
-//                   let image = ViewImageManager.powerupToImage[type] {
-//                    Button {
-//                        viewAdapter.usePowerup(at: i - 1)
-//                    } label: {
-//                        Image(image)
-//                            .resizable()
-//                            .frame(width: 50, height: 50)
-//                            .padding(20)
-//                    }
-//                    .modifier(PowerupButton(height: 70,
-//                                             width: 70,
-//                                             position: CGPoint(x: 100,
-//                                                               y: Int(viewAdapter.levelDimensions.height) - 100 * (i))))
-//                }
-//
-//            }
-
+            drawPowerupButtons()
 
 
             Button {
@@ -81,6 +60,38 @@ struct GameplayGuiView: View {
 
             drawGameGui()
         }
+    }
+
+    private func getPowerUpImgFor(powerupType: Powerup.Type) -> String? {
+        let type = powerupType.type
+        let image = ViewImageManager.powerupToImage[type]
+
+        return image
+    }
+
+    private func drawPowerupButtons() -> AnyView {
+        AnyView(
+            ZStack {
+                ForEach(1..<viewAdapter.powerups.count + 1) { i in
+                    if let currPowerupType = viewAdapter.powerups[i - 1],
+                       let image = getPowerUpImgFor(powerupType: currPowerupType) {
+                        Button {
+                            viewAdapter.usePowerup(at: i - 1)
+                        } label: {
+                            Image(image)
+                                .resizable()
+                                .frame(width: 50, height: 50)
+                                .padding(20)
+                        }
+                        .modifier(PowerupButton(height: 70,
+                                                 width: 70,
+                                                 position: CGPoint(x: 100,
+                                                                   y: Int(viewAdapter.levelDimensions.height) - 100 * (i))))
+                    }
+
+                }
+            }
+        )
     }
 
     private func drawGameGui() -> AnyView {

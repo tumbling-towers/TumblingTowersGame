@@ -83,8 +83,6 @@ class GameEngineManager {
     var rendererDelegate: GameRendererDelegate!
     
     var powerups: [Powerup.Type?] = [Powerup.Type?](repeating: nil, count: 5)
-    
-    var achievements: [DisplayableAchievement] = []
 
     var physicsEngine: FiziksEngine {
         gameEngine.gameWorld.fiziksEngine
@@ -99,7 +97,6 @@ class GameEngineManager {
         inputSystem = inputType.init()
 
         registerEvents()
-        updateAchievements()
     }
 
     func setRendererDelegate(_ renderer: GameRendererDelegate) {
@@ -141,7 +138,6 @@ class GameEngineManager {
     private lazy var update = { [weak self] () -> Void in
         self?.updateGameEngine()
         self?.renderCurrentFrame()
-        self?.updateAchievements()
     }
 
     func updateGameEngine() {
@@ -155,7 +151,7 @@ class GameEngineManager {
 
     func renderCurrentFrame() {
         if let referenceBoxToUpdate = referenceBox, let gameModeToUpdate = gameMode {
-            rendererDelegate.updateViewVariables(referenceBoxToUpdate: referenceBoxToUpdate, powerupsToUpdate: powerups, achievementsToUpdate: achievements, gameModeToUpdate: gameModeToUpdate, timeRemainingToUpdate: timeRemaining, scoreToUpdate: score, gameEndedToUpdate: gameEnded, gameEndMainMessageToUpdate: gameEndMainMessage, gameEndSubMessageToUpdate: gameEndSubMessage)
+            rendererDelegate.updateViewVariables(referenceBoxToUpdate: referenceBoxToUpdate, powerupsToUpdate: powerups, gameModeToUpdate: gameModeToUpdate, timeRemainingToUpdate: timeRemaining, scoreToUpdate: score, gameEndedToUpdate: gameEnded, gameEndMainMessageToUpdate: gameEndMainMessage, gameEndSubMessageToUpdate: gameEndSubMessage)
         }
 //        let levelToRender = gameEngine.gameWorld.level
 
@@ -205,17 +201,5 @@ class GameEngineManager {
             self?.gameMode?.endGame(endedBy: gameEndEvent.playerId, endState: gameEndEvent.endState)
         }
     }
-    
-    private func updateAchievements() {
-        var newAchievements = [DisplayableAchievement]()
-        for achievement in gameEngine.achiementSystem.calculateAndGetUpdatedAchievements() {
-            let newAchievement = DisplayableAchievement(id: UUID(),
-                                                        name: achievement.name,
-                                                        description: achievement.description,
-                                                        goal: achievement.goal,
-                                                        achieved: achievement.achieved)
-            newAchievements.append(newAchievement)
-        }
-        achievements = newAchievements
-    }
+
 }

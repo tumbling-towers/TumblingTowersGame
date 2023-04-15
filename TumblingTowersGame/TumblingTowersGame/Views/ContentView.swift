@@ -24,33 +24,18 @@ struct ContentView: View {
                 GameModeSelectView(currGameScreen: $currGameScreen)
             } else if currGameScreen == .singleplayerGameplay,
                       let gameMode = mainGameMgr.gameMode {
-                
-                let gameEngineMgr = mainGameMgr.createGameEngineManager(height: deviceHeight, width: deviceWidth)
-                let viewAdapter = ViewAdapter(levelDimensions: CGRect(x: 0, y: 0, width: deviceWidth, height: deviceHeight), gameEngineMgr: gameEngineMgr)
-                
+
                 ZStack {
-                    GameplayLevelView(currGameScreen: $currGameScreen, viewAdapter: viewAdapter, gameMode: gameMode)
-                }
-                .onAppear {
-                    gameEngineMgr.setRendererDelegate(viewAdapter)
+                    GameplayLevelView(currGameScreen: $currGameScreen, viewAdapter: ViewAdapter(levelDimensions: CGRect(x: 0, y: 0, width: deviceWidth, height: deviceHeight), gameEngineMgr: mainGameMgr.createGameEngineManager(height: deviceHeight, width: deviceWidth)), gameMode: gameMode)
                 }
                 .ignoresSafeArea(.all)
             } else if currGameScreen == .multiplayerGameplay,
                       let gameMode = mainGameMgr.gameMode {
-                      
-                  let gameEngineMgr = mainGameMgr.createGameEngineManager(height: deviceHeight / 2, width: deviceWidth)
-                  let viewAdapter = ViewAdapter(levelDimensions: CGRect(x: 0, y: 0, width: deviceWidth, height: deviceHeight / 2), gameEngineMgr: gameEngineMgr)
-                  let gameEngineMgr2 = mainGameMgr.createGameEngineManager(height: deviceHeight / 2, width: deviceWidth)
-                  let viewAdapter2 = ViewAdapter(levelDimensions: CGRect(x: 0, y: 0, width: deviceWidth, height: deviceHeight / 2), gameEngineMgr: gameEngineMgr2)
-                
+
                 VStack {
-                    GameplayLevelView(currGameScreen: $currGameScreen, viewAdapter: viewAdapter, gameMode: gameMode)
+                    GameplayLevelView(currGameScreen: $currGameScreen, viewAdapter: ViewAdapter(levelDimensions: CGRect(x: 0, y: 0, width: deviceWidth, height: deviceHeight / 2), gameEngineMgr: mainGameMgr.createGameEngineManager(height: deviceHeight / 2, width: deviceWidth)), gameMode: gameMode)
                     .rotation3DEffect(.degrees(180), axis: (x: 0, y: 0, z: 1))
-                    GameplayLevelView(currGameScreen: $currGameScreen, viewAdapter: viewAdapter2, gameMode: gameMode)
-                }
-                .onAppear {
-                    gameEngineMgr.setRendererDelegate(viewAdapter)
-                    gameEngineMgr2.setRendererDelegate(viewAdapter2)
+                    GameplayLevelView(currGameScreen: $currGameScreen, viewAdapter: ViewAdapter(levelDimensions: CGRect(x: 0, y: 0, width: deviceWidth, height: deviceHeight / 2), gameEngineMgr: mainGameMgr.createGameEngineManager(height: deviceHeight / 2, width: deviceWidth)), gameMode: gameMode)
                 }
             } else if currGameScreen == .settings {
                 SettingsView(settingsMgr: SettingsManager(), currGameScreen: $currGameScreen, selectedInputType: mainGameMgr.inputSystem)
@@ -80,34 +65,22 @@ struct ContentView: View {
     private func drawGameEndScreens() -> AnyView {
         AnyView(
             ZStack {
-//                if mainGameMgr.playersMode == .singleplayer, mainGameMgr.countGEM() {
-//                    if mainGameMgr.gameEngineMgrs.count >= 1,
-//                       let gameEngineMgr = mainGameMgr.gameEngineMgrs[0],
-//                       gameEngineMgr.gameEnded {
-//
-//                        let viewAdapter = ViewAdapter(levelDimensions: CGRect(x: 0, y: 0, width: deviceWidth, height: deviceHeight), gameEngineMgr: gameEngineMgr)
-//
-//                                GameEndView(currGameScreen: $currGameScreen)
-//                                    .environmentObject(viewAdapter)
-//                    }
-//                } else if mainGameMgr.playersMode == .multiplayer {
-//                    if mainGameMgr.gameEngineMgrs.count == 2,
-//                       let gameEngineMgr = mainGameMgr.gameEngineMgrs[0],
-//                       let gameEngineMgr2 = mainGameMgr.gameEngineMgrs[1],
-//                       gameEngineMgr.gameEnded {
-//
-//                        let viewAdapter = ViewAdapter(levelDimensions: CGRect(x: 0, y: 0, width: deviceWidth, height: deviceHeight), gameEngineMgr: gameEngineMgr)
-//                        let viewAdapter2 = ViewAdapter(levelDimensions: CGRect(x: 0, y: 0, width: deviceWidth, height: deviceHeight), gameEngineMgr: gameEngineMgr2)
-//
-//                        VStack {
-//                            GameEndView(currGameScreen: $currGameScreen)
-//                                .environmentObject(viewAdapter)
-//                                .rotation3DEffect(.degrees(180), axis: (x: 0, y: 0, z: 1))
-//                            GameEndView(currGameScreen: $currGameScreen)
-//                                .environmentObject(viewAdapter2)
-//                        }
-//                    }
-//                }
+                if mainGameMgr.playersMode == .singleplayer, mainGameMgr.countGEM() {
+                    if mainGameMgr.gameEngineMgrs.count >= 1,
+                       mainGameMgr.gameEngineMgrs[0].gameEnded {
+                        GameEndView(currGameScreen: $currGameScreen, gameEngineMgr: mainGameMgr.gameEngineMgrs[0])
+                    }
+                } else if mainGameMgr.playersMode == .multiplayer {
+                    if mainGameMgr.countGEM(),
+                        mainGameMgr.gameEngineMgrs.count == 2,
+                       mainGameMgr.gameEngineMgrs[0].gameEnded {
+                        VStack {
+                            GameEndView(currGameScreen: $currGameScreen,  gameEngineMgr: mainGameMgr.gameEngineMgrs[0])
+                                .rotation3DEffect(.degrees(180), axis: (x: 0, y: 0, z: 1))
+                            GameEndView(currGameScreen: $currGameScreen,  gameEngineMgr: mainGameMgr.gameEngineMgrs[1])
+                        }
+                    }
+                }
             }
         )
     }
