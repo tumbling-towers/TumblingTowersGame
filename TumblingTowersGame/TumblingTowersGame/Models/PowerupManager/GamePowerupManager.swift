@@ -9,7 +9,18 @@ import Foundation
 import CoreGraphics
 
 class GamePowerupManager: PowerupManager {
-    var gameWorld: GameWorld
+
+    // This is needed to avoid strong reference cycle to GameWorld
+    private weak var actualGameWorld: GameWorld?
+
+    var gameWorld: GameWorld? {
+        get {
+            actualGameWorld
+        }
+        set {
+            actualGameWorld = newValue
+        }
+    }
     
     static let defaultNumPowerups = 10
 
@@ -24,8 +35,8 @@ class GamePowerupManager: PowerupManager {
 
     init(eventManager: EventManager, gameWorld: GameWorld, seed: Int) {
         self.eventManager = eventManager
-        self.gameWorld = gameWorld
         self.rng = RandomNumberGeneratorWithSeed(seed: seed)
+        self.gameWorld = gameWorld
         
         registerEvents()
     }
@@ -44,7 +55,9 @@ class GamePowerupManager: PowerupManager {
         if let index = availablePowerups.firstIndex(where: { $0 == nil }) {
             let nextPowerup = type.create(manager: self)
             availablePowerups[index] = nextPowerup
-            eventManager.postEvent(PowerupAvailableEvent(type: type, idx: index, for: gameWorld))
+            if let gameWorld = gameWorld {
+                eventManager.postEvent(PowerupAvailableEvent(type: type, idx: index, for: gameWorld))
+            }
         }
     }
 

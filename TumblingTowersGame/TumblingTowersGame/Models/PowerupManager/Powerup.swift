@@ -8,7 +8,7 @@
 import Foundation
 
 protocol Powerup {
-    var manager: PowerupManager { get set }
+    var manager: PowerupManager? { get set }
     static var type: PowerupType { get }
 
     static func create(manager: PowerupManager) -> Powerup
