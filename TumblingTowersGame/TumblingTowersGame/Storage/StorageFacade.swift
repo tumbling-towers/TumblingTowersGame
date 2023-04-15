@@ -41,16 +41,22 @@ struct StorageFacade {
         guard let file = try? FileHandle(forReadingFrom: fileURL) else {
             return []
         }
+
+        print("File URL \(fileURL)")
         
         let achievementStorages = try JSONDecoder().decode([AchievementStorage].self, from: file.availableData)
         return achievementStorages
     }
 
-    func deleteAchievements(fileName: String) throws {
+    func delete(fileName: String) throws {
         let fileURL = try getFileURL(from: fileName)
-
         let fileManager = FileManager.default
-        try fileManager.removeItem(at: fileURL)
+
+        do {
+            try fileManager.removeItem(at: fileURL)
+        } catch let error as NSError {
+            print("ERROR Deleting \(fileName) at \(fileURL) with error \(error.localizedDescription)")
+        }
     }
     
     func save(statStorages: [StatStorage], fileName: String) throws {

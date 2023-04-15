@@ -30,7 +30,7 @@ struct SettingsView: View {
 
                 Divider().modifier(MenuDividerLine())
 
-                 //drawOtherSettings()
+                drawOtherSettings()
 
 //                HStack {
 //                    Text("Block Movement Speed")

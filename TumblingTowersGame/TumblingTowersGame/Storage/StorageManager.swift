@@ -38,7 +38,8 @@ class StorageManager {
     }
 
     func resetAchievements() {
-        try? storageFacade.deleteAchievements(fileName: StorageManager.achievementsFileName)
+        try? storageFacade.delete(fileName: StorageManager.achievementsFileName)
+        try? storageFacade.delete(fileName: StorageManager.statsFileName)
     }
     
     func saveStats(_ statTrackers: [StatTracker]) throws {

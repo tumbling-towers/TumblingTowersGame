@@ -12,8 +12,6 @@ protocol EventManager {
 
     var observerClosures: [EventIdentifier: [EventClosure]] { get set }
 
-    func reinit()
-
     func postEvent(_ event: Event)
 
     func registerClosure<T: Event>(for event: T.Type, closure: @escaping EventClosure)
