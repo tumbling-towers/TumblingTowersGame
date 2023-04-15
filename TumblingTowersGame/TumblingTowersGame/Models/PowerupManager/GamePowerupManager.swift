@@ -19,8 +19,8 @@ class GamePowerupManager: PowerupManager {
 
     var rng: RandomNumberGeneratorWithSeed
 
-    // FIXME: count here is a magic number
-    var availablePowerups: [Powerup?] = [Powerup?](repeating: nil, count: 5)
+    var availablePowerups: [Powerup?] = [Powerup?](repeating: nil,
+                                                   count: GameWorldConstants.maxPowerupsAtOneTime)
 
     init(eventManager: EventManager, gameWorld: GameWorld, seed: Int) {
         self.eventManager = eventManager
@@ -42,7 +42,7 @@ class GamePowerupManager: PowerupManager {
         let type = GamePowerupManager.powerupTypes[idx]
         
         if let index = availablePowerups.firstIndex(where: { $0 == nil }) {
-            var nextPowerup = type.create(manager: self)
+            let nextPowerup = type.create(manager: self)
             availablePowerups[index] = nextPowerup
             eventManager.postEvent(PowerupAvailableEvent(type: type, idx: index, for: gameWorld))
         }

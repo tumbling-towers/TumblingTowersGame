@@ -54,14 +54,12 @@ class TallEnoughGameMode: GameMode {
     }
 
     func update() {
-        let gameState = getGameState()
-
         if gameState != .RUNNING && gameState != .PAUSED {
-            eventMgr.postEvent(GameEndedEvent(playerId: playerId, endState: getGameState()))
+            eventMgr.postEvent(GameEndedEvent(playerId: playerId, endState: gameState))
         }
     }
 
-    func getGameState() -> Constants.GameState {
+    var gameState: Constants.GameState {
         if let overwriteGameState = overwriteGameState {
             return overwriteGameState
         }
@@ -81,17 +79,13 @@ class TallEnoughGameMode: GameMode {
         }
     }
 
-    func getScore() -> Int {
+    var score: Int {
         max(TallEnoughGameMode.scoreTimeWithBonusScore - realTimeTimer.count
             + currBlocksPlaced * scoreBlocksPlacedMultiplier
             - currBlocksDropped * scoreBlocksDroppedMultiplier, 0)
     }
 
-    func hasGameEnded() -> Bool {
-        isGameEnded
-    }
-
-    func getTime() -> Int {
+    var time: Int {
         realTimeTimer.count
     }
 
@@ -138,24 +132,24 @@ class TallEnoughGameMode: GameMode {
         }
     }
 
-    func getGameEndMainMessage() -> String {
-        if getGameState() == .WIN {
+    var gameEndMainMessage: String {
+        if gameState == .WIN {
             return Constants.defaultWinMainString
-        } else if getGameState() == .LOSE {
+        } else if gameState == .LOSE {
             return Constants.defaultLoseMainString
         }
 
         return ""
     }
 
-    func getGameEndSubMessage() -> String {
-        if getGameState() == .WIN {
+    var gameEndSubMessage: String {
+        if gameState == .WIN {
             if isEndedByOtherPlayer {
                 return "Your opponent dropped too many blocks!"
             } else {
                 return "You reached enough powerup lines!"
             }
-        } else if getGameState() == .LOSE {
+        } else if gameState == .LOSE {
             if isEndedByOtherPlayer {
                 return "Your opponent reached enough powerup lines first!"
             } else {

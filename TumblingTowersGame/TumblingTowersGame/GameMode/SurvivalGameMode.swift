@@ -47,18 +47,12 @@ class SurvivalGameMode: GameMode {
     }
 
     func update() {
-        let gameState = getGameState()
-
         if gameState != .RUNNING && gameState != .PAUSED {
-            eventMgr.postEvent(GameEndedEvent(playerId: playerId, endState: getGameState()))
+            eventMgr.postEvent(GameEndedEvent(playerId: playerId, endState: gameState))
         }
     }
 
-    func getGameState() -> Constants.GameState {
-//        print("Blocks Dropped \(currBlocksDropped)")
-//        print("Blocks Placed \(currBlocksPlaced)")
-//        print("Blocks Inserted \(currBlocksInserted)\n")
-
+    var gameState: Constants.GameState {
         if let overwriteGameState = overwriteGameState {
             return overwriteGameState
         }
@@ -78,17 +72,13 @@ class SurvivalGameMode: GameMode {
         }
     }
 
-    func hasGameEnded() -> Bool {
-        isGameEnded
-    }
-
-    func getScore() -> Int {
+    var score: Int {
         max(SurvivalGameMode.scoreTimeWithBonusScore - realTimeTimer.count
             + currBlocksPlaced * scoreBlocksPlacedMultiplier
             - currBlocksDropped * scoreBlocksDroppedMultiplier, 0)
     }
 
-    func getTime() -> Int {
+    var time: Int {
         realTimeTimer.count
     }
 
@@ -133,25 +123,25 @@ class SurvivalGameMode: GameMode {
         }
     }
 
-    func getGameEndMainMessage() -> String {
-        if getGameState() == .WIN {
+    var gameEndMainMessage: String {
+        if gameState == .WIN {
             return Constants.defaultWinMainString
-        } else if getGameState() == .LOSE {
+        } else if gameState == .LOSE {
             return Constants.defaultLoseMainString
         }
 
         return ""
     }
 
-    func getGameEndSubMessage() -> String {
-        if getGameState() == .WIN {
+    var gameEndSubMessage: String {
+        if gameState == .WIN {
             if isEndedByOtherPlayer {
                 // Opponent dropped too many blocks out of the screen
                 return "You beat your opponent!"
             } else {
                 return "You stacked enough blocks!"
             }
-        } else if getGameState() == .LOSE {
+        } else if gameState == .LOSE {
             if isEndedByOtherPlayer {
                 // Opponent stacked enough blocks faster than you
                 return "You opponent beat you at stacking blocks!"

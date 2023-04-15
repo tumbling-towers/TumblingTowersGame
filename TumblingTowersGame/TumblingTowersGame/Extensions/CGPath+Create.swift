@@ -27,9 +27,7 @@ extension CGPath {
                                  y: path.boundingBox.height / 2 + path.boundingBox.minY)
             var translation = CGAffineTransform(translationX: -center.x, y: -center.y)
             guard let newCGPath = path.copy(using: &translation) else {
-                // TODO: throw error. This assert(false) will throw for now
                 assert(false)
-                return path
             }
             return newCGPath
         }

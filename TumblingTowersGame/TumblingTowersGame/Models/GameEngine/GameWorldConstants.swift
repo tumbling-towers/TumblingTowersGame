@@ -39,4 +39,6 @@ struct GameWorldConstants {
     static let defaultPowerupPlatformHeight: Double = 20
     
     static let levelBoundaryWidth: Double = 5
+    
+    static let maxPowerupsAtOneTime: Int = 5
 }
