@@ -1,0 +1,7 @@
+@startuml
+loop every frame
+GameEngineManager -> GameEngine: update()
+GameEngine -> GameMode: update()
+GameEngine -> GameWorld: update()
+end
+@enduml

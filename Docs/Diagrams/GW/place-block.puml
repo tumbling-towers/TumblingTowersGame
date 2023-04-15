@@ -1,0 +1,8 @@
+@startuml
+GameFiziksEngine --> GameWorld: didBegin(FiziksContact)
+alt contact contains CMB and non-boundary object
+GameWorld --> GameWorld: handlePlaceCMB()
+GameWorld --> GameWorld: insertNewBlock()
+GameWorld --> SpecialPropertiesContactResolver: resolve(fiziksEngine, contact, specialProperties)
+end
+@enduml

@@ -1,0 +1,7 @@
+@startuml
+-> GameEngine: rotateCMBClockwise()
+GameEngine -> GameWorld: rotateCMB(rotation: -pi/2)
+GameWorld -> GameWorldLevel: rotate(currentlyMovingBlock, rotation)
+GameWorldLevel -> GameWorldObject: update zRotation value
+GameWorldObject -> FiziksBody: update zRotation value
+@enduml

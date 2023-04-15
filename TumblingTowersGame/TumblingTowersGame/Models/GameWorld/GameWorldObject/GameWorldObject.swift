@@ -16,12 +16,6 @@ protocol GameWorldObject: AnyObject {
     var rotation: Double { get }
     
     var specialProperties: SpecialProperties { get set }
-
-    static var categoryBitMask: BitMask { get }
-
-    static var collisionBitMask: BitMask { get }
-
-    static var contactTestBitMask: BitMask { get }
 }
 
 extension GameWorldObject {

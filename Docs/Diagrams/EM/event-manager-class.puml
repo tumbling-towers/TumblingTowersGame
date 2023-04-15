@@ -1,0 +1,37 @@
+@startuml
+interface Event {
++ toNotification() -> TumblingTowersNotification
+}
+
+class EventIdentifier
+
+interface EventManager {
++ observerClosures 
++ postEvent()
++ registerClosure(event, closure)
++ removeAllClosures()
+}
+class EventIdentifier
+
+class TumblingTowersEventIdentifier extends EventIdentifier
+class TumblingTowersEvent extends Event
+class TumblingTowersEventManager extends EventManager
+
+
+class NotificationCenterFacade {
+   + shared: NotificationCenterFacade
+   + postNotification(notification: TumblingTowersNotification)
+   + createObserver(observer, selector, notificationName)
+   + removeObserver(observer, notificationName, object)
+}
+
+
+EventManager "1"-->"*" Event
+Event "1"-->"1" EventIdentifier
+TumblingTowersEventManager --> TumblingTowersEvent
+TumblingTowersEvent --> TumblingTowersEventIdentifier
+
+TumblingTowersEventIdentifier --> NotificationName
+TumblingTowersEvent --> TumblingTowersNotification
+TumblingTowersEventManager --> NotificationCenterFacade
+@enduml
