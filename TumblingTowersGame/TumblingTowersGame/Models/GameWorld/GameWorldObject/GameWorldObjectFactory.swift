@@ -10,15 +10,15 @@ import Foundation
 class GameWorldObjectFactory {
     typealias GameWorldObjCreatorClosure = (ObjectShape, CGPoint) -> GameWorldObject?
 
-    static let gameWorldObjTypeToFn: [String: GameWorldObjCreatorClosure] = [GameWorldObjectType.block.rawValue: blockCreator,
+    private static let gameWorldObjTypeToFn: [String: GameWorldObjCreatorClosure] = [GameWorldObjectType.block.rawValue: blockCreator,
                                                                              GameWorldObjectType.platform.rawValue: platformCreator,
                                                                              GameWorldObjectType.levelBoundary.rawValue: levelBoundaryCreator]
 
-    static func getSpecificGameWorldObjCreator(from: GameWorldObjectType) -> GameWorldObjCreatorClosure? {
+    private static func getSpecificGameWorldObjCreator(from: GameWorldObjectType) -> GameWorldObjCreatorClosure? {
         gameWorldObjTypeToFn[from.rawValue]
     }
 
-    static let blockCreator: GameWorldObjCreatorClosure = { (_ shape: ObjectShape,
+    private static let blockCreator: GameWorldObjCreatorClosure = { (_ shape: ObjectShape,
                                                              _ position: CGPoint) -> GameWorldObject? in
         guard let pathObjectShape = shape as? PathObjectShape else {
             return nil
@@ -35,7 +35,7 @@ class GameWorldObjectFactory {
         return newBlock
     }
 
-    static let platformCreator: GameWorldObjCreatorClosure = { (_ shape: ObjectShape,
+    private static let platformCreator: GameWorldObjCreatorClosure = { (_ shape: ObjectShape,
                                                              _ position: CGPoint) -> GameWorldObject? in
         guard let pathObjectShape = shape as? PathObjectShape else {
             return nil
@@ -53,7 +53,7 @@ class GameWorldObjectFactory {
         return newPlatform
     }
 
-    static let levelBoundaryCreator: GameWorldObjCreatorClosure = { (_ shape: ObjectShape,
+    private static let levelBoundaryCreator: GameWorldObjCreatorClosure = { (_ shape: ObjectShape,
                                                              _ position: CGPoint) -> GameWorldObject? in
         guard let pathObjectShape = shape as? PathObjectShape else {
             return nil

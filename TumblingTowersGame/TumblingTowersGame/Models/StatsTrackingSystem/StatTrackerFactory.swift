@@ -8,14 +8,14 @@
 import Foundation
 
 class StatTrackerFactory {
-    static let statTrackerTypeToStatTracker: [String: StatTracker.Type] = [StatTrackerType.numBlocksPlaced.rawValue:
+    private static let statTrackerTypeToStatTracker: [String: StatTracker.Type] = [StatTrackerType.numBlocksPlaced.rawValue:
                                                                             NumBlocksPlacedStatTracker.self,
                                                                            StatTrackerType.numBlocksDropped.rawValue:
                                                                             NumBlocksDroppedStatTracker.self,
                                                                            StatTrackerType.towerHeight.rawValue:
                                                                             TowerHeightStatTracker.self]
 
-    static func getStatTrackerFromStatTrackerType(from: StatTrackerType) -> StatTracker.Type? {
+    private static func getStatTrackerFromStatTrackerType(from: StatTrackerType) -> StatTracker.Type? {
         statTrackerTypeToStatTracker[from.rawValue]
     }
 
