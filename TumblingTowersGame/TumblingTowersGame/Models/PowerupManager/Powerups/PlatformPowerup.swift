@@ -53,7 +53,7 @@ class PlatformPowerup: Powerup {
         guard let platform = manager?.gameWorld?.level.mainPlatform else { return nil }
         guard let gameWorld = gameWorld else { return nil }
         guard let rng = rng else { return nil }
-        
+
         var count = 0
         while count < GameWorldConstants.defaultTriesToFindPlatformPosition {
             let rngX = Int(rng.next()) % Int(platform.width)
@@ -71,10 +71,9 @@ class PlatformPowerup: Powerup {
             let shape = GamePathObjectShape(path: path)
 
             guard let newPlatform: Platform = GameWorldObjectFactory.create(ofType: .platform,
-                                                                                     ofShape: shape,
-                                                                                           at: newPosition) else {
+                                                                            ofShape: shape,
+                                                                            at: newPosition) else {
                 assert(false)
-                return nil
             }
 
             let otherBodies = gameWorld.level.gameObjects.map({ $0.fiziksBody })
