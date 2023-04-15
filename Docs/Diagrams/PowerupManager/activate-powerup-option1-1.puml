@@ -1,0 +1,6 @@
+@startuml
+View -> GameEngineManager: activatePowerup(idx)
+GameEngineManager -> GameEngine: activatePowerup(idx)
+GameEngine -> GameWorld: activatePowerup(idx)
+GameWorld -> PowerupManager: activatePowerup(idx)
+@enduml

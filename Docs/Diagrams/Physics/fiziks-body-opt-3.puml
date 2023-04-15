@@ -1,0 +1,48 @@
+@startuml
+class GameWorld {
+    - objects: [GameWorldObject]
+    - fiziksLookup: Dictionary<GameWorldObject, FiziksBody>
+    - fiziksEngine: FiziksEngine
+    + addObject(object: GameWorldObject, body: FiziksBody): void
+    + removeObject(object: GameWorldObject): void
+    + update(deltaTime: TimeInterval): void
+}
+
+interface FiziksBody {
+    - position: CGPoint
+    - zRotation: CGFloat
+    - velocity: CGVector
+    - angularVelocity: CGFloat
+    - friction: CGFloat
+    - mass: CGFloat
+    - density: CGFloat
+    - restitution: CGFloat
+    - linearDamping: CGFloat
+    - angularDamping: CGFloat
+    - affectedByGravity: Bool
+    - isDynamic: Bool
+    + applyForce(_ force: CGVector): void
+    + applyTorque(_ torque: CGFloat): void
+    + applyForce(_ force: CGVector, at point: CGPoint): void
+    + applyImpulse(_ impulse: CGVector): void
+    + applyAngularImpulse(_ angularImpulse: CGFloat): void
+    + applyImpulse(_ impulse: CGVector, at point: CGPoint): void
+}
+
+interface FiziksEngine {
+    - bodies: [FiziksBody]
+    + addBody(body: FiziksBody): void
+    + removeBody(body: FiziksBody): void
+    + update(deltaTime: TimeInterval): void
+}
+
+class GameWorldObject {
+    - position: CGPoint
+    - zRotation: CGPoint
+}
+
+GameWorld --> GameWorldObject
+GameWorld --> FiziksBody
+GameWorld --> FiziksEngine 
+FiziksEngine --> FiziksBody
+@enduml

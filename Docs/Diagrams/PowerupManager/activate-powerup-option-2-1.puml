@@ -1,0 +1,8 @@
+@startuml
+-> View: user taps power up button at index i
+View -> GameEngineManager: activatePowerup(idx)
+GameEngineManager -> EventManager: postEvent(PowerupButtonTappedEvent())
+EventManager -> PowerupManager: send event to listener
+PowerupManager -> Powerup: activate()
+Powerup -> EventManager: postEvent(XXXPowerupActivatedEvent())
+@enduml

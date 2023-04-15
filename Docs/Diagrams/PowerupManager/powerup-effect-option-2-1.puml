@@ -1,0 +1,4 @@
+@startuml
+-> XXXPowerup: activate()
+XXXPowerup -> GameWorld: alter state of GameWorld based on powerup
+@enduml

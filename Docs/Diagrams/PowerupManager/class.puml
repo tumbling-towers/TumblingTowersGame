@@ -1,0 +1,52 @@
+@startuml
+interface PowerupManager {
+    +var eventManager: EventManager
+    +var gameWorld: GameWorld
+    +var rng: RandomNumberGeneratorWithSeed
+    +var availablePowerups: [Powerup?]
+    +createNextPowerup()
+    +activatePowerup(at idx: Int)
+}
+
+interface Powerup {
+    +var manager: PowerupManager
+    +static var type: PowerupType
+    +static func create(manager: PowerupManager) -> Powerup
+    +activate()
+}
+
+class GluePowerup {
+    -manager: PowerupManager
+    +type: PowerupType
+    +static func create(manager: PowerupManager) -> Powerup
+    +activate()
+}
+
+class PlatformPowerup {
+    -manager: PowerupManager
+    +type: PowerupType
+    +static func create(manager: PowerupManager) -> Powerup
+    +activate()
+}
+
+class GamePowerupManager {
+    -gameWorld: GameWorld
+    -availablePowerups: [Powerup?]
+    -eventManager: EventManager
+    -rng: RandomNumberGeneratorWithSeed
+    +defaultNumPowerups: Int
+    +powerupTypes: [Powerup.Type]
+    +init(eventManager: EventManager, gameWorld: GameWorld, seed: Int)
+    +createNextPowerup()
+    +activatePowerup(at idx: Int)
+    -registerEvents()
+}
+
+PowerupManager <|.. GamePowerupManager
+PowerupManager --> EventManager
+PowerupManager --> GameWorld
+PowerupManager --> RandomNumberGeneratorWithSeed
+Powerup <|.. GluePowerup
+Powerup <|.. PlatformPowerup
+GamePowerupManager ..> Powerup
+@enduml

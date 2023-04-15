@@ -1,0 +1,39 @@
+
+@startuml
+interface FiziksBody {
+
+}
+
+interface FiziksEngine {
+    - fiziksContactDelegate
+    +insertBounds(_:)
+    +contains(_:)
+    +add(_:)
+    +delete(_:)
+    +combine(bodyA:bodyB:at:)
+    +setWorldGravity(to:)
+    +allBodiesContacted(with:)
+    +isIntersecting(body:otherBodies:)
+    +deleteAllBodies()
+    +pause()
+    +unpause()
+}
+
+class GameFiziksEngine implements SKPhysicsContactDelegate, FiziksEngine {
+    -idToFiziksBody: [ObjectIdentifier: FiziksBody]
+    -skNodeToFiziksBody: [SKNode: FiziksBody]
+    -fiziksScene: FiziksScene
+    -getSKPhysicsBody(of:) : SKPhysicsBody?
+}
+
+class SKPhysicsContactDelegate {
+    +didBegin(_:)
+    +didEnd(_:)
+}
+
+GameFiziksEngine --> FiziksBody
+GameFiziksEngine --> FiziksScene
+SKPhysicsContactDelegate ..> SKPhysicsContact
+FiziksScene ..|> SKScene
+GameWorld "1"-->"1" FiziksEngine
+@enduml
