@@ -80,46 +80,6 @@ class SurvivalGameMode: GameMode {
         realTimeTimer.count
     }
 
-    func resetGame() {
-        isStarted = false
-        isGameEnded = false
-        currBlocksPlaced = 0
-        currBlocksDropped = 0
-        realTimeTimer = GameTimer()
-
-        isEndedByOtherPlayer = false
-        overwriteGameState = nil
-    }
-
-    func startGame() {
-        isStarted = true
-        realTimeTimer.start(timeInSeconds: 0, countsUp: true)
-    }
-
-    func pauseGame() {
-        realTimeTimer.pause()
-    }
-
-    func resumeGame() {
-        realTimeTimer.resume()
-    }
-
-    func endGame(endedBy: UUID, endState: Constants.GameState) {
-        isGameEnded = true
-        realTimeTimer.stop()
-
-        if endedBy != playerId {
-            isEndedByOtherPlayer = true
-
-            if endState == .WIN {
-                overwriteGameState = .LOSE
-            } else if endState == .LOSE {
-                overwriteGameState = .WIN
-            }
-
-        }
-    }
-
     var gameEndMainMessage: String {
         if gameState == .WIN {
             return Constants.defaultWinMainString
@@ -150,6 +110,45 @@ class SurvivalGameMode: GameMode {
         return ""
     }
 
+    func resetGame() {
+        isStarted = false
+        isGameEnded = false
+        currBlocksPlaced = 0
+        currBlocksDropped = 0
+        realTimeTimer = GameTimer()
+
+        isEndedByOtherPlayer = false
+        overwriteGameState = nil
+    }
+
+    func startGame() {
+        isStarted = true
+        realTimeTimer.start(timeInSeconds: 0, isCountsUp: true)
+    }
+
+    func pauseGame() {
+        realTimeTimer.pause()
+    }
+
+    func resumeGame() {
+        realTimeTimer.resume()
+    }
+
+    func endGame(endedBy: UUID, endState: Constants.GameState) {
+        isGameEnded = true
+        realTimeTimer.stop()
+
+        if endedBy != playerId {
+            isEndedByOtherPlayer = true
+
+            if endState == .WIN {
+                overwriteGameState = .LOSE
+            } else if endState == .LOSE {
+                overwriteGameState = .WIN
+            }
+
+        }
+    }
 
     private lazy var blockPlaced = { [weak self] (_ event: Event) -> Void in
         if let placedEvent = event as? BlockPlacedEvent, placedEvent.playerId == self?.playerId {

@@ -117,10 +117,6 @@ class GameEngineManager: ObservableObject {
         inputSystem.resetInput()
     }
 
-    func getInput() -> InputData {
-        inputSystem.getInput()
-    }
-
     func getPhysicsEngine() -> FiziksEngine {
         gameEngine.gameWorld.fiziksEngine
     }
@@ -157,7 +153,7 @@ class GameEngineManager: ObservableObject {
 
     func updateGameEngine() {
         gameEngine.update()
-        let currInput = inputSystem.getInput()
+        let currInput = inputSystem.calculateInput()
 
         gameEngine.moveCMBSideways(by: currInput.vector)
         gameEngine.moveCMBDown(by: currInput.vector)
@@ -298,6 +294,6 @@ extension GameEngineManager: GameRendererDelegate {
     }
 
     func getCurrInput() -> InputData {
-        inputSystem.getInput()
+        inputSystem.calculateInput()
     }
 }

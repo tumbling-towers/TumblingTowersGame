@@ -59,6 +59,14 @@ class SandboxGameMode: GameMode {
         realTimeTimer.count
     }
 
+    var gameEndMainMessage: String {
+        "Thank you for playing!"
+    }
+
+    var gameEndSubMessage: String {
+        "Please Try Again!"
+    }
+
     func resetGame() {
         isStarted = false
         isGameEnded = false
@@ -67,7 +75,7 @@ class SandboxGameMode: GameMode {
 
     func startGame() {
         isStarted = true
-        realTimeTimer.start(timeInSeconds: 0, countsUp: true)
+        realTimeTimer.start(timeInSeconds: 0, isCountsUp: true)
     }
 
     func pauseGame() {
@@ -81,14 +89,6 @@ class SandboxGameMode: GameMode {
     func endGame(endedBy: UUID, endState: Constants.GameState) {
         isGameEnded = true
         realTimeTimer.stop()
-    }
-
-    var gameEndMainMessage: String {
-        "Thank you for playing!"
-    }
-
-    var gameEndSubMessage: String {
-        "Please Try Again!"
     }
 
     private lazy var blockPlaced = { [weak self] (_ event: Event) -> Void in

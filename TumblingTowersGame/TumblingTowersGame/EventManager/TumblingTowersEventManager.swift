@@ -41,7 +41,8 @@ class TumblingTowersEventManager: EventManager {
     @objc
     private func executeObserverClosures(_ notification: Notification) {
         guard let event = notification.userInfo?["event"] as? Event,
-              let closures = observerClosures[event.identifier] else { return }
+              let closures = observerClosures[event.identifier]
+        else { return }
 
         for closure in closures {
             closure(event)
@@ -49,11 +50,10 @@ class TumblingTowersEventManager: EventManager {
     }
 
     private func createObserver<T: Event>(for event: T.Type, observer: AnyObject, selector: Selector) {
-
         let notificationName = T.identifier.notificationName
 
         addedNames.insert(notificationName)
 
-        NCfacade.createObserver(observer: observer, selector: selector, notificationName: notificationName, object: nil)
+        NCfacade.createObserver(observer: observer, selector: selector, notificationName: notificationName)
     }
 }

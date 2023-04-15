@@ -15,6 +15,8 @@ protocol GameMode {
 
     init(eventMgr: EventManager, playerId: UUID, levelHeight: CGFloat)
 
+    func update()
+
     var gameState: Constants.GameState { get }
 
     var isGameEnded: Bool { get }
@@ -22,6 +24,10 @@ protocol GameMode {
     var score: Int { get }
 
     var time: Int { get }
+
+    var gameEndMainMessage: String { get }
+
+    var gameEndSubMessage: String { get }
 
     func startGame()
 
@@ -32,10 +38,4 @@ protocol GameMode {
     func resetGame()
 
     func endGame(endedBy: UUID, endState: Constants.GameState)
-
-    var gameEndMainMessage: String { get }
-
-    var gameEndSubMessage: String { get }
-
-    func update()
 }
