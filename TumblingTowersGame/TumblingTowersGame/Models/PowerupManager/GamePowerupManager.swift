@@ -9,7 +9,18 @@ import Foundation
 import CoreGraphics
 
 class GamePowerupManager: PowerupManager {
-    var gameWorld: GameWorld
+
+    // This is needed to avoid strong reference cycle to GameWorld
+    private weak var actualGameWorld: GameWorld?
+
+    var gameWorld: GameWorld? {
+        get {
+            actualGameWorld
+        }
+        set {
+            actualGameWorld = newValue
+        }
+    }
     
     static let defaultNumPowerups = 10
 
@@ -19,13 +30,13 @@ class GamePowerupManager: PowerupManager {
 
     var rng: RandomNumberGeneratorWithSeed
 
-    // FIXME: count here is a magic number
-    var availablePowerups: [Powerup?] = [Powerup?](repeating: nil, count: 5)
+    var availablePowerups: [Powerup?] = [Powerup?](repeating: nil,
+                                                   count: GameWorldConstants.maxPowerupsAtOneTime)
 
     init(eventManager: EventManager, gameWorld: GameWorld, seed: Int) {
         self.eventManager = eventManager
-        self.gameWorld = gameWorld
         self.rng = RandomNumberGeneratorWithSeed(seed: seed)
+        self.gameWorld = gameWorld
         
         registerEvents()
     }
@@ -42,18 +53,23 @@ class GamePowerupManager: PowerupManager {
         let type = GamePowerupManager.powerupTypes[idx]
         
         if let index = availablePowerups.firstIndex(where: { $0 == nil }) {
-            var nextPowerup = type.create(manager: self)
+            let nextPowerup = type.create(manager: self)
             availablePowerups[index] = nextPowerup
-            eventManager.postEvent(PowerupAvailableEvent(type: type, idx: index, for: gameWorld))
+            if let gameWorld = gameWorld {
+                eventManager.postEvent(PowerupAvailableEvent(type: type, idx: index, for: gameWorld))
+            }
         }
     }
 
     private func registerEvents() {
         // remove the powerup when it is used
-        eventManager.registerClosure(for: PowerupButtonTappedEvent.self, closure: { event in
-            if let event = event as? PowerupButtonTappedEvent, event.gameWorld === self.gameWorld {
-                self.activatePowerup(at: event.idx)
-            }
-        })
+        eventManager.registerClosure(for: PowerupButtonTappedEvent.self, closure: powerupButtonTappedEventFired)
     }
+
+    private lazy var powerupButtonTappedEventFired = { [weak self] (_ event: Event) -> Void in
+        if let event = event as? PowerupButtonTappedEvent, event.gameWorld === self?.gameWorld {
+            self?.activatePowerup(at: event.idx)
+        }
+    }
+    
 }

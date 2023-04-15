@@ -20,12 +20,11 @@ Swipe Down: Speeds up the downward movement of the block.
 
     private var inputVal = InputType.NONE
 
-    var inputData = InputData.none
+    private var inputData = InputData.none
 
     private var yMultiplier: Double = 5.0
 
-    // TODO: Allow for sensitivity adjustment?
-    let sensitivity: Double = 5
+    private let sensitivity: Double = 5
 
     required init() {
         motionManager = CMMotionManager()
@@ -43,7 +42,7 @@ Swipe Down: Speeds up the downward movement of the block.
         }
     }
 
-    func getInput() -> InputData {
+    func calculateInput() -> InputData {
 
         if let rate = motionManager.accelerometerData?.acceleration.x {
             // TODO: Add sensitivity setting?

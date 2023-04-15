@@ -54,14 +54,12 @@ class TallEnoughGameMode: GameMode {
     }
 
     func update() {
-        let gameState = getGameState()
-
         if gameState != .RUNNING && gameState != .PAUSED {
-            eventMgr.postEvent(GameEndedEvent(playerId: playerId, endState: getGameState()))
+            eventMgr.postEvent(GameEndedEvent(playerId: playerId, endState: gameState))
         }
     }
 
-    func getGameState() -> Constants.GameState {
+    var gameState: Constants.GameState {
         if let overwriteGameState = overwriteGameState {
             return overwriteGameState
         }
@@ -81,18 +79,41 @@ class TallEnoughGameMode: GameMode {
         }
     }
 
-    func getScore() -> Int {
+    var score: Int {
         max(TallEnoughGameMode.scoreTimeWithBonusScore - realTimeTimer.count
             + currBlocksPlaced * scoreBlocksPlacedMultiplier
             - currBlocksDropped * scoreBlocksDroppedMultiplier, 0)
     }
 
-    func hasGameEnded() -> Bool {
-        isGameEnded
+    var time: Int {
+        realTimeTimer.count
     }
 
-    func getTime() -> Int {
-        realTimeTimer.count
+    var gameEndMainMessage: String {
+        if gameState == .WIN {
+            return Constants.defaultWinMainString
+        } else if gameState == .LOSE {
+            return Constants.defaultLoseMainString
+        }
+
+        return ""
+    }
+
+    var gameEndSubMessage: String {
+        if gameState == .WIN {
+            if isEndedByOtherPlayer {
+                return "Your opponent dropped too many blocks!"
+            } else {
+                return "You reached enough powerup lines!"
+            }
+        } else if gameState == .LOSE {
+            if isEndedByOtherPlayer {
+                return "Your opponent reached enough powerup lines first!"
+            } else {
+                return "You dropped too many blocks!"
+            }
+        }
+        return ""
     }
 
     func resetGame() {
@@ -109,7 +130,7 @@ class TallEnoughGameMode: GameMode {
 
     func startGame() {
         isStarted = true
-        realTimeTimer.start(timeInSeconds: 0, countsUp: true)
+        realTimeTimer.start(timeInSeconds: 0, isCountsUp: true)
     }
 
     func pauseGame() {
@@ -138,48 +159,21 @@ class TallEnoughGameMode: GameMode {
         }
     }
 
-    func getGameEndMainMessage() -> String {
-        if getGameState() == .WIN {
-            return Constants.defaultWinMainString
-        } else if getGameState() == .LOSE {
-            return Constants.defaultLoseMainString
-        }
-
-        return ""
-    }
-
-    func getGameEndSubMessage() -> String {
-        if getGameState() == .WIN {
-            if isEndedByOtherPlayer {
-                return "Your opponent dropped too many blocks!"
-            } else {
-                return "You reached enough powerup lines!"
-            }
-        } else if getGameState() == .LOSE {
-            if isEndedByOtherPlayer {
-                return "Your opponent reached enough powerup lines first!"
-            } else {
-                return "You dropped too many blocks!"
-            }
-        }
-        return ""
-    }
-
-    private func touchedPowerupLine(event: Event) {
-        if let touchedEvent = event as? BlockTouchedPowerupLineEvent, touchedEvent.playerId == playerId {
-            currPowerupLineAmt += 1
+    private lazy var touchedPowerupLine = { [weak self] (_ event: Event) -> Void in
+        if let touchedEvent = event as? BlockTouchedPowerupLineEvent, touchedEvent.playerId == self?.playerId {
+            self?.currPowerupLineAmt += 1
         }
     }
 
-    private func blockPlaced(event: Event) {
-        if let placedEvent = event as? BlockPlacedEvent, placedEvent.playerId == playerId {
-            currBlocksPlaced = placedEvent.totalBlocksInLevel
+    private lazy var blockPlaced = { [weak self] (_ event: Event) -> Void in
+        if let placedEvent = event as? BlockPlacedEvent, placedEvent.playerId == self?.playerId {
+            self?.currBlocksPlaced = placedEvent.totalBlocksInLevel
         }
     }
 
-    private func blockDropped(event: Event) {
-        if let droppedEvent = event as? BlockDroppedEvent, droppedEvent.playerId == playerId {
-            currBlocksDropped += 1
+    private lazy var blockDropped = { [weak self] (_ event: Event) -> Void in
+        if let droppedEvent = event as? BlockDroppedEvent, droppedEvent.playerId == self?.playerId {
+            self?.currBlocksDropped += 1
         }
     }
 

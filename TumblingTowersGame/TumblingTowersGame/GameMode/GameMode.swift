@@ -15,17 +15,19 @@ protocol GameMode {
 
     init(eventMgr: EventManager, playerId: UUID, levelHeight: CGFloat)
 
-    // FIXME: can this be a computed variable?
-    func getGameState() -> Constants.GameState
+    func update()
 
-    // FIXME: can this be a computed variable?
-    func hasGameEnded() -> Bool
+    var gameState: Constants.GameState { get }
 
-    // FIXME: can this be a computed variable?
-    func getScore() -> Int
+    var isGameEnded: Bool { get }
 
-    // FIXME: can this be a computed variable?
-    func getTime() -> Int
+    var score: Int { get }
+
+    var time: Int { get }
+
+    var gameEndMainMessage: String { get }
+
+    var gameEndSubMessage: String { get }
 
     func startGame()
 
@@ -36,12 +38,4 @@ protocol GameMode {
     func resetGame()
 
     func endGame(endedBy: UUID, endState: Constants.GameState)
-
-    // FIXME: can this be a computed variable?
-    func getGameEndMainMessage() -> String
-
-    // FIXME: can this be a computed variable?
-    func getGameEndSubMessage() -> String
-
-    func update()
 }

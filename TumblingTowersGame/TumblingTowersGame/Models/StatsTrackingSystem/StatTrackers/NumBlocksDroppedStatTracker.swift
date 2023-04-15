@@ -18,7 +18,6 @@ class NumBlocksDroppedStatTracker: StatTracker {
     
     private lazy var blockDroppedClosure = { [weak self] (_ event: Event) -> Void in
         self?.stat = self?.stat ?? 0 + 1
-        print("blocks dropped \(self?.stat)")
     }
 }
 

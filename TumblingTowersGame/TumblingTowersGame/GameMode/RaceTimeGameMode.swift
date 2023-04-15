@@ -52,14 +52,12 @@ class RaceTimeGameMode: GameMode {
     }
 
     func update() {
-        let gameState = getGameState()
-
         if gameState != .RUNNING && gameState != .PAUSED {
-            eventMgr.postEvent(GameEndedEvent(playerId: playerId, endState: getGameState()))
+            eventMgr.postEvent(GameEndedEvent(playerId: playerId, endState: gameState))
         }
     }
 
-    func getGameState() -> Constants.GameState {
+    var gameState: Constants.GameState {
         if let overwriteGameState = overwriteGameState {
             return overwriteGameState
         }
@@ -77,18 +75,43 @@ class RaceTimeGameMode: GameMode {
         }
     }
 
-    func getScore() -> Int {
+    var score: Int {
         max(realTimeTimer.count * scoreTimeLeftMultiplier
             + currBlocksPlaced * scoreBlocksPlacedMultiplier
             - currBlocksDropped * scoreBlocksDroppedMultiplier, 0)
     }
 
-    func hasGameEnded() -> Bool {
-        isGameEnded
+    var time: Int {
+        realTimeTimer.count
     }
 
-    func getTime() -> Int {
-        realTimeTimer.count
+    var gameEndMainMessage: String {
+        if gameState == .WIN {
+            return Constants.defaultWinMainString
+        } else if gameState == .LOSE {
+            return Constants.defaultLoseMainString
+        }
+
+        return ""
+    }
+
+    var gameEndSubMessage: String {
+        if gameState == .WIN {
+            return "You beat the clock!"
+        } else if gameState == .LOSE {
+            if isEndedByOtherPlayer {
+                if otherPlayerRanOutOfTime {
+                    // Other player ran out of time
+                    return "You ran out of time!"
+                } else {
+                    // Other player stacked enough blocks faster
+                    return "You were too slow!"
+                }
+            } else {
+                return "You ran out of time!"
+            }
+        }
+        return ""
     }
 
     func resetGame() {
@@ -106,9 +129,9 @@ class RaceTimeGameMode: GameMode {
     func startGame() {
         isStarted = true
         if shortLevel {
-            realTimeTimer.start(timeInSeconds: RaceTimeGameMode.timeToPlaceBy / RaceTimeGameMode.shortLevelTimeMultiplier, countsUp: false)
+            realTimeTimer.start(timeInSeconds: RaceTimeGameMode.timeToPlaceBy / RaceTimeGameMode.shortLevelTimeMultiplier, isCountsUp: false)
         } else {
-            realTimeTimer.start(timeInSeconds: RaceTimeGameMode.timeToPlaceBy, countsUp: false)
+            realTimeTimer.start(timeInSeconds: RaceTimeGameMode.timeToPlaceBy, isCountsUp: false)
         }
     }
 
@@ -138,44 +161,15 @@ class RaceTimeGameMode: GameMode {
         }
     }
 
-    func getGameEndMainMessage() -> String {
-        if getGameState() == .WIN {
-            return Constants.defaultWinMainString
-        } else if getGameState() == .LOSE {
-            return Constants.defaultLoseMainString
-        }
-
-        return ""
-    }
-
-    func getGameEndSubMessage() -> String {
-        if getGameState() == .WIN {
-            return "You beat the clock!"
-        } else if getGameState() == .LOSE {
-            if isEndedByOtherPlayer {
-                if otherPlayerRanOutOfTime {
-                    // Other player ran out of time
-                    return "You ran out of time!"
-                } else {
-                    // Other player stacked enough blocks faster
-                    return "You were too slow!"
-                }
-            } else {
-                return "You ran out of time!"
-            }
-        }
-        return ""
-    }
-
-    private func blockPlaced(event: Event) {
-        if let placedEvent = event as? BlockPlacedEvent, placedEvent.playerId == playerId {
-            currBlocksPlaced = placedEvent.totalBlocksInLevel
+    private lazy var blockPlaced = { [weak self] (_ event: Event) -> Void in
+        if let placedEvent = event as? BlockPlacedEvent, placedEvent.playerId == self?.playerId {
+            self?.currBlocksPlaced = placedEvent.totalBlocksInLevel
         }
     }
 
-    private func blockDropped(event: Event) {
-        if let droppedEvent = event as? BlockDroppedEvent, droppedEvent.playerId == playerId {
-            currBlocksDropped += 1
+    private lazy var blockDropped = { [weak self] (_ event: Event) -> Void in
+        if let droppedEvent = event as? BlockDroppedEvent, droppedEvent.playerId == self?.playerId {
+            self?.currBlocksDropped += 1
         }
     }
 }

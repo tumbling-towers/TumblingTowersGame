@@ -37,14 +37,12 @@ class SandboxGameMode: GameMode {
     }
 
     func update() {
-        let gameState = getGameState()
-
         if gameState != .RUNNING && gameState != .PAUSED {
-            eventMgr.postEvent(GameEndedEvent(playerId: playerId, endState: getGameState()))
+            eventMgr.postEvent(GameEndedEvent(playerId: playerId, endState: gameState))
         }
     }
 
-    func getGameState() -> Constants.GameState {
+    var gameState: Constants.GameState {
         if isStarted {
             return .RUNNING
         } else {
@@ -52,17 +50,21 @@ class SandboxGameMode: GameMode {
         }
     }
 
-    func getScore() -> Int {
+    var score: Int {
         max(currBlocksPlaced * scoreBlocksPlacedMultiplier
         - currBlocksDropped * scoreBlocksDroppedMultiplier, 0)
     }
 
-    func hasGameEnded() -> Bool {
-        isGameEnded
+    var time: Int {
+        realTimeTimer.count
     }
 
-    func getTime() -> Int {
-        realTimeTimer.count
+    var gameEndMainMessage: String {
+        "Thank you for playing!"
+    }
+
+    var gameEndSubMessage: String {
+        "Please Try Again!"
     }
 
     func resetGame() {
@@ -73,7 +75,7 @@ class SandboxGameMode: GameMode {
 
     func startGame() {
         isStarted = true
-        realTimeTimer.start(timeInSeconds: 0, countsUp: true)
+        realTimeTimer.start(timeInSeconds: 0, isCountsUp: true)
     }
 
     func pauseGame() {
@@ -89,24 +91,15 @@ class SandboxGameMode: GameMode {
         realTimeTimer.stop()
     }
 
-    func getGameEndMainMessage() -> String {
-        "Thank you for playing!"
-    }
-
-    func getGameEndSubMessage() -> String {
-        "Please Try Again!"
-    }
-
-    private func blockPlaced(event: Event) {
-        if let placedEvent = event as? BlockPlacedEvent, placedEvent.playerId == playerId {
-            currBlocksPlaced = placedEvent.totalBlocksInLevel
+    private lazy var blockPlaced = { [weak self] (_ event: Event) -> Void in
+        if let placedEvent = event as? BlockPlacedEvent, placedEvent.playerId == self?.playerId {
+            self?.currBlocksPlaced = placedEvent.totalBlocksInLevel
         }
     }
 
-    private func blockDropped(event: Event) {
-        if let droppedEvent = event as? BlockDroppedEvent, droppedEvent.playerId == playerId {
-            currBlocksDropped += 1
+    private lazy var blockDropped = { [weak self] (_ event: Event) -> Void in
+        if let droppedEvent = event as? BlockDroppedEvent, droppedEvent.playerId == self?.playerId {
+            self?.currBlocksDropped += 1
         }
     }
-
 }

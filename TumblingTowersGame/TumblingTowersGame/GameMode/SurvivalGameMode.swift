@@ -25,7 +25,6 @@ class SurvivalGameMode: GameMode {
     static let scoreTimeWithBonusScore = 90
 
     // MARK: Tracking State of Game
-    var currBlocksInserted = 0
     var currBlocksPlaced = 0
     var currBlocksDropped = 0
     let playerId: UUID
@@ -43,22 +42,15 @@ class SurvivalGameMode: GameMode {
         
         eventMgr.registerClosure(for: BlockPlacedEvent.self, closure: blockPlaced)
         eventMgr.registerClosure(for: BlockDroppedEvent.self, closure: blockDropped)
-        eventMgr.registerClosure(for: BlockInsertedEvent.self, closure: blockInserted)
     }
 
     func update() {
-        let gameState = getGameState()
-
         if gameState != .RUNNING && gameState != .PAUSED {
-            eventMgr.postEvent(GameEndedEvent(playerId: playerId, endState: getGameState()))
+            eventMgr.postEvent(GameEndedEvent(playerId: playerId, endState: gameState))
         }
     }
 
-    func getGameState() -> Constants.GameState {
-//        print("Blocks Dropped \(currBlocksDropped)")
-//        print("Blocks Placed \(currBlocksPlaced)")
-//        print("Blocks Inserted \(currBlocksInserted)\n")
-
+    var gameState: Constants.GameState {
         if let overwriteGameState = overwriteGameState {
             return overwriteGameState
         }
@@ -78,24 +70,49 @@ class SurvivalGameMode: GameMode {
         }
     }
 
-    func hasGameEnded() -> Bool {
-        isGameEnded
-    }
-
-    func getScore() -> Int {
+    var score: Int {
         max(SurvivalGameMode.scoreTimeWithBonusScore - realTimeTimer.count
             + currBlocksPlaced * scoreBlocksPlacedMultiplier
             - currBlocksDropped * scoreBlocksDroppedMultiplier, 0)
     }
 
-    func getTime() -> Int {
+    var time: Int {
         realTimeTimer.count
+    }
+
+    var gameEndMainMessage: String {
+        if gameState == .WIN {
+            return Constants.defaultWinMainString
+        } else if gameState == .LOSE {
+            return Constants.defaultLoseMainString
+        }
+
+        return ""
+    }
+
+    var gameEndSubMessage: String {
+        if gameState == .WIN {
+            if isEndedByOtherPlayer {
+                // Opponent dropped too many blocks out of the screen
+                return "You beat your opponent!"
+            } else {
+                return "You stacked enough blocks!"
+            }
+        } else if gameState == .LOSE {
+            if isEndedByOtherPlayer {
+                // Opponent stacked enough blocks faster than you
+                return "You opponent beat you at stacking blocks!"
+            } else {
+                return "You dropped too many blocks!."
+            }
+        }
+
+        return ""
     }
 
     func resetGame() {
         isStarted = false
         isGameEnded = false
-        currBlocksInserted = 0
         currBlocksPlaced = 0
         currBlocksDropped = 0
         realTimeTimer = GameTimer()
@@ -106,7 +123,7 @@ class SurvivalGameMode: GameMode {
 
     func startGame() {
         isStarted = true
-        realTimeTimer.start(timeInSeconds: 0, countsUp: true)
+        realTimeTimer.start(timeInSeconds: 0, isCountsUp: true)
     }
 
     func pauseGame() {
@@ -133,52 +150,16 @@ class SurvivalGameMode: GameMode {
         }
     }
 
-    func getGameEndMainMessage() -> String {
-        if getGameState() == .WIN {
-            return Constants.defaultWinMainString
-        } else if getGameState() == .LOSE {
-            return Constants.defaultLoseMainString
-        }
-
-        return ""
-    }
-
-    func getGameEndSubMessage() -> String {
-        if getGameState() == .WIN {
-            if isEndedByOtherPlayer {
-                // Opponent dropped too many blocks out of the screen
-                return "You beat your opponent!"
-            } else {
-                return "You stacked enough blocks!"
-            }
-        } else if getGameState() == .LOSE {
-            if isEndedByOtherPlayer {
-                // Opponent stacked enough blocks faster than you
-                return "You opponent beat you at stacking blocks!"
-            } else {
-                return "You dropped too many blocks!."
-            }
-        }
-
-        return ""
-    }
-
-
-    private func blockPlaced(event: Event) {
-        if let placedEvent = event as? BlockPlacedEvent, placedEvent.playerId == playerId {
-            currBlocksPlaced = placedEvent.totalBlocksInLevel
+    private lazy var blockPlaced = { [weak self] (_ event: Event) -> Void in
+        if let placedEvent = event as? BlockPlacedEvent, placedEvent.playerId == self?.playerId {
+            self?.currBlocksPlaced = placedEvent.totalBlocksInLevel
         }
     }
 
-    private func blockDropped(event: Event) {
-        if let droppedEvent = event as? BlockDroppedEvent, droppedEvent.playerId == playerId {
-            currBlocksDropped += 1
+    private lazy var blockDropped = { [weak self] (_ event: Event) -> Void in
+        if let droppedEvent = event as? BlockDroppedEvent, droppedEvent.playerId == self?.playerId {
+            self?.currBlocksDropped += 1
         }
     }
 
-    private func blockInserted(event: Event) {
-        if let insertedEvent = event as? BlockInsertedEvent, insertedEvent.playerId == playerId {
-            currBlocksInserted += 1
-        }
-    }
 }

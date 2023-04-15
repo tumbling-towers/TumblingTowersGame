@@ -12,8 +12,8 @@ class GameTimer {
     }
     var isPaused = false
 
-    func start(timeInSeconds time: Int, countsUp: Bool) {
-        if countsUp {
+    func start(timeInSeconds time: Int, isCountsUp: Bool) {
+        if isCountsUp {
             timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true, block: { self.increment($0) })
         } else {
             count = time

@@ -50,7 +50,7 @@ class GameEngineManager: ObservableObject {
     }
 
     var timeRemaining: Int {
-        if let currTime = gameMode?.getTime() {
+        if let currTime = gameMode?.time {
             return currTime
         } else {
             return 0
@@ -58,7 +58,7 @@ class GameEngineManager: ObservableObject {
     }
 
     var score: Int {
-        if let currScore = gameMode?.getScore() {
+        if let currScore = gameMode?.score {
             return currScore
         } else {
             return 0
@@ -66,7 +66,7 @@ class GameEngineManager: ObservableObject {
     }
 
     var gameEnded: Bool {
-        if let ended = gameMode?.hasGameEnded() {
+        if let ended = gameMode?.isGameEnded {
             return ended
         } else {
             return false
@@ -74,7 +74,7 @@ class GameEngineManager: ObservableObject {
     }
 
     var gameEndMainMessage: String {
-        if let msg = gameMode?.getGameEndMainMessage() {
+        if let msg = gameMode?.gameEndMainMessage {
             return msg
         } else {
             return "The game has ended."
@@ -82,7 +82,7 @@ class GameEngineManager: ObservableObject {
     }
 
     var gameEndSubMessage: String {
-        if let msg = gameMode?.getGameEndSubMessage() {
+        if let msg = gameMode?.gameEndSubMessage {
             return msg
         } else {
             return "Please try again!"
@@ -117,10 +117,6 @@ class GameEngineManager: ObservableObject {
         inputSystem.resetInput()
     }
 
-    func getInput() -> InputData {
-        inputSystem.getInput()
-    }
-
     func getPhysicsEngine() -> FiziksEngine {
         gameEngine.gameWorld.fiziksEngine
     }
@@ -144,28 +140,20 @@ class GameEngineManager: ObservableObject {
         eventManager?.postEvent(GameEndedEvent(playerId: playerId, endState: .NONE))
     }
 
-    func stopGame(event: Event) {
-        if let gameEndEvent = event as? GameEndedEvent {
-            gameUpdater?.stopLevel()
-            gameEngine.stopGame()
-            gameMode?.endGame(endedBy: gameEndEvent.playerId, endState: gameEndEvent.endState)
-        }
-    }
-
     func resetGame() {
         gameEngine.resetGame()
         gameMode?.resetGame()
     }
 
-    func update() {
-        updateGameEngine()
-        renderCurrentFrame()
-        updateAchievements()
+    private lazy var update = { [weak self] () -> Void in
+        self?.updateGameEngine()
+        self?.renderCurrentFrame()
+        self?.updateAchievements()
     }
 
     func updateGameEngine() {
         gameEngine.update()
-        let currInput = inputSystem.getInput()
+        let currInput = inputSystem.calculateInput()
 
         gameEngine.moveCMBSideways(by: currInput.vector)
         gameEngine.moveCMBDown(by: currInput.vector)
@@ -241,18 +229,23 @@ class GameEngineManager: ObservableObject {
     }
 
     private func registerEvents() {
-        eventManager?.registerClosure(for: PowerupAvailableEvent.self, closure: { [self] event in
-            switch event {
-            case let powerupAvailableEvent as PowerupAvailableEvent:
-                if powerupAvailableEvent.gameWorld === gameEngine.gameWorld {
-                    self.powerups[powerupAvailableEvent.idx] = powerupAvailableEvent.type
-                }
-            default:
-                return
-            }
-        })
+        eventManager?.registerClosure(for: PowerupAvailableEvent.self, closure: powerupAvailableEventFired)
+        eventManager?.registerClosure(for: GameEndedEvent.self, closure: stopGameEventFired)
+    }
 
-        eventManager?.registerClosure(for: GameEndedEvent.self, closure: stopGame)
+    private lazy var powerupAvailableEventFired = { [weak self] (_ event: Event) -> Void in
+        if let powerupAvailableEvent = event as? PowerupAvailableEvent,
+           powerupAvailableEvent.gameWorld === self?.gameEngine.gameWorld {
+                self?.powerups[powerupAvailableEvent.idx] = powerupAvailableEvent.type
+        }
+    }
+
+    private lazy var stopGameEventFired = { [weak self] (_ event: Event) -> Void in
+        if let gameEndEvent = event as? GameEndedEvent {
+            self?.gameUpdater?.stopLevel()
+            self?.gameEngine.stopGame()
+            self?.gameMode?.endGame(endedBy: gameEndEvent.playerId, endState: gameEndEvent.endState)
+        }
     }
     
     private func updateAchievements() {
@@ -301,6 +294,6 @@ extension GameEngineManager: GameRendererDelegate {
     }
 
     func getCurrInput() -> InputData {
-        inputSystem.getInput()
+        inputSystem.calculateInput()
     }
 }
