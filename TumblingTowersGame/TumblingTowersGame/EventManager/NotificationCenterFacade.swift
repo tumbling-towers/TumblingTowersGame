@@ -26,4 +26,10 @@ class NotificationCenterFacade {
     func removeObserver(observer: Any, notificationName: NotificationName, object: Any?) {
         NotificationCenter.default.removeObserver(observer, name: notificationName.name, object: object)
     }
+
+    func removeAllObservers(notificationNames: [NotificationName]) {
+        for notificationName in notificationNames {
+            NotificationCenter.default.removeObserver(self, name: notificationName.name, object: nil)
+        }
+    }
 }

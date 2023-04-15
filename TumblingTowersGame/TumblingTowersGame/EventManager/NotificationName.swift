@@ -14,3 +14,13 @@ class NotificationName {
         self.name = Notification.Name(name)
     }
 }
+
+extension NotificationName: Hashable {
+    static func == (lhs: NotificationName, rhs: NotificationName) -> Bool {
+        lhs.name == rhs.name
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(name)
+    }
+}

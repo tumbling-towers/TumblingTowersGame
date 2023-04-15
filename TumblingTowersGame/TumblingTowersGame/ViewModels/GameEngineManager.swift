@@ -144,23 +144,15 @@ class GameEngineManager: ObservableObject {
         eventManager?.postEvent(GameEndedEvent(playerId: playerId, endState: .NONE))
     }
 
-    func stopGame(event: Event) {
-        if let gameEndEvent = event as? GameEndedEvent {
-            gameUpdater?.stopLevel()
-            gameEngine.stopGame()
-            gameMode?.endGame(endedBy: gameEndEvent.playerId, endState: gameEndEvent.endState)
-        }
-    }
-
     func resetGame() {
         gameEngine.resetGame()
         gameMode?.resetGame()
     }
 
-    func update() {
-        updateGameEngine()
-        renderCurrentFrame()
-        updateAchievements()
+    private lazy var update = { [weak self] () -> Void in
+        self?.updateGameEngine()
+        self?.renderCurrentFrame()
+        self?.updateAchievements()
     }
 
     func updateGameEngine() {
@@ -241,18 +233,23 @@ class GameEngineManager: ObservableObject {
     }
 
     private func registerEvents() {
-        eventManager?.registerClosure(for: PowerupAvailableEvent.self, closure: { [self] event in
-            switch event {
-            case let powerupAvailableEvent as PowerupAvailableEvent:
-                if powerupAvailableEvent.gameWorld === gameEngine.gameWorld {
-                    self.powerups[powerupAvailableEvent.idx] = powerupAvailableEvent.type
-                }
-            default:
-                return
-            }
-        })
+        eventManager?.registerClosure(for: PowerupAvailableEvent.self, closure: powerupAvailableEventFired)
+        eventManager?.registerClosure(for: GameEndedEvent.self, closure: stopGameEventFired)
+    }
 
-        eventManager?.registerClosure(for: GameEndedEvent.self, closure: stopGame)
+    private lazy var powerupAvailableEventFired = { [weak self] (_ event: Event) -> Void in
+        if let powerupAvailableEvent = event as? PowerupAvailableEvent,
+           powerupAvailableEvent.gameWorld === self?.gameEngine.gameWorld {
+                self?.powerups[powerupAvailableEvent.idx] = powerupAvailableEvent.type
+        }
+    }
+
+    private lazy var stopGameEventFired = { [weak self] (_ event: Event) -> Void in
+        if let gameEndEvent = event as? GameEndedEvent {
+            self?.gameUpdater?.stopLevel()
+            self?.gameEngine.stopGame()
+            self?.gameMode?.endGame(endedBy: gameEndEvent.playerId, endState: gameEndEvent.endState)
+        }
     }
     
     private func updateAchievements() {

@@ -25,7 +25,6 @@ class SurvivalGameMode: GameMode {
     static let scoreTimeWithBonusScore = 90
 
     // MARK: Tracking State of Game
-    var currBlocksInserted = 0
     var currBlocksPlaced = 0
     var currBlocksDropped = 0
     let playerId: UUID
@@ -43,7 +42,6 @@ class SurvivalGameMode: GameMode {
         
         eventMgr.registerClosure(for: BlockPlacedEvent.self, closure: blockPlaced)
         eventMgr.registerClosure(for: BlockDroppedEvent.self, closure: blockDropped)
-        eventMgr.registerClosure(for: BlockInsertedEvent.self, closure: blockInserted)
     }
 
     func update() {
@@ -85,7 +83,6 @@ class SurvivalGameMode: GameMode {
     func resetGame() {
         isStarted = false
         isGameEnded = false
-        currBlocksInserted = 0
         currBlocksPlaced = 0
         currBlocksDropped = 0
         realTimeTimer = GameTimer()
@@ -154,21 +151,16 @@ class SurvivalGameMode: GameMode {
     }
 
 
-    private func blockPlaced(event: Event) {
-        if let placedEvent = event as? BlockPlacedEvent, placedEvent.playerId == playerId {
-            currBlocksPlaced = placedEvent.totalBlocksInLevel
+    private lazy var blockPlaced = { [weak self] (_ event: Event) -> Void in
+        if let placedEvent = event as? BlockPlacedEvent, placedEvent.playerId == self?.playerId {
+            self?.currBlocksPlaced = placedEvent.totalBlocksInLevel
         }
     }
 
-    private func blockDropped(event: Event) {
-        if let droppedEvent = event as? BlockDroppedEvent, droppedEvent.playerId == playerId {
-            currBlocksDropped += 1
+    private lazy var blockDropped = { [weak self] (_ event: Event) -> Void in
+        if let droppedEvent = event as? BlockDroppedEvent, droppedEvent.playerId == self?.playerId {
+            self?.currBlocksDropped += 1
         }
     }
 
-    private func blockInserted(event: Event) {
-        if let insertedEvent = event as? BlockInsertedEvent, insertedEvent.playerId == playerId {
-            currBlocksInserted += 1
-        }
-    }
 }

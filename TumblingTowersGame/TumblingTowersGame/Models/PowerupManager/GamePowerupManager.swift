@@ -50,10 +50,13 @@ class GamePowerupManager: PowerupManager {
 
     private func registerEvents() {
         // remove the powerup when it is used
-        eventManager.registerClosure(for: PowerupButtonTappedEvent.self, closure: { event in
-            if let event = event as? PowerupButtonTappedEvent, event.gameWorld === self.gameWorld {
-                self.activatePowerup(at: event.idx)
-            }
-        })
+        eventManager.registerClosure(for: PowerupButtonTappedEvent.self, closure: powerupButtonTappedEventFired)
     }
+
+    private lazy var powerupButtonTappedEventFired = { [weak self] (_ event: Event) -> Void in
+        if let event = event as? PowerupButtonTappedEvent, event.gameWorld === self?.gameWorld {
+            self?.activatePowerup(at: event.idx)
+        }
+    }
+    
 }
