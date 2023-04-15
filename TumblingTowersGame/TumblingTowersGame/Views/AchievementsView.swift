@@ -18,7 +18,7 @@ struct AchievementsView: View {
             BackgroundView()
             
             VStack {
-                Text("Achievements")
+                Text("Singleplayer Achievements")
                     .modifier(CategoryText())
                 ForEach($gameEngineMgr.achievements) { achievment in
                     VStack {
