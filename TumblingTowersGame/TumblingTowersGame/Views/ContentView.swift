@@ -57,22 +57,19 @@ struct ContentView: View {
             ZStack {
                 if mainGameMgr.playersMode == .singleplayer, mainGameMgr.countGEM() {
                     if mainGameMgr.gameEngineMgrs.count >= 1,
-                       let gameEngineMgr = mainGameMgr.gameEngineMgrs[0],
-                       gameEngineMgr.gameEnded {
+                       mainGameMgr.gameEngineMgrs[0].gameEnded {
                                 GameEndView(currGameScreen: $currGameScreen)
-                                    .environmentObject(gameEngineMgr)
+                                    .environmentObject(mainGameMgr.gameEngineMgrs[0])
                     }
                 } else if mainGameMgr.playersMode == .multiplayer {
                     if mainGameMgr.gameEngineMgrs.count == 2,
-                       let gameEngineMgr = mainGameMgr.gameEngineMgrs[0],
-                       let gameEngineMgr2 = mainGameMgr.gameEngineMgrs[1],
-                       gameEngineMgr.gameEnded {
+                       mainGameMgr.gameEngineMgrs[0].gameEnded {
                         VStack {
                             GameEndView(currGameScreen: $currGameScreen)
-                                .environmentObject(gameEngineMgr)
+                                .environmentObject(mainGameMgr.gameEngineMgrs[0])
                                 .rotation3DEffect(.degrees(180), axis: (x: 0, y: 0, z: 1))
                             GameEndView(currGameScreen: $currGameScreen)
-                                .environmentObject(gameEngineMgr2)
+                                .environmentObject(mainGameMgr.gameEngineMgrs[1])
                         }
                     }
                 }
