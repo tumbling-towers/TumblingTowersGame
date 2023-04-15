@@ -19,7 +19,7 @@ class ViewAdapter: GameRendererDelegate, ObservableObject {
     
     var levelDimensions: CGRect
     var gameEngineMgr: GameEngineManager
-    
+
     @Published var gameMode: GameMode?
     @Published var timeRemaining: Int = 0
     @Published var score: Int = 0
@@ -33,7 +33,7 @@ class ViewAdapter: GameRendererDelegate, ObservableObject {
     }
     
     func dragEvent(offset: CGSize) {
-        gameEngineMgr.dragEvent(offset: offset)
+        gameEngineMgr.dragEvent(offset: CGSize(width: offset.width, height: -offset.height))
     }
     
     @Published var referenceBox: CGRect = .infinite

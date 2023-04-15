@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1202341029E9A1490021A8E1 /* ViewAdapater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1202340F29E9A1490021A8E1 /* ViewAdapater.swift */; };
+		1202341029E9A1490021A8E1 /* ViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1202340F29E9A1490021A8E1 /* ViewAdapter.swift */; };
 		122BA13729D9595100196052 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122BA13629D9595100196052 /* StorageManager.swift */; };
 		122BA13A29D9AF9600196052 /* StorageManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122BA13929D9AF9600196052 /* StorageManagerTests.swift */; };
 		124B02C129C415CC00094CF5 /* BlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124B02C029C415CC00094CF5 /* BlockView.swift */; };
@@ -198,7 +198,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1202340F29E9A1490021A8E1 /* ViewAdapater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewAdapater.swift; sourceTree = "<group>"; };
+		1202340F29E9A1490021A8E1 /* ViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewAdapter.swift; sourceTree = "<group>"; };
 		122BA13629D9595100196052 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		122BA13929D9AF9600196052 /* StorageManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManagerTests.swift; sourceTree = "<group>"; };
 		124B02C029C415CC00094CF5 /* BlockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockView.swift; sourceTree = "<group>"; };
@@ -567,7 +567,7 @@
 				146E2DE329C0D61A00BFC757 /* MainGameManager.swift */,
 				124B02C829C4171400094CF5 /* ViewImageManager.swift */,
 				14C6732A29D370AE00D8DF78 /* SettingsManager.swift */,
-				1202340F29E9A1490021A8E1 /* ViewAdapater.swift */,
+				1202340F29E9A1490021A8E1 /* ViewAdapter.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -1073,7 +1073,7 @@
 				61EB621E29DF38E400011A03 /* PlayersSelectView.swift in Sources */,
 				61F4F01D29DDFC090002AD69 /* CustomButton.swift in Sources */,
 				124B02D329C4204300094CF5 /* GameObjectPlatform.swift in Sources */,
-				1202341029E9A1490021A8E1 /* ViewAdapater.swift in Sources */,
+				1202341029E9A1490021A8E1 /* ViewAdapter.swift in Sources */,
 				61FC031729CD498400CE2CE5 /* Shape+Fill.swift in Sources */,
 				2F05841F29E29B7800605AEC /* GameWorldObjectType.swift in Sources */,
 				2F379D5629E5546500783575 /* AchievementsView.swift in Sources */,

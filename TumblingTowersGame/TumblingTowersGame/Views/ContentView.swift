@@ -38,10 +38,10 @@ struct ContentView: View {
             } else if currGameScreen == .multiplayerGameplay,
                       let gameMode = mainGameMgr.gameMode {
                       
-                  let gameEngineMgr = mainGameMgr.createGameEngineManager(height: deviceHeight, width: deviceWidth)
-                  let viewAdapter = ViewAdapter(levelDimensions: CGRect(x: 0, y: 0, width: deviceWidth, height: deviceHeight), gameEngineMgr: gameEngineMgr)
-                  let gameEngineMgr2 = mainGameMgr.createGameEngineManager(height: deviceHeight, width: deviceWidth)
-                  let viewAdapter2 = ViewAdapter(levelDimensions: CGRect(x: 0, y: 0, width: deviceWidth, height: deviceHeight), gameEngineMgr: gameEngineMgr2)
+                  let gameEngineMgr = mainGameMgr.createGameEngineManager(height: deviceHeight / 2, width: deviceWidth)
+                  let viewAdapter = ViewAdapter(levelDimensions: CGRect(x: 0, y: 0, width: deviceWidth, height: deviceHeight / 2), gameEngineMgr: gameEngineMgr)
+                  let gameEngineMgr2 = mainGameMgr.createGameEngineManager(height: deviceHeight / 2, width: deviceWidth)
+                  let viewAdapter2 = ViewAdapter(levelDimensions: CGRect(x: 0, y: 0, width: deviceWidth, height: deviceHeight / 2), gameEngineMgr: gameEngineMgr2)
                 
                 VStack {
                     GameplayLevelView(currGameScreen: $currGameScreen, viewAdapter: viewAdapter, gameMode: gameMode)

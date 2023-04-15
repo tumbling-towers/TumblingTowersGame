@@ -60,7 +60,7 @@ Swipe Down: Speeds up the downward movement of the block.
     }
 
     func dragEvent(offset: CGSize) {
-        if offset.height > 0 {
+        if offset.height < 0 {
             // detected as a swipe down
             inputData = InputData(inputType: .DOWN, vector: InputData.unitDown * yMultiplier)
         }
