@@ -10,4 +10,6 @@ import Foundation
 enum PlayersMode {
     case singleplayer
     case multiplayer
+    case threeplayer
+    case fourplayer
 }

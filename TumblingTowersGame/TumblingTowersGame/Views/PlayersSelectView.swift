@@ -21,13 +21,21 @@ struct PlayersSelectView: View {
                 Text("How many players:")
                     .modifier(MenuButtonText(fontSize: 50))
                 Spacer().frame(height: 100)
-                HStack {
-                    drawPlayersOption(playersMode: .singleplayer, name: "Singleplayer", fontSize: 30.0, red: 1, green: 0.341, blue: 0.341)
-                    
-                    drawPlayersOption(playersMode: .multiplayer, name: "Multiplayer", fontSize: 30.0, red: 0.322, green: 0.443, blue: 1)
-                    
-                    // MARK: Add back later
-                    //                    drawGameModeOption(gameMode: .RACECLOCK, name: "RACE AGAINST CLOCK", fontSize: 30.0)
+                VStack {
+                    HStack {
+                        drawPlayersOption(playersMode: .singleplayer, name: "Singleplayer", fontSize: 30.0, red: 1, green: 0.341, blue: 0.341)
+
+                        drawPlayersOption(playersMode: .multiplayer, name: "2 Players", fontSize: 30.0, red: 0.322, green: 0.443, blue: 1)
+
+                        // MARK: Add back later
+                        //                    drawGameModeOption(gameMode: .RACECLOCK, name: "RACE AGAINST CLOCK", fontSize: 30.0)
+                    }
+
+                    HStack {
+                        drawPlayersOption(playersMode: .threeplayer, name: "3 Players", fontSize: 30.0, red: 0.322, green: 1, blue: 0.322)
+
+                        drawPlayersOption(playersMode: .fourplayer, name: "4 Players", fontSize: 30.0, red: 1, green: 1, blue: 0.322)
+                    }
                 }
                 
                 NormalGoBackButtonView(currGameScreen: $currGameScreen)
