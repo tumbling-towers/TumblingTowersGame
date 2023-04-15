@@ -25,19 +25,19 @@ class TallEnoughGameMode: GameMode {
     static let scoreTimeWithBonusScore = 60
 
     // MARK: Tracking State of Game
-    var currPowerupLineAmt = 0
-    var currBlocksPlaced = 0
-    var currBlocksDropped = 0
-    let playerId: UUID
+    private var currPowerupLineAmt = 0
+    private var currBlocksPlaced = 0
+    private var currBlocksDropped = 0
+    private let playerId: UUID
 
     var isStarted = false
     var isGameEnded = false
 
-    var shortLevel = false
+    private var shortLevel = false
 
     // MARK: Multiplayer States
-    var isEndedByOtherPlayer = false
-    var overwriteGameState: Constants.GameState?
+    private var isEndedByOtherPlayer = false
+    private var overwriteGameState: Constants.GameState?
 
     required init(eventMgr: EventManager, playerId: UUID, levelHeight: CGFloat) {
         self.eventMgr = eventMgr

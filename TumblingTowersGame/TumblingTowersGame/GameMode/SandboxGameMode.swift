@@ -20,9 +20,9 @@ class SandboxGameMode: GameMode {
     let scoreBlocksDroppedMultiplier = 25
     
     // MARK: Tracking State of Game
-    var currBlocksPlaced = 0
-    var currBlocksDropped = 0
-    let playerId: UUID
+    private var currBlocksPlaced = 0
+    private var currBlocksDropped = 0
+    private let playerId: UUID
 
     var isStarted = false
     var isGameEnded = false
