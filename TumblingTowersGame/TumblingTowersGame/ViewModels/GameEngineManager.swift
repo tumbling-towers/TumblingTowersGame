@@ -5,18 +5,9 @@
 //
 
 import Foundation
-import SwiftUI
 import SpriteKit
 
 class GameEngineManager: ObservableObject {
-    @Published var goalLinePosition = CGPoint()
-    @Published var powerUpLinePosition = CGPoint()
-    @Published var powerupLineDimensions = CGSize()
-    @Published var levelBlocks: [GameObjectBlock] = []
-    @Published var levelPlatforms: [GameObjectPlatform] = []
-    @Published var powerups: [Powerup.Type?] = [Powerup.Type?](repeating: nil, count: 5)
-    @Published var achievements: [DisplayableAchievement] = []
-
     var playerId = UUID()
 
     var eventManager: EventManager?
@@ -88,6 +79,12 @@ class GameEngineManager: ObservableObject {
             return "Please try again!"
         }
     }
+    
+    var rendererDelegate: GameRendererDelegate
+    
+    var powerups: [Powerup.Type?] = [Powerup.Type?](repeating: nil, count: 5)
+    
+    var achievements: [DisplayableAchievement] = []
 
     init(levelDimensions: CGRect, eventManager: EventManager, inputType: InputSystem.Type, storageManager: StorageManager) {
         self.levelDimensions = levelDimensions
@@ -99,6 +96,10 @@ class GameEngineManager: ObservableObject {
 
         registerEvents()
         updateAchievements()
+    }
+    
+    func setRendererDelegate(_ renderer: GameRendererDelegate) {
+        self.rendererDelegate = renderer
     }
 
     // TODO: REMOVE THIS
@@ -156,10 +157,14 @@ class GameEngineManager: ObservableObject {
         gameEngine.resetGame()
         gameMode?.resetGame()
     }
+    
 
     func update() {
         updateGameEngine()
-        renderCurrentFrame()
+        
+        let levelToRender = gameEngine.gameWorld.level
+        rendererDelegate.renderCurrentFrame(levelToRender)
+        
         updateAchievements()
     }
 
@@ -170,12 +175,6 @@ class GameEngineManager: ObservableObject {
         gameEngine.moveCMBSideways(by: currInput.vector)
         gameEngine.moveCMBDown(by: currInput.vector)
 
-    }
-
-    func renderCurrentFrame() {
-        let levelToRender = convertLevel(gameWorldLevel: gameEngine.gameWorld.level)
-        renderLevel(gameObjectBlocks: levelToRender.blocks, gameObjectPlatforms: levelToRender.platforms)
-        rerender()
     }
 
     func rotateCurrentBlock() {
@@ -199,47 +198,7 @@ class GameEngineManager: ObservableObject {
         gameMode?.resumeGame()
     }
 
-    /// GameEngine outputs coordinates with the origin at the bottom-left.
-    /// This method converts it such that the origin is at the top-left.
-    private func adjustCoordinates(for point: CGPoint) -> CGPoint {
-        let newPoint = CGPoint(x: point.x, y: levelDimensions.height - point.y)
-        return newPoint
-    }
-
-    private func transformRenderable(for block: GameObjectBlock) -> GameObjectBlock {
-        // Flips the block vertically (mirror image) due to difference in coordinate system
-        let path = transformPath(path: block.path, width: block.width, height: block.height)
-        let newPosition = adjustCoordinates(for: block.position)
-        // TODO: Don't return a new block
-        let transformedBlock = GameObjectBlock(position: newPosition, path: path, specialProperties: block.specialProperties)
-        return transformedBlock
-    }
-    
-    private func convertLevel(gameWorldLevel: GameWorldLevel) -> Level {
-        var blocks: [GameObjectBlock] = []
-        var platforms: [GameObjectPlatform] = []
-        
-        for object in gameEngine.level.gameObjects {
-            if type(of: object) == Block.self {
-                guard let block = object as? Block, let tetrisShape = block.shape as? TetrisShape else { continue }
-                blocks.append(GameObjectBlock(position: block.position, path: tetrisShape.path, rotation: block.rotation, specialProperties: block.specialProperties))
-            } else if type(of: object) == Platform.self {
-                guard object is Platform else { continue }
-                platforms.append(GameObjectPlatform(position: object.position, width: object.width, height: object.height))
-            }
-        }
-        
-        return Level(blocks: blocks, platforms: platforms)
-    }
-
-    private func transformPath(path: CGPath, width: Double, height: Double) -> CGPath {
-        let path = UIBezierPath(cgPath: path)
-        var flip = CGAffineTransformMakeScale(1, -1)
-        flip = CGAffineTransformTranslate(flip, width / 2, -height / 2)
-        path.apply(flip)
-        return path.cgPath
-    }
-
+ 
     private func registerEvents() {
         eventManager?.registerClosure(for: PowerupAvailableEvent.self, closure: { [self] event in
             switch event {
@@ -266,41 +225,5 @@ class GameEngineManager: ObservableObject {
             newAchievements.append(newAchievement)
         }
         achievements = newAchievements
-    }
-}
-
-extension GameEngineManager: GameRendererDelegate {
-    func rerender() {
-        objectWillChange.send()
-    }
-
-    func renderLevel(gameObjectBlocks: [GameObjectBlock], gameObjectPlatforms: [GameObjectPlatform]) {
-        var invertedGameObjBlocks: [GameObjectBlock] = []
-        var invertedGameObjPlatforms: [GameObjectPlatform] = []
-
-        for gameObjectBlock in gameObjectBlocks {
-            let transformedBlock = transformRenderable(for: gameObjectBlock)
-            invertedGameObjBlocks.append(transformedBlock)
-        }
-
-        for var platform in gameObjectPlatforms {
-            let transformedPlatformPosition = adjustCoordinates(for: platform.position)
-            platform.position = transformedPlatformPosition
-            invertedGameObjPlatforms.append(platform)
-        }
-
-        if let powerupLine = gameEngine.level.powerupLine {
-            powerUpLinePosition = adjustCoordinates(for: powerupLine.position)
-                                  .add(by: CGVector(dx: -powerupLineDimensions.width / 2,
-                                                    dy: 0))
-            powerupLineDimensions = CGSize(width: powerupLine.dimensions.width, height: powerupLine.dimensions.height)
-        }
-
-        self.levelBlocks = invertedGameObjBlocks
-        self.levelPlatforms = invertedGameObjPlatforms
-    }
-
-    func getCurrInput() -> InputData {
-        inputSystem.getInput()
     }
 }

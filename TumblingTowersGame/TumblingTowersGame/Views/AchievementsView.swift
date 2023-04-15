@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AchievementsView: View {
-    @EnvironmentObject var gameEngineMgr: GameEngineManager
+    @EnvironmentObject var viewAdapter: ViewAdapter
 
     @Binding var currGameScreen: Constants.CurrGameScreens
 
@@ -19,7 +19,7 @@ struct AchievementsView: View {
             VStack {
                 Text("Achievements")
                     .modifier(CategoryText())
-                ForEach($gameEngineMgr.achievements) { achievment in
+                ForEach($viewAdapter.achievements) { achievment in
                     VStack {
                         HStack {
                             Text(achievment.wrappedValue.name)
@@ -34,13 +34,13 @@ struct AchievementsView: View {
                                     width: 20,
                                     height: 20,
                                     alignment: .center)
-                        }.frame(width: 2/3 * gameEngineMgr.levelDimensions.width)
+                        }.frame(width: 2/3 * viewAdapter.levelDimensions.width)
                         HStack {
                             Text(achievment.wrappedValue.description)
                                 .modifier(BodyText())
                             Spacer()
                         }
-                    }.frame(width: 2/3 * gameEngineMgr.levelDimensions.width)
+                    }.frame(width: 2/3 * viewAdapter.levelDimensions.width)
                 }
                 
                 NormalGoBackButtonView(currGameScreen: $currGameScreen)

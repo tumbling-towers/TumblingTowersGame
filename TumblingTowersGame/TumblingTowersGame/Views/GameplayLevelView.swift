@@ -10,7 +10,7 @@ import SwiftUI
 
 struct GameplayLevelView: View {
     @Binding var currGameScreen: Constants.CurrGameScreens
-    @StateObject var gameEngineMgr: GameEngineManager
+    @StateObject var viewAdapter: ViewAdapter
     @State var gameMode: Constants.GameModeTypes
     
     // for tracking drag movement
@@ -23,18 +23,18 @@ struct GameplayLevelView: View {
 
             // present actual level rendered by swift ui above sprite view
             LevelView(currGameScreen: $currGameScreen)
-            .environmentObject(gameEngineMgr)
+            .environmentObject(viewAdapter)
             .onAppear(perform: {
-                gameEngineMgr.startGame(gameMode: gameMode)
+                viewAdapter.startGame(gameMode: gameMode)
             })
             .gesture(DragGesture(minimumDistance: 0)
                 .onChanged { gesture in
                     offset = gesture.translation
-                    gameEngineMgr.dragEvent(offset: offset)
+                    viewAdapter.dragEvent(offset: offset)
                 }
                 .onEnded { _ in
                     offset = .zero
-                    gameEngineMgr.resetInput()
+                    viewAdapter.resetInput()
                 }
             )
         }
@@ -42,7 +42,7 @@ struct GameplayLevelView: View {
 
     private func getUselessSKSceneToPresent() -> SKScene {
         // Equivalent to gameEngine?.fiziksEngine
-        guard let gameFiziksEngine = gameEngineMgr.getPhysicsEngine() as? GameFiziksEngine else {
+        guard let gameFiziksEngine = viewAdapter.getPhysicsEngine() as? GameFiziksEngine else {
             // TODO: throw error
             return SKScene()
         }
@@ -52,6 +52,6 @@ struct GameplayLevelView: View {
 
 struct GameplayLevelView_Previews: PreviewProvider {
     static var previews: some View {
-        GameplayLevelView(currGameScreen: .constant(.singleplayerGameplay), gameEngineMgr: GameEngineManager(levelDimensions: .infinite, eventManager: TumblingTowersEventManager(), inputType: TapInput.self, storageManager: StorageManager()), gameMode: .SANDBOX)
+        GameplayLevelView(currGameScreen: .constant(.singleplayerGameplay), viewAdapter: GameEngineManager(levelDimensions: .infinite, eventManager: TumblingTowersEventManager(), inputType: TapInput.self, storageManager: StorageManager()), gameMode: .SANDBOX)
     }
 }
