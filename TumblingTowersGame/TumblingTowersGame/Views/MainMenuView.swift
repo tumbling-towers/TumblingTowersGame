@@ -9,7 +9,6 @@ import SwiftUI
 
 struct MainMenuView: View {
     @EnvironmentObject var mainGameMgr: MainGameManager
-    @EnvironmentObject var gameEngineMgr: GameEngineManager
 
     @Binding var currGameScreen: Constants.CurrGameScreens
 
@@ -20,36 +19,64 @@ struct MainMenuView: View {
             VStack {
                 Spacer()
 
-                Text("Welcome to.....")
-                Text("TUBMLING TOWERS")
-                    .font(.system(size: 60, weight: .heavy))
+                Image(ViewImageManager.mainLogo)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 500)
+                    
 
                 Spacer()
 
                 Button {
-                    currGameScreen = .gameModeSelection
+                    withAnimation {
+                        currGameScreen = .playerOptionSelection
+                    }
                 } label: {
-                    Text("START GAME")
-                        .modifier(MenuButtonText(fontSize: 30))
+                    Text("Play")
+                        .modifier(CustomButton(fontSize: 40))
                 }
+                
+                Spacer().frame(height: 50)
+                
+                Button {
+                    withAnimation {
+                        currGameScreen = .achievements
+                    }
+                } label: {
+                    Text("Achievements")
+                        .modifier(CustomButton(fontSize: 40))
+                }
+                .modifier(CustomButton(fontSize: 40))
+                
+                Spacer().frame(height: 50)
 
                 Button {
-                    currGameScreen = .achievements
+                    withAnimation {
+                        currGameScreen = .settings
+                    }
                 } label: {
-                    Text("ACHIEVEMENTS")
-                        .modifier(MenuButtonText(fontSize: 30, padding: 50))
+                    Text("Settings")
+                        .modifier(CustomButton(fontSize: 40))
                 }
-
-                Button {
-                    currGameScreen = .settings
-                } label: {
-                    Text("SETTINGS")
-                        .modifier(MenuButtonText(fontSize: 30))
-                }
+                .modifier(CustomButton(fontSize: 40))
 
                 Spacer()
                 Spacer()
             }
+
+            GeometryReader { geo in
+                Button {
+                    withAnimation {
+                        currGameScreen = .tutorial
+                    }
+                } label: {
+                    Text("?")
+                        .modifier(SquareCustomButton(fontSize: 50))
+                }
+                .modifier(SquareCustomButton(fontSize: 50))
+                .position(x: geo.size.width - 100, y: geo.size.height - 100)
+            }
+
         }
         .ignoresSafeArea(.all)
     }
@@ -59,6 +86,5 @@ struct MainMenuView_Previews: PreviewProvider {
     static var previews: some View {
         MainMenuView(currGameScreen: .constant(.mainMenu))
             .environmentObject(MainGameManager())
-            .environmentObject(GameEngineManager(levelDimensions: .infinite, eventManager: TumblingTowersEventManager()))
     }
 }

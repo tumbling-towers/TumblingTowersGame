@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct BlockView: View {
-    @EnvironmentObject var gameEngineMgr: GameEngineManager
     @Binding var block: GameObjectBlock
     static let color = Color(
         red: .random(in: 0...1),
@@ -19,7 +18,7 @@ struct BlockView: View {
 
     var body: some View {
         PathViewShape(cgPath: block.path)
-            .fill(BlockView.color, strokeBorder: block.isGlue
+            .fill(BlockView.color, strokeBorder: block.specialProperties.isGlue
                   ? .white : .black, lineWidth: 2)
             .frame(width: block.width, height: block.height)
             .position(block.position)
@@ -29,7 +28,5 @@ struct BlockView: View {
 struct BlockView_Previews: PreviewProvider {
     static var previews: some View {
         BlockView(block: .constant(GameObjectBlock.sampleBlock))
-            .environmentObject(GameEngineManager(levelDimensions: .infinite,
-                                                 eventManager: TumblingTowersEventManager()))
     }
 }

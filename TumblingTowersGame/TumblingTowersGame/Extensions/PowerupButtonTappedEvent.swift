@@ -8,9 +8,11 @@
 import Foundation
 
 class PowerupButtonTappedEvent: TumblingTowersEvent {
-    let type: Powerup.Type
+    let idx: Int
+    let gameWorld: GameWorld
 
-    init(type: Powerup.Type) {
-        self.type = type
+    init(idx: Int, for gameWorld: GameWorld) {
+        self.idx = idx
+        self.gameWorld = gameWorld
     }
 }

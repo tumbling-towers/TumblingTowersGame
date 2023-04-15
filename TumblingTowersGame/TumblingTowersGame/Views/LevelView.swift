@@ -8,72 +8,37 @@
 import SwiftUI
 
 struct LevelView: View {
-    @EnvironmentObject var gameEngineMgr: GameEngineManager
+    @EnvironmentObject var mainGameMgr: MainGameManager
+    @EnvironmentObject var viewAdapter: ViewAdapter
+    @Binding var currGameScreen: Constants.CurrGameScreens
 
     var body: some View {
         ZStack {
-            BackgroundView()
+            LevelBackgroundView()
 
-            ForEach($gameEngineMgr.levelBlocks) { block in
+            ForEach($viewAdapter.levelBlocks) { block in
                 BlockView(block: block)
             }
 
-            ForEach($gameEngineMgr.levelPlatforms) { platform in
+            ForEach($viewAdapter.levelPlatforms) { platform in
                 PlatformView(platform: platform)
             }
 
             PowerupLineView()
 
-            Button {
-                gameEngineMgr.rotateCurrentBlock()
-            } label: {
-                Image("rotate")
-                    .resizable()
-                    .frame(width: 50, height: 50)
-                    .padding(20)
-            }
-            .padding()
-            .foregroundColor(.white)
-            .background(Color.blue)
-            .frame(width: 70, height: 70)
-            .clipShape(Circle())
-            // TODO: Potentially could make this adjustable to be on left/right of screen (in settings)
-            .position(x: gameEngineMgr.levelDimensions.width - 100, y: gameEngineMgr.levelDimensions.height - 100)
-            .shadow(color: .black, radius: 5, x: 1, y: 1)
+            Rectangle()
+                .path(in: viewAdapter.referenceBox)
+                .fill(.blue.opacity(0.1), strokeBorder: .blue)
 
-            if let powerup = gameEngineMgr.powerup,
-               let image = ViewImageManager.powerupToImage[powerup.type] {
-                Button {
-                    gameEngineMgr.usePowerup()
-                } label: {
-                    Image(image)
-                        .resizable()
-                        .frame(width: 50, height: 50)
-                        .padding(20)
-                }
-                .padding()
-                .foregroundColor(.white)
-                .background(Color.blue)
-                .frame(width: 70, height: 70)
-                .clipShape(Circle())
-                // TODO: Potentially could make this adjustable to be on left/right of screen (in settings)
-                .position(x: 100, y: gameEngineMgr.levelDimensions.height - 100)
-                .shadow(color: .black, radius: 5, x: 1, y: 1)
-            }
 
-            if let box = gameEngineMgr.referenceBox {
-                Rectangle()
-                    .path(in: box)
-                    .fill(.blue.opacity(0.1), strokeBorder: .blue)
-            }
-
+            GameplayGuiView(currGameScreen: $currGameScreen)
         }
     }
 }
 
 struct LevelView_Previews: PreviewProvider {
     static var previews: some View {
-        LevelView()
-            .environmentObject(GameEngineManager(levelDimensions: .infinite, eventManager: TumblingTowersEventManager()))
+        LevelView(currGameScreen: .constant(.singleplayerGameplay))
+            .environmentObject(ViewAdapter(levelDimensions: .infinite, gameEngineMgr: GameEngineManager(levelDimensions: .infinite, eventManager: TumblingTowersEventManager(), inputType: TapInput.self, storageManager: StorageManager(), playersMode: .singleplayer)))
     }
 }

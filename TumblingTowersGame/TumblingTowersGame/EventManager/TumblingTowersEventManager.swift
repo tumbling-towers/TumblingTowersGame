@@ -14,18 +14,11 @@ class TumblingTowersEventManager: EventManager {
     var NCfacade = NotificationCenterFacade.shared
     var observerClosures: [EventIdentifier: [EventClosure]]
 
+    var addedNames = Set<NotificationName>()
+
     init() {
         observerClosures = [:]
-    }
-
-    func reinit() {
-        for eventIdentifier in observerClosures.keys {
-            observerClosures[eventIdentifier] = nil
-
-            NCfacade.removeObserver(observer: self, notificationName: eventIdentifier.notificationName, object: nil)
-        }
-
-        observerClosures = [:]
+        addedNames = []
     }
 
     func postEvent(_ event: Event) {
@@ -40,14 +33,16 @@ class TumblingTowersEventManager: EventManager {
         observerClosures[T.identifier, default: []].append(closure)
     }
 
+    func removeAllClosures() {
+        NCfacade.removeAllObservers(notificationNames: Array(addedNames))
+        observerClosures.removeAll()
+    }
+
     @objc
     private func executeObserverClosures(_ notification: Notification) {
-        guard
-            let event = notification.userInfo?["event"] as? Event,
-            let closures = observerClosures[event.identifier]
-        else {
-            return
-        }
+        guard let event = notification.userInfo?["event"] as? Event,
+              let closures = observerClosures[event.identifier]
+        else { return }
 
         for closure in closures {
             closure(event)
@@ -55,13 +50,10 @@ class TumblingTowersEventManager: EventManager {
     }
 
     private func createObserver<T: Event>(for event: T.Type, observer: AnyObject, selector: Selector) {
-
         let notificationName = T.identifier.notificationName
 
-        NCfacade.createObserver(observer: observer, selector: selector, notificationName: notificationName, object: nil)
-    }
+        addedNames.insert(notificationName)
 
-//    func degisterClosure<T: Event>(for event: T.Type, closure: @escaping EventClosure) {
-//        observerClosures[T.identifier]?.removeAll(where: {$0 == closure})
-//    }
+        NCfacade.createObserver(observer: observer, selector: selector, notificationName: notificationName)
+    }
 }

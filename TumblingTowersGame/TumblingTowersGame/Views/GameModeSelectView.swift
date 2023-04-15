@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct GameModeSelectView: View {
-    @EnvironmentObject var gameEngineMgr: GameEngineManager
+    @EnvironmentObject var mainGameMgr: MainGameManager
     @Binding var currGameScreen: Constants.CurrGameScreens
-
+    
     var body: some View {
         ZStack {
 
@@ -18,25 +18,69 @@ struct GameModeSelectView: View {
 
             VStack {
                 Spacer()
-                Text("Select Game Mode::")
-                    .font(.system(size: 30))
-                    .padding(.all, 30)
+                Text("Choose your game mode:")
+                    .modifier(MenuButtonText(fontSize: 50))
+                Spacer().frame(height: 100)
 
-                HStack {
-                    drawGameModeOption(gameMode: .SURVIVAL, name: "SURVIVAL", fontSize: 30.0)
+                VStack {
 
-                    drawGameModeOption(gameMode: .RACECLOCK, name: "RACE AGAINST CLOCK", fontSize: 30.0)
+                    if $mainGameMgr.playersMode.wrappedValue == .singleplayer {
+                        HStack {
+                            drawGameModeOption(gameMode: .SURVIVAL, playerMode: .singleplayer,
+                                               name: Constants.GameModeTypes.SURVIVAL.rawValue.uppercased(),
+                                               fontSize: 30.0, red: 1, green: 0.341, blue: 0.341)
+
+                            drawGameModeOption(gameMode: .SANDBOX, playerMode: .singleplayer,
+                                               name: Constants.GameModeTypes.SANDBOX.rawValue.uppercased(),
+                                               fontSize: 30.0, red: 0.322, green: 0.443, blue: 1)
+                        }
+
+                        HStack {
+                            drawGameModeOption(gameMode: .RACECLOCK, playerMode: .singleplayer,
+                                               name: Constants.GameModeTypes.RACECLOCK.rawValue.uppercased(),
+                                               fontSize: 30.0, red: 0.322, green: 1, blue: 0.322)
+
+                            drawGameModeOption(gameMode: .TALLENOUGH, playerMode: .singleplayer,
+                                               name: Constants.GameModeTypes.TALLENOUGH.rawValue.uppercased(),
+                                               fontSize: 25.0, red: 1, green: 1, blue: 0.322)
+                        }
+                    } else if $mainGameMgr.playersMode.wrappedValue == .multiplayer {
+                        HStack {
+                            drawGameModeOption(gameMode: .SURVIVAL, playerMode: .multiplayer,
+                                               name: Constants.GameModeTypes.SURVIVAL.rawValue.uppercased(),
+                                               fontSize: 30.0, red: 1, green: 0.341, blue: 0.341)
+
+                            drawGameModeOption(gameMode: .SANDBOX, playerMode: .multiplayer,
+                                               name: Constants.GameModeTypes.SANDBOX.rawValue.uppercased(),
+                                               fontSize: 30.0, red: 0.322, green: 0.443, blue: 1)
+                        }
+
+                        HStack {
+                            drawGameModeOption(gameMode: .RACECLOCK, playerMode: .multiplayer,
+                                               name: Constants.GameModeTypes.RACECLOCK.rawValue.uppercased(),
+                                               fontSize: 30.0, red: 0.322, green: 1, blue: 0.322)
+
+                            drawGameModeOption(gameMode: .TALLENOUGH, playerMode: .multiplayer,
+                                               name: Constants.GameModeTypes.TALLENOUGH.rawValue.uppercased(),
+                                               fontSize: 25.0, red: 1, green: 1, blue: 0.322)
+                        }
+                    }
                 }
 
-                Button {
-                    currGameScreen = .mainMenu
-                } label: {
-                    Text("BACK")
-                        .modifier(MenuButtonText(fontSize: 20))
-                }
-                .padding(.top, 35.0)
+                NormalGoBackButtonView(currGameScreen: $currGameScreen, destination: .playerOptionSelection)
 
-                drawInstructions()
+//                Button {
+//                    withAnimation {
+//                        currGameScreen = .playerOptionSelection
+//                        mainGameMgr.stopGames()
+//                    }
+//                } label: {
+//                    Text("Back")
+//                        .modifier(CustomButton(fontSize: 25))
+//                }
+
+//                GameplayGoBackMenuView(currGameScreen: $currGameScreen)
+//                .padding(.top, 35.0)
 
                 Spacer()
             }
@@ -45,25 +89,20 @@ struct GameModeSelectView: View {
 
     }
 
-    private func drawGameModeOption(gameMode: Constants.GameModeTypes, name: String, fontSize: CGFloat) -> AnyView {
+    private func drawGameModeOption(gameMode: Constants.GameModeTypes, playerMode: PlayersMode, name: String, fontSize: CGFloat, red: Double, green: Double, blue: Double) -> AnyView {
         AnyView(
             Button {
-//                gameEngineMgr.setGameMode(gameMode: gameMode)
-                gameEngineMgr.startGame(gameMode: gameMode)
-                currGameScreen = .gameplay
+                mainGameMgr.gameMode = gameMode
+                if playerMode == .singleplayer {
+                    currGameScreen = .singleplayerGameplay
+                } else if playerMode == .multiplayer {
+                    // do something
+                    currGameScreen = .multiplayerGameplay
+                }
             } label: {
                 Text(name)
-                    .modifier(MenuButtonText(fontSize: fontSize))
+                    .modifier(SecondaryButton(fontSize: fontSize, red: red, green: green, blue: blue))
             }
-        )
-    }
-
-    private func drawInstructions() -> AnyView {
-        AnyView(
-            Text("Choose your Game Mode!")
-                .foregroundColor(.black)
-                .font(.system(size: 20, weight: .bold))
-                .padding(.top, 100)
         )
     }
 }
@@ -71,7 +110,5 @@ struct GameModeSelectView: View {
 struct GameModeSelectView_Previews: PreviewProvider {
     static var previews: some View {
         GameModeSelectView(currGameScreen: .constant(.gameModeSelection))
-            .environmentObject(GameEngineManager(levelDimensions: .infinite,
-                                                 eventManager: TumblingTowersEventManager()))
     }
 }

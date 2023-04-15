@@ -9,13 +9,33 @@ import Foundation
 
 protocol GameMode {
 
-    var name: String { get }
+    static var name: String { get }
 
-    func getGameState() -> Constants.GameState
+    static var description: String { get }
 
-    func getScore() -> Int
+    init(eventMgr: EventManager, playerId: UUID, levelHeight: CGFloat)
 
-    func getTimeRemaining() -> Float
+    func update()
 
-    func restartGame()
+    var gameState: Constants.GameState { get }
+
+    var isGameEnded: Bool { get }
+
+    var score: Int { get }
+
+    var time: Int { get }
+
+    var gameEndMainMessage: String { get }
+
+    var gameEndSubMessage: String { get }
+
+    func startGame()
+
+    func pauseGame()
+
+    func resumeGame()
+
+    func resetGame()
+
+    func endGame(endedBy: UUID, endState: Constants.GameState)
 }

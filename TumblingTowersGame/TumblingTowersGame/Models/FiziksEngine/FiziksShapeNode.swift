@@ -15,6 +15,18 @@ class FiziksShapeNode: SKShapeNode {
         fiziksBody = nil
         super.init()
         self.path = path
+        self.physicsBody = SKPhysicsBody(polygonFrom: path)
+    }
+    
+    convenience init(rect: CGRect) {
+        let path = CGPath(rect: rect, transform: nil)
+        self.init(path: path)
+    }
+    
+    convenience init(circleOfRadius radius: CGFloat) {
+        let rect = CGRect(x: -radius, y: -radius, width: radius * 2, height: radius * 2)
+        let path = CGPath(ellipseIn: rect, transform: nil)
+        self.init(path: path)
     }
 
     required init?(coder aDecoder: NSCoder) {

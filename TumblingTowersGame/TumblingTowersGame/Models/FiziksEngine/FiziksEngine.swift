@@ -13,8 +13,6 @@ protocol FiziksEngine: AnyObject {
 
     func insertBounds(_ bounds: CGRect)
 
-    func activatePhysics()
-
     // FiziksBody related functions
     func contains(_ fiziksBody: FiziksBody) -> Bool
     func add(_ fiziksBody: FiziksBody)
@@ -23,4 +21,7 @@ protocol FiziksEngine: AnyObject {
     func setWorldGravity(to newValue: CGVector)
     func allBodiesContacted(with fiziksBody: FiziksBody) -> [FiziksBody]
     func isIntersecting(body: FiziksBody, otherBodies: [FiziksBody]) -> Bool
+    func deleteAllBodies()
+    func pause()
+    func unpause()
 }

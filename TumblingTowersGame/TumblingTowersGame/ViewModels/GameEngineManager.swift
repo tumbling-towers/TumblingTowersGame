@@ -1,39 +1,24 @@
 //
 //  GameEngineManager.swift
-//  Gyro
 //
 //  Created by Elvis on 13/3/23.
 //
 
 import Foundation
-import SwiftUI
 import SpriteKit
 
-class GameEngineManager: ObservableObject {
-    @Published var goalLinePosition = CGPoint()
-    @Published var powerUpLinePosition = CGPoint()
-    @Published var powerupLineDimensions = CGSize()
-    @Published var levelBlocks: [GameObjectBlock] = []
-    @Published var levelPlatforms: [GameObjectPlatform] = []
+class GameEngineManager {
+    var playerId = UUID()
 
-    private weak var mainGameMgr: MainGameManager?
     var eventManager: EventManager?
+    var storageManager: StorageManager
 
     // MARK: Game logic related attributes
     var platformPosition: CGPoint? {
         get {
-            gameEngine.platform?.position
-        }
-        set {
-            if let newPosition = newValue {
-                gameEngine.setInitialPlatform(position: newPosition)
-            }
+            gameEngine.level.mainPlatform?.position
         }
     }
-
-    var powerup: Powerup.Type?
-
-    var level = Level.sampleLevel
 
     var levelDimensions: CGRect
 
@@ -44,71 +29,134 @@ class GameEngineManager: ObservableObject {
 
     private var gameUpdater: GameUpdater?
 
-    var gameMode: GameMode = SurvivalGameMode(eventMgr: TumblingTowersEventManager())
+    var gameMode: GameMode? {
+        gameEngine.gameMode
+    }
 
     var referenceBox: CGRect? {
-        guard let refPoints = gameEngine.getReferencePoints() else { return nil }
+        guard let refPoints = gameEngine.gameWorld.referencePoints else { return nil }
 
         let width = refPoints.right.x - refPoints.left.x
         return CGRect(x: refPoints.left.x - 1, y: 0, width: width + 2, height: 3_000)
     }
 
-    init(levelDimensions: CGRect, eventManager: EventManager) {
+    var timeRemaining: Int {
+        if let currTime = gameMode?.time {
+            return currTime
+        } else {
+            return 0
+        }
+    }
+
+    var score: Int {
+        if let currScore = gameMode?.score {
+            return currScore
+        } else {
+            return 0
+        }
+    }
+
+    var gameEnded: Bool {
+        if let ended = gameMode?.isGameEnded {
+            return ended
+        } else {
+            return false
+        }
+    }
+
+    var gameEndMainMessage: String {
+        if let msg = gameMode?.gameEndMainMessage {
+            return msg
+        } else {
+            return "The game has ended."
+        }
+    }
+
+    var gameEndSubMessage: String {
+        if let msg = gameMode?.gameEndSubMessage {
+            return msg
+        } else {
+            return "Please try again!"
+        }
+    }
+    
+    var rendererDelegate: GameRendererDelegate!
+    
+    var powerups: [Powerup.Type?] = [Powerup.Type?](repeating: nil, count: 5)
+
+    var physicsEngine: FiziksEngine {
+        gameEngine.gameWorld.fiziksEngine
+    }
+
+    init(levelDimensions: CGRect, eventManager: EventManager, inputType: InputSystem.Type, storageManager: StorageManager, playersMode: PlayersMode?) {
         self.levelDimensions = levelDimensions
-
-        self.gameEngine = GameEngine(levelDimensions: levelDimensions)
         self.eventManager = eventManager
+        self.storageManager = storageManager
+        self.gameEngine = GameEngine(levelDimensions: levelDimensions, eventManager: eventManager, playerId: playerId, storageManager: storageManager, playersMode: playersMode)
 
-        gameEngine.eventManager = eventManager
-
-        inputSystem = TapInput()
+        inputSystem = inputType.init()
 
         registerEvents()
     }
 
+    func setRendererDelegate(_ renderer: GameRendererDelegate) {
+        self.rendererDelegate = renderer
+    }
+    
     func dragEvent(offset: CGSize) {
         inputSystem.dragEvent(offset: offset)
     }
-
+    
     func resetInput() {
         inputSystem.resetInput()
     }
 
-    func getInput() -> InputData {
-        inputSystem.getInput()
-    }
-
-    func getPhysicsEngine() -> FiziksEngine {
-        gameEngine.fiziksEngine
-    }
-
-    func setUpLevelAndStartEngine(mainGameMgr: MainGameManager) {
-        // set up renderer
-        gameEngine.setRenderer(gameRenderer: self)
-
-        self.mainGameMgr = mainGameMgr
-    }
-
     func startGame(gameMode: Constants.GameModeTypes) {
         // set up game loop
-        gameUpdater = GameUpdater(gameEngine: gameEngine, gameRenderer: self)
+        gameUpdater = GameUpdater(runThisEveryFrame: update)
         gameUpdater?.createCADisplayLink()
 
         // set up game mode
-        if let eventManager = eventManager {
-            if gameMode == .SURVIVAL {
-                self.gameMode = SurvivalGameMode(eventMgr: eventManager)
-            } else if gameMode == .RACECLOCK {
-                self.gameMode = RaceTimeGameMode(eventMgr: eventManager)
-            }
+        let gameModeClass = Constants.getGameModeType(from: gameMode)
+        if let eventManager = eventManager, let gameModeClass = gameModeClass {
+            self.gameEngine.gameMode = gameModeClass.init(eventMgr: eventManager, playerId: playerId, levelHeight: levelDimensions.height)
         }
 
         // set up game in game engine
         gameEngine.startGame()
+    }
 
-        // set up initial platform
-        if let mainGameMgr = mainGameMgr {
-            platformPosition = CGPoint(x: mainGameMgr.deviceWidth / 2, y: 100)
+    func stopGame() {
+        eventManager?.postEvent(GameEndedEvent(playerId: playerId, endState: .NONE))
+    }
+
+    func resetGame() {
+        gameEngine.resetGame()
+        gameMode?.resetGame()
+    }
+
+    private lazy var update = { [weak self] () -> Void in
+        self?.updateGameEngine()
+        self?.renderCurrentFrame()
+    }
+
+    func updateGameEngine() {
+        gameEngine.update()
+        let currInput = inputSystem.calculateInput()
+
+        gameEngine.moveCMBSideways(by: currInput.vector)
+        gameEngine.moveCMBDown(by: currInput.vector)
+
+    }
+
+    func renderCurrentFrame() {
+        if let referenceBoxToUpdate = referenceBox, let gameModeToUpdate = gameMode {
+            rendererDelegate.updateViewVariables(referenceBoxToUpdate: referenceBoxToUpdate, powerupsToUpdate: powerups, gameModeToUpdate: gameModeToUpdate, timeRemainingToUpdate: timeRemaining, scoreToUpdate: score, gameEndedToUpdate: gameEnded, gameEndMainMessageToUpdate: gameEndMainMessage, gameEndSubMessageToUpdate: gameEndSubMessage)
+        }
+//        let levelToRender = gameEngine.gameWorld.level
+
+        if let powerupLine = gameEngine.level.powerupLine {
+            rendererDelegate.renderCurrentFrame(gameObjects: gameEngine.level.gameObjects, powerUpLine: powerupLine)
         }
     }
 
@@ -116,82 +164,41 @@ class GameEngineManager: ObservableObject {
         gameEngine.rotateCMBClockwise()
     }
 
-    func usePowerup() {
-        guard let powerup = powerup else { return }
-        eventManager?.postEvent(PowerupButtonTappedEvent(type: powerup))
-        self.powerup = nil
+    func usePowerup(at idx: Int) {
+        eventManager?.postEvent(PowerupButtonTappedEvent(idx: idx, for: gameEngine.gameWorld))
+        self.powerups[idx] = nil
+    }
+    
+    func pause() {
+        gameUpdater?.pauseGame()
+        gameEngine.pauseGame()
+        gameMode?.pauseGame()
+    }
+    
+    func unpause() {
+        gameUpdater?.unpauseGame()
+        gameEngine.unpauseGame()
+        gameMode?.resumeGame()
     }
 
-    /// GameEngine outputs coordinates with the origin at the bottom-left.
-    /// This method converts it such that the origin is at the top-left.
-    private func adjustCoordinates(for point: CGPoint) -> CGPoint {
-        let newPoint = CGPoint(x: point.x, y: levelDimensions.height - point.y)
-        return newPoint
-    }
-
-    private func transformRenderable(for block: GameObjectBlock) -> GameObjectBlock {
-        // Flips the block vertically (mirror image) due to difference in coordinate system
-        let path = transformPath(path: block.path, width: block.width, height: block.height)
-        let newPosition = adjustCoordinates(for: block.position)
-        // TODO: Don't return a new block
-        let transformedBlock = GameObjectBlock(position: newPosition, path: path, isGlue: block.isGlue)
-        return transformedBlock
-    }
-
-    private func transformPath(path: CGPath, width: Double, height: Double) -> CGPath {
-        let path = UIBezierPath(cgPath: path)
-        var flip = CGAffineTransformMakeScale(1, -1)
-        flip = CGAffineTransformTranslate(flip, width / 2, -height / 2)
-        path.apply(flip)
-        return path.cgPath
-    }
-
+ 
     private func registerEvents() {
-        eventManager?.registerClosure(for: PowerupAvailableEvent.self, closure: { event in
-            switch event {
-            case let powerupAvailableEvent as PowerupAvailableEvent:
-                self.powerup = powerupAvailableEvent.type
-            default:
-                return
-            }
-        })
-    }
-}
-
-extension GameEngineManager: GameRendererDelegate {
-    func rerender() {
-        objectWillChange.send()
+        eventManager?.registerClosure(for: PowerupAvailableEvent.self, closure: powerupAvailableEventFired)
+        eventManager?.registerClosure(for: GameEndedEvent.self, closure: stopGameEventFired)
     }
 
-    func renderLevel(level: Level, gameObjectBlocks: [GameObjectBlock], gameObjectPlatforms: [GameObjectPlatform]) {
-        self.level = level
-
-        var invertedGameObjBlocks: [GameObjectBlock] = []
-        var invertedGameObjPlatforms: [GameObjectPlatform] = []
-
-        for gameObjectBlock in gameObjectBlocks {
-            let transformedBlock = transformRenderable(for: gameObjectBlock)
-            invertedGameObjBlocks.append(transformedBlock)
+    private lazy var powerupAvailableEventFired = { [weak self] (_ event: Event) -> Void in
+        if let powerupAvailableEvent = event as? PowerupAvailableEvent,
+           powerupAvailableEvent.gameWorld === self?.gameEngine.gameWorld {
+                self?.powerups[powerupAvailableEvent.idx] = powerupAvailableEvent.type
         }
-
-        for var platform in gameObjectPlatforms {
-            let transformedPlatformPosition = adjustCoordinates(for: platform.position)
-            platform.position = transformedPlatformPosition
-            invertedGameObjPlatforms.append(platform)
-        }
-
-        if let powerupLine = gameEngine.powerupLine {
-            powerUpLinePosition = adjustCoordinates(for: powerupLine.position)
-                                  .add(by: CGVector(dx: -powerupLineDimensions.width / 2,
-                                                    dy: 0))
-            powerupLineDimensions = CGSize(width: powerupLine.shape.width, height: powerupLine.shape.height)
-        }
-
-        self.levelBlocks = invertedGameObjBlocks
-        self.levelPlatforms = invertedGameObjPlatforms
     }
 
-    func getCurrInput() -> InputData {
-        inputSystem.getInput()
+    private lazy var stopGameEventFired = { [weak self] (_ event: Event) -> Void in
+        if let gameEndEvent = event as? GameEndedEvent {
+            self?.gameUpdater?.stopLevel()
+            self?.gameEngine.stopGame()
+            self?.gameMode?.endGame(endedBy: gameEndEvent.playerId, endState: gameEndEvent.endState)
+        }
     }
 }

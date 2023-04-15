@@ -8,53 +8,76 @@
 import SwiftUI
 
 struct ContentView: View {
-
     @EnvironmentObject var mainGameMgr: MainGameManager
-    @StateObject var gameEngineMgr: GameEngineManager
-    @State var currGameScreen = Constants.CurrGameScreens.mainMenu
 
-    // for tracking drag movement
-    @State private var offset = CGSize.zero
+    @State var deviceHeight: Double
+    @State var deviceWidth: Double
+    @State var currGameScreen = Constants.CurrGameScreens.mainMenu
 
     var body: some View {
 
-        if currGameScreen == .mainMenu {
-            MainMenuView(currGameScreen: $currGameScreen)
-                .environmentObject(mainGameMgr)
-                .environmentObject(gameEngineMgr)
-        } else if currGameScreen == .gameModeSelection {
-            GameModeSelectView(currGameScreen: $currGameScreen)
-                .environmentObject(gameEngineMgr)
-        } else if currGameScreen == .gameplay {
-            ZStack {
-                GameplayLevelView()
-                    .environmentObject(gameEngineMgr)
-                    .gesture(DragGesture(minimumDistance: 0)
-                        .onChanged { gesture in
-                            offset = gesture.translation
-                            gameEngineMgr.dragEvent(offset: offset)
-                        }
-                        .onEnded { _ in
-                            offset = .zero
-                            gameEngineMgr.resetInput()
-                        }
-                    )
+        ZStack {
+            if currGameScreen == .mainMenu {
+                MainMenuView(currGameScreen: $currGameScreen)
+                    .environmentObject(mainGameMgr)
+            } else if currGameScreen == .gameModeSelection {
+                GameModeSelectView(currGameScreen: $currGameScreen)
+            } else if currGameScreen == .singleplayerGameplay,
+                      let gameMode = mainGameMgr.gameMode {
 
-                // MARK: Comment this out later. This is for testing only
-                // We need to keep this view to receive tap input
+                ZStack {
+                    GameplayLevelView(currGameScreen: $currGameScreen, viewAdapter: ViewAdapter(levelDimensions: CGRect(x: 0, y: 0, width: deviceWidth, height: deviceHeight), gameEngineMgr: mainGameMgr.createGameEngineManager(height: deviceHeight, width: deviceWidth)), gameMode: gameMode)
+                }
+                .ignoresSafeArea(.all)
+            } else if currGameScreen == .multiplayerGameplay,
+                      let gameMode = mainGameMgr.gameMode {
+
                 VStack {
-                    Text("Move: " + gameEngineMgr.getInput().inputType.rawValue)
-                    Text("Selected GameMode: " + gameEngineMgr.gameMode.name)
+                    GameplayLevelView(currGameScreen: $currGameScreen, viewAdapter: ViewAdapter(levelDimensions: CGRect(x: 0, y: 0, width: deviceWidth, height: deviceHeight / 2), gameEngineMgr: mainGameMgr.createGameEngineManager(height: deviceHeight / 2, width: deviceWidth)), gameMode: gameMode)
+                    .rotation3DEffect(.degrees(180), axis: (x: 0, y: 0, z: 1))
+                    GameplayLevelView(currGameScreen: $currGameScreen, viewAdapter: ViewAdapter(levelDimensions: CGRect(x: 0, y: 0, width: deviceWidth, height: deviceHeight / 2), gameEngineMgr: mainGameMgr.createGameEngineManager(height: deviceHeight / 2, width: deviceWidth)), gameMode: gameMode)
+                }
+            } else if currGameScreen == .settings {
+                SettingsView(settingsMgr: SettingsManager(), currGameScreen: $currGameScreen, selectedInputType: mainGameMgr.inputSystem)
+                    .environmentObject(mainGameMgr)
+            } else if currGameScreen == .achievements {
+                
+                AchievementsView(currGameScreen: $currGameScreen)
+
+            } else if currGameScreen == .playerOptionSelection {
+                ZStack {
+                    PlayersSelectView(currGameScreen: $currGameScreen)
+                }
+            } else if currGameScreen == .tutorial {
+                TutorialView(currGameScreen: $currGameScreen)
+            }
+
+            drawGameEndScreens()
+
+        }
+    }
+
+    private func drawGameEndScreens() -> AnyView {
+        AnyView(
+            ZStack {
+                if mainGameMgr.playersMode == .singleplayer, mainGameMgr.countGEM() {
+                    if mainGameMgr.gameEngineMgrs.count >= 1,
+                       mainGameMgr.gameEngineMgrs[0].gameEnded {
+                        GameEndView(currGameScreen: $currGameScreen, gameEngineMgr: mainGameMgr.gameEngineMgrs[0])
+                    }
+                } else if mainGameMgr.playersMode == .multiplayer {
+                    if mainGameMgr.countGEM(),
+                        mainGameMgr.gameEngineMgrs.count == 2,
+                       mainGameMgr.gameEngineMgrs[0].gameEnded {
+                        VStack {
+                            GameEndView(currGameScreen: $currGameScreen,  gameEngineMgr: mainGameMgr.gameEngineMgrs[0])
+                                .rotation3DEffect(.degrees(180), axis: (x: 0, y: 0, z: 1))
+                            GameEndView(currGameScreen: $currGameScreen,  gameEngineMgr: mainGameMgr.gameEngineMgrs[1])
+                        }
+                    }
                 }
             }
-            .ignoresSafeArea(.all)
-        } else if currGameScreen == .settings {
-            SettingsView(currGameScreen: $currGameScreen)
-                .environmentObject(mainGameMgr)
-                .environmentObject(gameEngineMgr)
-        } else if currGameScreen == .achievements {
-            EmptyView()
-        }
+        )
     }
 }
 
@@ -62,8 +85,7 @@ struct ContentView_Previews: PreviewProvider {
     static var mainGameMgrPrev = MainGameManager()
 
     static var previews: some View {
-        ContentView(gameEngineMgr: GameEngineManager(levelDimensions: .infinite,
-                                                     eventManager: TumblingTowersEventManager()))
+        ContentView(deviceHeight: .infinity, deviceWidth: .infinity)
             .environmentObject(mainGameMgrPrev)
     }
 }
