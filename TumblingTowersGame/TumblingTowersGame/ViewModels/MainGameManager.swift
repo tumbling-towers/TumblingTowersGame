@@ -35,7 +35,7 @@ class MainGameManager: ObservableObject {
         }
 
         let gameEngineMgr = GameEngineManager(levelDimensions: CGRect(x: 0, y: 0,
-                                                                      width: width, height: height), eventManager: eventManager, inputType: inputClass, storageManager: storageManager)
+                                                                      width: width, height: height), eventManager: eventManager, inputType: inputClass, storageManager: storageManager, playersMode: playersMode)
         self.gameEngineMgrs.append(gameEngineMgr)
         self.eventManager = eventManager
 

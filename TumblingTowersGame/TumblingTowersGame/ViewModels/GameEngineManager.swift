@@ -89,11 +89,11 @@ class GameEngineManager: ObservableObject {
         }
     }
 
-    init(levelDimensions: CGRect, eventManager: EventManager, inputType: InputSystem.Type, storageManager: StorageManager) {
+    init(levelDimensions: CGRect, eventManager: EventManager, inputType: InputSystem.Type, storageManager: StorageManager, playersMode: PlayersMode?) {
         self.levelDimensions = levelDimensions
         self.eventManager = eventManager
         self.storageManager = storageManager
-        self.gameEngine = GameEngine(levelDimensions: levelDimensions, eventManager: eventManager, playerId: playerId, storageManager: storageManager)
+        self.gameEngine = GameEngine(levelDimensions: levelDimensions, eventManager: eventManager, playerId: playerId, storageManager: storageManager, playersMode: playersMode)
 
         inputSystem = inputType.init()
 
@@ -254,7 +254,11 @@ class GameEngineManager: ObservableObject {
     
     private func updateAchievements() {
         var newAchievements = [DisplayableAchievement]()
-        for achievement in gameEngine.achiementSystem.getUpdatedAchievements() {
+        guard let achievementsInGame = gameEngine.achievementSystem?.getUpdatedAchievements() else {
+            return
+        }
+
+        for achievement in achievementsInGame {
             let newAchievement = DisplayableAchievement(id: UUID(),
                                                         name: achievement.name,
                                                         description: achievement.description,
