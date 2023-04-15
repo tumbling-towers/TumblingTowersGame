@@ -129,8 +129,8 @@ class GameWorld {
     @discardableResult
     private func addBlock(ofShape shape: TetrisShape, at position: CGPoint) -> Block {
         guard let newBlock: Block = GameWorldObjectFactory.create(ofType: .block,
-                                                                               ofShape: shape,
-                                                                               at: position) else {
+                                                                  ofShape: shape,
+                                                                  at: position) else {
             assert(false)
         }
         
@@ -149,7 +149,6 @@ class GameWorld {
     
     // MARK: Level setup methods
     private func setUpLevel() {
-        // Set main platform
         setLevelPlatform()
         setLevelBoundaries()
         setPowerupLine()
@@ -163,7 +162,6 @@ class GameWorld {
                                                                      ofShape: platformShape,
                                                                      at: platformPosition) else {
             assert(false)
-            return
         }
         level.setMainPlatform(platform: platform)
         
@@ -245,7 +243,7 @@ class GameWorld {
     }
     
     private func handleBlocksInContactWithPowerupLine() {
-        guard let blocksInContact = level.blocksInContactWithPowerupLine else {
+        guard let blocksInContact = level.blocksInContactWithPowerupLineAndStable else {
             return
         }
         if blocksInContact.count >= 1 {

@@ -41,6 +41,12 @@ extension GameWorld: FiziksContactDelegate {
         currentlyMovingBlock?.fiziksBody.collisionBitMask = Block.collisionBitMask
         currentlyMovingBlock?.fiziksBody.contactTestBitMask = Block.contactTestBitMask
 
+        updatePlacedBlocksStatus()
+        updateTowerHeight()
+        insertNewBlock()
+    }
+
+    private func updatePlacedBlocksStatus() {
         var placedBlockCount = 0
         for gameObject in level.gameObjects {
             if gameObject.fiziksBody.categoryBitMask == CategoryMask.block {
@@ -48,10 +54,11 @@ extension GameWorld: FiziksContactDelegate {
             }
         }
         eventManager.postEvent(BlockPlacedEvent(totalBlocksInLevel: placedBlockCount, playerId: playerId))
-        
+
+    }
+
+    private func updateTowerHeight() {
         let towerHeight = level.getHighestPoint(excluding: currentlyMovingBlock)
         eventManager.postEvent(TowerHeightIncreasedEvent(newHeight: towerHeight))
-
-        insertNewBlock()
     }
 }
