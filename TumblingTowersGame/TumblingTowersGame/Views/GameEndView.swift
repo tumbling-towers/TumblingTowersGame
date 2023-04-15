@@ -30,7 +30,7 @@ struct GameEndView: View {
 //                    if let timeLeft = viewAdapter.timeRemaining {
                         Text("Timer: " + viewAdapter.timeRemaining.secondsToTimeStr())
                             .font(.system(size: 30))
-//                    }s
+//                    }
 
                     Spacer()
 

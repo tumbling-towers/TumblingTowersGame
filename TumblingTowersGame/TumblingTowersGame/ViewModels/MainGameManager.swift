@@ -60,23 +60,6 @@ class MainGameManager: ObservableObject {
         }
     }
 
-    // MARK: Remove
-    func hasAnyGameEnded() -> Bool {
-        for gameEngineMgr in gameEngineMgrs {
-            if gameEngineMgr.gameEnded {
-                return true
-            }
-        }
-
-        return false
-    }
-
-    // MARK: Remove
-    func countGEM() -> Bool {
-        print(gameEngineMgrs.count)
-        return true
-    }
-
     func refresh(event: Event) {
         objectWillChange.send()
     }
@@ -90,6 +73,10 @@ class MainGameManager: ObservableObject {
     }
     
     func removeAllGameEngineMgrs() {
+        for gameEngineMgr in gameEngineMgrs {
+            gameEngineMgr.eventManager?.removeAllClosures()
+        }
+
         gameEngineMgrs.removeAll()
     }
 }

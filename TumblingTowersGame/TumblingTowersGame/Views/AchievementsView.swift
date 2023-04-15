@@ -9,7 +9,6 @@ import SwiftUI
 
 struct AchievementsView: View {
     @EnvironmentObject var viewAdapter: ViewAdapter
-
     @Binding var currGameScreen: Constants.CurrGameScreens
 
     var body: some View {
@@ -17,7 +16,7 @@ struct AchievementsView: View {
             BackgroundView()
             
             VStack {
-                Text("Achievements")
+                Text("Singleplayer Achievements")
                     .modifier(CategoryText())
                 ForEach($viewAdapter.achievements) { achievment in
                     VStack {
@@ -51,6 +50,34 @@ struct AchievementsView: View {
         .onAppear {
         }
 
+    }
+
+    // FIXME: Should get from adapter instead (Just move code into adapter)
+    private func getUpdatedAchievements() -> [DisplayableAchievement] {
+
+        // FIXME: CHANGE NEXT LINE
+        let storage = viewAdapter.gameEngineMgr.storageManager
+        let statsSystem = StatsTrackingSystem(eventManager: TumblingTowersEventManager(), storageManager: storage)
+        let achievementSystem = AchievementSystem(eventManager: TumblingTowersEventManager(), dataSource: statsSystem, storageManager: storage)
+
+        let achievements = achievementSystem.calculateAndGetUpdatedAchievements()
+
+        let displayableAchievements = convertToRenderableAchievement(achievements: achievements)
+
+        return displayableAchievements
+    }
+
+    private func convertToRenderableAchievement(achievements: [any Achievement]) -> [DisplayableAchievement] {
+        var displayableAchievements = [DisplayableAchievement]()
+        for achievement in achievements {
+            let displayableAchievement = DisplayableAchievement(id: UUID(),
+                                                        name: achievement.name,
+                                                        description: achievement.description,
+                                                        goal: achievement.goal,
+                                                        achieved: achievement.achieved)
+            displayableAchievements.append(displayableAchievement)
+        }
+        return displayableAchievements
     }
 }
 

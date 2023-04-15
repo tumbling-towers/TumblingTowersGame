@@ -124,7 +124,7 @@ class ViewAdapter: GameRendererDelegate, ObservableObject {
     }
     
     func getPhysicsEngine() -> FiziksEngine {
-        gameEngineMgr.getPhysicsEngine()
+        gameEngineMgr.physicsEngine
     }
 
     

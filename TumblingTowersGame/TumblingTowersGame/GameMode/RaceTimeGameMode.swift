@@ -85,53 +85,6 @@ class RaceTimeGameMode: GameMode {
         realTimeTimer.count
     }
 
-    func resetGame() {
-        isStarted = false
-        isGameEnded = false
-        currBlocksPlaced = 0
-        currBlocksDropped = 0
-        realTimeTimer = GameTimer()
-
-        isEndedByOtherPlayer = false
-        overwriteGameState = nil
-        otherPlayerRanOutOfTime = false
-    }
-
-    func startGame() {
-        isStarted = true
-        if shortLevel {
-            realTimeTimer.start(timeInSeconds: RaceTimeGameMode.timeToPlaceBy / RaceTimeGameMode.shortLevelTimeMultiplier, countsUp: false)
-        } else {
-            realTimeTimer.start(timeInSeconds: RaceTimeGameMode.timeToPlaceBy, countsUp: false)
-        }
-    }
-
-    func pauseGame() {
-        realTimeTimer.pause()
-    }
-
-    func resumeGame() {
-        realTimeTimer.resume()
-    }
-
-    func endGame(endedBy: UUID, endState: Constants.GameState) {
-        isGameEnded = true
-        realTimeTimer.stop()
-
-        if endedBy != playerId {
-            isEndedByOtherPlayer = true
-
-            if endState == .WIN {
-                overwriteGameState = .LOSE
-                otherPlayerRanOutOfTime = false
-            } else if endState == .LOSE {
-                overwriteGameState = .LOSE
-                otherPlayerRanOutOfTime = true
-            }
-
-        }
-    }
-
     var gameEndMainMessage: String {
         if gameState == .WIN {
             return Constants.defaultWinMainString
@@ -161,15 +114,62 @@ class RaceTimeGameMode: GameMode {
         return ""
     }
 
-    private func blockPlaced(event: Event) {
-        if let placedEvent = event as? BlockPlacedEvent, placedEvent.playerId == playerId {
-            currBlocksPlaced = placedEvent.totalBlocksInLevel
+    func resetGame() {
+        isStarted = false
+        isGameEnded = false
+        currBlocksPlaced = 0
+        currBlocksDropped = 0
+        realTimeTimer = GameTimer()
+
+        isEndedByOtherPlayer = false
+        overwriteGameState = nil
+        otherPlayerRanOutOfTime = false
+    }
+
+    func startGame() {
+        isStarted = true
+        if shortLevel {
+            realTimeTimer.start(timeInSeconds: RaceTimeGameMode.timeToPlaceBy / RaceTimeGameMode.shortLevelTimeMultiplier, isCountsUp: false)
+        } else {
+            realTimeTimer.start(timeInSeconds: RaceTimeGameMode.timeToPlaceBy, isCountsUp: false)
         }
     }
 
-    private func blockDropped(event: Event) {
-        if let droppedEvent = event as? BlockDroppedEvent, droppedEvent.playerId == playerId {
-            currBlocksDropped += 1
+    func pauseGame() {
+        realTimeTimer.pause()
+    }
+
+    func resumeGame() {
+        realTimeTimer.resume()
+    }
+
+    func endGame(endedBy: UUID, endState: Constants.GameState) {
+        isGameEnded = true
+        realTimeTimer.stop()
+
+        if endedBy != playerId {
+            isEndedByOtherPlayer = true
+
+            if endState == .WIN {
+                overwriteGameState = .LOSE
+                otherPlayerRanOutOfTime = false
+            } else if endState == .LOSE {
+                overwriteGameState = .LOSE
+                otherPlayerRanOutOfTime = true
+            }
+
+        }
+    }
+
+    private lazy var blockPlaced = { [weak self] (_ event: Event) -> Void in
+        if let placedEvent = event as? BlockPlacedEvent, placedEvent.playerId == self?.playerId {
+            self?.currBlocksPlaced = placedEvent.totalBlocksInLevel
+        }
+    }
+
+    private lazy var blockDropped = { [weak self] (_ event: Event) -> Void in
+        if let droppedEvent = event as? BlockDroppedEvent, droppedEvent.playerId == self?.playerId {
+            self?.currBlocksDropped += 1
         }
     }
 }

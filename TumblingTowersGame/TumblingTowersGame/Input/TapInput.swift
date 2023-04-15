@@ -13,7 +13,7 @@ Swipe Left / Right: Move the block in the swiped direction.
 Swipe Down: Speeds up the downward movement of the block.
 """
     
-    var inputData = InputData.none
+    private var inputData = InputData.none
 
     private var xMultiplier: Double = 0.01
     private var yMultiplier: Double = 5.0
@@ -21,7 +21,7 @@ Swipe Down: Speeds up the downward movement of the block.
     required init() {
     }
 
-    func getInput() -> InputData {
+    func calculateInput() -> InputData {
         inputData
     }
 

@@ -43,8 +43,7 @@ struct GameplayLevelView: View {
     private func getUselessSKSceneToPresent() -> SKScene {
         // Equivalent to gameEngine?.fiziksEngine
         guard let gameFiziksEngine = viewAdapter.getPhysicsEngine() as? GameFiziksEngine else {
-            // TODO: throw error
-            return SKScene()
+            assert(false)
         }
         return gameFiziksEngine.fiziksScene
     }

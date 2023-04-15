@@ -9,18 +9,28 @@ import Foundation
 import CoreGraphics
 
 class PlatformPowerup: Powerup {
-    var manager: PowerupManager
-    
-    private var gameWorld: GameWorld {
-        manager.gameWorld
+    // This is needed to avoid strong reference cycle to PowerupManager
+    private weak var realManager: PowerupManager?
+
+    var manager: PowerupManager? {
+        get {
+            realManager
+        }
+        set {
+            realManager = newValue
+        }
+    }
+
+    private var gameWorld: GameWorld? {
+        manager?.gameWorld
     }
     
-    private var eventManager: EventManager {
-        manager.eventManager
+    private var eventManager: EventManager? {
+        manager?.eventManager
     }
     
-    private var rng: RandomNumberGeneratorWithSeed {
-        manager.rng
+    private var rng: RandomNumberGeneratorWithSeed? {
+        manager?.rng
     }
 
     static var type: PowerupType = .platform
@@ -35,12 +45,15 @@ class PlatformPowerup: Powerup {
 
     func activate() {
         guard let newPlatform = createPowerupPlatform() else { return }
-        gameWorld.addObject(object: newPlatform)
-        eventManager.postEvent(PlatformPowerupActivatedEvent())
+        gameWorld?.addObject(object: newPlatform)
+        eventManager?.postEvent(PlatformPowerupActivatedEvent())
     }
     
     func createPowerupPlatform() -> Platform? {
-        guard let platform = manager.gameWorld.level.mainPlatform else { return nil }
+        guard let platform = manager?.gameWorld?.level.mainPlatform else { return nil }
+        guard let gameWorld = gameWorld else { return nil }
+        guard let rng = rng else { return nil }
+
         var count = 0
         while count < GameWorldConstants.defaultTriesToFindPlatformPosition {
             let rngX = Int(rng.next()) % Int(platform.width)
@@ -58,10 +71,9 @@ class PlatformPowerup: Powerup {
             let shape = GamePathObjectShape(path: path)
 
             guard let newPlatform: Platform = GameWorldObjectFactory.create(ofType: .platform,
-                                                                                     ofShape: shape,
-                                                                                           at: newPosition) else {
+                                                                            ofShape: shape,
+                                                                            at: newPosition) else {
                 assert(false)
-                return nil
             }
 
             let otherBodies = gameWorld.level.gameObjects.map({ $0.fiziksBody })

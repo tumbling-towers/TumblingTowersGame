@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum StatTrackerType {
+enum StatTrackerType: String {
     case numBlocksPlaced
     case numBlocksDropped
     case towerHeight

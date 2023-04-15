@@ -9,7 +9,7 @@ import Foundation
 
 protocol PowerupManager: AnyObject {
     var eventManager: EventManager { get set }
-    var gameWorld: GameWorld { get set }
+    var gameWorld: GameWorld? { get set }
     var rng: RandomNumberGeneratorWithSeed { get }
     var availablePowerups: [Powerup?] { get set }
     func createNextPowerup()
