@@ -14,5 +14,7 @@ protocol Achievement: Identifiable {
     var achieved: Bool { get }
     var achievementType: AchievementType { get }
     var dataSource: AchievementSystemDataSource { get }
+
+    init(name: String, goal: Double, dataSource: AchievementSystemDataSource)
     func update()
 }

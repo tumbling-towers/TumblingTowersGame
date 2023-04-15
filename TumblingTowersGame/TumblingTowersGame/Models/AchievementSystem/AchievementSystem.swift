@@ -31,15 +31,8 @@ class AchievementSystem {
         
         if achievementsStorage.count == 0 {
             loadDefaultAchievements()
-            return
-        }
-        
-        for achievementStorage in achievementsStorage {
-            add(AchievementFactory.createAchievement(ofType: achievementStorage.achievementType,
-                                                     name: achievementStorage.name,
-                                                     goal: achievementStorage.goal,
-                                                     achieved: achievementStorage.achieved,
-                                                     dataSource: dataSource))
+        } else {
+            loadStorageAchievements(achievementsStorage: achievementsStorage)
         }
     }
     
@@ -64,6 +57,16 @@ class AchievementSystem {
                                                  goal: 500,
                                                  achieved: false,
                                                  dataSource: dataSource))
+    }
+
+    private func loadStorageAchievements(achievementsStorage: [AchievementStorage]) {
+        for achievementStorage in achievementsStorage {
+            add(AchievementFactory.createAchievement(ofType: achievementStorage.achievementType,
+                                                     name: achievementStorage.name,
+                                                     goal: achievementStorage.goal,
+                                                     achieved: achievementStorage.achieved,
+                                                     dataSource: dataSource))
+        }
     }
     
     private func add(_ achievement: any Achievement) {
