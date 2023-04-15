@@ -31,7 +31,7 @@ struct GameplayGuiView: View {
                                     position: CGPoint(x: viewAdapter.levelDimensions.width - 100,
                                                       y: viewAdapter.levelDimensions.height - 100)))
 
-            ForEach(1..<$viewAdapter.powerups.count + 1) { i in
+            ForEach(1..<Int($viewAdapter.powerups.count) + 1) { i in
                 if let powerup0 = $viewAdapter.powerups[i - 1],
                    let type = powerup0.wrappedValue?.type,
                    let image = ViewImageManager.powerupToImage[type] {
@@ -100,7 +100,7 @@ struct GameplayGuiView: View {
 struct GameplayGuiView_Previews: PreviewProvider {
     static var previews: some View {
         GameplayGuiView(currGameScreen: .constant(.singleplayerGameplay))
-            .environmentObject(GameEngineManager(levelDimensions: .infinite, eventManager: TumblingTowersEventManager(), inputType: TapInput.self, storageManager: StorageManager()))
             .environmentObject(MainGameManager())
+            .environmentObject(ViewAdapter(levelDimensions: .infinite, gameEngineMgr: GameEngineManager(levelDimensions: .infinite, eventManager: TumblingTowersEventManager(), inputType: TapInput.self, storageManager: StorageManager())))
     }
 }

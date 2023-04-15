@@ -57,6 +57,6 @@ struct AchievementsView: View {
 struct AchievementsView_Previews: PreviewProvider {
     static var previews: some View {
         AchievementsView(currGameScreen: .constant(.achievements))
-            .environmentObject(GameEngineManager(levelDimensions: .infinite, eventManager: TumblingTowersEventManager(), inputType: TapInput.self, storageManager: StorageManager()))
+            .environmentObject(ViewAdapter(levelDimensions: .infinite, gameEngineMgr: GameEngineManager(levelDimensions: .infinite, eventManager: TumblingTowersEventManager(), inputType: TapInput.self, storageManager: StorageManager())))
     }
 }

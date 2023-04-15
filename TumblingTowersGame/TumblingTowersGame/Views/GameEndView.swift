@@ -59,12 +59,8 @@ struct GameEndView: View {
 }
 
 struct GameEndView_Previews: PreviewProvider {
-    static var viewAdapter: ViewAdapter {
-        
-    }
-
     static var previews: some View {
         GameEndView(currGameScreen: .constant(.singleplayerGameplay))
-            .environmentObject(viewAdapter)
+            .environmentObject(ViewAdapter(levelDimensions: .infinite, gameEngineMgr: GameEngineManager(levelDimensions: .infinite, eventManager: TumblingTowersEventManager(), inputType: TapInput.self, storageManager: StorageManager())))
     }
 }

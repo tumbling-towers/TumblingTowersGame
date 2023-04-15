@@ -22,23 +22,38 @@ struct ContentView: View {
                     .environmentObject(mainGameMgr)
             } else if currGameScreen == .gameModeSelection {
                 GameModeSelectView(currGameScreen: $currGameScreen)
-            } else if currGameScreen == .singleplayerGameplay, let gameMode = mainGameMgr.gameMode {
+            } else if currGameScreen == .singleplayerGameplay,
+                      let gameMode = mainGameMgr.gameMode {
+                
+                let gameEngineMgr = mainGameMgr.createGameEngineManager(height: deviceHeight, width: deviceWidth)
+                let viewAdapter = ViewAdapter(levelDimensions: CGRect(x: 0, y: 0, width: deviceWidth, height: deviceHeight), gameEngineMgr: gameEngineMgr)
+                
                 ZStack {
-                    GameplayLevelView(currGameScreen: $currGameScreen, gameEngineMgr: mainGameMgr.createGameEngineManager(height: deviceHeight, width: deviceWidth), gameMode: gameMode)
+                    GameplayLevelView(currGameScreen: $currGameScreen, viewAdapter: viewAdapter, gameMode: gameMode)
                 }
                 .ignoresSafeArea(.all)
-            } else if currGameScreen == .multiplayerGameplay, let gameMode = mainGameMgr.gameMode {
+            } else if currGameScreen == .multiplayerGameplay,
+                      let gameMode = mainGameMgr.gameMode {
+                      
+                  let gameEngineMgr = mainGameMgr.createGameEngineManager(height: deviceHeight, width: deviceWidth)
+                  let viewAdapter = ViewAdapter(levelDimensions: CGRect(x: 0, y: 0, width: deviceWidth, height: deviceHeight), gameEngineMgr: gameEngineMgr)
+                  let gameEngineMgr2 = mainGameMgr.createGameEngineManager(height: deviceHeight, width: deviceWidth)
+                  let viewAdapter2 = ViewAdapter(levelDimensions: CGRect(x: 0, y: 0, width: deviceWidth, height: deviceHeight), gameEngineMgr: gameEngineMgr2)
+                
                 VStack {
-                    GameplayLevelView(currGameScreen: $currGameScreen, gameEngineMgr: mainGameMgr.createGameEngineManager(height: deviceHeight / 2, width: deviceWidth), gameMode: gameMode)
+                    GameplayLevelView(currGameScreen: $currGameScreen, viewAdapter: viewAdapter, gameMode: gameMode)
                     .rotation3DEffect(.degrees(180), axis: (x: 0, y: 0, z: 1))
-                    GameplayLevelView(currGameScreen: $currGameScreen, gameEngineMgr: mainGameMgr.createGameEngineManager(height: deviceHeight / 2, width: deviceWidth), gameMode: gameMode)
+                    GameplayLevelView(currGameScreen: $currGameScreen, viewAdapter: viewAdapter2, gameMode: gameMode)
                 }
             } else if currGameScreen == .settings {
                 SettingsView(settingsMgr: SettingsManager(), currGameScreen: $currGameScreen, selectedInputType: mainGameMgr.inputSystem)
                     .environmentObject(mainGameMgr)
             } else if currGameScreen == .achievements {
+                let gameEngineMgr = GameEngineManager(levelDimensions: CGRect(x: 0, y: 0, width: mainGameMgr.deviceWidth, height: mainGameMgr.deviceHeight), eventManager: TumblingTowersEventManager(), inputType: TapInput.self, storageManager: mainGameMgr.storageManager)
+                  let viewAdapter = ViewAdapter(levelDimensions: CGRect(x: 0, y: 0, width: deviceWidth, height: deviceHeight), gameEngineMgr: gameEngineMgr)
+                
                 AchievementsView(currGameScreen: $currGameScreen)
-                    .environmentObject(GameEngineManager(levelDimensions: CGRect(x: 0, y: 0, width: mainGameMgr.deviceWidth, height: mainGameMgr.deviceHeight), eventManager: TumblingTowersEventManager(), inputType: TapInput.self, storageManager: mainGameMgr.storageManager))
+                    .environmentObject(viewAdapter)
             } else if currGameScreen == .playerOptionSelection {
                 ZStack {
                     PlayersSelectView(currGameScreen: $currGameScreen)
@@ -57,22 +72,29 @@ struct ContentView: View {
             ZStack {
                 if mainGameMgr.playersMode == .singleplayer, mainGameMgr.countGEM() {
                     if mainGameMgr.gameEngineMgrs.count >= 1,
-                       let gameEngineMgr = mainGameMgr.gameEngineMgrs[0],
                        gameEngineMgr.gameEnded {
+                        
+                        let gameEngineMgr = mainGameMgr.gameEngineMgrs[0]
+                        let viewAdapter = ViewAdapter(levelDimensions: CGRect(x: 0, y: 0, width: deviceWidth, height: deviceHeight), gameEngineMgr: gameEngineMgr)
+                        
                                 GameEndView(currGameScreen: $currGameScreen)
-                                    .environmentObject(gameEngineMgr)
+                                    .environmentObject(viewAdapter)
                     }
                 } else if mainGameMgr.playersMode == .multiplayer {
                     if mainGameMgr.gameEngineMgrs.count == 2,
                        let gameEngineMgr = mainGameMgr.gameEngineMgrs[0],
                        let gameEngineMgr2 = mainGameMgr.gameEngineMgrs[1],
                        gameEngineMgr.gameEnded {
+                        
+                        let viewAdapter = ViewAdapter(levelDimensions: CGRect(x: 0, y: 0, width: deviceWidth, height: deviceHeight), gameEngineMgr: gameEngineMgr)
+                        let viewAdapter2 = ViewAdapter(levelDimensions: CGRect(x: 0, y: 0, width: deviceWidth, height: deviceHeight), gameEngineMgr: gameEngineMgr2)
+                        
                         VStack {
                             GameEndView(currGameScreen: $currGameScreen)
-                                .environmentObject(gameEngineMgr)
+                                .environmentObject(viewAdapter)
                                 .rotation3DEffect(.degrees(180), axis: (x: 0, y: 0, z: 1))
                             GameEndView(currGameScreen: $currGameScreen)
-                                .environmentObject(gameEngineMgr2)
+                                .environmentObject(viewAdapter2)
                         }
                     }
                 }
