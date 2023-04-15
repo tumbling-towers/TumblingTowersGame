@@ -102,18 +102,18 @@ class ViewAdapter: GameRendererDelegate, ObservableObject {
         gameEngineMgr.resetInput()
     }
 
-//    func getInput() -> InputData {
-//        inputSystem.getInput()
-//    }
-//
-//    func getPhysicsEngine() -> FiziksEngine {
-//        gameEngine.gameWorld.fiziksEngine
-//    }
+    func resetGame() {
+        gameEngineMgr.resetGame()
+    }
 
     func startGame(gameMode: Constants.GameModeTypes) {
         gameEngineMgr.startGame(gameMode: gameMode)
     }
     
+    func getPhysicsEngine() -> FiziksEngine {
+        gameEngineMgr.getPhysicsEngine()
+    }
+
     
     func renderLevel(gameObjectBlocks: [GameObjectBlock], gameObjectPlatforms: [GameObjectPlatform], powerupLine: PowerupLine) {
         var invertedGameObjBlocks: [GameObjectBlock] = []

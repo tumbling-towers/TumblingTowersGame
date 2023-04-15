@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct GameEndView: View {
-    @EnvironmentObject var gameEngineMgr: GameEngineManager
+    @EnvironmentObject var viewAdapter: ViewAdapter
     @Binding var currGameScreen: Constants.CurrGameScreens
 
     var body: some View {
@@ -22,15 +22,15 @@ struct GameEndView: View {
 
                     drawGameEndText()
 
-                    if let score = gameEngineMgr.score {
-                        Text("Score: " + String(score))
+//                    if let score = viewAdapter.score {
+                        Text("Score: " + String(viewAdapter.score))
                             .font(.system(size: 30))
-                    }
+//                    }
 
-                    if let timeLeft = gameEngineMgr.timeRemaining {
-                        Text("Timer: " + timeLeft.secondsToTimeStr())
+//                    if let timeLeft = viewAdapter.timeRemaining {
+                        Text("Timer: " + viewAdapter.timeRemaining.secondsToTimeStr())
                             .font(.system(size: 30))
-                    }
+//                    }s
 
                     Spacer()
 
@@ -46,11 +46,11 @@ struct GameEndView: View {
     private func drawGameEndText() -> AnyView {
         AnyView(
             VStack {
-                if gameEngineMgr.gameEnded {
-                    Text(gameEngineMgr.gameEndMainMessage)
+                if viewAdapter.gameEnded {
+                    Text(viewAdapter.gameEndMainMessage)
                         .font(.system(size: 70))
                         .fontWeight(.heavy)
-                    Text(gameEngineMgr.gameEndSubMessage)
+                    Text(viewAdapter.gameEndSubMessage)
                         .font(.system(size: 30))
                 }
             }
@@ -59,15 +59,12 @@ struct GameEndView: View {
 }
 
 struct GameEndView_Previews: PreviewProvider {
-    static var gameEngineMgr: GameEngineManager = {
-        let gameEngineManager = GameEngineManager(levelDimensions: .infinite, eventManager: TumblingTowersEventManager(), inputType: TapInput.self, storageManager: StorageManager())
-
-        return gameEngineManager
-
-    }()
+    static var viewAdapter: ViewAdapter {
+        
+    }
 
     static var previews: some View {
         GameEndView(currGameScreen: .constant(.singleplayerGameplay))
-            .environmentObject(gameEngineMgr)
+            .environmentObject(viewAdapter)
     }
 }

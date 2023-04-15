@@ -135,7 +135,6 @@ struct SettingsView: View {
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
         SettingsView(settingsMgr: SettingsManager(), currGameScreen: .constant(.gameModeSelection), selectedInputType: .GYRO)
-            .environmentObject(GameEngineManager(levelDimensions: .infinite, eventManager: TumblingTowersEventManager(), inputType: TapInput.self, storageManager: StorageManager()))
             .environmentObject(MainGameManager())
             .environmentObject(SettingsManager())
     }

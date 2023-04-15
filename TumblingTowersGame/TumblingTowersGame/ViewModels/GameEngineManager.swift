@@ -7,7 +7,7 @@
 import Foundation
 import SpriteKit
 
-class GameEngineManager: ObservableObject {
+class GameEngineManager {
     var playerId = UUID()
 
     var eventManager: EventManager?

@@ -9,24 +9,24 @@ import SwiftUI
 
 struct LevelView: View {
     @EnvironmentObject var mainGameMgr: MainGameManager
-    @EnvironmentObject var gameEngineMgr: GameEngineManager
+    @EnvironmentObject var viewAdapter: ViewAdapter
     @Binding var currGameScreen: Constants.CurrGameScreens
 
     var body: some View {
         ZStack {
             LevelBackgroundView()
 
-            ForEach($gameEngineMgr.levelBlocks) { block in
+            ForEach($viewAdapter.levelBlocks) { block in
                 BlockView(block: block)
             }
 
-            ForEach($gameEngineMgr.levelPlatforms) { platform in
+            ForEach($viewAdapter.levelPlatforms) { platform in
                 PlatformView(platform: platform)
             }
 
             PowerupLineView()
 
-            if let box = gameEngineMgr.referenceBox {
+            if let box = viewAdapter.referenceBox {
                 Rectangle()
                     .path(in: box)
                     .fill(.blue.opacity(0.1), strokeBorder: .blue)

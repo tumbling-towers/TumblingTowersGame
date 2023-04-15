@@ -9,7 +9,7 @@ import SwiftUI
 
 struct GameplayGoBackMenuView: View {
     @EnvironmentObject var mainGameMgr: MainGameManager
-    @EnvironmentObject var gameEngineMgr: GameEngineManager
+    @EnvironmentObject var viewAdapter: ViewAdapter
     @Binding var currGameScreen: Constants.CurrGameScreens
 
     var body: some View {
@@ -19,7 +19,7 @@ struct GameplayGoBackMenuView: View {
             Button {
                 withAnimation {
                     currGameScreen = .mainMenu
-                    gameEngineMgr.resetGame()
+                    viewAdapter.resetGame()
                     mainGameMgr.stopGames()
                     mainGameMgr.resetGames()
                     mainGameMgr.removeAllGameEngineMgrs()
@@ -38,6 +38,6 @@ struct GameplayGoBackMenuView: View {
 struct GameplayGoBackMenuView_Previews: PreviewProvider {
     static var previews: some View {
         GameplayGoBackMenuView(currGameScreen: .constant(.singleplayerGameplay))
-            .environmentObject(GameEngineManager(levelDimensions: .infinite, eventManager: TumblingTowersEventManager(), inputType: TapInput.self, storageManager: StorageManager()))
+//            .environmentObject(GameEngineManager(levelDimensions: .infinite, eventManager: TumblingTowersEventManager(), inputType: TapInput.self, storageManager: StorageManager()))
     }
 }
