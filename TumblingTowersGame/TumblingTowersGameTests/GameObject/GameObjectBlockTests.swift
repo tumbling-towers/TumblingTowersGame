@@ -13,7 +13,7 @@ final class GameObjectBlockTests: XCTestCase {
     func test_init() {
         let path = CGPath(rect: CGRect(origin: .zero, size: .zero), transform: nil)
         let block = GameObjectBlock(position: CGPoint(x: 200, y: 200),
-                                    path: path)
+                                    path: path, specialProperties: SpecialProperties())
     }
 
     func test_sameBlockEquals() {
