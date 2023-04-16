@@ -24,7 +24,13 @@ class MainGameManager: ObservableObject {
     var gameMode: Constants.GameModeTypes?
     
     func createGameEngineManager(height: CGFloat, width: CGFloat) -> GameEngineManager {
-        let eventManager = TumblingTowersEventManager()
+        if eventManager as? EventManager == nil {
+            eventManager = TumblingTowersEventManager()
+        }
+
+        guard let eventManager = eventManager else {
+            assert(false)
+        }
 
         SoundSystem.shared.registerSoundEvents(eventMgr: eventManager)
 
