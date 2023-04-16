@@ -24,19 +24,19 @@ class RaceTimeGameMode: GameMode {
     static let shortLevelTimeMultiplier = 2
 
     // MARK: Tracking State of Game
-    var currBlocksPlaced = 0
-    var currBlocksDropped = 0
-    let playerId: UUID
+    private var currBlocksPlaced = 0
+    private var currBlocksDropped = 0
+    private let playerId: UUID
 
     var isStarted = false
     var isGameEnded = false
 
-    var shortLevel = false
+    private var shortLevel = false
 
     // MARK: Multiplayer States
-    var isEndedByOtherPlayer = false
-    var overwriteGameState: Constants.GameState?
-    var otherPlayerRanOutOfTime = false
+    private var isEndedByOtherPlayer = false
+    private var overwriteGameState: Constants.GameState?
+    private var otherPlayerRanOutOfTime = false
 
     required init(eventMgr: EventManager, playerId: UUID, levelHeight: CGFloat) {
         self.eventMgr = eventMgr
