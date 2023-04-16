@@ -1,0 +1,9 @@
+@startuml
+SKScene -> GameFiziksEngine: didBegin(SKPhysicsContact)
+
+create FiziksContact
+GameFiziksEngine -> FiziksContact: createFiziksContact(SKPhysicsContact)
+FiziksContact --> GameFiziksEngine: FiziksContact
+
+GameFiziksEngine -> GameWorld: didBegin(FiziksContact)
+@enduml

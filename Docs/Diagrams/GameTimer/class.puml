@@ -1,0 +1,15 @@
+@startuml
+class GameTimer {
++ count: Int
++ timeInMinSec
++ isPaused: Bool
++ start(time: TInt, isCountsUp: Bool)
++ increment()
++ decrement()
++ pause()
++ resume()
++ stop()
+}
+
+GameTimer --> Timer
+@enduml
