@@ -14,7 +14,7 @@ class GameFiziksBody: FiziksBody {
         }
         set {
             if newValue != position {
-                fiziksShapeNode.didUpdatePosition(to: newValue)
+                fiziksShapeNode.position = newValue
             }
         }
     }
@@ -25,7 +25,7 @@ class GameFiziksBody: FiziksBody {
         }
         set {
             if newValue != zRotation {
-                fiziksShapeNode.didUpdateZRotation(to: newValue)
+                fiziksShapeNode.zRotation = newValue
             }
         }
     }
@@ -35,10 +35,7 @@ class GameFiziksBody: FiziksBody {
             fiziksShapeNode.velocity
         }
         set {
-            if let unwrappedNewValue = newValue,
-                unwrappedNewValue != velocity {
-                fiziksShapeNode.didUpdateVelocity(to: unwrappedNewValue)
-            }
+            fiziksShapeNode.velocity = newValue
         }
     }
 
@@ -47,10 +44,7 @@ class GameFiziksBody: FiziksBody {
             fiziksShapeNode.angularVelocity
         }
         set {
-            if let unwrappedNewValue = newValue,
-                unwrappedNewValue != angularVelocity {
-                fiziksShapeNode.didUpdateAngularVelocity(to: unwrappedNewValue)
-            }
+            fiziksShapeNode.angularVelocity = newValue
         }
     }
 
@@ -59,10 +53,7 @@ class GameFiziksBody: FiziksBody {
             fiziksShapeNode.isResting
         }
         set {
-            if let unwrappedNewValue = newValue,
-                unwrappedNewValue != isResting {
-                fiziksShapeNode.didUpdateIsResting(to: unwrappedNewValue)
-            }
+            fiziksShapeNode.isResting = newValue
         }
     }
 
@@ -72,10 +63,7 @@ class GameFiziksBody: FiziksBody {
             fiziksShapeNode.affectedByGravity
         }
         set {
-            if let unwrappedNewValue = newValue,
-                unwrappedNewValue != affectedByGravity {
-                fiziksShapeNode.didUpdateAffectedByGravity(to: unwrappedNewValue)
-            }
+            fiziksShapeNode.affectedByGravity = newValue
         }
     }
 
@@ -84,10 +72,7 @@ class GameFiziksBody: FiziksBody {
             fiziksShapeNode.allowsRotation
         }
         set {
-            if let unwrappedNewValue = newValue,
-                unwrappedNewValue != allowsRotation {
-                fiziksShapeNode.didUpdateAllowsRotation(to: unwrappedNewValue)
-            }
+            fiziksShapeNode.allowsRotation = newValue
         }
     }
 
@@ -96,10 +81,7 @@ class GameFiziksBody: FiziksBody {
             fiziksShapeNode.isDynamic
         }
         set {
-            if let unwrappedNewValue = newValue,
-                unwrappedNewValue != isDynamic {
-                fiziksShapeNode.didUpdateIsDynamic(to: unwrappedNewValue)
-            }
+            fiziksShapeNode.isDynamic = newValue
         }
     }
 
@@ -109,10 +91,7 @@ class GameFiziksBody: FiziksBody {
             fiziksShapeNode.mass
         }
         set {
-            if let unwrappedNewValue = newValue,
-                unwrappedNewValue != mass {
-                fiziksShapeNode.didUpdateMass(to: unwrappedNewValue)
-            }
+            fiziksShapeNode.mass = newValue
         }
     }
 
@@ -121,10 +100,7 @@ class GameFiziksBody: FiziksBody {
             fiziksShapeNode.density
         }
         set {
-            if let unwrappedNewValue = newValue,
-                unwrappedNewValue != density {
-                fiziksShapeNode.didUpdateDensity(to: unwrappedNewValue)
-            }
+            fiziksShapeNode.density = newValue
         }
     }
 
@@ -137,10 +113,7 @@ class GameFiziksBody: FiziksBody {
             fiziksShapeNode.friction
         }
         set {
-            if let unwrappedNewValue = newValue,
-                unwrappedNewValue != friction {
-                fiziksShapeNode.didUpdateFriction(to: unwrappedNewValue)
-            }
+            fiziksShapeNode.friction = newValue
         }
     }
 
@@ -149,10 +122,7 @@ class GameFiziksBody: FiziksBody {
             fiziksShapeNode.restitution
         }
         set {
-            if let unwrappedNewValue = newValue,
-                unwrappedNewValue != restitution {
-                fiziksShapeNode.didUpdateRestitution(to: unwrappedNewValue)
-            }
+            fiziksShapeNode.restitution = newValue
         }
     }
 
@@ -161,10 +131,7 @@ class GameFiziksBody: FiziksBody {
             fiziksShapeNode.linearDamping
         }
         set {
-            if let unwrappedNewValue = newValue,
-                unwrappedNewValue != linearDamping {
-                fiziksShapeNode.didUpdateLinearDamping(to: unwrappedNewValue)
-            }
+            fiziksShapeNode.linearDamping = newValue
         }
     }
 
@@ -173,10 +140,7 @@ class GameFiziksBody: FiziksBody {
             fiziksShapeNode.angularDamping
         }
         set {
-            if let unwrappedNewValue = newValue,
-                unwrappedNewValue != angularDamping {
-                fiziksShapeNode.didUpdateAngularDamping(to: unwrappedNewValue)
-            }
+            fiziksShapeNode.angularDamping = newValue
         }
     }
 
@@ -186,10 +150,7 @@ class GameFiziksBody: FiziksBody {
             fiziksShapeNode.categoryBitMask
         }
         set {
-            if let unwrappedNewValue = newValue,
-                unwrappedNewValue != categoryBitMask {
-                fiziksShapeNode.didUpdateCategoryBitMask(to: unwrappedNewValue)
-            }
+            fiziksShapeNode.categoryBitMask = newValue
         }
     }
 
@@ -198,10 +159,7 @@ class GameFiziksBody: FiziksBody {
             fiziksShapeNode.collisionBitMask
         }
         set {
-            if let unwrappedNewValue = newValue,
-                unwrappedNewValue != collisionBitMask {
-                fiziksShapeNode.didUpdateCollisionBitMask(to: unwrappedNewValue)
-            }
+            fiziksShapeNode.collisionBitMask = newValue
         }
     }
 
@@ -210,10 +168,7 @@ class GameFiziksBody: FiziksBody {
             fiziksShapeNode.contactTestBitMask
         }
         set {
-            if let unwrappedNewValue = newValue,
-                unwrappedNewValue != contactTestBitMask {
-                fiziksShapeNode.didUpdateContactTestBitMask(to: unwrappedNewValue)
-            }
+            fiziksShapeNode.contactTestBitMask = newValue
         }
     }
 
@@ -222,10 +177,7 @@ class GameFiziksBody: FiziksBody {
             fiziksShapeNode.usesPreciseCollisionDetection
         }
         set {
-            if let unwrappedNewValue = newValue,
-                unwrappedNewValue != usesPreciseCollisionDetection {
-                fiziksShapeNode.didUpdateUsesPreciseCollisionDetection(to: unwrappedNewValue)
-            }
+            fiziksShapeNode.usesPreciseCollisionDetection = newValue
         }
     }
 

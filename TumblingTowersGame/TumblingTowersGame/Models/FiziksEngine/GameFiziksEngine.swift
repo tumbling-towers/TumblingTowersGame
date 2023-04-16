@@ -29,13 +29,11 @@ class GameFiziksEngine: NSObject {
 
     private func setUpFiziksScene() {
         fiziksScene.physicsWorld.contactDelegate = self
-        fiziksScene.gravity = GameFiziksEngine.defaultFiziksEngineGravity
+        fiziksScene.gravity = FiziksConstants.defaultFiziksEngineGravity
     }
 }
 
 extension GameFiziksEngine: FiziksEngine {
-
-    static let defaultFiziksEngineGravity = CGVector(dx: 0, dy: -1.0)
 
     func insertBounds(_ bounds: CGRect) {
         fiziksScene.physicsBody = SKPhysicsBody(edgeLoopFrom: bounds)
