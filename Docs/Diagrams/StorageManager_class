@@ -1,0 +1,33 @@
+@startuml
+
+class StorageManager {
+    + saveSettings(settings: [Float]) throws
+    + loadSettings() throws -> [Float]
+    + saveAchievements(achievements: [any Achievement]) throws
+    + loadAchievements() throws -> [AchievementStorage]
+    + resetAchievements()
+    + saveStats(statTrackers: [StatTracker]) throws
+    + loadStats() throws -> [StatStorage]
+}
+
+struct StorageFacade {
+    + save(floats: [Float], fileName: String) throws
+    + loadFloats(fileName: String) throws -> [Float]
+    + save(achievements: [AchievementStorage], fileName: String) throws
+    + loadAchievements(fileName: String) throws -> [AchievementStorage]
+    + delete(fileName: String) throws
+    + save(statStorages: [StatStorage], fileName: String) throws
+    + loadStatStorages(fileName: String) throws -> [StatStorage]
+    - getFileURL(from: String) throws -> URL
+}
+
+
+StorageManager -> StorageFacade
+
+class AchievementStorage {
+}
+
+class StatStorage {
+}
+
+@enduml

@@ -1,0 +1,19 @@
+@startuml
+
+entity MainGameManager
+entity GameInstanceController
+entity ViewAdapter
+
+create GameInstanceController
+MainGameManager -> GameInstanceController: init()
+GameInstanceController --> MainGameManager: gameInstanceController
+
+create ViewAdapter
+MainGameManager -> ViewAdapter: init(gameInstanceController)
+ViewAdapter --> MainGameManager: viewAdapter
+
+
+MainGameManager -> GameInstanceController: setRendererDelegate(ViewAdapter)
+
+
+@enduml
