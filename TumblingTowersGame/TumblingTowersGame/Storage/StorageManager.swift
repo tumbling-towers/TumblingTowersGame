@@ -32,9 +32,19 @@ class StorageManager {
         try storageFacade.save(achievements: achievementsStorage, fileName: StorageManager.achievementsFileName)
     }
     
-    func loadAchievements() throws -> [AchievementStorage] {
+    func loadAchievements(dataSource: AchievementSystemDataSource) throws -> [any Achievement] {
         let achievementStorages = try storageFacade.loadAchievements(fileName: StorageManager.achievementsFileName)
-        return achievementStorages
+        
+        var achievements: [any Achievement] = []
+        for achievementStorage in achievementStorages {
+            let achievement = AchievementFactory.createAchievement(ofType: achievementStorage.achievementType,
+                                                     name: achievementStorage.name,
+                                                     goal: achievementStorage.goal,
+                                                     achieved: achievementStorage.achieved,
+                                                     dataSource: dataSource)
+            achievements.append(achievement)
+        }
+        return achievements
     }
 
     func resetAchievements() {
@@ -51,8 +61,15 @@ class StorageManager {
         try storageFacade.save(statStorages: statsStorage, fileName: StorageManager.statsFileName)
     }
     
-    func loadStats() throws -> [StatStorage] {
+    func loadStats(eventManager: EventManager) throws -> [any StatTracker] {
         let statStorages = try storageFacade.loadStatStorages(fileName: StorageManager.statsFileName)
-        return statStorages
+        
+        var stats: [StatTracker] = []
+        for storage in statStorages {
+            let stat = StatTrackerFactory.createStatTracker(ofType: storage.statTrackerType, eventManager: eventManager, stat: storage.stat)
+            stats.append(stat)
+        }
+        
+        return stats
     }
 }

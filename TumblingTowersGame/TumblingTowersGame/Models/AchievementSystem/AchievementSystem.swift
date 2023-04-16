@@ -25,7 +25,7 @@ class AchievementSystem {
     }
     
     private func setupAchievements() {
-        guard let achievementsStorage = try? storageManager.loadAchievements() else {
+        guard let achievementsStorage = try? storageManager.loadAchievements(dataSource: dataSource) else {
             return
         }
         
@@ -59,13 +59,9 @@ class AchievementSystem {
                                                  dataSource: dataSource))
     }
 
-    private func loadStorageAchievements(achievementsStorage: [AchievementStorage]) {
+    private func loadStorageAchievements(achievementsStorage: [any Achievement]) {
         for achievementStorage in achievementsStorage {
-            add(AchievementFactory.createAchievement(ofType: achievementStorage.achievementType,
-                                                     name: achievementStorage.name,
-                                                     goal: achievementStorage.goal,
-                                                     achieved: achievementStorage.achieved,
-                                                     dataSource: dataSource))
+            add(achievementStorage)
         }
     }
     
