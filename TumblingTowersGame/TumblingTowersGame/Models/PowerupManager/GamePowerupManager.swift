@@ -37,7 +37,6 @@ class GamePowerupManager: PowerupManager {
         self.eventManager = eventManager
         self.rng = RandomNumberGeneratorWithSeed(seed: seed)
         self.gameWorld = gameWorld
-        
         registerEvents()
     }
 
