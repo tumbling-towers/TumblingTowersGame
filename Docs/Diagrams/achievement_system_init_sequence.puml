@@ -1,0 +1,10 @@
+@startuml
+actor User
+User -> AchievementSystem : Instantiate
+AchievementSystem -> StorageManager : Load achievements
+AchievementSystem <-- StorageManager: AchievementStorage
+AchievementSystem -> AchievementFactory : getAchievement(ofType:)
+AchievementFactory --> AchievementSystem : Achievement
+AchievementSystem -> AchievementSystem : Add achievements to array
+@enduml
+

@@ -2,7 +2,6 @@
 
 interface StatTracker {
     + var stat: Double
-    + var statTrackerType: StatTrackerType
     + init(eventManager: EventManager, stat: Double?)
 }
 
@@ -16,10 +15,6 @@ class NumBlocksDroppedStatTracker {
 
 class TowerHeightStatTracker {
     - towerHeightUpdatedClosure: (Event) -> Void
-}
-
-interface AchievementSystemDataSource {
-    + func getStat(for statTrackerType: StatTrackerType) -> Any?
 }
 
 class StatsTrackingSystem {
@@ -41,19 +36,16 @@ class StatTrackerFactory {
 }
 
 enum StatTrackerType {
-    <<enumeration>>
     + numBlocksPlaced
     + numBlocksDropped
     + towerHeight
 }
 
-AchievementSystemDataSource <|-d- StatsTrackingSystem
-AchievementSystemDataSource ..> StatTrackerType
-StatTrackerFactory ..> StatTrackerType
 StatTrackerFactory --> StatTracker
 NumBlocksPlacedStatTracker .u.|> StatTracker
 NumBlocksDroppedStatTracker .u.|> StatTracker
 TowerHeightStatTracker .u.|> StatTracker
+StatTracker -> StatTrackerType
+StatsTrackingSystem -> StatTracker
 
 @enduml
-

@@ -1,0 +1,51 @@
+@startuml
+
+class AchievementSystemDataSource
+class AchievementFactory
+class StatsTrackingSystem
+
+interface Achievement {
+    + name: String
+    + description: String
+    + goal: Double
+    + achieved: Bool
+    + update(): void
+}
+
+class BobTheBuilderAchievement {
+    - progress: Double
+    - goal: Double
+}
+
+class SkyscraperAchievement {
+    - highScore: Double
+    - goal: Double
+}
+
+class AchievementSystem {
+    - storageManager: StorageManager
+    + calculateAndGetUpdatedAchievements(): [any Achievement]
+    - setupAchievements(): void
+    - loadDefaultAchievements(): void
+    - loadStorageAchievements(achievementsStorage: [AchievementStorage]): void
+    - add(_ achievement: any Achievement): void
+    - updateAllAchievements(): void
+}
+
+enum AchievementType {
+    BobTheBuilder
+    Skyscraper
+}
+
+StatsTrackingSystem .u.|> AchievementSystemDataSource
+AchievementFactory -d-> Achievement
+AchievementSystemDataSource <-u- AchievementSystem
+AchievementSystem -> Achievement
+BobTheBuilderAchievement .u.|> Achievement
+SkyscraperAchievement .u.|> Achievement
+Achievement -> AchievementType
+Achievement --> AchievementSystemDataSource
+
+
+@enduml
+
