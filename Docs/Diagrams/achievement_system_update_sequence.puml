@@ -1,0 +1,13 @@
+@startuml
+actor User
+
+User -> AchievementSystem: calculateAndGetUpdatedAchievements()
+loop for each achievement in achievements
+    AchievementSystem -> achievement: update()
+    achievement -> dataSource: getStat(for: statType)
+    dataSource --> achievement: stat value
+end
+AchievementSystem -> storageManager: saveAchievements(achievements)
+AchievementSystem -> User: achievments
+@enduml
+

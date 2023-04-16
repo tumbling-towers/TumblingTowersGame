@@ -43,9 +43,9 @@ class StatsTrackingSystem {
     }
     
     private func loadDefaultStats() {
-        add(StatTrackerFactory.createStatTracker(ofType: .numBlocksPlaced, eventManager: eventManager))
-        add(StatTrackerFactory.createStatTracker(ofType: .numBlocksDropped, eventManager: eventManager))
-        add(StatTrackerFactory.createStatTracker(ofType: .towerHeight, eventManager: eventManager))
+        for statTrackerType in StatTrackerType.allCases {
+            add(StatTrackerFactory.createStatTracker(ofType: statTrackerType, eventManager: eventManager))
+        }
     }
 
     private func loadStorageStats(statsStorage: [StatStorage]) {
