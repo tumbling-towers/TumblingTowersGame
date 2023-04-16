@@ -1,0 +1,15 @@
+@startuml
+==set up==
+TumblingTowersGameApp -> SettingsManager **: SettingsManager()
+TumblingTowersGameApp -> SettingsManager: loadSettings()
+SettingsManager -> StorageManager: loadSettings()
+StorageManager --> SettingsManager: settings
+SettingsManager -> SettingsManager: set attribute values
+====
+
+==changing settings==
+-> SettingsView: user slides slider of background music
+SettingsView -> SettingsManager: change value of background music
+SettingsManager -> StorageManager: saveSettings()
+====
+@enduml

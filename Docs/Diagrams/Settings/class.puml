@@ -1,0 +1,11 @@
+@startuml
+class SettingsManager {
++ backgroundMusicVolume: Float
++ otherSoundVolume: Float
++ overallVolume: Float
++ loadSettings()
++ setStorageManager(StorageManager)
+}
+
+SettingsManager --> StorageManager
+@enduml
