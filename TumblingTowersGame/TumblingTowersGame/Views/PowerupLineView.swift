@@ -26,10 +26,11 @@ struct PowerupLineView_Previews: PreviewProvider {
     static var previews: some View {
         PowerupLineView()
             .environmentObject(ViewAdapter(levelDimensions: .infinite,
-                                           gameEngineMgr: GameEngineManager(levelDimensions: .infinite,
-                                                                            eventManager: TumblingTowersEventManager(),
-                                                                            inputType: TapInput.self,
-                                                                            storageManager: StorageManager(),
-                                                                            playersMode: .singleplayer)))
+                                           gameEngineMgr: GameInstanceController(
+                                            levelDimensions: .infinite,
+                                            eventManager: TumblingTowersEventManager(),
+                                            inputType: TapInput.self,
+                                            storageManager: StorageManager(),
+                                            playersMode: .singleplayer)))
     }
 }

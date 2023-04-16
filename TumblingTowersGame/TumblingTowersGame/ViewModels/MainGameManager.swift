@@ -15,7 +15,7 @@ class MainGameManager: ObservableObject {
 
     private var eventManager: EventManager?
 
-    var gameEngineMgrs: [GameEngineManager] = []
+    var gameEngineMgrs: [GameInstanceController] = []
 
     var playersMode: PlayersMode?
 
@@ -23,7 +23,7 @@ class MainGameManager: ObservableObject {
 
     var gameMode: Constants.GameModeTypes?
 
-    func createGameEngineManager(height: CGFloat, width: CGFloat) -> GameEngineManager {
+    func createGameInstanceController(height: CGFloat, width: CGFloat) -> GameInstanceController {
         if eventManager == nil {
             eventManager = TumblingTowersEventManager()
         }
@@ -40,14 +40,14 @@ class MainGameManager: ObservableObject {
             inputClass = Constants.getGameInputType(fromGameInputType: inputSystem) ?? GyroInput.self
         }
 
-        let gameEngineMgr = GameEngineManager(levelDimensions: CGRect(x: 0,
-                                                                      y: 0,
-                                                                      width: width,
-                                                                      height: height),
-                                              eventManager: eventManager,
-                                              inputType: inputClass,
-                                              storageManager: storageManager,
-                                              playersMode: playersMode)
+        let gameEngineMgr = GameInstanceController(levelDimensions: CGRect(x: 0,
+                                                                           y: 0,
+                                                                           width: width,
+                                                                           height: height),
+                                                   eventManager: eventManager,
+                                                   inputType: inputClass,
+                                                   storageManager: storageManager,
+                                                   playersMode: playersMode)
         self.gameEngineMgrs.append(gameEngineMgr)
         self.eventManager = eventManager
 

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct GameEndView: View {
     @Binding var currGameScreen: Constants.CurrGameScreens
-    var gameEngineMgr: GameEngineManager
+    var gameEngineMgr: GameInstanceController
 
     var body: some View {
         VStack {
@@ -57,10 +57,10 @@ struct GameEndView: View {
 struct GameEndView_Previews: PreviewProvider {
     static var previews: some View {
         GameEndView(currGameScreen: .constant(.singleplayerGameplay),
-                    gameEngineMgr: GameEngineManager(levelDimensions: .infinite,
-                                                     eventManager: TumblingTowersEventManager(),
-                                                     inputType: TapInput.self,
-                                                     storageManager: StorageManager(),
-                                                     playersMode: .singleplayer))
+                    gameEngineMgr: GameInstanceController(levelDimensions: .infinite,
+                                                          eventManager: TumblingTowersEventManager(),
+                                                          inputType: TapInput.self,
+                                                          storageManager: StorageManager(),
+                                                          playersMode: .singleplayer))
     }
 }

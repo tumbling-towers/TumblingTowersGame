@@ -17,7 +17,7 @@ class ViewAdapter: GameRendererDelegate, ObservableObject {
     @Published var powerups: [Powerup.Type?] = [Powerup.Type?](repeating: nil, count: 5)
 
     var levelDimensions: CGRect
-    var gameEngineMgr: GameEngineManager
+    var gameEngineMgr: GameInstanceController
 
     @Published var gameMode: GameMode?
     @Published var timeRemaining: Int = 0
@@ -26,7 +26,7 @@ class ViewAdapter: GameRendererDelegate, ObservableObject {
     @Published var gameEndMainMessage: String = ""
     @Published var gameEndSubMessage: String = ""
 
-    init(levelDimensions: CGRect, gameEngineMgr: GameEngineManager) {
+    init(levelDimensions: CGRect, gameEngineMgr: GameInstanceController) {
         self.levelDimensions = levelDimensions
         self.gameEngineMgr = gameEngineMgr
         gameEngineMgr.setRendererDelegate(self)

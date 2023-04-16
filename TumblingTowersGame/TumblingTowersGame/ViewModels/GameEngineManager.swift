@@ -1,5 +1,5 @@
 //
-//  GameEngineManager.swift
+//  GameInstanceController.swift
 //
 //  Created by Elvis on 13/3/23.
 //
@@ -7,7 +7,7 @@
 import Foundation
 import Fiziks
 
-class GameEngineManager {
+class GameInstanceController {
     var playerId = UUID()
 
     var eventManager: EventManager?
