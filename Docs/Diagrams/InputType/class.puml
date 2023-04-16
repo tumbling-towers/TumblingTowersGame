@@ -1,0 +1,23 @@
+@startuml
+interface InputSystem {
++ calculateInput() -> InputData
++ dragEvent(offset: CGSize)
++ resetInput()
+}
+
+struct InputData {
++ vector: CGVector
+}
+
+enum InputType {
+LEFT
+RIGHT
+DOWN
+NONE
+}
+
+InputSystem ..> InputData
+InputData -->"inputType" InputType
+GyroInput ..|> InputSystem
+TapInput ..|> InputSystem
+@enduml
