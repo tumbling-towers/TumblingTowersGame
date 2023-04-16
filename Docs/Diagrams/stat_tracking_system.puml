@@ -1,0 +1,59 @@
+@startuml
+
+interface StatTracker {
+    + var stat: Double
+    + var statTrackerType: StatTrackerType
+    + init(eventManager: EventManager, stat: Double?)
+}
+
+class NumBlocksPlacedStatTracker {
+    - blockPlacedClosure: (Event) -> Void
+}
+
+class NumBlocksDroppedStatTracker {
+    - blockDroppedClosure: (Event) -> Void
+}
+
+class TowerHeightStatTracker {
+    - towerHeightUpdatedClosure: (Event) -> Void
+}
+
+interface AchievementSystemDataSource {
+    + func getStat(for statTrackerType: StatTrackerType) -> Any?
+}
+
+class StatsTrackingSystem {
+    - eventManager: EventManager
+    - statTrackerTypeToStatTracker: [StatTrackerType: StatTracker]
+    - storageManager: StorageManager
+    + init(eventManager: EventManager, storageManager: StorageManager)
+    + getStat(for statTrackerType: StatTrackerType) -> Any?
+    - saveStats: (Event) -> Void
+    - setupStatTrackers()
+    - loadDefaultStats()
+    - loadStorageStats(statsStorage: [StatStorage])
+    - add(_ statTracker: StatTracker)
+}
+
+class StatTrackerFactory {
+    + createStatTracker(ofType: StatTrackerType, eventManager: EventManager, stat: Double?) -> StatTracker
+    - getStatTrackerFromStatTrackerType(from: StatTrackerType) -> StatTracker.Type?
+}
+
+enum StatTrackerType {
+    <<enumeration>>
+    + numBlocksPlaced
+    + numBlocksDropped
+    + towerHeight
+}
+
+AchievementSystemDataSource <|-d- StatsTrackingSystem
+AchievementSystemDataSource ..> StatTrackerType
+StatTrackerFactory ..> StatTrackerType
+StatTrackerFactory --> StatTracker
+NumBlocksPlacedStatTracker .u.|> StatTracker
+NumBlocksDroppedStatTracker .u.|> StatTracker
+TowerHeightStatTracker .u.|> StatTracker
+
+@enduml
+

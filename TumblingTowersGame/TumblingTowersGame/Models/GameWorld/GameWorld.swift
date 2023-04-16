@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import Fiziks
 
 class GameWorld {
     
@@ -77,6 +78,7 @@ class GameWorld {
 
     func resetGame() {
         level.reset()
+        currentlyMovingBlock = nil
         fiziksEngine.deleteAllBodies()
         
         fiziksEngine = GameFiziksEngine(size: dimensions)
@@ -87,6 +89,7 @@ class GameWorld {
         level.reset()
         isGameEnded = true
         fiziksEngine.deleteAllBodies()
+        currentlyMovingBlock = nil
     }
 
     /// Update method called by GameEngine every frame

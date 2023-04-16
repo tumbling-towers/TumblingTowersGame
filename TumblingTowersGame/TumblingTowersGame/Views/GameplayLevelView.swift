@@ -7,6 +7,7 @@
 
 import SpriteKit
 import SwiftUI
+import Fiziks
 
 struct GameplayLevelView: View {
     @Binding var currGameScreen: Constants.CurrGameScreens
