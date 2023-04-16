@@ -15,10 +15,6 @@ struct TumblingTowersGameApp: App {
     var body: some Scene {
         WindowGroup {
             GeometryReader { geo in
-//                ContentView(gameEngineMgr: mainGameMgr
-//                    .createGameEngineManager(
-//                        deviceHeight: geo.size.height,
-//                        deviceWidth: geo.size.width))
                 ContentView(deviceHeight: geo.size.height,
                         deviceWidth: geo.size.width)
                 .environmentObject(mainGameMgr)

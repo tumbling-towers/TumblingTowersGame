@@ -10,7 +10,7 @@ import Foundation
 class BobTheBuilderAchievement: Achievement {
     var name: String
     var description: String {
-        "Place \(goal) blocks without them falling off the platform.\nProgress: \(Int(progress))/\(Int(goal))"
+        "Place \(Int(goal)) blocks without them falling off the platform.\nProgress: \(Int(progress))/\(Int(goal))"
     }
     let goal: Double
     var achieved: Bool {
