@@ -15,6 +15,10 @@ struct RandomNumberGeneratorWithSeed: RandomNumberGenerator {
 
     func next() -> UInt64 {
         // drand48() returns a Double, transform to UInt64
+
+        // This is a legacy function and will show up as a warning
+        // on swiftlint, but it is necessary as type.random(in:) does
+        // not support seeding
         return withUnsafeBytes(of: drand48()) { bytes in
             bytes.load(as: UInt64.self)
         }

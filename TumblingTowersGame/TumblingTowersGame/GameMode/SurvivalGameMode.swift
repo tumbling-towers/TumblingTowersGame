@@ -12,8 +12,8 @@ class SurvivalGameMode: GameMode {
     // Place N blocks wo dropping more than M blocks in shortest time possible (Score is time taken?)
     static var name = Constants.GameModeTypes.SURVIVAL.rawValue
 
-    static var description = "Place \(blocksToPlace) blocks without dropping more than \(blocksDroppedThreshold) blocks! Score decays over time! Bonus Score Time: \(scoreTimeWithBonusScore)s"
-
+    static var description = "Place \(blocksToPlace) blocks without dropping more than "
+        + "\(blocksDroppedThreshold) blocks! Score decays over time! Bonus Score Time: \(scoreTimeWithBonusScore)s"
 
     var realTimeTimer = GameTimer()
 
@@ -39,7 +39,7 @@ class SurvivalGameMode: GameMode {
     required init(eventMgr: EventManager, playerId: UUID, levelHeight: CGFloat) {
         self.eventMgr = eventMgr
         self.playerId = playerId
-        
+
         eventMgr.registerClosure(for: BlockPlacedEvent.self, closure: blockPlaced)
         eventMgr.registerClosure(for: BlockDroppedEvent.self, closure: blockDropped)
     }

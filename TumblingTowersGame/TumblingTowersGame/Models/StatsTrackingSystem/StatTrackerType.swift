@@ -14,5 +14,5 @@ enum StatTrackerType: String, CaseIterable {
 }
 
 extension StatTrackerType: Codable {
-    
+
 }

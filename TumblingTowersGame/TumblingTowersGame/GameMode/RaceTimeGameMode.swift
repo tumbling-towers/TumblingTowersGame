@@ -10,7 +10,8 @@ import Foundation
 class RaceTimeGameMode: GameMode {
 
     static var name = Constants.GameModeTypes.RACECLOCK.rawValue
-    static var description = "Place \(blocksToPlace) blocks in \(timeToPlaceBy)s (singleplayer) / \(timeToPlaceBy / shortLevelTimeMultiplier)s (multiplayer)!"
+    static var description = "Place \(blocksToPlace) blocks in \(timeToPlaceBy)s "
+        + "(singleplayer) / \(timeToPlaceBy / shortLevelTimeMultiplier)s (multiplayer)!"
 
     var realTimeTimer = GameTimer()
     var eventMgr: EventManager
@@ -64,7 +65,7 @@ class RaceTimeGameMode: GameMode {
 
         if currBlocksPlaced >= RaceTimeGameMode.blocksToPlace {
             return .WIN
-        } else if realTimeTimer.count <= 0 {
+        } else if realTimeTimer.count <= .zero {
             return .LOSE
         }
 
@@ -129,7 +130,9 @@ class RaceTimeGameMode: GameMode {
     func startGame() {
         isStarted = true
         if shortLevel {
-            realTimeTimer.start(timeInSeconds: RaceTimeGameMode.timeToPlaceBy / RaceTimeGameMode.shortLevelTimeMultiplier, isCountsUp: false)
+            realTimeTimer.start(timeInSeconds: RaceTimeGameMode.timeToPlaceBy
+                                             / RaceTimeGameMode.shortLevelTimeMultiplier,
+                                isCountsUp: false)
         } else {
             realTimeTimer.start(timeInSeconds: RaceTimeGameMode.timeToPlaceBy, isCountsUp: false)
         }

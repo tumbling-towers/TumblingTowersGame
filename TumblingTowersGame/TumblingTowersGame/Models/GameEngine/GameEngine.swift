@@ -16,46 +16,54 @@ class GameEngine {
         gameWorld.level
     }
 
-    init(levelDimensions: CGRect, eventManager: EventManager, playerId: UUID, storageManager: StorageManager, playersMode: PlayersMode?) {
-        self.gameWorld = GameWorld(levelDimensions: levelDimensions, eventManager: eventManager, playerId: playerId)
+    init(levelDimensions: CGRect,
+         eventManager: EventManager,
+         playerId: UUID,
+         storageManager: StorageManager,
+         playersMode: PlayersMode?) {
+        self.gameWorld = GameWorld(levelDimensions: levelDimensions,
+                                   eventManager: eventManager,
+                                   playerId: playerId)
 
         if playersMode == .singleplayer {
             let statsTrackingSystem = StatsTrackingSystem(eventManager: eventManager, storageManager: storageManager)
             self.statsTrackingSystem = statsTrackingSystem
-            self.achievementSystem = AchievementSystem(eventManager: eventManager, dataSource: statsTrackingSystem, storageManager: storageManager)
+            self.achievementSystem = AchievementSystem(eventManager: eventManager,
+                                                       dataSource: statsTrackingSystem,
+                                                       storageManager: storageManager)
         } else {
             self.statsTrackingSystem = nil
             self.achievementSystem = nil
         }
     }
-    
+
     func startGame() {
         gameWorld.startGame()
         gameMode?.startGame()
     }
-    
+
     func update() {
         gameMode?.update()
         gameWorld.update()
     }
-    
+
     func stopGame() {
         gameWorld.endGame()
     }
-    
+
     func pauseGame() {
         gameWorld.pauseGame()
     }
-    
+
     func unpauseGame() {
         gameWorld.unpauseGame()
     }
-    
+
     func resetGame() {
         gameWorld.resetGame()
         gameMode?.resetGame()
     }
-    
+
     // MARK: Game Control methods
     /// Slides the currently-moving block only on the x-axis.
     func moveCMBSideways(by displacement: CGVector) {
@@ -79,5 +87,5 @@ class GameEngine {
     func rotateCMBCounterClockwise() {
         gameWorld.rotateCMB(by: CGFloat.pi / 2)
     }
-    
+
 }

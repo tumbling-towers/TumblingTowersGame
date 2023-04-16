@@ -21,7 +21,7 @@ class GamePowerupManager: PowerupManager {
             actualGameWorld = newValue
         }
     }
-    
+
     static let defaultNumPowerups = 10
 
     static let powerupTypes: [Powerup.Type] = [PlatformPowerup.self, GluePowerup.self]
@@ -49,7 +49,7 @@ class GamePowerupManager: PowerupManager {
         let next = rng.next() / 1_000
         let idx = Int(next) % GamePowerupManager.powerupTypes.count
         let type = GamePowerupManager.powerupTypes[idx]
-        
+
         if let index = availablePowerups.firstIndex(where: { $0 == nil }) {
             let nextPowerup = type.create(manager: self)
             availablePowerups[index] = nextPowerup
@@ -68,5 +68,5 @@ class GamePowerupManager: PowerupManager {
             self?.activatePowerup(at: event.idx)
         }
     }
-    
+
 }

@@ -13,6 +13,7 @@ final class FiziksSceneTests: XCTestCase {
     var fiziksScene: FiziksScene!
 
     override func setUp() {
+        super.setUp()
         let testSize = CGSize(width: 100, height: 100)
         fiziksScene = FiziksScene(size: testSize)
     }

@@ -11,7 +11,7 @@ class AchievementSystem {
     private var achievements: [any Achievement]
     private let dataSource: AchievementSystemDataSource
     private let storageManager: StorageManager
-    
+
     init(eventManager: EventManager, dataSource: AchievementSystemDataSource, storageManager: StorageManager) {
         self.achievements = []
         self.dataSource = dataSource
@@ -23,36 +23,36 @@ class AchievementSystem {
         updateAllAchievements()
         return achievements
     }
-    
+
     private func setupAchievements() {
         guard let achievementsStorage = try? storageManager.loadAchievements(dataSource: dataSource) else {
             return
         }
-        
-        if achievementsStorage.count == 0 {
+
+        if achievementsStorage.count == .zero {
             loadDefaultAchievements()
         } else {
             loadStorageAchievements(achievementsStorage: achievementsStorage)
         }
     }
-    
+
     private func loadDefaultAchievements() {
-        add(AchievementFactory.createAchievement(ofType: .BobTheBuilder,
+        add(AchievementFactory.createAchievement(ofType: .bobTheBuilder,
                                                  name: "BobTheBuilder I",
                                                  goal: 2,
                                                  achieved: false,
                                                  dataSource: dataSource))
-        add(AchievementFactory.createAchievement(ofType: .BobTheBuilder,
+        add(AchievementFactory.createAchievement(ofType: .bobTheBuilder,
                                                  name: "BobTheBuilder II",
                                                  goal: 20,
                                                  achieved: false,
                                                  dataSource: dataSource))
-        add(AchievementFactory.createAchievement(ofType: .Skyscraper,
+        add(AchievementFactory.createAchievement(ofType: .skyscraper,
                                                  name: "SkyScraper I",
                                                  goal: 300,
                                                  achieved: false,
                                                  dataSource: dataSource))
-        add(AchievementFactory.createAchievement(ofType: .Skyscraper,
+        add(AchievementFactory.createAchievement(ofType: .skyscraper,
                                                  name: "SkyScraper II",
                                                  goal: 500,
                                                  achieved: false,
@@ -64,11 +64,11 @@ class AchievementSystem {
             add(achievementStorage)
         }
     }
-    
+
     private func add(_ achievement: any Achievement) {
         achievements.append(achievement)
     }
-    
+
     private func updateAllAchievements() {
         for achievement in achievements {
             achievement.update()

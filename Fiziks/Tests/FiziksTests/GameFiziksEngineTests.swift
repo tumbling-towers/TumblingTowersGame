@@ -17,6 +17,7 @@ class GameFiziksEngineTests: XCTestCase {
     let fiziksBody: FiziksBody = MockFiziksBody()
 
     override func setUp() {
+        super.setUp()
         engine = GameFiziksEngine(size: defaultLevelDimensions)
         engine?.fiziksContactDelegate = delegate
     }

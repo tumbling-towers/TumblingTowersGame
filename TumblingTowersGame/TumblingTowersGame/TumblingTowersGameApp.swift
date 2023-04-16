@@ -16,7 +16,7 @@ struct TumblingTowersGameApp: App {
         WindowGroup {
             GeometryReader { geo in
                 ContentView(deviceHeight: geo.size.height,
-                        deviceWidth: geo.size.width)
+                            deviceWidth: geo.size.width)
                 .environmentObject(mainGameMgr)
                 .environmentObject(settingsMgr)
                 .statusBarHidden(true)

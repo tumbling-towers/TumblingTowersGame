@@ -18,7 +18,7 @@ extension CGPath {
         if centered {
             path = centerThePath(path)
         }
-        
+
         return path
     }
 
@@ -47,9 +47,9 @@ extension CGPath {
 
     public static func create(from rect: CGRect, centered: Bool = true) -> CGPath {
         let path = CGPath.create(from: [CGPoint(x: rect.minX, y: rect.minY),
-                             CGPoint(x: rect.maxX, y: rect.minY),
-                             CGPoint(x: rect.maxX, y: rect.maxY),
-                             CGPoint(x: rect.minX, y: rect.maxY)], centered: centered)
+                                        CGPoint(x: rect.maxX, y: rect.minY),
+                                        CGPoint(x: rect.maxX, y: rect.maxY),
+                                        CGPoint(x: rect.minX, y: rect.maxY)], centered: centered)
 
         return path
     }

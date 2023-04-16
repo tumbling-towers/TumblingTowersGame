@@ -17,7 +17,7 @@ class LevelBoundary: GameWorldObject {
     var rotation: Double {
         fiziksBody.zRotation
     }
-    
+
     var specialProperties: SpecialProperties
 
     static var categoryBitMask: BitMask = CategoryMask.platform

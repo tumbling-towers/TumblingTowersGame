@@ -25,7 +25,7 @@ final class TapInputTests: XCTestCase {
         tapInput.dragEvent(offset: CGSize(width: -50, height: 0))
         var currInput = tapInput.calculateInput()
         XCTAssertEqual(currInput.inputType, .LEFT)
-        
+
         tapInput.dragEvent(offset: CGSize(width: -50, height: 51))
         currInput = tapInput.calculateInput()
         XCTAssertEqual(currInput.inputType, .NONE)
@@ -42,7 +42,7 @@ final class TapInputTests: XCTestCase {
         currInput = tapInput.calculateInput()
         XCTAssertEqual(currInput.inputType, .NONE)
     }
-    
+
     func testDownMove() {
         let tapInput = TapInput()
 

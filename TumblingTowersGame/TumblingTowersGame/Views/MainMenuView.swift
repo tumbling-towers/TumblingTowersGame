@@ -23,7 +23,6 @@ struct MainMenuView: View {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 500)
-                    
 
                 Spacer()
 
@@ -35,9 +34,9 @@ struct MainMenuView: View {
                     Text("Play")
                         .modifier(CustomButton(fontSize: 40))
                 }
-                
+
                 Spacer().frame(height: 50)
-                
+
                 Button {
                     withAnimation {
                         currGameScreen = .achievements
@@ -47,7 +46,7 @@ struct MainMenuView: View {
                         .modifier(CustomButton(fontSize: 40))
                 }
                 .modifier(CustomButton(fontSize: 40))
-                
+
                 Spacer().frame(height: 50)
 
                 Button {

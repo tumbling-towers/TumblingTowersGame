@@ -9,7 +9,7 @@ import Foundation
 
 struct SpecialProperties {
     var isGlue: Bool
-    
+
     init(isGlueBlock: Bool = false) {
         self.isGlue = isGlueBlock
     }

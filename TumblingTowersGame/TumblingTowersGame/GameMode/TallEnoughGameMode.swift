@@ -10,7 +10,10 @@ import Foundation
 class TallEnoughGameMode: GameMode {
 
     static var name = Constants.GameModeTypes.RACECLOCK.rawValue
-    static var description = "Build your tower as high as you can... Until the \(powerupLinesToHit)th (singleplayer) / \(powerupLinesToHit / shortLevelMultiplier)th (multiplayer) powerup line! DO NOT drop more than \(blocksDroppedThreshold) blocks! Score decays over time! Bonus score time: \(scoreTimeWithBonusScore)s"
+    static var description = "Build your tower as high as you can... Until the \(powerupLinesToHit)th "
+        + "(singleplayer) / \(powerupLinesToHit / shortLevelMultiplier)th (multiplayer) powerup line! "
+        + "DO NOT drop more than \(blocksDroppedThreshold) blocks! Score decays over time! Bonus score "
+        + "time: \(scoreTimeWithBonusScore)s"
 
     var realTimeTimer = GameTimer()
     var eventMgr: EventManager
@@ -18,7 +21,7 @@ class TallEnoughGameMode: GameMode {
     // MARK: Constants for this game mode
     static let powerupLinesToHit = 10
     static let blocksDroppedThreshold = 20
-    
+
     let scoreBlocksPlacedMultiplier = 10
     let scoreBlocksDroppedMultiplier = 15
     static let shortLevelMultiplier = 2
@@ -66,7 +69,9 @@ class TallEnoughGameMode: GameMode {
 
         if currPowerupLineAmt >= TallEnoughGameMode.powerupLinesToHit {
             return .WIN
-        } else if shortLevel && currPowerupLineAmt >= TallEnoughGameMode.powerupLinesToHit / TallEnoughGameMode.shortLevelMultiplier {
+        } else if shortLevel
+            && currPowerupLineAmt >= TallEnoughGameMode.powerupLinesToHit
+                                   / TallEnoughGameMode.shortLevelMultiplier {
             return .WIN
         } else if currBlocksDropped >= TallEnoughGameMode.blocksDroppedThreshold {
             return .LOSE

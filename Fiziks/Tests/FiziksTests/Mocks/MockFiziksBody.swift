@@ -100,26 +100,32 @@ class MockFiziksBody: FiziksBody {
     }
 
     func applyForce(_ force: CGVector) {
+        print("force applied: \(force)")
         return
     }
 
     func applyTorque(_ torque: CGFloat) {
+        print("torque applied: \(torque)")
         return
     }
 
     func applyForce(_ force: CGVector, at point: CGPoint) {
+        print("force applied: \(force) at: \(point)")
         return
     }
 
     func applyImpulse(_ impulse: CGVector) {
+        print("impuse applied: \(impulse)")
         return
     }
 
     func applyAngularImpulse(_ angularImpulse: CGFloat) {
+        print("angular impulse applied: \(angularImpulse)")
         return
     }
 
     func applyImpulse(_ impulse: CGVector, at point: CGPoint) {
+        print("impulse applied: \(impulse) at: \(point)")
         return
     }
 }

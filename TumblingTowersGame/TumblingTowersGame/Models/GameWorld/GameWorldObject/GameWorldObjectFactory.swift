@@ -11,16 +11,17 @@ import Fiziks
 class GameWorldObjectFactory {
     typealias GameWorldObjCreatorClosure = (ObjectShape, CGPoint) -> GameWorldObject?
 
-    private static let gameWorldObjTypeToFn: [String: GameWorldObjCreatorClosure] = [GameWorldObjectType.block.rawValue: blockCreator,
-                                                                             GameWorldObjectType.platform.rawValue: platformCreator,
-                                                                             GameWorldObjectType.levelBoundary.rawValue: levelBoundaryCreator]
+    private static let gameWorldObjTypeToFn: [String: GameWorldObjCreatorClosure] =
+        [GameWorldObjectType.block.rawValue: blockCreator,
+         GameWorldObjectType.platform.rawValue: platformCreator,
+         GameWorldObjectType.levelBoundary.rawValue: levelBoundaryCreator]
 
     private static func getSpecificGameWorldObjCreator(from: GameWorldObjectType) -> GameWorldObjCreatorClosure? {
         gameWorldObjTypeToFn[from.rawValue]
     }
 
-    private static let blockCreator: GameWorldObjCreatorClosure = { (_ shape: ObjectShape,
-                                                             _ position: CGPoint) -> GameWorldObject? in
+    private static let blockCreator: GameWorldObjCreatorClosure = { (_ shape: ObjectShape, _ position: CGPoint)
+            -> GameWorldObject? in
         guard let pathObjectShape = shape as? PathObjectShape else {
             return nil
         }
@@ -36,8 +37,8 @@ class GameWorldObjectFactory {
         return newBlock
     }
 
-    private static let platformCreator: GameWorldObjCreatorClosure = { (_ shape: ObjectShape,
-                                                             _ position: CGPoint) -> GameWorldObject? in
+    private static let platformCreator: GameWorldObjCreatorClosure = { (_ shape: ObjectShape, _ position: CGPoint)
+            -> GameWorldObject? in
         guard let pathObjectShape = shape as? PathObjectShape else {
             return nil
         }
@@ -54,8 +55,8 @@ class GameWorldObjectFactory {
         return newPlatform
     }
 
-    private static let levelBoundaryCreator: GameWorldObjCreatorClosure = { (_ shape: ObjectShape,
-                                                             _ position: CGPoint) -> GameWorldObject? in
+    private static let levelBoundaryCreator: GameWorldObjCreatorClosure = { (_ shape: ObjectShape, _ position: CGPoint)
+            -> GameWorldObject? in
         guard let pathObjectShape = shape as? PathObjectShape else {
             return nil
         }
@@ -67,7 +68,6 @@ class GameWorldObjectFactory {
         let newBoundary = LevelBoundary(fiziksBody: newFiziksBody, shape: pathObjectShape)
         return newBoundary
     }
-
 
     static func create<T: GameWorldObject>(ofType gameWorldObjectType: GameWorldObjectType,
                                            ofShape shape: ObjectShape,

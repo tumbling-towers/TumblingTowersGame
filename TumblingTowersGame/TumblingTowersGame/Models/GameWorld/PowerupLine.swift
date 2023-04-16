@@ -10,7 +10,7 @@ import Foundation
 class PowerupLine {
     var position: CGPoint
     var dimensions: CGRect
-    
+
     init(position: CGPoint, dimensions: CGRect) {
         self.position = position
         self.dimensions = dimensions

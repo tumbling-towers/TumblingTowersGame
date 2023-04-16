@@ -10,10 +10,12 @@ import Foundation
 
 class MockFiziksContactDelegate: FiziksContactDelegate {
     func didBegin(_ contact: FiziksContact) {
+        print("contact began")
         return
     }
-    
+
     func didEnd(_ contact: FiziksContact) {
+        print("contact ended")
         return
     }
 }

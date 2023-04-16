@@ -10,7 +10,7 @@ import SwiftUI
 struct GameModeSelectView: View {
     @EnvironmentObject var mainGameMgr: MainGameManager
     @Binding var currGameScreen: Constants.CurrGameScreens
-    
+
     var body: some View {
         ZStack {
 
@@ -68,20 +68,6 @@ struct GameModeSelectView: View {
                 }
 
                 NormalGoBackButtonView(currGameScreen: $currGameScreen, destination: .playerOptionSelection)
-
-//                Button {
-//                    withAnimation {
-//                        currGameScreen = .playerOptionSelection
-//                        mainGameMgr.stopGames()
-//                    }
-//                } label: {
-//                    Text("Back")
-//                        .modifier(CustomButton(fontSize: 25))
-//                }
-
-//                GameplayGoBackMenuView(currGameScreen: $currGameScreen)
-//                .padding(.top, 35.0)
-
                 Spacer()
             }
         }
@@ -89,7 +75,13 @@ struct GameModeSelectView: View {
 
     }
 
-    private func drawGameModeOption(gameMode: Constants.GameModeTypes, playerMode: PlayersMode, name: String, fontSize: CGFloat, red: Double, green: Double, blue: Double) -> AnyView {
+    private func drawGameModeOption(gameMode: Constants.GameModeTypes,
+                                    playerMode: PlayersMode,
+                                    name: String,
+                                    fontSize: CGFloat,
+                                    red: Double,
+                                    green: Double,
+                                    blue: Double) -> AnyView {
         AnyView(
             Button {
                 mainGameMgr.gameMode = gameMode

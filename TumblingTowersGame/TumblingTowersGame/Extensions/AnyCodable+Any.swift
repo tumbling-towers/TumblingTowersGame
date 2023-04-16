@@ -6,9 +6,9 @@
 ////
 ////  Referenced from https://theblueprototype.medium.com/codable-protocol-with-any-type-e05f8b73c8b2
 //
-//import Foundation
+// import Foundation
 //
-//enum AnyCodable {
+// enum AnyCodable {
 //    case string(value: String)
 //    case int(value: Int)
 //    case data(value: Data)
@@ -33,9 +33,9 @@
 //    enum AnyCodableError:Error {
 //        case missingValue
 //    }
-//}
+// }
 //
-//extension AnyCodable: Codable {
+// extension AnyCodable: Codable {
 //    
 //    enum CodingKeys: String, CodingKey {
 //        case string, int, data, double, cgfloat
@@ -108,4 +108,4 @@
 //            try container.encode(value, forKey: .double)
 //        }
 //    }
-//}
+// }

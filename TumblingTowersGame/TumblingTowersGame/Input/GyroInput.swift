@@ -13,7 +13,7 @@ class GyroInput: InputSystem {
 Tilt Left / Right: Moves the block in the tilted direction.
 Swipe Down: Speeds up the downward movement of the block.
 """
-    
+
     private weak var mainGameMgr: MainGameManager?
 
     private var motionManager: CMMotionManager

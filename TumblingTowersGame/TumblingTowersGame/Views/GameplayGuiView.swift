@@ -10,8 +10,8 @@ import SwiftUI
 struct GameplayGuiView: View {
     @EnvironmentObject var mainGameMgr: MainGameManager
     @EnvironmentObject var viewAdapter: ViewAdapter
-    
-    @State var isPaused: Bool = false
+
+    @State var isPaused = false
 
     @Binding var currGameScreen: Constants.CurrGameScreens
 
@@ -32,7 +32,6 @@ struct GameplayGuiView: View {
                                                       y: viewAdapter.levelDimensions.height - 100)))
 
             drawPowerupButtons()
-
 
             Button {
                 isPaused = true
@@ -72,11 +71,11 @@ struct GameplayGuiView: View {
     private func drawPowerupButtons() -> AnyView {
         AnyView(
             ZStack {
-                ForEach(1..<viewAdapter.powerups.count + 1) { i in
-                    if let currPowerupType = viewAdapter.powerups[i - 1],
+                ForEach(1..<Int(viewAdapter.powerups.count + 1)) { idx in
+                    if let currPowerupType = viewAdapter.powerups[idx - 1],
                        let image = getPowerUpImgFor(powerupType: currPowerupType) {
                         Button {
-                            viewAdapter.usePowerup(at: i - 1)
+                            viewAdapter.usePowerup(at: idx - 1)
                         } label: {
                             Image(image)
                                 .resizable()
@@ -86,7 +85,8 @@ struct GameplayGuiView: View {
                         .modifier(PowerupButton(height: 70,
                                                  width: 70,
                                                  position: CGPoint(x: 100,
-                                                                   y: Int(viewAdapter.levelDimensions.height) - 100 * (i))))
+                                                                   y: Int(viewAdapter.levelDimensions.height)
+                                                                        - 100 * (idx))))
                     }
 
                 }
@@ -115,6 +115,11 @@ struct GameplayGuiView_Previews: PreviewProvider {
     static var previews: some View {
         GameplayGuiView(currGameScreen: .constant(.singleplayerGameplay))
             .environmentObject(MainGameManager())
-            .environmentObject(ViewAdapter(levelDimensions: .infinite, gameEngineMgr: GameEngineManager(levelDimensions: .infinite, eventManager: TumblingTowersEventManager(), inputType: TapInput.self, storageManager: StorageManager(), playersMode: .singleplayer)))
+            .environmentObject(ViewAdapter(levelDimensions: .infinite,
+                                           gameEngineMgr: GameEngineManager(levelDimensions: .infinite,
+                                                                            eventManager: TumblingTowersEventManager(),
+                                                                            inputType: TapInput.self,
+                                                                            storageManager: StorageManager(),
+                                                                            playersMode: .singleplayer)))
     }
 }

@@ -14,7 +14,7 @@ struct SettingsView: View {
     @Binding var currGameScreen: Constants.CurrGameScreens
 
     // MARK: Retrieve from storage in future
-    @State var selectedInputType : Constants.GameInputTypes
+    @State var selectedInputType: Constants.GameInputTypes
 
     var body: some View {
         ZStack {
@@ -105,7 +105,9 @@ struct SettingsView: View {
                     mainGameMgr.changeInput(to: val)
                 }
 
-                Text((Constants.getGameInputType(fromGameInputType: selectedInputType)?.description ?? "<input type description>") + "\n" + Constants.generalInputDescription)
+                Text((Constants.getGameInputType(fromGameInputType: selectedInputType)?.description
+                     ?? "<input type description>")
+                     + "\n" + Constants.generalInputDescription)
                     .modifier(BodyText())
             }
         )
@@ -134,7 +136,9 @@ struct SettingsView: View {
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsView(settingsMgr: SettingsManager(), currGameScreen: .constant(.gameModeSelection), selectedInputType: .GYRO)
+        SettingsView(settingsMgr: SettingsManager(),
+                     currGameScreen: .constant(.gameModeSelection),
+                     selectedInputType: .GYRO)
             .environmentObject(MainGameManager())
             .environmentObject(SettingsManager())
     }

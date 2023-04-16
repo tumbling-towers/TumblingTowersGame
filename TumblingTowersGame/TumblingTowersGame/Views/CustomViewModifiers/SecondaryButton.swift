@@ -22,7 +22,10 @@ struct SecondaryButton: ViewModifier {
                 .padding(.all, padding)
         }.frame(width: 300, height: 75)
             .background(
-                RoundedRectangle(cornerRadius: 10, style: .continuous).fill(Color.init(red: red, green: green, blue: blue)))
+                RoundedRectangle(cornerRadius: 10,
+                                 style: .continuous)
+                .fill(Color(red: red,
+                            green: green,
+                            blue: blue)))
     }
 }
-

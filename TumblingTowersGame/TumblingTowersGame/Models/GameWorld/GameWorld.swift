@@ -10,19 +10,21 @@ import SwiftUI
 import Fiziks
 
 class GameWorld {
-    
+
     // MARK: Model objects / properties
     var level: GameWorldLevel
-    
+
     var currentlyMovingBlock: Block?
-    
+
     var highestPoint: CGFloat {
         level.getHighestPoint(excluding: currentlyMovingBlock)
     }
-    
+
     /// Obtains the leftmost and rightmost points of the CMB.
     var referencePoints: (left: CGPoint, right: CGPoint)? {
-        guard let block = currentlyMovingBlock else { return nil }
+        guard let block = currentlyMovingBlock else {
+            return nil
+        }
         let width = block.width
         let xPosLeft: Double = block.position.x - width / 2
         let xPosRight: Double = block.position.x + width / 2
@@ -39,26 +41,27 @@ class GameWorld {
 
     // MARK: Engines & Managers
     var fiziksEngine: FiziksEngine
-    
+
     var eventManager: EventManager {
         didSet {
             powerupManager?.eventManager = eventManager
         }
     }
-    
+
     var powerupManager: PowerupManager?
-    
 
     // MARK: Generators
     private var rng: RandomNumberGeneratorWithSeed
 
     private var shapeRandomizer: ShapeRandomizer
-    
-    private var isGameEnded: Bool = false
 
-    
+    private var isGameEnded = false
+
     // MARK: Initializer
-    init(levelDimensions: CGRect, seed: Int = GameWorldConstants.defaultSeed, eventManager: EventManager, playerId: UUID) {
+    init(levelDimensions: CGRect,
+         eventManager: EventManager,
+         playerId: UUID,
+         seed: Int = GameWorldConstants.defaultSeed) {
         self.eventManager = eventManager
         self.level = GameWorldLevel(levelDimensions: levelDimensions)
         self.playerId = playerId
@@ -66,7 +69,7 @@ class GameWorld {
         self.shapeRandomizer = ShapeRandomizer(possibleShapes: TetrisType.allCases, seed: seed)
         self.rng = RandomNumberGeneratorWithSeed(seed: seed)
         self.powerupManager = GamePowerupManager(eventManager: eventManager, gameWorld: self, seed: seed)
-        
+
         setUpFiziksEngine()
     }
 
@@ -80,11 +83,11 @@ class GameWorld {
         level.reset()
         currentlyMovingBlock = nil
         fiziksEngine.deleteAllBodies()
-        
+
         fiziksEngine = GameFiziksEngine(size: dimensions)
         setUpFiziksEngine()
     }
-    
+
     func endGame() {
         level.reset()
         isGameEnded = true
@@ -103,32 +106,32 @@ class GameWorld {
         if isGameEnded {
             return
         }
-        
+
         let shape = shapeRandomizer.createRandomShape()
         let insertedBlock = addBlock(ofShape: shape, at: level.blockInsertionPoint)
         currentlyMovingBlock = insertedBlock
 
         eventManager.postEvent(BlockInsertedEvent(playerId: playerId))
     }
-    
+
     func moveCMB(by vector: CGVector) {
         guard let blockToMove = currentlyMovingBlock else {
             return
         }
         level.move(gameWorldObject: blockToMove, by: vector)
     }
-    
+
     func rotateCMB(by rotation: Double) {
         guard let blockToMove = currentlyMovingBlock else {
             return
         }
         level.rotate(gameWorldObject: blockToMove, by: rotation)
     }
-    
+
     func setCMBSpecialProperties(properties: SpecialProperties) {
         currentlyMovingBlock?.specialProperties = properties
     }
-    
+
     @discardableResult
     private func addBlock(ofShape shape: TetrisShape, at position: CGPoint) -> Block {
         guard let newBlock: Block = GameWorldObjectFactory.create(ofType: .block,
@@ -136,20 +139,20 @@ class GameWorld {
                                                                   at: position) else {
             assert(false)
         }
-        
+
         addObject(object: newBlock)
-        
+
         // make block move at constant speed
         newBlock.fiziksBody.affectedByGravity = false
         newBlock.fiziksBody.velocity = .zero
         newBlock.fiziksBody.applyImpulse(GameWorldConstants.defaultBlockVelocity)
-        
+
         // prevent newly inserted blocks from rotating via collisions
         newBlock.fiziksBody.allowsRotation = false
-        
+
         return newBlock
     }
-    
+
     // MARK: Level setup methods
     private func setUpLevel() {
         setLevelPlatform()
@@ -167,24 +170,26 @@ class GameWorld {
             assert(false)
         }
         level.setMainPlatform(platform: platform)
-        
+
         fiziksEngine.add(platform.fiziksBody)
     }
-    
+
     private func setLevelBoundaries() {
         // left boundary
-        let leftPosition = CGPoint(x: dimensions.midX - GameWorldConstants.defaultPlatformBoundaryBuffer, y: dimensions.midY)
+        let leftPosition = CGPoint(x: dimensions.midX - GameWorldConstants.defaultPlatformBoundaryBuffer,
+                                   y: dimensions.midY)
         let leftBoundary = createLevelBoundary(at: leftPosition)
         level.leftBoundary = leftBoundary
         fiziksEngine.add(leftBoundary.fiziksBody)
-        
+
         // right boundary
-        let rightPosition = CGPoint(x: dimensions.midX + GameWorldConstants.defaultPlatformBoundaryBuffer, y: dimensions.midY)
+        let rightPosition = CGPoint(x: dimensions.midX + GameWorldConstants.defaultPlatformBoundaryBuffer,
+                                    y: dimensions.midY)
         let rightBoundary = createLevelBoundary(at: rightPosition)
         level.rightBoundary = rightBoundary
         fiziksEngine.add(rightBoundary.fiziksBody)
     }
-    
+
     private func setPowerupLine() {
         let pos = CGPoint(x: dimensions.midX, y: GameWorldConstants.defaultInitialPowerupHeight)
         let rect = CGRect(x: pos.x,
@@ -193,7 +198,7 @@ class GameWorld {
                           height: GameWorldConstants.defaultPowerupLineDimensions.height)
         level.powerupLine = PowerupLine(position: pos, dimensions: rect)
     }
-    
+
     private func setUpFiziksEngine() {
         let fiziksEngineBoundingRect = CGRect(x: dimensions.minX,
                                               y: dimensions.minY - 100,
@@ -202,21 +207,21 @@ class GameWorld {
         fiziksEngine.insertBounds(fiziksEngineBoundingRect)
         fiziksEngine.fiziksContactDelegate = self
     }
-    
+
     // MARK: Other methods
     func pauseGame() {
         fiziksEngine.pause()
     }
-    
+
     func unpauseGame() {
         fiziksEngine.unpause()
     }
-    
+
     func addObject(object: GameWorldObject) {
         level.add(gameWorldObject: object)
         fiziksEngine.add(object.fiziksBody)
     }
-    
+
     func removeObject(object: GameWorldObject) {
         level.remove(gameWorldObject: object)
         fiziksEngine.delete(object.fiziksBody)
@@ -224,7 +229,7 @@ class GameWorld {
             insertNewBlock()
         }
     }
-    
+
     private func createLevelBoundary(ofWidth width: CGFloat = GameWorldConstants.levelBoundaryWidth,
                                      at position: CGPoint) -> LevelBoundary {
         let rect = CGRect(origin: position, size: CGSize(width: width, height: dimensions.height))
@@ -244,7 +249,7 @@ class GameWorld {
             eventManager.postEvent(BlockDroppedEvent(playerId: playerId))
         }
     }
-    
+
     private func handleBlocksInContactWithPowerupLine() {
         guard let blocksInContact = level.blocksInContactWithPowerupLineAndStable else {
             return

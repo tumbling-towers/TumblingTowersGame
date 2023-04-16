@@ -11,37 +11,37 @@ class StatsTrackingSystem {
     let eventManager: EventManager
     var statTrackerTypeToStatTracker: [StatTrackerType: StatTracker]
     private let storageManager: StorageManager
-    
+
     init(eventManager: EventManager, storageManager: StorageManager) {
         self.eventManager = eventManager
         self.statTrackerTypeToStatTracker = [:]
         self.storageManager = storageManager
-        
+
         setupStatTrackers()
         eventManager.registerClosure(for: GameEndedEvent.self, closure: saveStats)
     }
-    
+
     private lazy var saveStats = { [weak self] (_ event: Event) -> Void in
         guard let values = self?.statTrackerTypeToStatTracker.values else {
             return
         }
-        
+
         let statTrackers = Array(values)
         try? self?.storageManager.saveStats(statTrackers)
     }
-    
+
     private func setupStatTrackers() {
         guard let statsStorage = try? storageManager.loadStats(eventManager: eventManager) else {
             return
         }
-        
-        if statsStorage.count == 0 {
+
+        if statsStorage.count == .zero {
             loadDefaultStats()
         } else {
             loadStorageStats(statsStorage: statsStorage)
         }
     }
-    
+
     private func loadDefaultStats() {
         for statTrackerType in StatTrackerType.allCases {
             add(StatTrackerFactory.createStatTracker(ofType: statTrackerType, eventManager: eventManager))
@@ -53,7 +53,7 @@ class StatsTrackingSystem {
             add(storage)
         }
     }
-    
+
     private func add(_ statTracker: StatTracker) {
         statTrackerTypeToStatTracker[statTracker.statTrackerType] = statTracker
     }
@@ -67,4 +67,3 @@ extension StatsTrackingSystem: AchievementSystemDataSource {
         return statTracker.stat
     }
 }
-

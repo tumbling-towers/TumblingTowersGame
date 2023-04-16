@@ -12,7 +12,7 @@ protocol InputSystem {
     init()
 
     static var description: String { get }
-    
+
     func calculateInput() -> InputData
 
     func dragEvent(offset: CGSize)

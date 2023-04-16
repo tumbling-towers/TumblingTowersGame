@@ -32,7 +32,7 @@ struct GameEndView: View {
 
                     GameplayGoBackMenuView(currGameScreen: $currGameScreen)
                         .padding(.bottom, 1)
-                    
+
                 }
 
             }
@@ -56,6 +56,11 @@ struct GameEndView: View {
 
 struct GameEndView_Previews: PreviewProvider {
     static var previews: some View {
-        GameEndView(currGameScreen: .constant(.singleplayerGameplay),  gameEngineMgr: GameEngineManager(levelDimensions: .infinite, eventManager: TumblingTowersEventManager(), inputType: TapInput.self, storageManager: StorageManager(), playersMode: .singleplayer))
+        GameEndView(currGameScreen: .constant(.singleplayerGameplay),
+                    gameEngineMgr: GameEngineManager(levelDimensions: .infinite,
+                                                     eventManager: TumblingTowersEventManager(),
+                                                     inputType: TapInput.self,
+                                                     storageManager: StorageManager(),
+                                                     playersMode: .singleplayer))
     }
 }

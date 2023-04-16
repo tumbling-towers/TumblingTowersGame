@@ -16,9 +16,7 @@ class GameEngineManager {
 
     // MARK: Game logic related attributes
     var platformPosition: CGPoint? {
-        get {
-            gameEngine.level.mainPlatform?.position
-        }
+        gameEngine.level.mainPlatform?.position
     }
 
     var levelDimensions: CGRect
@@ -35,7 +33,9 @@ class GameEngineManager {
     }
 
     var referenceBox: CGRect? {
-        guard let refPoints = gameEngine.gameWorld.referencePoints else { return nil }
+        guard let refPoints = gameEngine.gameWorld.referencePoints else {
+            return nil
+        }
 
         let width = refPoints.right.x - refPoints.left.x
         return CGRect(x: refPoints.left.x - 1, y: 0, width: width + 2, height: 3_000)
@@ -80,20 +80,28 @@ class GameEngineManager {
             return "Please try again!"
         }
     }
-    
+
     weak var rendererDelegate: GameRendererDelegate?
-    
+
     var powerups: [Powerup.Type?] = [Powerup.Type?](repeating: nil, count: 5)
 
     var physicsEngine: FiziksEngine {
         gameEngine.gameWorld.fiziksEngine
     }
 
-    init(levelDimensions: CGRect, eventManager: EventManager, inputType: InputSystem.Type, storageManager: StorageManager, playersMode: PlayersMode?) {
+    init(levelDimensions: CGRect,
+         eventManager: EventManager,
+         inputType: InputSystem.Type,
+         storageManager: StorageManager,
+         playersMode: PlayersMode?) {
         self.levelDimensions = levelDimensions
         self.eventManager = eventManager
         self.storageManager = storageManager
-        self.gameEngine = GameEngine(levelDimensions: levelDimensions, eventManager: eventManager, playerId: playerId, storageManager: storageManager, playersMode: playersMode)
+        self.gameEngine = GameEngine(levelDimensions: levelDimensions,
+                                     eventManager: eventManager,
+                                     playerId: playerId,
+                                     storageManager: storageManager,
+                                     playersMode: playersMode)
 
         inputSystem = inputType.init()
 
@@ -103,11 +111,11 @@ class GameEngineManager {
     func setRendererDelegate(_ renderer: GameRendererDelegate) {
         self.rendererDelegate = renderer
     }
-    
+
     func dragEvent(offset: CGSize) {
         inputSystem.dragEvent(offset: offset)
     }
-    
+
     func resetInput() {
         inputSystem.resetInput()
     }
@@ -120,7 +128,9 @@ class GameEngineManager {
         // set up game mode
         let gameModeClass = Constants.getGameModeType(from: gameMode)
         if let eventManager = eventManager, let gameModeClass = gameModeClass {
-            self.gameEngine.gameMode = gameModeClass.init(eventMgr: eventManager, playerId: playerId, levelHeight: levelDimensions.height)
+            self.gameEngine.gameMode = gameModeClass.init(eventMgr: eventManager,
+                                                          playerId: playerId,
+                                                          levelHeight: levelDimensions.height)
         }
 
         // set up game in game engine
@@ -152,7 +162,14 @@ class GameEngineManager {
 
     func renderCurrentFrame() {
         if let referenceBoxToUpdate = referenceBox, let gameModeToUpdate = gameMode {
-            rendererDelegate?.updateViewVariables(referenceBoxToUpdate: referenceBoxToUpdate, powerupsToUpdate: powerups, gameModeToUpdate: gameModeToUpdate, timeRemainingToUpdate: timeRemaining, scoreToUpdate: score, gameEndedToUpdate: gameEnded, gameEndMainMessageToUpdate: gameEndMainMessage, gameEndSubMessageToUpdate: gameEndSubMessage)
+            rendererDelegate?.updateViewVariables(referenceBoxToUpdate: referenceBoxToUpdate,
+                                                  powerupsToUpdate: powerups,
+                                                  gameModeToUpdate: gameModeToUpdate,
+                                                  timeRemainingToUpdate: timeRemaining,
+                                                  scoreToUpdate: score,
+                                                  gameEndedToUpdate: gameEnded,
+                                                  gameEndMainMessageToUpdate: gameEndMainMessage,
+                                                  gameEndSubMessageToUpdate: gameEndSubMessage)
         }
 //        let levelToRender = gameEngine.gameWorld.level
 
@@ -169,20 +186,19 @@ class GameEngineManager {
         eventManager?.postEvent(PowerupButtonTappedEvent(idx: idx, for: gameEngine.gameWorld))
         self.powerups[idx] = nil
     }
-    
+
     func pause() {
         gameUpdater?.pauseGame()
         gameEngine.pauseGame()
         gameMode?.pauseGame()
     }
-    
+
     func unpause() {
         gameUpdater?.unpauseGame()
         gameEngine.unpauseGame()
         gameMode?.resumeGame()
     }
 
- 
     private func registerEvents() {
         eventManager?.registerClosure(for: PowerupAvailableEvent.self, closure: powerupAvailableEventFired)
         eventManager?.registerClosure(for: GameEndedEvent.self, closure: stopGameEventFired)

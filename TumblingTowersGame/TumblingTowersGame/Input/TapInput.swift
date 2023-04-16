@@ -12,7 +12,7 @@ class TapInput: InputSystem {
 Swipe Left / Right: Move the block in the swiped direction.
 Swipe Down: Speeds up the downward movement of the block.
 """
-    
+
     private var inputData = InputData.none
 
     private var xMultiplier: Double = 0.01

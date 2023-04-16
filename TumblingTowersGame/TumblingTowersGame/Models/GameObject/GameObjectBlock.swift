@@ -47,5 +47,8 @@ extension GameObjectBlock: Equatable {
 }
 
 extension GameObjectBlock {
-    static let sampleBlock = GameObjectBlock(position: CGPoint(x: 500, y: 500), path: TetrisShape(type: .I).path, specialProperties: SpecialProperties())
+    static let sampleBlock = GameObjectBlock(position: CGPoint(x: 500,
+                                                               y: 500),
+                                             path: TetrisShape(type: .I).path,
+                                             specialProperties: SpecialProperties())
 }

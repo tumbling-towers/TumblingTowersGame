@@ -18,12 +18,12 @@ extension GameWorld: FiziksContactDelegate {
             && !cmbContactedBoundary(contact: contact) {
             handlePlaceCMB()
         }
-        
+
         SpecialPropertiesContactResolver.resolve(fiziksEngine: fiziksEngine,
                                                  contact: contact,
                                                  specialProperties: currentBlock.specialProperties)
     }
-    
+
     private func cmbContactedBoundary(contact: FiziksContact) -> Bool {
         contact.contains(body: level.leftBoundary?.fiziksBody)
         || contact.contains(body: level.rightBoundary?.fiziksBody)
@@ -49,10 +49,9 @@ extension GameWorld: FiziksContactDelegate {
 
     private func updatePlacedBlocksStatus() {
         var placedBlockCount = 0
-        for gameObject in level.gameObjects {
-            if gameObject.fiziksBody.categoryBitMask == CategoryMask.block {
-                placedBlockCount += 1
-            }
+        for gameObject in level.gameObjects
+            where gameObject.fiziksBody.categoryBitMask == CategoryMask.block {
+            placedBlockCount += 1
         }
         eventManager.postEvent(BlockPlacedEvent(totalBlocksInLevel: placedBlockCount, playerId: playerId))
 

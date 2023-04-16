@@ -8,10 +8,10 @@
 import Foundation
 
 enum AchievementType: String {
-    case BobTheBuilder
-    case Skyscraper
+    case bobTheBuilder
+    case skyscraper
 }
 
 extension AchievementType: Codable {
-    
+
 }

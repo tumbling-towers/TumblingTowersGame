@@ -20,6 +20,7 @@ final class GameFiziksBodyTestsA: XCTestCase {
     let path = CGPath.create(from: GameFiziksBodyTestsA.points)
 
     override func setUp() {
+        super.setUp()
         fiziksBody = GameFiziksBody(path: path,
                                     position: .zero,
                                     zRotation: 5,
@@ -29,7 +30,7 @@ final class GameFiziksBodyTestsA: XCTestCase {
                                     contactTestBitMask: 0x1)
         fiziksShapeNode = fiziksBody.fiziksShapeNode
     }
-    
+
     func testGetPosition_bothSameValue() {
         let currFSNValue = fiziksShapeNode.position
         let currPFBValue = fiziksBody.position

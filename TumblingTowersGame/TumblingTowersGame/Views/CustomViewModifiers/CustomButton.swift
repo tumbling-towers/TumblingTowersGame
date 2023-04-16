@@ -19,6 +19,8 @@ struct CustomButton: ViewModifier {
                 .padding(.all, padding)
         }.frame(width: 300, height: 75)
             .background(
-                RoundedRectangle(cornerRadius: 10, style: .continuous).fill(Color.init(red: 0.969, green: 0.933, blue: 0.855)))
+                RoundedRectangle(cornerRadius: 10,
+                                 style: .continuous)
+                    .fill(Color(red: 0.969, green: 0.933, blue: 0.855)))
     }
 }

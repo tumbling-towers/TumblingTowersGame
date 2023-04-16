@@ -18,7 +18,7 @@ class SandboxGameMode: GameMode {
     // MARK: Constants for this game mode
     let scoreBlocksPlacedMultiplier = 10
     let scoreBlocksDroppedMultiplier = 25
-    
+
     // MARK: Tracking State of Game
     private var currBlocksPlaced = 0
     private var currBlocksDropped = 0

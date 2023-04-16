@@ -23,23 +23,30 @@ class ViewAdapter: GameRendererDelegate, ObservableObject {
     @Published var gameMode: GameMode?
     @Published var timeRemaining: Int = 0
     @Published var score: Int = 0
-    @Published var gameEnded: Bool = true
+    @Published var gameEnded = true
     @Published var gameEndMainMessage: String = ""
     @Published var gameEndSubMessage: String = ""
-    
+
     init(levelDimensions: CGRect, gameEngineMgr: GameEngineManager) {
         self.levelDimensions = levelDimensions
         self.gameEngineMgr = gameEngineMgr
         gameEngineMgr.setRendererDelegate(self)
     }
-    
+
     func dragEvent(offset: CGSize) {
         gameEngineMgr.dragEvent(offset: CGSize(width: offset.width, height: -offset.height))
     }
-    
+
     @Published var referenceBox: CGRect = .infinite
-    
-    func updateViewVariables(referenceBoxToUpdate: CGRect, powerupsToUpdate: [Powerup.Type?], gameModeToUpdate: GameMode, timeRemainingToUpdate: Int, scoreToUpdate: Int, gameEndedToUpdate: Bool, gameEndMainMessageToUpdate: String, gameEndSubMessageToUpdate: String) {
+
+    func updateViewVariables(referenceBoxToUpdate: CGRect,
+                             powerupsToUpdate: [Powerup.Type?],
+                             gameModeToUpdate: GameMode,
+                             timeRemainingToUpdate: Int,
+                             scoreToUpdate: Int,
+                             gameEndedToUpdate: Bool,
+                             gameEndMainMessageToUpdate: String,
+                             gameEndSubMessageToUpdate: String) {
         referenceBox = referenceBoxToUpdate
         powerups = powerupsToUpdate
 
@@ -49,13 +56,15 @@ class ViewAdapter: GameRendererDelegate, ObservableObject {
         gameEndSubMessage = gameEndSubMessageToUpdate
         gameEndMainMessage = gameEndMainMessageToUpdate
     }
-    
+
     func renderCurrentFrame(gameObjects: [any GameWorldObject], powerUpLine: PowerupLine) {
-        
+
         let levelToRender = convertLevel(gameObjects: gameObjects)
-        renderLevel(gameObjectBlocks: levelToRender.blocks, gameObjectPlatforms: levelToRender.platforms, powerupLine: powerUpLine)
+        renderLevel(gameObjectBlocks: levelToRender.blocks,
+                    gameObjectPlatforms: levelToRender.platforms,
+                    powerupLine: powerUpLine)
         rerender()
-        
+
     }
 
     /// GameEngine outputs coordinates with the origin at the bottom-left.
@@ -69,25 +78,31 @@ class ViewAdapter: GameRendererDelegate, ObservableObject {
         // Flips the block vertically (mirror image) due to difference in coordinate system
         let path = transformPath(path: block.path, width: block.width, height: block.height)
         let newPosition = adjustCoordinates(for: block.position)
-        // TODO: Don't return a new block
-        let transformedBlock = GameObjectBlock(position: newPosition, path: path, specialProperties: block.specialProperties)
+        let transformedBlock = GameObjectBlock(position: newPosition,
+                                               path: path,
+                                               specialProperties: block.specialProperties)
         return transformedBlock
     }
-    
+
     private func convertLevel(gameObjects: [any GameWorldObject]) -> Level {
         var blocks: [GameObjectBlock] = []
         var platforms: [GameObjectPlatform] = []
-        
+
         for object in gameObjects {
             if type(of: object) == Block.self {
                 guard let block = object as? Block, let tetrisShape = block.shape as? TetrisShape else { continue }
-                blocks.append(GameObjectBlock(position: block.position, path: tetrisShape.path, rotation: block.rotation, specialProperties: block.specialProperties))
+                blocks.append(GameObjectBlock(position: block.position,
+                                              path: tetrisShape.path,
+                                              rotation: block.rotation,
+                                              specialProperties: block.specialProperties))
             } else if type(of: object) == Platform.self {
                 guard object is Platform else { continue }
-                platforms.append(GameObjectPlatform(position: object.position, width: object.width, height: object.height))
+                platforms.append(GameObjectPlatform(position: object.position,
+                                                    width: object.width,
+                                                    height: object.height))
             }
         }
-        
+
         return Level(blocks: blocks, platforms: platforms)
     }
 
@@ -98,19 +113,19 @@ class ViewAdapter: GameRendererDelegate, ObservableObject {
         path.apply(flip)
         return path.cgPath
     }
-    
+
     func rerender() {
         objectWillChange.send()
     }
 
     func getCurrInput() -> InputData {
-        return .none
+        .none
     }
-    
+
     func rotateCurrentBlock() {
         gameEngineMgr.rotateCurrentBlock()
     }
-    
+
     func resetInput() {
         gameEngineMgr.resetInput()
     }
@@ -122,13 +137,14 @@ class ViewAdapter: GameRendererDelegate, ObservableObject {
     func startGame(gameMode: Constants.GameModeTypes) {
         gameEngineMgr.startGame(gameMode: gameMode)
     }
-    
+
     func getPhysicsEngine() -> FiziksEngine {
         gameEngineMgr.physicsEngine
     }
 
-    
-    func renderLevel(gameObjectBlocks: [GameObjectBlock], gameObjectPlatforms: [GameObjectPlatform], powerupLine: PowerupLine) {
+    func renderLevel(gameObjectBlocks: [GameObjectBlock],
+                     gameObjectPlatforms: [GameObjectPlatform],
+                     powerupLine: PowerupLine) {
         var invertedGameObjBlocks: [GameObjectBlock] = []
         var invertedGameObjPlatforms: [GameObjectPlatform] = []
 
@@ -144,23 +160,24 @@ class ViewAdapter: GameRendererDelegate, ObservableObject {
         }
 
         powerUpLinePosition = adjustCoordinates(for: powerupLine.position)
-                              .add(by: CGVector(dx: -powerupLineDimensions.width / 2,
-                                                dy: 0))
+            .add(by: CGVector(dx: -powerupLineDimensions.width / 2,
+                              dy: 0))
         powerupLineDimensions = CGSize(width: powerupLine.dimensions.width, height: powerupLine.dimensions.height)
-        
+
         self.levelBlocks = invertedGameObjBlocks
         self.levelPlatforms = invertedGameObjPlatforms
     }
 
-    func usePowerup(at: Int) {
-        gameEngineMgr.usePowerup(at: at)
+    func usePowerup(at idx: Int) {
+        gameEngineMgr.usePowerup(at: idx)
     }
-
 
     func getUpdatedAchievements() -> [DisplayableAchievement] {
         let storage = gameEngineMgr.storageManager
         let statsSystem = StatsTrackingSystem(eventManager: TumblingTowersEventManager(), storageManager: storage)
-        let achievementSystem = AchievementSystem(eventManager: TumblingTowersEventManager(), dataSource: statsSystem, storageManager: storage)
+        let achievementSystem = AchievementSystem(eventManager: TumblingTowersEventManager(),
+                                                  dataSource: statsSystem,
+                                                  storageManager: storage)
 
         let updatedAchievements = achievementSystem.calculateAndGetUpdatedAchievements()
 
@@ -173,10 +190,10 @@ class ViewAdapter: GameRendererDelegate, ObservableObject {
         var displayableAchievements = [DisplayableAchievement]()
         for achievement in achievements {
             let displayableAchievement = DisplayableAchievement(id: UUID(),
-                                                        name: achievement.name,
-                                                        description: achievement.description,
-                                                        goal: achievement.goal,
-                                                        achieved: achievement.achieved)
+                                                                name: achievement.name,
+                                                                description: achievement.description,
+                                                                goal: achievement.goal,
+                                                                achieved: achievement.achieved)
             displayableAchievements.append(displayableAchievement)
         }
         return displayableAchievements

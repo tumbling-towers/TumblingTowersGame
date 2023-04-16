@@ -26,22 +26,46 @@ struct ContentView: View {
                       let gameMode = mainGameMgr.gameMode {
 
                 ZStack {
-                    GameplayLevelView(currGameScreen: $currGameScreen, viewAdapter: ViewAdapter(levelDimensions: CGRect(x: 0, y: 0, width: deviceWidth, height: deviceHeight), gameEngineMgr: mainGameMgr.createGameEngineManager(height: deviceHeight, width: deviceWidth)), gameMode: gameMode)
+                    GameplayLevelView(currGameScreen: $currGameScreen,
+                                      viewAdapter: ViewAdapter(levelDimensions: CGRect(x: 0,
+                                                                                       y: 0,
+                                                                                       width: deviceWidth,
+                                                                                       height: deviceHeight),
+                                                               gameEngineMgr: mainGameMgr
+                                        .createGameEngineManager(height: deviceHeight,
+                                                                 width: deviceWidth)),
+                                      gameMode: gameMode)
                 }
                 .ignoresSafeArea(.all)
             } else if currGameScreen == .multiplayerGameplay,
                       let gameMode = mainGameMgr.gameMode {
 
                 VStack {
-                    GameplayLevelView(currGameScreen: $currGameScreen, viewAdapter: ViewAdapter(levelDimensions: CGRect(x: 0, y: 0, width: deviceWidth, height: deviceHeight / 2), gameEngineMgr: mainGameMgr.createGameEngineManager(height: deviceHeight / 2, width: deviceWidth)), gameMode: gameMode)
+                    GameplayLevelView(currGameScreen: $currGameScreen,
+                                      viewAdapter: ViewAdapter(levelDimensions: CGRect(x: 0,
+                                                                                       y: 0,
+                                                                                       width: deviceWidth,
+                                                                                       height: deviceHeight / 2),
+                                                               gameEngineMgr: mainGameMgr
+                                        .createGameEngineManager(height: deviceHeight / 2,
+                                                                 width: deviceWidth)),
+                                      gameMode: gameMode)
                     .rotation3DEffect(.degrees(180), axis: (x: 0, y: 0, z: 1))
-                    GameplayLevelView(currGameScreen: $currGameScreen, viewAdapter: ViewAdapter(levelDimensions: CGRect(x: 0, y: 0, width: deviceWidth, height: deviceHeight / 2), gameEngineMgr: mainGameMgr.createGameEngineManager(height: deviceHeight / 2, width: deviceWidth)), gameMode: gameMode)
+                    GameplayLevelView(currGameScreen: $currGameScreen,
+                                      viewAdapter: ViewAdapter(levelDimensions: CGRect(x: 0, y: 0, width: deviceWidth,
+                                                                                       height: deviceHeight / 2),
+                                                               gameEngineMgr: mainGameMgr
+                                        .createGameEngineManager(height: deviceHeight / 2,
+                                                                 width: deviceWidth)),
+                                      gameMode: gameMode)
                 }
             } else if currGameScreen == .settings {
-                SettingsView(settingsMgr: SettingsManager(), currGameScreen: $currGameScreen, selectedInputType: mainGameMgr.inputSystem)
-                    .environmentObject(mainGameMgr)
+                SettingsView(settingsMgr: SettingsManager(),
+                             currGameScreen: $currGameScreen,
+                             selectedInputType: mainGameMgr.inputSystem)
+                .environmentObject(mainGameMgr)
             } else if currGameScreen == .achievements {
-                
+
                 AchievementsView(currGameScreen: $currGameScreen)
 
             } else if currGameScreen == .playerOptionSelection {
@@ -67,12 +91,12 @@ struct ContentView: View {
                     }
                 } else if mainGameMgr.playersMode == .multiplayer {
                     if mainGameMgr.countGEM(),
-                        mainGameMgr.gameEngineMgrs.count == 2,
+                       mainGameMgr.gameEngineMgrs.count == 2,
                        mainGameMgr.gameEngineMgrs[0].gameEnded {
                         VStack {
-                            GameEndView(currGameScreen: $currGameScreen,  gameEngineMgr: mainGameMgr.gameEngineMgrs[0])
+                            GameEndView(currGameScreen: $currGameScreen, gameEngineMgr: mainGameMgr.gameEngineMgrs[0])
                                 .rotation3DEffect(.degrees(180), axis: (x: 0, y: 0, z: 1))
-                            GameEndView(currGameScreen: $currGameScreen,  gameEngineMgr: mainGameMgr.gameEngineMgrs[1])
+                            GameEndView(currGameScreen: $currGameScreen, gameEngineMgr: mainGameMgr.gameEngineMgrs[1])
                         }
                     }
                 }

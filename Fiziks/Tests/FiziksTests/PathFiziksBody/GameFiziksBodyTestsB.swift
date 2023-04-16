@@ -20,6 +20,7 @@ final class GameFiziksBodyTestsB: XCTestCase {
     let path = CGPath.create(from: GameFiziksBodyTestsA.points)
 
     override func setUp() {
+        super.setUp()
         fiziksBody = GameFiziksBody(path: path,
                                     position: .zero,
                                     zRotation: 5,

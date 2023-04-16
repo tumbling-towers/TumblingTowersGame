@@ -8,7 +8,7 @@
 import Foundation
 
 class MainGameManager: ObservableObject {
-    var storageManager =  StorageManager()
+    var storageManager = StorageManager()
 
     var deviceHeight: CGFloat = 1_920
     var deviceWidth: CGFloat = 1_080
@@ -16,15 +16,15 @@ class MainGameManager: ObservableObject {
     private var eventManager: EventManager?
 
     var gameEngineMgrs: [GameEngineManager] = []
-    
+
     var playersMode: PlayersMode?
-    
+
     var inputSystem = Constants.GameInputTypes.GYRO
-    
+
     var gameMode: Constants.GameModeTypes?
-    
+
     func createGameEngineManager(height: CGFloat, width: CGFloat) -> GameEngineManager {
-        if eventManager as? EventManager == nil {
+        if eventManager == nil {
             eventManager = TumblingTowersEventManager()
         }
 
@@ -40,22 +40,28 @@ class MainGameManager: ObservableObject {
             inputClass = Constants.getGameInputType(fromGameInputType: inputSystem) ?? GyroInput.self
         }
 
-        let gameEngineMgr = GameEngineManager(levelDimensions: CGRect(x: 0, y: 0,
-                                                                      width: width, height: height), eventManager: eventManager, inputType: inputClass, storageManager: storageManager, playersMode: playersMode)
+        let gameEngineMgr = GameEngineManager(levelDimensions: CGRect(x: 0,
+                                                                      y: 0,
+                                                                      width: width,
+                                                                      height: height),
+                                              eventManager: eventManager,
+                                              inputType: inputClass,
+                                              storageManager: storageManager,
+                                              playersMode: playersMode)
         self.gameEngineMgrs.append(gameEngineMgr)
         self.eventManager = eventManager
 
         eventManager.registerClosure(for: GameEndedEvent.self, closure: refresh)
-        
+
         return gameEngineMgr
     }
-    
+
     func changeInput(to inputType: Constants.GameInputTypes) {
         inputSystem = inputType
     }
 
     func countGEM() -> Bool {
-        return true
+        true
     }
 
     func pauseGame() {
@@ -73,7 +79,7 @@ class MainGameManager: ObservableObject {
     func refresh(event: Event) {
         objectWillChange.send()
     }
-    
+
     func stopGames() {
         gameEngineMgrs.forEach({ $0.stopGame() })
     }
@@ -81,7 +87,7 @@ class MainGameManager: ObservableObject {
     func resetGames() {
         gameEngineMgrs.forEach({ $0.resetGame() })
     }
-    
+
     func removeAllGameEngineMgrs() {
         for gameEngineMgr in gameEngineMgrs {
             gameEngineMgr.eventManager?.removeAllClosures()

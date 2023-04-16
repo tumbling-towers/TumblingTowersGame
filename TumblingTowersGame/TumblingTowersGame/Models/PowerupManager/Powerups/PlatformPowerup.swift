@@ -24,17 +24,17 @@ class PlatformPowerup: Powerup {
     private var gameWorld: GameWorld? {
         manager?.gameWorld
     }
-    
+
     private var eventManager: EventManager? {
         manager?.eventManager
     }
-    
+
     private var rng: RandomNumberGeneratorWithSeed? {
         manager?.rng
     }
 
     static var type: PowerupType = .platform
-    
+
     init(manager: PowerupManager) {
         self.manager = manager
     }
@@ -44,15 +44,23 @@ class PlatformPowerup: Powerup {
     }
 
     func activate() {
-        guard let newPlatform = createPowerupPlatform() else { return }
+        guard let newPlatform = createPowerupPlatform() else {
+            return
+        }
         gameWorld?.addObject(object: newPlatform)
         eventManager?.postEvent(PlatformPowerupActivatedEvent())
     }
-    
+
     func createPowerupPlatform() -> Platform? {
-        guard let platform = manager?.gameWorld?.level.mainPlatform else { return nil }
-        guard let gameWorld = gameWorld else { return nil }
-        guard let rng = rng else { return nil }
+        guard let platform = manager?.gameWorld?.level.mainPlatform else {
+            return nil
+        }
+        guard let gameWorld = gameWorld else {
+            return nil
+        }
+        guard let rng = rng else {
+            return nil
+        }
 
         var count = 0
         while count < GameWorldConstants.defaultTriesToFindPlatformPosition {
@@ -87,5 +95,5 @@ class PlatformPowerup: Powerup {
 
         return nil
     }
-    
+
 }

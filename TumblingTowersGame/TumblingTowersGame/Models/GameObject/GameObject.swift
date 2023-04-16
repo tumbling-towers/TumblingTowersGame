@@ -13,7 +13,7 @@ protocol GameObject: Identifiable {
     var height: Double { get }
 
     var width: Double { get }
-    
+
     var specialProperties: SpecialProperties { get }
 }
 

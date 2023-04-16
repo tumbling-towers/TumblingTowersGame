@@ -14,7 +14,7 @@ public class GameFiziksEngine: NSObject {
     var idToFiziksBody: [ObjectIdentifier: FiziksBody]
     var skNodeToFiziksBody: [SKNode: FiziksBody]
 
-    weak public var fiziksContactDelegate: FiziksContactDelegate?
+    public weak var fiziksContactDelegate: FiziksContactDelegate?
 
     public init(size: CGRect) {
         let size = CGSize(width: size.width, height: size.height)
@@ -71,7 +71,9 @@ extension GameFiziksEngine: FiziksEngine {
             pinJoint = SKPhysicsJointPin.joint(withBodyA: bodyA, bodyB: bodyB, anchor: meanPos)
         }
 
-        guard let pinJoint = pinJoint else { return }
+        guard let pinJoint = pinJoint else {
+            return
+        }
 
         pinJoint.shouldEnableLimits = true
         fiziksScene.scene?.physicsWorld.add(pinJoint)
@@ -104,21 +106,21 @@ extension GameFiziksEngine: FiziksEngine {
 
         return false
     }
-    
+
     public func deleteAllBodies() {
         for (id, fiziksBody) in idToFiziksBody {
             idToFiziksBody[id] = nil
             skNodeToFiziksBody[fiziksBody.fiziksShapeNode] = nil
             fiziksScene.remove(fiziksBody)
         }
-        
+
         fiziksScene.removeAllChildren()
     }
-    
+
     public func pause() {
         fiziksScene.pause()
     }
-    
+
     public func unpause() {
         fiziksScene.unpause()
     }

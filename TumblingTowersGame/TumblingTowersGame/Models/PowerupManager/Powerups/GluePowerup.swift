@@ -19,17 +19,17 @@ class GluePowerup: Powerup {
             realManager = newValue
         }
     }
-    
+
     private var gameWorld: GameWorld? {
         manager?.gameWorld
     }
-    
+
     private var eventManager: EventManager? {
         manager?.eventManager
     }
 
     static var type: PowerupType = .glue
-    
+
     init(manager: PowerupManager) {
         self.manager = manager
     }

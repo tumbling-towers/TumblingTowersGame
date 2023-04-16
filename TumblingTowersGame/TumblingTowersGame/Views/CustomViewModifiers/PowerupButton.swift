@@ -24,4 +24,3 @@ struct PowerupButton: ViewModifier {
             .shadow(color: .black, radius: 5, x: 1, y: 1)
     }
 }
-

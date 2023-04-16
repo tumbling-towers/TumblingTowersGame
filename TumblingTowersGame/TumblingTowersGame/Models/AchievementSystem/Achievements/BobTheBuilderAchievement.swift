@@ -16,22 +16,22 @@ class BobTheBuilderAchievement: Achievement {
     var achieved: Bool {
         progress >= goal
     }
-    let achievementType: AchievementType = .BobTheBuilder
+    let achievementType: AchievementType = .bobTheBuilder
     let dataSource: AchievementSystemDataSource
-    
+
     var progress: Double {
         didSet {
             progress = min(goal, progress)
         }
     }
-    
+
     required init(name: String, goal: Double, dataSource: AchievementSystemDataSource) {
         self.name = name
         self.goal = goal
         self.dataSource = dataSource
         self.progress = 0
     }
-    
+
     func update() {
         guard let numBlocksPlaced = dataSource.getStat(for: .numBlocksPlaced) as? Double,
               let numBlocksDropped = dataSource.getStat(for: .numBlocksDropped) as? Double else {

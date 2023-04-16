@@ -15,7 +15,7 @@ struct AchievementsView: View {
     var body: some View {
         ZStack {
             BackgroundView()
-            
+
             VStack {
                 Text("Singleplayer Achievements")
                     .modifier(CategoryText())
@@ -35,15 +35,15 @@ struct AchievementsView: View {
                                     width: 20,
                                     height: 20,
                                     alignment: .center)
-                        }.frame(width: 2/3 * mainGameMgr.deviceWidth)
+                        }.frame(width: 2 / 3 * mainGameMgr.deviceWidth)
                         HStack {
                             Text(achievment.wrappedValue.description)
                                 .modifier(BodyText())
                             Spacer()
                         }
-                    }.frame(width: 2/3 * mainGameMgr.deviceWidth)
+                    }.frame(width: 2 / 3 * mainGameMgr.deviceWidth)
                 }
-                
+
                 NormalGoBackButtonView(currGameScreen: $currGameScreen)
 
             }

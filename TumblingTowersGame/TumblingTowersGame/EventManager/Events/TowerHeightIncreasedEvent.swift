@@ -9,7 +9,7 @@ import Foundation
 
 class TowerHeightIncreasedEvent: TumblingTowersEvent {
     let newHeight: CGFloat
-    
+
     init(newHeight: CGFloat) {
         self.newHeight = newHeight
     }

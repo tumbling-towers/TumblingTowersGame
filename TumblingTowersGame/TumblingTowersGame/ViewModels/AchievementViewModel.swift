@@ -20,7 +20,9 @@ class AchievementViewModel: ObservableObject {
 
     func updateAchievements() {
         let statsSystem = StatsTrackingSystem(eventManager: TumblingTowersEventManager(), storageManager: storage)
-        let achievementSystem = AchievementSystem(eventManager: TumblingTowersEventManager(), dataSource: statsSystem, storageManager: storage)
+        let achievementSystem = AchievementSystem(eventManager: TumblingTowersEventManager(),
+                                                  dataSource: statsSystem,
+                                                  storageManager: storage)
 
         let updatedAchievements = achievementSystem.calculateAndGetUpdatedAchievements()
 

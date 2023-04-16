@@ -45,7 +45,7 @@ class SettingsManager: ObservableObject {
             return
         }
 
-        guard settings.count > 0 else {
+        guard !settings.isEmpty else {
             return
         }
         backgroundMusicVolume = settings[0]

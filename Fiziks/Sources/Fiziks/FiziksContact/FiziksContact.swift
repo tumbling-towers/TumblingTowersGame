@@ -16,10 +16,10 @@ public class FiziksContact {
     public let contactNormal: CGVector
 
     public init(bodyA: FiziksBody,
-         bodyB: FiziksBody,
-         contactPoint: CGPoint,
-         collisionImpulse: CGFloat,
-         contactNormal: CGVector) {
+                bodyB: FiziksBody,
+                contactPoint: CGPoint,
+                collisionImpulse: CGFloat,
+                contactNormal: CGVector) {
         self.bodyA = bodyA
         self.bodyB = bodyB
         self.contactPoint = contactPoint

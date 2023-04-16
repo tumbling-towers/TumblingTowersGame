@@ -61,7 +61,7 @@ struct TutorialView: View {
                 drawGameModeDescriptions()
 
                 Divider().modifier(MenuDividerLine())
-                
+
                 Text(Constants.instructionsAfterSelectGameMode)
                     .modifier(GameplayBodyText(fontSize: 25))
                     .padding(.all, 3)
@@ -88,15 +88,20 @@ struct TutorialView: View {
                         Text(value.rawValue + ": ")
                             .modifier(CategoryText())
 
-                        Text(Constants.getGameModeType(from: value)?.description ?? Constants.instructionsDefaultGamemodeText)
-                            .modifier(GameplayBodyText(fontSize: 30))
+                        Text(Constants.getGameModeType(from: value)?.description
+                             ?? Constants.instructionsDefaultGamemodeText)
+                        .modifier(GameplayBodyText(fontSize: 30))
                     }
                     .padding(.all, 10)
                 }
 
             }
-            .background(
-                RoundedRectangle(cornerRadius: 10, style: .continuous).fill(Color.init(red: 0.969, green: 0.933, blue: 0.855)))
+                .background(
+                    RoundedRectangle(cornerRadius: 10,
+                                     style: .continuous)
+                    .fill(Color(red: 0.969,
+                                green: 0.933,
+                                blue: 0.855)))
         )
     }
 
@@ -129,7 +134,11 @@ struct TutorialView: View {
                 }
                 .padding(.all, 10)
                 .background(
-                    RoundedRectangle(cornerRadius: 10, style: .continuous).fill(Color.init(red: 0.969, green: 0.933, blue: 0.855)))
+                    RoundedRectangle(cornerRadius: 10,
+                                     style: .continuous)
+                    .fill(Color(red: 0.969,
+                                green: 0.933,
+                                blue: 0.855)))
 
                 Divider().modifier(MenuDividerLine())
 
@@ -148,19 +157,23 @@ struct TutorialView: View {
                         Text(value.rawValue + ": ")
                             .modifier(CategoryText())
 
-                        Text(Constants.getGameInputType(fromGameInputType: value)?.description ?? Constants.instructionsDefaultInputText)
-                            .modifier(BodyText(fontSize: 20))
+                        Text(Constants.getGameInputType(fromGameInputType: value)?.description
+                             ?? Constants.instructionsDefaultInputText)
+                        .modifier(BodyText(fontSize: 20))
                     }
                     .padding(.all, 10)
                 }
 
             }
-            .background(
-                RoundedRectangle(cornerRadius: 10, style: .continuous).fill(Color.init(red: 0.969, green: 0.933, blue: 0.855)))
+                .background(
+                    RoundedRectangle(cornerRadius: 10,
+                                     style: .continuous)
+                    .fill(Color(red: 0.969,
+                                green: 0.933,
+                                blue: 0.855)))
 
         )
     }
-
 
 }
 

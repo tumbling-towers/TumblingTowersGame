@@ -9,7 +9,7 @@ import Foundation
 
 public struct FiziksConstants {
     public static let defaultFiziksEngineGravity = CGVector(dx: 0, dy: -1.0)
-    
+
     public static let defaultPosition: CGPoint = .zero
 
     public static let defaultVelocity: CGVector = .zero

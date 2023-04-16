@@ -19,6 +19,10 @@ struct GameplayGuiText: ViewModifier {
                 .padding(.all, padding)
         }.scaledToFit()
             .background(
-                RoundedRectangle(cornerRadius: 10, style: .continuous).fill(Color.init(red: 0.969, green: 0.933, blue: 0.855)))
+                RoundedRectangle(cornerRadius: 10,
+                                 style: .continuous)
+                .fill(Color(red: 0.969,
+                            green: 0.933,
+                            blue: 0.855)))
     }
 }

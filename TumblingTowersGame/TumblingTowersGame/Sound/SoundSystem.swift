@@ -39,11 +39,16 @@ class SoundSystem {
     }
 
     func registerSoundEvents(eventMgr: EventManager) {
-        eventMgr.registerClosure(for: BlockPlacedEvent.self, closure: { [weak self] (_ event: Event) -> Void in self?.playSound(.COLLIDE) })
-        eventMgr.registerClosure(for: BlockTouchedPowerupLineEvent.self, closure: { [weak self] (_ event: Event) -> Void in self?.playSound(.POWERUPCOLLECT) })
-        eventMgr.registerClosure(for: GluePowerupActivatedEvent.self, closure: { [weak self] (_ event: Event) -> Void in self?.playSound(.POWERUPGLUE) })
-        eventMgr.registerClosure(for: PlatformPowerupActivatedEvent.self, closure: { [weak self] (_ event: Event) -> Void in self?.playSound(.POWERUPPLATFORM) })
-        eventMgr.registerClosure(for: GameEndedEvent.self, closure: { [weak self] (_ event: Event) -> Void in self?.playSound(.GAMEEND) })
+        eventMgr.registerClosure(for: BlockPlacedEvent.self,
+                                 closure: { [weak self] (_ event: Event) -> Void in self?.playSound(.COLLIDE) })
+        eventMgr.registerClosure(for: BlockTouchedPowerupLineEvent.self,
+                                 closure: { [weak self] (_ event: Event) -> Void in self?.playSound(.POWERUPCOLLECT) })
+        eventMgr.registerClosure(for: GluePowerupActivatedEvent.self,
+                                 closure: { [weak self] (_ event: Event) -> Void in self?.playSound(.POWERUPGLUE) })
+        eventMgr.registerClosure(for: PlatformPowerupActivatedEvent.self,
+                                 closure: { [weak self] (_ event: Event) -> Void in self?.playSound(.POWERUPPLATFORM) })
+        eventMgr.registerClosure(for: GameEndedEvent.self,
+                                 closure: { [weak self] (_ event: Event) -> Void in self?.playSound(.GAMEEND) })
     }
 
     private func loadSound(_ sound: GameSound) {

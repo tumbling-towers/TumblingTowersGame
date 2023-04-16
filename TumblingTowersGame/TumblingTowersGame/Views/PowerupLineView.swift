@@ -13,9 +13,10 @@ struct PowerupLineView: View {
 
     var body: some View {
         PathViewShape(cgPath: CGPath(rect: CGRect(x: viewAdapter.powerUpLinePosition.x,
-                                                         y: viewAdapter.powerUpLinePosition.y,
-                                                         width: viewAdapter.powerupLineDimensions.width,
-                                                         height: viewAdapter.powerupLineDimensions.height), transform: nil))
+                                                  y: viewAdapter.powerUpLinePosition.y,
+                                                  width: viewAdapter.powerupLineDimensions.width,
+                                                  height: viewAdapter.powerupLineDimensions.height),
+                                     transform: nil))
         .fill(.red, strokeBorder: .white, lineWidth: 1)
 
     }
@@ -24,6 +25,11 @@ struct PowerupLineView: View {
 struct PowerupLineView_Previews: PreviewProvider {
     static var previews: some View {
         PowerupLineView()
-            .environmentObject(ViewAdapter(levelDimensions: .infinite, gameEngineMgr: GameEngineManager(levelDimensions: .infinite, eventManager: TumblingTowersEventManager(), inputType: TapInput.self, storageManager: StorageManager(), playersMode: .singleplayer)))
+            .environmentObject(ViewAdapter(levelDimensions: .infinite,
+                                           gameEngineMgr: GameEngineManager(levelDimensions: .infinite,
+                                                                            eventManager: TumblingTowersEventManager(),
+                                                                            inputType: TapInput.self,
+                                                                            storageManager: StorageManager(),
+                                                                            playersMode: .singleplayer)))
     }
 }

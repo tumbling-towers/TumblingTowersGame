@@ -13,7 +13,7 @@ struct GameplayLevelView: View {
     @Binding var currGameScreen: Constants.CurrGameScreens
     @StateObject var viewAdapter: ViewAdapter
     @State var gameMode: Constants.GameModeTypes
-    
+
     // for tracking drag movement
     @State private var offset = CGSize.zero
 
@@ -52,6 +52,14 @@ struct GameplayLevelView: View {
 
 struct GameplayLevelView_Previews: PreviewProvider {
     static var previews: some View {
-        GameplayLevelView(currGameScreen: .constant(.singleplayerGameplay), viewAdapter:             (ViewAdapter(levelDimensions: .infinite, gameEngineMgr: GameEngineManager(levelDimensions: .infinite, eventManager: TumblingTowersEventManager(), inputType: TapInput.self, storageManager: StorageManager(), playersMode: .singleplayer))), gameMode: .SANDBOX)
+        GameplayLevelView(currGameScreen: .constant(.singleplayerGameplay),
+                          viewAdapter: (ViewAdapter(levelDimensions: .infinite,
+                                                    gameEngineMgr: GameEngineManager(
+                                                        levelDimensions: .infinite,
+                                                        eventManager: TumblingTowersEventManager(),
+                                                        inputType: TapInput.self,
+                                                        storageManager: StorageManager(),
+                                                        playersMode: .singleplayer))),
+                          gameMode: .SANDBOX)
     }
 }

@@ -39,16 +39,16 @@ struct ViewImageManager {
         .glue: GluePowerupImage,
         .platform: PlatformPowerupImage
     ]
-    
+
     static let tickImage = "tick"
     static let crossImage = "cross"
-    
+
     static let pauseButton = "pause"
     static let resumeButton = "resume"
     static let exitButton = "exit"
     static let startButton = "start"
     static let achievementsButton = "achievements"
     static let settingsButton = "settings"
-    
+
     static let mainLogo = "ttlogo"
 }

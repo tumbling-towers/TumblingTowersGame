@@ -26,15 +26,14 @@ enum GameObjectCategory {
          max: 0xFFFFFFFF]
 
     var categoryBitMask: BitMask {
-        return GameObjectCategory.categoryToBitMaskMap[self] ?? 0
+        GameObjectCategory.categoryToBitMaskMap[self] ?? 0
     }
 
     var collisionBitMask: BitMask {
-        return GameObjectCategory.categoryToCollisionBitMaskMap[self] ?? 0
+        GameObjectCategory.categoryToCollisionBitMaskMap[self] ?? 0
     }
 
     var contactTestBitMask: BitMask {
-        // FIXME: need to test for contact for vine powerup?
-        return 0
+        0
     }
 }

@@ -13,7 +13,7 @@ struct AchievementStorage: Codable {
     var goal: Double
     var achieved: Bool
     var achievementType: AchievementType
-    
+
     init(name: String, description: String, goal: Double, achieved: Bool, achievementType: AchievementType) {
         self.name = name
         self.description = description
@@ -21,7 +21,7 @@ struct AchievementStorage: Codable {
         self.achieved = achieved
         self.achievementType = achievementType
     }
-    
+
     init(_ achievement: any Achievement) {
         self.name = achievement.name
         self.description = achievement.description
@@ -30,4 +30,3 @@ struct AchievementStorage: Codable {
         self.achievementType = achievement.achievementType
     }
 }
-

@@ -23,14 +23,19 @@ Pause Button: Pauses the game.
 
     static let instructionsTitle = "Welcome to Tumbling Towers!"
     static let instructionsPressStart = "Press Start to begin the game!"
-    static let instructionsGameModes = "First, we need to choose singleplayer or multiplayer, and then a game mode. Choose from:"
+    static let instructionsGameModes = "First, we need to choose singleplayer or multiplayer, "
+        + "and then a game mode. Choose from:"
     static let instructionsAfterSelectGameMode = "After you select a game mode, the game starts!"
-    static let instructionsInputControl = "Now a new tetris shaped block gets inserted into the game. For Singleplayer, You can control it using your chosen input method in Settings. Input Methods includes: "
+    static let instructionsInputControl = "Now a new tetris shaped block gets inserted into the game. "
+        + "For Singleplayer, You can control it using your chosen input method in Settings. Input Methods includes: "
     static let instructionsMultiplayerInput = "For multiplayer, the input system is fixed at Tap Input."
-    static let instructionsBlockContact = "When the currently moving block hits a platform or another block, you will lose control of that block. A new block would be inserted at the top of the screen and you can control it. Build up to the powerup line to gain powerups! (Only when your tower is stable!!)"
+    static let instructionsBlockContact = "When the currently moving block hits a platform or another block, "
+        + "you will lose control of that block. A new block would be inserted at the top of the screen and you can "
+        + "control it. Build up to the powerup line to gain powerups! (Only when your tower is stable!!)"
     static let instructionsOtherGuiButtons = "There are other buttons available on the screen for you to press."
 
-    static let instructionsStackBlocks = "Why continue reading blocks of text? Start up the game instead, stack the blocks as high as you can... and..."
+    static let instructionsStackBlocks = "Why continue reading blocks of text? Start up the game instead, "
+        + "stack the blocks as high as you can... and..."
     static let instructionsHaveFun = "HAVE FUN!!!"
 
     static let instructionsDefaultGamemodeText = "A Tumbling Towers Game Mode."
@@ -49,10 +54,11 @@ Pause Button: Pauses the game.
         case achievements
     }
 
-    static let gameModeTypeToClass: [String: GameMode.Type] = [GameModeTypes.SURVIVAL.rawValue: SurvivalGameMode.self,
-                                                               GameModeTypes.RACECLOCK.rawValue: RaceTimeGameMode.self,
-                                                               GameModeTypes.SANDBOX.rawValue: SandboxGameMode.self,
-                                                               GameModeTypes.TALLENOUGH.rawValue: TallEnoughGameMode.self]
+    static let gameModeTypeToClass: [String: GameMode.Type] =
+        [GameModeTypes.SURVIVAL.rawValue: SurvivalGameMode.self,
+         GameModeTypes.RACECLOCK.rawValue: RaceTimeGameMode.self,
+         GameModeTypes.SANDBOX.rawValue: SandboxGameMode.self,
+         GameModeTypes.TALLENOUGH.rawValue: TallEnoughGameMode.self]
 
     enum GameModeTypes: String, Equatable, CaseIterable {
         case SURVIVAL = "Survival"
@@ -80,7 +86,6 @@ Pause Button: Pauses the game.
         case TAP = "Tap"
         case GYRO = "Gyro"
     }
-    
 
     static func getGameInputType(fromGameInputType: GameInputTypes) -> InputSystem.Type? {
         gameInputTypeToClass[fromGameInputType.rawValue]
