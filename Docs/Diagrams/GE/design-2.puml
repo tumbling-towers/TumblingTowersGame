@@ -1,0 +1,17 @@
+@startuml
+package Facade <<Rectangle>> {
+class GameEngine
+}
+
+package BusinessLayer <<Rectangle>> {
+class GameWorld
+}
+
+package State <<Rectangle>> {
+class GameWorldLevel
+class FiziksEngine
+}
+
+Facade -> BusinessLayer
+BusinessLayer -> State
+@enduml

@@ -19,9 +19,9 @@ interface FiziksEngine {
 }
 
 class GameFiziksEngine implements SKPhysicsContactDelegate, FiziksEngine {
-    -idToFiziksBody: [ObjectIdentifier: FiziksBody]
-    -skNodeToFiziksBody: [SKNode: FiziksBody]
-    -getSKPhysicsBody(of:) : SKPhysicsBody?
+    + idToFiziksBody: [ObjectIdentifier: FiziksBody]
+    + skNodeToFiziksBody: [SKNode: FiziksBody]
+    - getSKPhysicsBody(of:) : SKPhysicsBody?
 }
 
 class SKPhysicsContactDelegate {

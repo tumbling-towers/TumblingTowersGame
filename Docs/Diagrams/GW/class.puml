@@ -4,6 +4,9 @@ class GameWorld {
     + highestPoint: CGFloat
     + referencePoints: (left: CGPoint, right: CGPoint)?
     + playerId: UUID
+    - rng: RandomNumberGeneratorWithSeed
+    - shapeRandomizer: ShapeRandomizer
+    - isGameEnded: Bool
     + startGame()
     + resetGame()
     + endGame()
