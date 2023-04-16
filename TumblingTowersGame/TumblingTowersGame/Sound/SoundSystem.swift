@@ -58,22 +58,15 @@ class SoundSystem {
                 return
             }
 
-            print("Loaded " + sound.rawValue)
-
             soundPlayers[sound] = currPlayer
-
-            print(soundPlayers.count)
         }
     }
 
     private func playSound(_ sound: GameSound) {
-        print(soundPlayers.count)
         guard let currPlayer = soundPlayers[sound] else {
             print("Cant find player for \(sound.rawValue)")
             return
         }
-
-        print("Playing Sound \(sound.rawValue) with volume \(otherSoundVolume)")
 
         currPlayer.volume = exp(otherSoundVolume) - 1
 

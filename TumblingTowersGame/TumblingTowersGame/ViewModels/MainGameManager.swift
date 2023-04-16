@@ -55,7 +55,6 @@ class MainGameManager: ObservableObject {
     }
 
     func countGEM() -> Bool {
-        print("GEM COUNT:  \(gameEngineMgrs.count)")
         return true
     }
 
