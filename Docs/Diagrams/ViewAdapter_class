@@ -40,11 +40,11 @@ class GameRendererDelegate {
   + rerender()
 }
 
-class GameInstanceManager {
+class GameInstanceController {
   + setRendererDelegate(GameRendererDelegate)
 }
 
-GameInstanceManager -> ViewAdapter
-ViewAdapter -> GameInstanceManager
+GameInstanceController -> ViewAdapter
+ViewAdapter -> GameInstanceController
 
 @enduml
