@@ -1,11 +1,9 @@
 @startuml
 class GameWorld {
     + fiziksEngine: FiziksEngine
-    + currentlyMovingBlock: Block?
     + highestPoint: CGFloat
     + referencePoints: (left: CGPoint, right: CGPoint)?
     + playerId: UUID
-    + GameWorld(levelDimensions: CGRect, seed: Int = GameWorldConstants.defaultSeed, eventManager: EventManager, playerId: UUID)
     + startGame()
     + resetGame()
     + endGame()
@@ -28,11 +26,6 @@ class GameWorldObject {
 
 class GameWorldLevel {
 + dimensions: CGRect
-+ gameObjects: [GameWorldObject]
-+ mainPlatform: Platform?
-+ powerupLine: PowerupLine?
-+ leftBoundary: LevelBoundary?
-+ rightBoundary: LevelBoundary?
  + add(GameWorldObject)
  + remove(GameWorldObject)
  + move(GameWorldObject, vector: CGVector)
@@ -60,14 +53,16 @@ class FiziksContact {
 GameWorld --> GameWorldLevel
 GameWorld --> PowerupManager
 GameWorld --> EventManager
-GameWorldLevel --> GameWorldObject
+GameWorldLevel -->"*" GameWorldObject: gameObjects >
 Platform --|> GameWorldObject
 Block--|> GameWorldObject
 LevelBoundary --|> GameWorldObject
 GameWorld "1"-->"0..1" Block: currentlyMovingBlock >
-GameWorldLevel "1"-->"2" LevelBoundary
+GameWorldLevel "1"-->"1" LevelBoundary: leftBoundary >
+GameWorldLevel "1"-->"1" LevelBoundary: rightBoundary >
 GameWorldLevel "1"-->"1" Platform : mainPlatform >
 GameWorldLevel --> PowerupLine
 GameWorld ..|> FiziksContactDelegate
 FiziksContactDelegate ..> FiziksContact
+GameWorld ..> SpecialPropertiesContactResolver
 @enduml

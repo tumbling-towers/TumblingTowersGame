@@ -9,7 +9,8 @@ import SwiftUI
 
 struct GameplayGuiView: View {
     @EnvironmentObject var mainGameMgr: MainGameManager
-    @EnvironmentObject var gameEngineMgr: GameEngineManager
+    @EnvironmentObject var viewAdapter: ViewAdapter
+    
     @State var isPaused: Bool = false
 
     @Binding var currGameScreen: Constants.CurrGameScreens
@@ -18,7 +19,7 @@ struct GameplayGuiView: View {
         ZStack {
 
             Button {
-                gameEngineMgr.rotateCurrentBlock()
+                viewAdapter.rotateCurrentBlock()
             } label: {
                 Image("rotate")
                     .resizable()
@@ -27,28 +28,11 @@ struct GameplayGuiView: View {
             }
             .modifier(PowerupButton(height: 70,
                                     width: 70,
-                                    position: CGPoint(x: gameEngineMgr.levelDimensions.width - 100,
-                                                      y: gameEngineMgr.levelDimensions.height - 100)))
+                                    position: CGPoint(x: viewAdapter.levelDimensions.width - 100,
+                                                      y: viewAdapter.levelDimensions.height - 100)))
 
-            ForEach(1..<$gameEngineMgr.powerups.count + 1) { i in
-                if let powerup0 = $gameEngineMgr.powerups[i - 1],
-                   let type = powerup0.wrappedValue?.type,
-                   let image = ViewImageManager.powerupToImage[type] {
-                    Button {
-                        gameEngineMgr.usePowerup(at: i - 1)
-                    } label: {
-                        Image(image)
-                            .resizable()
-                            .frame(width: 50, height: 50)
-                            .padding(20)
-                    }
-                    .modifier(PowerupButton(height: 70,
-                                             width: 70,
-                                             position: CGPoint(x: 100,
-                                                               y: Int(gameEngineMgr.levelDimensions.height) - 100 * (i))))
-                }
+            drawPowerupButtons()
 
-            }
 
             Button {
                 isPaused = true
@@ -60,7 +44,7 @@ struct GameplayGuiView: View {
                     .frame(height: 50)
             }
             .frame(width: 50, height: 50)
-            .position(x: gameEngineMgr.levelDimensions.width - 50, y: 50)
+            .position(x: viewAdapter.levelDimensions.width - 50, y: 50)
             .sheet(isPresented: $isPaused) {
                 PauseView(unpause: {
                     isPaused = false
@@ -75,19 +59,50 @@ struct GameplayGuiView: View {
             }
 
             drawGameGui()
-
         }
+    }
+
+    private func getPowerUpImgFor(powerupType: Powerup.Type) -> String? {
+        let type = powerupType.type
+        let image = ViewImageManager.powerupToImage[type]
+
+        return image
+    }
+
+    private func drawPowerupButtons() -> AnyView {
+        AnyView(
+            ZStack {
+                ForEach(1..<viewAdapter.powerups.count + 1) { i in
+                    if let currPowerupType = viewAdapter.powerups[i - 1],
+                       let image = getPowerUpImgFor(powerupType: currPowerupType) {
+                        Button {
+                            viewAdapter.usePowerup(at: i - 1)
+                        } label: {
+                            Image(image)
+                                .resizable()
+                                .frame(width: 50, height: 50)
+                                .padding(20)
+                        }
+                        .modifier(PowerupButton(height: 70,
+                                                 width: 70,
+                                                 position: CGPoint(x: 100,
+                                                                   y: Int(viewAdapter.levelDimensions.height) - 100 * (i))))
+                    }
+
+                }
+            }
+        )
     }
 
     private func drawGameGui() -> AnyView {
         AnyView(
             ZStack {
-                Text("Score: " + String(gameEngineMgr.score))
+                Text("Score: " + String(viewAdapter.score))
                     .modifier(GameplayGuiText(fontSize: 20))
                     .frame(width: 200, height: 50, alignment: .leading)
                     .position(x: 130, y: 50)
 
-                Text("Time: " + gameEngineMgr.timeRemaining.secondsToTimeStr())
+                Text("Time: " + viewAdapter.timeRemaining.secondsToTimeStr())
                     .modifier(GameplayGuiText(fontSize: 20))
                     .frame(width: 200, height: 50, alignment: .leading)
                     .position(x: 130, y: 125)
@@ -99,7 +114,7 @@ struct GameplayGuiView: View {
 struct GameplayGuiView_Previews: PreviewProvider {
     static var previews: some View {
         GameplayGuiView(currGameScreen: .constant(.singleplayerGameplay))
-            .environmentObject(GameEngineManager(levelDimensions: .infinite, eventManager: TumblingTowersEventManager(), inputType: TapInput.self, storageManager: StorageManager()))
             .environmentObject(MainGameManager())
+            .environmentObject(ViewAdapter(levelDimensions: .infinite, gameEngineMgr: GameEngineManager(levelDimensions: .infinite, eventManager: TumblingTowersEventManager(), inputType: TapInput.self, storageManager: StorageManager(), playersMode: .singleplayer)))
     }
 }

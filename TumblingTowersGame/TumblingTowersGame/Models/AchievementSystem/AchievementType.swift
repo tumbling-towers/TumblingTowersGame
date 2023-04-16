@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum AchievementType {
+enum AchievementType: String {
     case BobTheBuilder
     case Skyscraper
 }

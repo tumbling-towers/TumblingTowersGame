@@ -25,7 +25,7 @@ class SkyscraperAchievement: Achievement {
         }
     }
     
-    init(name: String, goal: Double, dataSource: AchievementSystemDataSource) {
+    required init(name: String, goal: Double, dataSource: AchievementSystemDataSource) {
         self.name = name
         self.goal = goal
         self.dataSource = dataSource

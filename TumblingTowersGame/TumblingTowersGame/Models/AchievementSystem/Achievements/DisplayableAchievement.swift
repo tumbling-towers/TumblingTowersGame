@@ -7,7 +7,6 @@
 
 import Foundation
 
-// FIXME: having this "adapter" just for swiftUI is not really good
 struct DisplayableAchievement: Identifiable {
     var id: UUID
     var name: String

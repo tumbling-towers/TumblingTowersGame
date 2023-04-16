@@ -1,13 +1,6 @@
 @startuml
 class GameEngine {
-    - storageManager: StorageManager
-    - eventManager: EventManager
-    - gameWorld: GameWorld
-    - achiementSystem: AchievementSystem
-    - statsTrackingSystem: StatsTrackingSystem
-    - gameMode: GameMode?
-    + level: GameWorldLevel
-    + init(levelDimensions: CGRect, eventManager: EventManager, playerId: UUID, storageManager: StorageManager)
+    + level()
     + startGame()
     + update()
     + stopGame()

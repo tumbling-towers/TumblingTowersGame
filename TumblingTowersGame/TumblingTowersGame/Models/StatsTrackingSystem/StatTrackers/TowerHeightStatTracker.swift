@@ -8,18 +8,16 @@
 import Foundation
 
 class TowerHeightStatTracker: StatTracker {
-    static let name: String = "TowerHeight"
     var stat: Double
     let statTrackerType: StatTrackerType = .towerHeight
     
-    init(eventManager: EventManager, stat: Double? = 0.0) {
+    required init(eventManager: EventManager, stat: Double? = 0.0) {
         self.stat = stat ?? 0
         eventManager.registerClosure(for: TowerHeightIncreasedEvent.self, closure: towerHeightUpdatedClosure)
     }
     
     private lazy var towerHeightUpdatedClosure = { [weak self] (_ event: Event) -> Void in
-        guard
-              let towerHeightIncreasedEvent = event as? TowerHeightIncreasedEvent else {
+        guard let towerHeightIncreasedEvent = event as? TowerHeightIncreasedEvent else {
             return
         }
         self?.stat = max(self?.stat ?? 0.0, towerHeightIncreasedEvent.newHeight)

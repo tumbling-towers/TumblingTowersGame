@@ -9,18 +9,24 @@ import Foundation
 
 class GameEngine {
     let gameWorld: GameWorld
-    let achiementSystem: AchievementSystem
-    let statsTrackingSystem: StatsTrackingSystem
+    let achievementSystem: AchievementSystem?
+    let statsTrackingSystem: StatsTrackingSystem?
     var gameMode: GameMode?
     var level: GameWorldLevel {
         gameWorld.level
     }
 
-    init(levelDimensions: CGRect, eventManager: EventManager, playerId: UUID, storageManager: StorageManager) {
+    init(levelDimensions: CGRect, eventManager: EventManager, playerId: UUID, storageManager: StorageManager, playersMode: PlayersMode?) {
         self.gameWorld = GameWorld(levelDimensions: levelDimensions, eventManager: eventManager, playerId: playerId)
-        let statsTrackingSystem = StatsTrackingSystem(eventManager: eventManager, storageManager: storageManager)
-        self.statsTrackingSystem = statsTrackingSystem
-        self.achiementSystem = AchievementSystem(eventManager: eventManager, dataSource: statsTrackingSystem, storageManager: storageManager)
+
+        if playersMode == .singleplayer {
+            let statsTrackingSystem = StatsTrackingSystem(eventManager: eventManager, storageManager: storageManager)
+            self.statsTrackingSystem = statsTrackingSystem
+            self.achievementSystem = AchievementSystem(eventManager: eventManager, dataSource: statsTrackingSystem, storageManager: storageManager)
+        } else {
+            self.statsTrackingSystem = nil
+            self.achievementSystem = nil
+        }
     }
     
     func startGame() {
@@ -29,7 +35,6 @@ class GameEngine {
     }
     
     func update() {
-        // TODO: Support this by adding function ins Gamemode
         gameMode?.update()
         gameWorld.update()
     }

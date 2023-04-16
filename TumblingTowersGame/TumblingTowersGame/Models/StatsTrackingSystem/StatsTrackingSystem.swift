@@ -37,20 +37,21 @@ class StatsTrackingSystem {
         
         if statsStorage.count == 0 {
             loadDefaultStats()
-            return
+        } else {
+            loadStorageStats(statsStorage: statsStorage)
         }
-        
-        for storage in statsStorage {
-            print(storage)
-            add(StatTrackerFactory.createStatTracker(ofType: storage.statTrackerType, eventManager: eventManager, stat: storage.stat))
-        }
-
     }
     
     private func loadDefaultStats() {
         add(StatTrackerFactory.createStatTracker(ofType: .numBlocksPlaced, eventManager: eventManager))
         add(StatTrackerFactory.createStatTracker(ofType: .numBlocksDropped, eventManager: eventManager))
         add(StatTrackerFactory.createStatTracker(ofType: .towerHeight, eventManager: eventManager))
+    }
+
+    private func loadStorageStats(statsStorage: [StatStorage]) {
+        for storage in statsStorage {
+            add(StatTrackerFactory.createStatTracker(ofType: storage.statTrackerType, eventManager: eventManager, stat: storage.stat))
+        }
     }
     
     private func add(_ statTracker: StatTracker) {

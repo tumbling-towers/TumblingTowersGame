@@ -26,4 +26,5 @@ GameFiziksEngine --> FiziksBody
 FiziksBody --> FiziksShapeNode
 FiziksShapeNode --|> SKShapeNode
 SKShapeNode --> SKPhysicsBody
+GameFiziksBody ..|> FiziksBody
 @enduml

@@ -1,4 +1,3 @@
-
 @startuml
 interface FiziksBody {
 
@@ -22,7 +21,6 @@ interface FiziksEngine {
 class GameFiziksEngine implements SKPhysicsContactDelegate, FiziksEngine {
     -idToFiziksBody: [ObjectIdentifier: FiziksBody]
     -skNodeToFiziksBody: [SKNode: FiziksBody]
-    -fiziksScene: FiziksScene
     -getSKPhysicsBody(of:) : SKPhysicsBody?
 }
 
@@ -34,6 +32,6 @@ class SKPhysicsContactDelegate {
 GameFiziksEngine --> FiziksBody
 GameFiziksEngine --> FiziksScene
 SKPhysicsContactDelegate ..> SKPhysicsContact
-FiziksScene ..|> SKScene
+FiziksScene --|> SKScene
 GameWorld "1"-->"1" FiziksEngine
 @enduml

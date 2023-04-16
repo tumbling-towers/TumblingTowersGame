@@ -41,8 +41,6 @@ struct StorageFacade {
         guard let file = try? FileHandle(forReadingFrom: fileURL) else {
             return []
         }
-
-        print("File URL \(fileURL)")
         
         let achievementStorages = try JSONDecoder().decode([AchievementStorage].self, from: file.availableData)
         return achievementStorages
