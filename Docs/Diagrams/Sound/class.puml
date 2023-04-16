@@ -1,0 +1,28 @@
+@startuml
+class SoundSystem {
++ {static} shared: SoundSystem
++ otherSoundVolume
+- soundPlayers: [GameSound: AVAudioPlayer]
++ backgroundMusicVolume()
++ overallVolume()
++ registerSoundEvents(EventManager)
++ startBackgroundMusic()
++ changeBackgroundMusicVolume(Float)
++ changeSoundVolume(Float)
++ changeOverallVolume(Float)
+- loadSound(GameSound)
+- playSound(GameSound)
+}
+
+
+enum GameSound {
+COLLIDE
+POWERUPCOLLECT
+POWERUPGLUE
+POWERUPPLATFORM
+GAMEEND
+}
+
+SoundSystem ..> GameSound
+SoundSystem --> "0..1" AVAudioPlayer: backgroundMusicPlayer >
+@enduml

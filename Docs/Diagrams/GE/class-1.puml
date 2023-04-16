@@ -1,0 +1,20 @@
+@startuml
+class GameEngine {
+    + level()
+    + startGame()
+    + update()
+    + stopGame()
+    + pauseGame()
+    + unpauseGame()
+    + resetGame()
+    + moveCMBSideways(by displacement: CGVector)
+    + moveCMBDown(by displacement: CGVector)
+    + rotateCMBClockwise()
+    + rotateCMBCounterClockwise()
+}
+
+GameEngine --> GameWorld
+GameEngine --> AchievementSystem
+GameEngine --> StatsTrackingSystem
+GameEngine --> GameMode
+@enduml

@@ -1,0 +1,8 @@
+@startuml
+View -> MainGameManager: check if game ended
+MainGameManager --> View: return game ended state
+
+alt if game ended
+<- View: show user end game screen
+end
+@enduml

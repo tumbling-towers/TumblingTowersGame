@@ -1,0 +1,102 @@
+@startuml
+interface GameMode {
+    + {static} name: String
+    + {static} description: String
+    + GameMode(eventMgr: EventManager, playerId: UUID, levelHeight: CGFloat)
+    + update(): void
+    + gameState: Constants.GameState
+    + isGameEnded: Bool
+    + score: Int
+    + time: Int
+    + gameEndMainMessage: String
+    + gameEndSubMessage: String
+    + startGame(): void
+    + pauseGame(): void
+    + resumeGame(): void
+    + resetGame(): void
+    + endGame(endedBy: UUID, endState: Constants.GameState): void
+}
+@enduml
+
+class RaceTimeGameMode implements GameMode {
+    + {static} blocksToPlace: Int
+    + {static} timeToPlaceBy: Int
+    + realTimeTimer: GameTimer
+    + eventMgr: EventManager
+    + currBlocksPlaced: Int
+    + currBlocksDropped: Int
+    + playerId: UUID
+    + isStarted: Bool
+    + isGameEnded: Bool
+    + shortLevel: Bool
+    + isEndedByOtherPlayer: Bool
+    + overwriteGameState: GameState
+    + otherPlayerRanOutOfTime: Bool
+    + scoreTimeLeftMultiplier: Int
+    + scoreBlocksPlacedMultiplier: Int
+    + scoreBlocksDroppedMultiplier: Int
+    + shortLevelTimeMultiplier: Int
+    - blockPlaced(Event)
+    - blockDropped(Event)
+}
+
+class SandboxGameMode implements GameMode {
+    + realTimeTimer: GameTimer
+    + eventMgr: EventManager
+    + currBlocksPlaced: Int
+    + currBlocksDropped: Int
+    + playerId: UUID
+    + isStarted: Bool
+    + isGameEnded: Bool
+    - blockPlaced(Event)
+    - blockDropped(Event)
+}
+
+class SurvivalGameMode implements GameMode {
+    + {static} blocksToPlace: Int
+    + {static} blocksDroppedThreshold: Int
+    + {static} scoreTimeWithBonusScore: Int
+    + scoreBlocksPlacedMultiplier: Int
+    + scoreBlocksDroppedMultiplier: Int
+    + realTimeTimer: GameTimer
+    + eventMgr: EventManager
+    + currBlocksPlaced: Int
+    + currBlocksDropped: Int
+    + playerId: UUID
+    + isStarted: Bool
+    + isGameEnded: Bool
+    + isEndedByOtherPlayer: Bool
+    + overwriteGameState: GameState
+    - blockPlaced(Event)
+    - blockDropped(Event)
+}
+
+class TallEnoughGameMode implements GameMode {
+    + {static} powerupLinesToHit: Int
+    + {static} blocksDroppedThreshold: Int
+    + {static} shortLevelMultiplier: Int
+    + {static} scoreTimeWithBonusScore: Int
+    + scoreBlocksPlacedMultiplier: Int
+    + scoreBlocksDroppedMultiplier: Int
+    + realTimeTimer: GameTimer
+    + eventMgr: EventManager
+    + currBlocksPlaced: Int
+    + currBlocksDropped: Int
+    + playerId: UUID
+    + isStarted: Bool
+    + isGameEnded: Bool
+    + isShortLevel
+    + isEndedByOtherPlayer: Bool
+    + overwriteGameState: GameState
+    - blockPlaced(Event)
+    - blockDropped(Event)
+}
+
+RaceTimeGameMode --> GameTimer
+SandboxGameMode --> GameTimer
+SurvivalGameMode --> GameTimer
+TallEnoughGameMode --> GameTimer
+RaceTimeGameMode --> EventManager
+SandboxGameMode --> EventManager
+SurvivalGameMode --> EventManager
+TallEnoughGameMode --> EventManager

@@ -1,0 +1,13 @@
+@startuml
+-> View: user taps power up button at index i
+View -> GameEngineManager: activatePowerup(idx)
+GameEngineManager -> GameEngine: activatePowerup(idx)
+GameEngine -> GameWorld: activatePowerup(idx)
+GameWorld -> PowerupManager: activatePowerup(idx)
+PowerupManager -> Powerup: activate()
+GameEngineManager -> ComponentB: activatePowerup(idx)
+GameEngineManager -> ComponentC: activatePowerup(idx)
+GameEngineManager -> ComponentD: activatePowerup(idx)
+GameEngineManager -> ComponentE: activatePowerup(idx)
+GameEngineManager -> ComponentF: activatePowerup(idx)
+@enduml

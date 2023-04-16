@@ -1,0 +1,71 @@
+@startuml
+class GameWorld {
+    + fiziksEngine: FiziksEngine
+    + highestPoint: CGFloat
+    + referencePoints: (left: CGPoint, right: CGPoint)?
+    + playerId: UUID
+    - rng: RandomNumberGeneratorWithSeed
+    - shapeRandomizer: ShapeRandomizer
+    - isGameEnded: Bool
+    + startGame()
+    + resetGame()
+    + endGame()
+    + update()
+    + insertNewBlock()
+    + moveCMB(by vector: CGVector)
+    + rotateCMB(by rotation: Double)
+    + setCMBSpecialProperties(properties: SpecialProperties)
+}
+
+class GameWorldObject {
+    + shape: ObjectShape
+    + position: CGPoint
+    + specialProperties: SpecialProperties?
+    + fiziksBody: FiziksBody
+    + categoryBitMask: BitMask
+    + collisionBitMask: BitMask
+    + contactTestBitMask: BitMask
+}
+
+class GameWorldLevel {
++ dimensions: CGRect
+ + add(GameWorldObject)
+ + remove(GameWorldObject)
+ + move(GameWorldObject, vector: CGVector)
++ rotate(GameWorldObject, rotation: CGFloat)
++ reset()
++ setMainPlatform()
++ updatePowerupLineHeight()
++ isOutOfBounds()
++ getHighestPoint()
+}
+
+interface FiziksContactDelegate {
+  + didBegin(FiziksContact)
+  + didEnd(FiziksContact)
+}
+
+class FiziksContact {
++ bodyA: FiziksBody
++ bodyB: FiziksBody
++ contactPoint: CGPoint
++ collisionImpulse: CGFloat
++ contactNormal: CGVector
+}
+
+GameWorld --> GameWorldLevel
+GameWorld --> PowerupManager
+GameWorld --> EventManager
+GameWorldLevel -->"*" GameWorldObject: gameObjects >
+Platform --|> GameWorldObject
+Block--|> GameWorldObject
+LevelBoundary --|> GameWorldObject
+GameWorld "1"-->"0..1" Block: currentlyMovingBlock >
+GameWorldLevel "1"-->"1" LevelBoundary: leftBoundary >
+GameWorldLevel "1"-->"1" LevelBoundary: rightBoundary >
+GameWorldLevel "1"-->"1" Platform : mainPlatform >
+GameWorldLevel --> PowerupLine
+GameWorld ..|> FiziksContactDelegate
+FiziksContactDelegate ..> FiziksContact
+GameWorld ..> SpecialPropertiesContactResolver
+@enduml

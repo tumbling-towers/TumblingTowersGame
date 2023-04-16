@@ -1,0 +1,13 @@
+@startuml
+class GameUpdater {
+- runThisEveryFrame() -> Void
++ init(runThisEveryFrame: () -> Void)
++ createCADisplayLink()
++ pauseGame()
++ unpauseGame()
++ stopLevel()
++ update()
+}
+
+GameUpdater --> "0..1" CADisplayLink: displayLink >
+@enduml

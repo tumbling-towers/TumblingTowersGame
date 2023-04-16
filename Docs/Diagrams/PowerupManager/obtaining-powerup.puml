@@ -1,0 +1,22 @@
+@startuml
+create GameWorld
+
+[-> GameWorld: user receives powerup
+
+GameWorld-> GamePowerupManager: createNextPowerup(PowerupType)
+
+GamePowerupManager -> GamePowerupManager: find empty slot in powerup array
+
+alt if empty slot available at index i
+create XXXPowerup
+GamePowerupManager-> XXXPowerup: XXXPowerup.create()
+GamePowerupManager -> GamePowerupManager: add powerup to empty slot
+GamePowerupManager -> EventManager: postEvent(PowerupAvailableEvent(type, index, gameWorld))
+end
+
+EventManager -> GameEngineManager: send PowerupAvailableEvent
+alt if correct gameWorld
+GameEngineManager -> GameEngineManager: update own state
+GameEngineManager -> View: show powerup button at index i
+end
+@enduml

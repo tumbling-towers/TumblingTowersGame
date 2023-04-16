@@ -1,0 +1,6 @@
+@startuml
+-> XXXPowerup: activate()
+XXXPowerup -> EventManager: postEvent(XXXPowerupActivatedEvent())
+EventManager -> GameEngine: XXXPowerupActivatedEvent
+GameEngine -> GameWorld: alter state of GameWorld based on powerup
+@enduml

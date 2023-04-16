@@ -1,0 +1,30 @@
+@startuml
+interface FiziksBody {
+    + fiziksShapeNode: FiziksShapeNode
+    + position: CGPoint
+    + zRotation: CGFloat
+    + velocity: CGVector
+    + angularVelocity: CGFloat
+    + friction: CGFloat
+    + mass: CGFloat
+    + density: CGFloat
+    + restitution: CGFloat
+    + linearDamping: CGFloat
+    + angularDamping: CGFloat
+    + affectedByGravity: Bool
+    + isDynamic: Bool
+    + applyForce(_ force: CGVector): void
+    + applyTorque(_ torque: CGFloat): void
+    + applyForce(_ force: CGVector, at point: CGPoint): void
+    + applyImpulse(_ impulse: CGVector): void
+    + applyAngularImpulse(_ angularImpulse: CGFloat): void
+    + applyImpulse(_ impulse: CGVector, at point: CGPoint): void
+}
+
+GameWorldObject --> FiziksBody
+GameFiziksEngine --> FiziksBody
+FiziksBody --> FiziksShapeNode
+FiziksShapeNode --|> SKShapeNode
+SKShapeNode --> SKPhysicsBody
+GameFiziksBody ..|> FiziksBody
+@enduml

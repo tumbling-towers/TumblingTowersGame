@@ -1,0 +1,26 @@
+@startuml
+create GameInstanceController
+create GameUpdater
+
+
+activate GameInstanceController
+group setup()
+GameInstanceController-> GameUpdater: GameUpdater(runThisEveryFrame: update)
+GameInstanceController-> GameUpdater: createCADisplayLink()
+end
+
+deactivate GameInstanceController
+
+
+group Every Display Frame
+GameUpdater -> GameInstanceController: update()
+
+activate GameInstanceController
+
+GameInstanceController-> GameEngine: update()
+GameInstanceController -> GameInstanceController: renderCurrentFrame()
+
+deactivate GameInstanceController
+
+end
+@enduml

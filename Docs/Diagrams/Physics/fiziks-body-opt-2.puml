@@ -1,0 +1,44 @@
+@startuml
+interface FiziksBody {
+  + position: CGPoint
+  + zRotation: CGFloat
+  + velocity: CGVector
+  + angularVelocity: CGFloat
+  + friction: CGFloat
+  + mass: CGFloat
+  + density: CGFloat
+  + restitution: CGFloat
+  + linearDamping: CGFloat
+  + angularDamping: CGFloat
+  + affectedByGravity: Bool
+  + isDynamic: Bool
+  + applyForce(_ force: CGVector)
+  + applyTorque(_ torque: CGFloat)
+  + applyForce(_ force: CGVector, at point: CGPoint)
+  + applyImpulse(_ impulse: CGVector)
+  + applyAngularImpulse(_ angularImpulse: CGFloat)
+  + applyImpulse(_ impulse: CGVector, at point: CGPoint)
+}
+
+interface FiziksEngine {
+  - bodies: [FiziksBody]
+  + addBody(_ body: FiziksBody)
+  + removeBody(_ body: FiziksBody)
+}
+
+class GameWorldObject {
+  - body: FiziksBody
+}
+
+class GameWorld {
+  - objects: [GameWorldObject]
+  - fiziksEngine: FiziksEngine
+  + addGameObject(_ gameObject: GameWorldObject)
+  + removeGameObject(_ gameObject: GameWorldObject)
+}
+
+GameWorld --> FiziksEngine
+FiziksEngine --> FiziksBody
+GameWorldObject --> FiziksBody
+GameWorld --> GameWorldObject
+@enduml

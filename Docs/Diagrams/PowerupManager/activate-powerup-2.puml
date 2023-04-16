@@ -1,0 +1,11 @@
+@startuml
+[-> View: user taps powerup button at index i
+View -> GameEngineManager: usePowerup(index)
+GameEngineManager -> EventManager: postEvent(PowerupButtonTappedEvent(index, gameWorld))
+EventManager -> GamePowerupManager: send PowerupButtonTappedEvent
+alt if correct gameWorld
+GamePowerupManager -> GamePowerupManager: find powerup at index i
+GamePowerupManager -> XXXPowerup: activate()
+XXXPowerup -> GameWorld: modify state of world
+end
+@enduml

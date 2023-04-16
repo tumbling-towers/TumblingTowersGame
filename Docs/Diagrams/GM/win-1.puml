@@ -1,0 +1,12 @@
+@startuml
+GameEngine -> GameMode: update()
+GameMode -> EventManager: postEvent(GameEndedEvent(playerId, gameState))
+EventManager -> GameEngineManager: inform listener of GameEndedEvent
+GameEngineManager -> GameEngineManager: stopGameEventFired()
+activate GameEngineManager
+GameEngineManager -> GameMode: endGame(endedBy: playerId, endState)
+GameMode -> GameTimer: stop()
+GameMode -> GameMode: update game state
+GameMode --> GameEngineManager
+deactivate GameEngineManager
+@enduml

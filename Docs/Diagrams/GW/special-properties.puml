@@ -1,0 +1,6 @@
+@startuml
+GameWorld --> SpecialPropertiesContactResolver: resolve(fiziksEngine, contact, specialProperties)
+alt specialProperties.isGlue
+SpecialPropertiesContactResolver --> FiziksEngine: combine(bodyA, bodyB, position)
+end
+@enduml
