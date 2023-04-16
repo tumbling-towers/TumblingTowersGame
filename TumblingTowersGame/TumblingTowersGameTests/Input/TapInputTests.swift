@@ -13,7 +13,7 @@ final class TapInputTests: XCTestCase {
     func testConstruct() {
         let tapInput = TapInput()
 
-        let currInput = tapInput.getInput()
+        let currInput = tapInput.calculateInput()
 
         XCTAssertEqual(currInput.inputType, .NONE)
         XCTAssertEqual(currInput.vector, .zero)
@@ -22,25 +22,37 @@ final class TapInputTests: XCTestCase {
     func testLeftMove() {
         let tapInput = TapInput()
 
-        tapInput.dragEvent(offset: CGSize(width: -100, height: 0))
-        var currInput = tapInput.getInput()
+        tapInput.dragEvent(offset: CGSize(width: -50, height: 0))
+        var currInput = tapInput.calculateInput()
         XCTAssertEqual(currInput.inputType, .LEFT)
-
-        tapInput.dragEvent(offset: CGSize(width: -100, height: 51))
-        currInput = tapInput.getInput()
+        
+        tapInput.dragEvent(offset: CGSize(width: -50, height: 51))
+        currInput = tapInput.calculateInput()
         XCTAssertEqual(currInput.inputType, .NONE)
     }
 
     func testRightMove() {
         let tapInput = TapInput()
 
-        tapInput.dragEvent(offset: CGSize(width: 100, height: 0))
-        var currInput = tapInput.getInput()
+        tapInput.dragEvent(offset: CGSize(width: 50, height: 0))
+        var currInput = tapInput.calculateInput()
         XCTAssertEqual(currInput.inputType, .RIGHT)
 
-        tapInput.dragEvent(offset: CGSize(width: 100, height: 51))
-        currInput = tapInput.getInput()
+        tapInput.dragEvent(offset: CGSize(width: 50, height: 51))
+        currInput = tapInput.calculateInput()
         XCTAssertEqual(currInput.inputType, .NONE)
+    }
+    
+    func testDownMove() {
+        let tapInput = TapInput()
+
+        tapInput.dragEvent(offset: CGSize(width: 20, height: -100))
+        var currInput = tapInput.calculateInput()
+        XCTAssertEqual(currInput.inputType, .NONE)
+
+        tapInput.dragEvent(offset: CGSize(width: 19, height: -100))
+        currInput = tapInput.calculateInput()
+        XCTAssertEqual(currInput.inputType, .DOWN)
     }
 
 }

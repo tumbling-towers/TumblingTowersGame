@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Fiziks
 
 class SpecialPropertiesContactResolver {
     static func resolve(fiziksEngine: FiziksEngine, contact: FiziksContact, specialProperties: SpecialProperties) {
