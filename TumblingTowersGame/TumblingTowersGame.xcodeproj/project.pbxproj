@@ -19,7 +19,6 @@
 		124B02D529C55F8C00094CF5 /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124B02D429C55F8C00094CF5 /* Level.swift */; };
 		124B02D729C567F600094CF5 /* LevelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124B02D629C567F600094CF5 /* LevelView.swift */; };
 		124B02D929C568FE00094CF5 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124B02D829C568FE00094CF5 /* BackgroundView.swift */; };
-		124B02DC29C74C1400094CF5 /* ViewImageManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124B02DB29C74C1400094CF5 /* ViewImageManagerTests.swift */; };
 		124B02DE29C74D8800094CF5 /* GameObjectBlockTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124B02DD29C74D8800094CF5 /* GameObjectBlockTests.swift */; };
 		124B02E029C74F3900094CF5 /* GameObjectPlatformTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124B02DF29C74F3900094CF5 /* GameObjectPlatformTests.swift */; };
 		124B02E229C754F400094CF5 /* LevelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124B02E129C754F400094CF5 /* LevelTests.swift */; };
@@ -223,6 +222,7 @@
 		61076F4829EBC18800BF21AB /* NotificationCenterFacade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124B02F229C9ED6A00094CF5 /* NotificationCenterFacade.swift */; };
 		61076F4B29EBC6E100BF21AB /* GameEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61076F4A29EBC6E100BF21AB /* GameEngineTests.swift */; };
 		61076F4D29EBCC2100BF21AB /* MockGameMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61076F4C29EBCC2100BF21AB /* MockGameMode.swift */; };
+		61076F5029EBCF9900BF21AB /* GameWorldLevelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61076F4F29EBCF9900BF21AB /* GameWorldLevelTests.swift */; };
 		614B458829D3EB9100BDD2F0 /* CGVector+Multiply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614B458729D3EB9100BDD2F0 /* CGVector+Multiply.swift */; };
 		615C564129E3F13500E3256E /* LevelBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615C564029E3F13500E3256E /* LevelBackgroundView.swift */; };
 		616EAD0829D6D6A2006D602A /* PowerupAvailableEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 616EAD0729D6D6A2006D602A /* PowerupAvailableEvent.swift */; };
@@ -305,7 +305,6 @@
 		124B02D429C55F8C00094CF5 /* Level.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
 		124B02D629C567F600094CF5 /* LevelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelView.swift; sourceTree = "<group>"; };
 		124B02D829C568FE00094CF5 /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
-		124B02DB29C74C1400094CF5 /* ViewImageManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewImageManagerTests.swift; sourceTree = "<group>"; };
 		124B02DD29C74D8800094CF5 /* GameObjectBlockTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameObjectBlockTests.swift; sourceTree = "<group>"; };
 		124B02DF29C74F3900094CF5 /* GameObjectPlatformTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameObjectPlatformTests.swift; sourceTree = "<group>"; };
 		124B02E129C754F400094CF5 /* LevelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelTests.swift; sourceTree = "<group>"; };
@@ -419,6 +418,7 @@
 		61076ECB29EBAFEE00BF21AB /* MockEventManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockEventManager.swift; sourceTree = "<group>"; };
 		61076F4A29EBC6E100BF21AB /* GameEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngineTests.swift; sourceTree = "<group>"; };
 		61076F4C29EBCC2100BF21AB /* MockGameMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockGameMode.swift; sourceTree = "<group>"; };
+		61076F4F29EBCF9900BF21AB /* GameWorldLevelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameWorldLevelTests.swift; sourceTree = "<group>"; };
 		614B458729D3EB9100BDD2F0 /* CGVector+Multiply.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGVector+Multiply.swift"; sourceTree = "<group>"; };
 		615C564029E3F13500E3256E /* LevelBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelBackgroundView.swift; sourceTree = "<group>"; };
 		616EAD0729D6D6A2006D602A /* PowerupAvailableEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PowerupAvailableEvent.swift; path = TumblingTowersGame/Extensions/PowerupAvailableEvent.swift; sourceTree = SOURCE_ROOT; };
@@ -630,6 +630,7 @@
 		146E2DC329C0D07300BFC757 /* TumblingTowersGameTests */ = {
 			isa = PBXGroup;
 			children = (
+				61076F4E29EBCF8C00BF21AB /* GameWorldLevel */,
 				61076F4929EBC6C400BF21AB /* GameEngine */,
 				61076ECA29EBAFE300BF21AB /* Mocks */,
 				122BA13829D9AF8500196052 /* Storage */,
@@ -638,7 +639,6 @@
 				2FA2AC0129C74528001C5B7C /* GameWorld */,
 				619D449E29C62FCF00EE00CE /* FiziksEngine */,
 				2FC7FACB29C50B4500B56850 /* ShapeRandomizerTests.swift */,
-				124B02DB29C74C1400094CF5 /* ViewImageManagerTests.swift */,
 			);
 			path = TumblingTowersGameTests;
 			sourceTree = "<group>";
@@ -899,6 +899,14 @@
 				61076F4A29EBC6E100BF21AB /* GameEngineTests.swift */,
 			);
 			path = GameEngine;
+			sourceTree = "<group>";
+		};
+		61076F4E29EBCF8C00BF21AB /* GameWorldLevel */ = {
+			isa = PBXGroup;
+			children = (
+				61076F4F29EBCF9900BF21AB /* GameWorldLevelTests.swift */,
+			);
+			path = GameWorldLevel;
 			sourceTree = "<group>";
 		};
 		619D449E29C62FCF00EE00CE /* FiziksEngine */ = {
@@ -1300,6 +1308,7 @@
 				61076F4629EBC17B00BF21AB /* SoundSystem.swift in Sources */,
 				61076EF229EBBE4E00BF21AB /* GameEngine.swift in Sources */,
 				61076F1629EBBFA600BF21AB /* BlockDroppedEvent.swift in Sources */,
+				61076F5029EBCF9900BF21AB /* GameWorldLevelTests.swift in Sources */,
 				61076F4729EBC18700BF21AB /* NotificationCenterFacade.swift in Sources */,
 				61076F2229EBBFF000BF21AB /* SandboxGameMode.swift in Sources */,
 				61076F0729EBBF4B00BF21AB /* PowerupManager.swift in Sources */,
@@ -1320,7 +1329,6 @@
 				61076ECC29EBAFEE00BF21AB /* MockEventManager.swift in Sources */,
 				61076ED829EBBD9A00BF21AB /* TumblingTowersNotification.swift in Sources */,
 				122BA13A29D9AF9600196052 /* StorageManagerTests.swift in Sources */,
-				124B02DC29C74C1400094CF5 /* ViewImageManagerTests.swift in Sources */,
 				61076F3129EBC03700BF21AB /* StatsTrackingSystem.swift in Sources */,
 				124B02E229C754F400094CF5 /* LevelTests.swift in Sources */,
 				61ECC59929DEBA6100086794 /* PowerupButton.swift in Sources */,
