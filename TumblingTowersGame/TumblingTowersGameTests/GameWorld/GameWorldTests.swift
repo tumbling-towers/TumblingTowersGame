@@ -74,9 +74,9 @@ final class GameWorldTests: XCTestCase {
         let blockOriginalZRotation = try XCTUnwrap(gameWorld.currentlyMovingBlock?.rotation)
 
         let rotationChange = (Double.pi / 2)
-        let expectedBlockFinalZRotation = blockOriginalZRotation + (Double.pi / 2)
+        let expectedBlockFinalZRotation = blockOriginalZRotation + rotationChange
 
-        gameWorld.rotateCMB(by: Double.pi / 2)
+        gameWorld.rotateCMB(by: rotationChange)
 
         let updatedRotation = try XCTUnwrap(gameWorld.currentlyMovingBlock?.rotation)
         XCTAssertEqual(updatedRotation, expectedBlockFinalZRotation, accuracy: 1e-4)

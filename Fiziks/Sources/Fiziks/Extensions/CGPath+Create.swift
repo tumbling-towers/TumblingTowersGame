@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import SpriteKit
+import CoreGraphics
 
 extension CGPath {
     /// Takes in an array of `CGPoint` and creates a `CGPath`.

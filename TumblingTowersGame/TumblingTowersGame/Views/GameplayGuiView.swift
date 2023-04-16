@@ -69,9 +69,10 @@ struct GameplayGuiView: View {
     }
 
     private func drawPowerupButtons() -> AnyView {
-        AnyView(
+        let powerupCount = viewAdapter.powerups.count + 1
+        return AnyView(
             ZStack {
-                ForEach(1..<Int(viewAdapter.powerups.count + 1)) { idx in
+                ForEach(1..<Int(powerupCount)) { idx in
                     if let currPowerupType = viewAdapter.powerups[idx - 1],
                        let image = getPowerUpImgFor(powerupType: currPowerupType) {
                         Button {
@@ -116,10 +117,11 @@ struct GameplayGuiView_Previews: PreviewProvider {
         GameplayGuiView(currGameScreen: .constant(.singleplayerGameplay))
             .environmentObject(MainGameManager())
             .environmentObject(ViewAdapter(levelDimensions: .infinite,
-                                           gameEngineMgr: GameEngineManager(levelDimensions: .infinite,
-                                                                            eventManager: TumblingTowersEventManager(),
-                                                                            inputType: TapInput.self,
-                                                                            storageManager: StorageManager(),
-                                                                            playersMode: .singleplayer)))
+                                           gameEngineMgr: GameInstanceController(
+                                            levelDimensions: .infinite,
+                                            eventManager: TumblingTowersEventManager(),
+                                            inputType: TapInput.self,
+                                            storageManager: StorageManager(),
+                                            playersMode: .singleplayer)))
     }
 }

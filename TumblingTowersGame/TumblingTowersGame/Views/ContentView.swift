@@ -32,8 +32,8 @@ struct ContentView: View {
                                                                                        width: deviceWidth,
                                                                                        height: deviceHeight),
                                                                gameEngineMgr: mainGameMgr
-                                        .createGameEngineManager(height: deviceHeight,
-                                                                 width: deviceWidth)),
+                                        .createGameInstanceController(height: deviceHeight,
+                                                                      width: deviceWidth)),
                                       gameMode: gameMode)
                 }
                 .ignoresSafeArea(.all)
@@ -47,16 +47,16 @@ struct ContentView: View {
                                                                                        width: deviceWidth,
                                                                                        height: deviceHeight / 2),
                                                                gameEngineMgr: mainGameMgr
-                                        .createGameEngineManager(height: deviceHeight / 2,
-                                                                 width: deviceWidth)),
+                                        .createGameInstanceController(height: deviceHeight / 2,
+                                                                      width: deviceWidth)),
                                       gameMode: gameMode)
                     .rotation3DEffect(.degrees(180), axis: (x: 0, y: 0, z: 1))
                     GameplayLevelView(currGameScreen: $currGameScreen,
                                       viewAdapter: ViewAdapter(levelDimensions: CGRect(x: 0, y: 0, width: deviceWidth,
                                                                                        height: deviceHeight / 2),
                                                                gameEngineMgr: mainGameMgr
-                                        .createGameEngineManager(height: deviceHeight / 2,
-                                                                 width: deviceWidth)),
+                                        .createGameInstanceController(height: deviceHeight / 2,
+                                                                      width: deviceWidth)),
                                       gameMode: gameMode)
                 }
             } else if currGameScreen == .settings {

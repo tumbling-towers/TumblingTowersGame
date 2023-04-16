@@ -54,7 +54,7 @@ struct GameplayLevelView_Previews: PreviewProvider {
     static var previews: some View {
         GameplayLevelView(currGameScreen: .constant(.singleplayerGameplay),
                           viewAdapter: (ViewAdapter(levelDimensions: .infinite,
-                                                    gameEngineMgr: GameEngineManager(
+                                                    gameEngineMgr: GameInstanceController(
                                                         levelDimensions: .infinite,
                                                         eventManager: TumblingTowersEventManager(),
                                                         inputType: TapInput.self,

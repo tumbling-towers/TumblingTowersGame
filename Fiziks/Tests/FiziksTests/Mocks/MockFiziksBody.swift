@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import SpriteKit
 @testable import Fiziks
 
 class MockFiziksBody: FiziksBody {

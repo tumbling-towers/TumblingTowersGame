@@ -21,7 +21,6 @@ interface FiziksBody {
 }
 
 interface FiziksEngine {
-  - bodies: [FiziksBody]
   + addBody(_ body: FiziksBody)
   + removeBody(_ body: FiziksBody)
 }
@@ -31,8 +30,6 @@ class GameWorldObject {
 }
 
 class GameWorld {
-  - objects: [GameWorldObject]
-  - fiziksEngine: FiziksEngine
   + addGameObject(_ gameObject: GameWorldObject)
   + removeGameObject(_ gameObject: GameWorldObject)
 }

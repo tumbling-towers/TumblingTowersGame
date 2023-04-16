@@ -3,7 +3,6 @@
  */
 
 import Foundation
-import SpriteKit
 
 public typealias BitMask = UInt32
 

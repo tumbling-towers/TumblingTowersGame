@@ -1,8 +1,6 @@
 @startuml
 class GameWorld {
-    - objects: [GameWorldObject]
     - fiziksLookup: Dictionary<GameWorldObject, FiziksBody>
-    - fiziksEngine: FiziksEngine
     + addObject(object: GameWorldObject, body: FiziksBody): void
     + removeObject(object: GameWorldObject): void
     + update(deltaTime: TimeInterval): void
@@ -30,7 +28,6 @@ interface FiziksBody {
 }
 
 interface FiziksEngine {
-    - bodies: [FiziksBody]
     + addBody(body: FiziksBody): void
     + removeBody(body: FiziksBody): void
     + update(deltaTime: TimeInterval): void
@@ -41,8 +38,8 @@ class GameWorldObject {
     - zRotation: CGPoint
 }
 
-GameWorld --> GameWorldObject
-GameWorld --> FiziksBody
-GameWorld --> FiziksEngine 
-FiziksEngine --> FiziksBody
+GameWorld -d-> GameWorldObject
+GameWorld -d-> FiziksBody
+GameWorld -d-> FiziksEngine 
+FiziksEngine -d-> FiziksBody
 @enduml

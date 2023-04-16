@@ -24,7 +24,7 @@ class GameFiziksEngine implements SKPhysicsContactDelegate, FiziksEngine {
     - getSKPhysicsBody(of:) : SKPhysicsBody?
 }
 
-class SKPhysicsContactDelegate {
+interface SKPhysicsContactDelegate {
     +didBegin(_:)
     +didEnd(_:)
 }
