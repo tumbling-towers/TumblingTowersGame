@@ -214,6 +214,7 @@
 		61076F4B29EBC6E100BF21AB /* GameEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61076F4A29EBC6E100BF21AB /* GameEngineTests.swift */; };
 		61076F4D29EBCC2100BF21AB /* MockGameMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61076F4C29EBCC2100BF21AB /* MockGameMode.swift */; };
 		61076F5029EBCF9900BF21AB /* GameWorldLevelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61076F4F29EBCF9900BF21AB /* GameWorldLevelTests.swift */; };
+		61076F6129EC38B500BF21AB /* TumblingTowersGameUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61076F6029EC38B500BF21AB /* TumblingTowersGameUITests.swift */; };
 		614B458829D3EB9100BDD2F0 /* CGVector+Multiply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614B458729D3EB9100BDD2F0 /* CGVector+Multiply.swift */; };
 		615C564129E3F13500E3256E /* LevelBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615C564029E3F13500E3256E /* LevelBackgroundView.swift */; };
 		616EAD0829D6D6A2006D602A /* PowerupAvailableEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 616EAD0729D6D6A2006D602A /* PowerupAvailableEvent.swift */; };
@@ -266,6 +267,13 @@
 
 /* Begin PBXContainerItemProxy section */
 		146E2DC129C0D07300BFC757 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 146E2DA829C0D07200BFC757 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 146E2DAF29C0D07200BFC757;
+			remoteInfo = TumblingTowersGame;
+		};
+		61076F6429EC38B500BF21AB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 146E2DA829C0D07200BFC757 /* Project object */;
 			proxyType = 1;
@@ -392,6 +400,8 @@
 		61076F4A29EBC6E100BF21AB /* GameEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngineTests.swift; sourceTree = "<group>"; };
 		61076F4C29EBCC2100BF21AB /* MockGameMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockGameMode.swift; sourceTree = "<group>"; };
 		61076F4F29EBCF9900BF21AB /* GameWorldLevelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameWorldLevelTests.swift; sourceTree = "<group>"; };
+		61076F5E29EC38B500BF21AB /* TumblingTowersGameUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TumblingTowersGameUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		61076F6029EC38B500BF21AB /* TumblingTowersGameUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TumblingTowersGameUITests.swift; sourceTree = "<group>"; };
 		614B458729D3EB9100BDD2F0 /* CGVector+Multiply.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGVector+Multiply.swift"; sourceTree = "<group>"; };
 		615C564029E3F13500E3256E /* LevelBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelBackgroundView.swift; sourceTree = "<group>"; };
 		616EAD0729D6D6A2006D602A /* PowerupAvailableEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PowerupAvailableEvent.swift; path = TumblingTowersGame/Extensions/PowerupAvailableEvent.swift; sourceTree = SOURCE_ROOT; };
@@ -441,6 +451,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		146E2DBD29C0D07300BFC757 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		61076F5B29EC38B500BF21AB /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -552,6 +569,7 @@
 				2FB0003229EBCEA10093A64A /* Fiziks */,
 				146E2DB229C0D07200BFC757 /* TumblingTowersGame */,
 				146E2DC329C0D07300BFC757 /* TumblingTowersGameTests */,
+				61076F5F29EC38B500BF21AB /* TumblingTowersGameUITests */,
 				146E2DB129C0D07200BFC757 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -561,6 +579,7 @@
 			children = (
 				146E2DB029C0D07200BFC757 /* TumblingTowersGame.app */,
 				146E2DC029C0D07300BFC757 /* TumblingTowersGameTests.xctest */,
+				61076F5E29EC38B500BF21AB /* TumblingTowersGameUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -843,6 +862,14 @@
 			path = GameWorldLevel;
 			sourceTree = "<group>";
 		};
+		61076F5F29EC38B500BF21AB /* TumblingTowersGameUITests */ = {
+			isa = PBXGroup;
+			children = (
+				61076F6029EC38B500BF21AB /* TumblingTowersGameUITests.swift */,
+			);
+			path = TumblingTowersGameUITests;
+			sourceTree = "<group>";
+		};
 		619D44C129C6F39E00EE00CE /* ObjectShape */ = {
 			isa = PBXGroup;
 			children = (
@@ -948,6 +975,24 @@
 			productReference = 146E2DC029C0D07300BFC757 /* TumblingTowersGameTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		61076F5D29EC38B500BF21AB /* TumblingTowersGameUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 61076F6629EC38B500BF21AB /* Build configuration list for PBXNativeTarget "TumblingTowersGameUITests" */;
+			buildPhases = (
+				61076F5A29EC38B500BF21AB /* Sources */,
+				61076F5B29EC38B500BF21AB /* Frameworks */,
+				61076F5C29EC38B500BF21AB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				61076F6529EC38B500BF21AB /* PBXTargetDependency */,
+			);
+			name = TumblingTowersGameUITests;
+			productName = TumblingTowersGameUITests;
+			productReference = 61076F5E29EC38B500BF21AB /* TumblingTowersGameUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -962,6 +1007,10 @@
 						CreatedOnToolsVersion = 14.2;
 					};
 					146E2DBF29C0D07300BFC757 = {
+						CreatedOnToolsVersion = 14.2;
+						TestTargetID = 146E2DAF29C0D07200BFC757;
+					};
+					61076F5D29EC38B500BF21AB = {
 						CreatedOnToolsVersion = 14.2;
 						TestTargetID = 146E2DAF29C0D07200BFC757;
 					};
@@ -982,6 +1031,7 @@
 			targets = (
 				146E2DAF29C0D07200BFC757 /* TumblingTowersGame */,
 				146E2DBF29C0D07300BFC757 /* TumblingTowersGameTests */,
+				61076F5D29EC38B500BF21AB /* TumblingTowersGameUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -1007,6 +1057,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				61F4F01A29DDF9C30002AD69 /* JosefinSans-Medium.ttf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		61076F5C29EC38B500BF21AB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1293,6 +1350,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		61076F5A29EC38B500BF21AB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				61076F6129EC38B500BF21AB /* TumblingTowersGameUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -1300,6 +1365,11 @@
 			isa = PBXTargetDependency;
 			target = 146E2DAF29C0D07200BFC757 /* TumblingTowersGame */;
 			targetProxy = 146E2DC129C0D07300BFC757 /* PBXContainerItemProxy */;
+		};
+		61076F6529EC38B500BF21AB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 146E2DAF29C0D07200BFC757 /* TumblingTowersGame */;
+			targetProxy = 61076F6429EC38B500BF21AB /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1520,6 +1590,40 @@
 			};
 			name = Release;
 		};
+		61076F6729EC38B500BF21AB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = T95PZMKKDH;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.taubar.TumblingTowersGameUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = TumblingTowersGame;
+			};
+			name = Debug;
+		};
+		61076F6829EC38B500BF21AB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = T95PZMKKDH;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.taubar.TumblingTowersGameUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = TumblingTowersGame;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1546,6 +1650,15 @@
 			buildConfigurations = (
 				146E2DD829C0D07300BFC757 /* Debug */,
 				146E2DD929C0D07300BFC757 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		61076F6629EC38B500BF21AB /* Build configuration list for PBXNativeTarget "TumblingTowersGameUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				61076F6729EC38B500BF21AB /* Debug */,
+				61076F6829EC38B500BF21AB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

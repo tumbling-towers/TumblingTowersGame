@@ -27,8 +27,7 @@
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES"
-      codeCoverageEnabled = "YES"
-      onlyGenerateCoverageForSpecifiedTargets = "YES">
+      codeCoverageEnabled = "YES">
       <CodeCoverageTargets>
          <BuildableReference
             BuildableIdentifier = "primary"
@@ -55,7 +54,7 @@
             parallelizable = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "146E2DC929C0D07300BFC757"
+               BlueprintIdentifier = "61076F5D29EC38B500BF21AB"
                BuildableName = "TumblingTowersGameUITests.xctest"
                BlueprintName = "TumblingTowersGameUITests"
                ReferencedContainer = "container:TumblingTowersGame.xcodeproj">
