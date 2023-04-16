@@ -24,41 +24,11 @@ struct ContentView: View {
                 GameModeSelectView(currGameScreen: $currGameScreen)
             } else if currGameScreen == .singleplayerGameplay,
                       let gameMode = mainGameMgr.gameMode {
-
-                ZStack {
-                    GameplayLevelView(currGameScreen: $currGameScreen,
-                                      viewAdapter: ViewAdapter(levelDimensions: CGRect(x: 0,
-                                                                                       y: 0,
-                                                                                       width: deviceWidth,
-                                                                                       height: deviceHeight),
-                                                               gameEngineMgr: mainGameMgr
-                                        .createGameInstanceController(height: deviceHeight,
-                                                                      width: deviceWidth)),
-                                      gameMode: gameMode)
-                }
+                drawSingleplayerScreen(gameMode: gameMode)
                 .ignoresSafeArea(.all)
             } else if currGameScreen == .multiplayerGameplay,
                       let gameMode = mainGameMgr.gameMode {
-
-                VStack {
-                    GameplayLevelView(currGameScreen: $currGameScreen,
-                                      viewAdapter: ViewAdapter(levelDimensions: CGRect(x: 0,
-                                                                                       y: 0,
-                                                                                       width: deviceWidth,
-                                                                                       height: deviceHeight / 2),
-                                                               gameEngineMgr: mainGameMgr
-                                        .createGameInstanceController(height: deviceHeight / 2,
-                                                                      width: deviceWidth)),
-                                      gameMode: gameMode)
-                    .rotation3DEffect(.degrees(180), axis: (x: 0, y: 0, z: 1))
-                    GameplayLevelView(currGameScreen: $currGameScreen,
-                                      viewAdapter: ViewAdapter(levelDimensions: CGRect(x: 0, y: 0, width: deviceWidth,
-                                                                                       height: deviceHeight / 2),
-                                                               gameEngineMgr: mainGameMgr
-                                        .createGameInstanceController(height: deviceHeight / 2,
-                                                                      width: deviceWidth)),
-                                      gameMode: gameMode)
-                }
+                drawMultiplayerScreen(gameMode: gameMode)
             } else if currGameScreen == .settings {
                 SettingsView(settingsMgr: SettingsManager(),
                              currGameScreen: $currGameScreen,
@@ -79,6 +49,46 @@ struct ContentView: View {
             drawGameEndScreens()
 
         }
+    }
+
+    private func drawSingleplayerScreen(gameMode: Constants.GameModeTypes) -> AnyView {
+        AnyView(
+            ZStack {
+                GameplayLevelView(currGameScreen: $currGameScreen,
+                                  viewAdapter: ViewAdapter(levelDimensions: CGRect(x: 0,
+                                                                                   y: 0,
+                                                                                   width: deviceWidth,
+                                                                                   height: deviceHeight),
+                                                           gameEngineMgr: mainGameMgr
+                                    .createGameInstanceController(height: deviceHeight,
+                                                                  width: deviceWidth)),
+                                  gameMode: gameMode)
+            }
+        )
+    }
+
+    private func drawMultiplayerScreen(gameMode: Constants.GameModeTypes) -> AnyView {
+        AnyView(
+            VStack {
+                GameplayLevelView(currGameScreen: $currGameScreen,
+                                  viewAdapter: ViewAdapter(levelDimensions: CGRect(x: 0,
+                                                                                   y: 0,
+                                                                                   width: deviceWidth,
+                                                                                   height: deviceHeight / 2),
+                                                           gameEngineMgr: mainGameMgr
+                                    .createGameInstanceController(height: deviceHeight / 2,
+                                                                  width: deviceWidth)),
+                                  gameMode: gameMode)
+                .rotation3DEffect(.degrees(180), axis: (x: 0, y: 0, z: 1))
+                GameplayLevelView(currGameScreen: $currGameScreen,
+                                  viewAdapter: ViewAdapter(levelDimensions: CGRect(x: 0, y: 0, width: deviceWidth,
+                                                                                   height: deviceHeight / 2),
+                                                           gameEngineMgr: mainGameMgr
+                                    .createGameInstanceController(height: deviceHeight / 2,
+                                                                  width: deviceWidth)),
+                                  gameMode: gameMode)
+            }
+        )
     }
 
     private func drawGameEndScreens() -> AnyView {

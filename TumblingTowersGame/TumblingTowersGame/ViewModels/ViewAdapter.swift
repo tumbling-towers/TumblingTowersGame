@@ -92,8 +92,8 @@ class ViewAdapter: GameRendererDelegate, ObservableObject {
                 guard let block = object as? Block, let tetrisShape = block.shape as? TetrisShape else { continue }
                 blocks.append(GameObjectBlock(position: block.position,
                                               path: tetrisShape.path,
-                                              rotation: block.rotation,
-                                              specialProperties: block.specialProperties))
+                                              specialProperties: block.specialProperties,
+                                              rotation: block.rotation))
             } else if type(of: object) == Platform.self {
                 guard object is Platform else { continue }
                 platforms.append(GameObjectPlatform(position: object.position,

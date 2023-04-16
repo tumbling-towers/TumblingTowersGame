@@ -230,8 +230,8 @@ class GameWorld {
         }
     }
 
-    private func createLevelBoundary(ofWidth width: CGFloat = GameWorldConstants.levelBoundaryWidth,
-                                     at position: CGPoint) -> LevelBoundary {
+    private func createLevelBoundary(at position: CGPoint,
+                                     ofWidth width: CGFloat = GameWorldConstants.levelBoundaryWidth) -> LevelBoundary {
         let rect = CGRect(origin: position, size: CGSize(width: width, height: dimensions.height))
         let path = CGPath.create(from: rect, centered: true)
         let shape = GamePathObjectShape(path: path)

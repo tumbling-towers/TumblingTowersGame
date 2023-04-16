@@ -47,8 +47,6 @@ class SoundSystem {
                                  closure: { [weak self] (_ event: Event) -> Void in self?.playSound(.POWERUPGLUE) })
         eventMgr.registerClosure(for: PlatformPowerupActivatedEvent.self,
                                  closure: { [weak self] (_ event: Event) -> Void in self?.playSound(.POWERUPPLATFORM) })
-        eventMgr.registerClosure(for: GameEndedEvent.self,
-                                 closure: { [weak self] (_ event: Event) -> Void in self?.playSound(.GAMEEND) })
     }
 
     private func loadSound(_ sound: GameSound) {
@@ -69,7 +67,7 @@ class SoundSystem {
 
     private func playSound(_ sound: GameSound) {
         guard let currPlayer = soundPlayers[sound] else {
-            print("Cant find player for \(sound.rawValue)")
+            print("Error: No player for \(sound.rawValue)")
             return
         }
 
@@ -116,7 +114,5 @@ class SoundSystem {
         case POWERUPCOLLECT = "powerup-collect.mp3"
         case POWERUPGLUE = "powerup-glue.mp3"
         case POWERUPPLATFORM = "powerup-platform.mp3"
-        case GAMEEND = "result.mp3"
-
     }
 }

@@ -26,38 +26,15 @@ struct MainMenuView: View {
 
                 Spacer()
 
-                Button {
-                    withAnimation {
-                        currGameScreen = .playerOptionSelection
-                    }
-                } label: {
-                    Text("Play")
-                        .modifier(CustomButton(fontSize: 40))
-                }
+                createButton(label: "Play", destination: .playerOptionSelection)
 
                 Spacer().frame(height: 50)
 
-                Button {
-                    withAnimation {
-                        currGameScreen = .achievements
-                    }
-                } label: {
-                    Text("Achievements")
-                        .modifier(CustomButton(fontSize: 40))
-                }
-                .modifier(CustomButton(fontSize: 40))
+                createButton(label: "Achievements", destination: .achievements)
 
                 Spacer().frame(height: 50)
 
-                Button {
-                    withAnimation {
-                        currGameScreen = .settings
-                    }
-                } label: {
-                    Text("Settings")
-                        .modifier(CustomButton(fontSize: 40))
-                }
-                .modifier(CustomButton(fontSize: 40))
+                createButton(label: "Settings", destination: .settings)
 
                 Spacer()
                 Spacer()
@@ -78,6 +55,20 @@ struct MainMenuView: View {
 
         }
         .ignoresSafeArea(.all)
+    }
+
+    private func createButton(label: String, destination: Constants.CurrGameScreens) -> AnyView {
+        AnyView(
+            Button {
+                withAnimation {
+                    currGameScreen = destination
+                }
+            } label: {
+                Text(label)
+                    .modifier(CustomButton(fontSize: 40))
+            }
+            .modifier(CustomButton(fontSize: 40))
+        )
     }
 }
 

@@ -30,9 +30,14 @@ struct GameplayGuiView: View {
                                     width: 70,
                                     position: CGPoint(x: viewAdapter.levelDimensions.width - 100,
                                                       y: viewAdapter.levelDimensions.height - 100)))
-
+            drawPauseButton()
             drawPowerupButtons()
+            drawGameGui()
+        }
+    }
 
+    private func drawPauseButton() -> AnyView {
+        AnyView(
             Button {
                 isPaused = true
                 mainGameMgr.pauseGame()
@@ -56,9 +61,7 @@ struct GameplayGuiView: View {
                     currGameScreen = .mainMenu
                 })
             }
-
-            drawGameGui()
-        }
+        )
     }
 
     private func getPowerUpImgFor(powerupType: Powerup.Type) -> String? {

@@ -32,7 +32,7 @@ struct GameObjectBlock: GameObject {
 
     var specialProperties: SpecialProperties
 
-    init(position: CGPoint, path: CGPath, rotation: Double = 0, specialProperties: SpecialProperties) {
+    init(position: CGPoint, path: CGPath, specialProperties: SpecialProperties, rotation: Double = 0) {
         self.position = position
         self.rawPath = path
         self.rotation = rotation
