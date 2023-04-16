@@ -4,7 +4,6 @@
 
 import CoreGraphics
 import Foundation
-import SpriteKit
 
 public class GameFiziksBody: FiziksBody {
     // MARK: Methods to apply forces and impulses to a physics body

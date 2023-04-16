@@ -5,7 +5,6 @@
 //
 
 import Foundation
-import SpriteKit
 import Fiziks
 
 class GameEngineManager {

@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import SpriteKit
 
 public class FiziksContact {
     public let bodyA: FiziksBody

@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import SpriteKit
 
 public protocol FiziksEngine: AnyObject {
     var fiziksContactDelegate: FiziksContactDelegate? { get set }

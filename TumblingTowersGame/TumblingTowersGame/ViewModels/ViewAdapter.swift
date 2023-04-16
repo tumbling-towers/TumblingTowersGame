@@ -7,7 +7,6 @@
 
 import Foundation
 import SwiftUI
-import SpriteKit
 import Fiziks
 
 class ViewAdapter: GameRendererDelegate, ObservableObject {

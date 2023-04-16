@@ -99,7 +99,6 @@ final class GameEngineTests: XCTestCase {
     }
 
     func test_rotateClockwise() throws {
-        let displacement = CGVector(dx: 10, dy: -10)
         let gameEngine = try XCTUnwrap(testGameEngine)
 
         gameEngine.startGame()
@@ -114,7 +113,6 @@ final class GameEngineTests: XCTestCase {
     }
 
     func test_rotateCounterClockwise() throws {
-        let displacement = CGVector(dx: 10, dy: -10)
         let gameEngine = try XCTUnwrap(testGameEngine)
 
         gameEngine.startGame()

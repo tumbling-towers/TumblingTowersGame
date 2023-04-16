@@ -1,6 +1,5 @@
 @startuml
 interface FiziksBody {
-    + fiziksShapeNode: FiziksShapeNode
     + position: CGPoint
     + zRotation: CGFloat
     + velocity: CGVector

@@ -1,6 +1,5 @@
 @startuml
 class GameWorld {
-    - objects: [GameWorldObject]
     - fiziksLookup: Dictionary<GameWorldObject, FiziksBody>
     + addObject(object: GameWorldObject, body: FiziksBody): void
     + removeObject(object: GameWorldObject): void
@@ -29,7 +28,6 @@ interface FiziksBody {
 }
 
 class FiziksEngine {
-    - bodies: [FiziksBody]
     + addBody(body: FiziksBody): void
     + removeBody(body: FiziksBody): void
     + update(deltaTime: TimeInterval): void
