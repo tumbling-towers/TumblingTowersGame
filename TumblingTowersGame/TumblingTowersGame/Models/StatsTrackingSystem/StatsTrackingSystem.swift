@@ -31,7 +31,7 @@ class StatsTrackingSystem {
     }
     
     private func setupStatTrackers() {
-        guard let statsStorage = try? storageManager.loadStats() else {
+        guard let statsStorage = try? storageManager.loadStats(eventManager: eventManager) else {
             return
         }
         
@@ -48,9 +48,9 @@ class StatsTrackingSystem {
         }
     }
 
-    private func loadStorageStats(statsStorage: [StatStorage]) {
+    private func loadStorageStats(statsStorage: [StatTracker]) {
         for storage in statsStorage {
-            add(StatTrackerFactory.createStatTracker(ofType: storage.statTrackerType, eventManager: eventManager, stat: storage.stat))
+            add(storage)
         }
     }
     
