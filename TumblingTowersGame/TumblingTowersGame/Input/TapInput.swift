@@ -39,6 +39,8 @@ Swipe Down: Speeds up the downward movement of the block.
         } else if abs(offset.width) < 20 && offset.height < 0 {
             // detected as a swipe down
             inputData = InputData(inputType: .DOWN, vector: InputData.unitDown * yMultiplier)
+        } else {
+            inputData = InputData(inputType: .NONE, vector: .zero)
         }
     }
 }

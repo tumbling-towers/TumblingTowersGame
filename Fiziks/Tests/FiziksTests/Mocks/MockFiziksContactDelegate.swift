@@ -12,7 +12,7 @@ class MockFiziksContactDelegate: FiziksContactDelegate {
     func didBegin(_ contact: FiziksContact) {
         return
     }
-
+    
     func didEnd(_ contact: FiziksContact) {
         return
     }

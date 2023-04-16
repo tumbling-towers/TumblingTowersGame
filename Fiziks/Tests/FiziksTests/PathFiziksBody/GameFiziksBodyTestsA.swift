@@ -21,15 +21,15 @@ final class GameFiziksBodyTestsA: XCTestCase {
 
     override func setUp() {
         fiziksBody = GameFiziksBody(path: path,
-                                  position: .zero,
-                                  zRotation: 5,
-                                  isDynamic: true,
-                                  categoryBitMask: 0x1,
-                                  collisionBitMask: 0x1,
-                                  contactTestBitMask: 0x1)
+                                    position: .zero,
+                                    zRotation: 5,
+                                    isDynamic: true,
+                                    categoryBitMask: 0x1,
+                                    collisionBitMask: 0x1,
+                                    contactTestBitMask: 0x1)
         fiziksShapeNode = fiziksBody.fiziksShapeNode
     }
-
+    
     func testGetPosition_bothSameValue() {
         let currFSNValue = fiziksShapeNode.position
         let currPFBValue = fiziksBody.position
