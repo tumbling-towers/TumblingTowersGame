@@ -1,0 +1,28 @@
+@startuml
+
+entity GameInstanceController
+entity GameEngine
+entity SurvivalGameMode
+entity EventManager
+
+== Initialization of Game Mode == 
+
+create SurvivalGameMode
+GameInstanceController -> SurvivalGameMode: init(eventManager)
+
+SurvivalGameMode -> EventManager: registerClosure(for: BlockPlacedEvent.self, closure: blockPlaced)
+
+SurvivalGameMode --> GameInstanceController: gameMode
+GameInstanceController -> GameEngine: setGameMode(gameMode)
+
+== When game ends == 
+
+GameEngine -> SurvivalGameMode: update()
+
+alt gameState != .RUNNING && gameState != .PAUSED
+
+SurvivalGameMode -> EventManager: postEvent(GameEndedEvent(playerId: playerId, endState: gameState))
+
+end 
+
+@enduml

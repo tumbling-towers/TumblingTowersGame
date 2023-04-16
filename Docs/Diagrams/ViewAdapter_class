@@ -1,0 +1,50 @@
+@startuml
+
+class ViewAdapter implements GameRendererDelegate {
+  + powerUpLinePosition: CGPoint
+  + powerupLineDimensions: CGSize
+  + levelBlocks: [GameObjectBlock]
+  + levelPlatforms: [GameObjectPlatform]
+  + powerups: [Powerup.Type?]
+  + levelDimensions: CGRect
+  + gameEngineMgr: GameEngineManager
+  + gameMode: GameMode?
+  + timeRemaining: Int
+  + score: Int
+  + gameEnded: Bool
+  + gameEndMainMessage: String
+  + gameEndSubMessage: String
+  + referenceBox: CGRect
+  
+  + updateViewVariables()
+  + renderCurrentFrame(gameObjects: [any GameWorldObject], powerUpLine: PowerupLine)
+  - convertLevel(gameObjects: [any GameWorldObject]): Level
+  - transformRenderable(for block: GameObjectBlock): GameObjectBlock
+  - transformPath(path: CGPath, width: Double, height: Double): CGPath
+  - adjustCoordinates(for point: CGPoint): CGPoint
+
+  + rerender()
+  + dragEvent(offset: CGSize)
+  + getCurrInput(): InputData
+  + rotateCurrentBlock()
+  + resetInput()
+  + resetGame()
+  + startGame(gameMode: Constants.GameModeTypes)
+  + getPhysicsEngine(): FiziksEngine
+}
+
+class GameRendererDelegate {
+  + dragEvent(offset: CGSize)
+  + updateViewVariables()
+  + renderCurrentFrame()
+  + rerender()
+}
+
+class GameInstanceController {
+  + setRendererDelegate(GameRendererDelegate)
+}
+
+GameInstanceController -> ViewAdapter
+ViewAdapter -> GameInstanceController
+
+@enduml

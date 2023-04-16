@@ -1,0 +1,31 @@
+@startuml
+
+entity GameInstanceController
+entity ViewAdapter
+
+
+-> GameInstanceController: update()
+
+== Updating published variables ==
+
+GameInstanceController -> ViewAdapter: updateViewVariables(score, timeRemaining, referenceBox ...)
+
+note right: set variables to published variables 
+
+
+== Updating GameEngine related models and converting the coordinates system ==
+
+GameInstanceController -> ViewAdapter: renderCurrentFrame() 
+
+ViewAdapter -> ViewAdapter: renderLevel()
+activate ViewAdapter
+
+ViewAdapter -> ViewAdapter: transformRenderable(for: gameObjectBlock)
+ViewAdapter -> ViewAdapter: adjustCoordinates(for: platform.position)
+ViewAdapter -> ViewAdapter: adjustCoordinates(for: powerupLine.position)
+
+note left: set adjusted variables to published variables 
+
+deactivate ViewAdapter
+
+@enduml
