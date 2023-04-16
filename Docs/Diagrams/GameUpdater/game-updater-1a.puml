@@ -1,0 +1,30 @@
+@startuml
+create GameEngineManager
+create GameUpdater
+
+
+activate GameEngineManager
+
+GameEngineManager -> GameUpdater: GameUpdater(runThisEveryFrame: update)
+GameEngineManager -> GameUpdater: createCADisplayLink()
+
+deactivate GameEngineManager
+
+
+group Every Display Frame
+GameUpdater -> GameEngineManager: update()
+
+activate GameEngineManager
+
+GameEngineManager -> GameEngine: update()
+GameEngineManager -> GameEngineManager: renderCurrentFrame()
+
+activate GameEngineManager
+GameEngineManager -> GameEngine: getLevelToRender()
+deactivate GameEngineManager
+
+deactivate GameEngineManager
+
+end
+
+@enduml
