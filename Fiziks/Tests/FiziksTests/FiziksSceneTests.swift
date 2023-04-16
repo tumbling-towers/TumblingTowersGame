@@ -6,7 +6,7 @@
 //
 
 import XCTest
-@testable import TumblingTowersGame
+@testable import Fiziks
 
 final class FiziksSceneTests: XCTestCase {
 

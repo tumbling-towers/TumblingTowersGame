@@ -7,7 +7,7 @@
 
 import Foundation
 import CoreGraphics
-@testable import TumblingTowersGame
+@testable import Fiziks
 
 class MockFiziksShapeNode: FiziksShapeNode {
 

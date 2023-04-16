@@ -6,9 +6,9 @@ import CoreGraphics
 import Foundation
 import SpriteKit
 
-class GameFiziksBody: FiziksBody {
+public class GameFiziksBody: FiziksBody {
     // MARK: Attributes of a physics body with respect to the world
-    var position: CGPoint {
+    public var position: CGPoint {
         get {
             fiziksShapeNode.position
         }
@@ -19,7 +19,7 @@ class GameFiziksBody: FiziksBody {
         }
     }
 
-    var zRotation: CGFloat {
+    public var zRotation: CGFloat {
         get {
             fiziksShapeNode.zRotation
         }
@@ -30,7 +30,7 @@ class GameFiziksBody: FiziksBody {
         }
     }
 
-    var velocity: CGVector? {
+    public var velocity: CGVector? {
         get {
             fiziksShapeNode.velocity
         }
@@ -39,7 +39,7 @@ class GameFiziksBody: FiziksBody {
         }
     }
 
-    var angularVelocity: CGFloat? {
+    public var angularVelocity: CGFloat? {
         get {
             fiziksShapeNode.angularVelocity
         }
@@ -48,7 +48,7 @@ class GameFiziksBody: FiziksBody {
         }
     }
 
-    var isResting: Bool? {
+    public var isResting: Bool? {
         get {
             fiziksShapeNode.isResting
         }
@@ -58,7 +58,7 @@ class GameFiziksBody: FiziksBody {
     }
 
     // MARK: Attributes defining how forces affect a physics body
-    var affectedByGravity: Bool? {
+    public var affectedByGravity: Bool? {
         get {
             fiziksShapeNode.affectedByGravity
         }
@@ -67,7 +67,7 @@ class GameFiziksBody: FiziksBody {
         }
     }
 
-    var allowsRotation: Bool? {
+    public var allowsRotation: Bool? {
         get {
             fiziksShapeNode.allowsRotation
         }
@@ -76,7 +76,7 @@ class GameFiziksBody: FiziksBody {
         }
     }
 
-    var isDynamic: Bool? {
+    public var isDynamic: Bool? {
         get {
             fiziksShapeNode.isDynamic
         }
@@ -86,7 +86,7 @@ class GameFiziksBody: FiziksBody {
     }
 
     // MARK: Attributes defining a physics body's physical properties
-    var mass: CGFloat? {
+    public var mass: CGFloat? {
         get {
             fiziksShapeNode.mass
         }
@@ -95,7 +95,7 @@ class GameFiziksBody: FiziksBody {
         }
     }
 
-    var density: CGFloat? {
+    public var density: CGFloat? {
         get {
             fiziksShapeNode.density
         }
@@ -104,11 +104,11 @@ class GameFiziksBody: FiziksBody {
         }
     }
 
-    var area: CGFloat? {
+    public var area: CGFloat? {
         fiziksShapeNode.area
     }
 
-    var friction: CGFloat? {
+    public var friction: CGFloat? {
         get {
             fiziksShapeNode.friction
         }
@@ -117,7 +117,7 @@ class GameFiziksBody: FiziksBody {
         }
     }
 
-    var restitution: CGFloat? {
+    public var restitution: CGFloat? {
         get {
             fiziksShapeNode.restitution
         }
@@ -126,7 +126,7 @@ class GameFiziksBody: FiziksBody {
         }
     }
 
-    var linearDamping: CGFloat? {
+    public var linearDamping: CGFloat? {
         get {
             fiziksShapeNode.linearDamping
         }
@@ -135,7 +135,7 @@ class GameFiziksBody: FiziksBody {
         }
     }
 
-    var angularDamping: CGFloat? {
+    public var angularDamping: CGFloat? {
         get {
             fiziksShapeNode.angularDamping
         }
@@ -145,7 +145,7 @@ class GameFiziksBody: FiziksBody {
     }
 
     // MARK: Attributes for working with collisions and contacts
-    var categoryBitMask: BitMask? {
+    public var categoryBitMask: BitMask? {
         get {
             fiziksShapeNode.categoryBitMask
         }
@@ -154,7 +154,7 @@ class GameFiziksBody: FiziksBody {
         }
     }
 
-    var collisionBitMask: BitMask? {
+    public var collisionBitMask: BitMask? {
         get {
             fiziksShapeNode.collisionBitMask
         }
@@ -163,7 +163,7 @@ class GameFiziksBody: FiziksBody {
         }
     }
 
-    var contactTestBitMask: BitMask? {
+    public var contactTestBitMask: BitMask? {
         get {
             fiziksShapeNode.contactTestBitMask
         }
@@ -172,7 +172,7 @@ class GameFiziksBody: FiziksBody {
         }
     }
 
-    var usesPreciseCollisionDetection: Bool? {
+    public var usesPreciseCollisionDetection: Bool? {
         get {
             fiziksShapeNode.usesPreciseCollisionDetection
         }
@@ -182,31 +182,31 @@ class GameFiziksBody: FiziksBody {
     }
 
     // MARK: Methods to apply forces and impulses to a physics body
-    func applyForce(_ force: CGVector) {
+    public func applyForce(_ force: CGVector) {
         fiziksShapeNode.applyForce(force)
     }
 
-    func applyTorque(_ torque: CGFloat) {
+    public func applyTorque(_ torque: CGFloat) {
         fiziksShapeNode.applyTorque(torque)
     }
 
-    func applyForce(_ force: CGVector, at point: CGPoint) {
+    public func applyForce(_ force: CGVector, at point: CGPoint) {
         fiziksShapeNode.applyForce(force, at: point)
     }
 
-    func applyImpulse(_ impulse: CGVector) {
+    public func applyImpulse(_ impulse: CGVector) {
         fiziksShapeNode.applyImpulse(impulse)
     }
 
-    func applyAngularImpulse(_ angularImpulse: CGFloat) {
+    public func applyAngularImpulse(_ angularImpulse: CGFloat) {
         fiziksShapeNode.applyAngularImpulse(angularImpulse)
     }
 
-    func applyImpulse(_ impulse: CGVector, at point: CGPoint) {
+    public func applyImpulse(_ impulse: CGVector, at point: CGPoint) {
         fiziksShapeNode.applyImpulse(impulse, at: point)
     }
 
-    var fiziksShapeNode: FiziksShapeNode
+    public var fiziksShapeNode: FiziksShapeNode
 
     /// Note that any shape can be represented with a `CGPath`.
     var path: CGPath? {
@@ -218,7 +218,7 @@ class GameFiziksBody: FiziksBody {
         }
     }
 
-    init(path: CGPath,
+    public init(path: CGPath,
          position: CGPoint = FiziksConstants.defaultPosition,
          zRotation: CGFloat = FiziksConstants.defaultZRotation,
          velocity: CGVector = FiziksConstants.defaultVelocity,
@@ -267,7 +267,7 @@ class GameFiziksBody: FiziksBody {
     /// Proof of concept that initializers for other-shaped `GameFiziksBody`s
     /// can be created easily. Note that `self.path` stays the same as
     /// a `CGPath` is used to represent all shapes.
-    init(rect: CGRect,
+    public init(rect: CGRect,
          position: CGPoint = FiziksConstants.defaultPosition,
          zRotation: CGFloat = FiziksConstants.defaultZRotation,
          velocity: CGVector = FiziksConstants.defaultVelocity,
@@ -315,7 +315,7 @@ class GameFiziksBody: FiziksBody {
 }
 
 extension GameFiziksBody: CustomDebugStringConvertible {
-    var debugDescription: String {
+    public var debugDescription: String {
         "\(position)"
     }
 }

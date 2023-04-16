@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Fiziks
 
 class GameWorldObjectFactory {
     typealias GameWorldObjCreatorClosure = (ObjectShape, CGPoint) -> GameWorldObject?

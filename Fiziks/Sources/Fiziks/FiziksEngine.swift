@@ -8,7 +8,7 @@
 import Foundation
 import SpriteKit
 
-protocol FiziksEngine: AnyObject {
+public protocol FiziksEngine: AnyObject {
     var fiziksContactDelegate: FiziksContactDelegate? { get set }
 
     func insertBounds(_ bounds: CGRect)

@@ -8,7 +8,7 @@
 import Foundation
 import SpriteKit
 
-class FiziksShapeNode: SKShapeNode {
+public class FiziksShapeNode: SKShapeNode {
     weak var fiziksBody: FiziksBody?
 
     init(path: CGPath) {

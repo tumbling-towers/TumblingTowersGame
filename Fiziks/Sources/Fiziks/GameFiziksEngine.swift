@@ -8,15 +8,15 @@
 import Foundation
 import SpriteKit
 
-class GameFiziksEngine: NSObject {
-    let fiziksScene: FiziksScene
+public class GameFiziksEngine: NSObject {
+    public let fiziksScene: FiziksScene
 
     var idToFiziksBody: [ObjectIdentifier: FiziksBody]
     var skNodeToFiziksBody: [SKNode: FiziksBody]
 
-    weak var fiziksContactDelegate: FiziksContactDelegate?
+    weak public var fiziksContactDelegate: FiziksContactDelegate?
 
-    init(size: CGRect) {
+    public init(size: CGRect) {
         let size = CGSize(width: size.width, height: size.height)
         self.fiziksScene = FiziksScene(size: size)
         self.fiziksContactDelegate = nil
@@ -35,30 +35,30 @@ class GameFiziksEngine: NSObject {
 
 extension GameFiziksEngine: FiziksEngine {
 
-    func insertBounds(_ bounds: CGRect) {
+    public func insertBounds(_ bounds: CGRect) {
         fiziksScene.physicsBody = SKPhysicsBody(edgeLoopFrom: bounds)
     }
 
-    func contains(_ fiziksBody: FiziksBody) -> Bool {
+    public func contains(_ fiziksBody: FiziksBody) -> Bool {
         let bodyId = ObjectIdentifier(fiziksBody)
         return idToFiziksBody.keys.contains(bodyId)
     }
 
-    func add(_ fiziksBody: FiziksBody) {
+    public func add(_ fiziksBody: FiziksBody) {
         let bodyId = ObjectIdentifier(fiziksBody)
         idToFiziksBody[bodyId] = fiziksBody
         skNodeToFiziksBody[fiziksBody.fiziksShapeNode] = fiziksBody
         fiziksScene.addChild(fiziksBody)
     }
 
-    func delete(_ fiziksBody: FiziksBody) {
+    public func delete(_ fiziksBody: FiziksBody) {
         let idToDelete = ObjectIdentifier(fiziksBody)
         idToFiziksBody[idToDelete] = nil
         skNodeToFiziksBody[fiziksBody.fiziksShapeNode] = nil
         fiziksScene.remove(fiziksBody)
     }
 
-    func combine(bodyA: FiziksBody, bodyB: FiziksBody, at anchorPoint: CGPoint? = nil) {
+    public func combine(bodyA: FiziksBody, bodyB: FiziksBody, at anchorPoint: CGPoint? = nil) {
         guard let bodyA = bodyA.fiziksShapeNode.physicsBody,
               let bodyB = bodyB.fiziksShapeNode.physicsBody else { return }
 
@@ -77,11 +77,11 @@ extension GameFiziksEngine: FiziksEngine {
         fiziksScene.scene?.physicsWorld.add(pinJoint)
     }
 
-    func setWorldGravity(to newValue: CGVector) {
+    public func setWorldGravity(to newValue: CGVector) {
         fiziksScene.gravity = newValue
     }
 
-    func allBodiesContacted(with fiziksBody: FiziksBody) -> [FiziksBody] {
+    public func allBodiesContacted(with fiziksBody: FiziksBody) -> [FiziksBody] {
         guard let skPhysicsBody = fiziksBody.fiziksShapeNode.physicsBody else {
             return []
         }
@@ -97,7 +97,7 @@ extension GameFiziksEngine: FiziksEngine {
         return contactedFiziksBodies
     }
 
-    func isIntersecting(body: FiziksBody, otherBodies: [FiziksBody]) -> Bool {
+    public func isIntersecting(body: FiziksBody, otherBodies: [FiziksBody]) -> Bool {
         for otherBody in otherBodies where body.fiziksShapeNode.intersects(otherBody.fiziksShapeNode) {
             return true
         }
@@ -105,7 +105,7 @@ extension GameFiziksEngine: FiziksEngine {
         return false
     }
     
-    func deleteAllBodies() {
+    public func deleteAllBodies() {
         for (id, fiziksBody) in idToFiziksBody {
             idToFiziksBody[id] = nil
             skNodeToFiziksBody[fiziksBody.fiziksShapeNode] = nil
@@ -115,11 +115,11 @@ extension GameFiziksEngine: FiziksEngine {
         fiziksScene.removeAllChildren()
     }
     
-    func pause() {
+    public func pause() {
         fiziksScene.pause()
     }
     
-    func unpause() {
+    public func unpause() {
         fiziksScene.unpause()
     }
 

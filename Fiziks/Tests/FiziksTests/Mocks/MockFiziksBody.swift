@@ -7,7 +7,7 @@
 
 import Foundation
 import SpriteKit
-@testable import TumblingTowersGame
+@testable import Fiziks
 
 class MockFiziksBody: FiziksBody {
     var fiziksShapeNode: FiziksShapeNode

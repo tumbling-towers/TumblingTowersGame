@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol FiziksContactDelegate: AnyObject {
+public protocol FiziksContactDelegate: AnyObject {
     func didBegin(_ contact: FiziksContact)
     func didEnd(_ contact: FiziksContact)
 }

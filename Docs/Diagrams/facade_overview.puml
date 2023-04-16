@@ -1,0 +1,19 @@
+@startuml
+
+class GameWorld
+
+package Facade <<Rectangle>> {
+class GameFiziksEngine
+class GameFiziksBody
+class FiziksScene
+class FiziksShapeNode
+}
+
+GameWorld -> GameFiziksBody
+GameWorld -> GameFiziksEngine
+GameFiziksEngine -> FiziksScene
+GameFiziksBody -> FiziksShapeNode
+FiziksShapeNode ..|> SKShapeNode
+FiziksScene ..|> SKScene
+
+@enduml
