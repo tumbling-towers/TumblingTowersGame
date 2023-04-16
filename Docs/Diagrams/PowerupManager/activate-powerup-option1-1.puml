@@ -1,6 +1,8 @@
 @startuml
-View -> GameEngineManager: activatePowerup(idx)
-GameEngineManager -> GameEngine: activatePowerup(idx)
+-> View: user taps powerup button at index i
+View -> GameInstanceController: activatePowerup(idx)
+GameInstanceController -> GameEngine: activatePowerup(idx)
 GameEngine -> GameWorld: activatePowerup(idx)
 GameWorld -> PowerupManager: activatePowerup(idx)
+PowerupManager -> Powerup: activate()
 @enduml

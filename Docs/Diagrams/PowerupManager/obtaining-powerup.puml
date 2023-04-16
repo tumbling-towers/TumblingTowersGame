@@ -3,7 +3,7 @@ create GameWorld
 
 [-> GameWorld: user receives powerup
 
-GameWorld-> GamePowerupManager: createNextPowerup(PowerupType)
+GameWorld-> GamePowerupManager: createNextPowerup()
 
 GamePowerupManager -> GamePowerupManager: find empty slot in powerup array
 
@@ -14,9 +14,9 @@ GamePowerupManager -> GamePowerupManager: add powerup to empty slot
 GamePowerupManager -> EventManager: postEvent(PowerupAvailableEvent(type, index, gameWorld))
 end
 
-EventManager -> GameEngineManager: send PowerupAvailableEvent
+EventManager -> GameInstanceController: send PowerupAvailableEvent
 alt if correct gameWorld
-GameEngineManager -> GameEngineManager: update own state
-GameEngineManager -> View: show powerup button at index i
+GameInstanceController -> GameInstanceController: update own state
+GameInstanceController -> View: show powerup button at index i
 end
 @enduml
