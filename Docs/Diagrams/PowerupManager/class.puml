@@ -1,8 +1,5 @@
 @startuml
 interface PowerupManager {
-    +var eventManager: EventManager
-    +var gameWorld: GameWorld
-    +var rng: RandomNumberGeneratorWithSeed
     +var availablePowerups: [Powerup?]
     +createNextPowerup()
     +activatePowerup(at idx: Int)
@@ -16,24 +13,12 @@ interface Powerup {
 }
 
 class GluePowerup {
-    -manager: PowerupManager
-    +type: PowerupType
-    +static func create(manager: PowerupManager) -> Powerup
-    +activate()
 }
 
 class PlatformPowerup {
-    -manager: PowerupManager
-    +type: PowerupType
-    +static func create(manager: PowerupManager) -> Powerup
-    +activate()
 }
 
 class GamePowerupManager {
-    -gameWorld: GameWorld
-    -availablePowerups: [Powerup?]
-    -eventManager: EventManager
-    -rng: RandomNumberGeneratorWithSeed
     +defaultNumPowerups: Int
     +powerupTypes: [Powerup.Type]
     +init(eventManager: EventManager, gameWorld: GameWorld, seed: Int)
@@ -48,5 +33,5 @@ PowerupManager --> GameWorld
 PowerupManager --> RandomNumberGeneratorWithSeed
 Powerup <|.. GluePowerup
 Powerup <|.. PlatformPowerup
-GamePowerupManager ..> Powerup
+GamePowerupManager --> "5" Powerup: availablePowerups >
 @enduml
