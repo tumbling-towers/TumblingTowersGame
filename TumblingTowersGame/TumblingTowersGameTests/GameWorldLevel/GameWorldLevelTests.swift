@@ -7,6 +7,7 @@
 
 import Foundation
 import XCTest
+import Fiziks
 @testable import TumblingTowersGame
 
 final class GameWorldLevelTests: XCTestCase {
@@ -56,21 +57,21 @@ final class GameWorldLevelTests: XCTestCase {
         XCTAssertEqual(level.gameObjects.count, 0)
     }
     
-//    func testMove() throws {
-//        let level = try XCTUnwrap(testGameWorldLevel)
-//        let shape = GamePathObjectShape(path: CGPath(rect: .zero, transform: nil))
-//        let object = Block(fiziksBody: GameFiziksBody(rect: .zero), shape: shape)
-//
-//        level.add(gameWorldObject: object)
-//
-//        let displacement = CGVector(dx: 10, dy: 10)
-//        let position = object.position
-//
-//        level.move(gameWorldObject: object, by: displacement)
-//
-//        let expectedPosition = position.add(by: displacement)
-//        XCTAssertEqual(expectedPosition, object.position)
-//    }
+    func testMove() throws {
+        let level = try XCTUnwrap(testGameWorldLevel)
+        let shape = GamePathObjectShape(path: CGPath(rect: .zero, transform: nil))
+        let object = Block(fiziksBody: GameFiziksBody(rect: .zero), shape: shape)
+        
+        level.add(gameWorldObject: object)
+        
+        let displacement = CGVector(dx: 10, dy: 10)
+        let position = object.position
+        
+        level.move(gameWorldObject: object, by: displacement)
+        
+        let expectedPosition = position.add(by: displacement)
+        XCTAssertEqual(expectedPosition, object.position)
+    }
     
     func testRotate() throws {
         let level = try XCTUnwrap(testGameWorldLevel)

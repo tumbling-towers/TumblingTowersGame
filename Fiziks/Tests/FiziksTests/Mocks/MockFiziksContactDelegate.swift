@@ -6,7 +6,7 @@
 //
 
 import Foundation
-@testable import TumblingTowersGame
+@testable import Fiziks
 
 class MockFiziksContactDelegate: FiziksContactDelegate {
     func didBegin(_ contact: FiziksContact) {

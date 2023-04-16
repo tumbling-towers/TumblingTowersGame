@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Fiziks
 
 extension GameWorld: FiziksContactDelegate {
     func didBegin(_ contact: FiziksContact) {

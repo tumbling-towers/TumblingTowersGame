@@ -6,255 +6,207 @@ import CoreGraphics
 import Foundation
 import SpriteKit
 
-class GameFiziksBody: FiziksBody {
+public class GameFiziksBody: FiziksBody {
     // MARK: Attributes of a physics body with respect to the world
-    var position: CGPoint {
+    public var position: CGPoint {
         get {
             fiziksShapeNode.position
         }
         set {
             if newValue != position {
-                fiziksShapeNode.didUpdatePosition(to: newValue)
+                fiziksShapeNode.position = newValue
             }
         }
     }
 
-    var zRotation: CGFloat {
+    public var zRotation: CGFloat {
         get {
             fiziksShapeNode.zRotation
         }
         set {
             if newValue != zRotation {
-                fiziksShapeNode.didUpdateZRotation(to: newValue)
+                fiziksShapeNode.zRotation = newValue
             }
         }
     }
 
-    var velocity: CGVector? {
+    public var velocity: CGVector? {
         get {
             fiziksShapeNode.velocity
         }
         set {
-            if let unwrappedNewValue = newValue,
-                unwrappedNewValue != velocity {
-                fiziksShapeNode.didUpdateVelocity(to: unwrappedNewValue)
-            }
+            fiziksShapeNode.velocity = newValue
         }
     }
 
-    var angularVelocity: CGFloat? {
+    public var angularVelocity: CGFloat? {
         get {
             fiziksShapeNode.angularVelocity
         }
         set {
-            if let unwrappedNewValue = newValue,
-                unwrappedNewValue != angularVelocity {
-                fiziksShapeNode.didUpdateAngularVelocity(to: unwrappedNewValue)
-            }
+            fiziksShapeNode.angularVelocity = newValue
         }
     }
 
-    var isResting: Bool? {
+    public var isResting: Bool? {
         get {
             fiziksShapeNode.isResting
         }
         set {
-            if let unwrappedNewValue = newValue,
-                unwrappedNewValue != isResting {
-                fiziksShapeNode.didUpdateIsResting(to: unwrappedNewValue)
-            }
+            fiziksShapeNode.isResting = newValue
         }
     }
 
     // MARK: Attributes defining how forces affect a physics body
-    var affectedByGravity: Bool? {
+    public var affectedByGravity: Bool? {
         get {
             fiziksShapeNode.affectedByGravity
         }
         set {
-            if let unwrappedNewValue = newValue,
-                unwrappedNewValue != affectedByGravity {
-                fiziksShapeNode.didUpdateAffectedByGravity(to: unwrappedNewValue)
-            }
+            fiziksShapeNode.affectedByGravity = newValue
         }
     }
 
-    var allowsRotation: Bool? {
+    public var allowsRotation: Bool? {
         get {
             fiziksShapeNode.allowsRotation
         }
         set {
-            if let unwrappedNewValue = newValue,
-                unwrappedNewValue != allowsRotation {
-                fiziksShapeNode.didUpdateAllowsRotation(to: unwrappedNewValue)
-            }
+            fiziksShapeNode.allowsRotation = newValue
         }
     }
 
-    var isDynamic: Bool? {
+    public var isDynamic: Bool? {
         get {
             fiziksShapeNode.isDynamic
         }
         set {
-            if let unwrappedNewValue = newValue,
-                unwrappedNewValue != isDynamic {
-                fiziksShapeNode.didUpdateIsDynamic(to: unwrappedNewValue)
-            }
+            fiziksShapeNode.isDynamic = newValue
         }
     }
 
     // MARK: Attributes defining a physics body's physical properties
-    var mass: CGFloat? {
+    public var mass: CGFloat? {
         get {
             fiziksShapeNode.mass
         }
         set {
-            if let unwrappedNewValue = newValue,
-                unwrappedNewValue != mass {
-                fiziksShapeNode.didUpdateMass(to: unwrappedNewValue)
-            }
+            fiziksShapeNode.mass = newValue
         }
     }
 
-    var density: CGFloat? {
+    public var density: CGFloat? {
         get {
             fiziksShapeNode.density
         }
         set {
-            if let unwrappedNewValue = newValue,
-                unwrappedNewValue != density {
-                fiziksShapeNode.didUpdateDensity(to: unwrappedNewValue)
-            }
+            fiziksShapeNode.density = newValue
         }
     }
 
-    var area: CGFloat? {
+    public var area: CGFloat? {
         fiziksShapeNode.area
     }
 
-    var friction: CGFloat? {
+    public var friction: CGFloat? {
         get {
             fiziksShapeNode.friction
         }
         set {
-            if let unwrappedNewValue = newValue,
-                unwrappedNewValue != friction {
-                fiziksShapeNode.didUpdateFriction(to: unwrappedNewValue)
-            }
+            fiziksShapeNode.friction = newValue
         }
     }
 
-    var restitution: CGFloat? {
+    public var restitution: CGFloat? {
         get {
             fiziksShapeNode.restitution
         }
         set {
-            if let unwrappedNewValue = newValue,
-                unwrappedNewValue != restitution {
-                fiziksShapeNode.didUpdateRestitution(to: unwrappedNewValue)
-            }
+            fiziksShapeNode.restitution = newValue
         }
     }
 
-    var linearDamping: CGFloat? {
+    public var linearDamping: CGFloat? {
         get {
             fiziksShapeNode.linearDamping
         }
         set {
-            if let unwrappedNewValue = newValue,
-                unwrappedNewValue != linearDamping {
-                fiziksShapeNode.didUpdateLinearDamping(to: unwrappedNewValue)
-            }
+            fiziksShapeNode.linearDamping = newValue
         }
     }
 
-    var angularDamping: CGFloat? {
+    public var angularDamping: CGFloat? {
         get {
             fiziksShapeNode.angularDamping
         }
         set {
-            if let unwrappedNewValue = newValue,
-                unwrappedNewValue != angularDamping {
-                fiziksShapeNode.didUpdateAngularDamping(to: unwrappedNewValue)
-            }
+            fiziksShapeNode.angularDamping = newValue
         }
     }
 
     // MARK: Attributes for working with collisions and contacts
-    var categoryBitMask: BitMask? {
+    public var categoryBitMask: BitMask? {
         get {
             fiziksShapeNode.categoryBitMask
         }
         set {
-            if let unwrappedNewValue = newValue,
-                unwrappedNewValue != categoryBitMask {
-                fiziksShapeNode.didUpdateCategoryBitMask(to: unwrappedNewValue)
-            }
+            fiziksShapeNode.categoryBitMask = newValue
         }
     }
 
-    var collisionBitMask: BitMask? {
+    public var collisionBitMask: BitMask? {
         get {
             fiziksShapeNode.collisionBitMask
         }
         set {
-            if let unwrappedNewValue = newValue,
-                unwrappedNewValue != collisionBitMask {
-                fiziksShapeNode.didUpdateCollisionBitMask(to: unwrappedNewValue)
-            }
+            fiziksShapeNode.collisionBitMask = newValue
         }
     }
 
-    var contactTestBitMask: BitMask? {
+    public var contactTestBitMask: BitMask? {
         get {
             fiziksShapeNode.contactTestBitMask
         }
         set {
-            if let unwrappedNewValue = newValue,
-                unwrappedNewValue != contactTestBitMask {
-                fiziksShapeNode.didUpdateContactTestBitMask(to: unwrappedNewValue)
-            }
+            fiziksShapeNode.contactTestBitMask = newValue
         }
     }
 
-    var usesPreciseCollisionDetection: Bool? {
+    public var usesPreciseCollisionDetection: Bool? {
         get {
             fiziksShapeNode.usesPreciseCollisionDetection
         }
         set {
-            if let unwrappedNewValue = newValue,
-                unwrappedNewValue != usesPreciseCollisionDetection {
-                fiziksShapeNode.didUpdateUsesPreciseCollisionDetection(to: unwrappedNewValue)
-            }
+            fiziksShapeNode.usesPreciseCollisionDetection = newValue
         }
     }
 
     // MARK: Methods to apply forces and impulses to a physics body
-    func applyForce(_ force: CGVector) {
+    public func applyForce(_ force: CGVector) {
         fiziksShapeNode.applyForce(force)
     }
 
-    func applyTorque(_ torque: CGFloat) {
+    public func applyTorque(_ torque: CGFloat) {
         fiziksShapeNode.applyTorque(torque)
     }
 
-    func applyForce(_ force: CGVector, at point: CGPoint) {
+    public func applyForce(_ force: CGVector, at point: CGPoint) {
         fiziksShapeNode.applyForce(force, at: point)
     }
 
-    func applyImpulse(_ impulse: CGVector) {
+    public func applyImpulse(_ impulse: CGVector) {
         fiziksShapeNode.applyImpulse(impulse)
     }
 
-    func applyAngularImpulse(_ angularImpulse: CGFloat) {
+    public func applyAngularImpulse(_ angularImpulse: CGFloat) {
         fiziksShapeNode.applyAngularImpulse(angularImpulse)
     }
 
-    func applyImpulse(_ impulse: CGVector, at point: CGPoint) {
+    public func applyImpulse(_ impulse: CGVector, at point: CGPoint) {
         fiziksShapeNode.applyImpulse(impulse, at: point)
     }
 
-    var fiziksShapeNode: FiziksShapeNode
+    public var fiziksShapeNode: FiziksShapeNode
 
     /// Note that any shape can be represented with a `CGPath`.
     var path: CGPath? {
@@ -266,7 +218,7 @@ class GameFiziksBody: FiziksBody {
         }
     }
 
-    init(path: CGPath,
+    public init(path: CGPath,
          position: CGPoint = FiziksConstants.defaultPosition,
          zRotation: CGFloat = FiziksConstants.defaultZRotation,
          velocity: CGVector = FiziksConstants.defaultVelocity,
@@ -315,7 +267,7 @@ class GameFiziksBody: FiziksBody {
     /// Proof of concept that initializers for other-shaped `GameFiziksBody`s
     /// can be created easily. Note that `self.path` stays the same as
     /// a `CGPath` is used to represent all shapes.
-    init(rect: CGRect,
+    public init(rect: CGRect,
          position: CGPoint = FiziksConstants.defaultPosition,
          zRotation: CGFloat = FiziksConstants.defaultZRotation,
          velocity: CGVector = FiziksConstants.defaultVelocity,
@@ -363,7 +315,7 @@ class GameFiziksBody: FiziksBody {
 }
 
 extension GameFiziksBody: CustomDebugStringConvertible {
-    var debugDescription: String {
+    public var debugDescription: String {
         "\(position)"
     }
 }

@@ -8,9 +8,9 @@
 import Foundation
 import SpriteKit
 
-class FiziksScene: SKScene {
+public class FiziksScene: SKScene {
 
-    var gravity: CGVector {
+    public var gravity: CGVector {
         get {
             physicsWorld.gravity
         }
@@ -19,19 +19,19 @@ class FiziksScene: SKScene {
         }
     }
 
-    func addChild(_ fiziksBody: FiziksBody) {
+    public func addChild(_ fiziksBody: FiziksBody) {
         super.addChild(fiziksBody.fiziksShapeNode)
     }
 
-    func remove(_ fiziksBody: FiziksBody) {
+    public func remove(_ fiziksBody: FiziksBody) {
         fiziksBody.fiziksShapeNode.removeFromParent()
     }
     
-    func pause() {
+    public func pause() {
         physicsWorld.speed = .zero
     }
     
-    func unpause() {
+    public func unpause() {
         physicsWorld.speed = 1.0
     }
 }

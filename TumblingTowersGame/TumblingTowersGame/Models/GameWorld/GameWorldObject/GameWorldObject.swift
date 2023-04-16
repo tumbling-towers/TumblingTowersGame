@@ -7,6 +7,7 @@
 
 import CoreGraphics
 import Foundation
+import Fiziks
 
 protocol GameWorldObject: AnyObject {
     var fiziksBody: FiziksBody { get }

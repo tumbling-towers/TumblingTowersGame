@@ -7,7 +7,7 @@
 
 import XCTest
 import SpriteKit
-@testable import TumblingTowersGame
+@testable import Fiziks
 
 class GameFiziksEngineTests: XCTestCase {
     let defaultLevelDimensions = CGRect(x: 0, y: 0, width: 500, height: 500)

@@ -7,6 +7,7 @@
 
 import CoreGraphics
 import Foundation
+import Fiziks
 
 class Platform: GameWorldObject {
 

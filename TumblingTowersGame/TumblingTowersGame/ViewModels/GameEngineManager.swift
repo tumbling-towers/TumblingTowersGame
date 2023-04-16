@@ -6,6 +6,7 @@
 
 import Foundation
 import SpriteKit
+import Fiziks
 
 class GameEngineManager {
     var playerId = UUID()

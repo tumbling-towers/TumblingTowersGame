@@ -8,14 +8,14 @@
 import Foundation
 import SpriteKit
 
-class FiziksContact {
-    let bodyA: FiziksBody
-    let bodyB: FiziksBody
-    let contactPoint: CGPoint
-    let collisionImpulse: CGFloat
-    let contactNormal: CGVector
+public class FiziksContact {
+    public let bodyA: FiziksBody
+    public let bodyB: FiziksBody
+    public let contactPoint: CGPoint
+    public let collisionImpulse: CGFloat
+    public let contactNormal: CGVector
 
-    init(bodyA: FiziksBody,
+    public init(bodyA: FiziksBody,
          bodyB: FiziksBody,
          contactPoint: CGPoint,
          collisionImpulse: CGFloat,
@@ -27,7 +27,7 @@ class FiziksContact {
         self.contactNormal = contactNormal
     }
 
-    func contains(body: FiziksBody?) -> Bool {
+    public func contains(body: FiziksBody?) -> Bool {
         if let body = body {
             return bodyA === body || bodyB === body
         } else {

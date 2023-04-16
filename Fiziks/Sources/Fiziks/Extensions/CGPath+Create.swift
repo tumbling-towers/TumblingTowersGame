@@ -12,7 +12,7 @@ extension CGPath {
     /// Takes in an array of `CGPoint` and creates a `CGPath`.
     /// If the `centered` parameter is true, translates the `CGPath` such that the
     /// center of its bounding box is at (0, 0).
-    static func create(from points: [CGPoint], centered: Bool = true) -> CGPath {
+    public static func create(from points: [CGPoint], centered: Bool = true) -> CGPath {
         var path = pointsToPath(from: points)
 
         if centered {
@@ -45,7 +45,7 @@ extension CGPath {
         return newCGPath
     }
 
-    static func create(from rect: CGRect, centered: Bool = true) -> CGPath {
+    public static func create(from rect: CGRect, centered: Bool = true) -> CGPath {
         let path = CGPath.create(from: [CGPoint(x: rect.minX, y: rect.minY),
                              CGPoint(x: rect.maxX, y: rect.minY),
                              CGPoint(x: rect.maxX, y: rect.maxY),

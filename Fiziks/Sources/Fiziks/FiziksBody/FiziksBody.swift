@@ -5,7 +5,9 @@
 import Foundation
 import SpriteKit
 
-protocol FiziksBody: AnyObject {
+public typealias BitMask = UInt32
+
+public protocol FiziksBody: AnyObject {
 
     var fiziksShapeNode: FiziksShapeNode { get set }
 

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Fiziks
 
 class LevelBoundary: GameWorldObject {
 
